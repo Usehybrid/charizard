@@ -1,0 +1,8 @@
+node_modules
+build
+coverage
+.vscode
+.github
+.yarn
+public
+.pnpm
