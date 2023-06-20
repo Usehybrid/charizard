@@ -1,0 +1,30 @@
+/* HUI button styles */
+.btn {
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  overflow: visible;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  line-height: normal;
+  font-size: 16px;
+  line-height: 24px;
+  padding: 0px 16px;
+  height: 40px;
+  border-radius: 6px;
+  background: var(--iris);
+  color: white;
+}
+
+.btn.btnSecondary {
+  background: var(--slate-20);
+  color: var(--primary);
+}
+
+.btn.btnOutline {
+  background-color: var(--iris-5);
+  color: var(--primary);
+  border: 1px solid var(--primary);
+}
