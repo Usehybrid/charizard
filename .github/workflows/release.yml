@@ -12,26 +12,27 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Setup repo
+      - name: Setup repo + install pnpm
         uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8     
 
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
           node-version: 18
           registry-url: "https://registry.npmjs.org"
-
-      - name: NPM CI
-        run: npm ci
-
+          cache: 'pnpm'
+          
       - name: Install Packages
-        run: npm install
+        run: pnpm install
 
       - name: Build
-        run: npm run build
+        run: pnpm run build
 
       - name: Publish Package
-        run: npm publish
+        run: pnpm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
