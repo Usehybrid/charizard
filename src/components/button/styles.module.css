@@ -1,4 +1,4 @@
-/* HUI button styles */
+/* button styles */
 .btn {
   border: none;
   margin: 0;
@@ -27,4 +27,34 @@
   background-color: var(--iris-5);
   color: var(--iris);
   border: 1px solid var(--iris);
+}
+
+/* Menu Button styles  */
+
+.btnGrp {
+  display: flex;
+  align-items: center;
+  height: 40px;
+}
+
+.btnMenu {
+  border-radius: 6px 0 0 6px;
+  padding-right: 8px;
+}
+.btnAddon {
+  border-left: 1px solid white;
+  border-radius: 0 6px 6px 0;
+  padding: 0 8px;
+}
+
+.btnImg {
+  filter: invert(100%) sepia(1%) saturate(7478%) hue-rotate(16deg) brightness(107%) contrast(100%);
+}
+
+.btnImgSecondary {
+  filter: invert(100%) sepia(1%) saturate(7478%) hue-rotate(16deg) brightness(107%) contrast(100%);
+}
+
+.btnImgGhost {
+  filter: invert(100%) sepia(1%) saturate(7478%) hue-rotate(16deg) brightness(107%) contrast(100%);
 }

@@ -10,7 +10,7 @@
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/hybr1d-ui.es.js",
+      "import": "./dist/hybr1d-upnmi.es.js",
       "require": "./dist/hybr1d-ui.umd.js"
     },
     "./styles.css": {
@@ -31,6 +31,8 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
+    "@zag-js/menu": "^0.10.2",
+    "@zag-js/react": "^0.10.2",
     "clsx": "^1.2.1"
   },
   "peerDependencies": {
