@@ -17,12 +17,20 @@ export default defineConfig({
       entry: resolve(__dirname, 'src/components/index.ts'),
       name: 'Hybrid UI',
       formats: ['es', 'umd'],
-      fileName: format => `hybrid-ui.${format}.js`,
+      // the proper extensions will be added
+      fileName: format => `${packageJson.name}.${format}.js`,
     },
     rollupOptions: {
-      external: [...Object.keys(packageJson.peerDependencies)],
+      external: ['react', 'react-dom'],
+      output: {
+        globals: {
+          react: 'React',
+          'react-dom': 'ReactDOM',
+        },
+      },
     },
   },
+
   // esbuild: {
   //   minify: true,
   // },
