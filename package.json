@@ -10,7 +10,7 @@
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/hybr1d-upnmi.es.js",
+      "import": "./dist/hybr1d-ui.es.js",
       "require": "./dist/hybr1d-ui.umd.js"
     },
     "./styles.css": {
