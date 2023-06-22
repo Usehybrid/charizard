@@ -1,1 +1,1 @@
-export {default} from './HUIButton'
+export * from './HUIButton'
