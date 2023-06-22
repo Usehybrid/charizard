@@ -68,6 +68,7 @@ function MenuButton({
             disabled && classes.disabled,
           )}
           disabled={disabled}
+          onClick={onClick}
         >
           {children}
         </button>
