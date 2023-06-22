@@ -1,17 +1,17 @@
 {
-  "name": "hybrid-ui",
+  "name": "hybr1d-ui",
   "version": "0.0.6",
   "type": "module",
   "files": [
     "dist"
   ],
-  "main": "./dist/hybrid-ui.umd.js",
-  "module": "./dist/hybrid-ui.es.js",
+  "main": "./dist/hybr1d-ui.umd.js",
+  "module": "./dist/hybr1d-ui.es.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/hybrid-ui.es.js",
-      "require": "./dist/hybrid-ui.umd.js"
+      "import": "./dist/hybr1d-ui.es.js",
+      "require": "./dist/hybr1d-ui.umd.js"
     }
   },
   "scripts": {

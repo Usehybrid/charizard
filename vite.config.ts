@@ -15,7 +15,7 @@ export default defineConfig({
   build: {
     lib: {
       entry: resolve(__dirname, 'src/components/index.ts'),
-      name: 'Hybrid UI',
+      name: 'Hybr1d UI',
       formats: ['es', 'umd'],
       // the proper extensions will be added
       fileName: format => `${packageJson.name}.${format}.js`,
@@ -30,8 +30,4 @@ export default defineConfig({
       },
     },
   },
-
-  // esbuild: {
-  //   minify: true,
-  // },
 })
