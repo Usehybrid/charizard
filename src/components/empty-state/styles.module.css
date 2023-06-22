@@ -1,0 +1,64 @@
+.container {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.containerRow {
+  flex-direction: row;
+  gap: 1.62rem;
+}
+
+.huiEmptyStateIconContainer {
+  width: 5.4rem;
+  height: 5.4rem;
+  margin-bottom: 1.23rem;
+  flex-shrink: 0;
+}
+
+.huiEmptyStateIconContainer .huiEmptyStateIcon {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+}
+
+.btn {
+  margin-top: 20px;
+  background: var(--iris-10);
+  border: 1px solid var(--iris);
+  border-radius: 4px;
+  width: 131px;
+  height: 40px;
+  color: var(--iris);
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 1.23rem;
+  line-height: 1.85rem;
+  text-align: center;
+  color: #939393;
+  margin-bottom: 8px;
+}
+
+.title.textRow {
+  text-align: left;
+}
+
+.desc {
+  font-weight: 400;
+  font-size: 1.08rem;
+  line-height: 1.54rem;
+  text-align: center;
+  color: #939393;
+}
+
+.desc.textRow {
+  text-align: left;
+}

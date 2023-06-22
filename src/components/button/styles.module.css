@@ -14,17 +14,17 @@
   padding: 0px 16px;
   height: 40px;
   border-radius: 6px;
-  background: var(--iris);
+  background-color: var(--iris);
   color: white;
 }
 
 .btn.btnSecondary {
-  background: var(--slate-20);
+  background-color: var(--slate-20);
   color: var(--primary);
 }
 
-.btn.btnOutline {
+.btn.btnGhost {
   background-color: var(--iris-5);
-  color: var(--primary);
-  border: 1px solid var(--primary);
+  color: var(--iris);
+  border: 1px solid var(--iris);
 }

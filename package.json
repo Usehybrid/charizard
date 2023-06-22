@@ -51,6 +51,7 @@
     "@vitejs/plugin-react": "^4.0.1",
     "prop-types": "^15.8.1",
     "storybook": "^7.0.22",
+    "storybook-css-modules-preset": "^1.1.1",
     "typescript": "^5.1.3",
     "vite": "^4.3.9",
     "vite-plugin-dts": "^2.3.0"

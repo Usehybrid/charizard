@@ -4,21 +4,24 @@ import classes from './styles.module.css'
 
 export interface ButtonProps {
   children: React.ReactNode
-  variant?: 'primary' | 'secondary' | 'outline'
+  variant?: 'primary' | 'secondary' | 'ghost'
+  disabled?: boolean
 }
 
-// 1. Button => primary, secondary, outline
+// 1. Button => primary, secondary, ghost
 // 2. Button Group => primary
 // 2. Button Menu => primary
 
-export function Button({children, variant = 'primary'}: ButtonProps) {
+export function Button({children, variant = 'primary', disabled = false}: ButtonProps) {
   return (
     <button
       className={clsx(
         classes.btn,
         variant === 'secondary' && classes.btnSecondary,
-        variant === 'outline' && classes.btnOutline,
+        variant === 'ghost' && classes.btnGhost,
+        disabled && classes.disabled,
       )}
+      disabled={disabled}
     >
       {children}
     </button>
