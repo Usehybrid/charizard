@@ -17,9 +17,10 @@ export default defineConfig({
     lib: {
       entry: resolve(__dirname, 'src/components/index.ts'),
       name: 'Hybr1d UI',
-      formats: ['es', 'umd'],
+      // formats: ['es', 'umd'],
       // the proper extensions will be added
-      fileName: format => `${packageJson.name}.${format}.js`,
+      fileName: 'hybr1d-ui',
+      // fileName: format => `${packageJson.name}.${format}.js`,
     },
     rollupOptions: {
       external: ['react', 'react-dom'],

@@ -6,16 +6,12 @@
     "dist"
   ],
   "main": "./dist/hybr1d-ui.umd.js",
-  "module": "./dist/hybr1d-ui.es.js",
+  "module": "./dist/hybr1d-ui.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/hybr1d-ui.es.js",
+      "import": "./dist/hybr1d-ui.js",
       "require": "./dist/hybr1d-ui.umd.js"
-    },
-    "./styles.css": {
-      "require": "./dist/styles.css",
-      "default": "./dist/styles.css"
     }
   },
   "repository": {
