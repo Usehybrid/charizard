@@ -1,17 +1,17 @@
 import * as React from 'react'
-import classes from './styles.module.css'
 import clsx from 'clsx'
+import classes from './styles.module.css'
 
-export interface HUIButtonProps {
+export interface ButtonProps {
   children: React.ReactNode
-  variant: 'primary' | 'secondary' | 'outline'
+  variant?: 'primary' | 'secondary' | 'outline'
 }
 
 // 1. Button => primary, secondary, outline
 // 2. Button Group => primary
 // 2. Button Menu => primary
 
-export function HUIButton({children, variant = 'primary'}: HUIButtonProps) {
+export function Button({children, variant = 'primary'}: ButtonProps) {
   return (
     <button
       className={clsx(
@@ -29,4 +29,4 @@ function MenuButton() {
   return <div></div>
 }
 
-HUIButton.MenuButton = MenuButton
+Button.MenuButton = MenuButton

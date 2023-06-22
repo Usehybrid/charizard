@@ -12,6 +12,10 @@
     ".": {
       "import": "./dist/hybr1d-ui.es.js",
       "require": "./dist/hybr1d-ui.umd.js"
+    },
+    "./styles.css": {
+      "require": "./dist/styles.css",
+      "default": "./dist/styles.css"
     }
   },
   "repository": {
