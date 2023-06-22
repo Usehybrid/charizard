@@ -40,9 +40,16 @@ export interface MenuButtonProps {
   variant?: 'primary' | 'secondary' | 'ghost'
   disabled?: boolean
   menuItems: {label: string; iconSrc?: string; onClick: () => void}[]
+  onClick?: React.MouseEventHandler<HTMLButtonElement>
 }
 
-function MenuButton({children, variant = 'primary', disabled = false, menuItems}: MenuButtonProps) {
+function MenuButton({
+  children,
+  variant = 'primary',
+  disabled = false,
+  menuItems,
+  onClick,
+}: MenuButtonProps) {
   const [state, send] = useMachine(
     menu.machine({id: 'hui-menu-button', positioning: {placement: 'bottom-end'}}),
   )
