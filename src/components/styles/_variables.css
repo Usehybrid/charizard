@@ -36,4 +36,9 @@
   /* default */
   --black: #000000;
   --white: #ffffff;
+
+  /* states */
+  --danger: #de350b;
+  --success: #36b37e;
+  --warning: #ff8b00;
 }

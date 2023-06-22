@@ -1,32 +1,52 @@
 /* button styles */
 .btn {
-  border: none;
-  margin: 0;
-  padding: 0;
   width: auto;
   overflow: visible;
-  background: transparent;
-  color: inherit;
   font: inherit;
+  border: none;
   line-height: normal;
   font-size: 16px;
   line-height: 24px;
   padding: 0px 16px;
   height: 40px;
   border-radius: 6px;
+}
+
+.btn:hover {
+  cursor: pointer;
+}
+
+.btnPrimary {
   background-color: var(--iris);
   color: white;
 }
 
-.btn.btnSecondary {
+.btnPrimary:hover {
+  background-color: var(--iris-60);
+}
+
+.btnSecondary {
   background-color: var(--slate-20);
   color: var(--primary);
 }
 
-.btn.btnGhost {
+.btnSecondary:hover {
+  background-color: var(--slate-50);
+}
+
+.btnGhost {
   background-color: var(--iris-5);
   color: var(--iris);
   border: 1px solid var(--iris);
+}
+
+.btnGhost:hover {
+  background-color: var(--iris-10);
+}
+
+.btnDanger {
+  color: white;
+  background-color: var(--danger);
 }
 
 /* Menu Button styles  */
@@ -40,21 +60,72 @@
 .btnMenu {
   border-radius: 6px 0 0 6px;
   padding-right: 8px;
+  border-right: none !important;
 }
 .btnAddon {
-  border-left: 1px solid white;
   border-radius: 0 6px 6px 0;
   padding: 0 8px;
 }
 
-.btnImg {
+.btnAddonPrimary {
+  border-left: 1px solid white;
+}
+
+.btnAddonSecondary {
+  border-left: 1px solid var(--slate-300);
+}
+
+.btnAddonGhost {
+  border-left: 1px solid var(--iris);
+}
+
+.btnImgPrimary {
   filter: invert(100%) sepia(1%) saturate(7478%) hue-rotate(16deg) brightness(107%) contrast(100%);
 }
 
 .btnImgSecondary {
-  filter: invert(100%) sepia(1%) saturate(7478%) hue-rotate(16deg) brightness(107%) contrast(100%);
+  filter: invert(6%) sepia(7%) saturate(287%) hue-rotate(201deg) brightness(97%) contrast(93%);
 }
 
 .btnImgGhost {
-  filter: invert(100%) sepia(1%) saturate(7478%) hue-rotate(16deg) brightness(107%) contrast(100%);
+  filter: invert(37%) sepia(89%) saturate(3140%) hue-rotate(234deg) brightness(90%) contrast(81%);
+}
+
+.btnAddon [data-part='trigger'][data-focus] {
+  outline: none;
+}
+
+.menus {
+  padding: 4px;
+  padding-bottom: 0;
+  border-radius: 4px;
+  background: #fff;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15);
+}
+
+.menus:focus-visible {
+  outline: none;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  margin-bottom: 4px;
+  padding: 8px 10px;
+  color: var(--primary);
+  font-size: 1rem;
+  line-height: 1.5rem;
+  border-radius: 6px;
+}
+
+.menu:hover {
+  background: var(--slate-100);
+  cursor: pointer;
+}
+
+.menuIcon {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+  filter: invert(82%) sepia(3%) saturate(333%) hue-rotate(210deg) brightness(90%) contrast(82%);
 }

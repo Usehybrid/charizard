@@ -10,10 +10,34 @@ const styles = {
   justifyContent: 'center',
 }
 
+const i = [
+  {
+    label: 'Item 1',
+    iconSrc: 'fd',
+    onClick: () => {
+      console.log('HI')
+    },
+  },
+  {
+    label: 'Item 2',
+    onClick: () => {
+      console.log('HI 2')
+    },
+  },
+  {
+    label: 'Item 3',
+    onClick: () => {
+      console.log('HI 3')
+    },
+  },
+]
+
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <div style={styles}>
-      <Button.MenuButton>Add software</Button.MenuButton>
+      <Button.MenuButton variant="primary" menuItems={i}>
+        Add software
+      </Button.MenuButton>
     </div>
   </React.StrictMode>,
 )
