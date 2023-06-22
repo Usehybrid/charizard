@@ -73,6 +73,9 @@ devDependencies:
   vite-plugin-dts:
     specifier: ^2.3.0
     version: 2.3.0(@types/node@20.3.1)(vite@4.3.9)
+  vite-plugin-libcss:
+    specifier: ^1.1.0
+    version: 1.1.0(vite@4.3.9)
 
 packages:
 
@@ -6683,6 +6686,13 @@ packages:
       brace-expansion: 2.0.1
     dev: true
 
+  /minimatch@9.0.1:
+    resolution: {integrity: sha512-0jWhJpD/MdhPXwPuiRkCbfYfSKp2qnn2eOc279qI7f+osl/l+prKSrvhg157zSYvx/1nmgn2NqdT6k2Z7zSH9w==}
+    engines: {node: '>=16 || 14 >=14.17'}
+    dependencies:
+      brace-expansion: 2.0.1
+    dev: true
+
   /minimist@1.2.8:
     resolution: {integrity: sha512-2yyAR8qBkN3YuheJanUpWC5U3bb5osDywNB8RzDVlDwDHbocAJveqqj1u8+SVD7jkWT4yvsHCpWqqWqAxb0zCA==}
     dev: true
@@ -8238,6 +8248,15 @@ packages:
       - '@types/node'
       - rollup
       - supports-color
+    dev: true
+
+  /vite-plugin-libcss@1.1.0(vite@4.3.9):
+    resolution: {integrity: sha512-Os8PuRSO+8GSbPeZ1ikAejf2+w4HUsF03B+piec3g2jlkO9SuBK1xqsW/U3CzjqmRsUuSx/fjKGVT7IpIOLVQg==}
+    peerDependencies:
+      vite: '*'
+    dependencies:
+      minimatch: 9.0.1
+      vite: 4.3.9(@types/node@20.3.1)
     dev: true
 
   /vite@4.3.9(@types/node@20.3.1):
