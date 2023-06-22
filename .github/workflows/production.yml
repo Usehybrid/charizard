@@ -1,0 +1,55 @@
+name: production-deploy
+on:
+  push:
+    branches: [main]
+env:
+  REACT_APP_API_END_POINT: ${{ secrets.API }}
+  REACT_APP_PAGE_TITLE: ${{ secrets.PAGE_TITLE }}
+  REACT_APP_SENTRY: ${{ secrets.SENTRY_DSN }}
+  REACT_APP_MIXPANEL: ${{ secrets.MIXPANEL_TOKEN }}
+  REACT_APP_SEGMENT: ${{ secrets.SEGMENT }}
+  SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+  REACT_APP_VERSION: ${{ github.run_id }}${{ github.run_attempt }}
+  PUBLIC_URL: ${{ secrets.PUBLIC_URL }}
+  REACT_APP_GOOGLE_CLIENT_ID: ${{secrets.GOOGLE_CLIENT_ID}}
+  REACT_APP_INTERCOM: ${{secrets.INTERCOM_APP_ID}}
+  REACT_APP_LANDING_MIXPANEL_TOKEN_PROD: ${{secrets.LANDING_MIXPANEL_TOKEN_PROD}}
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Installing Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Build React App
+        run: yarn install && yarn build:prod    
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1-node16
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+      - name: Deploy app build to S3 bucket
+        run: aws s3 sync ./build/ s3://${{secrets.S3_BUCKET}} --delete
+      - name: Invalidate Cloudfront Cache
+        run: aws cloudfront create-invalidation --distribution-id ${{secrets.CLOUDFRONT_DISTRIBUTION_ID}} --paths "/*"
+      - name: Semantic Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx semantic-release    
+      - name: slack - GitHub Actions Slack integration - build success
+        uses: act10ns/slack@v2.0.0
+        with:
+          status: ${{ job.status }}
+          message:
+            '${{ env.REACT_APP_PAGE_TITLE }} was successfully deployed to production at https://console.hybr1d.io/'
+        if: success()
+      - name: slack - GitHub Actions Slack integration - build failed
+        uses: act10ns/slack@v2.0.0
+        with:
+          status: ${{ job.status }}
+          message:
+            'Production Build failed for ${{ env.REACT_APP_PAGE_TITLE }}'
+        if: failure()

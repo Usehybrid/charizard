@@ -1,0 +1,48 @@
+name: dev-deploy
+on:
+  push:
+    branches: [development]
+env:
+  REACT_APP_API_END_POINT: ${{ secrets.API_DEV }}
+  REACT_APP_PAGE_TITLE: ${{ secrets.PAGE_TITLE_DEV }}
+  SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+  REACT_APP_VERSION: ${{ github.run_id }}${{ github.run_attempt }}
+  PUBLIC_URL: ${{ secrets.PUBLIC_URL_DEV }}
+  REACT_APP_GOOGLE_CLIENT_ID: ${{secrets.GOOGLE_CLIENT_ID_DEV}}
+  REACT_APP_LANDING_MIXPANEL_TOKEN_DEV: ${{secrets.LANDING_MIXPANEL_TOKEN_DEV}}
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Installing Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Build React App
+        run: yarn install && yarn build:dev
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1-node16
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}   
+      - name: Deploy app build to S3 bucket
+        run: aws s3 sync ./build/ s3://${{secrets.S3_BUCKET_DEV}} --delete
+      - name: Invalidate Cloudfront Cache
+        run: aws cloudfront create-invalidation --distribution-id ${{secrets.CLOUDFRONT_DISTRIBUTION_ID_DEV}} --paths "/*"    
+      - name: slack - GitHub Actions Slack integration - build success
+        uses: act10ns/slack@v2.0.0
+        with:
+          status: ${{ job.status }}
+          message:
+            '${{ env.REACT_APP_PAGE_TITLE }} was successfully deployed to dev at http://dev.usehybrid.co/'
+        if: success()
+      - name: slack - GitHub Actions Slack integration - build failure
+        uses: act10ns/slack@v2.0.0
+        with:
+          status: ${{ job.status }}
+          message:
+            'Development Build failed for ${{ env.REACT_APP_PAGE_TITLE }}'
+        if: failure()
+
