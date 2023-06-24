@@ -41,4 +41,8 @@
   --danger: #de350b;
   --success: #36b37e;
   --warning: #ff8b00;
+
+  /* svg filters */
+  --filter-slate-600: invert(79%) sepia(7%) saturate(161%) hue-rotate(210deg) brightness(92%)
+    contrast(85%);
 }

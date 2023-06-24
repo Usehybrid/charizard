@@ -1,0 +1,38 @@
+.box {
+  position: relative;
+}
+
+.search {
+  border-radius: 4px;
+  border: 1px solid var(--slate-300);
+  background: var(--white);
+  display: flex;
+  max-width: 240px;
+  width: 100%;
+  padding: 6px 12px;
+  align-items: center;
+  gap: 10px;
+  padding-left: 40px;
+
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--primary);
+}
+
+.search::placeholder {
+  color: var(--hint);
+}
+
+.search:focus-visible {
+  outline: 1px solid var(--iris);
+}
+
+.searchIcon {
+  position: absolute;
+  left: 12px;
+  top: 10px;
+  width: 20px;
+  height: 20px;
+
+  filter: var(--filter-slate-600);
+}

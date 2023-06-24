@@ -27,6 +27,7 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
+    "@tanstack/react-table": "^8.9.2",
     "@zag-js/menu": "^0.10.2",
     "@zag-js/react": "^0.10.2",
     "clsx": "^1.2.1"
