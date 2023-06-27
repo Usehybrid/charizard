@@ -1,6 +1,5 @@
 import clsx from 'clsx'
 import classes from './styles.module.scss'
-// import {FormikProps} from 'formik'
 import {HTMLInputTypeAttribute} from 'react'
 import {Inputs} from './types'
 
@@ -13,7 +12,6 @@ interface InputProps {
   id?: string
   value?: string | number
   onChange?: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, arg?: any) => void
-  formik?: any // ! move from formik to zod later on
   disabled?: boolean
   restprops?: any
   rows?: number
@@ -28,7 +26,6 @@ export function Input({
   placeholder = 'Placeholder',
   name,
   id,
-  formik,
   value,
   onChange,
   disabled = false,
