@@ -1,6 +1,6 @@
 import * as React from 'react'
 import clsx from 'clsx'
-import classes from './styles.module.scss'
+import classes from './styles.module.css'
 import {Portal} from '@zag-js/react'
 
 interface PopoverContentProps {
