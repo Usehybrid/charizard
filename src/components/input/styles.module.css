@@ -71,6 +71,7 @@
 
 .input.error {
   border-color: #de350b;
+  caret-color: #de350b;
 }
 
 .input:disabled {
