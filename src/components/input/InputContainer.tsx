@@ -4,10 +4,10 @@ import {Inputs} from './types'
 
 interface InputContainerProps {
   children: React.ReactNode
-  size?: 'sm' | 'md' // sm: 270px, md: 360px
+  size?: 'sm' | 'md' | 'adapt' // sm: 270px, md: 360px, adapt: 100%
 }
 
-export function InputContainer({size = 'sm', children}: InputContainerProps) {
+export function InputContainer({size = 'adapt', children}: InputContainerProps) {
   return <div className={clsx(classes.inputContainer, classes[size])}>{children}</div>
 }
 

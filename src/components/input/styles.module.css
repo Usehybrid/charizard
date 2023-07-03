@@ -2,6 +2,10 @@
   width: 100%;
 }
 
+.inputContainer.adapt {
+  width: 100%;
+}
+
 .inputContainer.sm {
   width: 20.8rem;
 }
