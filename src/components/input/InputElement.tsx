@@ -18,11 +18,11 @@ interface InputDirectionElementProps {
 }
 
 export function InputLeftElement({children}: InputDirectionElementProps) {
-  return <InputElement placement="left" children={children} />
+  return <InputElement placement="left">{children}</InputElement>
 }
 
 export function InputRightElement({children}: InputDirectionElementProps) {
-  return <InputElement placement="right" children={children} />
+  return <InputElement placement="right">{children}</InputElement>
 }
 
 InputElement.displayName = Inputs.INPUT_ELEMENT

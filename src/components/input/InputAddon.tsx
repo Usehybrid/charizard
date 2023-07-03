@@ -18,11 +18,11 @@ interface InputDirectionAddonProps {
 }
 
 export function InputLeftAddon({children}: InputDirectionAddonProps) {
-  return <InputAddon placement="left" children={children} />
+  return <InputAddon placement="left">{children}</InputAddon>
 }
 
 export function InputRightAddon({children}: InputDirectionAddonProps) {
-  return <InputAddon placement="right" children={children} />
+  return <InputAddon placement="right">{children}</InputAddon>
 }
 
 InputAddon.displayName = Inputs.INPUT_ADDON
