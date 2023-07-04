@@ -1,32 +1,46 @@
-.errorMsg {
-  font-weight: 400;
-  font-size: 1rem;
-  line-height: 1.54rem;
-  color: #de350b;
-  margin: 0;
+.selectContainer {
+  width: 100%;
+
+  .errorMsg {
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.54rem;
+    color: #de350b;
+    margin: 0;
+  }
 }
 
-.subLabelContainer {
-  padding: 6px 12px;
-  margin: 4px;
-  width: auto !important;
-  border-radius: 4px;
+.labelContainer {
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
-.subLabelContainer:hover {
-  background-color: #f5f8ff;
+.optionContainer .profileImg,
+.labelContainer .profileImg {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
-.subLabelContainer .label {
-  font-weight: 500;
-  font-size: 1.08rem;
-  line-height: 1.84rem;
-  color: #37373d;
+.optionContainer .label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.subLabelContainer .subLabel {
+.optionContainer .subLabel {
   font-weight: 400;
   font-size: 0.92rem;
   line-height: 1.54rem;
-  color: #979797;
+  color: var(--secondary);
+}
+
+.closeSpan,
+.downArrowSpan {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: invert(76%) sepia(5%) saturate(209%) hue-rotate(210deg) brightness(95%) contrast(89%);
 }

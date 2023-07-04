@@ -1,13 +1,12 @@
 import {StylesConfig} from 'react-select'
 
 export const colourStyles: StylesConfig<any> = {
-  control: styles => ({
-    ...styles,
-    backgroundColor: '#ffffff',
-    color: '#37373D',
-    border: '1px solid #E2E8F0',
-    fontSize: '14px',
-  }),
+  valueContainer: styles => {
+    return {
+      ...styles,
+      gap: '4px',
+    }
+  },
   option: (styles, {data, isDisabled, isFocused, isSelected}) => {
     return {
       ...styles,
@@ -16,38 +15,80 @@ export const colourStyles: StylesConfig<any> = {
         : isSelected
         ? data.color
         : isFocused
-        ? '#f7f1ff'
+        ? '#f7f7f7'
         : '#ffffff',
-      color: isFocused ? '#37373d' : '#37373d',
+      color: '#171718',
       cursor: isDisabled ? 'not-allowed' : 'default',
-      padding: '5px',
-      fontWeight: 'bold',
-      fontSize: '14px',
+      padding: '8px 12px',
+      fontSize: '16px',
+      lineHeight: '24px',
+      ':hover': {
+        backgroundColor: '#f7f7f7',
+      },
     }
   },
-
+  singleValue: (styles, {data}) => {
+    return {
+      ...styles,
+      color: '#171718',
+      fontSize: '16px',
+      lineHeight: '24px',
+      display: 'flex',
+      alignItems: 'center',
+      gap: '4px',
+      backgroundColor: data.profileImgUrl ? '#f5f5f8' : 'transparent',
+      padding: data.profileImgUrl ? '0px 8px 0 0 !important' : '0 !important',
+    }
+  },
   multiValue: (styles, {data, isFocused}) => {
     return {
       ...styles,
-      backgroundColor: '#f7f1ff',
-      color: isFocused ? 'white' : 'black',
+      backgroundColor: '#f5f5f8',
+      padding: data.profileImgUrl ? '0px 8px 0 0' : '0 8px',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: '4px',
+      borderRadius: '24px',
+      margin: '0',
     }
   },
   multiValueLabel: (styles, {data}) => ({
     ...styles,
-    color: '#734daf',
-    fontWeight: '700',
+    color: '#171718',
+    fontSize: '16px',
+    lineHeight: '24px',
+    padding: '0 !important',
   }),
   multiValueRemove: (styles, {data}) => ({
     ...styles,
-    color: '#734daf',
+    color: '#b3b2b8',
+    padding: '0',
     ':hover': {
-      backgroundColor: '#ca281a',
-      color: '#ffffff',
+      backgroundColor: 'transparent',
+      color: '#b3b2b8',
+    },
+    svg: {
+      filter:
+        'invert(76%) sepia(5%) saturate(209%) hue-rotate(210deg) brightness(95%) contrast(89%)',
     },
   }),
   indicatorSeparator: styles => ({
     ...styles,
     display: 'none',
+  }),
+  dropdownIndicator: styles => ({
+    ...styles,
+    svg: {
+      filter:
+        'invert(76%) sepia(5%) saturate(209%) hue-rotate(210deg) brightness(95%) contrast(89%)',
+    },
+  }),
+  clearIndicator: styles => ({
+    ...styles,
+    svg: {
+      filter:
+        'invert(76%) sepia(5%) saturate(209%) hue-rotate(210deg) brightness(95%) contrast(89%)',
+    },
   }),
 }
