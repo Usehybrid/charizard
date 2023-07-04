@@ -3,23 +3,35 @@ import classes from './styles.module.css'
 import filterLines from '../assets/filter-lines.svg'
 import chevronDown from '../assets/chevron-down.svg'
 import chevronUp from '../assets/chevron-up.svg'
-import {useReactTable, getCoreRowModel, flexRender} from '@tanstack/react-table'
+import {
+  useReactTable,
+  getCoreRowModel,
+  flexRender,
+  getPaginationRowModel,
+} from '@tanstack/react-table'
 import {Search} from '../search'
 
 export interface TableProps {
   data: any
   columns: any
+  search?: string
+  setSearch?: any
+  sortBy?: string
+  sortOrd?: 'asc' | 'desc' | ''
 }
 
-export function Table({data, columns}: TableProps) {
+export function Table({data, columns, search, setSearch}: TableProps) {
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
   })
 
   let isSorting = true
   let sortOrd = 'desc'
+
+  const [s, setS] = React.useState('')
 
   return (
     <div className={classes.box}>
@@ -39,7 +51,7 @@ export function Table({data, columns}: TableProps) {
           )}
         </div>
         <div className={classes.search}>
-          <Search />
+          <Search search={search} setSearch={setSearch} placeholder="Search by software name" />
         </div>
       </div>
 

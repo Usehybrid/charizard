@@ -27,7 +27,9 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
+    "@tanstack/match-sorter-utils": "^8.8.4",
     "@tanstack/react-table": "^8.9.2",
+    "@tanstack/table-core": "^8.9.3",
     "@zag-js/menu": "^0.10.2",
     "@zag-js/popover": "^0.10.2",
     "@zag-js/popper": "^0.10.2",

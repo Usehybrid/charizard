@@ -5,9 +5,15 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@tanstack/match-sorter-utils':
+    specifier: ^8.8.4
+    version: 8.8.4
   '@tanstack/react-table':
     specifier: ^8.9.2
     version: 8.9.2(react-dom@18.2.0)(react@18.2.0)
+  '@tanstack/table-core':
+    specifier: ^8.9.3
+    version: 8.9.3
   '@zag-js/menu':
     specifier: ^0.10.2
     version: 0.10.2
@@ -3837,6 +3843,13 @@ packages:
       file-system-cache: 2.3.0
     dev: true
 
+  /@tanstack/match-sorter-utils@8.8.4:
+    resolution: {integrity: sha512-rKH8LjZiszWEvmi01NR72QWZ8m4xmXre0OOwlRGnjU01Eqz/QnN+cqpty2PJ0efHblq09+KilvyR7lsbzmXVEw==}
+    engines: {node: '>=12'}
+    dependencies:
+      remove-accents: 0.4.2
+    dev: false
+
   /@tanstack/react-table@8.9.2(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-Irvw4wqVF9hhuYzmNrlae4IKdlmgSyoRWnApSLebvYzqHoi5tEsYzBj6YPd0hX78aB/L+4w/jgK2eBQVpGfThQ==}
     engines: {node: '>=12'}
@@ -3851,6 +3864,11 @@ packages:
 
   /@tanstack/table-core@8.9.2:
     resolution: {integrity: sha512-ajc0OF+karBAdaSz7OK09rCoAHB1XI1+wEhu+tDNMPc+XcO+dTlXXN/Vc0a8vym4kElvEjXEDd9c8Zfgt4bekA==}
+    engines: {node: '>=12'}
+    dev: false
+
+  /@tanstack/table-core@8.9.3:
+    resolution: {integrity: sha512-NpHZBoHTfqyJk0m/s/+CSuAiwtebhYK90mDuf5eylTvgViNOujiaOaxNDxJkQQAsVvHWZftUGAx1EfO1rkKtLg==}
     engines: {node: '>=12'}
     dev: false
 
@@ -7559,6 +7577,10 @@ packages:
       mdast-util-to-string: 1.1.0
       unist-util-visit: 2.0.3
     dev: true
+
+  /remove-accents@0.4.2:
+    resolution: {integrity: sha512-7pXIJqJOq5tFgG1A2Zxti3Ht8jJF337m4sowbuHsW30ZnkQFnDzy9qBNhgzX8ZLW4+UBcXiiR7SwR6pokHsxiA==}
+    dev: false
 
   /require-directory@2.1.1:
     resolution: {integrity: sha512-fGxEI7+wsG9xrvdjsrlmL22OMTTiHRwAMroiEeMgq8gzoLC/PQr7RsRDSTLUg/bZAZtF+TVIkHc6/4RIKrui+Q==}
