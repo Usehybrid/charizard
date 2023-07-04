@@ -1,0 +1,116 @@
+.backdropLayer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1040;
+  width: 100vw;
+  height: 100vh;
+
+  visibility: hidden;
+}
+
+.backdropLayer.show {
+  visibility: visible;
+}
+
+.backdropLayer .backdrop {
+  width: 100%;
+  height: 100%;
+  background-color: var(--black);
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+}
+
+.backdropLayer .backdrop.showBackdrop {
+  opacity: 0.3;
+}
+
+.container {
+  height: 100vh;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  background: var(--white);
+  box-shadow: 0px -4px 15px rgba(0, 0, 0, 0.08);
+  z-index: 1040;
+
+  right: 0;
+  transform: translateX(100%);
+
+  transition: transform 0.3s ease-in-out;
+}
+
+.container.sm {
+  width: 30.8rem;
+}
+
+.container.md {
+  width: 46.2rem;
+}
+
+.container .content {
+  height: 100%;
+  overflow-y: auto;
+  position: relative;
+}
+
+.container .content .headerContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  border-bottom: 1px solid var(--slate-300);
+}
+
+.container .content .headerContainer .title {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1.54rem;
+  line-height: 2.15rem;
+  color: var(--text-primary);
+}
+
+.container .content .headerContainer .closeBtn {
+  background: transparent
+    url('data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27 fill=%27%23434053%27%3e%3cpath d=%27M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z%27/%3e%3c/svg%3e')
+    center/0.8rem auto no-repeat;
+
+  color: var(--slate-700);
+  width: 11.5px;
+  height: 11.5px;
+  outline: none;
+  border: none;
+}
+
+.container .content .descriptionContainer {
+  padding: 20px;
+}
+
+.container .content .footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 12px 20px;
+  z-index: 20;
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.container .content .footer .saveBtn,
+.container .content .footer .closeBtn {
+  font-weight: 400;
+  font-size: 1.23rem;
+  line-height: 1.9rem;
+  padding: 8px 16px;
+  border-radius: 6px;
+}
+
+@media screen and (max-width: 600px) {
+  .container {
+    width: 100vw !important;
+  }
+}
