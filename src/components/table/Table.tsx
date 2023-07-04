@@ -43,12 +43,12 @@ export function Table({data, columns}: TableProps) {
         </div>
       </div>
 
-      <table>
-        <thead>
+      <table className={classes.table}>
+        <thead className={classes.tableHead}>
           {table.getHeaderGroups().map(headerGroup => (
-            <tr key={headerGroup.id}>
+            <tr key={headerGroup.id} className={classes.tableRow}>
               {headerGroup.headers.map(header => (
-                <th key={header.id}>
+                <th key={header.id} className={classes.tableHeader}>
                   {header.isPlaceholder
                     ? null
                     : flexRender(header.column.columnDef.header, header.getContext())}
@@ -57,18 +57,20 @@ export function Table({data, columns}: TableProps) {
             </tr>
           ))}
         </thead>
-        <tbody>
+        <tbody className={classes.tableBody}>
           {table.getRowModel().rows.map(row => (
-            <tr key={row.id}>
+            <tr key={row.id} className={classes.tableRow}>
               {row.getVisibleCells().map(cell => (
-                <td key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</td>
+                <td key={cell.id} className={classes.tableData}>
+                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                </td>
               ))}
             </tr>
           ))}
         </tbody>
-        <tfoot>
+        <tfoot className={classes.tableFoot}>
           {table.getFooterGroups().map(footerGroup => (
-            <tr key={footerGroup.id}>
+            <tr key={footerGroup.id} className={classes.tableRow}>
               {footerGroup.headers.map(header => (
                 <th key={header.id}>
                   {header.isPlaceholder

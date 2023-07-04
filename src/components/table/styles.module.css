@@ -1,6 +1,8 @@
 .box {
   background-color: var(--white);
   width: 100%;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 
 .header {
@@ -44,4 +46,23 @@
   font-size: 14px;
   line-height: 20px;
   margin-inline-end: 4px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tableHead {
+  background: var(--slate-50);
+  height: 36px;
+  color: var(--secondary);
+  font-size: 10px;
+  line-height: 20px;
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
+}
+
+.tableData {
+  text-align: center;
 }
