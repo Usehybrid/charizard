@@ -1,0 +1,32 @@
+.errorMsg {
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.54rem;
+  color: #de350b;
+  margin: 0;
+}
+
+.subLabelContainer {
+  padding: 6px 12px;
+  margin: 4px;
+  width: auto !important;
+  border-radius: 4px;
+}
+
+.subLabelContainer:hover {
+  background-color: #f5f8ff;
+}
+
+.subLabelContainer .label {
+  font-weight: 500;
+  font-size: 1.08rem;
+  line-height: 1.84rem;
+  color: #37373d;
+}
+
+.subLabelContainer .subLabel {
+  font-weight: 400;
+  font-size: 0.92rem;
+  line-height: 1.54rem;
+  color: #979797;
+}

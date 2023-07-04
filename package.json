@@ -32,7 +32,8 @@
     "@zag-js/popover": "^0.10.2",
     "@zag-js/popper": "^0.10.2",
     "@zag-js/react": "^0.10.2",
-    "clsx": "^1.2.1"
+    "clsx": "^1.2.1",
+    "react-select": "^5.7.3"
   },
   "peerDependencies": {
     "react": "^18.2.0",
