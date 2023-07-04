@@ -11,6 +11,12 @@ dependencies:
   '@zag-js/menu':
     specifier: ^0.10.2
     version: 0.10.2
+  '@zag-js/popover':
+    specifier: ^0.10.2
+    version: 0.10.2
+  '@zag-js/popper':
+    specifier: ^0.10.2
+    version: 0.10.2
   '@zag-js/react':
     specifier: ^0.10.2
     version: 0.10.2(react-dom@18.2.0)(react@18.2.0)
@@ -4177,6 +4183,12 @@ packages:
     resolution: {integrity: sha512-hXJO047Bx1ilIQIlY4yk4f7QM7hFWg5p6DC4zZBsQf2A/FmDikGcOvqYhM4NM5Zuw8Rp4RF8aSU2qWONqAo8kA==}
     dev: false
 
+  /@zag-js/aria-hidden@0.10.2:
+    resolution: {integrity: sha512-2e7ITwdxpsH4+TKgib0GLv1HGWx8k9MJbzpv03MknQvQUOgZVyXsFUh0BQWoTpOLcZTlifD+NX7Dle4PCaAiSg==}
+    dependencies:
+      '@zag-js/dom-query': 0.10.2
+    dev: false
+
   /@zag-js/core@0.10.2:
     resolution: {integrity: sha512-p9ctX27Dik2PYUPE66O2sJwesGsmlV6FbMSbGfc/lteZiQHkFxulOTs1kiFxUDfjFgbsHDu4a0QwBmNrHH25Uw==}
     dependencies:
@@ -4231,6 +4243,22 @@ packages:
       '@zag-js/utils': 0.10.2
     dev: false
 
+  /@zag-js/popover@0.10.2:
+    resolution: {integrity: sha512-xAjARtlFFCApFANi7Ti3yKBaecNVgjoxA4Uya0kPYgBrfOQcxAFxYaM14Adigi4gsrz8+7n34MOqHJZHdTNBQA==}
+    dependencies:
+      '@zag-js/anatomy': 0.10.2
+      '@zag-js/aria-hidden': 0.10.2
+      '@zag-js/core': 0.10.2
+      '@zag-js/dismissable': 0.10.2
+      '@zag-js/dom-query': 0.10.2
+      '@zag-js/popper': 0.10.2
+      '@zag-js/remove-scroll': 0.10.2
+      '@zag-js/tabbable': 0.10.2
+      '@zag-js/types': 0.10.2
+      '@zag-js/utils': 0.10.2
+      focus-trap: 7.4.3
+    dev: false
+
   /@zag-js/popper@0.10.2:
     resolution: {integrity: sha512-UckgTCwa+fNv3VQNKImO8EhkPoJBB5gQz2K4CQ5CEyFuiubQQpQRL/p/QGvivaIKmZ5kfQnl2SVechoiiMSpTg==}
     dependencies:
@@ -4256,6 +4284,12 @@ packages:
 
   /@zag-js/rect-utils@0.10.2:
     resolution: {integrity: sha512-rie7sO39T0bsTRO6CWL5bFpKbhoTEd+8apVuQIBDRof2GGU7RGePKV3BQA5q5gQ4nIG6zXIZ9k6HD+syQ4ivOA==}
+    dev: false
+
+  /@zag-js/remove-scroll@0.10.2:
+    resolution: {integrity: sha512-PJispN7PmzbOqmhd6VFQXprLDUd5QHx9X4o8TJF0vvD1D7oNSLVzwhGUZc5QeSB1xNuIisjGs0clNoZF8z8FUA==}
+    dependencies:
+      '@zag-js/dom-query': 0.10.2
     dev: false
 
   /@zag-js/store@0.10.2:
@@ -5545,6 +5579,12 @@ packages:
     resolution: {integrity: sha512-uD7Du+9xC/gGnOyk3kANQmtgWWKANWcKGJ84Wu0NSjTaVING3GqUAsywUPAl3fEYKLVVIcDWiaQ8+R6qzghwmA==}
     engines: {node: '>=0.4.0'}
     dev: true
+
+  /focus-trap@7.4.3:
+    resolution: {integrity: sha512-BgSSbK4GPnS2VbtZ50VtOv1Sti6DIkj3+LkVjiWMNjLeAp1SH1UlLx3ULu/DCu4vq5R4/uvTm+zrvsMsuYmGLg==}
+    dependencies:
+      tabbable: 6.2.0
+    dev: false
 
   /for-each@0.3.3:
     resolution: {integrity: sha512-jqYfLp7mo9vIyQf8ykW2v7A+2N4QjeCeI5+Dz9XraiO1ign81wjiH7Fb9vSOWvQfNtmSa4H2RoQTrrXivdUZmw==}
@@ -7909,6 +7949,10 @@ packages:
   /synchronous-promise@2.0.17:
     resolution: {integrity: sha512-AsS729u2RHUfEra9xJrE39peJcc2stq2+poBXX8bcM08Y6g9j/i/PUzwNQqkaJde7Ntg1TO7bSREbR5sdosQ+g==}
     dev: true
+
+  /tabbable@6.2.0:
+    resolution: {integrity: sha512-Cat63mxsVJlzYvN51JmVXIgNoUokrIaT2zLclCXjRd8boZ0004U4KCs/sToJ75C6sdlByWxpYnb5Boif1VSFew==}
+    dev: false
 
   /tar-fs@2.1.1:
     resolution: {integrity: sha512-V0r2Y9scmbDRLCNex/+hYzvp/zyYjvFbHPNgVTKfQvVrb6guiE/fxP+XblDNR011utopbkex2nM4dHNV6GDsng==}
