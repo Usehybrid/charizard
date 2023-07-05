@@ -75,6 +75,7 @@ function Filter({
                 <input
                   type="checkbox"
                   name={option.name}
+                  id={option.value}
                   checked={option.checked}
                   onChange={e => {
                     setFilterOptions(state => {

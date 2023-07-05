@@ -85,6 +85,8 @@
   gap: 6px;
   border-radius: 12px;
   background: var(--white);
+
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 
 .options {
@@ -98,8 +100,11 @@
   font-size: 14px;
   line-height: 180%;
   width: 100%;
-  padding-left: 8px;
-  padding-right: 8px;
+  padding: 4px 8px;
+
+  display: flex;
+  align-items: center;
+  column-gap: 16px;
 }
 
 .option:hover {
