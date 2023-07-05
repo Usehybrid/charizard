@@ -1,13 +1,13 @@
 .selectContainer {
   width: 100%;
+}
 
-  .errorMsg {
-    font-weight: 400;
-    font-size: 1rem;
-    line-height: 1.54rem;
-    color: #de350b;
-    margin: 0;
-  }
+.selectContainer .errorMsg {
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.54rem;
+  color: #de350b;
+  margin: 0;
 }
 
 .labelContainer {
