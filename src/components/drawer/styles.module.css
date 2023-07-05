@@ -101,7 +101,7 @@
 }
 
 .container .content .footer .saveBtn,
-.container .content .footer .closeBtn {
+.container .content .footer .cancelBtn {
   font-weight: 400;
   font-size: 1.23rem;
   line-height: 1.9rem;

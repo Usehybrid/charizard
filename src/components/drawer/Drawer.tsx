@@ -1,6 +1,7 @@
 import * as React from 'react'
 import clsx from 'clsx'
 import classes from './styles.module.css'
+import {Button} from '../button'
 
 interface DrawerProps {
   /**
@@ -36,9 +37,9 @@ interface DrawerProps {
    */
   saveBtnText?: string
   /**
-   * Close button text
+   * Cancel button text
    */
-  closeBtnText?: string
+  cancelBtnText?: string
   /**
    * Drawer size
    */
@@ -66,7 +67,7 @@ export default function Drawer({
   customHeader,
   customFooter,
   saveBtnText = 'Save',
-  closeBtnText = 'Cancel',
+  cancelBtnText = 'Cancel',
   size = 'md',
   showBackdrop = true,
   showHeader = true,
@@ -109,7 +110,7 @@ export default function Drawer({
               ) : (
                 <>
                   <h1 className={classes.title}>{title}</h1>
-                  <button className={classes.closeBtn} onClick={onClose}></button>
+                  <button type="button" className={classes.closeBtn} onClick={onClose}></button>
                 </>
               )}
             </div>
@@ -126,20 +127,10 @@ export default function Drawer({
                 customFooter
               ) : (
                 <>
-                  <button
-                    type="button"
-                    className={clsx('secondary-btn', classes.closeBtn)}
-                    onClick={onClose}
-                  >
-                    {closeBtnText}
-                  </button>
-                  <button
-                    type="button"
-                    className={clsx('primary-btn', classes.saveBtn)}
-                    onClick={onSave}
-                  >
-                    {saveBtnText}
-                  </button>
+                  <Button variant="secondary" onClick={onClose}>
+                    {cancelBtnText}
+                  </Button>
+                  <Button onClick={onSave}>{saveBtnText}</Button>
                 </>
               )}
             </div>
