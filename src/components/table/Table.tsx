@@ -66,7 +66,7 @@ const defaultFilterOptions = [
     options: [
       {
         name: 'Figma',
-        value: '123-156a',
+        value: '123-156afdafd',
         checked: false,
       },
     ],
