@@ -1,0 +1,44 @@
+.trigger {
+  cursor: default !important;
+}
+
+.content {
+  padding: 8px 12px;
+  border-radius: 4px;
+  position: relative;
+}
+
+.content.black {
+  background: var(--slate-800);
+  color: var(--white);
+}
+
+.content.white {
+  background: var(--slate-200);
+  color: var(--primary);
+}
+
+.closeBtn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0.5rem;
+}
+
+.arrow {
+  --arrow-size: 6px;
+  display: none;
+  transition: 0.3s all ease-in-out;
+}
+
+.arrow.black {
+  --arrow-background: var(--slate-800);
+}
+
+.arrow.white {
+  --arrow-background: var(--slate-200);
+}
+
+.trigger[data-expanded] ~ .positioner > .arrow {
+  display: block;
+}

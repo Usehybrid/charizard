@@ -70,3 +70,73 @@ h6 {
 #__next {
   isolation: isolate;
 }
+
+/*
+  Reset Button
+*/
+
+.reset-btn {
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  overflow: visible;
+
+  background: transparent;
+
+  /* inherit font & color from ancestor */
+  color: inherit;
+  font: inherit;
+
+  /* Normalize `line-height`. Cannot be changed from `normal` in Firefox 4+. */
+  line-height: normal;
+
+  /* Corrects font smoothing for webkit */
+  -webkit-font-smoothing: inherit;
+  -moz-osx-font-smoothing: inherit;
+
+  /* Corrects inability to style clickable `input` types in iOS */
+  -webkit-appearance: none;
+}
+
+/*
+Base button styles
+*/
+.base-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  outline: none;
+  border: none;
+
+  transition: all 0.3s ease-in-out;
+}
+
+/*
+Primary button
+use this like
+<button class="reset-btn base-btn primary-btn">Primary</button>
+*/
+.primary-btn {
+  background: var(--iris);
+  color: #ffffff;
+}
+
+.primary-btn:hover {
+  background: var(--iris-60);
+}
+
+/*
+Secondary button
+use this like
+<button class="reset-btn base-btn secondary-btn">Secondary</button>
+*/
+.secondary-btn {
+  background: var(--slate-20);
+  color: var(--text-primary);
+}
+
+.secondary-btn:hover {
+  background: var(--slate-100);
+}
