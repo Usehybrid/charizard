@@ -1,0 +1,46 @@
+.selectContainer {
+  width: 100%;
+
+  .errorMsg {
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.54rem;
+    color: #de350b;
+    margin: 0;
+  }
+}
+
+.labelContainer {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.optionContainer .profileImg,
+.labelContainer .profileImg {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.optionContainer .label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.optionContainer .subLabel {
+  font-weight: 400;
+  font-size: 0.92rem;
+  line-height: 1.54rem;
+  color: var(--secondary);
+}
+
+.closeSpan,
+.downArrowSpan {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: invert(76%) sepia(5%) saturate(209%) hue-rotate(210deg) brightness(95%) contrast(89%);
+}
