@@ -77,7 +77,9 @@
 
 .dropdown {
   width: 256px;
-  height: 316px;
+  max-height: 316px;
+  position: relative;
+  overflow-y: scroll;
   display: inline-flex;
   padding: 8px;
   flex-direction: column;
@@ -85,12 +87,21 @@
   gap: 6px;
   border-radius: 12px;
   background: var(--white);
-
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.dropdown:focus-visible {
+  outline: none;
 }
 
 .options {
   width: 100%;
+}
+
+.optionsEmpty {
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .option {
@@ -109,7 +120,6 @@
 
 .option:hover {
   background: var(--slate-50);
-  cursor: pointer;
 }
 
 .selectedFilters {
@@ -119,12 +129,20 @@
   line-height: 180%;
 }
 
+.dropdownSearch {
+  position: sticky;
+  top: 0;
+}
+
 .footer {
   width: 100%;
   display: flex;
   justify-content: space-between;
   padding-left: 8px;
   padding-right: 8px;
+  position: sticky;
+  bottom: 0;
+  background-color: white;
 }
 
 .resetBtn {
@@ -141,4 +159,29 @@
   font-size: 12px;
   font-weight: 500;
   line-height: 16px;
+}
+
+/* checkbox */
+
+.optionLabel {
+  display: flex;
+  align-items: center;
+  column-gap: 16px;
+}
+
+.optionLabel:hover {
+  cursor: pointer;
+}
+
+.optionLabel > [data-part='control'] {
+  width: 16px;
+  height: 16px;
+  border-radius: 2px;
+  border: 2px solid var(--slate-200);
+  background-color: white;
+}
+
+.optionLabel > [data-part='control'][data-checked] {
+  border-color: var(--iris);
+  background-color: var(--iris);
 }

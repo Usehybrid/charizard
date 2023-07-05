@@ -82,8 +82,15 @@ const columns = [
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <div style={styles}>
-      <Table data={data} columns={columns} />
-    </div>
+    <App />
   </React.StrictMode>,
 )
+
+function App() {
+  const [search, setSearch] = React.useState('')
+  return (
+    <div style={styles}>
+      <Table data={data} columns={columns} search={search} setSearch={setSearch} />
+    </div>
+  )
+}

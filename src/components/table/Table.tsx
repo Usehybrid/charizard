@@ -25,6 +25,9 @@ export interface TableProps {
 export type FilterOptions = {
   id: string
   name: string
+  config?: {
+    hideSearch?: boolean
+  }
   options: {
     name: string
     value: string
@@ -36,6 +39,9 @@ const defaultFilterOptions = [
   {
     id: 'software-owner',
     name: 'Software Owner',
+    config: {
+      hideSearch: false,
+    },
     options: [
       {
         name: 'Owner 1',
@@ -53,24 +59,44 @@ const defaultFilterOptions = [
         checked: false,
       },
       {
-        name: 'Figmaf',
+        name: 'Figma a',
         value: '123-156aadf',
+        checked: false,
+      },
+      {
+        name: 'Figma b',
+        value: '123-156aadf12',
+        checked: false,
+      },
+      {
+        name: 'Figma c',
+        value: '123-156aadf21',
+        checked: false,
+      },
+      {
+        name: 'Figma d',
+        value: '123-156aadf121',
+        checked: false,
+      },
+      {
+        name: 'Figma e',
+        value: '123-156aadf214',
         checked: false,
       },
     ],
   },
 
-  {
-    id: 'software-name',
-    name: 'Software Name',
-    options: [
-      {
-        name: 'Figma',
-        value: '123-156afdafd',
-        checked: false,
-      },
-    ],
-  },
+  // {
+  //   id: 'software-name',
+  //   name: 'Software Name',
+  //   options: [
+  //     {
+  //       name: 'Figma',
+  //       value: '123-156afdafd',
+  //       checked: false,
+  //     },
+  //   ],
+  // },
 ]
 
 // const filterOptions = [] as any
@@ -95,7 +121,12 @@ export function Table({data, columns, search, setSearch}: TableProps) {
           <TableFilters filterOptions={filterOptions} setFilterOptions={setFilterOptions} />
         </div>
         <div className={classes.search}>
-          <Search search={search} setSearch={setSearch} placeholder="Search by software name" />
+          <Search
+            id="table-search"
+            search={search}
+            setSearch={setSearch}
+            placeholder="Search by software name"
+          />
         </div>
       </div>
 

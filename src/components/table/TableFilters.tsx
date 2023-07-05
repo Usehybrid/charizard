@@ -1,5 +1,6 @@
 import * as React from 'react'
 import * as menu from '@zag-js/menu'
+import * as checkbox from '@zag-js/checkbox'
 import clsx from 'clsx'
 import filterLines from '../assets/filter-lines.svg'
 import chevronDown from '../assets/chevron-down.svg'
@@ -36,31 +37,32 @@ function Filter({
   setFilterOptions: SetFilterOptions
 }) {
   const [search, setSearch] = React.useState('')
-  const [checked, setChecked] = React.useState(false)
   //   console.log(filter['id'], 'filter-id')
   const [state, send] = useMachine(
     menu.machine({
       id: filter['id'],
-      //   onSelect: ({value}) => {
-      //     console.log('hits')
-      //     setFilterOptions(state => {
-      //       const newState = [...state]
-      //       newState.forEach(obj => {
-      //         obj.options.forEach(option => {
-      //           if (option.value === value) {
-      //             console.log(option, value)
-      //             option.checked = !option.checked
-      //             return
-      //           }
-      //         })
-      //       })
-      //       console.log(newState, 'test')
-      //       return newState
-      //     })
-      //   },
+      onSelect: ({value}) => {
+        setFilterOptions(state => {
+          const newState = [...state]
+          newState.forEach(obj => {
+            obj.options.forEach(option => {
+              if (option.value === value) {
+                console.log(option, value)
+                option.checked = !option.checked
+                return
+              }
+            })
+          })
+          return newState
+        })
+      },
     }),
   )
   const api = menu.connect(state, send, normalizeProps)
+
+  const filteredOptions = filter.options.filter(option =>
+    option.name.toLowerCase().includes(search.toLowerCase()),
+  )
 
   return (
     <div>
@@ -70,39 +72,28 @@ function Filter({
       </button>
 
       <div {...api.positionerProps}>
-        <div {...api.contentProps} className={classes.dropdown}>
-          <Search search={search} setSearch={setSearch} />
+        <div {...api.contentProps} className={classes.dropdown} onKeyDown={() => {}}>
+          {!filter.config?.hideSearch && (
+            <div className={classes.dropdownSearch}>
+              <Search
+                id="filter-search"
+                search={search}
+                setSearch={setSearch}
+                placeholder="Search"
+              />
+            </div>
+          )}
 
           <div className={classes.options}>
-            {filter.options.map((option, idx) => (
-              <div key={idx} {...api.getItemProps({id: option.value})} className={classes.option}>
-                <input
-                  type="checkbox"
-                  name={option.name}
-                  id={option.value}
-                  checked={option.checked}
-                  //   onChange={e => {
-                  //     console.log(e)
-                  //     setFilterOptions(state => {
-                  //       const newState = [...state]
-                  //       newState.forEach(obj => {
-                  //         obj.options.forEach(option => {
-                  //           if (option.value === e.target.value) {
-                  //             console.log(option.checked, e.target.checked, 'test')
-                  //             option.checked = e.target.checked
-                  //             return
-                  //           }
-                  //         })
-                  //       })
-                  //       return newState
-                  //     })
-                  //   }}
-                  //   checked={checked}
-                  //   onChange={e => setChecked(s => !s)}
-                />
-                <label htmlFor={option.name}>{option.name}</label>
-              </div>
-            ))}
+            {filteredOptions.length === 0 ? (
+              <div className={classes.optionsEmpty}>No results found</div>
+            ) : (
+              filteredOptions.map((option, idx) => (
+                <div key={idx} {...api.getItemProps({id: option.value})} className={classes.option}>
+                  <Checkbox label={option.name} value={option.value} />
+                </div>
+              ))
+            )}
           </div>
 
           <div className={classes.footer}>
@@ -113,5 +104,19 @@ function Filter({
         </div>
       </div>
     </div>
+  )
+}
+
+function Checkbox({label, value}: {label: string; value: string}) {
+  const [state, send] = useMachine(checkbox.machine({id: value, name: label}))
+
+  const api = checkbox.connect(state, send, normalizeProps)
+
+  return (
+    <label {...api.rootProps} className={classes.optionLabel}>
+      <div {...api.controlProps} />
+      <span {...api.labelProps}>{label}</span>
+      <input {...api.inputProps} />
+    </label>
   )
 }
