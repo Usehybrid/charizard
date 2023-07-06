@@ -56,7 +56,7 @@
   font-size: 1.23rem;
   line-height: 1.85rem;
   color: #171718;
-   padding: 6px 12px;
+  padding: 6px 12px;
 }
 
 .options {
@@ -80,6 +80,5 @@
 }
 
 .option:hover {
-  background: var(--slate-slate-20, #F7F7F7);
-
+  background: var(--slate-slate-20, #f7f7f7);
 }
