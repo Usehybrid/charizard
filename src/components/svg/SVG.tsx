@@ -11,7 +11,7 @@ interface SVGProps {
   handleClick?: (e: any) => void
 }
 
-export default function SVG({
+export function SVG({
   path,
   width,
   height,

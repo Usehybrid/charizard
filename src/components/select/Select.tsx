@@ -1,9 +1,9 @@
 import * as React from 'react'
 import clsx from 'clsx'
-import SVG from '../svg'
 import closeIcon from '../assets/close.svg'
 import chevronDownIcon from '../assets/chevron-down.svg'
 import classes from './styles.module.css'
+import {SVG} from '../svg'
 import {colourStyles} from './config'
 import {default as ReactSelect} from 'react-select'
 import {MultiValue, components} from 'react-select'
@@ -26,7 +26,7 @@ export type SelectActionMeta = ActionMeta<{
   value: string
 }>
 
-interface HUISelectProps {
+interface SelectProps {
   /**
    * The options to be displayed in the select
    */
@@ -97,7 +97,7 @@ interface HUISelectProps {
   extraprops?: any
 }
 
-export default function HUISelect({
+export function Select({
   options,
   onChange,
   name,
@@ -115,7 +115,7 @@ export default function HUISelect({
   isSearchable = true,
   isMulti = false,
   isClearable = false,
-}: HUISelectProps) {
+}: SelectProps) {
   const controlErrorStyles: StylesConfig<any> = {
     control: (styles, {isDisabled, isFocused}) => ({
       ...styles,

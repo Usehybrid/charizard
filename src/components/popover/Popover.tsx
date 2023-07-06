@@ -20,7 +20,7 @@ interface PopoverProps {
   popoverProps?: Partial<UserDefinedContext>
 }
 
-export default function Popover({children, placement = 'top', popoverProps}: PopoverProps) {
+export function Popover({children, placement = 'top', popoverProps}: PopoverProps) {
   const [state, send] = useMachine(
     popover.machine({
       id: useId(),

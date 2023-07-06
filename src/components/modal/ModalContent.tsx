@@ -18,7 +18,7 @@ interface ModalContentProps {
   size?: 'sm' | 'md' // sm: 400px, md: 600px
 }
 
-export default function ModalContent({children, api, size = 'md'}: ModalContentProps) {
+export function ModalContent({children, api, size = 'md'}: ModalContentProps) {
   const clones = React.Children.toArray(children).map((child: any) => {
     return React.cloneElement(child, {
       ...child.props,
