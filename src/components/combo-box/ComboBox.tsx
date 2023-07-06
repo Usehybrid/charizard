@@ -15,6 +15,7 @@ export interface ComboboxProps {
   label?: string
   placeholder?: string
   labelClassName?: string
+  inputClassName?: string
   required?: boolean
   disabled?: boolean
   defaultOptions?: option[] | []
@@ -27,6 +28,7 @@ export default function Combobox({
   label,
   required = false,
   labelClassName,
+  inputClassName,
   disabled = false,
   defaultOptions = [],
   isAPIFilter = false,
@@ -85,7 +87,7 @@ export default function Combobox({
           </label>
         )}
         <div {...api.controlProps} className={classes.container}>
-          <input {...api.inputProps} />
+          <input {...api.inputProps} className={inputClassName} />
           {/* <button {...api.triggerProps}>▼</button> */}
         </div>
       </div>
