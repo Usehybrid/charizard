@@ -16,14 +16,7 @@
   border: 1px solid var(--slate-200);
 }
 
-.filters {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.meta,
-.filter {
+.meta {
   display: flex;
   align-items: center;
 }
@@ -33,25 +26,6 @@
   font-size: 12px;
   line-height: 16px;
   margin-inline-end: 10px;
-}
-
-.filterIcon {
-  margin-inline-end: 12px;
-  width: 24px;
-  height: 24px;
-}
-
-.filterIcon2 {
-  width: 20px;
-  height: 20px;
-  filter: var(--filter-slate-600);
-}
-
-.filterCol {
-  color: var(--secondary);
-  font-size: 14px;
-  line-height: 20px;
-  margin-inline-end: 4px;
 }
 
 .table {
@@ -71,117 +45,4 @@
 
 .tableData {
   text-align: center;
-}
-
-/* table filters */
-
-.dropdown {
-  width: 256px;
-  max-height: 316px;
-  position: relative;
-  overflow-y: scroll;
-  display: inline-flex;
-  padding: 8px;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 6px;
-  border-radius: 12px;
-  background: var(--white);
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-}
-
-.dropdown:focus-visible {
-  outline: none;
-}
-
-.options {
-  width: 100%;
-}
-
-.optionsEmpty {
-  text-align: center;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-
-.option {
-  border-radius: 6px;
-  background: var(--white);
-  color: var(--primary);
-  font-size: 14px;
-  line-height: 180%;
-  width: 100%;
-  padding: 4px 8px;
-
-  display: flex;
-  align-items: center;
-  column-gap: 16px;
-}
-
-.option:hover {
-  background: var(--slate-50);
-}
-
-.selectedFilters {
-  color: var(--secondary);
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 180%;
-}
-
-.dropdownSearch {
-  position: sticky;
-  top: 0;
-}
-
-.footer {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  padding-left: 8px;
-  padding-right: 8px;
-  position: sticky;
-  bottom: 0;
-  background-color: white;
-}
-
-.resetBtn {
-  display: inline-flex;
-  height: 24px;
-  padding: 0px 8px;
-  justify-content: center;
-  align-items: center;
-  gap: 6px;
-
-  border-radius: 6px;
-  border: 1px solid var(--slate-200);
-  color: var(--secondary);
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 16px;
-}
-
-/* checkbox */
-
-.optionLabel {
-  display: flex;
-  align-items: center;
-  column-gap: 16px;
-}
-
-.optionLabel:hover {
-  cursor: pointer;
-}
-
-.optionLabel > [data-part='control'] {
-  width: 16px;
-  height: 16px;
-  border-radius: 2px;
-  border: 2px solid var(--slate-200);
-  background-color: white;
-}
-
-.optionLabel > [data-part='control'][data-checked] {
-  border-color: var(--iris);
-  background-color: var(--iris);
 }

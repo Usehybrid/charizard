@@ -52,7 +52,7 @@ jobs:
           status: ${{ job.status }}
           channel: '#alerts-deploys'
           message:
-            'Hybrid UI CI has failed'
+            'Hybrid UI publishing has failed'
         if: failure()
 
    
