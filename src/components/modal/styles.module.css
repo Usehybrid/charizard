@@ -1,0 +1,107 @@
+.backdrop {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--black);
+  opacity: 0.3;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1040;
+  overflow: hidden;
+}
+
+.container .contentWrapper {
+  width: 100%;
+  // took a random number of 1.75, might have to change it later according to preferences
+  max-height: calc(100vh - (1.75rem * 2));
+  background-color: var(--white);
+  overflow-x: hidden;
+}
+
+.container .contentWrapper.sm {
+  width: 400px;
+}
+
+.container .contentWrapper.md {
+  width: 600px;
+}
+
+.container .contentWrapper .content {
+  position: relative;
+  width: 100%;
+  max-height: 100%;
+  overflow-y: auto;
+}
+
+.container .contentWrapper .content .header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 20px;
+  background-color: var(--white);
+
+  color: var(--primary);
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 28px;
+}
+
+.container .contentWrapper .content .header.showBorder {
+  border-bottom: 1px solid var(--slate-300);
+}
+
+.container .contentWrapper .content .header .closeIconSpan {
+  filter: invert(76%) sepia(11%) saturate(92%) hue-rotate(210deg) brightness(91%) contrast(95%);
+}
+
+.container .contentWrapper .content .header .closeIconSpan .closeIcon {
+  width: 24px;
+  height: 24px;
+  filter: invert(76%) sepia(11%) saturate(92%) hue-rotate(210deg) brightness(91%) contrast(95%);
+}
+
+.container .contentWrapper .content .body {
+  width: 100%;
+  padding: 20px;
+  background-color: transparent;
+  overflow-y: scroll;
+}
+
+.container .contentWrapper .content .footer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 12px 20px;
+  background-color: var(--white);
+}
+
+.container .contentWrapper .content .footer.showBorder {
+  border-top: 1px solid var(--slate-300);
+}
+
+@media screen and (max-width: 400px) {
+  .container .contentWrapper {
+    width: 100% !important;
+  }
+}
