@@ -1,9 +1,9 @@
-import Modal from './Modal'
-import ModalBody from './ModalBody'
-import ModalContent from './ModalContent'
-import ModalFooter from './ModalFooter'
-import ModalHeader from './ModalHeader'
-import ModalOverlay from './ModalOverlay'
+import {Modal} from './Modal'
+import {ModalBody} from './ModalBody'
+import {ModalContent} from './ModalContent'
+import {ModalFooter} from './ModalFooter'
+import {ModalHeader} from './ModalHeader'
+import {ModalOverlay} from './ModalOverlay'
 
 export default function Example({isOpen, onClose}: any) {
   return (

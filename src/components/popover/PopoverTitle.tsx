@@ -17,7 +17,7 @@ interface PopoverTitleProps {
   className?: string
 }
 
-export default function PopoverTitle({children, api, styles, className}: PopoverTitleProps) {
+export function PopoverTitle({children, api, styles, className}: PopoverTitleProps) {
   return (
     <div {...api?.titleProps} style={styles} className={className}>
       {children}

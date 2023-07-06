@@ -26,7 +26,7 @@ interface PopoverTriggerProps {
   className?: string
 }
 
-export default function PopoverTrigger({
+export function PopoverTrigger({
   children,
   api,
   openOnHover = true,

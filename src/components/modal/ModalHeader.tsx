@@ -23,7 +23,7 @@ interface ModalHeaderProps {
   showBorder?: boolean
 }
 
-export default function ModalHeader({
+export function ModalHeader({
   children,
   api,
   showCrossBtn = true,

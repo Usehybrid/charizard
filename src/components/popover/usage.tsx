@@ -1,9 +1,9 @@
-import Popover from './Popover'
-import PopoverCloseButton from './PopoverCloseButton'
-import PopoverContent from './PopoverContent'
-import PopoverDescription from './PopoverDescription'
-import PopoverTitle from './PopoverTitle'
-import PopoverTrigger from './PopoverTrigger'
+import {Popover} from './Popover'
+import {PopoverCloseButton} from './PopoverCloseButton'
+import {PopoverContent} from './PopoverContent'
+import {PopoverDescription} from './PopoverDescription'
+import {PopoverTitle} from './PopoverTitle'
+import {PopoverTrigger} from './PopoverTrigger'
 
 export default function Example() {
   return (
