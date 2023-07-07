@@ -18,8 +18,6 @@ export default function TableFilters({
 }: TableFiltersProps) {
   if (!filterOptions || !filterOptions.length) return null
 
-  console.log(filterOptions)
-
   return (
     <div className={classes.filters}>
       <img src={filterLines} alt="filter lines" className={classes.filterIcon} />

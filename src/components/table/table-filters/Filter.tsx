@@ -34,6 +34,7 @@ export default function Filter({filter, setFilterOptions, defaultFilterOptions, 
   const selectedFilters = filter.options.reduce((acc, curr) => (curr.checked ? acc + 1 : acc), 0)
 
   const handleResetFilter = () => {
+    console.log(defaultFilterOptions)
     setFilterOptions(state => {
       const newState = [...state]
       newState[idx] = defaultFilterOptions[idx]

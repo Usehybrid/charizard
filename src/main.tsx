@@ -50,7 +50,15 @@ const data: Person[] = [
 
 const columnHelper = createColumnHelper<Person>()
 
+// function Test({row}) {
+//   return <div></div>
+// }
+
 const columns = [
+  // columnHelper.display({
+  //   id: 'actions',
+  //   cell: props => <Test row={props.row} />,
+  // }),
   columnHelper.accessor('firstName', {
     cell: info => info.getValue(),
     footer: info => info.column.id,
@@ -140,10 +148,13 @@ const defaultFilterOptions = [
   // {
   //   id: 'software-name',
   //   name: 'Software Name',
+  //   config: {
+  //     // hideSearch: true,
+  //   },
   //   options: [
   //     {
-  //       name: 'Figma',
-  //       value: '123-156afdafd',
+  //       name: 'Maximum',
+  //       value: '123-156afdafd-iohfuitg',
   //       checked: false,
   //     },
   //   ],
