@@ -3,6 +3,9 @@ import classes from './styles.module.scss'
 import {Inputs} from './types'
 
 interface InputGroupProps {
+  /**
+   * Children of the input group
+   */
   children: React.ReactNode
 }
 

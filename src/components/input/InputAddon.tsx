@@ -3,7 +3,13 @@ import classes from './styles.module.scss'
 import {Inputs, Placement} from './types'
 
 interface InputAddonProps {
+  /**
+   * Children of the input addon
+   */
   children: React.ReactNode
+  /**
+   * Placement of the input addon
+   */
   placement?: Placement
 }
 
@@ -14,6 +20,9 @@ function InputAddon({children, placement = 'left'}: InputAddonProps) {
 }
 
 interface InputDirectionAddonProps {
+  /**
+   * Children of the input addon
+   */
   children: React.ReactNode
 }
 
