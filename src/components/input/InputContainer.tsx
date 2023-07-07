@@ -3,17 +3,29 @@ import classes from './styles.module.scss'
 import {Inputs} from './types'
 
 interface InputContainerProps {
+  /**
+   * Children of the input container
+   */
   children: React.ReactNode
+  /**
+   * Size of the input container
+   */
   size?: 'sm' | 'md' | 'adapt' // sm: 270px, md: 360px, adapt: 100%
+  /**
+   * Custom classes to be applied to the input container
+   */
   customClassName?: string
+  /**
+   * Custom styles to be applied to the input container
+   */
   customStyles?: React.CSSProperties
 }
 
 export function InputContainer({
-  size = 'adapt',
   children,
   customClassName,
   customStyles,
+  size = 'adapt',
 }: InputContainerProps) {
   return (
     <div
