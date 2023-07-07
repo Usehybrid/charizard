@@ -1,7 +1,7 @@
 import * as React from 'react'
 import * as menu from '@zag-js/menu'
 import clsx from 'clsx'
-import SVG from '../../svg'
+import {SVG} from '../../svg'
 import FilterCheckbox from './FilterCheckbox'
 import chevronDown from '../../assets/chevron-down.svg'
 import resetIcon from '../../assets/rotate-left.svg'

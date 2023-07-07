@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import SVG from '../svg'
+import {SVG} from '../svg'
 import closeIcon from '../../assets/close.svg'
 import classes from './styles.module.css'
 
