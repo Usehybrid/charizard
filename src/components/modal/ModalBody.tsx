@@ -12,7 +12,7 @@ interface ModalBodyProps {
   api?: any
 }
 
-export default function ModalBody({children, api}: ModalBodyProps) {
+export function ModalBody({children, api}: ModalBodyProps) {
   return (
     <div {...api.descriptionProps} className={classes.body}>
       {children}

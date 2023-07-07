@@ -44,7 +44,7 @@ interface ModalFooterProps {
   showBorder?: boolean
 }
 
-export default function ModalFooter({
+export function ModalFooter({
   onSave,
   onClose,
   children,

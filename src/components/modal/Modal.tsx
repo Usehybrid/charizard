@@ -21,7 +21,7 @@ interface ModalProps {
   size?: 'sm' | 'md' // sm: 400px, md: 600px
 }
 
-export default function Modal({isOpen, onClose, children, size = 'md'}: ModalProps) {
+export function Modal({isOpen, onClose, children, size = 'md'}: ModalProps) {
   const [state, send] = useMachine(dialog.machine({id: React.useId(), open: isOpen, onClose}))
   const api = dialog.connect(state, send, normalizeProps)
 

@@ -1,1 +1,6 @@
-export {default} from './Popover'
+export {Popover} from './Popover'
+export {PopoverCloseButton} from './PopoverCloseButton'
+export {PopoverContent} from './PopoverContent'
+export {PopoverDescription} from './PopoverDescription'
+export {PopoverTitle} from './PopoverTitle'
+export {PopoverTrigger} from './PopoverTrigger'

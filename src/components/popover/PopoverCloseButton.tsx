@@ -19,12 +19,7 @@ interface PopoverCloseButtonProps {
   className?: string
 }
 
-export default function PopoverCloseButton({
-  children,
-  api,
-  styles,
-  className,
-}: PopoverCloseButtonProps) {
+export function PopoverCloseButton({children, api, styles, className}: PopoverCloseButtonProps) {
   return (
     <button
       {...api?.closeTriggerProps}

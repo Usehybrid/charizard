@@ -58,7 +58,7 @@ interface DrawerProps {
   showFooter?: boolean
 }
 
-export default function Drawer({
+export function Drawer({
   isOpen,
   onClose,
   onSave,

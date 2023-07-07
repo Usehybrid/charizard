@@ -8,6 +8,6 @@ interface ModalOverlayProps {
   api?: any
 }
 
-export default function ModalOverlay({api}: ModalOverlayProps) {
+export function ModalOverlay({api}: ModalOverlayProps) {
   return <div {...api?.backdropProps} className={classes.backdrop} />
 }
