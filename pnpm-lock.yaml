@@ -12,6 +12,7 @@ dependencies:
     specifier: ^0.10.3
     version: 0.10.3
   '@zag-js/combobox':
+  '@zag-js/dialog':
     specifier: ^0.10.3
     version: 0.10.3
   '@zag-js/menu':
@@ -4320,6 +4321,20 @@ packages:
     dependencies:
       '@zag-js/store': 0.10.3
       klona: 2.0.6
+    dev: false
+
+  /@zag-js/dialog@0.10.3:
+    resolution: {integrity: sha512-9v9TRyDBBE2nYnBthqCejn86oirPcuMc/eViN9wW6QoeR6Jhbp5esZvrIqaXQsDJJVcGlMtzAJKTwPXOWYuVpw==}
+    dependencies:
+      '@zag-js/anatomy': 0.10.3
+      '@zag-js/aria-hidden': 0.10.3
+      '@zag-js/core': 0.10.3
+      '@zag-js/dismissable': 0.10.3
+      '@zag-js/dom-query': 0.10.3
+      '@zag-js/remove-scroll': 0.10.3
+      '@zag-js/types': 0.10.3
+      '@zag-js/utils': 0.10.3
+      focus-trap: 7.4.3
     dev: false
 
   /@zag-js/dismissable@0.10.3:

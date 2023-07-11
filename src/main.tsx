@@ -50,7 +50,15 @@ const data: Person[] = [
 
 const columnHelper = createColumnHelper<Person>()
 
+// function Test({row}) {
+//   return <div></div>
+// }
+
 const columns = [
+  // columnHelper.display({
+  //   id: 'actions',
+  //   cell: props => <Test row={props.row} />,
+  // }),
   columnHelper.accessor('firstName', {
     cell: info => info.getValue(),
     footer: info => info.column.id,
@@ -82,8 +90,88 @@ const columns = [
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <div style={styles}>
-      <Table data={data} columns={columns} />
-    </div>
+    <App />
   </React.StrictMode>,
 )
+
+const defaultFilterOptions = [
+  {
+    id: 'software-owner',
+    name: 'Software Owner',
+    config: {
+      hideSearch: false,
+    },
+    options: [
+      {
+        name: 'Owner 1',
+        value: 'o1',
+        checked: false,
+      },
+      {
+        name: 'Figma',
+        value: '123-156a',
+        checked: false,
+      },
+      {
+        name: 'Figma1',
+        value: '123-156a1',
+        checked: false,
+      },
+      {
+        name: 'Figma a',
+        value: '123-156aadf',
+        checked: false,
+      },
+      {
+        name: 'Figma b',
+        value: '123-156aadf12',
+        checked: false,
+      },
+      {
+        name: 'Figma c',
+        value: '123-156aadf21',
+        checked: false,
+      },
+      {
+        name: 'Figma d',
+        value: '123-156aadf121',
+        checked: false,
+      },
+      {
+        name: 'Figma e',
+        value: '123-156aadf214',
+        checked: false,
+      },
+    ],
+  },
+
+  // {
+  //   id: 'software-name',
+  //   name: 'Software Name',
+  //   config: {
+  //     // hideSearch: true,
+  //   },
+  //   options: [
+  //     {
+  //       name: 'Maximum',
+  //       value: '123-156afdafd-iohfuitg',
+  //       checked: false,
+  //     },
+  //   ],
+  // },
+]
+
+function App() {
+  const [search, setSearch] = React.useState('')
+  return (
+    <div style={styles}>
+      <Table
+        data={data}
+        columns={columns}
+        search={search}
+        setSearch={setSearch}
+        defaultFilterOptions={defaultFilterOptions}
+      />
+    </div>
+  )
+}

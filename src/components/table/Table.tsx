@@ -1,7 +1,6 @@
 import * as React from 'react'
-
+import TableFilters from './table-filters'
 import classes from './styles.module.css'
-
 import {
   useReactTable,
   getCoreRowModel,
@@ -9,7 +8,7 @@ import {
   getPaginationRowModel,
 } from '@tanstack/react-table'
 import {Search} from '../search'
-import TableFilters from './TableFilters'
+import {FilterOptions} from './types'
 
 export interface TableProps {
   data: any
@@ -18,64 +17,13 @@ export interface TableProps {
   setSearch?: any
   sortBy?: string
   sortOrd?: 'asc' | 'desc' | ''
-  // sortOrd?: '
-  filterOptions?: FilterOptions[]
+  defaultFilterOptions?: FilterOptions[]
 }
 
-export type FilterOptions = {
-  id: string
-  name: string
-  options: {
-    name: string
-    value: string
-    checked: boolean
-  }[]
-}
-
-const defaultFilterOptions = [
-  {
-    id: 'software-owner',
-    name: 'Software Owner',
-    options: [
-      {
-        name: 'Owner 1',
-        value: 'o1',
-        checked: false,
-      },
-      {
-        name: 'Figma',
-        value: '123-156a',
-        checked: false,
-      },
-      {
-        name: 'Figma1',
-        value: '123-156a1',
-        checked: false,
-      },
-      {
-        name: 'Figmaf',
-        value: '123-156aadf',
-        checked: false,
-      },
-    ],
-  },
-
-  {
-    id: 'software-name',
-    name: 'Software Name',
-    options: [
-      {
-        name: 'Figma',
-        value: '123-156afdafd',
-        checked: false,
-      },
-    ],
-  },
-]
-
-// const filterOptions = [] as any
-export function Table({data, columns, search, setSearch}: TableProps) {
-  const [filterOptions, setFilterOptions] = React.useState<FilterOptions[]>(defaultFilterOptions)
+export function Table({data, columns, search, setSearch, defaultFilterOptions}: TableProps) {
+  const [filterOptions, setFilterOptions] = React.useState<FilterOptions[]>(
+    defaultFilterOptions ?? [],
+  )
   const table = useReactTable({
     data,
     columns,
@@ -92,10 +40,19 @@ export function Table({data, columns, search, setSearch}: TableProps) {
         <div className={classes.meta}>
           <div className={classes.total}>14 softwares</div>
 
-          <TableFilters filterOptions={filterOptions} setFilterOptions={setFilterOptions} />
+          <TableFilters
+            filterOptions={filterOptions}
+            setFilterOptions={setFilterOptions}
+            defaultFilterOptions={defaultFilterOptions ?? []}
+          />
         </div>
         <div className={classes.search}>
-          <Search search={search} setSearch={setSearch} placeholder="Search by software name" />
+          <Search
+            id="table-search"
+            search={search}
+            setSearch={setSearch}
+            placeholder="Search by software name"
+          />
         </div>
       </div>
 

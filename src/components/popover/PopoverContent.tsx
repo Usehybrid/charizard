@@ -26,7 +26,7 @@ interface PopoverContentProps {
   className?: string
 }
 
-export default function PopoverContent({
+export function PopoverContent({
   children,
   api,
   bg = 'black',
