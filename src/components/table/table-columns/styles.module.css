@@ -1,0 +1,27 @@
+.optionLabel {
+  display: flex;
+  align-items: center;
+  column-gap: 16px;
+  margin-left: 16px;
+}
+
+.optionLabel:hover {
+  cursor: pointer;
+}
+
+.optionLabel > [data-part='control'] {
+  width: 16px;
+  height: 16px;
+  border-radius: 2px;
+  border: 2px solid var(--slate-200);
+  background-color: white;
+}
+
+.optionLabel > [data-part='control'][data-checked] {
+  border-color: var(--iris);
+  background-color: var(--iris);
+  background-image: url('../../assets/check.svg');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
