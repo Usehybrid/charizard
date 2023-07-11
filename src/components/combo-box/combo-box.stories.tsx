@@ -1,5 +1,5 @@
 import type {Meta, StoryObj} from '@storybook/react'
-import Combobox from '.'
+import {Combobox} from './ComboBox'
 
 const meta: Meta<typeof Combobox> = {
   component: Combobox,
@@ -19,7 +19,6 @@ export const clientSideSearch: Story = {
     label: 'Combo Box',
     disabled: false,
     isAPIFilter: false,
-    onSelect: details => console.log(details),
   },
 }
 
@@ -39,7 +38,6 @@ export const serverSideSearch: Story = {
         {label: 'Beninn', value: 'BN', disabled: false},
       ]
     },
-    onSelect: details => console.log(details),
   },
 }
 
@@ -53,7 +51,6 @@ export const disabledCombobox: Story = {
     label: 'Combo Box',
     disabled: true,
     isAPIFilter: false,
-    onSelect: details => console.log(details),
   },
 }
 
@@ -64,7 +61,6 @@ export const clientSideSearchWithNoResult: Story = {
     label: 'Combo Box',
     disabled: false,
     isAPIFilter: false,
-    onSelect: details => console.log(details),
   },
 }
 
@@ -81,6 +77,5 @@ export const serverSideSearchWithNoResult: Story = {
     onChange: async (test: string) => {
       return []
     },
-    onSelect: details => console.log(details),
   },
 }
