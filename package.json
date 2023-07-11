@@ -29,6 +29,7 @@
   "dependencies": {
     "@tanstack/react-table": "^8.9.3",
     "@zag-js/checkbox": "^0.10.3",
+    "@zag-js/combobox": "^0.10.3",
     "@zag-js/dialog": "^0.10.3",
     "@zag-js/menu": "^0.10.3",
     "@zag-js/popover": "^0.10.3",
