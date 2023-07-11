@@ -81,10 +81,6 @@
   cursor: not-allowed;
 }
 
-.input {
-  height: 100%;
-}
-
 .input[type='date']::-webkit-calendar-picker-indicator {
   display: none;
 }
