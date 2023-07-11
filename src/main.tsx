@@ -81,7 +81,6 @@ export interface Software {
   deleted_on: any
   software_license_count: string
   software_users_count: string
-  // software_license_count: string
 }
 
 const data: Software[] = [
@@ -217,8 +216,6 @@ const data: Software[] = [
 
 const columnHelper = createColumnHelper<Software>()
 
-const schema = [{}]
-
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <App />
@@ -315,11 +312,6 @@ function App() {
   const [search, setSearch] = React.useState('')
 
   const columns = [
-    // columnHelper.display({
-    //   id: 'checkbox actions',
-    //   cell: props => <TableCheckbox row={props.row} />,
-    //   header: props => <TableCheckbox header={props.header} />,
-    // }),
     columnHelper.accessor('software', {
       header: 'Software Name',
       cell: info => info.getValue().name,
@@ -345,12 +337,8 @@ function App() {
         return <div>{info.row.original.software_license_count}</div>
       },
     }),
-    // columnHelper.display({
-    //   id: 'software actions',
-    //   cell: props => <Button.MenuActionsDropdown menuItems={menuItems} />,
-    //   header: 'Actions',
-    // }),
   ]
+
   return (
     <div style={styles}>
       <Table
