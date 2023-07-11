@@ -1,4 +1,5 @@
 import * as React from 'react'
+import clsx from 'clsx'
 import TableFilters from './table-filters'
 import classes from './styles.module.css'
 import {
@@ -9,6 +10,8 @@ import {
 } from '@tanstack/react-table'
 import {Search} from '../search'
 import {FilterOptions} from './types'
+import {TableCheckbox} from './table-columns'
+import {Button} from '../button'
 
 export interface TableProps {
   data: any
@@ -18,15 +21,43 @@ export interface TableProps {
   sortBy?: string
   sortOrd?: 'asc' | 'desc' | ''
   defaultFilterOptions?: FilterOptions[]
+  isCheckboxActions?: boolean
+  isDropdownActions?: boolean
+  actionsConfig: {
+    menuItems: {label: string; iconSrc?: string; onClick: () => void}[]
+  }
 }
 
-export function Table({data, columns, search, setSearch, defaultFilterOptions}: TableProps) {
+export function Table({
+  data,
+  columns,
+  search,
+  setSearch,
+  defaultFilterOptions,
+  isCheckboxActions = false,
+  isDropdownActions = false,
+  actionsConfig,
+}: TableProps) {
   const [filterOptions, setFilterOptions] = React.useState<FilterOptions[]>(
     defaultFilterOptions ?? [],
   )
+
+  const _columns = [
+    isCheckboxActions && {
+      id: 'checkbox actions',
+      cell: (props: any) => <TableCheckbox row={props.row} />,
+      header: (props: any) => <TableCheckbox header={props.header} />,
+    },
+    ...columns,
+    isDropdownActions && {
+      id: 'dropdown actions',
+      cell: (props: any) => <Button.ActionsDropdown menuItems={actionsConfig?.menuItems} />,
+      header: 'Actions',
+    },
+  ]
   const table = useReactTable({
     data,
-    columns,
+    columns: _columns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
   })
@@ -57,11 +88,11 @@ export function Table({data, columns, search, setSearch, defaultFilterOptions}: 
       </div>
 
       <table className={classes.table}>
-        <thead className={classes.tableHead}>
+        <thead className={clsx(classes.tableHead, isCheckboxActions && classes.tableHead2)}>
           {table.getHeaderGroups().map(headerGroup => (
             <tr key={headerGroup.id} className={classes.tableRow}>
               {headerGroup.headers.map(header => (
-                <th key={header.id} className={classes.tableHeader}>
+                <th key={header.id} className={clsx(classes.tableHeader)}>
                   {header.isPlaceholder
                     ? null
                     : flexRender(header.column.columnDef.header, header.getContext())}

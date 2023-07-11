@@ -29,6 +29,7 @@
 }
 
 .table {
+  table-layout: fixed;
   width: 100%;
   border-collapse: collapse;
 }
@@ -61,4 +62,15 @@
   line-height: 20px;
   letter-spacing: 0.2px;
   text-transform: uppercase;
+}
+
+.tableHead2 th:first-child {
+  width: 4%;
+}
+
+.tableData {
+  color: var(--primary);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
 }

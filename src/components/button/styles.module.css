@@ -133,7 +133,7 @@
 /* actions dropdown */
 
 .actionsBox {
-  width: 26px;
+  width: 28px;
   height: 24px;
   border-radius: 6px;
 }
@@ -146,4 +146,5 @@
 .actionsDropdown {
   width: 24px;
   height: 24px;
+  margin: auto;
 }

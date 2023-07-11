@@ -2,7 +2,7 @@ import * as React from 'react'
 import * as menu from '@zag-js/menu'
 import clsx from 'clsx'
 import chevronDown from '../assets/chevron-down.svg'
-import moreMenu from '../assets/more-menu.svg'
+import threeDots from '../assets/three-dots.svg'
 import classes from './styles.module.css'
 import {useMachine, normalizeProps} from '@zag-js/react'
 
@@ -137,7 +137,7 @@ function MenuActionsDropdown({menuItems, onClick}: MenuActionsDropdownProps) {
     <div>
       <MenuButton menuItems={menuItems} onClick={onClick} isCustomTrigger={true}>
         <div className={classes.actionsBox}>
-          <img src={moreMenu} className={classes.actionsDropdown} />
+          <img src={threeDots} className={classes.actionsDropdown} />
         </div>
       </MenuButton>
     </div>
@@ -145,4 +145,4 @@ function MenuActionsDropdown({menuItems, onClick}: MenuActionsDropdownProps) {
 }
 
 Button.MenuButton = MenuButton
-Button.MenuActionsDropdown = MenuActionsDropdown
+Button.ActionsDropdown = MenuActionsDropdown

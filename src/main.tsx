@@ -315,11 +315,11 @@ function App() {
   const [search, setSearch] = React.useState('')
 
   const columns = [
-    columnHelper.display({
-      id: 'checkbox actions',
-      cell: props => <TableCheckbox row={props.row} />,
-      header: props => <TableCheckbox header={props.header} />,
-    }),
+    // columnHelper.display({
+    //   id: 'checkbox actions',
+    //   cell: props => <TableCheckbox row={props.row} />,
+    //   header: props => <TableCheckbox header={props.header} />,
+    // }),
     columnHelper.accessor('software', {
       header: 'Software Name',
       cell: info => info.getValue().name,
@@ -345,11 +345,11 @@ function App() {
         return <div>{info.row.original.software_license_count}</div>
       },
     }),
-    columnHelper.display({
-      id: 'software actions',
-      cell: props => <Button.MenuActionsDropdown menuItems={menuItems} />,
-      header: 'Actions',
-    }),
+    // columnHelper.display({
+    //   id: 'software actions',
+    //   cell: props => <Button.MenuActionsDropdown menuItems={menuItems} />,
+    //   header: 'Actions',
+    // }),
   ]
   return (
     <div style={styles}>
@@ -359,6 +359,9 @@ function App() {
         search={search}
         setSearch={setSearch}
         defaultFilterOptions={defaultFilterOptions}
+        isCheckboxActions={true}
+        isDropdownActions={true}
+        actionsConfig={{menuItems}}
       />
     </div>
   )
