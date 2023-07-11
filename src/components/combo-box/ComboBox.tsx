@@ -24,7 +24,7 @@ export interface ComboboxProps {
   onSelect: (selected?: option) => void
 }
 
-export default function Combobox({
+export function Combobox({
   label,
   required = false,
   labelClassName,
