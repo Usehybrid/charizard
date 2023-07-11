@@ -51,7 +51,12 @@ export function Table({
     ...columns,
     isDropdownActions && {
       id: 'dropdown actions',
-      cell: (props: any) => <Button.ActionsDropdown menuItems={actionsConfig?.menuItems} />,
+      cell: (props: any) => (
+        <Button.ActionsDropdown
+          menuItems={actionsConfig?.menuItems}
+          id={props.row.original.id || 'dropdown-action'}
+        />
+      ),
       header: 'Actions',
     },
   ]

@@ -37,6 +37,7 @@ export function Button({children, variant = 'primary', disabled = false, onClick
 }
 
 export interface MenuButtonProps {
+  id?: string
   children: React.ReactNode
   variant?: 'primary' | 'secondary' | 'ghost'
   disabled?: boolean
@@ -46,6 +47,7 @@ export interface MenuButtonProps {
 }
 
 function MenuButton({
+  id = 'hui-menu-button',
   children,
   variant = 'primary',
   disabled = false,
@@ -53,9 +55,7 @@ function MenuButton({
   onClick,
   isCustomTrigger = false,
 }: MenuButtonProps) {
-  const [state, send] = useMachine(
-    menu.machine({id: 'hui-menu-button', positioning: {placement: 'bottom-end'}}),
-  )
+  const [state, send] = useMachine(menu.machine({id, positioning: {placement: 'bottom-end'}}))
   const api = menu.connect(state, send, normalizeProps)
 
   return (
@@ -128,14 +128,15 @@ function MenuButton({
   )
 }
 export interface MenuActionsDropdownProps {
+  id?: string
   menuItems: {label: string; iconSrc?: string; onClick: () => void}[]
   onClick?: React.MouseEventHandler<HTMLButtonElement>
 }
 
-function MenuActionsDropdown({menuItems, onClick}: MenuActionsDropdownProps) {
+function MenuActionsDropdown({id, menuItems, onClick}: MenuActionsDropdownProps) {
   return (
     <div>
-      <MenuButton menuItems={menuItems} onClick={onClick} isCustomTrigger={true}>
+      <MenuButton id={id} menuItems={menuItems} onClick={onClick} isCustomTrigger={true}>
         <div className={classes.actionsBox}>
           <img src={threeDots} className={classes.actionsDropdown} />
         </div>
