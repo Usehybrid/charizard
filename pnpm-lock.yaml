@@ -11,6 +11,7 @@ dependencies:
   '@zag-js/checkbox':
     specifier: ^0.10.3
     version: 0.10.3
+  '@zag-js/combobox':
   '@zag-js/dialog':
     specifier: ^0.10.3
     version: 0.10.3
@@ -4299,6 +4300,22 @@ packages:
       '@zag-js/visually-hidden': 0.10.3
     dev: false
 
+  /@zag-js/combobox@0.10.3:
+    resolution: {integrity: sha512-JPMWAA7JeCmASzDoVxGts3yuYIYTrk80MLpynEOg+m5BA/Ys+7xk89WpOxSEoMfOGuBDKr9uhp4lqtoJRTyxpA==}
+    dependencies:
+      '@zag-js/anatomy': 0.10.3
+      '@zag-js/aria-hidden': 0.10.3
+      '@zag-js/core': 0.10.3
+      '@zag-js/dom-event': 0.10.3
+      '@zag-js/dom-query': 0.10.3
+      '@zag-js/interact-outside': 0.10.3
+      '@zag-js/live-region': 0.10.3
+      '@zag-js/mutation-observer': 0.10.3
+      '@zag-js/popper': 0.10.3
+      '@zag-js/types': 0.10.3
+      '@zag-js/utils': 0.10.3
+    dev: false
+
   /@zag-js/core@0.10.3:
     resolution: {integrity: sha512-LuFfEGDJoLEclrsX65UdNtERBN19FpiQekW0ge0PIxORiBSunRaJsy8FJIrg1AMOUD8xPqj3aobx+jltDcWpAw==}
     dependencies:
@@ -4357,6 +4374,12 @@ packages:
       '@zag-js/dom-query': 0.10.3
       '@zag-js/tabbable': 0.10.3
       '@zag-js/utils': 0.10.3
+    dev: false
+
+  /@zag-js/live-region@0.10.3:
+    resolution: {integrity: sha512-vKBqLR9vfg7iYaPaoMIPa1B5KCEF090Rk1Vdhv2eXCOx/kR1iFaipU/PD3XI1uX5ih9R2EljghY6z+pojUcDUg==}
+    dependencies:
+      '@zag-js/visually-hidden': 0.10.3
     dev: false
 
   /@zag-js/menu@0.10.3:
