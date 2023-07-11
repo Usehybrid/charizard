@@ -90,7 +90,7 @@ interface SelectProps {
   /**
    * The error message to be displayed
    */
-  errorMsg?: string
+  errorMsg?: string | false
   /**
    * extra props to pass for select component
    */
