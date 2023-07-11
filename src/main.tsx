@@ -1,8 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import {Button, Table} from './components'
+import {Table} from './components'
 import {createColumnHelper} from '@tanstack/react-table'
-import {TableCheckbox} from './components/table/table-columns'
 
 import randomIcon from './components/assets/check.svg'
 
