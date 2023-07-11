@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import classes from './styles.module.scss'
+import classes from './styles.module.css'
 import {Inputs, Placement} from './types'
 
 interface InputElementProps {
