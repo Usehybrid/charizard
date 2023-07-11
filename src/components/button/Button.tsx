@@ -2,6 +2,7 @@ import * as React from 'react'
 import * as menu from '@zag-js/menu'
 import clsx from 'clsx'
 import chevronDown from '../assets/chevron-down.svg'
+import moreMenu from '../assets/more-menu.svg'
 import classes from './styles.module.css'
 import {useMachine, normalizeProps} from '@zag-js/react'
 
@@ -41,6 +42,7 @@ export interface MenuButtonProps {
   disabled?: boolean
   menuItems: {label: string; iconSrc?: string; onClick: () => void}[]
   onClick?: React.MouseEventHandler<HTMLButtonElement>
+  isCustomTrigger?: boolean
 }
 
 function MenuButton({
@@ -49,6 +51,7 @@ function MenuButton({
   disabled = false,
   menuItems,
   onClick,
+  isCustomTrigger = false,
 }: MenuButtonProps) {
   const [state, send] = useMachine(
     menu.machine({id: 'hui-menu-button', positioning: {placement: 'bottom-end'}}),
@@ -57,48 +60,54 @@ function MenuButton({
 
   return (
     <div>
-      <div className={classes.btnGrp}>
-        <button
-          className={clsx(
-            classes.btn,
-            classes.btnMenu,
-            variant === 'primary' && classes.btnPrimary,
-            variant === 'secondary' && classes.btnSecondary,
-            variant === 'ghost' && classes.btnGhost,
-            disabled && classes.disabled,
-          )}
-          disabled={disabled}
-          onClick={onClick}
-        >
+      {isCustomTrigger ? (
+        <button className={'reset-btn'} {...api.triggerProps}>
           {children}
         </button>
-
-        <button
-          {...api.triggerProps}
-          className={clsx(
-            classes.btn,
-            classes.btnAddon,
-            variant === 'primary' && classes.btnPrimary,
-            variant === 'primary' && classes.btnAddonPrimary,
-            variant === 'secondary' && classes.btnSecondary,
-            variant === 'secondary' && classes.btnAddonSecondary,
-            variant === 'ghost' && classes.btnGhost,
-            variant === 'ghost' && classes.btnAddonGhost,
-            disabled && classes.disabled,
-          )}
-          disabled={disabled}
-        >
-          <img
-            src={chevronDown}
-            alt="chevron down"
+      ) : (
+        <div className={classes.btnGrp}>
+          <button
             className={clsx(
-              variant === 'primary' && classes.btnImgPrimary,
-              variant === 'secondary' && classes.btnImgSecondary,
-              variant === 'ghost' && classes.btnImgGhost,
+              classes.btn,
+              classes.btnMenu,
+              variant === 'primary' && classes.btnPrimary,
+              variant === 'secondary' && classes.btnSecondary,
+              variant === 'ghost' && classes.btnGhost,
+              disabled && classes.disabled,
             )}
-          />
-        </button>
-      </div>
+            disabled={disabled}
+            onClick={onClick}
+          >
+            {children}
+          </button>
+
+          <button
+            {...api.triggerProps}
+            className={clsx(
+              classes.btn,
+              classes.btnAddon,
+              variant === 'primary' && classes.btnPrimary,
+              variant === 'primary' && classes.btnAddonPrimary,
+              variant === 'secondary' && classes.btnSecondary,
+              variant === 'secondary' && classes.btnAddonSecondary,
+              variant === 'ghost' && classes.btnGhost,
+              variant === 'ghost' && classes.btnAddonGhost,
+              disabled && classes.disabled,
+            )}
+            disabled={disabled}
+          >
+            <img
+              src={chevronDown}
+              alt="chevron down"
+              className={clsx(
+                variant === 'primary' && classes.btnImgPrimary,
+                variant === 'secondary' && classes.btnImgSecondary,
+                variant === 'ghost' && classes.btnImgGhost,
+              )}
+            />
+          </button>
+        </div>
+      )}
 
       <div {...api.positionerProps}>
         <div {...api.contentProps} className={classes.menus}>
@@ -118,5 +127,22 @@ function MenuButton({
     </div>
   )
 }
+export interface MenuActionsDropdownProps {
+  menuItems: {label: string; iconSrc?: string; onClick: () => void}[]
+  onClick?: React.MouseEventHandler<HTMLButtonElement>
+}
+
+function MenuActionsDropdown({menuItems, onClick}: MenuActionsDropdownProps) {
+  return (
+    <div>
+      <MenuButton menuItems={menuItems} onClick={onClick} isCustomTrigger={true}>
+        <div className={classes.actionsBox}>
+          <img src={moreMenu} className={classes.actionsDropdown} />
+        </div>
+      </MenuButton>
+    </div>
+  )
+}
 
 Button.MenuButton = MenuButton
+Button.MenuActionsDropdown = MenuActionsDropdown

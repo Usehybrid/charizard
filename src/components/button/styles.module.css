@@ -129,3 +129,21 @@
   margin-right: 8px;
   filter: invert(82%) sepia(3%) saturate(333%) hue-rotate(210deg) brightness(90%) contrast(82%);
 }
+
+/* actions dropdown */
+
+.actionsBox {
+  width: 26px;
+  height: 24px;
+  border-radius: 6px;
+}
+
+.actionsBox:hover {
+  background-color: var(--slate-100);
+  cursor: pointer;
+}
+
+.actionsDropdown {
+  width: 24px;
+  height: 24px;
+}

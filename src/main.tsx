@@ -1,8 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import {Table} from './components'
+import {Button, Table} from './components'
 import {createColumnHelper} from '@tanstack/react-table'
 import {TableCheckbox} from './components/table/table-columns'
+
+import randomIcon from './components/assets/check.svg'
 
 const styles = {
   width: '100%',
@@ -290,6 +292,25 @@ const defaultFilterOptions = [
   // },
 ]
 
+const getFullName = (owner: any) => {
+  if (!owner) return 'N/A'
+
+  return `${owner.first_name} ${owner.last_name}`
+}
+
+const menuItems = [
+  {
+    label: 'Edit details',
+    iconSrc: randomIcon,
+    onClick: () => {},
+  },
+  {
+    label: 'Archive',
+    iconSrc: randomIcon,
+    onClick: () => {},
+  },
+]
+
 function App() {
   const [search, setSearch] = React.useState('')
 
@@ -308,33 +329,26 @@ function App() {
       header: 'Software Owners',
 
       cell: info => {
-        console.log(info.row.original)
-        return (
-          <div>
-            {info.row.original.software_owners.length
-              ? info.row.original.software_owners[0].name
-              : 'N/A'}
-          </div>
-        )
+        console.log(info.row.original.software_owners)
+        return <div>{getFullName(info.row.original.software_owners[0])}</div>
       },
     }),
     columnHelper.accessor('software_users', {
       header: 'Users',
       cell: info => {
-        console.log(info.row.original.software_owners.length)
-        return <div>{info.row.original.software_owners.length}</div>
+        return <div>{info.row.original.software_users_count}</div>
       },
     }),
     columnHelper.accessor('software_license', {
       header: 'Licenses',
       cell: info => {
-        return <div>{info.row.original.software_license.length}</div>
+        return <div>{info.row.original.software_license_count}</div>
       },
     }),
     columnHelper.display({
       id: 'software actions',
-      cell: props => <TableCheckbox row={props.row} />,
-      header: props => <TableCheckbox header={props.header} />,
+      cell: props => <Button.MenuActionsDropdown menuItems={menuItems} />,
+      header: 'Actions',
     }),
   ]
   return (

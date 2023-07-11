@@ -10,8 +10,8 @@
 }
 
 .optionLabel > [data-part='control'] {
-  width: 16px;
-  height: 16px;
+  width: 20px;
+  height: 20px;
   border-radius: 2px;
   border: 2px solid var(--slate-200);
   background-color: white;
