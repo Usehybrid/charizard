@@ -97,7 +97,6 @@
 
 .menus {
   padding: 4px;
-  padding-bottom: 0;
   border-radius: 4px;
   background: #fff;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15);
@@ -110,7 +109,7 @@
 .menu {
   display: flex;
   align-items: center;
-  margin-bottom: 4px;
+  gap: 4px;
   padding: 8px 10px;
   color: var(--primary);
   font-size: 1rem;
@@ -130,16 +129,27 @@
   filter: invert(82%) sepia(3%) saturate(333%) hue-rotate(210deg) brightness(90%) contrast(82%);
 }
 
+.customTrigger {
+  border-radius: 6px;
+}
+
+.customTrigger:focus-visible {
+  outline: none;
+}
+
+.customTriggerActive,
+.customTrigger:hover {
+  background-color: var(--slate-100);
+}
+
 /* actions dropdown */
 
 .actionsBox {
   width: 28px;
   height: 24px;
-  border-radius: 6px;
 }
 
 .actionsBox:hover {
-  background-color: var(--slate-100);
   cursor: pointer;
 }
 

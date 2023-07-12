@@ -1,0 +1,19 @@
+.box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  min-height: 500px;
+  width: 100vw;
+}
+
+.loader {
+  text-align: center;
+  border-radius: 0.475rem;
+  box-shadow: 0 0 50px 0 rgb(82 63 105 / 15%);
+  background-color: #fff;
+  color: #7e8299;
+  font-weight: 500;
+  font-size: 14px;
+  padding: 1rem 2rem;
+}

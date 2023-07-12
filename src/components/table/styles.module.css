@@ -1,8 +1,6 @@
 .box {
   background-color: var(--white);
   width: 100%;
-  padding-left: 30px;
-  padding-right: 30px;
 }
 
 .header {
@@ -45,6 +43,10 @@
   padding-bottom: 12px;
 }
 
+/* .tableBody {
+  width: 100%;
+} */
+
 .tableBody > .tableRow {
   border: 1px solid var(--slate-200);
   border-bottom: none;
@@ -62,6 +64,7 @@
   line-height: 20px;
   letter-spacing: 0.2px;
   text-transform: uppercase;
+  text-align: center;
 }
 
 .tableHead2 th:first-child {

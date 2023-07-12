@@ -342,6 +342,7 @@ function App() {
     <div style={styles}>
       <Table
         data={data}
+        loaderConfig={{fetchingData: true, text: 'Getting softwares...'}}
         columns={columns}
         search={search}
         setSearch={setSearch}

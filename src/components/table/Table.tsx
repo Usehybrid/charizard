@@ -12,6 +12,7 @@ import {Search} from '../search'
 import {FilterOptions} from './types'
 import {TableCheckbox} from './table-columns'
 import {Button} from '../button'
+import TableLoader from './table-loader/TableLoader'
 
 export interface TableProps {
   data: any
@@ -26,10 +27,15 @@ export interface TableProps {
   actionsConfig: {
     menuItems: {label: string; iconSrc?: string; onClick: () => void}[]
   }
+  loaderConfig: {
+    fetchingData: boolean
+    text?: string
+  }
 }
 
 export function Table({
   data,
+  loaderConfig,
   columns,
   search,
   setSearch,
@@ -108,17 +114,23 @@ export function Table({
             </tr>
           ))}
         </thead>
-        <tbody className={classes.tableBody}>
-          {table.getRowModel().rows.map(row => (
-            <tr key={row.id} className={classes.tableRow}>
-              {row.getVisibleCells().map(cell => (
-                <td key={cell.id} className={classes.tableData}>
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
+
+        {loaderConfig.fetchingData ? (
+          <TableLoader text={loaderConfig.text} />
+        ) : (
+          <tbody className={classes.tableBody}>
+            {table.getRowModel().rows.map(row => (
+              <tr key={row.id} className={classes.tableRow}>
+                {row.getVisibleCells().map(cell => (
+                  <td key={cell.id} className={classes.tableData}>
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        )}
+
         <tfoot className={classes.tableFoot}>
           {table.getFooterGroups().map(footerGroup => (
             <tr key={footerGroup.id} className={classes.tableRow}>

@@ -11,6 +11,10 @@
   border-radius: 4px;
 }
 
+.filter:focus-visible {
+  outline: none;
+}
+
 .filterActive {
   background-color: var(--slate-50);
 }

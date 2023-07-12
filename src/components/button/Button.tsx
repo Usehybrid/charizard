@@ -61,7 +61,14 @@ function MenuButton({
   return (
     <div>
       {isCustomTrigger ? (
-        <button className={'reset-btn'} {...api.triggerProps}>
+        <button
+          className={clsx(
+            'reset-btn',
+            classes.customTrigger,
+            api.isOpen && classes.customTriggerActive,
+          )}
+          {...api.triggerProps}
+        >
           {children}
         </button>
       ) : (
