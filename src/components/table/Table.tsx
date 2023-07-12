@@ -92,6 +92,8 @@ export function Table({
         </div>
       </div>
 
+      <div className={classes.selectedActions}></div>
+
       <table className={classes.table}>
         <thead className={clsx(classes.tableHead, isCheckboxActions && classes.tableHead2)}>
           {table.getHeaderGroups().map(headerGroup => (
