@@ -45,9 +45,10 @@
   filter: invert(76%) sepia(5%) saturate(209%) hue-rotate(210deg) brightness(95%) contrast(89%);
   width: 20px;
   height: 20px;
+}
 
-  svg {
-    width: 100%;
-    height: 100%;
-  }
+.closeSpan svg,
+.downArrowSpan svg {
+  width: 100%;
+  height: 100%;
 }
