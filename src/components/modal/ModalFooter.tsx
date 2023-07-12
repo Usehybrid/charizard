@@ -42,6 +42,14 @@ interface ModalFooterProps {
    * show border or not
    */
   showBorder?: boolean
+  /**
+   * save button variant
+   */
+  saveBtnVariant?: 'primary' | 'secondary' | 'ghost' | 'danger'
+  /**
+   * cancel button variant
+   */
+  closeBtnVariant?: 'primary' | 'secondary' | 'ghost' | 'danger'
 }
 
 export function ModalFooter({
@@ -54,6 +62,8 @@ export function ModalFooter({
   showCloseBtn = true,
   closeBtnText = 'Close',
   showBorder = true,
+  saveBtnVariant = 'primary',
+  closeBtnVariant = 'secondary',
 }: ModalFooterProps) {
   return (
     <div className={clsx(classes.footer, {[classes.showBorder]: showBorder})}>
@@ -63,7 +73,7 @@ export function ModalFooter({
         <>
           {showCloseBtn && (
             <Button
-              variant="secondary"
+              variant={closeBtnVariant}
               onClick={() => {
                 onClose && onClose()
                 api?.close()
@@ -74,7 +84,7 @@ export function ModalFooter({
           )}
           {showSaveBtn && (
             <Button
-              variant="primary"
+              variant={saveBtnVariant}
               onClick={() => {
                 onSave()
                 api?.close()

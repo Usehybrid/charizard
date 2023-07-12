@@ -1,6 +1,7 @@
 import * as React from 'react'
 import * as dialog from '@zag-js/dialog'
 import {Portal, normalizeProps, useMachine} from '@zag-js/react'
+import {ModalOverlay} from './ModalOverlay'
 
 interface ModalProps {
   /**
@@ -19,9 +20,13 @@ interface ModalProps {
    * size of modal
    */
   size?: 'sm' | 'md' // sm: 400px, md: 600px
+  /**
+   * show overlay
+   */
+  showOverlay?: boolean
 }
 
-export function Modal({isOpen, onClose, children, size = 'md'}: ModalProps) {
+export function Modal({isOpen, onClose, children, size = 'md', showOverlay = true}: ModalProps) {
   const [state, send] = useMachine(dialog.machine({id: React.useId(), open: isOpen, onClose}))
   const api = dialog.connect(state, send, normalizeProps)
 
@@ -33,5 +38,10 @@ export function Modal({isOpen, onClose, children, size = 'md'}: ModalProps) {
     })
   })
 
-  return <Portal>{clones}</Portal>
+  return (
+    <Portal>
+      {showOverlay && <ModalOverlay api={api} />}
+      {clones}
+    </Portal>
+  )
 }
