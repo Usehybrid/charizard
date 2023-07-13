@@ -11,13 +11,20 @@ export interface ButtonProps {
   variant?: 'primary' | 'secondary' | 'ghost' | 'danger'
   disabled?: boolean
   onClick?: React.MouseEventHandler<HTMLButtonElement>
+  type?: 'button' | 'submit' | 'reset'
 }
 
 // 1. Button => primary, secondary, ghost
 // 2. Button Group => primary
 // 2. Button Menu => primary
 
-export function Button({children, variant = 'primary', disabled = false, onClick}: ButtonProps) {
+export function Button({
+  children,
+  variant = 'primary',
+  disabled = false,
+  onClick,
+  type = 'button',
+}: ButtonProps) {
   return (
     <button
       className={clsx(
@@ -30,6 +37,7 @@ export function Button({children, variant = 'primary', disabled = false, onClick
       )}
       disabled={disabled}
       onClick={onClick}
+      type={type}
     >
       {children}
     </button>
