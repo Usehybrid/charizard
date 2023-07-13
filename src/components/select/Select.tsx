@@ -1,34 +1,22 @@
 import * as React from 'react'
 import clsx from 'clsx'
-import closeIcon from '../assets/close.svg'
-import chevronDownIcon from '../assets/chevron-down.svg'
 import classes from './styles.module.css'
-import {SVG} from '../svg'
 import {colourStyles, getControlStyles} from './config'
 import {default as ReactSelect} from 'react-select'
-import {MultiValue, components} from 'react-select'
-import type {MenuPlacement, SingleValue, ActionMeta, StylesConfig} from 'react-select'
-
-export type SelectMultiValue = MultiValue<{
-  label: string
-  value: string
-}>
-
-export type SelectSingleValue = SingleValue<{
-  label: string
-  value: string
-}>
-
-export type SelectValue = SelectMultiValue | SelectSingleValue
-
-export type SelectActionMeta = ActionMeta<{
-  label: string
-  value: string
-}>
+import type {MenuPlacement, StylesConfig} from 'react-select'
+import {
+  Option,
+  ClearIndicator,
+  DropdownIndicator,
+  MultiValueLabel,
+  MultiValueRemove,
+} from './Common'
+import {SelectActionMeta, SelectMultiValue, SelectSingleValue, SelectValue} from './types'
 
 interface SelectProps {
   /**
    * The options to be displayed in the select
+   * should atleast have {label: string, value: string}
    */
   options: Array<{label: string | ''; value: string | ''; profileImgUrl?: string}> | any
   /**
@@ -150,69 +138,5 @@ export function Select({
       />
       {errorMsg && <p className={classes.errorMsg}>{errorMsg}</p>}
     </div>
-  )
-}
-
-const Option = (props: any) => {
-  return (
-    <components.Option
-      {...props}
-      className={clsx({[classes.subLabelContainer]: props.data.subLabel}, classes.optionContainer)}
-    >
-      <div className={clsx(classes.label)}>
-        {props.data.profileImgUrl && (
-          <img
-            src={props.data.profileImgUrl}
-            className={classes.profileImg}
-            alt={props.data.label}
-          />
-        )}
-        <span>{props.data.label}</span>
-      </div>
-      {props.data.subLabel && <div className={clsx(classes.subLabel)}>{props.data.subLabel}</div>}
-    </components.Option>
-  )
-}
-
-const MultiValueLabel = (props: any) => {
-  return (
-    <components.MultiValueLabel {...props}>
-      <div className={classes.labelContainer}>
-        {props.data.profileImgUrl && (
-          <img
-            src={props.data.profileImgUrl}
-            className={classes.profileImg}
-            alt={props.data.label}
-          />
-        )}
-        <div className={clsx(classes.label)}>
-          <span>{props.data.label}</span>
-        </div>
-      </div>
-    </components.MultiValueLabel>
-  )
-}
-
-const MultiValueRemove = (props: any) => {
-  return (
-    <components.MultiValueRemove {...props}>
-      <SVG path={closeIcon} spanClassName={classes.closeSpan} />
-    </components.MultiValueRemove>
-  )
-}
-
-const ClearIndicator = (props: any) => {
-  return (
-    <components.ClearIndicator {...props}>
-      <SVG path={closeIcon} spanClassName={classes.closeSpan} />
-    </components.ClearIndicator>
-  )
-}
-
-const DropdownIndicator = (props: any) => {
-  return (
-    <components.DropdownIndicator {...props}>
-      <SVG path={chevronDownIcon} spanClassName={classes.downArrowSpan} />
-    </components.DropdownIndicator>
   )
 }
