@@ -71,7 +71,7 @@ export function Table({
       cell: (props: any) => (
         <Button.ActionsDropdown
           menuItems={actionsConfig?.menuItems}
-          row={props.row}
+          data={props.row.original}
           id={props.row.original.id || 'dropdown-action'}
         />
       ),

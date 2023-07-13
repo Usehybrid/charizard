@@ -13,7 +13,6 @@ export function TableCheckbox({
   row?: any
   header?: any
 }) {
-  console.log({row, header})
   const [state, send] = useMachine(
     checkbox.machine({
       id: row?.id || header?.id,

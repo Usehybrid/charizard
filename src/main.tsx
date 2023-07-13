@@ -298,12 +298,16 @@ const menuItems = [
   {
     label: 'Edit details',
     iconSrc: randomIcon,
-    onClick: () => {},
+    onClick: (data: any) => {
+      console.log('Editing details', data)
+    },
   },
   {
     label: 'Archive',
     iconSrc: randomIcon,
-    onClick: () => {},
+    onClick: (data: any) => {
+      console.log('Archiving', data)
+    },
   },
 ]
 
@@ -320,7 +324,6 @@ function App() {
       header: 'Software Owners',
 
       cell: info => {
-        console.log(info.row.original.software_owners)
         return <div>{getFullName(info.row.original.software_owners[0])}</div>
       },
     }),

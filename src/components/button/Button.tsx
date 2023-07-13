@@ -41,9 +41,11 @@ export interface MenuButtonProps {
   children: React.ReactNode
   variant?: 'primary' | 'secondary' | 'ghost'
   disabled?: boolean
-  menuItems: {label: string; iconSrc?: string; onClick: () => void}[]
+  menuItems: {label: string; iconSrc?: string; onClick: any}[]
   onClick?: React.MouseEventHandler<HTMLButtonElement>
   isCustomTrigger?: boolean
+  // exists on why it's a custom trigger, used to pass the whole row
+  customData?: any
 }
 
 function MenuButton({
@@ -54,6 +56,7 @@ function MenuButton({
   menuItems,
   onClick,
   isCustomTrigger = false,
+  customData,
 }: MenuButtonProps) {
   const [state, send] = useMachine(menu.machine({id, positioning: {placement: 'bottom-end'}}))
   const api = menu.connect(state, send, normalizeProps)
@@ -123,7 +126,7 @@ function MenuButton({
               key={menu.label}
               className={classes.menu}
               {...api.getItemProps({id: menu.label.toLowerCase()})}
-              onClick={menu.onClick}
+              onClick={isCustomTrigger ? () => menu.onClick(customData) : menu.onClick}
             >
               {menu.iconSrc && <img src={menu.iconSrc} className={classes.menuIcon} />}
               {menu.label}
@@ -135,22 +138,20 @@ function MenuButton({
   )
 }
 export interface MenuActionsDropdownProps {
-  id?: string
-  menuItems: {label: string; iconSrc?: string; onClick: () => void}[]
-  onClick?: (row: any) => void
-  row?: any
+  id: string
+  menuItems: {label: string; iconSrc?: string; onClick: any}[]
+  data: any
 }
 
-function MenuActionsDropdown({id, menuItems, onClick, row}: MenuActionsDropdownProps) {
+function MenuActionsDropdown({id, menuItems, data}: MenuActionsDropdownProps) {
   return (
     <div>
       <MenuButton
         id={id}
         menuItems={menuItems}
-        onClick={() => {
-          if (onClick) onClick(row)
-        }}
+        onClick={() => {}}
         isCustomTrigger={true}
+        customData={data}
       >
         <div className={classes.actionsBox}>
           <img src={threeDots} className={classes.actionsDropdown} />
