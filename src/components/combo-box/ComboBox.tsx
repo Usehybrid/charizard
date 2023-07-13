@@ -13,6 +13,7 @@ export type option = {
 }
 export interface ComboboxProps {
   label?: string
+  isLoading?: boolean
   placeholder?: string
   labelClassName?: string
   inputClassName?: string
@@ -20,12 +21,13 @@ export interface ComboboxProps {
   disabled?: boolean
   defaultOptions?: option[] | []
   isAPIFilter?: boolean
-  onChange?: (text: string) => Promise<option[] | []>
+  onChange?: (text: string) => void
   onSelect: (selected?: option) => void
 }
 
 export function Combobox({
   label,
+  isLoading = false,
   required = false,
   labelClassName,
   inputClassName,
@@ -37,7 +39,6 @@ export function Combobox({
   placeholder,
 }: ComboboxProps) {
   const [options, setOptions] = React.useState<option[] | []>(defaultOptions)
-  const [optionLoading, setOptionsLoading] = React.useState(false)
   const [searchText, setSearchText] = React.useState('')
 
   const [state, send] = useMachine(
@@ -58,11 +59,8 @@ export function Combobox({
           return
         }
         if (value && onChange) {
-          setOptionsLoading(true)
           setOptions([])
-          const apiOptions = await onChange(value)
-          setOptions(apiOptions)
-          setOptionsLoading(false)
+          onChange(value)
         }
       },
       onSelect(details) {
@@ -74,6 +72,12 @@ export function Combobox({
   )
 
   const api = combobox.connect(state, send, normalizeProps)
+
+  React.useEffect(() => {
+    if (defaultOptions) {
+      setOptions(defaultOptions)
+    }
+  }, [defaultOptions])
 
   return (
     <div>
@@ -112,7 +116,7 @@ export function Combobox({
         ) : (
           searchText && (
             <ul {...api.contentProps} className={classes.options}>
-              {isAPIFilter && !optionLoading && !options.length && (
+              {isAPIFilter && !isLoading && !options.length && (
                 <li
                   className={classes.option}
                   {...api.getOptionProps({

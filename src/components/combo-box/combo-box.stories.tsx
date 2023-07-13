@@ -32,12 +32,7 @@ export const serverSideSearch: Story = {
     disabled: false,
     isAPIFilter: true,
     label: 'Combo Box',
-    onChange: async (test: string) => {
-      return [
-        {label: 'Zambiaa', value: 'ZA', disabled: false},
-        {label: 'Beninn', value: 'BN', disabled: false},
-      ]
-    },
+    onChange: async (test: string) => {},
   },
 }
 
@@ -74,8 +69,6 @@ export const serverSideSearchWithNoResult: Story = {
     disabled: false,
     isAPIFilter: true,
     label: 'Combo Box',
-    onChange: async (test: string) => {
-      return []
-    },
+    onChange: async (test: string) => {},
   },
 }
