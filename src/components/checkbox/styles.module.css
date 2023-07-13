@@ -41,6 +41,8 @@
   background-position: center;
   transform: scale(0);
   transition: transform 0.2s ease-in-out;
+  margin-left: 1px;
+  margin-top: 1px;
 }
 
 .checkboxInput:checked + .checkboxBox::after {
@@ -49,4 +51,5 @@
 
 .checkboxBox.indeterminate::after {
   background-image: url(../assets/minus.svg);
+  margin-top: 0;
 }
