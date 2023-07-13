@@ -72,12 +72,12 @@ export function Combobox({
   )
 
   const api = combobox.connect(state, send, normalizeProps)
-  
+
   React.useEffect(() => {
-if(defaultOptions) {
-  setOptions(defaultOptions)
-}
-  },[defaultOptions])
+    if (defaultOptions) {
+      setOptions(defaultOptions)
+    }
+  }, [defaultOptions])
 
   return (
     <div>
