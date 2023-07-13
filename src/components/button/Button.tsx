@@ -137,13 +137,21 @@ function MenuButton({
 export interface MenuActionsDropdownProps {
   id?: string
   menuItems: {label: string; iconSrc?: string; onClick: () => void}[]
-  onClick?: React.MouseEventHandler<HTMLButtonElement>
+  onClick?: (row: any) => void
+  row?: any
 }
 
-function MenuActionsDropdown({id, menuItems, onClick}: MenuActionsDropdownProps) {
+function MenuActionsDropdown({id, menuItems, onClick, row}: MenuActionsDropdownProps) {
   return (
     <div>
-      <MenuButton id={id} menuItems={menuItems} onClick={onClick} isCustomTrigger={true}>
+      <MenuButton
+        id={id}
+        menuItems={menuItems}
+        onClick={() => {
+          if (onClick) onClick(row)
+        }}
+        isCustomTrigger={true}
+      >
         <div className={classes.actionsBox}>
           <img src={threeDots} className={classes.actionsDropdown} />
         </div>

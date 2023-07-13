@@ -24,7 +24,7 @@ export interface TableProps {
   isCheckboxActions?: boolean
   isDropdownActions?: boolean
   actionsConfig: {
-    menuItems: {label: string; iconSrc?: string; onClick: () => void}[]
+    menuItems: {label: string; iconSrc?: string; onClick: any}[]
   }
   loaderConfig: {
     fetchingData: boolean
@@ -71,6 +71,7 @@ export function Table({
       cell: (props: any) => (
         <Button.ActionsDropdown
           menuItems={actionsConfig?.menuItems}
+          row={props.row}
           id={props.row.original.id || 'dropdown-action'}
         />
       ),
