@@ -1,8 +1,8 @@
 import * as React from 'react'
+import ReactSelectAsync from 'react-select/async'
 import clsx from 'clsx'
 import classes from './styles.module.css'
 import {colourStyles, getControlStyles} from './config'
-import {default as ReactSelect} from 'react-select'
 import type {MenuPlacement, StylesConfig} from 'react-select'
 import {
   Option,
@@ -13,7 +13,7 @@ import {
 } from './Common'
 import {SelectActionMeta, SelectMultiValue, SelectSingleValue, SelectValue} from './types'
 
-interface SelectProps {
+interface SelectAsyncProps {
   /**
    * The options to be displayed in the select
    * should atleast have {label: string, value: string}
@@ -85,7 +85,7 @@ interface SelectProps {
   extraprops?: any
 }
 
-export function Select({
+export function SelectAsync({
   options,
   onChange,
   name,
@@ -103,18 +103,20 @@ export function Select({
   isSearchable = true,
   isMulti = false,
   isClearable = false,
-}: SelectProps) {
+}: SelectAsyncProps) {
   return (
     <div
       onClick={e => e.stopPropagation()}
       style={customContainerStyles}
       className={classes.selectContainer}
     >
-      <ReactSelect
+      <ReactSelectAsync
         isMulti={isMulti}
         placeholder={placeholder}
         defaultValue={defaultValue}
-        options={options}
+        cacheOptions
+        defaultOptions
+        loadOptions={options}
         maxMenuHeight={170}
         isClearable={isClearable}
         name={name}

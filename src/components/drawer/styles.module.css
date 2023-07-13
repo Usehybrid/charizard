@@ -80,6 +80,7 @@
   height: 11.5px;
   outline: none;
   border: none;
+  cursor: pointer;
 }
 
 .container .content .descriptionContainer {
