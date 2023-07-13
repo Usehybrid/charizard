@@ -5,7 +5,7 @@ import chevronDownIcon from '../assets/chevron-down.svg'
 import classes from './styles.module.css'
 import {SVG} from '../svg'
 import {colourStyles, getControlStyles} from './config'
-import {default as ReactSelect} from 'react-select'
+import ReactSelectAsync from 'react-select/async'
 import {MultiValue, components} from 'react-select'
 import type {MenuPlacement, SingleValue, ActionMeta, StylesConfig} from 'react-select'
 
@@ -26,7 +26,7 @@ export type SelectActionMeta = ActionMeta<{
   value: string
 }>
 
-interface SelectProps {
+interface SelectAsyncProps {
   /**
    * The options to be displayed in the select
    */
@@ -97,7 +97,7 @@ interface SelectProps {
   extraprops?: any
 }
 
-export function Select({
+export function SelectAsync({
   options,
   onChange,
   name,
@@ -115,18 +115,20 @@ export function Select({
   isSearchable = true,
   isMulti = false,
   isClearable = false,
-}: SelectProps) {
+}: SelectAsyncProps) {
   return (
     <div
       onClick={e => e.stopPropagation()}
       style={customContainerStyles}
       className={classes.selectContainer}
     >
-      <ReactSelect
+      <ReactSelectAsync
         isMulti={isMulti}
         placeholder={placeholder}
         defaultValue={defaultValue}
-        options={options}
+        cacheOptions
+        defaultOptions
+        loadOptions={options}
         maxMenuHeight={170}
         isClearable={isClearable}
         name={name}

@@ -92,3 +92,28 @@ export const colourStyles: StylesConfig<any> = {
     },
   }),
 }
+
+export const getControlStyles = (errorMsg: string | false | undefined): StylesConfig<any> => {
+  return {
+    control: (styles, {isDisabled, isFocused}) => ({
+      ...styles,
+      backgroundColor: isDisabled ? '#f5f5f8' : 'transparent',
+      color: '#171718',
+      border: '1px solid #e2e0eb',
+      borderColor: errorMsg
+        ? '#de350b !important'
+        : isFocused
+        ? '#6c5bd2 !important'
+        : '#e2e0eb !important',
+      fontSize: '16px',
+      boxShadow: 'none',
+      transition: 'all 0.3s ease-in-out',
+      ':hover': {
+        borderColor: errorMsg ? '#de350b !important' : '#6c5bd2 !important',
+      },
+      ':focus-within': {
+        boxShadow: errorMsg ? '#de350b !important' : '#6c5bd2 !important',
+      },
+    }),
+  }
+}
