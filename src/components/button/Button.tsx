@@ -140,7 +140,7 @@ function MenuButton({
 export interface MenuActionsDropdownProps {
   id: string
   menuItems: {label: string; iconSrc?: string; onClick: any}[]
-  data: any
+  data?: any
 }
 
 function MenuActionsDropdown({id, menuItems, data}: MenuActionsDropdownProps) {
