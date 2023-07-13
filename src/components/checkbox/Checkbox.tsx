@@ -47,12 +47,11 @@ export function Checkbox({
   indeterminate = false,
 }: CheckboxProps) {
   return (
-    <label className={classes.checkbox} htmlFor={id}>
+    <label className={clsx(classes.checkbox, customClasses)} style={customStyles} htmlFor={id}>
       <input
         type="checkbox"
         checked={checked}
-        className={clsx(classes.checkboxInput, customClasses)}
-        style={customStyles}
+        className={classes.checkboxInput}
         name={name}
         id={id}
         onChange={onChange}
