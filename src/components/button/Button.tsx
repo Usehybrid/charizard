@@ -116,7 +116,7 @@ function MenuButton({
         </div>
       )}
 
-      <div {...api.positionerProps}>
+      <div {...api.positionerProps} style={{zIndex: 1}}>
         <div {...api.contentProps} className={classes.menus}>
           {menuItems.map(menu => (
             <div

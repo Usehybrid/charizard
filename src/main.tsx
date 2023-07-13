@@ -342,15 +342,60 @@ function App() {
     <div style={styles}>
       <Table
         data={data}
-        loaderConfig={{fetchingData: true, text: 'Getting softwares...'}}
+        metaData={metaData}
+        loaderConfig={{fetchingData: false, text: 'Getting softwares...'}}
         columns={columns}
-        search={search}
-        setSearch={setSearch}
+        searchConfig={{
+          search,
+          setSearch,
+          placeholder: 'Search by software name',
+        }}
         defaultFilterOptions={defaultFilterOptions}
         isCheckboxActions={true}
         isDropdownActions={true}
         actionsConfig={{menuItems}}
+        totalText={`${metaData.total_items} softwares`}
       />
     </div>
   )
 }
+
+const metaData = {
+  total_items: 6,
+  page_no: 0,
+  items_on_page: 3,
+}
+
+export const filters = [
+  {
+    id: 'software-owner',
+    name: 'Software Owner',
+    key: 'software.owner',
+    options: [
+      {
+        name: 'Owner 1',
+        value: 'o1',
+      },
+      {
+        name: 'Figma',
+        value: '123-156a',
+      },
+      {
+        name: 'Figma e',
+        value: '123-156aadf214',
+      },
+    ],
+  },
+
+  {
+    id: 'software-name',
+    name: 'Software Name',
+    key: 'software.name',
+    options: [
+      {
+        name: 'Maximum',
+        value: '123-156afdafd-iohfuitg',
+      },
+    ],
+  },
+]

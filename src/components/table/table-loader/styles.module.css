@@ -4,7 +4,8 @@
   justify-content: center;
   background-color: white;
   min-height: 500px;
-  width: 100vw;
+  /* sidebar is 60px in default state, and padding * 2 is 60px */
+  width: calc(100vw - 60px - 60px);
 }
 
 .loader {

@@ -17,8 +17,7 @@ import TableLoader from './table-loader/TableLoader'
 export interface TableProps {
   data: any
   columns: any
-  search?: string
-  setSearch?: any
+
   sortBy?: string
   sortOrd?: 'asc' | 'desc' | ''
   defaultFilterOptions?: FilterOptions[]
@@ -31,18 +30,30 @@ export interface TableProps {
     fetchingData: boolean
     text?: string
   }
+  searchConfig?: {
+    placeholder?: string
+    search: string
+    setSearch: any
+  }
+  metaData?: {
+    total_items: number
+    page_no: number
+    items_on_page: number
+  }
+  totalText: string
 }
 
 export function Table({
   data,
   loaderConfig,
   columns,
-  search,
-  setSearch,
   defaultFilterOptions,
   isCheckboxActions = false,
   isDropdownActions = false,
   actionsConfig,
+  searchConfig,
+  totalText,
+  metaData,
 }: TableProps) {
   const [filterOptions, setFilterOptions] = React.useState<FilterOptions[]>(
     defaultFilterOptions ?? [],
@@ -80,7 +91,7 @@ export function Table({
     <div className={classes.box}>
       <div className={classes.header}>
         <div className={classes.meta}>
-          <div className={classes.total}>14 softwares</div>
+          <div className={classes.total}>{totalText}</div>
 
           <TableFilters
             filterOptions={filterOptions}
@@ -91,9 +102,9 @@ export function Table({
         <div className={classes.search}>
           <Search
             id="table-search"
-            search={search}
-            setSearch={setSearch}
-            placeholder="Search by software name"
+            search={searchConfig?.search}
+            setSearch={searchConfig?.setSearch}
+            placeholder={searchConfig?.placeholder}
           />
         </div>
       </div>
