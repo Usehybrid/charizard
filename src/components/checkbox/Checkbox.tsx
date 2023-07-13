@@ -19,6 +19,14 @@ interface CheckboxProps {
    */
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
   /**
+   * custom classes
+   */
+  customClasses?: string
+  /**
+   * custom styles
+   */
+  customStyles?: React.CSSProperties
+  /**
    * Checkbox checked
    */
   checked?: boolean
@@ -33,6 +41,8 @@ export function Checkbox({
   name,
   children,
   onChange,
+  customClasses,
+  customStyles,
   checked = false,
   indeterminate = false,
 }: CheckboxProps) {
@@ -41,7 +51,8 @@ export function Checkbox({
       <input
         type="checkbox"
         checked={checked}
-        className={classes.checkboxInput}
+        className={clsx(classes.checkboxInput, customClasses)}
+        style={customStyles}
         name={name}
         id={id}
         onChange={onChange}
