@@ -1,0 +1,55 @@
+.checkbox {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+
+  color: var(--primary);
+  font-size: 14px;
+  font-family: Instrument Sans;
+  line-height: 20px;
+}
+
+.checkboxInput {
+  display: none;
+}
+
+.checkboxBox {
+  width: 1.143em;
+  height: 1.143em;
+  border-radius: 2px;
+  border: 2px solid var(--slate-300);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-right: 10px;
+  transition: all 0.2s ease-in-out;
+}
+
+.checkboxInput:checked + .checkboxBox {
+  border: 2px solid var(--iris);
+  background: var(--iris);
+}
+
+.checkboxInput + .checkboxBox::after {
+  content: '';
+  width: 0.75em;
+  height: 0.75em;
+  background-image: url(../assets/check.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  transform: scale(0);
+  transition: transform 0.2s ease-in-out;
+  margin-left: 1px;
+  margin-top: 1px;
+}
+
+.checkboxInput:checked + .checkboxBox::after {
+  transform: scale(1);
+}
+
+.checkboxBox.indeterminate::after {
+  background-image: url(../assets/minus.svg);
+  margin-top: 0;
+}
