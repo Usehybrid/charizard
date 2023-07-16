@@ -18,7 +18,9 @@ interface SelectAsyncProps {
    * The options to be displayed in the select
    * should atleast have {label: string, value: string}
    */
-  options: Array<{label: string | ''; value: string | ''; imgUrl?: string}>
+  options: (
+    inputValue: string,
+  ) => Array<{label: string | ''; value: string | ''; imgUrl?: string | null}> | void
   /**
    * Handle change events on the select
    */
@@ -58,7 +60,8 @@ interface SelectAsyncProps {
   /**
    * The default value of the select
    */
-  defaultValue?: {label: string; value: string; imgUrl?: string | null}[]
+  defaultValue?: any
+
   //  {label: string; value: string; imgUrl?: string}
   /**
    * Formats group labels in the menu as React components
