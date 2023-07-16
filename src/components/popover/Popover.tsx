@@ -3,7 +3,6 @@ import * as popover from '@zag-js/popover'
 import type {Placement} from '@zag-js/popper'
 import {normalizeProps, useMachine} from '@zag-js/react'
 import {useId} from 'react'
-import {UserDefinedContext} from '@zag-js/popover/dist/popover.types'
 
 interface PopoverProps {
   /**
@@ -17,7 +16,7 @@ interface PopoverProps {
   /**
    * Props to pass to the popover machine
    */
-  popoverProps?: Partial<UserDefinedContext>
+  popoverProps?: any
 }
 
 export function Popover({children, placement = 'top', popoverProps}: PopoverProps) {
