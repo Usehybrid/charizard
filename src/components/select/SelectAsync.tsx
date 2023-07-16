@@ -20,7 +20,11 @@ interface SelectAsyncProps {
    */
   options: (
     inputValue: string,
-  ) => Array<{label: string | ''; value: string | ''; imgUrl?: string | null}> | void
+  ) => Promise<Array<{
+    label: string | ''
+    value: string | ''
+    profileImgUrl?: string | null
+  }> | void>
   /**
    * Handle change events on the select
    */
@@ -62,7 +66,7 @@ interface SelectAsyncProps {
    */
   defaultValue?: any
 
-  //  {label: string; value: string; imgUrl?: string}
+  //  {label: string; value: string; profileImgUrl?: string}
   /**
    * Formats group labels in the menu as React components
    */
