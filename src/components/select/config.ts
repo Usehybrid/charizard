@@ -93,7 +93,9 @@ export const colourStyles: StylesConfig<any> = {
   }),
 }
 
-export const getControlStyles = (errorMsg: string | false | undefined): StylesConfig<any> => {
+export const getControlStyles = (
+  errorMsg: string | false | string[] | undefined,
+): StylesConfig<any> => {
   return {
     control: (styles, {isDisabled, isFocused}) => ({
       ...styles,

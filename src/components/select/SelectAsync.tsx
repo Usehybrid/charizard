@@ -18,7 +18,7 @@ interface SelectAsyncProps {
    * The options to be displayed in the select
    * should atleast have {label: string, value: string}
    */
-  options: Array<{label: string | ''; value: string | ''; profileImgUrl?: string}> | any
+  options: Array<{label: string | ''; value: string | ''; imgUrl?: string}>
   /**
    * Handle change events on the select
    */
@@ -58,7 +58,8 @@ interface SelectAsyncProps {
   /**
    * The default value of the select
    */
-  defaultValue?: {label: string; value: string; profileImgUrl?: string}
+  defaultValue?: {label: string; value: string; imgUrl?: string | null}[]
+  //  {label: string; value: string; imgUrl?: string}
   /**
    * Formats group labels in the menu as React components
    */
@@ -78,11 +79,11 @@ interface SelectAsyncProps {
   /**
    * The error message to be displayed
    */
-  errorMsg?: string | false
+  errorMsg?: string | string[] | false
   /**
    * extra props to pass for select component
    */
-  extraprops?: any
+  extraProps?: any
 }
 
 export function SelectAsync({
@@ -98,7 +99,7 @@ export function SelectAsync({
   customContainerStyles,
   menuPlacement,
   errorMsg,
-  extraprops,
+  extraProps,
   isDisabled = false,
   isSearchable = true,
   isMulti = false,
@@ -136,7 +137,7 @@ export function SelectAsync({
         }}
         formatGroupLabel={formatGroupLabel}
         menuPlacement={menuPlacement}
-        {...extraprops}
+        {...extraProps}
       />
       {errorMsg && <p className={classes.errorMsg}>{errorMsg}</p>}
     </div>
