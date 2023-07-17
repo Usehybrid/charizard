@@ -2,6 +2,7 @@ import * as React from 'react'
 import clsx from 'clsx'
 import classes from './styles.module.css'
 import {Button} from '../button'
+import {FooterButtons} from '../modal/ModalFooter'
 
 interface DrawerProps {
   /**
@@ -12,10 +13,6 @@ interface DrawerProps {
    * Callback function when drawer is closed
    */
   onClose: () => void
-  /**
-   * Callback function when save button is clicked
-   */
-  onSave: () => void
   /**
    * Drawer content
    */
@@ -33,14 +30,6 @@ interface DrawerProps {
    */
   customFooter?: React.ReactNode
   /**
-   * Save button text
-   */
-  saveBtnText?: string
-  /**
-   * Cancel button text
-   */
-  cancelBtnText?: string
-  /**
    * Drawer size
    */
   size?: 'sm' | 'md' // sm: 400px, md: 600px
@@ -56,22 +45,24 @@ interface DrawerProps {
    * Show footer or not
    */
   showFooter?: boolean
+  /**
+   * footer buttons to show
+   */
+  buttons: FooterButtons
 }
 
 export function Drawer({
   isOpen,
   onClose,
-  onSave,
   children,
   title,
   customHeader,
   customFooter,
-  saveBtnText = 'Save',
-  cancelBtnText = 'Cancel',
   size = 'md',
   showBackdrop = true,
   showHeader = true,
   showFooter = true,
+  buttons,
 }: DrawerProps) {
   const containerRef = React.useRef<HTMLDivElement>(null)
 
@@ -126,12 +117,20 @@ export function Drawer({
               {customFooter ? (
                 customFooter
               ) : (
-                <>
-                  <Button variant="secondary" onClick={onClose}>
-                    {cancelBtnText}
-                  </Button>
-                  <Button onClick={onSave}>{saveBtnText}</Button>
-                </>
+                <div className={classes.footerBtnContainer}>
+                  {buttons.map((btn, idx) => (
+                    <Button
+                      key={idx}
+                      variant={btn.variant}
+                      onClick={() => {
+                        btn.onClick()
+                        onClose()
+                      }}
+                    >
+                      {btn.btnText}
+                    </Button>
+                  ))}
+                </div>
               )}
             </div>
           )}

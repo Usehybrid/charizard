@@ -1,16 +1,14 @@
 import clsx from 'clsx'
 import classes from './styles.module.css'
-import {Button} from '../button'
+import {Button, ButtonVariant} from '../button'
+
+export type FooterButtons = Array<{
+  variant: ButtonVariant
+  onClick: () => void
+  btnText: string
+}>
 
 interface ModalFooterProps {
-  /**
-   * Save button click handler
-   */
-  onSave: () => void
-  /**
-   * Close button click handler
-   */
-  onClose?: () => void
   /**
    * Modal footer children
    * if children is passed, default buttons will not be shown
@@ -22,78 +20,37 @@ interface ModalFooterProps {
    * will be inserted by default
    */
   api?: any
+
   /**
-   * show save button or not
+   * set of buttons to display
    */
-  showSaveBtn?: boolean
-  /**
-   * save button text
-   */
-  saveBtnText?: string
-  /**
-   * show close button or not
-   */
-  showCloseBtn?: boolean
-  /**
-   * close button text
-   */
-  closeBtnText?: string
+  buttons: FooterButtons
   /**
    * show border or not
    */
   showBorder?: boolean
-  /**
-   * save button variant
-   */
-  saveBtnVariant?: 'primary' | 'secondary' | 'ghost' | 'danger'
-  /**
-   * cancel button variant
-   */
-  closeBtnVariant?: 'primary' | 'secondary' | 'ghost' | 'danger'
 }
 
-export function ModalFooter({
-  onSave,
-  onClose,
-  children,
-  api,
-  showSaveBtn = true,
-  saveBtnText = 'Save',
-  showCloseBtn = true,
-  closeBtnText = 'Close',
-  showBorder = true,
-  saveBtnVariant = 'primary',
-  closeBtnVariant = 'secondary',
-}: ModalFooterProps) {
+export function ModalFooter({children, api, buttons, showBorder = true}: ModalFooterProps) {
   return (
     <div className={clsx(classes.footer, {[classes.showBorder]: showBorder})}>
       {children ? (
         children
       ) : (
-        <>
-          {showCloseBtn && (
+        <div className={classes.btnsContainer}>
+          {buttons.map((btn, idx) => (
             <Button
-              variant={closeBtnVariant}
+              key={idx}
+              variant={btn.variant}
               onClick={() => {
-                onClose && onClose()
+                btn.onClick()
                 api?.close()
               }}
             >
-              {closeBtnText}
+              {btn.btnText}
             </Button>
-          )}
-          {showSaveBtn && (
-            <Button
-              variant={saveBtnVariant}
-              onClick={() => {
-                onSave()
-                api?.close()
-              }}
-            >
-              {saveBtnText}
-            </Button>
-          )}
-        </>
+          ))}
+        </div>
       )}
     </div>
   )

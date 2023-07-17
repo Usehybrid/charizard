@@ -1,6 +1,9 @@
 import clsx from 'clsx'
+import infoCircleIcon from '../assets/info-circle.svg'
 import classes from './styles.module.css'
 import {Inputs} from './types'
+import {Popover, PopoverContent, PopoverDescription, PopoverTrigger} from '../popover'
+import {SVG} from '../svg'
 
 interface InputLabelProps {
   /**
@@ -27,6 +30,10 @@ interface InputLabelProps {
    * Rest props to be applied to the input label
    */
   restprops?: any
+  /**
+   * info text
+   */
+  infoText?: string
 }
 
 export function InputLabel({
@@ -36,6 +43,7 @@ export function InputLabel({
   required = false,
   htmlFor,
   restprops,
+  infoText,
 }: InputLabelProps) {
   return (
     <label
@@ -44,7 +52,17 @@ export function InputLabel({
       style={customStyles}
       {...restprops}
     >
-      {children}
+      <span>{children}</span>
+      {infoText && (
+        <Popover>
+          <PopoverTrigger openOnHover={false}>
+            <SVG path={infoCircleIcon} svgClassName={classes.infoCircleSvg} />
+          </PopoverTrigger>
+          <PopoverContent>
+            <PopoverDescription>{infoText}</PopoverDescription>
+          </PopoverContent>
+        </Popover>
+      )}
     </label>
   )
 }

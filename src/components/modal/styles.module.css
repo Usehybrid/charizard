@@ -72,6 +72,7 @@
 
 .container .contentWrapper .content .header .closeIconSpan {
   filter: invert(76%) sepia(11%) saturate(92%) hue-rotate(210deg) brightness(91%) contrast(95%);
+  cursor: pointer;
 }
 
 .container .contentWrapper .content .header .closeIconSpan .closeIcon {
@@ -99,6 +100,14 @@
 
 .container .contentWrapper .content .footer.showBorder {
   border-top: 1px solid var(--slate-300);
+}
+
+.container .contentWrapper .content .footer .btnsContainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
 }
 
 @media screen and (max-width: 400px) {

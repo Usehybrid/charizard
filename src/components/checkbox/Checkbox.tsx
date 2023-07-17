@@ -27,6 +27,10 @@ interface CheckboxProps {
    */
   customStyles?: React.CSSProperties
   /**
+   * error message
+   */
+  errorMsg?: string
+  /**
    * Checkbox checked
    */
   checked?: boolean
@@ -34,6 +38,10 @@ interface CheckboxProps {
    * Checkbox indeterminate state
    */
   indeterminate?: boolean
+  /**
+   * Checkbox disabled
+   */
+  disabled?: boolean
 }
 
 export function Checkbox({
@@ -43,21 +51,38 @@ export function Checkbox({
   onChange,
   customClasses,
   customStyles,
+  errorMsg,
   checked = false,
   indeterminate = false,
+  disabled = false,
 }: CheckboxProps) {
   return (
-    <label className={clsx(classes.checkbox, customClasses)} style={customStyles} htmlFor={id}>
-      <input
-        type="checkbox"
-        checked={checked}
-        className={classes.checkboxInput}
-        name={name}
-        id={id}
-        onChange={onChange}
-      />
-      <div className={clsx(classes.checkboxBox, {[classes.indeterminate]: indeterminate})}></div>
-      <span>{children}</span>
-    </label>
+    <>
+      <label
+        className={clsx(classes.checkbox, {[classes.disabled]: disabled}, customClasses)}
+        style={customStyles}
+        htmlFor={id}
+      >
+        <input
+          type="checkbox"
+          checked={checked}
+          className={classes.checkboxInput}
+          name={name}
+          id={id}
+          onChange={onChange}
+          disabled={disabled}
+        />
+        <div
+          className={clsx(
+            classes.checkboxBox,
+            {[classes.indeterminate]: indeterminate},
+            {[classes.error]: errorMsg},
+            {[classes.disabled]: disabled},
+          )}
+        ></div>
+        <span>{children}</span>
+      </label>
+      {errorMsg && <p className={classes.errorMsg}>{errorMsg}</p>}
+    </>
   )
 }
