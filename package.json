@@ -60,5 +60,8 @@
     "vite": "^4.4.4",
     "vite-plugin-dts": "^2.3.0",
     "vite-plugin-libcss": "^1.1.1"
+  },
+  "dependencies": {
+    "react-infinite-scroll-component": "^6.1.0"
   }
 }

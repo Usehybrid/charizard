@@ -1,6 +1,7 @@
 import * as React from 'react'
 import clsx from 'clsx'
 import TableFilters from './table-filters'
+import TableLoader from './table-loader'
 import classes from './styles.module.css'
 import {
   useReactTable,
@@ -12,15 +13,10 @@ import {Search} from '../search'
 import {FilterOptions} from './types'
 import {TableCheckbox} from './table-columns'
 import {Button} from '../button'
-import TableLoader from './table-loader/TableLoader'
 
 export interface TableProps {
   data: any
   columns: any
-
-  sortBy?: string
-  sortOrd?: 'asc' | 'desc' | ''
-  defaultFilterOptions?: FilterOptions[]
   isCheckboxActions?: boolean
   isDropdownActions?: boolean
   actionsConfig: {
@@ -35,10 +31,14 @@ export interface TableProps {
     search: string
     setSearch: any
   }
-  metaData?: {
-    total_items: number
-    page_no: number
-    items_on_page: number
+  sortConfig?: {
+    sortBy: string
+    setSortBy: any
+    sortOrd: 'asc' | 'desc' | ''
+    setSortOrd: any
+  }
+  filterConfig?: {
+    defaultFilterOptions?: FilterOptions[]
   }
   totalText: string
 }
@@ -47,16 +47,16 @@ export function Table({
   data,
   loaderConfig,
   columns,
-  defaultFilterOptions,
+  filterConfig,
+  sortConfig,
   isCheckboxActions = false,
   isDropdownActions = false,
   actionsConfig,
   searchConfig,
   totalText,
-  metaData,
 }: TableProps) {
   const [filterOptions, setFilterOptions] = React.useState<FilterOptions[]>(
-    defaultFilterOptions ?? [],
+    filterConfig?.defaultFilterOptions ?? [],
   )
 
   const _columns = [
@@ -85,9 +85,6 @@ export function Table({
     getPaginationRowModel: getPaginationRowModel(),
   })
 
-  let isSorting = true
-  let sortOrd = 'desc'
-
   return (
     <div className={classes.box}>
       <div className={classes.header}>
@@ -97,7 +94,7 @@ export function Table({
           <TableFilters
             filterOptions={filterOptions}
             setFilterOptions={setFilterOptions}
-            defaultFilterOptions={defaultFilterOptions ?? []}
+            defaultFilterOptions={filterConfig?.defaultFilterOptions ?? []}
           />
         </div>
         <div className={classes.search}>

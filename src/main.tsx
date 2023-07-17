@@ -345,7 +345,7 @@ function App() {
     <div style={styles}>
       <Table
         data={data}
-        metaData={metaData}
+        // metaData={metaData}
         loaderConfig={{fetchingData: false, text: 'Getting softwares...'}}
         columns={columns}
         searchConfig={{
@@ -353,7 +353,7 @@ function App() {
           setSearch,
           placeholder: 'Search by software name',
         }}
-        defaultFilterOptions={defaultFilterOptions}
+        filterConfig={{defaultFilterOptions}}
         isCheckboxActions={true}
         isDropdownActions={true}
         actionsConfig={{menuItems}}

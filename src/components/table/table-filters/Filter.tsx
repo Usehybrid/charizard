@@ -53,7 +53,7 @@ export default function Filter({filter, setFilterOptions, defaultFilterOptions, 
         <img src={chevronDown} alt="dropdown" className={classes.filterIcon2} />
       </button>
 
-      <div {...api.positionerProps}>
+      <div {...api.positionerProps} className={classes.positioner}>
         {api.isOpen && (
           <div {...api.contentProps} className={classes.dropdown} onKeyDown={() => {}}>
             {!filter.config?.hideSearch && (

@@ -50,6 +50,10 @@
 
 /* filter dropdown */
 
+.positioner {
+  z-index: 1;
+}
+
 .dropdown {
   width: 256px;
   max-height: 316px;
