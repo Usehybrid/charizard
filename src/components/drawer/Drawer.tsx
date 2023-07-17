@@ -2,6 +2,7 @@ import * as React from 'react'
 import clsx from 'clsx'
 import classes from './styles.module.css'
 import {Button} from '../button'
+import {FooterButtons} from '../modal/ModalFooter'
 
 interface DrawerProps {
   /**
@@ -47,11 +48,7 @@ interface DrawerProps {
   /**
    * footer buttons to show
    */
-  buttons: Array<{
-    variant: 'primary' | 'secondary' | 'ghost' | 'danger'
-    onClick: () => void
-    btnText: string
-  }>
+  buttons: FooterButtons
 }
 
 export function Drawer({

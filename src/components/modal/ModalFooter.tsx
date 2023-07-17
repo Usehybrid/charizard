@@ -1,6 +1,12 @@
 import clsx from 'clsx'
 import classes from './styles.module.css'
-import {Button} from '../button'
+import {Button, ButtonVariant} from '../button'
+
+export type FooterButtons = Array<{
+  variant: ButtonVariant
+  onClick: () => void
+  btnText: string
+}>
 
 interface ModalFooterProps {
   /**
@@ -18,11 +24,7 @@ interface ModalFooterProps {
   /**
    * set of buttons to display
    */
-  buttons?: Array<{
-    variant: 'primary' | 'secondary' | 'ghost' | 'danger'
-    onClick: () => void
-    btnText: string
-  }>
+  buttons: FooterButtons
   /**
    * show border or not
    */
@@ -36,7 +38,7 @@ export function ModalFooter({children, api, buttons, showBorder = true}: ModalFo
         children
       ) : (
         <div className={classes.btnsContainer}>
-          {buttons?.map((btn, idx) => (
+          {buttons.map((btn, idx) => (
             <Button
               key={idx}
               variant={btn.variant}

@@ -6,9 +6,16 @@ import threeDots from '../assets/three-dots.svg'
 import classes from './styles.module.css'
 import {useMachine, normalizeProps} from '@zag-js/react'
 
+export enum ButtonVariant {
+  PRIMARY = 'primary',
+  SECONDARY = 'secondary',
+  GHOST = 'ghost',
+  DANGER = 'danger',
+}
+
 export interface ButtonProps {
   children: React.ReactNode
-  variant?: 'primary' | 'secondary' | 'ghost' | 'danger'
+  variant?: ButtonVariant
   disabled?: boolean
   onClick?: React.MouseEventHandler<HTMLButtonElement>
   type?: 'button' | 'submit' | 'reset'
@@ -20,7 +27,7 @@ export interface ButtonProps {
 
 export function Button({
   children,
-  variant = 'primary',
+  variant = ButtonVariant.PRIMARY,
   disabled = false,
   onClick,
   type = 'button',
