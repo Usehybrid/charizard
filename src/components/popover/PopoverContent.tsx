@@ -24,6 +24,10 @@ interface PopoverContentProps {
    * The className to apply to the PopoverContent.
    */
   className?: string
+  /**
+   * The styles to apply to Popover positioner
+   */
+  positionerStyles?: React.CSSProperties
 }
 
 export function PopoverContent({
@@ -32,6 +36,7 @@ export function PopoverContent({
   bg = 'black',
   styles,
   className,
+  positionerStyles,
 }: PopoverContentProps) {
   const Wrapper = api?.portalled ? Portal : React.Fragment
 
@@ -56,7 +61,7 @@ export function PopoverContent({
 
   return (
     <Wrapper>
-      <div {...api?.positionerProps} className={classes.positioner}>
+      <div {...api?.positionerProps} className={classes.positioner} style={{...positionerStyles}}>
         <div {...arrowProps} className={clsx(classes.arrow, {[classes[bg]]: !isCustomBg})}>
           <div {...api?.arrowTipProps} />
         </div>
