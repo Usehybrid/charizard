@@ -15,7 +15,7 @@ interface PopoverContentProps {
   /**
    * The background color of the PopoverContent.
    */
-  bg?: 'black' | 'white'
+  bg?: 'black' | 'gray' | string
   /**
    * The styles to apply to the PopoverContent.
    */
@@ -42,16 +42,28 @@ export function PopoverContent({
     })
   })
 
+  const isCustomBg = !['black', 'gray'].includes(bg)
+
+  const arrowProps = {
+    ...api?.arrowProps,
+    ...(isCustomBg && {
+      style: {
+        ...api?.arrowProps?.style,
+        '--arrow-background': bg,
+      },
+    }),
+  }
+
   return (
     <Wrapper>
       <div {...api?.positionerProps} className={classes.positioner}>
-        <div {...api?.arrowProps} className={clsx(classes.arrow, classes[bg])}>
-          <div {...api?.arrowTipProps} className={classes.arrowTip} />
+        <div {...arrowProps} className={clsx(classes.arrow, {[classes[bg]]: !isCustomBg})}>
+          <div {...api?.arrowTipProps} />
         </div>
         <div
           {...api?.contentProps}
           className={clsx(classes.content, classes[bg], className)}
-          style={styles}
+          style={{background: isCustomBg ? bg : '', ...styles}}
         >
           {clones}
         </div>

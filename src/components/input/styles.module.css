@@ -20,6 +20,15 @@
   line-height: 1.54rem;
   color: var(--primary);
   margin-bottom: 4px;
+
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  .infoCircleSvg {
+    width: 20px;
+    height: 20px;
+  }
 }
 
 .inputLabel.required::after {
