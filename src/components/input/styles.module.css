@@ -24,11 +24,11 @@
   display: flex;
   align-items: center;
   gap: 4px;
+}
 
-  .infoCircleSvg {
-    width: 20px;
-    height: 20px;
-  }
+.inputLabel .infoCircleSvg {
+  width: 20px;
+  height: 20px;
 }
 
 .inputLabel.required::after {
