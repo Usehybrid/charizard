@@ -44,7 +44,7 @@ export function ModalFooter({children, api, buttons, showBorder = true}: ModalFo
               variant={btn.variant}
               onClick={() => {
                 btn.onClick()
-                api?.close()
+                // api?.close()
               }}
             >
               {btn.btnText}
