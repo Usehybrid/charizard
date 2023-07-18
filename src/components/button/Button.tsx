@@ -19,6 +19,7 @@ export interface ButtonProps {
   disabled?: boolean
   onClick?: React.MouseEventHandler<HTMLButtonElement>
   type?: 'button' | 'submit' | 'reset'
+  size?: 'sm' | 'md'
 }
 
 // 1. Button => primary, secondary, ghost
@@ -31,6 +32,7 @@ export function Button({
   disabled = false,
   onClick,
   type = 'button',
+  size = 'md',
 }: ButtonProps) {
   return (
     <button
@@ -40,6 +42,7 @@ export function Button({
         variant === 'secondary' && classes.btnSecondary,
         variant === 'ghost' && classes.btnGhost,
         variant === 'danger' && classes.btnDanger,
+        size === 'sm' && classes.btnSm,
         disabled && classes.disabled,
       )}
       disabled={disabled}
@@ -61,6 +64,7 @@ export interface MenuButtonProps {
   isCustomTrigger?: boolean
   // exists on why it's a custom trigger, used to pass the whole row
   customData?: any
+  size?: 'sm' | 'md'
 }
 
 function MenuButton({
@@ -72,6 +76,7 @@ function MenuButton({
   onClick,
   isCustomTrigger = false,
   customData,
+  size = 'md',
 }: MenuButtonProps) {
   const [state, send] = useMachine(menu.machine({id, positioning: {placement: 'bottom-end'}}))
   const api = menu.connect(state, send, normalizeProps)
@@ -98,6 +103,7 @@ function MenuButton({
               variant === 'primary' && classes.btnPrimary,
               variant === 'secondary' && classes.btnSecondary,
               variant === 'ghost' && classes.btnGhost,
+              size === 'sm' && classes.btnSm,
               disabled && classes.disabled,
             )}
             disabled={disabled}
@@ -117,6 +123,7 @@ function MenuButton({
               variant === 'secondary' && classes.btnAddonSecondary,
               variant === 'ghost' && classes.btnGhost,
               variant === 'ghost' && classes.btnAddonGhost,
+              size === 'sm' && classes.btnSm,
               disabled && classes.disabled,
             )}
             disabled={disabled}
@@ -128,6 +135,7 @@ function MenuButton({
                 variant === 'primary' && classes.btnImgPrimary,
                 variant === 'secondary' && classes.btnImgSecondary,
                 variant === 'ghost' && classes.btnImgGhost,
+                size === 'sm' && classes.btnImgSm,
               )}
             />
           </button>
@@ -156,9 +164,10 @@ export interface MenuActionsDropdownProps {
   id: string
   menuItems: {label: string; iconSrc?: string; onClick: any}[]
   data?: any
+  size?: 'md' | 'lg'
 }
 
-function MenuActionsDropdown({id, menuItems, data}: MenuActionsDropdownProps) {
+function MenuActionsDropdown({id, menuItems, data, size = 'md'}: MenuActionsDropdownProps) {
   return (
     <div>
       <MenuButton
@@ -167,8 +176,9 @@ function MenuActionsDropdown({id, menuItems, data}: MenuActionsDropdownProps) {
         onClick={() => {}}
         isCustomTrigger={true}
         customData={data}
+        size={size === 'md' ? 'sm' : 'md'}
       >
-        <div className={classes.actionsBox}>
+        <div className={clsx(classes.actionsBox, size === 'lg' && classes.actionsBoxLg)}>
           <img src={threeDots} className={classes.actionsDropdown} />
         </div>
       </MenuButton>

@@ -12,6 +12,13 @@
   border-radius: 6px;
 }
 
+.btnSm {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  height: 32px;
+}
+
 .btn:hover {
   cursor: pointer;
 }
@@ -91,6 +98,11 @@
   filter: invert(37%) sepia(89%) saturate(3140%) hue-rotate(234deg) brightness(90%) contrast(81%);
 }
 
+.btnImgSm {
+  width: 20px;
+  height: 20px;
+}
+
 .btnAddon [data-part='trigger'][data-focus] {
   outline: none;
 }
@@ -145,12 +157,19 @@
 /* actions dropdown */
 
 .actionsBox {
-  width: 28px;
+  width: 30px;
   height: 24px;
+  display: flex;
+  align-items: center;
 }
 
 .actionsBox:hover {
   cursor: pointer;
+}
+
+.actionsBoxLg {
+  width: 32px;
+  height: 38px;
 }
 
 .actionsDropdown {

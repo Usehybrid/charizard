@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import {Table} from './components'
+import {Button, Table} from './components'
 import {createColumnHelper} from '@tanstack/react-table'
 
 import randomIcon from './components/assets/check.svg'
@@ -12,6 +12,7 @@ const styles = {
   alignItems: 'center',
   justifyContent: 'center',
   backgroundColor: 'gray',
+  flexDir: 'column',
 }
 
 export interface Software {
@@ -343,7 +344,7 @@ function App() {
 
   return (
     <div style={styles}>
-      <Table
+      {/* <Table
         data={data}
         // metaData={metaData}
         loaderConfig={{fetchingData: false, text: 'Getting softwares...'}}
@@ -358,10 +359,31 @@ function App() {
         isDropdownActions={true}
         actionsConfig={{menuItems}}
         totalText={`${metaData.total_items} softwares`}
-      />
+      /> */}
+
+      <div style={{display: 'flex', alignItems: 'center'}}>
+        <Button.MenuButton menuItems={menuItems} size="sm">
+          Add software
+        </Button.MenuButton>
+        <div style={{marginLeft: '12px'}}>
+          <Button.ActionsDropdown
+            menuItems={softwareListMenuItems}
+            id={'software-list-dropdown-action'}
+            size="md"
+          />
+        </div>
+      </div>
     </div>
   )
 }
+
+const softwareListMenuItems = [
+  {
+    label: 'Archived softwares',
+    iconSrc: randomIcon,
+    onClick: () => {},
+  },
+]
 
 const metaData = {
   total_items: 6,
