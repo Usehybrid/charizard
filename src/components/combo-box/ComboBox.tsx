@@ -12,6 +12,7 @@ export type option = {
   listComponent?: React.ReactNode
 }
 export interface ComboboxProps {
+  value: string
   label?: string
   isLoading?: boolean
   placeholder?: string
@@ -23,6 +24,7 @@ export interface ComboboxProps {
   isAPIFilter?: boolean
   onChange?: (text: string) => void
   onSelect: (selected?: option) => void
+  optionsMaxHeight?: string
 }
 
 export function Combobox({
@@ -37,6 +39,8 @@ export function Combobox({
   onChange,
   onSelect,
   placeholder,
+  optionsMaxHeight = '300px',
+  value,
 }: ComboboxProps) {
   const [options, setOptions] = React.useState<option[] | []>(defaultOptions)
   const [searchText, setSearchText] = React.useState('')
@@ -45,6 +49,7 @@ export function Combobox({
     combobox.machine({
       id: useId(),
       disabled,
+      inputValue: value,
       placeholder,
       onOpen() {
         setOptions(defaultOptions)
@@ -97,7 +102,11 @@ export function Combobox({
       </div>
       <div {...api.positionerProps}>
         {options.length > 0 ? (
-          <ul {...api.contentProps} className={classes.options}>
+          <ul
+            {...api.contentProps}
+            className={classes.options}
+            style={{maxHeight: optionsMaxHeight}}
+          >
             {options.map((item, index) => (
               <li
                 className={classes.option}
@@ -115,7 +124,11 @@ export function Combobox({
           </ul>
         ) : (
           searchText && (
-            <ul {...api.contentProps} className={classes.options}>
+            <ul
+              {...api.contentProps}
+              className={classes.options}
+              style={{maxHeight: optionsMaxHeight}}
+            >
               {isAPIFilter && !isLoading && !options.length && (
                 <li
                   className={classes.option}

@@ -14,7 +14,7 @@ export const clientSideSearch: Story = {
   args: {
     defaultOptions: [
       {label: 'Zambia', value: 'ZA', disabled: false},
-      {label: 'Benin', value: 'BN', disabled: false},
+      { label: 'Benin', value: 'BN', disabled: false },
     ],
     label: 'Combo Box',
     disabled: false,
@@ -27,7 +27,7 @@ export const serverSideSearch: Story = {
   args: {
     defaultOptions: [
       {label: 'Zambia', value: 'ZA', disabled: false},
-      {label: 'Benin', value: 'BN', disabled: false},
+      { label: 'Benin', value: 'BN', disabled: false },
     ],
     disabled: false,
     isAPIFilter: true,
