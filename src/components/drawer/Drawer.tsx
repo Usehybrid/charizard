@@ -32,7 +32,7 @@ interface DrawerProps {
   /**
    * Drawer size
    */
-  size?: 'sm' | 'md' // sm: 400px, md: 600px
+  size?: 'sm' | 'md' | 'lg' // sm: 400px, md: 600px, lg: 820px
   /**
    * Show backdrop or not
    */

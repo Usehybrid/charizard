@@ -48,6 +48,10 @@
   width: 46.2rem;
 }
 
+.container.lg {
+  width: 63.08rem;
+}
+
 .container .content {
   height: 100%;
   overflow-y: auto;
