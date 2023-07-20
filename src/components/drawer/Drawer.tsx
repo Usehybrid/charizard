@@ -48,7 +48,7 @@ interface DrawerProps {
   /**
    * footer buttons to show
    */
-  buttons: FooterButtons
+  buttons?: FooterButtons
 }
 
 export function Drawer({
@@ -65,11 +65,16 @@ export function Drawer({
   buttons,
 }: DrawerProps) {
   const containerRef = React.useRef<HTMLDivElement>(null)
+  const descriptionRef = React.useRef<HTMLDivElement>(null)
+  const footerRef = React.useRef<HTMLDivElement>(null)
 
   React.useEffect(() => {
     const timeout = setTimeout(() => {
-      if (containerRef.current) {
+      if (containerRef.current && descriptionRef && footerRef) {
         containerRef.current.style.transform = isOpen ? 'translateX(0)' : 'translateX(100%)'
+        ;(
+          descriptionRef.current as HTMLDivElement
+        ).style.maxHeight = `calc(100vh - (1.75rem * 2) - ${footerRef.current?.clientHeight}px)`
       }
     }, 0)
 
@@ -87,10 +92,7 @@ export function Drawer({
       </div>
 
       {/* container */}
-      <div
-        className={clsx(classes.container, size === 'sm' ? classes.sm : classes.md)}
-        ref={containerRef}
-      >
+      <div className={clsx(classes.container, classes[size])} ref={containerRef}>
         {/* content */}
         <div className={classes.content}>
           {/* header */}
@@ -107,31 +109,31 @@ export function Drawer({
             </div>
           )}
           {/* description */}
-          <div className={classes.descriptionContainer}>
+          <div className={classes.descriptionContainer} ref={descriptionRef}>
             {/* children are shown here */}
             {children}
           </div>
           {/* footer */}
           {showFooter && (
-            <div className={classes.footer}>
-              {customFooter ? (
-                customFooter
-              ) : (
-                <div className={classes.footerBtnContainer}>
-                  {buttons.map((btn, idx) => (
-                    <Button
-                      key={idx}
-                      variant={btn.variant}
-                      onClick={() => {
-                        btn.onClick()
-                        // onClose()
-                      }}
-                    >
-                      {btn.btnText}
-                    </Button>
-                  ))}
-                </div>
-              )}
+            <div className={classes.footer} ref={footerRef}>
+              {customFooter
+                ? customFooter
+                : buttons && (
+                    <div className={classes.footerBtnContainer}>
+                      {buttons.map((btn, idx) => (
+                        <Button
+                          key={idx}
+                          variant={btn.variant}
+                          onClick={() => {
+                            btn.onClick()
+                            // onClose()
+                          }}
+                        >
+                          {btn.btnText}
+                        </Button>
+                      ))}
+                    </div>
+                  )}
             </div>
           )}
         </div>
