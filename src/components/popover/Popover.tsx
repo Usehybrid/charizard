@@ -56,7 +56,7 @@ export function Popover({
     return () => {
       if (closeOnScroll) containerRef.current?.removeEventListener('scroll', closePopover)
     }
-  }, [containerRef.current])
+  }, [containerRef?.current])
 
   const clones = React.Children.toArray(children).map((child: any) => {
     return React.cloneElement(child, {
