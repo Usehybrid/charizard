@@ -24,7 +24,7 @@ interface PopoverProps {
   /**
    * when using closeOnScroll, its necessary to pass containerRef to track scroll movement of the container you want to close the popover with respect to.
    */
-  containerRef?: any
+  containerRef?: React.RefObject<HTMLElement>
 }
 
 export function Popover({
@@ -54,7 +54,8 @@ export function Popover({
     }
 
     return () => {
-      if (closeOnScroll) containerRef.current?.removeEventListener('scroll', closePopover)
+      if (closeOnScroll && containerRef)
+        containerRef.current?.removeEventListener('scroll', closePopover)
     }
   }, [containerRef?.current])
 
