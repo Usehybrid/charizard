@@ -17,9 +17,23 @@ interface PopoverProps {
    * Props to pass to the popover machine
    */
   popoverProps?: any
+  /**
+   * close popover on scroll
+   */
+  closeOnScroll?: boolean
+  /**
+   * when using closeOnScroll, its necessary to pass containerRef to track scroll movement of the container you want to close the popover with respect to.
+   */
+  containerRef?: any
 }
 
-export function Popover({children, placement = 'top', popoverProps}: PopoverProps) {
+export function Popover({
+  children,
+  placement = 'top',
+  popoverProps,
+  closeOnScroll = false,
+  containerRef,
+}: PopoverProps) {
   const [state, send] = useMachine(
     popover.machine({
       id: useId(),
@@ -29,6 +43,20 @@ export function Popover({children, placement = 'top', popoverProps}: PopoverProp
     }),
   )
   const api = popover.connect(state, send, normalizeProps)
+
+  function closePopover() {
+    api?.close()
+  }
+
+  React.useEffect(() => {
+    if (closeOnScroll && containerRef && containerRef.current) {
+      containerRef.current.addEventListener('scroll', closePopover)
+    }
+
+    return () => {
+      if (closeOnScroll) containerRef.current?.removeEventListener('scroll', closePopover)
+    }
+  }, [containerRef.current])
 
   const clones = React.Children.toArray(children).map((child: any) => {
     return React.cloneElement(child, {
