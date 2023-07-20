@@ -10,19 +10,26 @@
   margin: 0;
 }
 
-.labelContainer {
+.multiLabelContainer {
   display: flex;
   align-items: center;
   gap: 4px;
 }
 
 .optionContainer .profileImg,
-.labelContainer .profileImg {
+.multiLabelContainer .profileImg,
+.singleValueContainer .profileImg {
   width: 28px;
   height: 28px;
   border-radius: 50%;
   object-fit: contain;
   overflow: hidden;
+}
+
+.singleValueContainer {
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .optionContainer .label {
