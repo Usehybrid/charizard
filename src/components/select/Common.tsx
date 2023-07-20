@@ -29,7 +29,7 @@ export const Option = (props: any) => {
 export const MultiValueLabel = (props: any) => {
   return (
     <components.MultiValueLabel {...props}>
-      <div className={classes.labelContainer}>
+      <div className={classes.multiLabelContainer}>
         {props.data.profileImgUrl && (
           <img
             src={props.data.profileImgUrl}
@@ -66,5 +66,24 @@ export const DropdownIndicator = (props: any) => {
     <components.DropdownIndicator {...props}>
       <SVG path={chevronDownIcon} spanClassName={classes.downArrowSpan} />
     </components.DropdownIndicator>
+  )
+}
+
+export const SingleValue = (props: any) => {
+  return (
+    <components.SingleValue {...props}>
+      <div className={classes.singleValueContainer}>
+        {props.data.profileImgUrl && (
+          <img
+            src={props.data.profileImgUrl}
+            className={classes.profileImg}
+            alt={props.data.label}
+          />
+        )}
+        <div className={clsx(classes.label)}>
+          <span>{props.data.label}</span>
+        </div>
+      </div>
+    </components.SingleValue>
   )
 }

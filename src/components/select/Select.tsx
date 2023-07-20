@@ -10,6 +10,7 @@ import {
   DropdownIndicator,
   MultiValueLabel,
   MultiValueRemove,
+  SingleValue,
 } from './Common'
 import {SelectActionMeta, SelectMultiValue, SelectSingleValue, SelectValue} from './types'
 
@@ -122,7 +123,14 @@ export function Select({
         className={clsx(className)}
         isSearchable={isSearchable}
         styles={{...colourStyles, ...getControlStyles(errorMsg), ...selectStyles}}
-        components={{Option, MultiValueLabel, MultiValueRemove, DropdownIndicator, ClearIndicator}}
+        components={{
+          Option,
+          MultiValueLabel,
+          MultiValueRemove,
+          DropdownIndicator,
+          ClearIndicator,
+          SingleValue,
+        }}
         isDisabled={isDisabled}
         onChange={(newValue: SelectValue, actionMeta: SelectActionMeta) => {
           if (isMulti) {
