@@ -344,7 +344,7 @@ function App() {
 
   return (
     <div style={styles}>
-      {/* <Table
+      <Table
         data={data}
         // metaData={metaData}
         loaderConfig={{fetchingData: false, text: 'Getting softwares...'}}
@@ -359,9 +359,9 @@ function App() {
         isDropdownActions={true}
         actionsConfig={{menuItems}}
         totalText={`${metaData.total_items} softwares`}
-      /> */}
+      />
 
-      <div style={{display: 'flex', alignItems: 'center'}}>
+      {/* <div style={{display: 'flex', alignItems: 'center'}}>
         <Button.MenuButton menuItems={menuItems} size="sm">
           Add software
         </Button.MenuButton>
@@ -372,7 +372,7 @@ function App() {
             size="md"
           />
         </div>
-      </div>
+      </div> */}
     </div>
   )
 }

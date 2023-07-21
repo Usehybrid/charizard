@@ -58,12 +58,34 @@ export function Table({
   const [filterOptions, setFilterOptions] = React.useState<FilterOptions[]>(
     filterConfig?.defaultFilterOptions ?? [],
   )
+  // used for checkbox
+  const [selectAll, setSelectAll] = React.useState(false)
+  // const [currSelectedRows, setCurrSelectedRows] = React.useState([])
+
+  const selectedRowsRef = React.useRef([])
+
+  // console.log(selectedRowsRef)
 
   const _columns = [
     isCheckboxActions && {
       id: 'checkbox actions',
-      cell: (props: any) => <TableCheckbox row={props.row} />,
-      header: (props: any) => <TableCheckbox header={props.header} />,
+      cell: (props: any) => (
+        <TableCheckbox
+          row={props.row}
+          selectAll={selectAll}
+          // setCurrSelectedRows={setCurrSelectedRows}
+          selectedRowsRef={selectedRowsRef}
+        />
+      ),
+      header: (props: any) => (
+        <TableCheckbox
+          header={props.header}
+          selectAll={selectAll}
+          setSelectAll={setSelectAll}
+          // setCurrSelectedRows={setCurrSelectedRows}
+          selectedRowsRef={selectedRowsRef}
+        />
+      ),
     },
     ...columns,
     isDropdownActions && {
