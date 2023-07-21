@@ -167,20 +167,16 @@
 .optionLabel > [data-part='control'] {
   width: 16px;
   height: 16px;
-  border-radius: 2px;
+  border-radius: 3px;
   border: 2px solid var(--slate-200);
   background-color: white;
 }
 
-.optionLabel > [data-part='control'][data-checked] {
+.optionLabel > [data-part='control'][data-state='checked'] {
   border-color: var(--iris);
   background-color: var(--iris);
   background-image: url('../../assets/check.svg');
   background-position: center;
-  background-size: contain;
+  background-size: 10px;
   background-repeat: no-repeat;
 }
-
-/* .optionLabel > [data-part='control'][data-checked] > path {
-  fill: white;
-} */
