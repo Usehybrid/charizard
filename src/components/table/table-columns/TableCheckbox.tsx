@@ -23,7 +23,7 @@ export function TableCheckbox({
   setCurrSelectedRows,
   selectedRowsRef,
 }: TableCheckboxProps) {
-  console.log(selectedRowsRef.current)
+  // console.log(selectedRowsRef.current)
   const [state, send] = useMachine(
     checkbox.machine({
       id: row?.id || header?.id,

@@ -327,6 +327,7 @@ function App() {
       cell: info => {
         return <div>{getFullName(info.row.original.software_owners[0])}</div>
       },
+      enableSorting: false,
     }),
     columnHelper.accessor('software_users', {
       header: 'Users',
@@ -342,46 +343,10 @@ function App() {
     }),
   ]
 
-  const colors = [
-    {
-      label: 'Red',
-      value: 'red',
-      profileImgUrl:
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Adobe_XD_CC_icon.svg/1200px-Adobe_XD_CC_icon.svg.png',
-    },
-    {
-      label: 'Purple',
-      value: 'purple',
-      profileImgUrl:
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Adobe_XD_CC_icon.svg/1200px-Adobe_XD_CC_icon.svg.png',
-    },
-    {
-      label: 'Black',
-      value: 'black',
-      profileImgUrl:
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Adobe_XD_CC_icon.svg/1200px-Adobe_XD_CC_icon.svg.png',
-    },
-    {
-      label: 'White',
-      value: 'white',
-      profileImgUrl:
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Adobe_XD_CC_icon.svg/1200px-Adobe_XD_CC_icon.svg.png',
-    },
-    {
-      label: 'Green',
-      value: 'green',
-      profileImgUrl:
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Adobe_XD_CC_icon.svg/1200px-Adobe_XD_CC_icon.svg.png',
-    },
-  ]
-
-  const [color, setColor] = React.useState('red')
-
   return (
     <div style={styles}>
       <Table
         data={data}
-        // metaData={metaData}
         loaderConfig={{fetchingData: false, text: 'Getting softwares...'}}
         columns={columns}
         searchConfig={{
@@ -390,6 +355,15 @@ function App() {
           placeholder: 'Search by software name',
         }}
         filterConfig={{defaultFilterOptions}}
+        sortConfig={{
+          sortBy: '',
+          setSortBy: () => {},
+          sortOrd: '',
+          setSortOrd: () => {},
+          sortMap: {
+            software: 'softwares.names',
+          },
+        }}
         isCheckboxActions={true}
         isDropdownActions={true}
         actionsConfig={{menuItems}}
