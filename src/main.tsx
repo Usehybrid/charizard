@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import {Button, Table} from './components'
+import {Button, Select, Table} from './components'
 import {createColumnHelper} from '@tanstack/react-table'
 
 import randomIcon from './components/assets/check.svg'
@@ -11,7 +11,7 @@ const styles = {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  backgroundColor: 'gray',
+  backgroundColor: 'white',
   flexDir: 'column',
 }
 
@@ -341,6 +341,41 @@ function App() {
       },
     }),
   ]
+
+  const colors = [
+    {
+      label: 'Red',
+      value: 'red',
+      profileImgUrl:
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Adobe_XD_CC_icon.svg/1200px-Adobe_XD_CC_icon.svg.png',
+    },
+    {
+      label: 'Purple',
+      value: 'purple',
+      profileImgUrl:
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Adobe_XD_CC_icon.svg/1200px-Adobe_XD_CC_icon.svg.png',
+    },
+    {
+      label: 'Black',
+      value: 'black',
+      profileImgUrl:
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Adobe_XD_CC_icon.svg/1200px-Adobe_XD_CC_icon.svg.png',
+    },
+    {
+      label: 'White',
+      value: 'white',
+      profileImgUrl:
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Adobe_XD_CC_icon.svg/1200px-Adobe_XD_CC_icon.svg.png',
+    },
+    {
+      label: 'Green',
+      value: 'green',
+      profileImgUrl:
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Adobe_XD_CC_icon.svg/1200px-Adobe_XD_CC_icon.svg.png',
+    },
+  ]
+
+  const [color, setColor] = React.useState('red')
 
   return (
     <div style={styles}>

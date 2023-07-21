@@ -89,6 +89,8 @@
 
 .container .content .descriptionContainer {
   padding: 20px;
+  max-height: calc(100vh - (1.75rem * 2));
+  overflow: scroll;
 }
 
 .container .content .footer {
@@ -103,6 +105,8 @@
   align-items: center;
   justify-content: flex-end;
   gap: 12px;
+
+  background: var(--white);
 }
 
 .container .content .footer .footerBtnContainer {

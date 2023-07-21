@@ -36,7 +36,7 @@ export const colourStyles: StylesConfig<any> = {
       display: 'flex',
       alignItems: 'center',
       gap: '4px',
-      backgroundColor: data.profileImgUrl ? '#f5f5f8' : 'transparent',
+      backgroundColor: 'transparent',
       padding: data.profileImgUrl ? '0px 8px 0 0 !important' : '0 !important',
     }
   },
