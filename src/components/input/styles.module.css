@@ -14,7 +14,13 @@
   width: 27.7rem;
 }
 
-.inputLabel {
+.inputLabelContainer {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.inputLabelContainer .inputLabel {
   font-weight: 400;
   font-size: 1.08rem;
   line-height: 1.54rem;
@@ -26,9 +32,9 @@
   gap: 4px;
 }
 
-.inputLabel .infoCircleSvg {
-  width: 20px;
-  height: 20px;
+.inputLabelContainer .infoCircleSvg {
+  width: 16px;
+  height: 16px;
 }
 
 .inputLabel.required::after {
