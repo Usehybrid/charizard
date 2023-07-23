@@ -46,16 +46,18 @@ export function InputLabel({
   infoText,
 }: InputLabelProps) {
   return (
-    <label
-      htmlFor={htmlFor}
-      className={clsx(classes.inputLabel, customClasses, required && classes.required)}
-      style={customStyles}
-      {...restprops}
-    >
-      <span>{children}</span>
+    <div className={classes.inputLabelContainer}>
+      <label
+        htmlFor={htmlFor}
+        className={clsx(classes.inputLabel, customClasses, required && classes.required)}
+        style={customStyles}
+        {...restprops}
+      >
+        <span>{children}</span>
+      </label>
       {infoText && (
         <Popover>
-          <PopoverTrigger openOnHover={false}>
+          <PopoverTrigger>
             <SVG path={infoCircleIcon} svgClassName={classes.infoCircleSvg} />
           </PopoverTrigger>
           <PopoverContent>
@@ -63,7 +65,7 @@ export function InputLabel({
           </PopoverContent>
         </Popover>
       )}
-    </label>
+    </div>
   )
 }
 

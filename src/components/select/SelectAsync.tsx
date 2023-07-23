@@ -10,6 +10,7 @@ import {
   DropdownIndicator,
   MultiValueLabel,
   MultiValueRemove,
+  SingleValue,
 } from './Common'
 import {SelectActionMeta, SelectMultiValue, SelectSingleValue, SelectValue} from './types'
 
@@ -18,9 +19,7 @@ interface SelectAsyncProps {
    * The options to be displayed in the select
    * should atleast have {label: string, value: string}
    */
-  options: (
-    inputValue: string,
-  ) => Promise<Array<{
+  options: (inputValue: string) => Promise<Array<{
     label: string | ''
     value: string | ''
     profileImgUrl?: string | null
@@ -132,7 +131,14 @@ export function SelectAsync({
         className={clsx(className)}
         isSearchable={isSearchable}
         styles={{...colourStyles, ...getControlStyles(errorMsg), ...selectStyles}}
-        components={{Option, MultiValueLabel, MultiValueRemove, DropdownIndicator, ClearIndicator}}
+        components={{
+          Option,
+          MultiValueLabel,
+          MultiValueRemove,
+          DropdownIndicator,
+          ClearIndicator,
+          SingleValue,
+        }}
         isDisabled={isDisabled}
         onChange={(newValue: SelectValue, actionMeta: SelectActionMeta) => {
           if (isMulti) {
