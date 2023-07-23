@@ -75,6 +75,9 @@ export function Drawer({
         ;(
           descriptionRef.current as HTMLDivElement
         ).style.maxHeight = `calc(100vh - (1.75rem * 2) - ${footerRef.current?.clientHeight}px)`
+        ;(
+          descriptionRef.current as HTMLDivElement
+        ).style.height = `calc(100vh - (1.75rem * 2) - ${footerRef.current?.clientHeight}px)`
       }
     }, 0)
 
