@@ -38,9 +38,9 @@
     "clsx": "^1.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-infinite-scroll-component": "^6.1.0",
     "react-inlinesvg": "^3.0.2",
     "react-select": "^5.7.3",
-    "react-infinite-scroll-component": "^6.1.0",
     "use-deep-compare-effect": "^1.8.1"
   },
   "devDependencies": {
@@ -62,5 +62,8 @@
     "vite": "^4.4.4",
     "vite-plugin-dts": "^2.3.0",
     "vite-plugin-libcss": "^1.1.1"
+  },
+  "dependencies": {
+    "@zag-js/tooltip": "^0.12.0"
   }
 }
