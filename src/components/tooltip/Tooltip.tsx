@@ -42,6 +42,7 @@ export function Tooltip({
       closeDelay,
       positioning: {
         placement,
+        gutter: 3,
       },
     }),
   )
