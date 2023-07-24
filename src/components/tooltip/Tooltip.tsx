@@ -43,7 +43,6 @@ export function Tooltip({
       positioning: {
         placement,
       },
-      open: true,
     }),
   )
   const api = tooltip.connect(state, send, normalizeProps)
