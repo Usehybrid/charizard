@@ -1,33 +1,55 @@
 import * as React from 'react'
 
-import Filter from './Filter'
+import TableFilter from './TableFilter'
 import filterLines from '../../assets/filter-lines.svg'
 import classes from './styles.module.css'
-import {FilterOptions, SetFilterOptions} from '../types'
+import {FilterConfig, InternalTableFilters, SetInternalTableFilters} from '../types'
+import useDeepCompareEffect from 'use-deep-compare-effect'
 
 interface TableFiltersProps {
-  filterOptions: FilterOptions[]
-  setFilterOptions: SetFilterOptions
-  defaultFilterOptions: FilterOptions[]
+  filterConfig: FilterConfig
+  tableFilters: InternalTableFilters[]
+  setTableFilters: SetInternalTableFilters
 }
 
 export default function TableFilters({
-  filterOptions,
-  setFilterOptions,
-  defaultFilterOptions,
+  filterConfig,
+  tableFilters,
+  setTableFilters,
 }: TableFiltersProps) {
-  if (!filterOptions || !filterOptions.length) return null
+  const {filters, setFilters, isLoading, isError} = filterConfig
+  if (!filters || !filters.length) return null
+
+  useDeepCompareEffect(() => {
+    console.log('extra')
+
+    console.log(tableFilters)
+
+    tableFilters.forEach(filter => {
+      if (!filter.values.length) return
+      let stringifiedQuery = ''
+
+      filter.values.forEach(value => {
+        // stringifiedQuery += `${filter.key}=${value}`
+        setFilters({filterType: filter.key, value})
+      })
+    })
+  }, [tableFilters])
+
+  if (isError) return <div className={classes.filtersInfo}>Error getting filters</div>
+
+  if (isLoading) return <div className={classes.filtersInfo}>Getting filters...</div>
 
   return (
     <div className={classes.filters}>
       <img src={filterLines} alt="filter lines" className={classes.filterIcon} />
-      {filterOptions.map((filter, idx) => (
-        <Filter
+      {filters.map((filter, idx) => (
+        <TableFilter
           key={filter.id}
           idx={idx}
           filter={filter}
-          setFilterOptions={setFilterOptions}
-          defaultFilterOptions={defaultFilterOptions}
+          tableFilters={tableFilters}
+          setTableFilters={setTableFilters}
         />
       ))}
     </div>

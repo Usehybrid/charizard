@@ -355,7 +355,12 @@ function App() {
           setSearch,
           placeholder: 'Search by software name',
         }}
-        filterConfig={{defaultFilterOptions}}
+        filterConfig={{
+          filters,
+          isLoading: false,
+          isError: false,
+          setFilters: () => {},
+        }}
         sortConfig={{
           sortBy: '',
           setSortBy: () => {},
@@ -439,3 +444,16 @@ export const filters = [
     ],
   },
 ]
+
+const filtersPlaceholder = [
+  {
+    id: 'so',
+    name: 'Software Owner',
+  },
+  {
+    id: 'sn',
+    name: 'Software Name',
+  },
+]
+
+const tableFilters = [{key: 'software.owners', values: []}]

@@ -1,18 +1,20 @@
 import * as checkbox from '@zag-js/checkbox'
 import classes from './styles.module.css'
 import {useMachine, normalizeProps} from '@zag-js/react'
-import {SetFilterOptions} from '../types'
+import {InternalTableFilters, SetInternalTableFilters} from '../types'
 
 export default function FilterCheckbox({
   label,
   value,
-  setFilterOptions,
+  setTableFilters,
   checked,
+  filterKey,
 }: {
   label: string
   value: string
-  setFilterOptions: SetFilterOptions
+  setTableFilters: SetInternalTableFilters
   checked: boolean
+  filterKey: string
 }) {
   const [state, send] = useMachine(
     checkbox.machine({
@@ -20,16 +22,19 @@ export default function FilterCheckbox({
       name: label,
       checked: checked,
       onChange: ({checked}) => {
-        setFilterOptions(state => {
-          const newState = [...state]
-          newState.forEach(obj => {
-            obj.options.forEach(option => {
-              if (option.value === value) {
-                option.checked = Boolean(checked)
-                return
+        // sync internal table state
+        setTableFilters(prevState => {
+          const newState = prevState.map(obj => {
+            if (obj.key === filterKey) {
+              if (checked) {
+                return {...obj, values: [...obj.values, value]}
+              } else {
+                return {...obj, values: obj.values.filter(objValue => objValue !== value)}
               }
-            })
+            }
+            return obj
           })
+
           return newState
         })
       },

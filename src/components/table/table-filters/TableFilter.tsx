@@ -1,23 +1,28 @@
 import * as React from 'react'
 import * as menu from '@zag-js/menu'
 import clsx from 'clsx'
-import {SVG} from '../../svg'
 import FilterCheckbox from './FilterCheckbox'
 import chevronDown from '../../assets/chevron-down.svg'
 import resetIcon from '../../assets/rotate-left.svg'
 import classes from './styles.module.css'
 import {useMachine, normalizeProps} from '@zag-js/react'
+import {SVG} from '../../svg'
 import {Search} from '../../search'
-import {FilterOptions, SetFilterOptions} from '../types'
+import type {FilterOptions, InternalTableFilters} from '../types'
 
-interface FilterProps {
-  filter: FilterOptions
-  setFilterOptions: SetFilterOptions
-  defaultFilterOptions: FilterOptions[]
+interface TableFilterProps {
   idx: number
+  filter: FilterOptions
+  tableFilters: InternalTableFilters[]
+  setTableFilters: React.Dispatch<React.SetStateAction<InternalTableFilters[]>>
 }
 
-export default function Filter({filter, setFilterOptions, defaultFilterOptions, idx}: FilterProps) {
+export default function TableFilter({
+  idx,
+  filter,
+  tableFilters,
+  setTableFilters,
+}: TableFilterProps) {
   const [search, setSearch] = React.useState('')
   const [state, send] = useMachine(
     menu.machine({
@@ -31,15 +36,31 @@ export default function Filter({filter, setFilterOptions, defaultFilterOptions, 
     option.name.toLowerCase().includes(search.toLowerCase()),
   )
 
-  const selectedFilters = filter.options.reduce((acc, curr) => (curr.checked ? acc + 1 : acc), 0)
+  // const selectedFilters = filter.options.reduce((acc, curr) => (curr.checked ? acc + 1 : acc), 0)
+  const selectedFilters = 0
 
   const handleResetFilter = () => {
-    setFilterOptions(state => {
-      const newState = [...state]
-      newState[idx] = defaultFilterOptions[idx]
-      return newState
-    })
+    // setFilterOptions(state => {
+    //   const newState = [...state]
+    //   newState[idx] = defaultFilterOptions[idx]
+    //   return newState
+    // })
     api.close()
+  }
+
+  // console.log(tableFilters)
+
+  const getIsChecked = (value: string) => {
+    let isChecked = false
+    tableFilters.forEach(filter => {
+      filter.values.forEach(obj => {
+        if (obj.includes(value)) {
+          isChecked = true
+          return
+        }
+      })
+    })
+    return isChecked
   }
 
   return (
@@ -80,8 +101,9 @@ export default function Filter({filter, setFilterOptions, defaultFilterOptions, 
                     <FilterCheckbox
                       label={option.name}
                       value={option.value}
-                      setFilterOptions={setFilterOptions}
-                      checked={option.checked}
+                      filterKey={filter.key}
+                      setTableFilters={setTableFilters}
+                      checked={getIsChecked(option.value)}
                     />
                   </div>
                 ))

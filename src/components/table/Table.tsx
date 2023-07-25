@@ -10,7 +10,7 @@ import {
   getPaginationRowModel,
 } from '@tanstack/react-table'
 import {Search} from '../search'
-import {FilterOptions} from './types'
+import {FilterConfig, InternalTableFilters} from './types'
 import {TableCheckbox} from './table-columns'
 import {Button} from '../button'
 import type {SortingState} from '@tanstack/react-table'
@@ -29,6 +29,7 @@ export interface TableProps {
   }
   loaderConfig: {
     fetchingData: boolean
+    isErrorFetchingData?: boolean
     text?: string
   }
   searchConfig?: {
@@ -43,9 +44,7 @@ export interface TableProps {
     setSortOrd: any
     sortMap: Record<string, string>
   }
-  filterConfig?: {
-    defaultFilterOptions?: FilterOptions[]
-  }
+  filterConfig?: FilterConfig
   totalText: string
 }
 
@@ -62,9 +61,11 @@ export function Table({
   totalText,
 }: TableProps) {
   const [sorting, setSorting] = React.useState<SortingState>([])
-  const [filterOptions, setFilterOptions] = React.useState<FilterOptions[]>(
-    filterConfig?.defaultFilterOptions ?? [],
-  )
+  // table filters
+  const [tableFilters, setTableFilters] = React.useState<InternalTableFilters[]>(() => {
+    if (!filterConfig?.filters?.length) return []
+    return filterConfig.filters.map(filter => ({key: filter.key, values: []}))
+  })
   // used for checkbox
   const [selectAll, setSelectAll] = React.useState(false)
   // const [currSelectedRows, setCurrSelectedRows] = React.useState([])
@@ -74,8 +75,6 @@ export function Table({
   useDeepCompareEffect(() => {
     if (!sortConfig || !sorting.length) return
     const {setSortOrd, setSortBy, sortMap} = sortConfig
-    console.log(sorting, sortMap)
-
     setSortBy(sortMap[sorting[0].id])
     setSortOrd(sorting[0].desc ? 'desc' : 'asc')
     return () => {
@@ -127,8 +126,8 @@ export function Table({
     manualSorting: true,
     onSortingChange: setSorting,
     manualPagination: true,
+    manualFiltering: true,
     getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
   })
 
   return (
@@ -136,21 +135,24 @@ export function Table({
       <div className={classes.header}>
         <div className={classes.meta}>
           <div className={classes.total}>{totalText}</div>
-
-          <TableFilters
-            filterOptions={filterOptions}
-            setFilterOptions={setFilterOptions}
-            defaultFilterOptions={filterConfig?.defaultFilterOptions ?? []}
-          />
+          {filterConfig && (
+            <TableFilters
+              filterConfig={filterConfig}
+              tableFilters={tableFilters}
+              setTableFilters={setTableFilters}
+            />
+          )}
         </div>
-        <div className={classes.search}>
-          <Search
-            id="table-search"
-            search={searchConfig?.search}
-            setSearch={searchConfig?.setSearch}
-            placeholder={searchConfig?.placeholder}
-          />
-        </div>
+        {searchConfig && (
+          <div className={classes.search}>
+            <Search
+              id="table-search"
+              search={searchConfig.search}
+              setSearch={searchConfig.setSearch}
+              placeholder={searchConfig.placeholder}
+            />
+          </div>
+        )}
       </div>
 
       <div className={classes.selectedActions}></div>
@@ -159,38 +161,58 @@ export function Table({
         <thead className={clsx(classes.tableHead, isCheckboxActions && classes.tableHead2)}>
           {table.getHeaderGroups().map(headerGroup => (
             <tr key={headerGroup.id} className={classes.tableRow}>
-              {headerGroup.headers.map(header => (
-                <th
-                  key={header.id}
-                  className={clsx(classes.tableHeader)}
-                  onClick={header.column.getToggleSortingHandler()}
-                >
-                  {header.isPlaceholder
-                    ? null
-                    : flexRender(header.column.columnDef.header, header.getContext())}
+              {headerGroup.headers.map(header => {
+                return (
+                  <th
+                    key={header.id}
+                    className={clsx(classes.tableHeader)}
+                    onClick={header.column.getToggleSortingHandler()}
+                  >
+                    {header.isPlaceholder
+                      ? null
+                      : flexRender(
+                          <div
+                            style={{
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                            }}
+                          >
+                            <span>{header.column.columnDef.header as React.ReactNode}</span>
 
-                  {/* Add a sort direction indicator */}
+                            {{
+                              asc: (
+                                <SVG
+                                  path={chevronUp}
+                                  customSvgStyles={{width: '18px', height: '18px'}}
+                                  customSpanStyles={{
+                                    width: '20px',
+                                    height: '20px',
+                                    marginLeft: '3px',
+                                  }}
+                                />
+                              ),
+                              desc: (
+                                <SVG
+                                  path={chevronDown}
+                                  customSvgStyles={{width: '18px', height: '18px'}}
+                                  customSpanStyles={{
+                                    width: '20px',
+                                    height: '20px',
+                                    marginLeft: '3px',
+                                  }}
+                                />
+                              ),
+                            }[header.column.getIsSorted() as string] ?? null}
+                          </div>,
 
-                  {{
-                    // asc: (
-                    //   <SVG
-                    //     path={chevronUp}
-                    //     customSvgStyles={{width: '18px', height: '18px'}}
-                    //     customSpanStyles={{width: '20px', height: '20px', marginLeft: '3px'}}
-                    //   />
-                    // ),
-                    // desc: (
-                    //   <SVG
-                    //     path={chevronDown}
-                    //     customSvgStyles={{width: '18px', height: '18px'}}
-                    //     customSpanStyles={{width: '20px', height: '20px', marginLeft: '3px'}}
-                    //   />
-                    // ),
-                    asc: ' 🔼',
-                    desc: ' 🔽',
-                  }[header.column.getIsSorted() as string] ?? null}
-                </th>
-              ))}
+                          header.getContext(),
+                        )}
+
+                    {/* Add a sort direction indicator */}
+                  </th>
+                )
+              })}
             </tr>
           ))}
         </thead>
