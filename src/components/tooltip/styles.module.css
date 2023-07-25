@@ -1,0 +1,19 @@
+.trigger {
+  background: transparent;
+  outline: none;
+  border: none;
+}
+
+.content {
+  padding: 8px 12px;
+  border-radius: 4px;
+  position: relative;
+  background: #2e2b40;
+  color: #ffffff;
+}
+
+.arrow {
+  --arrow-size: 6px;
+  --arrow-background: #2e2b40;
+  transition: 0.3s all ease-in-out;
+}

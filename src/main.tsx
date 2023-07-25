@@ -4,6 +4,7 @@ import {Button, Select, Table} from './components'
 import {createColumnHelper} from '@tanstack/react-table'
 
 import randomIcon from './components/assets/check.svg'
+import {Tooltip, TooltipContent, TooltipTrigger} from './components/tooltip'
 
 const styles = {
   width: '100%',
@@ -345,7 +346,7 @@ function App() {
 
   return (
     <div style={styles}>
-      <Table
+      {/* <Table
         data={data}
         loaderConfig={{fetchingData: false, text: 'Getting softwares...'}}
         columns={columns}
@@ -368,7 +369,12 @@ function App() {
         isDropdownActions={true}
         actionsConfig={{menuItems}}
         totalText={`${metaData.total_items} softwares`}
-      />
+      /> */}
+
+      <Tooltip tooltipId="tooltip">
+        <TooltipTrigger>trigger</TooltipTrigger>
+        <TooltipContent>content</TooltipContent>
+      </Tooltip>
 
       {/* <div style={{display: 'flex', alignItems: 'center'}}>
         <Button.MenuButton menuItems={menuItems} size="sm">

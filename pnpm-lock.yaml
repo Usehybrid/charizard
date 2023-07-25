@@ -29,6 +29,9 @@ dependencies:
   '@zag-js/react':
     specifier: ^0.12.0
     version: 0.12.0(react-dom@18.2.0)(react@18.2.0)
+  '@zag-js/tooltip':
+    specifier: ^0.12.0
+    version: 0.12.0
   clsx:
     specifier: ^1.2.1
     version: 1.2.1
@@ -4635,6 +4638,19 @@ packages:
     resolution: {integrity: sha512-XNfiV1il90ZOD2ysANc7z6n0LWYo9v5a9lQYTyLHtFOpnzjOPnuCyvU0WxwTLL7oyL8MabCiYunKyCtYq04ekA==}
     dependencies:
       '@zag-js/dom-query': 0.12.0
+    dev: false
+
+  /@zag-js/tooltip@0.12.0:
+    resolution: {integrity: sha512-PC5cQqgKTEqyCY6AKht71r0p/mvbxcJevLRhQ0cQR5H1+7mArgpQQJmWjuK9X4gTFkm31MohtaqE0TfNJvGydQ==}
+    dependencies:
+      '@zag-js/anatomy': 0.12.0
+      '@zag-js/core': 0.12.0
+      '@zag-js/dom-event': 0.12.0
+      '@zag-js/dom-query': 0.12.0
+      '@zag-js/popper': 0.12.0
+      '@zag-js/types': 0.12.0
+      '@zag-js/utils': 0.12.0
+      '@zag-js/visually-hidden': 0.12.0
     dev: false
 
   /@zag-js/types@0.12.0:
