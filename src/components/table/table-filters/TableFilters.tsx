@@ -28,19 +28,19 @@ export default function TableFilters({filterConfig}: TableFiltersProps) {
     shallow,
   )
 
-  // React.useEffect(() => {
-  //   if (!filters?.length || isLoading) return
-  //   setDefaultFilters(filters?.map(filter => ({key: filter.key, values: []})) || [])
-  // }, [isLoading])
-
-  useDeepCompareEffect(() => {
+  React.useEffect(() => {
     if (!filters?.length || isLoading) return
-
     setDefaultFilters(filters?.map(filter => ({key: filter.key, values: []})) || [])
-    return () => {
-      // setSortOrd('')
-    }
-  }, [filters])
+  }, [filters?.length, isLoading])
+
+  // useDeepCompareEffect(() => {
+  //   if (!filters?.length || isLoading) return
+
+  //   setDefaultFilters(filters?.map(filter => ({key: filter.key, values: []})) || [])
+  //   return () => {
+  //     // setSortOrd('')
+  //   }
+  // }, [filters])
 
   // useDeepCompareEffect(() => {
   //   if (!tableFilters.length) return
