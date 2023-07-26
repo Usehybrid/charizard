@@ -19,7 +19,7 @@ export interface ButtonProps {
   disabled?: boolean
   onClick?: React.MouseEventHandler<HTMLButtonElement>
   type?: 'button' | 'submit' | 'reset'
-  size?: 'sm' | 'md'
+  size?: 'sm' | 'md' | 'adapt'
 }
 
 // 1. Button => primary, secondary, ghost
@@ -43,6 +43,7 @@ export function Button({
         variant === 'ghost' && classes.btnGhost,
         variant === 'danger' && classes.btnDanger,
         size === 'sm' && classes.btnSm,
+        size === 'adapt' && classes.btnAdapt,
         disabled && classes.disabled,
       )}
       disabled={disabled}
