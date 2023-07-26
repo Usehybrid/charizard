@@ -26,9 +26,9 @@ export default function TableFilters({filterConfig}: TableFiltersProps) {
   )
 
   React.useEffect(() => {
-    if (!filters?.length) return
+    if (!filters?.length || isLoading) return
     setDefaultFilters(filters?.map(filter => ({key: filter.key, values: []})) || [])
-  }, [])
+  }, [isLoading])
 
   useDeepCompareEffect(() => {
     if (!tableFilters.length) return
