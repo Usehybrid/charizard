@@ -15,6 +15,9 @@ export default function TableFilters({filterConfig}: TableFiltersProps) {
   const {filters, isLoading, isError, filterDispatch} = filterConfig
 
   const tableFilters = useTableStore(s => s.filters)
+
+  console.log(tableFilters, 'hybr1d-ui')
+
   const {setDefaultFilters, addFilters, removeFilters, resetFilters} = useTableStore(
     s => ({
       setDefaultFilters: s.setDefaultFilters,
@@ -25,17 +28,26 @@ export default function TableFilters({filterConfig}: TableFiltersProps) {
     shallow,
   )
 
-  React.useEffect(() => {
-    if (!filters?.length || isLoading) return
-    setDefaultFilters(filters?.map(filter => ({key: filter.key, values: []})) || [])
-  }, [isLoading])
+  // React.useEffect(() => {
+  //   if (!filters?.length || isLoading) return
+  //   setDefaultFilters(filters?.map(filter => ({key: filter.key, values: []})) || [])
+  // }, [isLoading])
 
   useDeepCompareEffect(() => {
-    if (!tableFilters.length) return
+    if (!filters?.length || isLoading) return
+
+    setDefaultFilters(filters?.map(filter => ({key: filter.key, values: []})) || [])
     return () => {
       // setSortOrd('')
     }
-  }, [tableFilters])
+  }, [filters])
+
+  // useDeepCompareEffect(() => {
+  //   if (!tableFilters.length) return
+  //   return () => {
+  //     // setSortOrd('')
+  //   }
+  // }, [tableFilters])
 
   if (!filters || !filters.length) return null
 
