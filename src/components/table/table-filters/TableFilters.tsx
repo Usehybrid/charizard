@@ -18,23 +18,18 @@ export default function TableFilters({
   setTableFilters,
 }: TableFiltersProps) {
   const {filters, setFilters, isLoading, isError} = filterConfig
-  if (!filters || !filters.length) return null
 
   useDeepCompareEffect(() => {
-    console.log('extra')
-
-    console.log(tableFilters)
-
+    if (!setFilters) return
     tableFilters.forEach(filter => {
       if (!filter.values.length) return
-      let stringifiedQuery = ''
-
       filter.values.forEach(value => {
-        // stringifiedQuery += `${filter.key}=${value}`
         setFilters({filterType: filter.key, value})
       })
     })
   }, [tableFilters])
+
+  if (!filters || !filters.length) return null
 
   if (isError) return <div className={classes.filtersInfo}>Error getting filters</div>
 
