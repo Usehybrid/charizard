@@ -2,9 +2,11 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import {Button, Select, Table} from './components'
 import {createColumnHelper} from '@tanstack/react-table'
+import {shallow} from 'zustand/shallow'
 
 import randomIcon from './components/assets/check.svg'
 import {Tooltip, TooltipContent, TooltipTrigger} from './components/tooltip'
+import {SOFTWARE_ACTION_TYPES, useSoftwareStore} from './test'
 
 const styles = {
   width: '100%',
@@ -223,73 +225,6 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   </React.StrictMode>,
 )
 
-const defaultFilterOptions = [
-  {
-    id: 'software-owner',
-    name: 'Software Owner',
-    config: {
-      hideSearch: false,
-    },
-    options: [
-      {
-        name: 'Owner 1',
-        value: 'o1',
-        checked: false,
-      },
-      {
-        name: 'Figma',
-        value: '123-156a',
-        checked: false,
-      },
-      {
-        name: 'Figma1',
-        value: '123-156a1',
-        checked: false,
-      },
-      {
-        name: 'Figma a',
-        value: '123-156aadf',
-        checked: false,
-      },
-      {
-        name: 'Figma b',
-        value: '123-156aadf12',
-        checked: false,
-      },
-      {
-        name: 'Figma c',
-        value: '123-156aadf21',
-        checked: false,
-      },
-      {
-        name: 'Figma d',
-        value: '123-156aadf121',
-        checked: false,
-      },
-      {
-        name: 'Figma e',
-        value: '123-156aadf214',
-        checked: false,
-      },
-    ],
-  },
-
-  // {
-  //   id: 'software-name',
-  //   name: 'Software Name',
-  //   config: {
-  //     // hideSearch: true,
-  //   },
-  //   options: [
-  //     {
-  //       name: 'Maximum',
-  //       value: '123-156afdafd-iohfuitg',
-  //       checked: false,
-  //     },
-  //   ],
-  // },
-]
-
 const getFullName = (owner: any) => {
   if (!owner) return 'N/A'
 
@@ -344,6 +279,8 @@ function App() {
     }),
   ]
 
+  const tableFilters = useSoftwareStore(s => s.filters)
+
   return (
     <div style={styles}>
       <Table
@@ -359,7 +296,12 @@ function App() {
           filters,
           isLoading: false,
           isError: false,
-          setFilters: () => {},
+          filterDispatch: () => {},
+          // tableFilters,
+          // setDefaultFilters: setDefaultFilters,
+          // addFilters: addFilters,
+          // removeFilters: removeFilters,
+          // resetFilters: resetFilters,
         }}
         sortConfig={{
           sortBy: '',
@@ -397,14 +339,6 @@ function App() {
   )
 }
 
-const softwareListMenuItems = [
-  {
-    label: 'Archived softwares',
-    iconSrc: randomIcon,
-    onClick: () => {},
-  },
-]
-
 const metaData = {
   total_items: 6,
   page_no: 0,
@@ -415,7 +349,7 @@ export const filters = [
   {
     id: 'software-owner',
     name: 'Software Owner',
-    key: 'software.owner',
+    key: 'filter_software_owners',
     options: [
       {
         name: 'Owner 1',
@@ -435,7 +369,7 @@ export const filters = [
   {
     id: 'software-name',
     name: 'Software Name',
-    key: 'software.name',
+    key: 'filter_software_name',
     options: [
       {
         name: 'Maximum',
@@ -444,16 +378,3 @@ export const filters = [
     ],
   },
 ]
-
-const filtersPlaceholder = [
-  {
-    id: 'so',
-    name: 'Software Owner',
-  },
-  {
-    id: 'sn',
-    name: 'Software Name',
-  },
-]
-
-const tableFilters = [{key: 'software.owners', values: []}]

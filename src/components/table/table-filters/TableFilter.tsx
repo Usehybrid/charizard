@@ -2,26 +2,34 @@ import * as React from 'react'
 import * as menu from '@zag-js/menu'
 import clsx from 'clsx'
 import FilterCheckbox from './FilterCheckbox'
+import FilterTooltip from './FilterTooltip'
 import chevronDown from '../../assets/chevron-down.svg'
 import resetIcon from '../../assets/rotate-left.svg'
 import classes from './styles.module.css'
 import {useMachine, normalizeProps} from '@zag-js/react'
 import {SVG} from '../../svg'
 import {Search} from '../../search'
+import {TableStore} from '../store'
 import type {FilterOptions, InternalTableFilters} from '../types'
 
 interface TableFilterProps {
-  idx: number
   filter: FilterOptions
-  tableFilters: InternalTableFilters[]
-  setTableFilters: React.Dispatch<React.SetStateAction<InternalTableFilters[]>>
+  tableFilters: TableStore['filters']
+  tableFilter: InternalTableFilters
+  addFilters: TableStore['addFilters']
+  removeFilters: TableStore['removeFilters']
+  resetFilters: (filterKey: string) => void
+  filterDispatch: (value: any) => void
 }
 
 export default function TableFilter({
-  idx,
   filter,
   tableFilters,
-  setTableFilters,
+  tableFilter,
+  addFilters,
+  removeFilters,
+  resetFilters,
+  filterDispatch,
 }: TableFilterProps) {
   const [search, setSearch] = React.useState('')
   const [state, send] = useMachine(
@@ -36,19 +44,12 @@ export default function TableFilter({
     option.name.toLowerCase().includes(search.toLowerCase()),
   )
 
-  // const selectedFilters = filter.options.reduce((acc, curr) => (curr.checked ? acc + 1 : acc), 0)
-  const selectedFilters = 0
+  const selectedFilters = tableFilter?.values.length
 
   const handleResetFilter = () => {
-    // setFilterOptions(state => {
-    //   const newState = [...state]
-    //   newState[idx] = defaultFilterOptions[idx]
-    //   return newState
-    // })
+    resetFilters(tableFilter?.key)
     api.close()
   }
-
-  // console.log(tableFilters)
 
   const getIsChecked = (value: string) => {
     let isChecked = false
@@ -66,10 +67,15 @@ export default function TableFilter({
   return (
     <div>
       <button
-        className={clsx('reset-btn', classes.filter, api.isOpen && classes.filterActive)}
+        className={clsx('hybr1d-ui-reset-btn', classes.filter, api.isOpen && classes.filterActive)}
         {...api.triggerProps}
       >
-        <div className={classes.filterCol}>{filter.name}</div>
+        <FilterTooltip
+          filter={filter}
+          tableFilter={tableFilter}
+          selectedFilters={selectedFilters}
+        />
+        {/* <div className={classes.filterCol}>{filter.name}</div> */}
         {selectedFilters !== 0 && <span className={classes.totalSelected}>{selectedFilters}</span>}
         <img src={chevronDown} alt="dropdown" className={classes.filterIcon2} />
       </button>
@@ -102,8 +108,10 @@ export default function TableFilter({
                       label={option.name}
                       value={option.value}
                       filterKey={filter.key}
-                      setTableFilters={setTableFilters}
+                      addFilters={addFilters}
+                      removeFilters={removeFilters}
                       checked={getIsChecked(option.value)}
+                      filterDispatch={filterDispatch}
                     />
                   </div>
                 ))
@@ -113,7 +121,10 @@ export default function TableFilter({
             <div className={classes.footer}>
               <div className={classes.selectedFilters}>{selectedFilters} selected</div>
 
-              <button className={clsx('reset-btn', classes.resetBtn)} onClick={handleResetFilter}>
+              <button
+                className={clsx('hybr1d-ui-reset-btn', classes.resetBtn)}
+                onClick={handleResetFilter}
+              >
                 <SVG path={resetIcon} svgClassName={classes.resetIcon} />
                 Reset
               </button>

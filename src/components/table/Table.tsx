@@ -1,23 +1,18 @@
 import * as React from 'react'
+import useDeepCompareEffect from 'use-deep-compare-effect'
 import clsx from 'clsx'
 import TableFilters from './table-filters'
 import TableLoader from './table-loader'
-import classes from './styles.module.css'
-import {
-  useReactTable,
-  getCoreRowModel,
-  flexRender,
-  getPaginationRowModel,
-} from '@tanstack/react-table'
-import {Search} from '../search'
-import {FilterConfig, InternalTableFilters} from './types'
-import {TableCheckbox} from './table-columns'
-import {Button} from '../button'
-import type {SortingState} from '@tanstack/react-table'
-import useDeepCompareEffect from 'use-deep-compare-effect'
-import {SVG} from '../svg'
 import chevronDown from '../assets/chevron-down.svg'
 import chevronUp from '../assets/chevron-up.svg'
+import classes from './styles.module.css'
+import {useReactTable, getCoreRowModel, flexRender} from '@tanstack/react-table'
+import {Search} from '../search'
+import {Button} from '../button'
+import {SVG} from '../svg'
+import {TableCheckbox} from './table-columns'
+import type {SortingState} from '@tanstack/react-table'
+import type {FilterConfig} from './types'
 
 export interface TableProps {
   data: any
@@ -61,11 +56,6 @@ export function Table({
   totalText,
 }: TableProps) {
   const [sorting, setSorting] = React.useState<SortingState>([])
-  // table filters
-  const [tableFilters, setTableFilters] = React.useState<InternalTableFilters[]>(() => {
-    if (!filterConfig?.filters?.length) return []
-    return filterConfig.filters.map(filter => ({key: filter.key, values: []}))
-  })
   // used for checkbox
   const [selectAll, setSelectAll] = React.useState(false)
   // const [currSelectedRows, setCurrSelectedRows] = React.useState([])
@@ -135,15 +125,9 @@ export function Table({
       <div className={classes.header}>
         <div className={classes.meta}>
           <div className={classes.total}>{totalText}</div>
-          {filterConfig && (
-            <TableFilters
-              filterConfig={filterConfig}
-              tableFilters={tableFilters}
-              setTableFilters={setTableFilters}
-            />
-          )}
+          {typeof filterConfig === 'object' && <TableFilters filterConfig={filterConfig} />}
         </div>
-        {searchConfig && (
+        {typeof searchConfig === 'object' && (
           <div className={classes.search}>
             <Search
               id="table-search"

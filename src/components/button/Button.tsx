@@ -86,7 +86,7 @@ function MenuButton({
       {isCustomTrigger ? (
         <button
           className={clsx(
-            'reset-btn',
+            'hybr1d-ui-reset-btn',
             classes.customTrigger,
             api.isOpen && classes.customTriggerActive,
           )}

@@ -2,19 +2,24 @@ import * as checkbox from '@zag-js/checkbox'
 import classes from './styles.module.css'
 import {useMachine, normalizeProps} from '@zag-js/react'
 import {InternalTableFilters, SetInternalTableFilters} from '../types'
+import {TableStore} from '../store'
 
 export default function FilterCheckbox({
   label,
   value,
-  setTableFilters,
+  addFilters,
+  removeFilters,
   checked,
   filterKey,
+  filterDispatch,
 }: {
   label: string
   value: string
-  setTableFilters: SetInternalTableFilters
   checked: boolean
   filterKey: string
+  addFilters: TableStore['addFilters']
+  removeFilters: TableStore['removeFilters']
+  filterDispatch: (value: any) => void
 }) {
   const [state, send] = useMachine(
     checkbox.machine({
@@ -23,20 +28,11 @@ export default function FilterCheckbox({
       checked: checked,
       onChange: ({checked}) => {
         // sync internal table state
-        setTableFilters(prevState => {
-          const newState = prevState.map(obj => {
-            if (obj.key === filterKey) {
-              if (checked) {
-                return {...obj, values: [...obj.values, value]}
-              } else {
-                return {...obj, values: obj.values.filter(objValue => objValue !== value)}
-              }
-            }
-            return obj
-          })
-
-          return newState
-        })
+        if (checked) {
+          addFilters(filterKey, value, filterDispatch)
+        } else {
+          removeFilters(filterKey, value, filterDispatch)
+        }
       },
     }),
   )

@@ -33,7 +33,12 @@ export function ModalHeader({
     <div {...api?.titleProps} className={clsx(classes.header, {[classes.showBorder]: showBorder})}>
       <div>{children}</div>
       {showCrossBtn && (
-        <button {...api.closeTriggerProps} type="button" onClick={api?.close} className="reset-btn">
+        <button
+          {...api.closeTriggerProps}
+          type="button"
+          onClick={api?.close}
+          className="hybr1d-ui-reset-btn"
+        >
           <SVG
             path={closeIcon}
             svgClassName={classes.closeIcon}

@@ -1,32 +1,40 @@
 import * as React from 'react'
-
-import TableFilter from './TableFilter'
 import filterLines from '../../assets/filter-lines.svg'
+import TableFilter from './TableFilter'
 import classes from './styles.module.css'
-import {FilterConfig, InternalTableFilters, SetInternalTableFilters} from '../types'
+import {shallow} from 'zustand/shallow'
+import {useTableStore} from '../store'
+import type {FilterConfig} from '../types'
 import useDeepCompareEffect from 'use-deep-compare-effect'
 
 interface TableFiltersProps {
   filterConfig: FilterConfig
-  tableFilters: InternalTableFilters[]
-  setTableFilters: SetInternalTableFilters
 }
 
-export default function TableFilters({
-  filterConfig,
-  tableFilters,
-  setTableFilters,
-}: TableFiltersProps) {
-  const {filters, setFilters, isLoading, isError} = filterConfig
+export default function TableFilters({filterConfig}: TableFiltersProps) {
+  const {filters, isLoading, isError, filterDispatch} = filterConfig
+
+  const tableFilters = useTableStore(s => s.filters)
+  const {setDefaultFilters, addFilters, removeFilters, resetFilters} = useTableStore(
+    s => ({
+      setDefaultFilters: s.setDefaultFilters,
+      addFilters: s.addFilters,
+      removeFilters: s.removeFilters,
+      resetFilters: s.resetFilters,
+    }),
+    shallow,
+  )
+
+  React.useEffect(() => {
+    if (!filters?.length) return
+    setDefaultFilters(filters?.map(filter => ({key: filter.key, values: []})) || [])
+  }, [])
 
   useDeepCompareEffect(() => {
-    if (!setFilters) return
-    tableFilters.forEach(filter => {
-      if (!filter.values.length) return
-      filter.values.forEach(value => {
-        setFilters({filterType: filter.key, value})
-      })
-    })
+    if (!tableFilters.length) return
+    return () => {
+      // setSortOrd('')
+    }
   }, [tableFilters])
 
   if (!filters || !filters.length) return null
@@ -41,10 +49,13 @@ export default function TableFilters({
       {filters.map((filter, idx) => (
         <TableFilter
           key={filter.id}
-          idx={idx}
           filter={filter}
           tableFilters={tableFilters}
-          setTableFilters={setTableFilters}
+          tableFilter={tableFilters[idx]}
+          addFilters={addFilters}
+          removeFilters={removeFilters}
+          resetFilters={resetFilters}
+          filterDispatch={filterDispatch}
         />
       ))}
     </div>

@@ -75,7 +75,7 @@ h6 {
   Reset Button
 */
 
-.reset-btn {
+.hybr1d-ui-reset-btn {
   border: none;
   margin: 0;
   padding: 0;
@@ -96,13 +96,13 @@ h6 {
   -moz-osx-font-smoothing: inherit;
 
   /* Corrects inability to style clickable `input` types in iOS */
-  -webkit-appearance: none;
+  appearance: none;
 }
 
 /*
 Base button styles
 */
-.base-btn {
+.hybr1d-ui-base-btn {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -116,27 +116,27 @@ Base button styles
 /*
 Primary button
 use this like
-<button class="reset-btn base-btn primary-btn">Primary</button>
+<button class="hybr1d-ui-reset-btn hybr1d-ui-base-btn hybr1d-ui-primary-btn">Primary</button>
 */
-.primary-btn {
+.hybr1d-ui-primary-btn {
   background: var(--iris);
   color: #ffffff;
 }
 
-.primary-btn:hover {
+.hybr1d-ui-primary-btn:hover {
   background: var(--iris-60);
 }
 
 /*
 Secondary button
 use this like
-<button class="reset-btn base-btn secondary-btn">Secondary</button>
+<button class="hybr1d-ui-reset-btn hybr1d-ui-base-btn hybr1d-ui-secondary-btn">Secondary</button>
 */
-.secondary-btn {
+.hybr1d-ui-secondary-btn {
   background: var(--slate-20);
   color: var(--text-primary);
 }
 
-.secondary-btn:hover {
+.hybr1d-ui-secondary-btn:hover {
   background: var(--slate-100);
 }

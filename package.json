@@ -35,13 +35,15 @@
     "@zag-js/popover": "^0.12.0",
     "@zag-js/popper": "^0.12.0",
     "@zag-js/react": "^0.12.0",
+    "@zag-js/tooltip": "^0.12.0",
     "clsx": "^1.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-infinite-scroll-component": "^6.1.0",
     "react-inlinesvg": "^3.0.2",
     "react-select": "^5.7.3",
-    "use-deep-compare-effect": "^1.8.1"
+    "use-deep-compare-effect": "^1.8.1",
+    "zustand": "^4.3.9"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "^7.0.27",
@@ -62,8 +64,5 @@
     "vite": "^4.4.4",
     "vite-plugin-dts": "^2.3.0",
     "vite-plugin-libcss": "^1.1.1"
-  },
-  "dependencies": {
-    "@zag-js/tooltip": "^0.12.0"
   }
 }

@@ -145,6 +145,7 @@
   font-size: 12px;
   font-weight: 500;
   line-height: 16px;
+  background-color: var(--slate-20);
 }
 
 .resetBtn:hover {
@@ -154,7 +155,8 @@
 .resetIcon {
   width: 12px;
   height: 12px;
-  color: var(--secondary);
+  /* color: var(--secondary); */
+  filter: invert(42%) sepia(91%) saturate(0%) hue-rotate(161deg) brightness(91%) contrast(93%);
 }
 
 /* checkbox */
@@ -184,4 +186,32 @@
   background-position: center;
   background-size: 10px;
   background-repeat: no-repeat;
+}
+
+/* filter tooltip */
+.filterTooltip {
+  display: inline-flex;
+  padding: 6px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+
+  border-radius: 6px;
+  background: var(--white);
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  min-width: 120px;
+}
+
+.filterValue {
+  color: var(--primary);
+  width: 100%;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  display: flex;
+  height: 24px;
+  padding: 6px 4px 6px 6px;
+  align-items: center;
+  border-radius: 4px;
+  background: var(--slate-50);
 }
