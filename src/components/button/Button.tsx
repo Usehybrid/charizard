@@ -20,6 +20,8 @@ export interface ButtonProps {
   onClick?: React.MouseEventHandler<HTMLButtonElement>
   type?: 'button' | 'submit' | 'reset'
   size?: 'sm' | 'md'
+  className?: string
+  styles?: React.CSSProperties
 }
 
 // 1. Button => primary, secondary, ghost
@@ -33,6 +35,8 @@ export function Button({
   onClick,
   type = 'button',
   size = 'md',
+  className,
+  styles,
 }: ButtonProps) {
   return (
     <button
@@ -44,10 +48,12 @@ export function Button({
         variant === 'danger' && classes.btnDanger,
         size === 'sm' && classes.btnSm,
         disabled && classes.disabled,
+        className,
       )}
       disabled={disabled}
       onClick={onClick}
       type={type}
+      style={styles}
     >
       {children}
     </button>
