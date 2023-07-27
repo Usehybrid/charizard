@@ -42,18 +42,28 @@ interface ProgressProps {
    * allow navigation of steps when user click on certain step
    */
   allowNavigationOnStepClick?: boolean
+  /**
+   * step to show skip button
+   */
+  stepToShowSkipBtn?: number
+  /**
+   * skip button text
+   */
+  skipBtnText?: string
 }
 
 export function Progress({
   steps,
   onCancelClick,
   onFinalStepClick,
+  stepToShowSkipBtn = 0,
   lastStepFooterContinueBtnText = 'Confirm',
   showSkipBtn = false,
   showHeaderBtns = false,
   showFooter = true,
   lastStepHeaderContinueBtnText = 'Finish',
   allowNavigationOnStepClick = true,
+  skipBtnText = 'Skip and continue',
 }: ProgressProps) {
   const [currentStep, setCurrentStep] = React.useState(0)
 
@@ -120,9 +130,9 @@ export function Progress({
             >
               Back
             </Button>
-            {showSkipBtn && (
+            {showSkipBtn && currentStep === stepToShowSkipBtn && (
               <Button onClick={isFinalStep ? onFinalStepClick : onContinueClick}>
-                Skip and continue
+                {skipBtnText}
               </Button>
             )}
             <Button onClick={isFinalStep ? onFinalStepClick : onContinueClick}>
