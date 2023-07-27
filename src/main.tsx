@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import {Button, Select, Table} from './components'
+import {Button, Progress, Select, Table} from './components'
 import {createColumnHelper} from '@tanstack/react-table'
 import {shallow} from 'zustand/shallow'
 
@@ -281,9 +281,16 @@ function App() {
 
   const tableFilters = useSoftwareStore(s => s.filters)
 
+  const steps = [
+    {label: 'Equipment Type', component: <>Equipment type</>},
+    {label: 'Specification', component: <>Specification</>},
+    {label: 'Finance', component: <>Finance</>},
+    {label: 'Allocation', component: <>Allocation</>},
+  ]
+
   return (
     <div style={styles}>
-      <Table
+      {/* <Table
         data={data}
         loaderConfig={{fetchingData: false, text: 'Getting softwares...'}}
         columns={columns}
@@ -316,6 +323,14 @@ function App() {
         isDropdownActions={true}
         actionsConfig={{menuItems}}
         totalText={`${metaData.total_items} softwares`}
+      /> */}
+      <Progress
+        lastStepFooterContinueBtnText="Confirm and add to inventory"
+        onCancelClick={() => {}}
+        steps={steps}
+        showHeaderBtns
+        onFinalStepClick={() => {}}
+        showFooter={false}
       />
 
       {/* <Tooltip tooltipId="tooltip">
