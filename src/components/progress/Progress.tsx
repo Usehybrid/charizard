@@ -38,6 +38,9 @@ interface ProgressProps {
    * text to show on header continue button when the step is last step
    */
   lastStepHeaderContinueBtnText?: string
+  /**
+   * allow navigation of steps when user click on certain step
+   */
   allowNavigationOnStepClick?: boolean
 }
 
