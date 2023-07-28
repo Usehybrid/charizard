@@ -5,7 +5,6 @@ import classes from './styles.module.css'
 import {shallow} from 'zustand/shallow'
 import {useTableStore} from '../store'
 import type {FilterConfig} from '../types'
-import useDeepCompareEffect from 'use-deep-compare-effect'
 
 interface TableFiltersProps {
   filterConfig: FilterConfig
@@ -15,8 +14,6 @@ export default function TableFilters({filterConfig}: TableFiltersProps) {
   const {filters, isLoading, isError, filterDispatch} = filterConfig
 
   const tableFilters = useTableStore(s => s.filters)
-
-  console.log(tableFilters, 'hybr1d-ui')
 
   const {setDefaultFilters, addFilters, removeFilters, resetFilters} = useTableStore(
     s => ({
@@ -32,22 +29,6 @@ export default function TableFilters({filterConfig}: TableFiltersProps) {
     if (!filters?.length || isLoading) return
     setDefaultFilters(filters?.map(filter => ({key: filter.key, values: []})) || [])
   }, [filters?.length, isLoading])
-
-  // useDeepCompareEffect(() => {
-  //   if (!filters?.length || isLoading) return
-
-  //   setDefaultFilters(filters?.map(filter => ({key: filter.key, values: []})) || [])
-  //   return () => {
-  //     // setSortOrd('')
-  //   }
-  // }, [filters])
-
-  // useDeepCompareEffect(() => {
-  //   if (!tableFilters.length) return
-  //   return () => {
-  //     // setSortOrd('')
-  //   }
-  // }, [tableFilters])
 
   if (!filters || !filters.length) return null
 

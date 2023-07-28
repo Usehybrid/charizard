@@ -1,9 +1,9 @@
-import * as packageJson from './package.json'
 import react from '@vitejs/plugin-react'
 import dts from 'vite-plugin-dts'
 import libCss from 'vite-plugin-libcss'
 import {defineConfig} from 'vite'
 import {resolve} from 'node:path'
+import pkg from './package.json'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -25,7 +25,7 @@ export default defineConfig({
       // fileName: format => `${packageJson.name}.${format}.js`,
     },
     rollupOptions: {
-      external: ['react', 'react-dom'],
+      external: Object.keys(pkg.peerDependencies || {}),
       output: {
         globals: {
           react: 'React',
