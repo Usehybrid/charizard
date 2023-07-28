@@ -50,6 +50,10 @@ interface ProgressProps {
    * skip button text
    */
   skipBtnText?: string
+  /**
+   * if there's any error, user won't be able to click on continue
+   */
+  isError?: boolean
 }
 
 export function Progress({
@@ -64,13 +68,14 @@ export function Progress({
   lastStepHeaderContinueBtnText = 'Finish',
   allowNavigationOnStepClick = true,
   skipBtnText = 'Skip and continue',
+  isError = false,
 }: ProgressProps) {
   const [currentStep, setCurrentStep] = React.useState(0)
 
   const isFinalStep = currentStep === steps.length - 1
 
   const onContinueClick = () => {
-    if (currentStep < steps.length - 1) setCurrentStep(currentStep + 1)
+    if (currentStep < steps.length - 1 && !isError) setCurrentStep(currentStep + 1)
   }
 
   const onBackClick = () => {
@@ -110,7 +115,7 @@ export function Progress({
             <Button variant={ButtonVariant.SECONDARY} onClick={onCancelClick}>
               Cancel
             </Button>
-            <Button onClick={isFinalStep ? onFinalStepClick : onContinueClick}>
+            <Button disabled={isError} onClick={isFinalStep ? onFinalStepClick : onContinueClick}>
               {isFinalStep ? lastStepHeaderContinueBtnText : 'Continue'}
             </Button>
           </div>
@@ -135,7 +140,7 @@ export function Progress({
                 {skipBtnText}
               </Button>
             )}
-            <Button onClick={isFinalStep ? onFinalStepClick : onContinueClick}>
+            <Button disabled={isError} onClick={isFinalStep ? onFinalStepClick : onContinueClick}>
               {isFinalStep ? lastStepFooterContinueBtnText : 'Continue'}
             </Button>
           </div>

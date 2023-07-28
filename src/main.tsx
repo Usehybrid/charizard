@@ -330,7 +330,8 @@ function App() {
         steps={steps}
         showHeaderBtns
         onFinalStepClick={() => {}}
-        showFooter={false}
+        // showFooter={false}
+        isError
       />
 
       {/* <Tooltip tooltipId="tooltip">
