@@ -43,7 +43,7 @@ interface ProgressProps {
    */
   allowNavigationOnStepClick?: boolean
   /**
-   * step to show skip button
+   * step to show skip button (counting starts from zero)
    */
   stepToShowSkipBtn?: number
   /**
