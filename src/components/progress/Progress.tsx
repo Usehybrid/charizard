@@ -8,8 +8,9 @@ import {SVG} from '../svg'
 interface ProgressProps {
   /**
    * steps to show
+   * if there isError is true, user won't be able to click on Continue or finish button
    */
-  steps: {label: string; component: React.ReactNode}[]
+  steps: {label: string; component: React.ReactNode; isError: boolean}[]
   /**
    * handle cancel click
    */
@@ -50,10 +51,6 @@ interface ProgressProps {
    * skip button text
    */
   skipBtnText?: string
-  /**
-   * if there's any error, user won't be able to click on continue
-   */
-  isError?: boolean
 }
 
 export function Progress({
@@ -68,11 +65,11 @@ export function Progress({
   lastStepHeaderContinueBtnText = 'Finish',
   allowNavigationOnStepClick = true,
   skipBtnText = 'Skip and continue',
-  isError = false,
 }: ProgressProps) {
   const [currentStep, setCurrentStep] = React.useState(0)
 
   const isFinalStep = currentStep === steps.length - 1
+  const isError = steps[currentStep].isError
 
   const onContinueClick = () => {
     if (currentStep < steps.length - 1 && !isError) setCurrentStep(currentStep + 1)
