@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import {Button, Progress, Select, Table} from './components'
+import {Button, Progress, SegmentedControl, Select, Table} from './components'
 import {createColumnHelper} from '@tanstack/react-table'
 import {shallow} from 'zustand/shallow'
 
@@ -281,11 +281,10 @@ function App() {
 
   const tableFilters = useSoftwareStore(s => s.filters)
 
-  const steps = [
-    {label: 'Equipment Type', component: <>Equipment type</>},
-    {label: 'Specification', component: <>Specification</>},
-    {label: 'Finance', component: <>Finance</>},
-    {label: 'Allocation', component: <>Allocation</>},
+  const items = [
+    {label: 'Purchase', value: 'purchase', component: <>Purchase</>},
+    {label: 'Rental', value: 'rental', component: <>Rental</>},
+    {label: 'Lease', value: 'lease', component: <>Lease</>},
   ]
 
   return (
@@ -324,14 +323,7 @@ function App() {
         actionsConfig={{menuItems}}
         totalText={`${metaData.total_items} softwares`}
       /> */}
-      <Progress
-        lastStepFooterContinueBtnText="Confirm and add to inventory"
-        onCancelClick={() => {}}
-        steps={steps}
-        showHeaderBtns
-        onFinalStepClick={() => {}}
-        showFooter={false}
-      />
+      <SegmentedControl items={items} defaultValue="purchase" controlId="control" />
 
       {/* <Tooltip tooltipId="tooltip">
         <TooltipTrigger>trigger</TooltipTrigger>

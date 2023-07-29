@@ -1,0 +1,46 @@
+.segmentedControl {
+  display: flex;
+  flex-direction: column;
+}
+
+.segmentedControl .root {
+  display: inline-flex;
+  padding: 6px;
+  align-items: flex-start;
+  gap: 6px;
+
+  border-radius: 30px;
+  background: var(--slate-20);
+  margin-bottom: 20px;
+}
+
+.segmentedControl .root .indicator {
+  border-radius: 24px;
+  border: 1px solid var(--iris);
+}
+
+.segmentedControl .root .radio {
+  border: 1px solid transparent;
+}
+
+.segmentedControl .root .radio[data-focus] {
+  color: var(--primary);
+  background: #f8f8ff;
+}
+
+.segmentedControl .root .radio .radioLabel {
+  color: var(--secondary);
+  text-align: center;
+
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  padding: 6px 14px;
+  min-width: 80px;
+  display: block;
+}
+
+.segmentedControl .root .radio .radioLabel[data-state='checked'] {
+  color: var(--primary);
+}
