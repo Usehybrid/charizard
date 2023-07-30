@@ -43,10 +43,10 @@ export function InputLabel({
   customStyles,
   required = false,
   htmlFor,
-  restprops,
+  restprops = {},
   infoText,
 }: InputLabelProps) {
-  const tooltipId = React.useId()
+  // const tooltipId = React.useId()
 
   return (
     <div className={classes.inputLabelContainer}>
@@ -59,7 +59,7 @@ export function InputLabel({
         <span>{children}</span>
       </label>
       {infoText && (
-        <Tooltip tooltipId={tooltipId}>
+        <Tooltip tooltipId={'infotext-tooltip'}>
           <TooltipTrigger>
             <SVG path={infoCircleIcon} svgClassName={classes.infoCircleSvg} />
           </TooltipTrigger>

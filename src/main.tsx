@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import {Button, Progress, Select, Table} from './components'
+import {Input, InputContainer, InputGroup, InputLabel, Progress} from './components'
 import {createColumnHelper} from '@tanstack/react-table'
 import {shallow} from 'zustand/shallow'
 
@@ -324,19 +324,29 @@ function App() {
         actionsConfig={{menuItems}}
         totalText={`${metaData.total_items} softwares`}
       /> */}
-      <Progress
+      {/* <Progress
         lastStepFooterContinueBtnText="Confirm and add to inventory"
         onCancelClick={() => {}}
         steps={steps}
         showHeaderBtns
         onFinalStepClick={() => {}}
         // showFooter={false}
-      />
-
-      {/* <Tooltip tooltipId="tooltip">
-        <TooltipTrigger>trigger</TooltipTrigger>
-        <TooltipContent>content</TooltipContent>
-      </Tooltip> */}
+      /> */}
+      <div>
+        <InputContainer size="md">
+          <InputLabel required infoText="info">
+            Asset tag
+          </InputLabel>
+          <InputGroup>
+            <Input
+              // errorMsg={formik.touched.model && formik.errors.model}
+              value={'dadad'}
+              placeholder="Enter your asset tag ID or number"
+              // {...formik.getFieldProps('asset_tag')}
+            />
+          </InputGroup>
+        </InputContainer>
+      </div>
 
       {/* <div style={{display: 'flex', alignItems: 'center'}}>
         <Button.MenuButton menuItems={menuItems} size="sm">
