@@ -8,8 +8,9 @@ import {SVG} from '../svg'
 interface ProgressProps {
   /**
    * steps to show
+   * if there isError is true, user won't be able to click on Continue or finish button
    */
-  steps: {label: string; component: React.ReactNode}[]
+  steps: {label: string; component: React.ReactNode; isError: boolean}[]
   /**
    * handle cancel click
    */
@@ -43,7 +44,7 @@ interface ProgressProps {
    */
   allowNavigationOnStepClick?: boolean
   /**
-   * step to show skip button
+   * step to show skip button (counting starts from zero)
    */
   stepToShowSkipBtn?: number
   /**
@@ -68,9 +69,10 @@ export function Progress({
   const [currentStep, setCurrentStep] = React.useState(0)
 
   const isFinalStep = currentStep === steps.length - 1
+  const isError = steps[currentStep].isError
 
   const onContinueClick = () => {
-    if (currentStep < steps.length - 1) setCurrentStep(currentStep + 1)
+    if (currentStep < steps.length - 1 && !isError) setCurrentStep(currentStep + 1)
   }
 
   const onBackClick = () => {
@@ -110,7 +112,7 @@ export function Progress({
             <Button variant={ButtonVariant.SECONDARY} onClick={onCancelClick}>
               Cancel
             </Button>
-            <Button onClick={isFinalStep ? onFinalStepClick : onContinueClick}>
+            <Button disabled={isError} onClick={isFinalStep ? onFinalStepClick : onContinueClick}>
               {isFinalStep ? lastStepHeaderContinueBtnText : 'Continue'}
             </Button>
           </div>
@@ -135,7 +137,7 @@ export function Progress({
                 {skipBtnText}
               </Button>
             )}
-            <Button onClick={isFinalStep ? onFinalStepClick : onContinueClick}>
+            <Button disabled={isError} onClick={isFinalStep ? onFinalStepClick : onContinueClick}>
               {isFinalStep ? lastStepFooterContinueBtnText : 'Continue'}
             </Button>
           </div>
