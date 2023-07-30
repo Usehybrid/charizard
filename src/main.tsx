@@ -282,10 +282,10 @@ function App() {
   const tableFilters = useSoftwareStore(s => s.filters)
 
   const steps = [
-    {label: 'Equipment Type', component: <>Equipment type</>},
-    {label: 'Specification', component: <>Specification</>},
-    {label: 'Finance', component: <>Finance</>},
-    {label: 'Allocation', component: <>Allocation</>},
+    {label: 'Equipment Type', component: <>Equipment type</>, isError: false},
+    {label: 'Specification', component: <>Specification</>, isError: false},
+    {label: 'Finance', component: <>Finance</>, isError: true},
+    {label: 'Allocation', component: <>Allocation</>, isError: false},
   ]
 
   return (
@@ -330,7 +330,7 @@ function App() {
         steps={steps}
         showHeaderBtns
         onFinalStepClick={() => {}}
-        showFooter={false}
+        // showFooter={false}
       />
 
       {/* <Tooltip tooltipId="tooltip">
