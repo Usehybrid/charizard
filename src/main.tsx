@@ -281,11 +281,10 @@ function App() {
 
   const tableFilters = useSoftwareStore(s => s.filters)
 
-  const steps = [
-    {label: 'Equipment Type', component: <>Equipment type</>, isError: false},
-    {label: 'Specification', component: <>Specification</>, isError: false},
-    {label: 'Finance', component: <>Finance</>, isError: true},
-    {label: 'Allocation', component: <>Allocation</>, isError: false},
+  const items = [
+    {label: 'Purchase', value: 'purchase', component: <>Purchase</>},
+    {label: 'Rental', value: 'rental', component: <>Rental</>},
+    {label: 'Lease', value: 'lease', component: <>Lease</>},
   ]
 
   return (

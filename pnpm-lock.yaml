@@ -1,4 +1,4 @@
-lockfileVersion: '6.1'
+lockfileVersion: '6.0'
 
 settings:
   autoInstallPeers: true
@@ -25,6 +25,9 @@ dependencies:
     version: 0.12.0
   '@zag-js/popper':
     specifier: ^0.12.0
+    version: 0.12.0
+  '@zag-js/radio-group':
+    specifier: 0.12.0
     version: 0.12.0
   '@zag-js/react':
     specifier: ^0.12.0
@@ -4599,6 +4602,19 @@ packages:
       '@zag-js/dom-query': 0.12.0
       '@zag-js/element-rect': 0.12.0
       '@zag-js/utils': 0.12.0
+    dev: false
+
+  /@zag-js/radio-group@0.12.0:
+    resolution: {integrity: sha512-tzH0wj66jfm+hvTIRN9FL3wM3IggMQ4VxqfVBhrTRdU+MlDVjgmkZwigWQEKj295cNd3fP2wnJWGXVlxeD/21A==}
+    dependencies:
+      '@zag-js/anatomy': 0.12.0
+      '@zag-js/core': 0.12.0
+      '@zag-js/dom-query': 0.12.0
+      '@zag-js/element-rect': 0.12.0
+      '@zag-js/form-utils': 0.12.0
+      '@zag-js/types': 0.12.0
+      '@zag-js/utils': 0.12.0
+      '@zag-js/visually-hidden': 0.12.0
     dev: false
 
   /@zag-js/react@0.12.0(react-dom@18.2.0)(react@18.2.0):
