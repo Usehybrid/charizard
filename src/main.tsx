@@ -11,6 +11,10 @@ import {
   ModalContent,
   ModalFooter,
   ModalHeader,
+  Popover,
+  PopoverContent,
+  PopoverDescription,
+  PopoverTrigger,
   Progress,
   SegmentedControl,
   Select,
@@ -360,27 +364,12 @@ function App() {
         // showFooter={false}
       /> */}
       {/* <SegmentedControl items={items} /> */}
-      <button onClick={() => setIsOpen(true)}>open</button>
-      {isOpen && (
-        <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
-          <ModalContent>
-            <ModalHeader>Update status</ModalHeader>
-            <ModalBody customStyles={{overflowY: 'visible'}}>
-              <InputContainer>
-                <InputLabel required>Status</InputLabel>
-                <InputGroup>
-                  <Select
-                    // extraprops={{menuIsOpen: true}}
-                    options={options}
-                    onChange={val => {}}
-                  />
-                </InputGroup>
-              </InputContainer>
-            </ModalBody>
-            <ModalFooter buttons={buttons} showBorder={false} />
-          </ModalContent>
-        </Modal>
-      )}
+      <Popover>
+        <PopoverTrigger>trigger</PopoverTrigger>
+        <PopoverContent>
+          <PopoverDescription>popover description</PopoverDescription>
+        </PopoverContent>
+      </Popover>
       {/* <div>
         <InputContainer size="md">
           <InputLabel required infoText="info">
