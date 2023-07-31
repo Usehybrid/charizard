@@ -10,11 +10,15 @@ interface ModalBodyProps {
    * will be inserted by default
    */
   api?: any
+  /**
+   * custom styles
+   */
+  customStyles?: React.CSSProperties
 }
 
-export function ModalBody({children, api}: ModalBodyProps) {
+export function ModalBody({children, api, customStyles = {}}: ModalBodyProps) {
   return (
-    <div {...api.descriptionProps} className={classes.body}>
+    <div {...api.descriptionProps} className={classes.body} style={customStyles}>
       {children}
     </div>
   )

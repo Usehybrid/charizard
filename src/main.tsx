@@ -1,12 +1,19 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import {
+  ButtonVariant,
   Input,
   InputContainer,
   InputGroup,
   InputLabel,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
   Progress,
   SegmentedControl,
+  Select,
 } from './components'
 import {createColumnHelper} from '@tanstack/react-table'
 import {shallow} from 'zustand/shallow'
@@ -14,6 +21,7 @@ import {shallow} from 'zustand/shallow'
 import randomIcon from './components/assets/check.svg'
 import {Tooltip, TooltipContent, TooltipTrigger} from './components/tooltip'
 import {SOFTWARE_ACTION_TYPES, useSoftwareStore} from './test'
+import {FooterButtons} from './components/modal/ModalFooter'
 
 const styles = {
   width: '100%',
@@ -294,6 +302,19 @@ function App() {
     {label: 'Lease', value: 'lease', component: <>Lease</>},
   ]
 
+  const options = [
+    {label: 'Assigned', value: 'assigned'},
+    {label: 'Unassigned', value: 'unassigned'},
+    {label: 'Under maintenance', value: 'um'},
+  ]
+
+  const buttons: FooterButtons = [
+    {variant: ButtonVariant.SECONDARY, onClick: () => {}, btnText: 'Cancel'},
+    {variant: ButtonVariant.PRIMARY, onClick: () => {}, btnText: 'Upate'},
+  ]
+
+  const [isOpen, setIsOpen] = React.useState(false)
+
   return (
     <div style={styles}>
       {/* <Table
@@ -338,7 +359,28 @@ function App() {
         onFinalStepClick={() => {}}
         // showFooter={false}
       /> */}
-      <SegmentedControl items={items} />
+      {/* <SegmentedControl items={items} /> */}
+      <button onClick={() => setIsOpen(true)}>open</button>
+      {isOpen && (
+        <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+          <ModalContent>
+            <ModalHeader>Update status</ModalHeader>
+            <ModalBody customStyles={{overflowY: 'visible'}}>
+              <InputContainer>
+                <InputLabel required>Status</InputLabel>
+                <InputGroup>
+                  <Select
+                    // extraprops={{menuIsOpen: true}}
+                    options={options}
+                    onChange={val => {}}
+                  />
+                </InputGroup>
+              </InputContainer>
+            </ModalBody>
+            <ModalFooter buttons={buttons} showBorder={false} />
+          </ModalContent>
+        </Modal>
+      )}
       {/* <div>
         <InputContainer size="md">
           <InputLabel required infoText="info">
