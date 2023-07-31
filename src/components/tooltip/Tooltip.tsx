@@ -50,7 +50,7 @@ export function Tooltip({
 
   const clones = React.Children.toArray(children).map((child: any) => {
     return React.cloneElement(child, {
-      ...child.props,
+      ...(child.props ?? {}),
       api,
     })
   })
