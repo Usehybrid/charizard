@@ -9,24 +9,22 @@ interface SegmentedControlProps {
    */
   items: Array<{label: string; value: string; component: React.ReactNode}>
   /**
-   * control id used by zagjs
-   */
-  controlId: string
-  /**
    * default value to be selected on first render
    */
   defaultValue?: string
 }
 
-export function SegmentedControl({items, controlId, defaultValue}: SegmentedControlProps) {
+export function SegmentedControl({items, defaultValue}: SegmentedControlProps) {
+  const controlId = React.useId()
+
   const [state, send] = useMachine(
-    radio.machine({id: controlId, value: defaultValue ?? items[0].value}),
+    radio.machine({id: controlId, value: defaultValue ?? items?.[0]?.value}),
   )
   const api = radio.connect(state, send, normalizeProps)
 
   const componentToShow = React.useMemo(() => {
-    return items.find(item => item.value === api.value)?.component
-  }, [api.value])
+    return items?.find(item => item.value === api.value)?.component
+  }, [api?.value])
 
   return (
     <div className={classes.segmentedControl}>

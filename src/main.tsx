@@ -1,6 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import {Input, InputContainer, InputGroup, InputLabel, Progress} from './components'
+import {
+  Input,
+  InputContainer,
+  InputGroup,
+  InputLabel,
+  Progress,
+  SegmentedControl,
+} from './components'
 import {createColumnHelper} from '@tanstack/react-table'
 import {shallow} from 'zustand/shallow'
 
@@ -331,7 +338,8 @@ function App() {
         onFinalStepClick={() => {}}
         // showFooter={false}
       /> */}
-      <div>
+      <SegmentedControl items={items} />
+      {/* <div>
         <InputContainer size="md">
           <InputLabel required infoText="info">
             Asset tag
@@ -345,7 +353,7 @@ function App() {
             />
           </InputGroup>
         </InputContainer>
-      </div>
+      </div> */}
 
       {/* <div style={{display: 'flex', alignItems: 'center'}}>
         <Button.MenuButton menuItems={menuItems} size="sm">
