@@ -39,6 +39,6 @@
   --arrow-background: var(--slate-200);
 }
 
-.trigger[data-expanded] ~ .positioner > .arrow {
+.trigger[aria-expanded='true'] ~ .positioner > .arrow {
   display: block;
 }

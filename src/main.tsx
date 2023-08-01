@@ -1,12 +1,31 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import {Button, Progress, SegmentedControl, Select, Table} from './components'
+import {
+  ButtonVariant,
+  Input,
+  InputContainer,
+  InputGroup,
+  InputLabel,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  Popover,
+  PopoverContent,
+  PopoverDescription,
+  PopoverTrigger,
+  Progress,
+  SegmentedControl,
+  Select,
+} from './components'
 import {createColumnHelper} from '@tanstack/react-table'
 import {shallow} from 'zustand/shallow'
 
 import randomIcon from './components/assets/check.svg'
 import {Tooltip, TooltipContent, TooltipTrigger} from './components/tooltip'
 import {SOFTWARE_ACTION_TYPES, useSoftwareStore} from './test'
+import {FooterButtons} from './components/modal/ModalFooter'
 
 const styles = {
   width: '100%',
@@ -287,6 +306,19 @@ function App() {
     {label: 'Lease', value: 'lease', component: <>Lease</>},
   ]
 
+  const options = [
+    {label: 'Assigned', value: 'assigned'},
+    {label: 'Unassigned', value: 'unassigned'},
+    {label: 'Under maintenance', value: 'um'},
+  ]
+
+  const buttons: FooterButtons = [
+    {variant: ButtonVariant.SECONDARY, onClick: () => {}, btnText: 'Cancel'},
+    {variant: ButtonVariant.PRIMARY, onClick: () => {}, btnText: 'Upate'},
+  ]
+
+  const [isOpen, setIsOpen] = React.useState(false)
+
   return (
     <div style={styles}>
       {/* <Table
@@ -323,12 +355,36 @@ function App() {
         actionsConfig={{menuItems}}
         totalText={`${metaData.total_items} softwares`}
       /> */}
-      <SegmentedControl items={items} defaultValue="purchase" controlId="control" />
-
-      {/* <Tooltip tooltipId="tooltip">
-        <TooltipTrigger>trigger</TooltipTrigger>
-        <TooltipContent>content</TooltipContent>
-      </Tooltip> */}
+      {/* <Progress
+        lastStepFooterContinueBtnText="Confirm and add to inventory"
+        onCancelClick={() => {}}
+        steps={steps}
+        showHeaderBtns
+        onFinalStepClick={() => {}}
+        // showFooter={false}
+      /> */}
+      {/* <SegmentedControl items={items} /> */}
+      <Popover>
+        <PopoverTrigger>trigger</PopoverTrigger>
+        <PopoverContent>
+          <PopoverDescription>popover description</PopoverDescription>
+        </PopoverContent>
+      </Popover>
+      {/* <div>
+        <InputContainer size="md">
+          <InputLabel required infoText="info">
+            Asset tag
+          </InputLabel>
+          <InputGroup>
+            <Input
+              // errorMsg={formik.touched.model && formik.errors.model}
+              value={'dadad'}
+              placeholder="Enter your asset tag ID or number"
+              // {...formik.getFieldProps('asset_tag')}
+            />
+          </InputGroup>
+        </InputContainer>
+      </div> */}
 
       {/* <div style={{display: 'flex', alignItems: 'center'}}>
         <Button.MenuButton menuItems={menuItems} size="sm">
