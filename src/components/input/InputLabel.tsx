@@ -43,7 +43,7 @@ export function InputLabel({
   customStyles,
   required = false,
   htmlFor,
-  restprops,
+  restprops = {},
   infoText,
 }: InputLabelProps) {
   const tooltipId = React.useId()
