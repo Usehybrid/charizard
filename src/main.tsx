@@ -289,7 +289,7 @@ function App() {
 
   return (
     <div style={styles}>
-      {/* <Table
+      <Table
         data={data}
         loaderConfig={{fetchingData: false, text: 'Getting softwares...'}}
         columns={columns}
@@ -322,8 +322,8 @@ function App() {
         isDropdownActions={true}
         actionsConfig={{menuItems}}
         totalText={`${metaData.total_items} softwares`}
-      /> */}
-      <SegmentedControl items={items} defaultValue="purchase" controlId="control" />
+      />
+      {/* <SegmentedControl items={items} defaultValue="purchase" controlId="control" /> */}
 
       {/* <Tooltip tooltipId="tooltip">
         <TooltipTrigger>trigger</TooltipTrigger>
