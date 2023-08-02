@@ -10,6 +10,9 @@
   padding: 0px 16px;
   height: 40px;
   border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .btnSm {
@@ -79,7 +82,7 @@
 }
 
 .btnAddonPrimary {
-  border-left: 1px solid white;
+  border-left: 1px solid var(--iris-40);
 }
 
 .btnAddonSecondary {

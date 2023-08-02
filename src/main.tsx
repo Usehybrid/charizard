@@ -1,34 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import {
-  ButtonVariant,
-  Input,
-  InputContainer,
-  InputGroup,
-  InputLabel,
-  InputLeftAddon,
-  InputRightAddon,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  Popover,
-  PopoverContent,
-  PopoverDescription,
-  PopoverTrigger,
-  Progress,
-  SegmentedControl,
-  Select,
-  Table,
-} from './components'
 import {createColumnHelper} from '@tanstack/react-table'
-import {shallow} from 'zustand/shallow'
 
 import randomIcon from './components/assets/check.svg'
-import {Tooltip, TooltipContent, TooltipTrigger} from './components/tooltip'
-import {SOFTWARE_ACTION_TYPES, useSoftwareStore} from './test'
-import {FooterButtons} from './components/modal/ModalFooter'
+import {Table} from './components'
 
 const styles = {
   width: '100%',
@@ -301,42 +276,9 @@ function App() {
     }),
   ]
 
-  const tableFilters = useSoftwareStore(s => s.filters)
-
-  const items = [
-    {label: 'Purchase', value: 'purchase', component: <>Purchase</>},
-    {label: 'Rental', value: 'rental', component: <>Rental</>},
-    {label: 'Lease', value: 'lease', component: <>Lease</>},
-  ]
-
-  const options = [
-    {label: 'Assigned', value: 'assigned'},
-    {label: 'Unassigned', value: 'unassigned'},
-    {label: 'Under maintenance', value: 'um'},
-
-    {label: 'Assigned', value: 'assigned'},
-    {label: 'Unassigned', value: 'unassigned'},
-    {label: 'Under maintenance', value: 'um'},
-    {label: 'Assigned', value: 'assigned'},
-    {label: 'Unassigned', value: 'unassigned'},
-    {label: 'Under maintenance', value: 'um'},
-    {label: 'Assigned', value: 'assigned'},
-    {label: 'Unassigned', value: 'unassigned'},
-    {label: 'Under maintenance', value: 'um'},
-  ]
-
-  const [selectedVal, setSelectedVal] = React.useState<any>({})
-
-  const buttons: FooterButtons = [
-    {variant: ButtonVariant.SECONDARY, onClick: () => {}, btnText: 'Cancel'},
-    {variant: ButtonVariant.PRIMARY, onClick: () => {}, btnText: 'Upate'},
-  ]
-
-  const [isOpen, setIsOpen] = React.useState(false)
-
   return (
     <div style={styles}>
-      {/* <Table
+      <Table
         data={data}
         loaderConfig={{fetchingData: false, text: 'Getting softwares...'}}
         columns={columns}
@@ -350,11 +292,6 @@ function App() {
           isLoading: false,
           isError: false,
           filterDispatch: () => {},
-          // tableFilters,
-          // setDefaultFilters: setDefaultFilters,
-          // addFilters: addFilters,
-          // removeFilters: removeFilters,
-          // resetFilters: resetFilters,
         }}
         sortConfig={{
           sortBy: '',
@@ -365,13 +302,21 @@ function App() {
             software: 'softwares.names',
           },
         }}
-        isCheckboxActions={true}
+        checkboxConfig={{
+          isCheckboxActions: false,
+          actions: [
+            {
+              icon: randomIcon,
+              text: 'Archive',
+            },
+          ],
+        }}
         isDropdownActions={true}
         actionsConfig={{menuItems}}
         totalText={`${metaData.total_items} softwares`}
-      /> */}
+      />
       {/* <SegmentedControl items={items} defaultValue="purchase" controlId="control" /> */}
-      <InputContainer size="md">
+      {/* <InputContainer size="md">
         <InputLabel>Label</InputLabel>
         <InputGroup>
           <Input value={'value'} />
@@ -383,7 +328,7 @@ function App() {
             {selectedVal.label}
           </InputRightAddon>
         </InputGroup>
-      </InputContainer>
+      </InputContainer> */}
       {/* <Tooltip tooltipId="tooltip">
         <TooltipTrigger>trigger</TooltipTrigger>
         <TooltipContent>content</TooltipContent>
