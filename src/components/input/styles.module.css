@@ -138,6 +138,8 @@
   border-bottom: 1px solid var(--slate-300);
   padding: 6px 12px;
   position: relative;
+  gap: 4px;
+  white-space: nowrap;
 }
 
 .inputAddon.left {
@@ -152,6 +154,41 @@
   border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;
   border-right: 1px solid var(--slate-300);
+}
+
+.inputAddon .dropdownContainer {
+  position: absolute;
+  top: 120%;
+  left: 0;
+  width: fit-content;
+  background-color: var(--white);
+  border-radius: 4px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15);
+  padding: 0 0 12px 0;
+  max-height: 15rem;
+  overflow-y: auto;
+  min-width: 15rem;
+}
+
+.inputAddon .dropdownContainer .searchContainer {
+  padding: 12px;
+  position: sticky;
+  top: 0;
+  left: 0;
+  background-color: var(--white);
+}
+
+.inputAddon .dropdownContainer .dropdownOption {
+  padding: 8px 12px;
+  color: var(--primary);
+  font-size: 16px;
+  line-height: 24px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.inputAddon .dropdownContainer .dropdownOption:hover {
+  background-color: var(--slate-20);
 }
 
 @media screen and (max-width: 300px) {

@@ -6,6 +6,8 @@ import {
   InputContainer,
   InputGroup,
   InputLabel,
+  InputLeftAddon,
+  InputRightAddon,
   Modal,
   ModalBody,
   ModalContent,
@@ -311,7 +313,19 @@ function App() {
     {label: 'Assigned', value: 'assigned'},
     {label: 'Unassigned', value: 'unassigned'},
     {label: 'Under maintenance', value: 'um'},
+
+    {label: 'Assigned', value: 'assigned'},
+    {label: 'Unassigned', value: 'unassigned'},
+    {label: 'Under maintenance', value: 'um'},
+    {label: 'Assigned', value: 'assigned'},
+    {label: 'Unassigned', value: 'unassigned'},
+    {label: 'Under maintenance', value: 'um'},
+    {label: 'Assigned', value: 'assigned'},
+    {label: 'Unassigned', value: 'unassigned'},
+    {label: 'Under maintenance', value: 'um'},
   ]
+
+  const [selectedVal, setSelectedVal] = React.useState<any>({})
 
   const buttons: FooterButtons = [
     {variant: ButtonVariant.SECONDARY, onClick: () => {}, btnText: 'Cancel'},
@@ -322,7 +336,7 @@ function App() {
 
   return (
     <div style={styles}>
-      <Table
+      {/* <Table
         data={data}
         loaderConfig={{fetchingData: false, text: 'Getting softwares...'}}
         columns={columns}
@@ -355,9 +369,21 @@ function App() {
         isDropdownActions={true}
         actionsConfig={{menuItems}}
         totalText={`${metaData.total_items} softwares`}
-      />
+      /> */}
       {/* <SegmentedControl items={items} defaultValue="purchase" controlId="control" /> */}
-
+      <InputContainer size="md">
+        <InputLabel>Label</InputLabel>
+        <InputGroup>
+          <Input value={'value'} />
+          <InputRightAddon
+            isDropdown
+            dropdownOptions={options}
+            handleOptionClick={opt => setSelectedVal(opt)}
+          >
+            {selectedVal.label}
+          </InputRightAddon>
+        </InputGroup>
+      </InputContainer>
       {/* <Tooltip tooltipId="tooltip">
         <TooltipTrigger>trigger</TooltipTrigger>
         <TooltipContent>content</TooltipContent>
