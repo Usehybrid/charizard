@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import {createColumnHelper} from '@tanstack/react-table'
 
 import randomIcon from './components/assets/check.svg'
-import {Table} from './components'
+import {Input, InputContainer, InputGroup, InputLabel, InputRightAddon, Table} from './components'
 
 const styles = {
   width: '100%',
@@ -276,9 +276,20 @@ function App() {
     }),
   ]
 
+  const options = [
+    {label: 'Red', value: 'red'},
+    {label: 'Blue', value: 'blue'},
+    {label: 'Pink', value: 'pink'},
+    {label: 'White', value: 'white'},
+    {label: 'Yellow', value: 'yellow'},
+    {label: 'Light blue', value: 'light_blue'},
+    {label: 'Saffron', value: 'saffron'},
+  ]
+  const [selectedVal, setSelectedVal] = React.useState({label: '', value: ''})
+
   return (
     <div style={styles}>
-      <Table
+      {/* <Table
         data={data}
         loaderConfig={{fetchingData: false, text: 'Getting softwares...'}}
         columns={columns}
@@ -314,9 +325,9 @@ function App() {
         isDropdownActions={true}
         actionsConfig={{menuItems}}
         totalText={`${metaData.total_items} softwares`}
-      />
+      /> */}
       {/* <SegmentedControl items={items} defaultValue="purchase" controlId="control" /> */}
-      {/* <InputContainer size="md">
+      <InputContainer size="md">
         <InputLabel>Label</InputLabel>
         <InputGroup>
           <Input value={'value'} />
@@ -328,7 +339,7 @@ function App() {
             {selectedVal.label}
           </InputRightAddon>
         </InputGroup>
-      </InputContainer> */}
+      </InputContainer>
       {/* <Tooltip tooltipId="tooltip">
         <TooltipTrigger>trigger</TooltipTrigger>
         <TooltipContent>content</TooltipContent>

@@ -55,6 +55,9 @@ function InputAddon({
     }
   }
 
+  const searchFilter = (option: {label: string; value: string}) =>
+    (option.label + ' ' + option.value).toLowerCase().includes(search.toLowerCase())
+
   return (
     <div
       className={clsx(classes.inputAddon, classes[attr])}
@@ -75,19 +78,18 @@ function InputAddon({
               <div className={classes.searchContainer} onClick={e => e.stopPropagation()}>
                 <Search search={search} setSearch={setSearch} id="input-add-on-search" />
               </div>
-              {dropdownOptions
-                ?.filter(opt => opt.value.toLowerCase().includes(search.toLowerCase()))
-                ?.map(opt => (
-                  <div
-                    className={classes.dropdownOption}
-                    onClick={e => {
-                      e.stopPropagation()
-                      handleOptionClick(opt)
-                    }}
-                  >
-                    {opt.label}
-                  </div>
-                ))}
+              {dropdownOptions?.filter(searchFilter)?.map(opt => (
+                <div
+                  className={classes.dropdownOption}
+                  key={opt.value}
+                  onClick={e => {
+                    e.stopPropagation()
+                    handleOptionClick(opt)
+                  }}
+                >
+                  {opt.label}
+                </div>
+              ))}
             </div>
           )}
         </>
