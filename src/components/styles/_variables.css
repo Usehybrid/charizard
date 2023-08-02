@@ -23,6 +23,7 @@
   --slate-100: #f0eff4;
   --slate-200: #ebe9f1;
   --slate-300: #e2e0eb;
+  --slate-400: #d2cfe0;
   --slate-600: #b3b2b8;
   --slate-700: #434053;
   --slate-800: #2e2b40;
@@ -47,4 +48,8 @@
   /* svg filters */
   --filter-slate-600: invert(79%) sepia(7%) saturate(161%) hue-rotate(210deg) brightness(92%)
     contrast(85%);
+
+  /* grays */
+
+  --gray-700: #2d3748;
 }

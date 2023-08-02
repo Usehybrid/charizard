@@ -13,13 +13,14 @@ export enum ButtonVariant {
   DANGER = 'danger',
 }
 
-export interface ButtonProps {
+export type ButtonProps = {
   children: React.ReactNode
   variant?: ButtonVariant
   disabled?: boolean
   onClick?: React.MouseEventHandler<HTMLButtonElement>
   type?: 'button' | 'submit' | 'reset'
   size?: 'sm' | 'md' | 'adapt'
+  customStyles?: React.CSSProperties
 }
 
 // 1. Button => primary, secondary, ghost
@@ -33,6 +34,7 @@ export function Button({
   onClick,
   type = 'button',
   size = 'md',
+  customStyles = {},
 }: ButtonProps) {
   return (
     <button
@@ -49,6 +51,7 @@ export function Button({
       disabled={disabled}
       onClick={onClick}
       type={type}
+      style={customStyles}
     >
       {children}
     </button>

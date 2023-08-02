@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import {
+  Button,
   ButtonVariant,
   Input,
   InputContainer,
@@ -21,11 +22,8 @@ import {
   Table,
 } from './components'
 import {createColumnHelper} from '@tanstack/react-table'
-import {shallow} from 'zustand/shallow'
 
 import randomIcon from './components/assets/check.svg'
-import {Tooltip, TooltipContent, TooltipTrigger} from './components/tooltip'
-import {SOFTWARE_ACTION_TYPES, useSoftwareStore} from './test'
 import {FooterButtons} from './components/modal/ModalFooter'
 
 const styles = {
@@ -299,27 +297,6 @@ function App() {
     }),
   ]
 
-  const tableFilters = useSoftwareStore(s => s.filters)
-
-  const items = [
-    {label: 'Purchase', value: 'purchase', component: <>Purchase</>},
-    {label: 'Rental', value: 'rental', component: <>Rental</>},
-    {label: 'Lease', value: 'lease', component: <>Lease</>},
-  ]
-
-  const options = [
-    {label: 'Assigned', value: 'assigned'},
-    {label: 'Unassigned', value: 'unassigned'},
-    {label: 'Under maintenance', value: 'um'},
-  ]
-
-  const buttons: FooterButtons = [
-    {variant: ButtonVariant.SECONDARY, onClick: () => {}, btnText: 'Cancel'},
-    {variant: ButtonVariant.PRIMARY, onClick: () => {}, btnText: 'Upate'},
-  ]
-
-  const [isOpen, setIsOpen] = React.useState(false)
-
   return (
     <div style={styles}>
       <Table
@@ -336,11 +313,6 @@ function App() {
           isLoading: false,
           isError: false,
           filterDispatch: () => {},
-          // tableFilters,
-          // setDefaultFilters: setDefaultFilters,
-          // addFilters: addFilters,
-          // removeFilters: removeFilters,
-          // resetFilters: resetFilters,
         }}
         sortConfig={{
           sortBy: '',
@@ -351,30 +323,19 @@ function App() {
             software: 'softwares.names',
           },
         }}
-        isCheckboxActions={true}
+        checkboxConfig={{
+          isCheckboxActions: false,
+          actions: [
+            {
+              icon: randomIcon,
+              text: 'Archive',
+            },
+          ],
+        }}
         isDropdownActions={true}
         actionsConfig={{menuItems}}
         totalText={`${metaData.total_items} softwares`}
       />
-      {/* <SegmentedControl items={items} defaultValue="purchase" controlId="control" /> */}
-
-      {/* <Tooltip tooltipId="tooltip">
-        <TooltipTrigger>trigger</TooltipTrigger>
-        <TooltipContent>content</TooltipContent>
-      </Tooltip> */}
-
-      {/* <div style={{display: 'flex', alignItems: 'center'}}>
-        <Button.MenuButton menuItems={menuItems} size="sm">
-          Add software
-        </Button.MenuButton>
-        <div style={{marginLeft: '12px'}}>
-          <Button.ActionsDropdown
-            menuItems={softwareListMenuItems}
-            id={'software-list-dropdown-action'}
-            size="md"
-          />
-        </div>
-      </div> */}
     </div>
   )
 }

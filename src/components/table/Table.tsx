@@ -5,19 +5,19 @@ import TableFilters from './table-filters'
 import TableLoader from './table-loader'
 import chevronDown from '../assets/chevron-down.svg'
 import chevronUp from '../assets/chevron-up.svg'
+import chevronUp1 from '../assets/chevron-up.svg'
 import classes from './styles.module.css'
 import {useReactTable, getCoreRowModel, flexRender} from '@tanstack/react-table'
 import {Search} from '../search'
-import {Button} from '../button'
+import {Button, ButtonVariant} from '../button'
 import {SVG} from '../svg'
 import {TableCheckbox} from './table-columns'
-import type {SortingState} from '@tanstack/react-table'
+import type {SortingState, VisibilityState} from '@tanstack/react-table'
 import type {FilterConfig} from './types'
 
 export interface TableProps {
   data: any
   columns: any
-  isCheckboxActions?: boolean
   isDropdownActions?: boolean
   actionsConfig: {
     menuItems: {label: string; iconSrc?: string; onClick: any}[]
@@ -41,6 +41,13 @@ export interface TableProps {
   }
   filterConfig?: FilterConfig
   totalText: string
+  checkboxConfig?: {
+    isCheckboxActions?: boolean
+    actions?: {
+      icon: string
+      text: string
+    }[]
+  }
 }
 
 export function Table({
@@ -49,7 +56,9 @@ export function Table({
   columns,
   filterConfig,
   sortConfig,
-  isCheckboxActions = false,
+  checkboxConfig = {
+    isCheckboxActions: false,
+  },
   isDropdownActions = false,
   actionsConfig,
   searchConfig,
@@ -59,6 +68,9 @@ export function Table({
   // used for checkbox
   const [selectAll, setSelectAll] = React.useState(false)
   // const [currSelectedRows, setCurrSelectedRows] = React.useState([])
+  const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({
+    // 'checkbox-actions': false,
+  })
 
   const selectedRowsRef = React.useRef([])
 
@@ -72,9 +84,38 @@ export function Table({
     }
   }, [sorting])
 
+  const {isCheckboxActions, actions} = checkboxConfig
+
+  // console.log(isCheckboxActions, 'test')
   const _columns = [
-    isCheckboxActions && {
-      id: 'checkbox actions',
+    // isCheckboxActions
+    //   ? {
+    //       id: 'checkbox-actions',
+    //       cell: (props: any) => (
+    //         <TableCheckbox
+    //           row={props.row}
+    //           selectAll={selectAll}
+    //           // setCurrSelectedRows={setCurrSelectedRows}
+    //           selectedRowsRef={selectedRowsRef}
+    //         />
+    //       ),
+    //       header: (props: any) => (
+    //         <TableCheckbox
+    //           header={props.header}
+    //           selectAll={selectAll}
+    //           setSelectAll={setSelectAll}
+    //           // setCurrSelectedRows={setCurrSelectedRows}
+    //           selectedRowsRef={selectedRowsRef}
+    //         />
+    //       ),
+    //     }
+    //   : {
+    //       id: 'hidden checkbox actions',
+    //       enableHiding: true,
+    //     },
+
+    {
+      id: 'checkbox-actions',
       cell: (props: any) => (
         <TableCheckbox
           row={props.row}
@@ -112,13 +153,22 @@ export function Table({
     columns: _columns,
     state: {
       sorting,
+      columnVisibility,
     },
     manualSorting: true,
     onSortingChange: setSorting,
+    onColumnVisibilityChange: setColumnVisibility,
     manualPagination: true,
     manualFiltering: true,
     getCoreRowModel: getCoreRowModel(),
   })
+
+  // console.log(columnVisibility)
+
+  React.useLayoutEffect(() => {
+    if (isCheckboxActions) return
+    table.getColumn('checkbox-actions')?.toggleVisibility(false)
+  }, [])
 
   return (
     <div className={classes.box}>
@@ -139,7 +189,27 @@ export function Table({
         )}
       </div>
 
-      <div className={classes.selectedActions}></div>
+      {isCheckboxActions && (
+        <div className={classes.selectedActions}>
+          <div className={classes.selectedAction}>
+            <div>
+              <SVG path={chevronUp1} svgClassName={classes.selectedIcon} />
+            </div>
+            {actions?.map(action => (
+              <Button
+                variant={ButtonVariant.SECONDARY}
+                size="sm"
+                customStyles={{color: 'var(--gray-700)'}}
+              >
+                {action.icon && <SVG path={action.icon} svgClassName={classes.actionsBtnIcon} />}
+                {action.text}
+              </Button>
+            ))}
+          </div>
+
+          <div className={classes.selectedInfo}>{3} selected</div>
+        </div>
+      )}
 
       <table className={classes.table}>
         <thead className={clsx(classes.tableHead, isCheckboxActions && classes.tableHead2)}>
