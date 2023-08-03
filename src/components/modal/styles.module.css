@@ -44,6 +44,10 @@
   width: 600px;
 }
 
+.container .contentWrapper.fullScreen {
+  width: 100vh;
+  height: 100vh;
+}
 .container .contentWrapper .content {
   position: relative;
   width: 100%;

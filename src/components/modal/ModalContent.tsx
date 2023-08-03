@@ -15,7 +15,7 @@ interface ModalContentProps {
   /**
    * size of the modal
    */
-  size?: 'sm' | 'md' // sm: 400px, md: 600px
+  size?: 'sm' | 'md' | 'fullScreen' // sm: 400px, md: 600px
 }
 
 export function ModalContent({children, api, size = 'md'}: ModalContentProps) {
