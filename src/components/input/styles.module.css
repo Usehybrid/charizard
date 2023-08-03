@@ -168,6 +168,7 @@
   max-height: 15rem;
   overflow-y: auto;
   min-width: 15rem;
+  z-index: 10;
 }
 
 .inputAddon .dropdownContainer .searchContainer {

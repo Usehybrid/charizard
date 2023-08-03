@@ -8,12 +8,12 @@
   padding: 8px 12px;
   border-radius: 4px;
   position: relative;
-  background: #2e2b40;
-  color: #ffffff;
+  background: var(--slate-800);
+  color: var(--white);
 }
 
 .arrow {
   --arrow-size: 6px;
-  --arrow-background: #2e2b40;
+  --arrow-background: var(--slate-800);
   transition: 0.3s all ease-in-out;
 }

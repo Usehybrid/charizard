@@ -26,6 +26,16 @@
   width: 100%;
 }
 
+.btnXs {
+  color: var(--iris);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+  padding: 6px 12px;
+  height: fit-content;
+}
+
 .btn:hover {
   cursor: pointer;
 }

@@ -1,3 +1,7 @@
+/**
+ * @author Soham Sarkar <soham@hybr1d.io>
+ */
+
 import * as React from 'react'
 import useDeepCompareEffect from 'use-deep-compare-effect'
 import clsx from 'clsx'
@@ -113,9 +117,11 @@ export function Table({
       ),
     },
     ...columns,
-    {
+  ]
+
+  if (isDropdownActions) {
+    _columns.push({
       id: DROPDOWN_COL_ID,
-      header: 'Actions',
       cell: (props: any) => (
         <Button.ActionsDropdown
           menuItems={actionsConfig?.menuItems}
@@ -123,8 +129,9 @@ export function Table({
           id={props.row.original.id || 'dropdown-action'}
         />
       ),
-    },
-  ]
+      header: 'Actions',
+    })
+  }
 
   const table = useReactTable({
     data,

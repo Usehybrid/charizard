@@ -1,8 +1,12 @@
+/**
+ * @author Piyush Gupta <piyush@hybr1d.io>
+ */
+
 import * as React from 'react'
 import * as radio from '@zag-js/radio-group'
+import clsx from 'clsx'
 import classes from './styles.module.css'
 import {useMachine, normalizeProps} from '@zag-js/react'
-import clsx from 'clsx'
 import {InputContainer, InputLabel} from '../input'
 
 interface RadioGroupProps {
@@ -27,15 +31,25 @@ interface RadioGroupProps {
    *  value of selected radio
    * */
   onChange: (value: string) => void
+  /**
+   * if radio group is required
+   * */
+  required?: boolean
 }
 
-export function RadioGroup({items, radioHeading, defaultValue, onChange}: RadioGroupProps) {
+export function RadioGroup({
+  items,
+  radioHeading,
+  defaultValue,
+  onChange,
+  required = false,
+}: RadioGroupProps) {
   const controlId = React.useId()
 
   const [state, send] = useMachine(
     radio.machine({
       id: controlId,
-      value: defaultValue ?? items?.[1]?.value,
+      value: defaultValue,
       onChange: ({value}) => {
         onChange(value)
       },
@@ -48,7 +62,7 @@ export function RadioGroup({items, radioHeading, defaultValue, onChange}: RadioG
     <div className={classes.radioGroup}>
       <div {...api.rootProps} className={classes.root}>
         <InputContainer customClassName={classes.labelContainer}>
-          <InputLabel required customClasses={classes.heading}>
+          <InputLabel required={required} customClasses={classes.heading}>
             {radioHeading}
           </InputLabel>
         </InputContainer>
