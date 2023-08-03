@@ -59,7 +59,7 @@ export function InputLabel({
         <span>{children}</span>
       </label>
       {infoText && (
-        <Tooltip tooltipId={tooltipId}>
+        <Tooltip>
           <TooltipTrigger>
             <SVG path={infoCircleIcon} svgClassName={classes.infoCircleSvg} />
           </TooltipTrigger>

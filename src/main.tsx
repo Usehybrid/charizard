@@ -493,7 +493,7 @@ function App() {
           </InputRightAddon>
         </InputGroup>
       </InputContainer> */}
-      {/* <Tooltip tooltipId="tooltip">
+      {/* <Tooltip>
         <TooltipTrigger>trigger</TooltipTrigger>
         <TooltipContent>content</TooltipContent>
       </Tooltip> */}
