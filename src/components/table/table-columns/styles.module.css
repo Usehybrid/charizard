@@ -1,23 +1,21 @@
-.optionLabel {
-  display: flex;
-  align-items: center;
-  column-gap: 16px;
-  margin-left: 16px;
+.checkboxSpan > input[type='checkbox'] {
+  -webkit-appearance: none;
+  appearance: none;
+  /* For iOS < 15 to remove gradient background */
+  background-color: #fff;
+  /* Not removed via appearance */
+  margin: 0;
 }
 
-.optionLabel:hover {
-  cursor: pointer;
-}
-
-.optionLabel > [data-part='control'] {
+.checkbox {
   width: 20px;
   height: 20px;
   border-radius: 3px;
   border: 2px solid var(--slate-200);
-  background-color: white;
+  accent-color: var(--iris);
 }
 
-.optionLabel > [data-part='control'][data-state='checked'] {
+.checkboxSpan > input[type='checkbox']:checked {
   border-color: var(--iris);
   background-color: var(--iris);
   background-image: url('../../assets/check.svg');

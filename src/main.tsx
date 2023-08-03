@@ -477,6 +477,7 @@ function App() {
         totalText={`softwares`}
       /> */}
       {/* <SegmentedControl items={options} defaultValue="purchase" /> */}
+      {/* <SegmentedControl items={items} defaultValue="purchase" controlId="control" /> */}
       {/* <InputContainer size="md">
         <InputLabel>Label</InputLabel>
         <InputGroup>
