@@ -5,10 +5,6 @@ import type {Placement} from '@zag-js/popper'
 
 interface TooltipProps {
   /**
-   * tooltip id
-   */
-  tooltipId: string
-  /**
    * tooltip children
    */
   children: React.ReactNode
@@ -29,12 +25,12 @@ interface TooltipProps {
 }
 
 export function Tooltip({
-  tooltipId,
   children,
   openDelay = 0,
   closeDelay = 0,
   placement = 'top',
 }: TooltipProps) {
+  const tooltipId = React.useId()
   const [state, send] = useMachine(
     tooltip.machine({
       id: tooltipId,

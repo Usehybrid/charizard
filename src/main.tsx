@@ -9,6 +9,7 @@ import {
   InputGroup,
   InputLabel,
   InputRightAddon,
+  RadioGroup,
   SegmentedControl,
   Table,
 } from './components'
@@ -438,6 +439,7 @@ function App() {
 
   return (
     <div style={styles}>
+      <RadioGroup radioHeading="head" items={[]} onChange={() => {}}></RadioGroup>
       {/* <Table
         data={data}
         loaderConfig={{fetchingData: false, text: 'Getting softwares...'}}
