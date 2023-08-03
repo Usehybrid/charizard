@@ -81,6 +81,10 @@ export function Table({
     }
   }, [sorting])
 
+  useDeepCompareEffect(() => {
+    if (!sortConfig || !sorting.length) return
+  }, [rowSelection])
+
   const {isCheckboxActions, actions} = checkboxConfig
 
   const _columns = [
@@ -174,7 +178,7 @@ export function Table({
         )}
       </div>
 
-      {isCheckboxActions && (
+      {isCheckboxActions && Object.keys(rowSelection).length > 0 && (
         <div className={classes.selectedActions}>
           <div className={classes.selectedAction}>
             <div>

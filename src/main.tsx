@@ -324,7 +324,7 @@ function App() {
             },
           ],
         }}
-        isDropdownActions={false}
+        isDropdownActions={true}
         actionsConfig={{menuItems}}
         totalText={`${metaData.total_items} softwares`}
       />
