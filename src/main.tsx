@@ -3,7 +3,15 @@ import ReactDOM from 'react-dom/client'
 import {createColumnHelper} from '@tanstack/react-table'
 
 import randomIcon from './components/assets/check.svg'
-import {Input, InputContainer, InputGroup, InputLabel, InputRightAddon, Table} from './components'
+import {
+  Button,
+  Input,
+  InputContainer,
+  InputGroup,
+  InputLabel,
+  InputRightAddon,
+  Table,
+} from './components'
 
 const styles = {
   width: '90%',
@@ -290,7 +298,7 @@ function App() {
 
   return (
     <div style={styles}>
-      <Table
+      {/* <Table
         data={data}
         loaderConfig={{fetchingData: false, text: 'Getting softwares...'}}
         columns={columns}
@@ -339,7 +347,7 @@ function App() {
             {name: 'Testing', onClick: () => {}},
           ],
         }}
-      />
+      /> */}
       {/* <SegmentedControl items={items} defaultValue="purchase" controlId="control" /> */}
       {/* <InputContainer size="md">
         <InputLabel>Label</InputLabel>
@@ -359,26 +367,20 @@ function App() {
         <TooltipContent>content</TooltipContent>
       </Tooltip> */}
 
-      {/* <div style={{display: 'flex', alignItems: 'center'}}>
+      <div style={{display: 'flex', alignItems: 'center'}}>
         <Button.MenuButton menuItems={menuItems} size="sm">
           Add software
         </Button.MenuButton>
         <div style={{marginLeft: '12px'}}>
           <Button.ActionsDropdown
-            menuItems={softwareListMenuItems}
+            menuItems={menuItems}
             id={'software-list-dropdown-action'}
             size="md"
           />
         </div>
-      </div> */}
+      </div>
     </div>
   )
-}
-
-const metaData = {
-  total_items: 6,
-  page_no: 0,
-  items_on_page: 3,
 }
 
 export const filters = [
