@@ -54,6 +54,7 @@ export interface TableProps {
       onClick: any
     }[]
     setSelectedRows?: React.Dispatch<React.SetStateAction<any>>
+    iconSrc?: string
   }
 }
 
@@ -76,7 +77,7 @@ export function Table({
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
   const [rowSelection, setRowSelection] = React.useState({})
 
-  const {isCheckboxActions, actions, setSelectedRows} = checkboxConfig
+  const {isCheckboxActions, actions, setSelectedRows, iconSrc} = checkboxConfig
 
   useDeepCompareEffect(() => {
     if (!sortConfig || !sorting.length) return
@@ -91,7 +92,7 @@ export function Table({
   useDeepCompareEffect(() => {
     if (!checkboxConfig || !setSelectedRows) return
     const rows = table.getSelectedRowModel().rows.map(row => row.original)
-    setSelectedRows((s: any[]) => [...s, rows])
+    setSelectedRows((s: any[]) => [...s, ...rows])
   }, [rowSelection])
 
   const _columns = [
@@ -192,7 +193,7 @@ export function Table({
         <div className={classes.selectedActions}>
           <div className={classes.selectedAction}>
             <div>
-              <SVG path={chevronUp1} svgClassName={classes.selectedIcon} />
+              <SVG path={iconSrc || ''} svgClassName={classes.selectedIcon} />
             </div>
             {actions?.map((action, idx) => (
               <Button
