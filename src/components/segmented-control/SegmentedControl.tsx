@@ -1,3 +1,7 @@
+/**
+ * @author Pratik Awaik <pratik@hybr1d.io>
+ */
+
 import * as React from 'react'
 import * as radio from '@zag-js/radio-group'
 import classes from './styles.module.css'
@@ -35,6 +39,7 @@ export function SegmentedControl({items, defaultValue}: SegmentedControlProps) {
             key={opt.value}
             {...api.getRadioProps({value: opt.value})}
             className={classes.radio}
+            style={{width: `${(100 / items.length).toFixed(2)}%`}}
           >
             <span {...api.getRadioLabelProps({value: opt.value})} className={classes.radioLabel}>
               {opt.label}

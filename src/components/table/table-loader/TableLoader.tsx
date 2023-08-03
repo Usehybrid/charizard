@@ -1,3 +1,7 @@
+/**
+ * @author Soham Sarkar <soham@hybr1d.io>
+ */
+
 import classes from './styles.module.css'
 
 export default function TableLoader({text = 'Getting data...'}: {text?: string}) {

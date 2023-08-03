@@ -23,7 +23,7 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  max-width: 750px;
+  max-width: fit-content;
   min-width: 200px;
   overflow-x: scroll;
   overflow-y: hidden;

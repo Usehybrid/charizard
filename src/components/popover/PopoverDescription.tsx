@@ -1,3 +1,7 @@
+/**
+ * @author Pratik Awaik <pratik@hybr1d.io>
+ */
+
 interface PopoverDescriptionProps {
   /**
    * The content of the PopoverDescription.

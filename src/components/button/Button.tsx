@@ -1,3 +1,7 @@
+/**
+ * @author Soham Sarkar <soham@hybr1d.io>
+ */
+
 import * as React from 'react'
 import * as menu from '@zag-js/menu'
 import clsx from 'clsx'
@@ -19,7 +23,7 @@ export type ButtonProps = {
   disabled?: boolean
   onClick?: React.MouseEventHandler<HTMLButtonElement>
   type?: 'button' | 'submit' | 'reset'
-  size?: 'sm' | 'md' | 'adapt'
+  size?: 'xs' | 'sm' | 'md' | 'adapt'
   customStyles?: React.CSSProperties
 }
 
@@ -46,6 +50,7 @@ export function Button({
         variant === 'danger' && classes.btnDanger,
         size === 'sm' && classes.btnSm,
         size === 'adapt' && classes.btnAdapt,
+        size === 'xs' && classes.btnXs,
         disabled && classes.disabled,
       )}
       disabled={disabled}

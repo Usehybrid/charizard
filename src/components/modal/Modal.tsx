@@ -1,3 +1,7 @@
+/**
+ * @author Pratik Awaik <pratik@hybr1d.io>
+ */
+
 import * as React from 'react'
 import * as dialog from '@zag-js/dialog'
 import {Portal, normalizeProps, useMachine} from '@zag-js/react'

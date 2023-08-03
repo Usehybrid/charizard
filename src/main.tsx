@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import {createColumnHelper} from '@tanstack/react-table'
 
 import randomIcon from './components/assets/check.svg'
-import {Input, InputContainer, InputGroup, InputLabel, InputRightAddon, Table} from './components'
+import {Button, ButtonVariant, Table} from './components'
 
 const styles = {
   width: '90%',
@@ -12,7 +12,7 @@ const styles = {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  backgroundColor: 'white',
+  backgroundColor: 'black',
   flexDir: 'column',
 }
 
@@ -84,137 +84,6 @@ export interface Software {
   software_users_count: string
 }
 
-const data: Software[] = [
-  {
-    id: 'f8e6f802-c1e8-437f-8507-1d68b1336b37',
-    notes: 'Updated Adobde Xd Design',
-    description: "This will be used for designing purpose and it's updated",
-    is_deleted: false,
-    account_manager_name: null,
-    account_manager_email: null,
-    software: {
-      id: 'd8b1ef2e-08d3-4679-a981-61e01615b6bd',
-      name: 'Adobe Xd',
-      logo_url:
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Adobe_XD_CC_icon.svg/1200px-Adobe_XD_CC_icon.svg.png',
-      company_id: null,
-      created_at: '2023-06-06T12:38:43+00:00',
-      updated_at: '2023-06-06T12:38:43+00:00',
-      is_deleted: false,
-      landing_page_url: null,
-    },
-    software_users: [
-      {
-        id: 'eaaf7e87-2995-4e1c-ad9b-9cb230efab07',
-        last_name: 'Dhoni',
-        first_name: 'Ms',
-        license_id: '057aa05d-940e-4f0a-b15e-fa95c28d68e1',
-        profile_img_url: null,
-        software_tracking_id: 'f8e6f802-c1e8-437f-8507-1d68b1336b37',
-      },
-    ],
-    software_owners: [
-      {
-        id: 'eaaf7e87-2995-4e1c-ad9b-9cb230efab07',
-        last_name: 'Dhoni',
-        first_name: 'Ms',
-        license_id: '057aa05d-940e-4f0a-b15e-fa95c28d68e1',
-        profile_img_url: null,
-        software_tracking_id: 'f8e6f802-c1e8-437f-8507-1d68b1336b37',
-      },
-    ],
-    software_license: [
-      {
-        id: '057aa05d-940e-4f0a-b15e-fa95c28d68e1',
-        cost: 432,
-        seats: 1,
-        status: 'active',
-        company_id: '99fe5378-d0da-4735-9167-0ba35578e168',
-        created_at: '2023-07-04T13:08:37+00:00',
-        created_by: '5a6858d4-9395-45a2-b329-893c82803d6f',
-        deleted_by: null,
-        deleted_on: null,
-        is_deleted: false,
-        updated_at: '2023-07-05T19:27:41+00:00',
-        user_limit: null,
-        currency_id: '2efb576a-be86-44f4-bef3-36ef08d80f77',
-        license_name: 'Premium License',
-        plan_end_date: null,
-        billing_frequency: 'monthly',
-        pricing_structure: 'per_seat',
-        billing_start_date: '2023-03-20T00:00:00+00:00',
-        software_tracking_id: 'f8e6f802-c1e8-437f-8507-1d68b1336b37',
-      },
-    ],
-    created_by: {
-      id: '5a6858d4-9395-45a2-b329-893c82803d6f',
-      first_name: 'Hybrid',
-      last_name: 'Dev ',
-      profile_img_url:
-        'https://hybrid-dev-test.s3.us-west-2.amazonaws.com/user_document/5a6858d4-9395-45a2-b329-893c82803d6f/T8XYUUcqKQEWsHDblZAdX4AH%40320.png.jpeg',
-    },
-    archived_by: null,
-    created_at: '2023-06-19T05:40:18.000Z',
-    updated_at: '2023-06-19T17:41:25.000Z',
-    is_archived: false,
-    archived_on: null,
-    deleted_on: null,
-    software_license_count: '1',
-    software_users_count: '1',
-  },
-  {
-    id: '963a877a-931c-421a-a070-2693ae69af59',
-    notes: 'Ranomd',
-    description: 'afasdd',
-    is_deleted: false,
-    account_manager_name: null,
-    account_manager_email: null,
-    software: {
-      id: '89b6b8d7-c770-457b-808d-93bf12f028ea',
-      name: 'Figma',
-      logo_url: 'https://miro.medium.com/v2/resize:fit:320/1*j3GPPrDmy2CqnxPw-NtWHg.png',
-      company_id: null,
-      created_at: '2023-06-06T12:38:43+00:00',
-      updated_at: '2023-06-06T12:38:43+00:00',
-      is_deleted: false,
-      landing_page_url: null,
-    },
-    software_users: [
-      {
-        id: 'ba1c3934-0121-44d8-917b-b1b96675d857',
-        last_name: 'Emmerich',
-        first_name: 'Tristin',
-        license_id: null,
-        profile_img_url: null,
-        software_tracking_id: '963a877a-931c-421a-a070-2693ae69af59',
-      },
-    ],
-    software_owners: [],
-    software_license: [],
-    created_by: {
-      id: '5a6858d4-9395-45a2-b329-893c82803d6f',
-      first_name: 'Hybrid',
-      last_name: 'Dev ',
-      profile_img_url:
-        'https://hybrid-dev-test.s3.us-west-2.amazonaws.com/user_document/5a6858d4-9395-45a2-b329-893c82803d6f/T8XYUUcqKQEWsHDblZAdX4AH%40320.png.jpeg',
-    },
-    archived_by: {
-      id: '5a6858d4-9395-45a2-b329-893c82803d6f',
-      first_name: 'Hybrid',
-      last_name: 'Dev ',
-      profile_img_url:
-        'https://hybrid-dev-test.s3.us-west-2.amazonaws.com/user_document/5a6858d4-9395-45a2-b329-893c82803d6f/T8XYUUcqKQEWsHDblZAdX4AH%40320.png.jpeg',
-    },
-    created_at: '2023-06-06T12:59:39.000Z',
-    updated_at: '2023-06-19T17:41:25.000Z',
-    is_archived: true,
-    archived_on: '2023-06-29T19:36:01.000Z',
-    deleted_on: null,
-    software_license_count: '0',
-    software_users_count: '1',
-  },
-]
-
 const columnHelper = createColumnHelper<Software>()
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
@@ -249,42 +118,59 @@ const menuItems = [
 function App() {
   const [search, setSearch] = React.useState('')
 
+  // ! replace any with IUserDetails
+  const columnHelper = createColumnHelper<any>()
+
   const columns = [
-    columnHelper.accessor('software', {
-      header: 'Software Name',
-      cell: info => info.getValue().name,
+    columnHelper.accessor('user', {
+      // id: 'user',
+      // ! need no. of people here as well
+      header: 'People',
+      cell: info => <div>{JSON.stringify(info.getValue())}</div>,
     }),
 
-    columnHelper.accessor('software_owners', {
-      header: 'Software Owners',
-
+    // ! should be user's home address
+    columnHelper.accessor('work_location', {
+      // id: 'work_location',
+      header: 'Location',
       cell: info => {
-        return <div>{getFullName(info.row.original.software_owners[0])}</div>
+        const data = info.getValue()
+        return (
+          <p>
+            {data.city}, {data.country.name}
+          </p>
+        )
       },
       enableSorting: false,
     }),
-    columnHelper.accessor('software_users', {
-      header: 'Users',
+    columnHelper.accessor('user_tags', {
+      // id: 'user_tags',
+      header: 'Team tag',
       cell: info => {
-        return <div>{info.row.original.software_users_count}</div>
+        const data = info.getValue()
+        return <div>{JSON.stringify(info.getValue())}</div>
       },
     }),
-    columnHelper.accessor('software_license', {
-      header: 'Licenses',
+    columnHelper.accessor('allocated_product', {
+      // id: 'allocated_product',
+      header: 'Allocated Product',
       cell: info => {
-        return <div>{info.row.original.software_license_count}</div>
+        return <div>{JSON.stringify(info.getValue())}</div>
       },
     }),
   ]
 
   const options = [
-    {label: 'Red', value: 'red'},
-    {label: 'Blue', value: 'blue'},
-    {label: 'Pink', value: 'pink'},
-    {label: 'White', value: 'white'},
-    {label: 'Yellow', value: 'yellow'},
-    {label: 'Light blue', value: 'light_blue'},
-    {label: 'Saffron', value: 'saffron'},
+    // {label: 'Red', value: 'red', component: <>Red</>},
+    // {label: 'Blue', value: 'blue', component: <>Red</>},
+    // {label: 'Pink', value: 'pink', component: <>Red</>},
+    // {label: 'White', value: 'white', component: <>Red</>},
+    // {label: 'Yellow', value: 'yellow', component: <>Red</>},
+    // {label: 'Light blue', value: 'light_blue', component: <>Red</>},
+    // {label: 'Saffron', value: 'saffron', component: <>Red</>},
+    {label: 'Purchase', value: 'purchase', component: <>purchase</>},
+    {label: 'Rental', value: 'rental', component: <>rental</>},
+    {label: 'Lease', value: 'lease', component: <>lease</>},
   ]
   const [selectedVal, setSelectedVal] = React.useState({label: '', value: ''})
 
@@ -325,10 +211,11 @@ function App() {
           ],
           setSelectedRows: () => {},
         }}
-        isDropdownActions={true}
-        actionsConfig={{menuItems}}
-        totalText={`${metaData.total_items} softwares`}
+        isDropdownActions={false}
+        actionsConfig={{menuItems: []}}
+        totalText={`softwares`}
       />
+      {/* <SegmentedControl items={options} defaultValue="purchase" /> */}
       {/* <SegmentedControl items={items} defaultValue="purchase" controlId="control" /> */}
       {/* <InputContainer size="md">
         <InputLabel>Label</InputLabel>
@@ -343,11 +230,13 @@ function App() {
           </InputRightAddon>
         </InputGroup>
       </InputContainer> */}
-      {/* <Tooltip tooltipId="tooltip">
+      {/* <Tooltip>
         <TooltipTrigger>trigger</TooltipTrigger>
         <TooltipContent>content</TooltipContent>
       </Tooltip> */}
-
+      {/* <Button size="xs" variant={ButtonVariant.GHOST}>
+        button
+      </Button> */}
       {/* <div style={{display: 'flex', alignItems: 'center'}}>
         <Button.MenuButton menuItems={menuItems} size="sm">
           Add software
@@ -401,5 +290,259 @@ export const filters = [
         value: '123-156afdafd-iohfuitg',
       },
     ],
+  },
+]
+
+const data = [
+  {
+    id: 1,
+    user: {
+      id: 1,
+      first_name: 'Peter',
+      last_name: 'Park',
+      profile_img_url: null,
+    },
+    user_position: {id: 1, position: {id: '1', name: 'Designer'}},
+    user_department: {id: 1, department: {id: '2', name: 'Product'}},
+    work_location: {id: 1, city: 'Bangalore', country: {id: '1', name: 'India'}},
+    user_tags: [{id: '1', tag: {id: '1', name: 'Design'}}],
+    allocated_product: [
+      {
+        id: 1,
+        serial_number: 'CG575653HJ',
+        name: 'Macbook Pro 16"',
+        tag: 'LP0213',
+        type: 'Laptop',
+      },
+    ],
+  },
+  {
+    id: 2,
+    user: {
+      id: 1,
+      first_name: 'Alex',
+      last_name: 'Fernando',
+      profile_img_url: null,
+    },
+    user_position: {id: 1, position: {id: '1', name: 'Designer'}},
+    user_department: {id: 1, department: {id: '2', name: 'Product'}},
+    work_location: {id: 1, city: 'Bangalore', country: {id: '1', name: 'India'}},
+    user_tags: [
+      {id: '1', tag: {id: '1', name: 'Finance'}},
+      {id: '2', tag: {id: '2', name: 'Sales'}},
+    ],
+    allocated_product: [
+      {
+        id: 1,
+        serial_number: 'ESE75653HJ',
+        name: 'Macbook Pro 16"',
+        tag: 'LP0213',
+        type: 'Laptop',
+      },
+      {
+        id: 1,
+        serial_number: 'CG575653HJ',
+        name: 'Macbook Pro 16"',
+        tag: 'LP0213',
+        type: 'Laptop',
+      },
+      {
+        id: 1,
+        serial_number: 'CG575653HJ',
+        name: 'Macbook Pro 16"',
+        tag: 'LP0213',
+        type: 'Laptop',
+      },
+    ],
+  },
+  {
+    id: 3,
+    user: {
+      id: 1,
+      first_name: 'Antony',
+      last_name: 'Das',
+      profile_img_url: null,
+    },
+    user_position: {id: 1, position: {id: '1', name: 'Designer'}},
+    user_department: {id: 1, department: {id: '2', name: 'Product'}},
+    work_location: {id: 1, city: 'Bangalore', country: {id: '1', name: 'India'}},
+    user_tags: [{id: '1', tag: {id: '1', name: 'Marketing'}}],
+    allocated_product: [
+      {
+        id: 1,
+        serial_number: 'GDE75653HJ',
+        name: 'Macbook Pro 16"',
+        tag: 'LP0213',
+        type: 'Laptop',
+      },
+    ],
+  },
+  {
+    id: 4,
+    user: {
+      id: 1,
+      first_name: 'James',
+      last_name: 'Caren',
+      profile_img_url: null,
+    },
+    user_position: {id: 1, position: {id: '1', name: 'Designer'}},
+    user_department: {id: 1, department: {id: '2', name: 'Product'}},
+    work_location: {id: 1, city: 'Bangalore', country: {id: '1', name: 'India'}},
+    user_tags: [{id: '1', tag: {id: '1', name: 'Tech'}}],
+    allocated_product: null,
+  },
+  {
+    id: 5,
+    user: {
+      id: 1,
+      first_name: 'Vetri',
+      last_name: 'Govindarajan',
+      profile_img_url: null,
+    },
+    user_position: {id: 1, position: {id: '1', name: 'Designer'}},
+    user_department: {id: 1, department: {id: '2', name: 'Product'}},
+    work_location: {id: 1, city: 'Bangalore', country: {id: '1', name: 'India'}},
+    user_tags: [{id: '1', tag: {id: '1', name: 'Marketing'}}],
+    allocated_product: null,
+  },
+  {
+    id: 6,
+    user: {
+      id: 1,
+      first_name: 'Vetri',
+      last_name: 'Govindarajan',
+      profile_img_url: null,
+    },
+    user_position: {id: 1, position: {id: '1', name: 'Designer'}},
+    user_department: {id: 1, department: {id: '2', name: 'Product'}},
+    work_location: {id: 1, city: 'Bangalore', country: {id: '1', name: 'India'}},
+    user_tags: [{id: '1', tag: {id: '1', name: 'Marketing'}}],
+    allocated_product: null,
+  },
+  {
+    id: 7,
+    user: {
+      id: 1,
+      first_name: 'Vetri',
+      last_name: 'Govindarajan',
+      profile_img_url: null,
+    },
+    user_position: {id: 1, position: {id: '1', name: 'Designer'}},
+    user_department: {id: 1, department: {id: '2', name: 'Product'}},
+    work_location: {id: 1, city: 'Bangalore', country: {id: '1', name: 'India'}},
+    user_tags: [{id: '1', tag: {id: '1', name: 'Marketing'}}],
+    allocated_product: null,
+  },
+  {
+    id: 8,
+    user: {
+      id: 1,
+      first_name: 'Vetri',
+      last_name: 'Govindarajan',
+      profile_img_url: null,
+    },
+    user_position: {id: 1, position: {id: '1', name: 'Designer'}},
+    user_department: {id: 1, department: {id: '2', name: 'Product'}},
+    work_location: {id: 1, city: 'Bangalore', country: {id: '1', name: 'India'}},
+    user_tags: [{id: '1', tag: {id: '1', name: 'Marketing'}}],
+    allocated_product: null,
+  },
+  {
+    id: 9,
+    user: {
+      id: 1,
+      first_name: 'Vetri',
+      last_name: 'Govindarajan',
+      profile_img_url: null,
+    },
+    user_position: {id: 1, position: {id: '1', name: 'Designer'}},
+    user_department: {id: 1, department: {id: '2', name: 'Product'}},
+    work_location: {id: 1, city: 'Bangalore', country: {id: '1', name: 'India'}},
+    user_tags: [{id: '1', tag: {id: '1', name: 'Marketing'}}],
+    allocated_product: null,
+  },
+  {
+    id: 10,
+    user: {
+      id: 1,
+      first_name: 'Vetri',
+      last_name: 'Govindarajan',
+      profile_img_url: null,
+    },
+    user_position: {id: 1, position: {id: '1', name: 'Designer'}},
+    user_department: {id: 1, department: {id: '2', name: 'Product'}},
+    work_location: {id: 1, city: 'Bangalore', country: {id: '1', name: 'India'}},
+    user_tags: [{id: '1', tag: {id: '1', name: 'Marketing'}}],
+    allocated_product: null,
+  },
+  {
+    id: 11,
+    user: {
+      id: 1,
+      first_name: 'Vetri',
+      last_name: 'Govindarajan',
+      profile_img_url: null,
+    },
+    user_position: {id: 1, position: {id: '1', name: 'Designer'}},
+    user_department: {id: 1, department: {id: '2', name: 'Product'}},
+    work_location: {id: 1, city: 'Bangalore', country: {id: '1', name: 'India'}},
+    user_tags: [{id: '1', tag: {id: '1', name: 'Marketing'}}],
+    allocated_product: null,
+  },
+  {
+    id: 12,
+    user: {
+      id: 1,
+      first_name: 'Vetri',
+      last_name: 'Govindarajan',
+      profile_img_url: null,
+    },
+    user_position: {id: 1, position: {id: '1', name: 'Designer'}},
+    user_department: {id: 1, department: {id: '2', name: 'Product'}},
+    work_location: {id: 1, city: 'Bangalore', country: {id: '1', name: 'India'}},
+    user_tags: [{id: '1', tag: {id: '1', name: 'Marketing'}}],
+    allocated_product: null,
+  },
+  {
+    id: 13,
+    user: {
+      id: 1,
+      first_name: 'Vetri',
+      last_name: 'Govindarajan',
+      profile_img_url: null,
+    },
+    user_position: {id: 1, position: {id: '1', name: 'Designer'}},
+    user_department: {id: 1, department: {id: '2', name: 'Product'}},
+    work_location: {id: 1, city: 'Bangalore', country: {id: '1', name: 'India'}},
+    user_tags: [{id: '1', tag: {id: '1', name: 'Marketing'}}],
+    allocated_product: null,
+  },
+  {
+    id: 14,
+    user: {
+      id: 1,
+      first_name: 'Vetri',
+      last_name: 'Govindarajan',
+      profile_img_url: null,
+    },
+    user_position: {id: 1, position: {id: '1', name: 'Designer'}},
+    user_department: {id: 1, department: {id: '2', name: 'Product'}},
+    work_location: {id: 1, city: 'Bangalore', country: {id: '1', name: 'India'}},
+    user_tags: [{id: '1', tag: {id: '1', name: 'Marketing'}}],
+    allocated_product: null,
+  },
+  {
+    id: 15,
+    user: {
+      id: 1,
+      first_name: 'Vetri',
+      last_name: 'Govindarajan',
+      profile_img_url: null,
+    },
+    user_position: {id: 1, position: {id: '1', name: 'Designer'}},
+    user_department: {id: 1, department: {id: '2', name: 'Product'}},
+    work_location: {id: 1, city: 'Bangalore', country: {id: '1', name: 'India'}},
+    user_tags: [{id: '1', tag: {id: '1', name: 'Marketing'}}],
+    allocated_product: null,
   },
 ]
