@@ -35,6 +35,7 @@ export function SegmentedControl({items, defaultValue}: SegmentedControlProps) {
             key={opt.value}
             {...api.getRadioProps({value: opt.value})}
             className={classes.radio}
+            style={{width: `${(100 / items.length).toFixed(2)}%`}}
           >
             <span {...api.getRadioLabelProps({value: opt.value})} className={classes.radioLabel}>
               {opt.label}
