@@ -19,6 +19,7 @@ import {TableCheckbox} from './table-columns'
 import {CHECKBOX_COL_ID, DROPDOWN_COL_ID} from './constants'
 import type {SortingState, VisibilityState} from '@tanstack/react-table'
 import type {FilterConfig} from './types'
+import TableSelectors from './table-selectors'
 
 export interface TableProps {
   data: any
@@ -56,6 +57,9 @@ export interface TableProps {
     setSelectedRows?: React.Dispatch<React.SetStateAction<any>>
     iconSrc?: string
   }
+  selectorConfig?: {
+    selectors: {name: string; onClick: any}[]
+  }
 }
 
 export function Table({
@@ -71,6 +75,7 @@ export function Table({
   actionsConfig,
   searchConfig,
   totalText,
+  selectorConfig,
 }: TableProps) {
   const [sorting, setSorting] = React.useState<SortingState>([])
   // used for checkbox visibility
@@ -123,10 +128,7 @@ export function Table({
       ),
     },
     ...columns,
-  ]
-
-  if (isDropdownActions) {
-    _columns.push({
+    {
       id: DROPDOWN_COL_ID,
       cell: (props: any) => (
         <Button.ActionsDropdown
@@ -136,8 +138,22 @@ export function Table({
         />
       ),
       header: 'Actions',
-    })
-  }
+    },
+  ]
+
+  // if (isDropdownActions) {
+  //   _columns.push({
+  //     id: DROPDOWN_COL_ID,
+  //     cell: (props: any) => (
+  //       <Button.ActionsDropdown
+  //         menuItems={actionsConfig?.menuItems}
+  //         data={props.row.original}
+  //         id={props.row.original.id || 'dropdown-action'}
+  //       />
+  //     ),
+  //     header: 'Actions',
+  //   })
+  // }
 
   const table = useReactTable({
     data,
@@ -177,16 +193,20 @@ export function Table({
           <div className={classes.total}>{totalText}</div>
           {typeof filterConfig === 'object' && <TableFilters filterConfig={filterConfig} />}
         </div>
-        {typeof searchConfig === 'object' && (
-          <div className={classes.search}>
-            <Search
-              id="table-search"
-              search={searchConfig.search}
-              setSearch={searchConfig.setSearch}
-              placeholder={searchConfig.placeholder}
-            />
-          </div>
-        )}
+
+        <div className={classes.selectorGrp}>
+          {typeof selectorConfig === 'object' && <TableSelectors selectorConfig={selectorConfig} />}
+          {typeof searchConfig === 'object' && (
+            <div className={classes.search}>
+              <Search
+                id="table-search"
+                search={searchConfig.search}
+                setSearch={searchConfig.setSearch}
+                placeholder={searchConfig.placeholder}
+              />
+            </div>
+          )}
+        </div>
       </div>
 
       {isCheckboxActions && Object.keys(rowSelection).length > 0 && (

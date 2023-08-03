@@ -327,6 +327,18 @@ function App() {
         isDropdownActions={true}
         actionsConfig={{menuItems}}
         totalText={`${metaData.total_items} softwares`}
+        selectorConfig={{
+          selectors: [
+            {
+              name: 'Active',
+              onClick: () => {
+                console.log('test')
+              },
+            },
+            {name: 'New hire', onClick: () => {}},
+            {name: 'Testing', onClick: () => {}},
+          ],
+        }}
       />
       {/* <SegmentedControl items={items} defaultValue="purchase" controlId="control" /> */}
       {/* <InputContainer size="md">
