@@ -4,6 +4,8 @@ import {createColumnHelper} from '@tanstack/react-table'
 
 import randomIcon from './components/assets/check.svg'
 import {
+  Button,
+  ButtonVariant,
   Input,
   InputContainer,
   InputGroup,
@@ -439,7 +441,6 @@ function App() {
 
   return (
     <div style={styles}>
-      <RadioGroup radioHeading="head" items={[]} onChange={() => {}}></RadioGroup>
       {/* <Table
         data={data}
         loaderConfig={{fetchingData: false, text: 'Getting softwares...'}}
@@ -497,6 +498,9 @@ function App() {
         <TooltipTrigger>trigger</TooltipTrigger>
         <TooltipContent>content</TooltipContent>
       </Tooltip> */}
+      <Button size="xs" variant={ButtonVariant.GHOST}>
+        button
+      </Button>
 
       {/* <div style={{display: 'flex', alignItems: 'center'}}>
         <Button.MenuButton menuItems={menuItems} size="sm">
