@@ -1,30 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import {
-  Button,
-  ButtonVariant,
-  Input,
-  InputContainer,
-  InputGroup,
-  InputLabel,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  Popover,
-  PopoverContent,
-  PopoverDescription,
-  PopoverTrigger,
-  Progress,
-  SegmentedControl,
-  Select,
-  Table,
-} from './components'
 import {createColumnHelper} from '@tanstack/react-table'
 
 import randomIcon from './components/assets/check.svg'
-import {FooterButtons} from './components/modal/ModalFooter'
+import {Input, InputContainer, InputGroup, InputLabel, InputRightAddon, Table} from './components'
 
 const styles = {
   width: '100%',
@@ -297,9 +276,20 @@ function App() {
     }),
   ]
 
+  const options = [
+    {label: 'Red', value: 'red'},
+    {label: 'Blue', value: 'blue'},
+    {label: 'Pink', value: 'pink'},
+    {label: 'White', value: 'white'},
+    {label: 'Yellow', value: 'yellow'},
+    {label: 'Light blue', value: 'light_blue'},
+    {label: 'Saffron', value: 'saffron'},
+  ]
+  const [selectedVal, setSelectedVal] = React.useState({label: '', value: ''})
+
   return (
     <div style={styles}>
-      <Table
+      {/* <Table
         data={data}
         loaderConfig={{fetchingData: false, text: 'Getting softwares...'}}
         columns={columns}
@@ -335,7 +325,38 @@ function App() {
         isDropdownActions={true}
         actionsConfig={{menuItems}}
         totalText={`${metaData.total_items} softwares`}
-      />
+      /> */}
+      {/* <SegmentedControl items={items} defaultValue="purchase" controlId="control" /> */}
+      <InputContainer size="md">
+        <InputLabel>Label</InputLabel>
+        <InputGroup>
+          <Input value={'value'} />
+          <InputRightAddon
+            isDropdown
+            dropdownOptions={options}
+            handleOptionClick={opt => setSelectedVal(opt)}
+          >
+            {selectedVal.label}
+          </InputRightAddon>
+        </InputGroup>
+      </InputContainer>
+      {/* <Tooltip tooltipId="tooltip">
+        <TooltipTrigger>trigger</TooltipTrigger>
+        <TooltipContent>content</TooltipContent>
+      </Tooltip> */}
+
+      {/* <div style={{display: 'flex', alignItems: 'center'}}>
+        <Button.MenuButton menuItems={menuItems} size="sm">
+          Add software
+        </Button.MenuButton>
+        <div style={{marginLeft: '12px'}}>
+          <Button.ActionsDropdown
+            menuItems={softwareListMenuItems}
+            id={'software-list-dropdown-action'}
+            size="md"
+          />
+        </div>
+      </div> */}
     </div>
   )
 }
