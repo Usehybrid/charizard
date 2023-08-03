@@ -323,6 +323,7 @@ function App() {
               onClick: () => {},
             },
           ],
+          setSelectedRows: () => {},
         }}
         isDropdownActions={true}
         actionsConfig={{menuItems}}

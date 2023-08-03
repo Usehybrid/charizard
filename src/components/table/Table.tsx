@@ -49,6 +49,7 @@ export interface TableProps {
       text: string
       onClick: any
     }[]
+    setSelectedRows?: React.Dispatch<React.SetStateAction<any>>
   }
 }
 
@@ -67,9 +68,11 @@ export function Table({
   totalText,
 }: TableProps) {
   const [sorting, setSorting] = React.useState<SortingState>([])
-  // used for checkbox
+  // used for checkbox visibility
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
   const [rowSelection, setRowSelection] = React.useState({})
+
+  const {isCheckboxActions, actions, setSelectedRows} = checkboxConfig
 
   useDeepCompareEffect(() => {
     if (!sortConfig || !sorting.length) return
@@ -82,10 +85,10 @@ export function Table({
   }, [sorting])
 
   useDeepCompareEffect(() => {
-    if (!sortConfig || !sorting.length) return
+    if (!checkboxConfig || !setSelectedRows) return
+    const rows = table.getSelectedRowModel().rows.map(row => row.original)
+    setSelectedRows((s: any[]) => [...s, rows])
   }, [rowSelection])
-
-  const {isCheckboxActions, actions} = checkboxConfig
 
   const _columns = [
     {
@@ -98,6 +101,7 @@ export function Table({
             indeterminate: props.table.getIsSomeRowsSelected(),
             onChange: props.table.getToggleAllRowsSelectedHandler(),
           }}
+          // setSelectedRows={setSelectedRows}
         />
       ),
       cell: ({row}: {row: any}) => (
@@ -109,6 +113,7 @@ export function Table({
             indeterminate: row.getIsSomeSelected(),
             onChange: row.getToggleSelectedHandler(),
           }}
+          // setSelectedRows={setSelectedRows}
         />
       ),
     },
@@ -156,8 +161,6 @@ export function Table({
     if (isDropdownActions) return
     table.getColumn(DROPDOWN_COL_ID)?.toggleVisibility(false)
   }, [])
-
-  console.log(rowSelection)
 
   return (
     <div className={classes.box}>
@@ -209,82 +212,37 @@ export function Table({
               {headerGroup.headers.map(header => {
                 const HeaderDef = header.column.columnDef.header
                 return (
-                  <th
-                    key={header.id}
-                    className={clsx(classes.tableHeader)}
-                    onClick={header.column.getToggleSortingHandler()}
-                  >
-                    {
-                      header.isPlaceholder ? null : (
-                        <div
-                          style={{
+                  <th key={header.id} className={clsx(classes.tableHeader)}>
+                    {header.isPlaceholder ? null : (
+                      <div
+                        {...{
+                          onClick: header.column.getToggleSortingHandler(),
+                          style: {
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
-                          }}
-                        >
-                          {/* <span>{header.column.columnDef.header as React.ReactNode}</span> */}
-                          <span>{typeof HeaderDef === 'string' && HeaderDef}</span>
-
-                          {{
-                            asc: (
-                              <SVG
-                                path={chevronUp}
-                                spanClassName={classes.tableHeaderSortSpan}
-                                svgClassName={classes.tableHeaderSort}
-                              />
-                            ),
-                            desc: (
-                              <SVG
-                                path={chevronDown}
-                                spanClassName={classes.tableHeaderSortSpan}
-                                svgClassName={classes.tableHeaderSort}
-                              />
-                            ),
-                          }[header.column.getIsSorted() as string] ?? null}
-                        </div>
-                      )
-                      // : flexRender(
-                      //     <div
-                      //       style={{
-                      //         display: 'flex',
-                      //         alignItems: 'center',
-                      //         justifyContent: 'center',
-                      //       }}
-                      //     >
-                      //       <span>{header.column.columnDef.header as React.ReactNode}</span>
-
-                      //       {{
-                      //         asc: (
-                      //           <SVG
-                      //             path={chevronUp}
-                      //             customSvgStyles={{width: '18px', height: '18px'}}
-                      //             customSpanStyles={{
-                      //               width: '20px',
-                      //               height: '20px',
-                      //               marginLeft: '3px',
-                      //             }}
-                      //           />
-                      //         ),
-                      //         desc: (
-                      //           <SVG
-                      //             path={chevronDown}
-                      //             customSvgStyles={{width: '18px', height: '18px'}}
-                      //             customSpanStyles={{
-                      //               width: '20px',
-                      //               height: '20px',
-                      //               marginLeft: '3px',
-                      //             }}
-                      //           />
-                      //         ),
-                      //       }[header.column.getIsSorted() as string] ?? null}
-                      //     </div>,
-
-                      //     header.getContext(),
-                      //   )
-                    }
-
-                    {/* Add a sort direction indicator */}
+                          },
+                        }}
+                      >
+                        {flexRender(header.column.columnDef.header, header.getContext())}
+                        {{
+                          asc: (
+                            <SVG
+                              path={chevronUp}
+                              spanClassName={classes.tableHeaderSortSpan}
+                              svgClassName={classes.tableHeaderSort}
+                            />
+                          ),
+                          desc: (
+                            <SVG
+                              path={chevronDown}
+                              spanClassName={classes.tableHeaderSortSpan}
+                              svgClassName={classes.tableHeaderSort}
+                            />
+                          ),
+                        }[header.column.getIsSorted() as string] ?? null}
+                      </div>
+                    )}
                   </th>
                 )
               })}
