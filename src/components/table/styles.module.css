@@ -1,6 +1,7 @@
 .box {
   background-color: var(--white);
   width: 100%;
+  border-bottom: 1px solid var(--slate-200);
 }
 
 .header {
@@ -67,8 +68,20 @@
   text-align: center;
 }
 
+/* for width for checkbox column if used */
 .tableHead2 th:first-child {
   width: 4%;
+}
+
+.tableHeaderSortSpan {
+  width: 20px;
+  height: 20px;
+  margin-left: 3px;
+}
+
+.tableHeaderSortIcon {
+  width: 18px;
+  height: 18px;
 }
 
 .tableData {
@@ -87,6 +100,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  border-left: 1px solid var(--slate-200);
+  border-right: 1px solid var(--slate-200);
 }
 
 .selectedAction {

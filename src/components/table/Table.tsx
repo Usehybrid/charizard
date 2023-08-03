@@ -12,6 +12,7 @@ import {Search} from '../search'
 import {Button, ButtonVariant} from '../button'
 import {SVG} from '../svg'
 import {TableCheckbox} from './table-columns'
+import {CHECKBOX_COL_ID, DROPDOWN_COL_ID} from './constants'
 import type {SortingState, VisibilityState} from '@tanstack/react-table'
 import type {FilterConfig} from './types'
 
@@ -46,6 +47,7 @@ export interface TableProps {
     actions?: {
       icon: string
       text: string
+      onClick: any
     }[]
   }
 }
@@ -66,13 +68,8 @@ export function Table({
 }: TableProps) {
   const [sorting, setSorting] = React.useState<SortingState>([])
   // used for checkbox
-  const [selectAll, setSelectAll] = React.useState(false)
-  // const [currSelectedRows, setCurrSelectedRows] = React.useState([])
-  const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({
-    // 'checkbox-actions': false,
-  })
-
-  const selectedRowsRef = React.useRef([])
+  const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
+  const [rowSelection, setRowSelection] = React.useState({})
 
   useDeepCompareEffect(() => {
     if (!sortConfig || !sorting.length) return
@@ -86,57 +83,35 @@ export function Table({
 
   const {isCheckboxActions, actions} = checkboxConfig
 
-  // console.log(isCheckboxActions, 'test')
   const _columns = [
-    // isCheckboxActions
-    //   ? {
-    //       id: 'checkbox-actions',
-    //       cell: (props: any) => (
-    //         <TableCheckbox
-    //           row={props.row}
-    //           selectAll={selectAll}
-    //           // setCurrSelectedRows={setCurrSelectedRows}
-    //           selectedRowsRef={selectedRowsRef}
-    //         />
-    //       ),
-    //       header: (props: any) => (
-    //         <TableCheckbox
-    //           header={props.header}
-    //           selectAll={selectAll}
-    //           setSelectAll={setSelectAll}
-    //           // setCurrSelectedRows={setCurrSelectedRows}
-    //           selectedRowsRef={selectedRowsRef}
-    //         />
-    //       ),
-    //     }
-    //   : {
-    //       id: 'hidden checkbox actions',
-    //       enableHiding: true,
-    //     },
-
     {
-      id: 'checkbox-actions',
-      cell: (props: any) => (
-        <TableCheckbox
-          row={props.row}
-          selectAll={selectAll}
-          // setCurrSelectedRows={setCurrSelectedRows}
-          selectedRowsRef={selectedRowsRef}
-        />
-      ),
+      id: CHECKBOX_COL_ID,
       header: (props: any) => (
         <TableCheckbox
-          header={props.header}
-          selectAll={selectAll}
-          setSelectAll={setSelectAll}
-          // setCurrSelectedRows={setCurrSelectedRows}
-          selectedRowsRef={selectedRowsRef}
+          row={props.header}
+          {...{
+            checked: props.table.getIsAllRowsSelected(),
+            indeterminate: props.table.getIsSomeRowsSelected(),
+            onChange: props.table.getToggleAllRowsSelectedHandler(),
+          }}
+        />
+      ),
+      cell: ({row}: {row: any}) => (
+        <TableCheckbox
+          row={row}
+          {...{
+            checked: row.getIsSelected(),
+            disabled: !row.getCanSelect(),
+            indeterminate: row.getIsSomeSelected(),
+            onChange: row.getToggleSelectedHandler(),
+          }}
         />
       ),
     },
     ...columns,
-    isDropdownActions && {
-      id: 'dropdown actions',
+    {
+      id: DROPDOWN_COL_ID,
+      header: 'Actions',
       cell: (props: any) => (
         <Button.ActionsDropdown
           menuItems={actionsConfig?.menuItems}
@@ -144,7 +119,6 @@ export function Table({
           id={props.row.original.id || 'dropdown-action'}
         />
       ),
-      header: 'Actions',
     },
   ]
 
@@ -154,21 +128,32 @@ export function Table({
     state: {
       sorting,
       columnVisibility,
+      rowSelection,
     },
     manualSorting: true,
     onSortingChange: setSorting,
     onColumnVisibilityChange: setColumnVisibility,
+    enableRowSelection: true, //enable row selection for all rows
+    // enableRowSelection: row => row.original.age > 18, // or enable row selection conditionally per row
+    onRowSelectionChange: setRowSelection,
     manualPagination: true,
     manualFiltering: true,
     getCoreRowModel: getCoreRowModel(),
   })
 
-  // console.log(columnVisibility)
-
+  // hide checkbox column
   React.useLayoutEffect(() => {
     if (isCheckboxActions) return
-    table.getColumn('checkbox-actions')?.toggleVisibility(false)
+    table.getColumn(CHECKBOX_COL_ID)?.toggleVisibility(false)
   }, [])
+
+  // hide actions dropdown column
+  React.useLayoutEffect(() => {
+    if (isDropdownActions) return
+    table.getColumn(DROPDOWN_COL_ID)?.toggleVisibility(false)
+  }, [])
+
+  console.log(rowSelection)
 
   return (
     <div className={classes.box}>
@@ -195,11 +180,13 @@ export function Table({
             <div>
               <SVG path={chevronUp1} svgClassName={classes.selectedIcon} />
             </div>
-            {actions?.map(action => (
+            {actions?.map((action, idx) => (
               <Button
+                key={idx}
                 variant={ButtonVariant.SECONDARY}
                 size="sm"
                 customStyles={{color: 'var(--gray-700)'}}
+                onClick={action.onClick}
               >
                 {action.icon && <SVG path={action.icon} svgClassName={classes.actionsBtnIcon} />}
                 {action.text}
@@ -207,7 +194,7 @@ export function Table({
             ))}
           </div>
 
-          <div className={classes.selectedInfo}>{3} selected</div>
+          <div className={classes.selectedInfo}>{Object.keys(rowSelection).length} selected</div>
         </div>
       )}
 
@@ -216,52 +203,82 @@ export function Table({
           {table.getHeaderGroups().map(headerGroup => (
             <tr key={headerGroup.id} className={classes.tableRow}>
               {headerGroup.headers.map(header => {
+                const HeaderDef = header.column.columnDef.header
                 return (
                   <th
                     key={header.id}
                     className={clsx(classes.tableHeader)}
                     onClick={header.column.getToggleSortingHandler()}
                   >
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(
-                          <div
-                            style={{
-                              display: 'flex',
-                              alignItems: 'center',
-                              justifyContent: 'center',
-                            }}
-                          >
-                            <span>{header.column.columnDef.header as React.ReactNode}</span>
+                    {
+                      header.isPlaceholder ? null : (
+                        <div
+                          style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                          }}
+                        >
+                          {/* <span>{header.column.columnDef.header as React.ReactNode}</span> */}
+                          <span>{typeof HeaderDef === 'string' && HeaderDef}</span>
 
-                            {{
-                              asc: (
-                                <SVG
-                                  path={chevronUp}
-                                  customSvgStyles={{width: '18px', height: '18px'}}
-                                  customSpanStyles={{
-                                    width: '20px',
-                                    height: '20px',
-                                    marginLeft: '3px',
-                                  }}
-                                />
-                              ),
-                              desc: (
-                                <SVG
-                                  path={chevronDown}
-                                  customSvgStyles={{width: '18px', height: '18px'}}
-                                  customSpanStyles={{
-                                    width: '20px',
-                                    height: '20px',
-                                    marginLeft: '3px',
-                                  }}
-                                />
-                              ),
-                            }[header.column.getIsSorted() as string] ?? null}
-                          </div>,
+                          {{
+                            asc: (
+                              <SVG
+                                path={chevronUp}
+                                spanClassName={classes.tableHeaderSortSpan}
+                                svgClassName={classes.tableHeaderSort}
+                              />
+                            ),
+                            desc: (
+                              <SVG
+                                path={chevronDown}
+                                spanClassName={classes.tableHeaderSortSpan}
+                                svgClassName={classes.tableHeaderSort}
+                              />
+                            ),
+                          }[header.column.getIsSorted() as string] ?? null}
+                        </div>
+                      )
+                      // : flexRender(
+                      //     <div
+                      //       style={{
+                      //         display: 'flex',
+                      //         alignItems: 'center',
+                      //         justifyContent: 'center',
+                      //       }}
+                      //     >
+                      //       <span>{header.column.columnDef.header as React.ReactNode}</span>
 
-                          header.getContext(),
-                        )}
+                      //       {{
+                      //         asc: (
+                      //           <SVG
+                      //             path={chevronUp}
+                      //             customSvgStyles={{width: '18px', height: '18px'}}
+                      //             customSpanStyles={{
+                      //               width: '20px',
+                      //               height: '20px',
+                      //               marginLeft: '3px',
+                      //             }}
+                      //           />
+                      //         ),
+                      //         desc: (
+                      //           <SVG
+                      //             path={chevronDown}
+                      //             customSvgStyles={{width: '18px', height: '18px'}}
+                      //             customSpanStyles={{
+                      //               width: '20px',
+                      //               height: '20px',
+                      //               marginLeft: '3px',
+                      //             }}
+                      //           />
+                      //         ),
+                      //       }[header.column.getIsSorted() as string] ?? null}
+                      //     </div>,
+
+                      //     header.getContext(),
+                      //   )
+                    }
 
                     {/* Add a sort direction indicator */}
                   </th>

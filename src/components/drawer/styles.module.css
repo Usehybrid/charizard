@@ -52,6 +52,14 @@
   width: 63.08rem;
 }
 
+.container.xlg {
+  width: 77rem;
+}
+
+.container.xxlg {
+  width: 92.30rem;
+}
+
 .container .content {
   height: 100%;
   overflow-y: auto;
