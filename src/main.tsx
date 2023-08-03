@@ -290,7 +290,7 @@ function App() {
 
   return (
     <div style={styles}>
-      {/* <Table
+      <Table
         data={data}
         loaderConfig={{fetchingData: false, text: 'Getting softwares...'}}
         columns={columns}
@@ -327,9 +327,9 @@ function App() {
         isDropdownActions={false}
         actionsConfig={{menuItems}}
         totalText={`${metaData.total_items} softwares`}
-      /> */}
+      />
       {/* <SegmentedControl items={items} defaultValue="purchase" controlId="control" /> */}
-      <InputContainer size="md">
+      {/* <InputContainer size="md">
         <InputLabel>Label</InputLabel>
         <InputGroup>
           <Input value={'value'} />
@@ -341,7 +341,7 @@ function App() {
             {selectedVal.label}
           </InputRightAddon>
         </InputGroup>
-      </InputContainer>
+      </InputContainer> */}
       {/* <Tooltip tooltipId="tooltip">
         <TooltipTrigger>trigger</TooltipTrigger>
         <TooltipContent>content</TooltipContent>
