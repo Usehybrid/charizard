@@ -3,18 +3,7 @@ import ReactDOM from 'react-dom/client'
 import {createColumnHelper} from '@tanstack/react-table'
 
 import randomIcon from './components/assets/check.svg'
-import {
-  Button,
-  ButtonVariant,
-  Input,
-  InputContainer,
-  InputGroup,
-  InputLabel,
-  InputRightAddon,
-  RadioGroup,
-  SegmentedControl,
-  Table,
-} from './components'
+import {Button, ButtonVariant} from './components'
 
 const styles = {
   width: '90%',
@@ -23,7 +12,7 @@ const styles = {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  backgroundColor: 'white',
+  backgroundColor: 'black',
   flexDir: 'column',
 }
 
@@ -501,7 +490,6 @@ function App() {
       <Button size="xs" variant={ButtonVariant.GHOST}>
         button
       </Button>
-
       {/* <div style={{display: 'flex', alignItems: 'center'}}>
         <Button.MenuButton menuItems={menuItems} size="sm">
           Add software
