@@ -27,7 +27,8 @@ import randomIcon from './components/assets/check.svg'
 import {FooterButtons} from './components/modal/ModalFooter'
 
 const styles = {
-  width: '100%',
+  width: '90%',
+  margin: 'auto',
   height: '100vh',
   display: 'flex',
   alignItems: 'center',
@@ -324,15 +325,16 @@ function App() {
           },
         }}
         checkboxConfig={{
-          isCheckboxActions: false,
+          isCheckboxActions: true,
           actions: [
             {
               icon: randomIcon,
               text: 'Archive',
+              onClick: () => {},
             },
           ],
         }}
-        isDropdownActions={true}
+        isDropdownActions={false}
         actionsConfig={{menuItems}}
         totalText={`${metaData.total_items} softwares`}
       />
