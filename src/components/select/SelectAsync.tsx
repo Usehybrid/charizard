@@ -1,3 +1,7 @@
+/**
+ * @author Pratik Awaik <pratik@hybr1d.io>
+ */
+
 import * as React from 'react'
 import ReactSelectAsync from 'react-select/async'
 import clsx from 'clsx'

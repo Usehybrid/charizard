@@ -1,3 +1,7 @@
+/**
+ * @author Piyush Gupta <piyush@hybr1d.io>
+ */
+
 import * as React from 'react'
 import * as radio from '@zag-js/radio-group'
 import clsx from 'clsx'

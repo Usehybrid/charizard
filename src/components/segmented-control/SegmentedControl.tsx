@@ -1,3 +1,7 @@
+/**
+ * @author Pratik Awaik <pratik@hybr1d.io>
+ */
+
 import * as React from 'react'
 import * as radio from '@zag-js/radio-group'
 import classes from './styles.module.css'

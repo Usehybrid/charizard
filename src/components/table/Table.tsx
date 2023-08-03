@@ -1,3 +1,7 @@
+/**
+ * @author Soham Sarkar <soham@hybr1d.io>
+ */
+
 import * as React from 'react'
 import useDeepCompareEffect from 'use-deep-compare-effect'
 import clsx from 'clsx'

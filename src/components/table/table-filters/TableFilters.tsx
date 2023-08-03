@@ -1,3 +1,7 @@
+/**
+ * @author Soham Sarkar <soham@hybr1d.io>
+ */
+
 import * as React from 'react'
 import filterLines from '../../assets/filter-lines.svg'
 import TableFilter from './TableFilter'

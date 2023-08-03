@@ -1,3 +1,7 @@
+/**
+ * @author Pratik Awaik <pratik@hybr1d.io>
+ */
+
 import * as React from 'react'
 import * as tooltip from '@zag-js/tooltip'
 import {useMachine, normalizeProps} from '@zag-js/react'

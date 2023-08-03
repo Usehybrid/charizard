@@ -1,3 +1,7 @@
+/**
+ * @author Pratik Awaik <pratik@hybr1d.io>
+ */
+
 import clsx from 'clsx'
 
 interface PopoverCloseButtonProps {

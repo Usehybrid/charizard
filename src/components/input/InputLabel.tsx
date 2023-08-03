@@ -1,3 +1,7 @@
+/**
+ * @author Pratik Awaik <pratik@hybr1d.io>
+ */
+
 import * as React from 'react'
 import clsx from 'clsx'
 import infoCircleIcon from '../assets/info-circle.svg'
