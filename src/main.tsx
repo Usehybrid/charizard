@@ -302,7 +302,7 @@ function App() {
 
   return (
     <div style={styles}>
-      {/* <Table
+      <Table
         data={data}
         loaderConfig={{fetchingData: false, text: 'Getting softwares...'}}
         columns={columns}
@@ -338,7 +338,7 @@ function App() {
         }}
         isDropdownActions={true}
         actionsConfig={{menuItems}}
-        totalText={`${metaData.total_items} softwares`}
+        totalText={`${4} softwares`}
         selectorConfig={{
           selectors: [
             {
@@ -351,13 +351,7 @@ function App() {
             {name: 'Testing', onClick: () => {}},
           ],
         }}
-      /> */}
-      <Popover>
-        <PopoverTrigger openOnHover={false}>trigger</PopoverTrigger>
-        <PopoverContent>
-          <PopoverDescription>Content</PopoverDescription>
-        </PopoverContent>
-      </Popover>
+      />
       {/* <SegmentedControl items={items} defaultValue="purchase" controlId="control" /> */}
       {/* <InputContainer size="md">
         <InputLabel>Label</InputLabel>
@@ -377,7 +371,7 @@ function App() {
         <TooltipContent>content</TooltipContent>
       </Tooltip> */}
 
-      <div style={{display: 'flex', alignItems: 'center'}}>
+      {/* <div style={{display: 'flex', alignItems: 'center'}}>
         <Button.MenuButton menuItems={menuItems} size="sm">
           Add software
         </Button.MenuButton>
@@ -388,7 +382,7 @@ function App() {
             size="md"
           />
         </div>
-      </div>
+      </div> */}
     </div>
   )
 }

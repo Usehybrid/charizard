@@ -20,6 +20,7 @@ import {CHECKBOX_COL_ID, DROPDOWN_COL_ID} from './constants'
 import type {SortingState, VisibilityState} from '@tanstack/react-table'
 import type {FilterConfig} from './types'
 import TableSelectors from './table-selectors'
+import {useVirtual} from '@tanstack/react-virtual'
 
 export interface TableProps {
   data: any
@@ -60,6 +61,11 @@ export interface TableProps {
   selectorConfig?: {
     selectors: {name: string; onClick: any}[]
   }
+  virtualizationConfig?: {
+    totalFetched: number | null
+    totalRows: number | null
+    fetchNextPage: any
+  }
 }
 
 export function Table({
@@ -76,11 +82,15 @@ export function Table({
   searchConfig,
   totalText,
   selectorConfig,
+  virtualizationConfig = {totalFetched: null, totalRows: null, fetchNextPage: null},
 }: TableProps) {
   const [sorting, setSorting] = React.useState<SortingState>([])
   // used for checkbox visibility
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
   const [rowSelection, setRowSelection] = React.useState({})
+
+  //we need a reference to the scrolling element for logic down below
+  const tableContainerRef = React.useRef<HTMLDivElement>(null)
 
   const {isCheckboxActions, actions, setSelectedRows, iconSrc} = checkboxConfig
 
@@ -155,6 +165,32 @@ export function Table({
   //   })
   // }
 
+  const {totalFetched, totalRows, fetchNextPage} = virtualizationConfig
+
+  //called on scroll and possibly on mount to fetch more data as the user scrolls and reaches bottom of table
+  const fetchMoreOnBottomReached = React.useCallback(
+    (containerRefElement?: HTMLDivElement | null) => {
+      if (!totalFetched || !totalRows) return () => {}
+      if (containerRefElement) {
+        const {scrollHeight, scrollTop, clientHeight} = containerRefElement
+        //once the user has scrolled within 300px of the bottom of the table, fetch more data if there is any
+        if (
+          scrollHeight - scrollTop - clientHeight < 300 &&
+          !loaderConfig?.fetchingData &&
+          totalFetched < totalRows
+        ) {
+          fetchNextPage()
+        }
+      }
+    },
+    [fetchNextPage, loaderConfig?.fetchingData, totalFetched, totalRows],
+  )
+
+  //a check on mount and after a fetch to see if the table is already scrolled to the bottom and immediately needs to fetch more data
+  React.useEffect(() => {
+    fetchMoreOnBottomReached(tableContainerRef.current)
+  }, [fetchMoreOnBottomReached])
+
   const table = useReactTable({
     data,
     columns: _columns,
@@ -185,6 +221,19 @@ export function Table({
     if (isDropdownActions) return
     table.getColumn(DROPDOWN_COL_ID)?.toggleVisibility(false)
   }, [])
+
+  const {rows} = table.getRowModel()
+
+  //Virtualizing is optional, but might be necessary if we are going to potentially have hundreds or thousands of rows
+  const rowVirtualizer = useVirtual({
+    parentRef: tableContainerRef,
+    size: rows.length,
+    overscan: 10,
+  })
+  const {virtualItems: virtualRows, totalSize} = rowVirtualizer
+  const paddingTop = virtualRows.length > 0 ? virtualRows?.[0]?.start || 0 : 0
+  const paddingBottom =
+    virtualRows.length > 0 ? totalSize - (virtualRows?.[virtualRows.length - 1]?.end || 0) : 0
 
   return (
     <div className={classes.box}>
@@ -232,82 +281,87 @@ export function Table({
           <div className={classes.selectedInfo}>{Object.keys(rowSelection).length} selected</div>
         </div>
       )}
+      <div
+        className="container"
+        onScroll={e => fetchMoreOnBottomReached(e.target as HTMLDivElement)}
+        ref={tableContainerRef}
+      >
+        <table className={classes.table}>
+          <thead className={clsx(classes.tableHead, isCheckboxActions && classes.tableHead2)}>
+            {table.getHeaderGroups().map(headerGroup => (
+              <tr key={headerGroup.id} className={classes.tableRow}>
+                {headerGroup.headers.map(header => {
+                  const HeaderDef = header.column.columnDef.header
+                  return (
+                    <th key={header.id} className={clsx(classes.tableHeader)}>
+                      {header.isPlaceholder ? null : (
+                        <div
+                          {...{
+                            onClick: header.column.getToggleSortingHandler(),
+                            style: {
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                            },
+                          }}
+                        >
+                          {flexRender(header.column.columnDef.header, header.getContext())}
+                          {{
+                            asc: (
+                              <SVG
+                                path={chevronUp}
+                                spanClassName={classes.tableHeaderSortSpan}
+                                svgClassName={classes.tableHeaderSort}
+                              />
+                            ),
+                            desc: (
+                              <SVG
+                                path={chevronDown}
+                                spanClassName={classes.tableHeaderSortSpan}
+                                svgClassName={classes.tableHeaderSort}
+                              />
+                            ),
+                          }[header.column.getIsSorted() as string] ?? null}
+                        </div>
+                      )}
+                    </th>
+                  )
+                })}
+              </tr>
+            ))}
+          </thead>
 
-      <table className={classes.table}>
-        <thead className={clsx(classes.tableHead, isCheckboxActions && classes.tableHead2)}>
-          {table.getHeaderGroups().map(headerGroup => (
-            <tr key={headerGroup.id} className={classes.tableRow}>
-              {headerGroup.headers.map(header => {
-                const HeaderDef = header.column.columnDef.header
-                return (
-                  <th key={header.id} className={clsx(classes.tableHeader)}>
-                    {header.isPlaceholder ? null : (
-                      <div
-                        {...{
-                          onClick: header.column.getToggleSortingHandler(),
-                          style: {
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                          },
-                        }}
-                      >
-                        {flexRender(header.column.columnDef.header, header.getContext())}
-                        {{
-                          asc: (
-                            <SVG
-                              path={chevronUp}
-                              spanClassName={classes.tableHeaderSortSpan}
-                              svgClassName={classes.tableHeaderSort}
-                            />
-                          ),
-                          desc: (
-                            <SVG
-                              path={chevronDown}
-                              spanClassName={classes.tableHeaderSortSpan}
-                              svgClassName={classes.tableHeaderSort}
-                            />
-                          ),
-                        }[header.column.getIsSorted() as string] ?? null}
-                      </div>
-                    )}
+          {loaderConfig.fetchingData ? (
+            <TableLoader text={loaderConfig.text} />
+          ) : (
+            <tbody className={classes.tableBody}>
+              {table.getRowModel().rows.map(row => (
+                <tr key={row.id} className={classes.tableRow}>
+                  {row.getVisibleCells().map(cell => (
+                    <td key={cell.id} className={classes.tableData}>
+                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          )}
+
+          <tfoot className={classes.tableFoot}>
+            {table.getFooterGroups().map(footerGroup => (
+              <tr key={footerGroup.id} className={classes.tableRow}>
+                {footerGroup.headers.map(header => (
+                  <th key={header.id}>
+                    {header.isPlaceholder
+                      ? null
+                      : flexRender(header.column.columnDef.footer, header.getContext())}
                   </th>
-                )
-              })}
-            </tr>
-          ))}
-        </thead>
-
-        {loaderConfig.fetchingData ? (
-          <TableLoader text={loaderConfig.text} />
-        ) : (
-          <tbody className={classes.tableBody}>
-            {table.getRowModel().rows.map(row => (
-              <tr key={row.id} className={classes.tableRow}>
-                {row.getVisibleCells().map(cell => (
-                  <td key={cell.id} className={classes.tableData}>
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </td>
                 ))}
               </tr>
             ))}
-          </tbody>
-        )}
-
-        <tfoot className={classes.tableFoot}>
-          {table.getFooterGroups().map(footerGroup => (
-            <tr key={footerGroup.id} className={classes.tableRow}>
-              {footerGroup.headers.map(header => (
-                <th key={header.id}>
-                  {header.isPlaceholder
-                    ? null
-                    : flexRender(header.column.columnDef.footer, header.getContext())}
-                </th>
-              ))}
-            </tr>
-          ))}
-        </tfoot>
-      </table>
+          </tfoot>
+        </table>
+      </div>
     </div>
   )
 }
