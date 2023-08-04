@@ -10,6 +10,10 @@ import {
   InputGroup,
   InputLabel,
   InputRightAddon,
+  Popover,
+  PopoverContent,
+  PopoverDescription,
+  PopoverTrigger,
   Table,
 } from './components'
 
@@ -348,6 +352,12 @@ function App() {
           ],
         }}
       /> */}
+      <Popover>
+        <PopoverTrigger openOnHover={false}>trigger</PopoverTrigger>
+        <PopoverContent>
+          <PopoverDescription>Content</PopoverDescription>
+        </PopoverContent>
+      </Popover>
       {/* <SegmentedControl items={items} defaultValue="purchase" controlId="control" /> */}
       {/* <InputContainer size="md">
         <InputLabel>Label</InputLabel>
