@@ -96,9 +96,9 @@
   cursor: not-allowed;
 }
 
-.input[type='date']::-webkit-calendar-picker-indicator {
+/* .input[type='date']::-webkit-calendar-picker-indicator {
   display: none;
-}
+} */
 
 .errorMsg {
   font-weight: 400;

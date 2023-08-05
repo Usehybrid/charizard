@@ -14,6 +14,7 @@ import {
   PopoverContent,
   PopoverDescription,
   PopoverTrigger,
+  SegmentedControl,
   Table,
 } from './components'
 
@@ -300,6 +301,20 @@ function App() {
   ]
   const [selectedVal, setSelectedVal] = React.useState({label: '', value: ''})
 
+  const items = [
+    {
+      label: 'Purchase',
+      value: 'purchase',
+      component: <>purchase</>,
+    },
+    {
+      label: 'Rental',
+      value: 'rental',
+      component: <>rental</>,
+    },
+    {label: 'Lease', value: 'lease', component: <>lease</>},
+  ]
+
   return (
     <div style={styles}>
       {/* <Table
@@ -352,8 +367,8 @@ function App() {
           ],
         }}
       /> */}
-      {/* <SegmentedControl items={items} defaultValue="purchase" controlId="control" /> */}
-      <InputContainer size="md">
+      <SegmentedControl items={items} defaultValue="purchase" />
+      {/* <InputContainer size="md">
         <InputLabel
           infoText="big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text "
           infoTextTooltipStyles={{maxWidth: '300px', minWidth: '300px'}}
@@ -361,16 +376,9 @@ function App() {
           Label
         </InputLabel>
         <InputGroup>
-          <Input value={'value'} />
-          <InputRightAddon
-            isDropdown
-            dropdownOptions={options}
-            handleOptionClick={opt => setSelectedVal(opt)}
-          >
-            {selectedVal.label}
-          </InputRightAddon>
+          <Input type="date" value={'value'} />
         </InputGroup>
-      </InputContainer>
+      </InputContainer> */}
       {/* <Tooltip tooltipId="tooltip">
         <TooltipTrigger>trigger</TooltipTrigger>
         <TooltipContent>content</TooltipContent>
