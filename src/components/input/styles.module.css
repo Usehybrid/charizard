@@ -106,6 +106,7 @@
   line-height: 1.54rem;
   color: var(--danger);
   margin: 0;
+  text-align: left;
 }
 
 .inputElement {

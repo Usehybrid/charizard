@@ -10,6 +10,10 @@ import {
   InputGroup,
   InputLabel,
   InputRightAddon,
+  Popover,
+  PopoverContent,
+  PopoverDescription,
+  PopoverTrigger,
   Table,
 } from './components'
 

@@ -6,7 +6,6 @@ import * as React from 'react'
 import * as popover from '@zag-js/popover'
 import type {Placement} from '@zag-js/popper'
 import {normalizeProps, useMachine} from '@zag-js/react'
-import {useId} from 'react'
 
 interface PopoverProps {
   /**
@@ -40,9 +39,10 @@ export function Popover({
 }: PopoverProps) {
   const [state, send] = useMachine(
     popover.machine({
-      id: useId(),
+      id: React.useId(),
       positioning: {placement},
       closeOnInteractOutside: true,
+      portalled: false,
       ...popoverProps,
     }),
   )
