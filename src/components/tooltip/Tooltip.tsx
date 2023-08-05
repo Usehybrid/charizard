@@ -40,6 +40,7 @@ export function Tooltip({
       id: tooltipId,
       openDelay,
       closeDelay,
+      open: true,
       positioning: {
         placement,
         gutter: 3,

@@ -18,9 +18,18 @@ interface TooltipContentProps {
    * content background
    */
   bg?: 'black' | 'gray' | string
+  /**
+   * positioner styles
+   */
+  positionerStyles?: React.CSSProperties
 }
 
-export function TooltipContent({children, api, bg = 'black'}: TooltipContentProps) {
+export function TooltipContent({
+  children,
+  api,
+  bg = 'black',
+  positionerStyles = {},
+}: TooltipContentProps) {
   const isCustomBg = !['black', 'gray'].includes(bg)
 
   const arrowProps = {
@@ -36,7 +45,7 @@ export function TooltipContent({children, api, bg = 'black'}: TooltipContentProp
   return (
     <>
       {api.isOpen && (
-        <div {...api.positionerProps}>
+        <div {...api.positionerProps} style={{...api?.positionerProps?.style, ...positionerStyles}}>
           <div {...arrowProps} className={clsx(classes.arrow, {[classes[bg]]: !isCustomBg})}>
             <div {...api.arrowTipProps} />
           </div>

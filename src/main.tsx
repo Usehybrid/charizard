@@ -302,7 +302,7 @@ function App() {
 
   return (
     <div style={styles}>
-      <Table
+      {/* <Table
         data={data}
         loaderConfig={{fetchingData: false, text: 'Getting softwares...'}}
         columns={columns}
@@ -351,10 +351,15 @@ function App() {
             {name: 'Testing', onClick: () => {}},
           ],
         }}
-      />
+      /> */}
       {/* <SegmentedControl items={items} defaultValue="purchase" controlId="control" /> */}
-      {/* <InputContainer size="md">
-        <InputLabel>Label</InputLabel>
+      <InputContainer size="md">
+        <InputLabel
+          infoText="big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text "
+          infoTextTooltipStyles={{maxWidth: '300px', minWidth: '300px'}}
+        >
+          Label
+        </InputLabel>
         <InputGroup>
           <Input value={'value'} />
           <InputRightAddon
@@ -365,7 +370,7 @@ function App() {
             {selectedVal.label}
           </InputRightAddon>
         </InputGroup>
-      </InputContainer> */}
+      </InputContainer>
       {/* <Tooltip tooltipId="tooltip">
         <TooltipTrigger>trigger</TooltipTrigger>
         <TooltipContent>content</TooltipContent>
