@@ -28,7 +28,6 @@
   },
   "peerDependencies": {
     "@tanstack/react-table": "^8.9.3",
-    "@tanstack/react-virtual": "3.0.0-alpha.0",
     "@zag-js/checkbox": "^0.13.0",
     "@zag-js/combobox": "^0.13.0",
     "@zag-js/dialog": "^0.13.0",
