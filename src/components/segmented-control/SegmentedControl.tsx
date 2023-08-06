@@ -16,13 +16,24 @@ interface SegmentedControlProps {
    * default value to be selected on first render
    */
   defaultValue?: string
+  /**
+   * handle on change
+   * use this if you are controlling the behavior of segmented control from an external entity
+   */
+  handleOnChange?: (value: string) => void
 }
 
-export function SegmentedControl({items, defaultValue}: SegmentedControlProps) {
+export function SegmentedControl({items, defaultValue, handleOnChange}: SegmentedControlProps) {
   const controlId = React.useId()
 
   const [state, send] = useMachine(
-    radio.machine({id: controlId, value: defaultValue ?? items?.[0]?.value}),
+    radio.machine({
+      id: controlId,
+      value: defaultValue ?? items?.[0]?.value,
+      onChange(details) {
+        handleOnChange && handleOnChange(details.value)
+      },
+    }),
   )
   const api = radio.connect(state, send, normalizeProps)
 

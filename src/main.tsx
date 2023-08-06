@@ -14,6 +14,7 @@ import {
   PopoverContent,
   PopoverDescription,
   PopoverTrigger,
+  SegmentedControl,
   Table,
 } from './components'
 
@@ -300,9 +301,23 @@ function App() {
   ]
   const [selectedVal, setSelectedVal] = React.useState({label: '', value: ''})
 
+  const items = [
+    {
+      label: 'Purchase',
+      value: 'purchase',
+      component: <>purchase</>,
+    },
+    {
+      label: 'Rental',
+      value: 'rental',
+      component: <>rental</>,
+    },
+    {label: 'Lease', value: 'lease', component: <>lease</>},
+  ]
+
   return (
     <div style={styles}>
-      <Table
+      {/* <Table
         data={data}
         loaderConfig={{fetchingData: false, text: 'Getting softwares...'}}
         columns={columns}
@@ -351,19 +366,17 @@ function App() {
             {name: 'Testing', onClick: () => {}},
           ],
         }}
-      />
-      {/* <SegmentedControl items={items} defaultValue="purchase" controlId="control" /> */}
+      /> */}
+      <SegmentedControl items={items} defaultValue="purchase" />
       {/* <InputContainer size="md">
-        <InputLabel>Label</InputLabel>
+        <InputLabel
+          infoText="big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text "
+          infoTextTooltipStyles={{maxWidth: '300px', minWidth: '300px'}}
+        >
+          Label
+        </InputLabel>
         <InputGroup>
-          <Input value={'value'} />
-          <InputRightAddon
-            isDropdown
-            dropdownOptions={options}
-            handleOptionClick={opt => setSelectedVal(opt)}
-          >
-            {selectedVal.label}
-          </InputRightAddon>
+          <Input type="date" value={'value'} />
         </InputGroup>
       </InputContainer> */}
       {/* <Tooltip tooltipId="tooltip">

@@ -39,6 +39,10 @@ interface InputLabelProps {
    * info text
    */
   infoText?: string
+  /**
+   * info text tooltip styles
+   */
+  infoTextTooltipStyles?: React.CSSProperties
 }
 
 export function InputLabel({
@@ -49,6 +53,7 @@ export function InputLabel({
   htmlFor,
   restprops = {},
   infoText,
+  infoTextTooltipStyles = {},
 }: InputLabelProps) {
   const tooltipId = React.useId()
 
@@ -67,7 +72,7 @@ export function InputLabel({
           <TooltipTrigger>
             <SVG path={infoCircleIcon} svgClassName={classes.infoCircleSvg} />
           </TooltipTrigger>
-          <TooltipContent>{infoText}</TooltipContent>
+          <TooltipContent positionerStyles={infoTextTooltipStyles}>{infoText}</TooltipContent>
         </Tooltip>
       )}
     </div>
