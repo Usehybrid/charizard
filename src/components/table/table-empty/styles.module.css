@@ -1,0 +1,11 @@
+.box {
+  background-color: white;
+  border-radius: 4px;
+  padding-top: 80px;
+  padding-bottom: 73px;
+  min-height: 500px;
+}
+
+.empty {
+  text-align: center;
+}

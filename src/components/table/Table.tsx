@@ -20,6 +20,7 @@ import {TableCheckbox} from './table-columns'
 import {CHECKBOX_COL_ID, DROPDOWN_COL_ID} from './constants'
 import type {SortingState, Table, VisibilityState} from '@tanstack/react-table'
 import type {FilterConfig} from './types'
+import TableEmpty from './table-empty'
 
 export type TableProps = {
   data: any
@@ -60,7 +61,6 @@ export type TableProps = {
   selectorConfig?: {
     selectors: {name: string; onClick: any}[]
   }
-
   paginationConfig?: {
     metaData: {
       total_items: number
@@ -68,9 +68,20 @@ export type TableProps = {
     loader: React.ReactNode
     fetchNextPage: () => void
   }
+  emptyStateConfig?: {
+    icon: string
+    isCustom?: {
+      value: boolean
+      component: React.ReactNode
+    }
+    title: string
+    desc: string
+    btnText: string
+    onClick: any
+    columns: number
+  }
 }
 // todo
-//* 2. Reset all filters
 //* 3. Pagination height fix
 //* 4. label prop for under actions dropdown
 //* 5. fix action dropdown style
@@ -93,6 +104,7 @@ export function Table({
   totalText,
   selectorConfig,
   paginationConfig,
+  emptyStateConfig,
 }: TableProps) {
   const [sorting, setSorting] = React.useState<SortingState>([])
   // used for checkbox visibility
@@ -248,6 +260,8 @@ export function Table({
             table={table}
             isCheckboxActions={isCheckboxActions}
             loaderConfig={loaderConfig}
+            isEmpty={isEmpty}
+            emptyStateConfig={emptyStateConfig}
           />
         </InfiniteScroll>
       ) : (
@@ -255,6 +269,8 @@ export function Table({
           table={table}
           isCheckboxActions={isCheckboxActions}
           loaderConfig={loaderConfig}
+          isEmpty={isEmpty}
+          emptyStateConfig={emptyStateConfig}
         />
       )}
     </div>
@@ -265,10 +281,14 @@ function TableComp({
   table,
   isCheckboxActions,
   loaderConfig,
+  emptyStateConfig,
+  isEmpty,
 }: {
   table: Table<unknown>
   isCheckboxActions?: boolean
   loaderConfig: TableProps['loaderConfig']
+  emptyStateConfig: TableProps['emptyStateConfig']
+  isEmpty: boolean
 }) {
   return (
     <table className={classes.table}>
@@ -318,6 +338,8 @@ function TableComp({
 
       {loaderConfig.fetchingData ? (
         <TableLoader text={loaderConfig.text} />
+      ) : isEmpty ? (
+        <TableEmpty emptyStateConfig={emptyStateConfig} />
       ) : (
         <tbody className={classes.tableBody}>
           {table.getRowModel().rows.map(row => (

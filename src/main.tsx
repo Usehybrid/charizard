@@ -298,7 +298,8 @@ function App() {
   return (
     <div style={styles}>
       <Table
-        data={data}
+        data={[] || data}
+        // data={data}
         loaderConfig={{fetchingData: false, text: 'Getting softwares...'}}
         columns={columns}
         searchConfig={{
@@ -334,6 +335,16 @@ function App() {
         isDropdownActions={true}
         actionsConfig={{menuItems}}
         totalText={`${4} softwares`}
+        emptyStateConfig={{
+          icon: randomIcon,
+          title: 'Get started by adding your first inventory',
+          desc: '',
+          btnText: 'add inventory',
+          onClick: () => {
+            console.log('works')
+          },
+          columns: 6,
+        }}
         // selectorConfig={{
         //   selectors: [
         //     {

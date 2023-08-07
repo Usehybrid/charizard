@@ -1,7 +1,6 @@
 .box {
   background-color: var(--white);
   width: 100%;
-  border-bottom: 1px solid var(--slate-200);
 }
 
 .header {
@@ -10,9 +9,9 @@
   align-items: center;
   justify-content: space-between;
   padding: 0 20px;
-
   border-radius: 4px 4px 0px 0px;
   border: 1px solid var(--slate-200);
+  border-bottom: none;
 }
 
 .meta {
@@ -37,6 +36,7 @@
   table-layout: fixed;
   width: 100%;
   border-collapse: collapse;
+  border: 1px solid var(--slate-200);
 }
 
 .tableHead {
@@ -49,10 +49,6 @@
   padding-top: 12px;
   padding-bottom: 12px;
 }
-
-/* .tableBody {
-  width: 100%;
-} */
 
 .tableBody > .tableRow {
   border: 1px solid var(--slate-200);

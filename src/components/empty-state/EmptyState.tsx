@@ -5,6 +5,7 @@
 import * as React from 'react'
 import clsx from 'clsx'
 import classes from './styles.module.css'
+import {Button, ButtonVariant} from '../button'
 
 export interface EmptyStateProps {
   icon: string
@@ -37,9 +38,9 @@ export function EmptyState({
       </div>
 
       {btnText && (
-        <button className={classes.btn} onClick={onClick}>
+        <Button onClick={onClick} variant={ButtonVariant.GHOST}>
           {btnText}
-        </button>
+        </Button>
       )}
     </div>
   )
