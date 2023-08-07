@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client'
 import {createColumnHelper} from '@tanstack/react-table'
 
 import randomIcon from './components/assets/check.svg'
+import randomIcon2 from './components/assets/search-2.svg'
 import {Button, Table} from './components'
 
 const styles = {
@@ -239,7 +240,7 @@ const menuItems = [
   },
   {
     label: 'Archive',
-    iconSrc: randomIcon,
+    iconSrc: randomIcon2,
     onClick: (data: any) => {
       console.log('Archiving', data)
     },
@@ -279,7 +280,7 @@ function App() {
 
   return (
     <div style={styles}>
-      <Table
+      {/* <Table
         // data={[] || data}
         data={data}
         loaderConfig={{isFetching: false, isError: false, text: 'Getting softwares...'}}
@@ -339,20 +340,16 @@ function App() {
         //     {name: 'Testing', onClick: () => {}},
         //   ],
         // }}
-      />
+      /> */}
 
-      {/* <div style={{display: 'flex', alignItems: 'center'}}>
-        <Button.MenuButton menuItems={menuItems} size="sm">
+      <div style={{display: 'flex', alignItems: 'center'}}>
+        <Button.MenuButton menuItems={menuItems} id="add-software-menu">
           Add software
         </Button.MenuButton>
         <div style={{marginLeft: '12px'}}>
-          <Button.ActionsDropdown
-            menuItems={menuItems}
-            id={'software-list-dropdown-action'}
-            size="md"
-          />
+          <Button.ActionsDropdown menuItems={menuItems} id={'software-list-dropdown-action'} />
         </div>
-      </div> */}
+      </div>
     </div>
   )
 }

@@ -9,6 +9,7 @@ import chevronDown from '../assets/chevron-down.svg'
 import threeDots from '../assets/three-dots.svg'
 import classes from './styles.module.css'
 import {useMachine, normalizeProps} from '@zag-js/react'
+import {SVG} from '../svg'
 
 export enum ButtonVariant {
   PRIMARY = 'primary',
@@ -122,7 +123,6 @@ function MenuButton({
           </button>
 
           <button
-            {...api.triggerProps}
             className={clsx(
               classes.btn,
               classes.btnAddon,
@@ -136,6 +136,7 @@ function MenuButton({
               disabled && classes.disabled,
             )}
             disabled={disabled}
+            {...api.triggerProps}
           >
             <img
               src={chevronDown}
@@ -151,7 +152,7 @@ function MenuButton({
         </div>
       )}
 
-      <div {...api.positionerProps} style={{zIndex: 1}}>
+      <div {...api.positionerProps}>
         <div {...api.contentProps} className={classes.menus}>
           {menuItems.map(menu => (
             <div
@@ -160,7 +161,8 @@ function MenuButton({
               {...api.getItemProps({id: menu.label.toLowerCase()})}
               onClick={isCustomTrigger ? () => menu.onClick(customData) : menu.onClick}
             >
-              {menu.iconSrc && <img src={menu.iconSrc} className={classes.menuIcon} />}
+              {/* {menu.iconSrc && <img src={menu.iconSrc} className={classes.menuIcon} />} */}
+              {menu.iconSrc && <SVG path={menu.iconSrc} svgClassName={classes.menuIcon} />}
               {menu.label}
             </div>
           ))}

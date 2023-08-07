@@ -84,7 +84,6 @@ export type TableProps = {
 }
 // todo
 //* 5. fix action dropdown style
-//* 6. fix uncheck row
 //* 8. add radio option
 
 //* 3. Pagination height fix
@@ -121,9 +120,6 @@ export function Table({
     const {setSortOrd, setSortBy, sortMap} = sortConfig
     setSortBy(sortMap[sorting[0].id])
     setSortOrd(sorting[0].desc ? 'desc' : 'asc')
-    return () => {
-      // setSortOrd('')
-    }
   }, [sorting])
 
   useDeepCompareEffect(() => {
@@ -137,25 +133,23 @@ export function Table({
       id: CHECKBOX_COL_ID,
       header: (props: any) => (
         <TableCheckbox
-          row={props.header}
           {...{
             checked: props.table.getIsAllRowsSelected(),
             indeterminate: props.table.getIsSomeRowsSelected(),
             onChange: props.table.getToggleAllRowsSelectedHandler(),
+            row: props.header,
           }}
-          // setSelectedRows={setSelectedRows}
         />
       ),
       cell: ({row}: {row: any}) => (
         <TableCheckbox
-          row={row}
           {...{
             checked: row.getIsSelected(),
             disabled: !row.getCanSelect(),
             indeterminate: row.getIsSomeSelected(),
             onChange: row.getToggleSelectedHandler(),
+            row,
           }}
-          // setSelectedRows={setSelectedRows}
         />
       ),
     },
