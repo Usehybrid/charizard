@@ -1,12 +1,8 @@
-/**
- * @author Soham Sarkar <soham@hybr1d.io>
- */
-
 import * as React from 'react'
 import filterLines from '../../assets/filter-lines.svg'
+import history from '../../assets/history.svg'
 import TableFilter from './TableFilter'
 import classes from './styles.module.css'
-import {shallow} from 'zustand/shallow'
 import {useTableStore} from '../store'
 import type {FilterConfig} from '../types'
 
@@ -19,15 +15,14 @@ export default function TableFilters({filterConfig}: TableFiltersProps) {
 
   const tableFilters = useTableStore(s => s.filters)
 
-  const {setDefaultFilters, addFilters, removeFilters, resetFilters} = useTableStore(
-    s => ({
+  const {setDefaultFilters, addFilters, removeFilters, resetFilters, resetAllFilters} =
+    useTableStore(s => ({
       setDefaultFilters: s.setDefaultFilters,
       addFilters: s.addFilters,
       removeFilters: s.removeFilters,
       resetFilters: s.resetFilters,
-    }),
-    shallow,
-  )
+      resetAllFilters: s.resetAllFilters,
+    }))
 
   React.useEffect(() => {
     if (!filters?.length || isLoading) return
@@ -40,9 +35,11 @@ export default function TableFilters({filterConfig}: TableFiltersProps) {
 
   if (isLoading) return <div className={classes.filtersInfo}>Getting filters...</div>
 
+  const selectedFilters = tableFilters.map(filter => filter.values).flat()
+
   return (
     <div className={classes.filters}>
-      <img src={filterLines} alt="filter lines" className={classes.filterIcon} />
+      <img src={filterLines} alt="filters" className={classes.filterIcon} />
       {filters.map((filter, idx) => (
         <TableFilter
           key={filter.id}
@@ -55,6 +52,17 @@ export default function TableFilters({filterConfig}: TableFiltersProps) {
           filterDispatch={filterDispatch}
         />
       ))}
+      {selectedFilters.length > 0 && (
+        <img
+          title="Reset filters"
+          src={history}
+          alt="reset all filters"
+          className={classes.resetIcon2}
+          onClick={() => {
+            resetAllFilters()
+          }}
+        />
+      )}
     </div>
   )
 }

@@ -17,6 +17,7 @@ import {
   SegmentedControl,
   Table,
 } from './components'
+import {useSoftwareStore} from './test'
 
 const styles = {
   width: '90%',
@@ -259,65 +260,44 @@ const menuItems = [
   },
 ]
 
+const columns = [
+  columnHelper.accessor('software', {
+    header: 'Software Name',
+    cell: info => info.getValue().name,
+  }),
+
+  columnHelper.accessor('software_owners', {
+    header: 'Software Owners',
+
+    cell: info => {
+      return <div>{getFullName(info.row.original.software_owners[0])}</div>
+    },
+    enableSorting: false,
+  }),
+  columnHelper.accessor('software_users', {
+    header: 'Users',
+    cell: info => {
+      return <div>{info.row.original.software_users_count}</div>
+    },
+  }),
+  columnHelper.accessor('software_license', {
+    header: 'Licenses',
+    cell: info => {
+      return <div>{info.row.original.software_license_count}</div>
+    },
+  }),
+]
+
 function App() {
   const [search, setSearch] = React.useState('')
 
-  const columns = [
-    columnHelper.accessor('software', {
-      header: 'Software Name',
-      cell: info => info.getValue().name,
-    }),
+  const query = useSoftwareStore(s => s.query)
 
-    columnHelper.accessor('software_owners', {
-      header: 'Software Owners',
-
-      cell: info => {
-        return <div>{getFullName(info.row.original.software_owners[0])}</div>
-      },
-      enableSorting: false,
-    }),
-    columnHelper.accessor('software_users', {
-      header: 'Users',
-      cell: info => {
-        return <div>{info.row.original.software_users_count}</div>
-      },
-    }),
-    columnHelper.accessor('software_license', {
-      header: 'Licenses',
-      cell: info => {
-        return <div>{info.row.original.software_license_count}</div>
-      },
-    }),
-  ]
-
-  const options = [
-    {label: 'Red', value: 'red'},
-    {label: 'Blue', value: 'blue'},
-    {label: 'Pink', value: 'pink'},
-    {label: 'White', value: 'white'},
-    {label: 'Yellow', value: 'yellow'},
-    {label: 'Light blue', value: 'light_blue'},
-    {label: 'Saffron', value: 'saffron'},
-  ]
-  const [selectedVal, setSelectedVal] = React.useState({label: '', value: ''})
-
-  const items = [
-    {
-      label: 'Purchase',
-      value: 'purchase',
-      component: <>purchase</>,
-    },
-    {
-      label: 'Rental',
-      value: 'rental',
-      component: <>rental</>,
-    },
-    {label: 'Lease', value: 'lease', component: <>lease</>},
-  ]
+  console.log(query.filters)
 
   return (
     <div style={styles}>
-      {/* <Table
+      <Table
         data={data}
         loaderConfig={{fetchingData: false, text: 'Getting softwares...'}}
         columns={columns}
@@ -354,35 +334,19 @@ function App() {
         isDropdownActions={true}
         actionsConfig={{menuItems}}
         totalText={`${4} softwares`}
-        selectorConfig={{
-          selectors: [
-            {
-              name: 'Active',
-              onClick: () => {
-                console.log('test')
-              },
-            },
-            {name: 'New hire', onClick: () => {}},
-            {name: 'Testing', onClick: () => {}},
-          ],
-        }}
-      /> */}
-      <SegmentedControl items={items} defaultValue="purchase" />
-      {/* <InputContainer size="md">
-        <InputLabel
-          infoText="big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text "
-          infoTextTooltipStyles={{maxWidth: '300px', minWidth: '300px'}}
-        >
-          Label
-        </InputLabel>
-        <InputGroup>
-          <Input type="date" value={'value'} />
-        </InputGroup>
-      </InputContainer> */}
-      {/* <Tooltip tooltipId="tooltip">
-        <TooltipTrigger>trigger</TooltipTrigger>
-        <TooltipContent>content</TooltipContent>
-      </Tooltip> */}
+        // selectorConfig={{
+        //   selectors: [
+        //     {
+        //       name: 'Active',
+        //       onClick: () => {
+        //         console.log('test')
+        //       },
+        //     },
+        //     {name: 'New hire', onClick: () => {}},
+        //     {name: 'Testing', onClick: () => {}},
+        //   ],
+        // }}
+      />
 
       {/* <div style={{display: 'flex', alignItems: 'center'}}>
         <Button.MenuButton menuItems={menuItems} size="sm">

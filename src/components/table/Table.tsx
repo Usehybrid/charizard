@@ -3,6 +3,7 @@
  */
 
 import * as React from 'react'
+import InfiniteScroll from 'react-infinite-scroll-component'
 import useDeepCompareEffect from 'use-deep-compare-effect'
 import clsx from 'clsx'
 import TableFilters from './table-filters'
@@ -19,7 +20,6 @@ import {TableCheckbox} from './table-columns'
 import {CHECKBOX_COL_ID, DROPDOWN_COL_ID} from './constants'
 import type {SortingState, Table, VisibilityState} from '@tanstack/react-table'
 import type {FilterConfig} from './types'
-import InfiniteScroll from 'react-infinite-scroll-component'
 
 export type TableProps = {
   data: any
@@ -69,6 +69,14 @@ export type TableProps = {
     fetchNextPage: () => void
   }
 }
+// todo
+//* 2. Reset all filters
+//* 3. Pagination height fix
+//* 4. label prop for under actions dropdown
+//* 5. fix action dropdown style
+//* 6. fix uncheck row
+//* 7. add empty state UI
+//* 8. add radio option
 
 export function Table({
   data,
@@ -91,8 +99,7 @@ export function Table({
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
   const [rowSelection, setRowSelection] = React.useState({})
 
-  //we need a reference to the scrolling element for logic down below
-  const tableContainerRef = React.useRef<HTMLDivElement>(null)
+  const isEmpty = !loaderConfig.fetchingData && !loaderConfig.isErrorFetchingData && !data.length
 
   const {isCheckboxActions, actions, setSelectedRows, iconSrc} = checkboxConfig
 
