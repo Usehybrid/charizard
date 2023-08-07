@@ -282,7 +282,7 @@ function App() {
       <Table
         // data={[] || data}
         data={data}
-        loaderConfig={{fetchingData: false, text: 'Getting softwares...'}}
+        loaderConfig={{isFetching: false, isError: false, text: 'Getting softwares...'}}
         columns={columns}
         searchConfig={{
           search,
@@ -318,7 +318,6 @@ function App() {
         actionsConfig={{menuItems}}
         totalText={`${4} softwares`}
         emptyStateConfig={{
-          // icon: randomIcon,
           icon: './components/assets/check.svg',
           title: 'Get started by adding your first inventory',
           desc: '',

@@ -30,9 +30,10 @@ export type TableProps = {
     menuItems: {label: string; iconSrc?: string; onClick: any}[]
   }
   loaderConfig: {
-    fetchingData: boolean
-    isErrorFetchingData?: boolean
     text?: string
+    isFetching: boolean
+    isError: boolean
+    errMsg?: string
   }
   searchConfig?: {
     placeholder?: string
@@ -111,7 +112,7 @@ export function Table({
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
   const [rowSelection, setRowSelection] = React.useState({})
 
-  const isEmpty = !loaderConfig.fetchingData && !loaderConfig.isErrorFetchingData && !data.length
+  const isEmpty = !loaderConfig.isFetching && !loaderConfig.isError && !data.length
 
   const {isCheckboxActions, actions, setSelectedRows, iconSrc} = checkboxConfig
 
@@ -205,26 +206,30 @@ export function Table({
 
   return (
     <div className={classes.box}>
-      <div className={classes.header}>
-        <div className={classes.meta}>
-          <div className={classes.total}>{totalText}</div>
-          {typeof filterConfig === 'object' && <TableFilters filterConfig={filterConfig} />}
-        </div>
+      {!loaderConfig.isError && (
+        <div className={classes.header}>
+          <div className={classes.meta}>
+            <div className={classes.total}>{totalText}</div>
+            {typeof filterConfig === 'object' && <TableFilters filterConfig={filterConfig} />}
+          </div>
 
-        <div className={classes.selectorGrp}>
-          {typeof selectorConfig === 'object' && <TableSelectors selectorConfig={selectorConfig} />}
-          {typeof searchConfig === 'object' && (
-            <div className={classes.search}>
-              <Search
-                id="table-search"
-                search={searchConfig.search}
-                setSearch={searchConfig.setSearch}
-                placeholder={searchConfig.placeholder}
-              />
-            </div>
-          )}
+          <div className={classes.selectorGrp}>
+            {typeof selectorConfig === 'object' && (
+              <TableSelectors selectorConfig={selectorConfig} />
+            )}
+            {typeof searchConfig === 'object' && (
+              <div className={classes.search}>
+                <Search
+                  id="table-search"
+                  search={searchConfig.search}
+                  setSearch={searchConfig.setSearch}
+                  placeholder={searchConfig.placeholder}
+                />
+              </div>
+            )}
+          </div>
         </div>
-      </div>
+      )}
 
       {isCheckboxActions && Object.keys(rowSelection).length > 0 && (
         <div className={classes.selectedActions}>
@@ -336,8 +341,12 @@ function TableComp({
         ))}
       </thead>
 
-      {loaderConfig.fetchingData ? (
-        <TableLoader text={loaderConfig.text} />
+      {loaderConfig.isFetching ? (
+        <TableLoader
+          text={loaderConfig.text}
+          isError={loaderConfig.isError}
+          isFetching={loaderConfig.isFetching}
+        />
       ) : isEmpty ? (
         <TableEmpty emptyStateConfig={emptyStateConfig} />
       ) : (
@@ -351,6 +360,16 @@ function TableComp({
               ))}
             </tr>
           ))}
+        </tbody>
+      )}
+
+      {loaderConfig.isError && (
+        <tbody style={{height: '200px'}}>
+          <tr>
+            <td colSpan={emptyStateConfig?.columns} style={{textAlign: 'center'}}>
+              {loaderConfig.errMsg || 'Error getting data, please try again later.'}
+            </td>
+          </tr>
         </tbody>
       )}
 
