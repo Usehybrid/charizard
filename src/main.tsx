@@ -281,7 +281,7 @@ function App() {
 
   return (
     <div style={styles}>
-      <Table
+      <Table<Software>
         data={data}
         loaderConfig={{isFetching: false, isError: false, text: 'Getting employees...'}}
         columns={columns}

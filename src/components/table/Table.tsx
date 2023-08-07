@@ -10,6 +10,7 @@ import TableFilters from './table-filters'
 import TableLoader from './table-loader'
 import TableSelectors from './table-selectors'
 import TableEmpty from './table-empty'
+import TableActions from './table-actions'
 import chevronDown from '../assets/chevron-down.svg'
 import chevronUp from '../assets/chevron-up.svg'
 import classes from './styles.module.css'
@@ -22,7 +23,6 @@ import {TableRadio} from './table-columns'
 import {CHECKBOX_COL_ID, DROPDOWN_COL_ID, RADIO_COL_ID} from './constants'
 import type {SortingState, Table, VisibilityState} from '@tanstack/react-table'
 import type {FilterConfig} from './types'
-import TableActions from './table-actions'
 
 export type TableProps<T> = {
   data: T
