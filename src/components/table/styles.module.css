@@ -60,6 +60,13 @@
   border-right: 1px solid var(--slate-200);
 }
 
+.headerTxt {
+  color: var(--gray-700);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 24px;
+}
+
 .tableHeader {
   color: var(--secondary);
   font-size: 10px;

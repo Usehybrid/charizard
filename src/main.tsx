@@ -282,19 +282,19 @@ function App() {
     <div style={styles}>
       <Table
         data={data}
-        loaderConfig={{isFetching: false, isError: false, text: 'Getting softwares...'}}
+        loaderConfig={{isFetching: false, isError: false, text: 'Getting employees...'}}
         columns={columns}
         searchConfig={{
           search,
           setSearch,
-          placeholder: 'Search by software name',
+          placeholder: 'Search your employees',
         }}
-        filterConfig={{
-          filters,
-          isLoading: false,
-          isError: false,
-          filterDispatch: () => {},
-        }}
+        // filterConfig={{
+        //   filters,
+        //   isLoading: false,
+        //   isError: false,
+        //   filterDispatch: () => {},
+        // }}
         sortConfig={{
           sortBy: '',
           setSortBy: () => {},
@@ -305,7 +305,7 @@ function App() {
           },
         }}
         rowSelectionConfig={{
-          isCheckbox: true,
+          isRadio: true,
           actions: [
             {
               icon: randomIcon,
@@ -314,7 +314,7 @@ function App() {
             },
           ],
         }}
-        actionsConfig={{menuItems, isDropdownActions: true}}
+        // actionsConfig={{menuItems, isDropdownActions: true}}
         totalText={`${4} softwares`}
         emptyStateConfig={{
           icon: './components/assets/check.svg',
@@ -326,18 +326,18 @@ function App() {
           },
           columns: 6,
         }}
-        // selectorConfig={{
-        //   selectors: [
-        //     {
-        //       name: 'Active',
-        //       onClick: () => {
-        //         console.log('test')
-        //       },
-        //     },
-        //     {name: 'New hire', onClick: () => {}},
-        //     {name: 'Testing', onClick: () => {}},
-        //   ],
-        // }}
+        selectorConfig={{
+          selectors: [
+            {
+              name: 'Active',
+              onClick: () => {
+                console.log('test')
+              },
+            },
+            {name: 'New hire', onClick: () => {}},
+          ],
+        }}
+        headerText="Choose your employee to ship the asset"
       />
 
       {/* <div style={{display: 'flex', alignItems: 'center'}}>

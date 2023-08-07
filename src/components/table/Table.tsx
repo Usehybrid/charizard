@@ -83,6 +83,7 @@ export type TableProps = {
     onClick: any
     columns: number
   }
+  headerText?: string
 }
 
 //* 4. label prop for under actions dropdown
@@ -105,6 +106,7 @@ export function Table({
   selectorConfig,
   paginationConfig,
   emptyStateConfig,
+  headerText,
 }: TableProps) {
   const [sorting, setSorting] = React.useState<SortingState>([])
   // used for checkbox visibility
@@ -232,10 +234,14 @@ export function Table({
     <div className={classes.box}>
       {!loaderConfig.isError && (
         <div className={classes.header}>
-          <div className={classes.meta}>
-            <div className={classes.total}>{totalText}</div>
-            {typeof filterConfig === 'object' && <TableFilters filterConfig={filterConfig} />}
-          </div>
+          {!headerText && (
+            <div className={classes.meta}>
+              <div className={classes.total}>{totalText}</div>
+              {typeof filterConfig === 'object' && <TableFilters filterConfig={filterConfig} />}
+            </div>
+          )}
+
+          {headerText && <div className={classes.headerTxt}>{headerText}</div>}
 
           <div className={classes.selectorGrp}>
             {typeof selectorConfig === 'object' && (
