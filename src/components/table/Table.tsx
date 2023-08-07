@@ -22,13 +22,16 @@ import {TableRadio} from './table-columns'
 import {CHECKBOX_COL_ID, DROPDOWN_COL_ID, RADIO_COL_ID} from './constants'
 import type {SortingState, Table, VisibilityState} from '@tanstack/react-table'
 import type {FilterConfig} from './types'
+import TableActions from './table-actions'
 
-export type TableProps = {
-  data: any
+export type TableProps<T> = {
+  data: T
   columns: any
   actionsConfig?: {
     isDropdownActions?: boolean
     menuItems?: {label: string; iconSrc?: string; onClick: any}[]
+    labelText?: boolean
+    key: string
   }
   loaderConfig: {
     text?: string
@@ -86,9 +89,7 @@ export type TableProps = {
   headerText?: string
 }
 
-//* 4. label prop for under actions dropdown
-
-export function Table({
+export function Table<T>({
   data,
   loaderConfig,
   columns,
@@ -100,6 +101,7 @@ export function Table({
   },
   actionsConfig = {
     isDropdownActions: false,
+    key: '',
   },
   searchConfig,
   totalText,
@@ -107,7 +109,7 @@ export function Table({
   paginationConfig,
   emptyStateConfig,
   headerText,
-}: TableProps) {
+}: TableProps<T[]>) {
   const [sorting, setSorting] = React.useState<SortingState>([])
   // used for checkbox visibility
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
@@ -173,11 +175,12 @@ export function Table({
     ...columns,
     {
       id: DROPDOWN_COL_ID,
+
       cell: (props: any) => (
-        <Button.ActionsDropdown
-          menuItems={actionsConfig?.menuItems || []}
+        <TableActions
+          actionsConfig={actionsConfig}
+          id={props.row.original.id || 'dropdown-actions'}
           data={props.row.original}
-          id={props.row.original.id || 'dropdown-action'}
         />
       ),
       header: 'Actions',
@@ -322,11 +325,11 @@ function TableComp({
   emptyStateConfig,
   isEmpty,
 }: {
-  table: Table<unknown>
+  table: Table<any>
   isCheckbox?: boolean
   isRadio?: boolean
-  loaderConfig: TableProps['loaderConfig']
-  emptyStateConfig: TableProps['emptyStateConfig']
+  loaderConfig: TableProps<any>['loaderConfig']
+  emptyStateConfig: TableProps<any>['emptyStateConfig']
   isEmpty: boolean
 }) {
   return (

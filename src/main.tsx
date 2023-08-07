@@ -83,6 +83,7 @@ export interface Software {
   deleted_on: any
   software_license_count: string
   software_users_count: string
+  status: string
 }
 
 const data: Software[] = [
@@ -91,6 +92,7 @@ const data: Software[] = [
     notes: 'Updated Adobde Xd Design',
     description: "This will be used for designing purpose and it's updated",
     is_deleted: false,
+    status: 'In transit',
     account_manager_name: null,
     account_manager_email: null,
     software: {
@@ -170,6 +172,7 @@ const data: Software[] = [
     is_deleted: false,
     account_manager_name: null,
     account_manager_email: null,
+    status: 'Delivered',
     software: {
       id: '89b6b8d7-c770-457b-808d-93bf12f028ea',
       name: 'Figma',
@@ -252,10 +255,8 @@ const columns = [
     header: 'Software Name',
     cell: info => info.getValue().name,
   }),
-
   columnHelper.accessor('software_owners', {
     header: 'Software Owners',
-
     cell: info => {
       return <div>{getFullName(info.row.original.software_owners[0])}</div>
     },
@@ -289,12 +290,12 @@ function App() {
           setSearch,
           placeholder: 'Search your employees',
         }}
-        // filterConfig={{
-        //   filters,
-        //   isLoading: false,
-        //   isError: false,
-        //   filterDispatch: () => {},
-        // }}
+        filterConfig={{
+          filters,
+          isLoading: false,
+          isError: false,
+          filterDispatch: () => {},
+        }}
         sortConfig={{
           sortBy: '',
           setSortBy: () => {},
@@ -314,7 +315,7 @@ function App() {
             },
           ],
         }}
-        // actionsConfig={{menuItems, isDropdownActions: true}}
+        actionsConfig={{menuItems, isDropdownActions: true, labelText: true, key: 'status'}}
         totalText={`${4} softwares`}
         emptyStateConfig={{
           icon: './components/assets/check.svg',
@@ -326,18 +327,18 @@ function App() {
           },
           columns: 6,
         }}
-        selectorConfig={{
-          selectors: [
-            {
-              name: 'Active',
-              onClick: () => {
-                console.log('test')
-              },
-            },
-            {name: 'New hire', onClick: () => {}},
-          ],
-        }}
-        headerText="Choose your employee to ship the asset"
+        // selectorConfig={{
+        //   selectors: [
+        //     {
+        //       name: 'Active',
+        //       onClick: () => {
+        //         console.log('test')
+        //       },
+        //     },
+        //     {name: 'New hire', onClick: () => {}},
+        //   ],
+        // }}
+        // headerText="Choose your employee to ship the asset"
       />
 
       {/* <div style={{display: 'flex', alignItems: 'center'}}>
