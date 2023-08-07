@@ -6,6 +6,7 @@ import * as React from 'react'
 import clsx from 'clsx'
 import classes from './styles.module.css'
 import {Button, ButtonVariant} from '../button'
+import {SVG} from '../svg'
 
 export interface EmptyStateProps {
   icon: string
@@ -30,7 +31,7 @@ export function EmptyState({
   return (
     <div className={clsx(classes.container, flexDir === 'row' && classes.containerRow)}>
       <div className={classes.huiEmptyStateIconContainer}>
-        <img src={icon} alt="empty state icon" className={classes.huiEmptyStateIcon} />
+        <SVG path={icon} />
       </div>
       <div>
         <h6 className={clsx(classes.title, flexDir === 'row' && classes.textRow)}>{title}</h6>

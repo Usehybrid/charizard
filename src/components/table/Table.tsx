@@ -86,7 +86,6 @@ export type TableProps = {
 //* 4. label prop for under actions dropdown
 //* 5. fix action dropdown style
 //* 6. fix uncheck row
-//* 7. add empty state UI
 //* 8. add radio option
 
 export function Table({

@@ -3,21 +3,7 @@ import ReactDOM from 'react-dom/client'
 import {createColumnHelper} from '@tanstack/react-table'
 
 import randomIcon from './components/assets/check.svg'
-import {
-  Button,
-  Input,
-  InputContainer,
-  InputGroup,
-  InputLabel,
-  InputRightAddon,
-  Popover,
-  PopoverContent,
-  PopoverDescription,
-  PopoverTrigger,
-  SegmentedControl,
-  Table,
-} from './components'
-import {useSoftwareStore} from './test'
+import {Button, Table} from './components'
 
 const styles = {
   width: '90%',
@@ -291,15 +277,11 @@ const columns = [
 function App() {
   const [search, setSearch] = React.useState('')
 
-  const query = useSoftwareStore(s => s.query)
-
-  console.log(query.filters)
-
   return (
     <div style={styles}>
       <Table
-        data={[] || data}
-        // data={data}
+        // data={[] || data}
+        data={data}
         loaderConfig={{fetchingData: false, text: 'Getting softwares...'}}
         columns={columns}
         searchConfig={{
@@ -336,7 +318,8 @@ function App() {
         actionsConfig={{menuItems}}
         totalText={`${4} softwares`}
         emptyStateConfig={{
-          icon: randomIcon,
+          // icon: randomIcon,
+          icon: './components/assets/check.svg',
           title: 'Get started by adding your first inventory',
           desc: '',
           btnText: 'add inventory',
