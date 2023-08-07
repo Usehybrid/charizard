@@ -82,11 +82,12 @@ export type TableProps = {
   }
 }
 // todo
-//* 3. Pagination height fix
-//* 4. label prop for under actions dropdown
 //* 5. fix action dropdown style
 //* 6. fix uncheck row
 //* 8. add radio option
+
+//* 3. Pagination height fix
+//* 4. label prop for under actions dropdown
 
 export function Table({
   data,
@@ -127,7 +128,7 @@ export function Table({
   useDeepCompareEffect(() => {
     if (!checkboxConfig || !setSelectedRows) return
     const rows = table.getSelectedRowModel().rows.map(row => row.original)
-    setSelectedRows((s: any[]) => [...s, ...rows])
+    setSelectedRows((s: any[]) => [...rows])
   }, [rowSelection])
 
   const _columns = [
