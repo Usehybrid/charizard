@@ -161,7 +161,6 @@ function MenuButton({
               {...api.getItemProps({id: menu.label.toLowerCase()})}
               onClick={isCustomTrigger ? () => menu.onClick(customData) : menu.onClick}
             >
-              {/* {menu.iconSrc && <img src={menu.iconSrc} className={classes.menuIcon} />} */}
               {menu.iconSrc && <SVG path={menu.iconSrc} svgClassName={classes.menuIcon} />}
               {menu.label}
             </div>

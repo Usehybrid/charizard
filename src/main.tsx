@@ -280,8 +280,7 @@ function App() {
 
   return (
     <div style={styles}>
-      {/* <Table
-        // data={[] || data}
+      <Table
         data={data}
         loaderConfig={{isFetching: false, isError: false, text: 'Getting softwares...'}}
         columns={columns}
@@ -305,8 +304,8 @@ function App() {
             software: 'softwares.names',
           },
         }}
-        checkboxConfig={{
-          isCheckboxActions: true,
+        rowSelectionConfig={{
+          isCheckbox: true,
           actions: [
             {
               icon: randomIcon,
@@ -315,8 +314,7 @@ function App() {
             },
           ],
         }}
-        isDropdownActions={true}
-        actionsConfig={{menuItems}}
+        actionsConfig={{menuItems, isDropdownActions: true}}
         totalText={`${4} softwares`}
         emptyStateConfig={{
           icon: './components/assets/check.svg',
@@ -340,16 +338,16 @@ function App() {
         //     {name: 'Testing', onClick: () => {}},
         //   ],
         // }}
-      /> */}
+      />
 
-      <div style={{display: 'flex', alignItems: 'center'}}>
+      {/* <div style={{display: 'flex', alignItems: 'center'}}>
         <Button.MenuButton menuItems={menuItems} id="add-software-menu">
           Add software
         </Button.MenuButton>
         <div style={{marginLeft: '12px'}}>
           <Button.ActionsDropdown menuItems={menuItems} id={'software-list-dropdown-action'} />
         </div>
-      </div>
+      </div> */}
     </div>
   )
 }

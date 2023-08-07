@@ -9,6 +9,7 @@ import clsx from 'clsx'
 import TableFilters from './table-filters'
 import TableLoader from './table-loader'
 import TableSelectors from './table-selectors'
+import TableEmpty from './table-empty'
 import chevronDown from '../assets/chevron-down.svg'
 import chevronUp from '../assets/chevron-up.svg'
 import classes from './styles.module.css'
@@ -17,17 +18,17 @@ import {Search} from '../search'
 import {Button, ButtonVariant} from '../button'
 import {SVG} from '../svg'
 import {TableCheckbox} from './table-columns'
-import {CHECKBOX_COL_ID, DROPDOWN_COL_ID} from './constants'
+import {TableRadio} from './table-columns'
+import {CHECKBOX_COL_ID, DROPDOWN_COL_ID, RADIO_COL_ID} from './constants'
 import type {SortingState, Table, VisibilityState} from '@tanstack/react-table'
 import type {FilterConfig} from './types'
-import TableEmpty from './table-empty'
 
 export type TableProps = {
   data: any
   columns: any
-  isDropdownActions?: boolean
-  actionsConfig: {
-    menuItems: {label: string; iconSrc?: string; onClick: any}[]
+  actionsConfig?: {
+    isDropdownActions?: boolean
+    menuItems?: {label: string; iconSrc?: string; onClick: any}[]
   }
   loaderConfig: {
     text?: string
@@ -49,8 +50,9 @@ export type TableProps = {
   }
   filterConfig?: FilterConfig
   totalText: string
-  checkboxConfig?: {
-    isCheckboxActions?: boolean
+  rowSelectionConfig?: {
+    isCheckbox?: boolean
+    isRadio?: boolean
     actions?: {
       icon: string
       text: string
@@ -82,11 +84,7 @@ export type TableProps = {
     columns: number
   }
 }
-// todo
-//* 5. fix action dropdown style
-//* 8. add radio option
 
-//* 3. Pagination height fix
 //* 4. label prop for under actions dropdown
 
 export function Table({
@@ -95,11 +93,13 @@ export function Table({
   columns,
   filterConfig,
   sortConfig,
-  checkboxConfig = {
-    isCheckboxActions: false,
+  rowSelectionConfig = {
+    isCheckbox: false,
+    isRadio: false,
   },
-  isDropdownActions = false,
-  actionsConfig,
+  actionsConfig = {
+    isDropdownActions: false,
+  },
   searchConfig,
   totalText,
   selectorConfig,
@@ -113,7 +113,7 @@ export function Table({
 
   const isEmpty = !loaderConfig.isFetching && !loaderConfig.isError && !data.length
 
-  const {isCheckboxActions, actions, setSelectedRows, iconSrc} = checkboxConfig
+  const {isCheckbox, isRadio, actions, setSelectedRows, iconSrc} = rowSelectionConfig
 
   useDeepCompareEffect(() => {
     if (!sortConfig || !sorting.length) return
@@ -123,7 +123,7 @@ export function Table({
   }, [sorting])
 
   useDeepCompareEffect(() => {
-    if (!checkboxConfig || !setSelectedRows) return
+    if (!rowSelectionConfig || !setSelectedRows) return
     const rows = table.getSelectedRowModel().rows.map(row => row.original)
     setSelectedRows((s: any[]) => [...rows])
   }, [rowSelection])
@@ -153,12 +153,27 @@ export function Table({
         />
       ),
     },
+    {
+      id: RADIO_COL_ID,
+      cell: ({row}: {row: any}) => (
+        <TableRadio
+          {...{
+            checked: row.getIsSelected(),
+            disabled: !row.getCanSelect(),
+            indeterminate: row.getIsSomeSelected(),
+            onChange: row.getToggleSelectedHandler(),
+
+            row,
+          }}
+        />
+      ),
+    },
     ...columns,
     {
       id: DROPDOWN_COL_ID,
       cell: (props: any) => (
         <Button.ActionsDropdown
-          menuItems={actionsConfig?.menuItems}
+          menuItems={actionsConfig?.menuItems || []}
           data={props.row.original}
           id={props.row.original.id || 'dropdown-action'}
         />
@@ -178,23 +193,38 @@ export function Table({
     manualSorting: true,
     onSortingChange: setSorting,
     onColumnVisibilityChange: setColumnVisibility,
-    enableRowSelection: true, //enable row selection for all rows
+    enableRowSelection: true,
     // enableRowSelection: row => row.original.age > 18, // or enable row selection conditionally per row
     onRowSelectionChange: setRowSelection,
+    enableMultiRowSelection: isRadio ? false : true,
     manualPagination: true,
     manualFiltering: true,
     getCoreRowModel: getCoreRowModel(),
   })
 
+  React.useLayoutEffect(() => {
+    if (isCheckbox && isRadio)
+      throw new Error(
+        'Hybrid UI<Table>: Can not use both checkbox and radio columns, please use only one',
+      )
+  }, [])
+
   // hide checkbox column
   React.useLayoutEffect(() => {
-    if (isCheckboxActions) return
+    if (isCheckbox) return
     table.getColumn(CHECKBOX_COL_ID)?.toggleVisibility(false)
+  }, [])
+
+  // hide checkbox column
+  React.useLayoutEffect(() => {
+    if (isRadio) return
+    table.getColumn(RADIO_COL_ID)?.toggleVisibility(false)
   }, [])
 
   // hide actions dropdown column
   React.useLayoutEffect(() => {
-    if (isDropdownActions) return
+    console.log(actionsConfig)
+    if (actionsConfig.isDropdownActions) return
     table.getColumn(DROPDOWN_COL_ID)?.toggleVisibility(false)
   }, [])
 
@@ -225,7 +255,7 @@ export function Table({
         </div>
       )}
 
-      {isCheckboxActions && Object.keys(rowSelection).length > 0 && (
+      {isCheckbox && Object.keys(rowSelection).length > 0 && (
         <div className={classes.selectedActions}>
           <div className={classes.selectedAction}>
             <div>
@@ -257,7 +287,8 @@ export function Table({
         >
           <TableComp
             table={table}
-            isCheckboxActions={isCheckboxActions}
+            isCheckbox={isCheckbox}
+            isRadio={isRadio}
             loaderConfig={loaderConfig}
             isEmpty={isEmpty}
             emptyStateConfig={emptyStateConfig}
@@ -266,7 +297,8 @@ export function Table({
       ) : (
         <TableComp
           table={table}
-          isCheckboxActions={isCheckboxActions}
+          isCheckbox={isCheckbox}
+          isRadio={isRadio}
           loaderConfig={loaderConfig}
           isEmpty={isEmpty}
           emptyStateConfig={emptyStateConfig}
@@ -278,20 +310,28 @@ export function Table({
 
 function TableComp({
   table,
-  isCheckboxActions,
+  isCheckbox,
+  isRadio,
   loaderConfig,
   emptyStateConfig,
   isEmpty,
 }: {
   table: Table<unknown>
-  isCheckboxActions?: boolean
+  isCheckbox?: boolean
+  isRadio?: boolean
   loaderConfig: TableProps['loaderConfig']
   emptyStateConfig: TableProps['emptyStateConfig']
   isEmpty: boolean
 }) {
   return (
     <table className={classes.table}>
-      <thead className={clsx(classes.tableHead, isCheckboxActions && classes.tableHead2)}>
+      <thead
+        className={clsx(
+          classes.tableHead,
+          isCheckbox && classes.tableHead2,
+          isRadio && classes.tableHead3,
+        )}
+      >
         {table.getHeaderGroups().map(headerGroup => (
           <tr key={headerGroup.id} className={classes.tableRow}>
             {headerGroup.headers.map(header => {
