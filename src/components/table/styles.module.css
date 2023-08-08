@@ -1,7 +1,6 @@
 .box {
   background-color: var(--white);
   width: 100%;
-  border-bottom: 1px solid var(--slate-200);
 }
 
 .header {
@@ -10,9 +9,9 @@
   align-items: center;
   justify-content: space-between;
   padding: 0 20px;
-
   border-radius: 4px 4px 0px 0px;
   border: 1px solid var(--slate-200);
+  border-bottom: none;
 }
 
 .meta {
@@ -37,6 +36,7 @@
   table-layout: fixed;
   width: 100%;
   border-collapse: collapse;
+  border: 1px solid var(--slate-200);
 }
 
 .tableHead {
@@ -50,10 +50,6 @@
   padding-bottom: 12px;
 }
 
-/* .tableBody {
-  width: 100%;
-} */
-
 .tableBody > .tableRow {
   border: 1px solid var(--slate-200);
   border-bottom: none;
@@ -62,6 +58,13 @@
 .tableHead > .tableRow {
   border-left: 1px solid var(--slate-200);
   border-right: 1px solid var(--slate-200);
+}
+
+.headerTxt {
+  color: var(--gray-700);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 24px;
 }
 
 .tableHeader {
@@ -77,6 +80,11 @@
 /* for width for checkbox column if used */
 .tableHead2 th:first-child {
   width: 4%;
+}
+
+/* for width for radio column if used */
+.tableHead3 th:first-child {
+  width: 7%;
 }
 
 .tableHeaderSortSpan {

@@ -26,18 +26,6 @@
   max-width: 100%;
 }
 
-.btn {
-  margin-top: 20px;
-  background: var(--iris-10);
-  border: 1px solid var(--iris);
-  border-radius: 4px;
-  width: 131px;
-  height: 40px;
-  color: var(--iris);
-  font-size: 16px;
-  line-height: 24px;
-}
-
 .title {
   font-weight: 600;
   font-size: 1.23rem;
@@ -61,4 +49,8 @@
 
 .desc.textRow {
   text-align: left;
+}
+
+.info {
+  margin-bottom: 20px;
 }

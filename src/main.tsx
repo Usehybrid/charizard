@@ -18,6 +18,7 @@ import {
   SegmentedControl,
   Table,
 } from './components'
+import randomIcon2 from './components/assets/search-2.svg'
 
 const styles = {
   width: '90%',
@@ -96,6 +97,7 @@ export interface Software {
   deleted_on: any
   software_license_count: string
   software_users_count: string
+  status: string
 }
 
 const data: Software[] = [
@@ -104,6 +106,7 @@ const data: Software[] = [
     notes: 'Updated Adobde Xd Design',
     description: "This will be used for designing purpose and it's updated",
     is_deleted: false,
+    status: 'In transit',
     account_manager_name: null,
     account_manager_email: null,
     software: {
@@ -183,6 +186,7 @@ const data: Software[] = [
     is_deleted: false,
     account_manager_name: null,
     account_manager_email: null,
+    status: 'Delivered',
     software: {
       id: '89b6b8d7-c770-457b-808d-93bf12f028ea',
       name: 'Figma',
@@ -253,11 +257,37 @@ const menuItems = [
   },
   {
     label: 'Archive',
-    iconSrc: randomIcon,
+    iconSrc: randomIcon2,
     onClick: (data: any) => {
       console.log('Archiving', data)
     },
   },
+]
+
+const columns = [
+  columnHelper.accessor('software', {
+    header: 'Software Name',
+    cell: info => info.getValue().name,
+  }),
+  columnHelper.accessor('software_owners', {
+    header: 'Software Owners',
+    cell: info => {
+      return <div>{getFullName(info.row.original.software_owners[0])}</div>
+    },
+    enableSorting: false,
+  }),
+  columnHelper.accessor('software_users', {
+    header: 'Users',
+    cell: info => {
+      return <div>{info.row.original.software_users_count}</div>
+    },
+  }),
+  columnHelper.accessor('software_license', {
+    header: 'Licenses',
+    cell: info => {
+      return <div>{info.row.original.software_license_count}</div>
+    },
+  }),
 ]
 
 function App() {
@@ -363,14 +393,14 @@ function App() {
 
   return (
     <div style={styles}>
-      {/* <Table
+      {/* <Table<Software>
         data={data}
-        loaderConfig={{fetchingData: false, text: 'Getting softwares...'}}
+        loaderConfig={{isFetching: false, isError: false, text: 'Getting employees...'}}
         columns={columns}
         searchConfig={{
           search,
           setSearch,
-          placeholder: 'Search by software name',
+          placeholder: 'Search your employees',
         }}
         filterConfig={{
           filters,
@@ -387,8 +417,8 @@ function App() {
             software: 'softwares.names',
           },
         }}
-        checkboxConfig={{
-          isCheckboxActions: true,
+        rowSelectionConfig={{
+          isRadio: true,
           actions: [
             {
               icon: randomIcon,
@@ -397,22 +427,19 @@ function App() {
             },
           ],
         }}
-        isDropdownActions={true}
-        actionsConfig={{menuItems}}
+        actionsConfig={{menuItems, isDropdownActions: true, labelText: true, key: 'status'}}
         totalText={`${4} softwares`}
-        selectorConfig={{
-          selectors: [
-            {
-              name: 'Active',
-              onClick: () => {
-                console.log('test')
-              },
-            },
-            {name: 'New hire', onClick: () => {}},
-            {name: 'Testing', onClick: () => {}},
-          ],
+        emptyStateConfig={{
+          icon: './components/assets/check.svg',
+          title: 'Get started by adding your first inventory',
+          desc: '',
+          btnText: 'add inventory',
+          onClick: () => {
+            console.log('works')
+          },
+          columns: 6,
         }}
-      /> */}
+      />  */}
       {/* <SegmentedControl items={items} defaultValue="purchase" /> */}
       <Progress
         steps={steps}
@@ -439,15 +466,11 @@ function App() {
       </Tooltip> */}
 
       {/* <div style={{display: 'flex', alignItems: 'center'}}>
-        <Button.MenuButton menuItems={menuItems} size="sm">
+        <Button.MenuButton menuItems={menuItems} id="add-software-menu">
           Add software
         </Button.MenuButton>
         <div style={{marginLeft: '12px'}}>
-          <Button.ActionsDropdown
-            menuItems={menuItems}
-            id={'software-list-dropdown-action'}
-            size="md"
-          />
+          <Button.ActionsDropdown menuItems={menuItems} id={'software-list-dropdown-action'} />
         </div>
       </div> */}
     </div>

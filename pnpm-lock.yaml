@@ -8,9 +8,6 @@ dependencies:
   '@tanstack/react-table':
     specifier: ^8.9.3
     version: 8.9.3(react-dom@18.2.0)(react@18.2.0)
-  '@tanstack/react-virtual':
-    specifier: 3.0.0-alpha.0
-    version: 3.0.0-alpha.0(react@18.2.0)
   '@zag-js/checkbox':
     specifier: ^0.13.0
     version: 0.13.0
@@ -2445,10 +2442,6 @@ packages:
       '@babel/runtime': 7.22.6
     dev: true
 
-  /@reach/observe-rect@1.2.0:
-    resolution: {integrity: sha512-Ba7HmkFgfQxZqqaeIWWkNK0rEhpxVQHIoVyW1YDSkGsGIXzcaW4deC8B0pZrNSSyLTdIk7y+5olKt5+g0GmFIQ==}
-    dev: false
-
   /@rollup/pluginutils@5.0.2:
     resolution: {integrity: sha512-pTd9rIsP92h+B6wWwFbW8RkZv4hiR/xKsqre4SIuAOaOEQRxi0lqLke9k2/7WegC85GgUs9pjmOjCUi3In4vwA==}
     engines: {node: '>=14.0.0'}
@@ -3410,17 +3403,6 @@ packages:
       '@tanstack/table-core': 8.9.3
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
-    dev: false
-
-  /@tanstack/react-virtual@3.0.0-alpha.0(react@18.2.0):
-    resolution: {integrity: sha512-WpHU/dt34NwZZ8qtiE05TF+nX/b1W6qrWZarO+s8jJFpPVicrTbJKp5Bjt4eSJuk7aYw272oEfsH3ABBRgj+3A==}
-    engines: {node: '>=12'}
-    peerDependencies:
-      react: '>=16'
-    dependencies:
-      '@babel/runtime': 7.22.6
-      '@reach/observe-rect': 1.2.0
-      react: 18.2.0
     dev: false
 
   /@tanstack/table-core@8.9.3:

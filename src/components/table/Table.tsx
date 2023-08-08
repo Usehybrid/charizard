@@ -3,36 +3,41 @@
  */
 
 import * as React from 'react'
+import InfiniteScroll from 'react-infinite-scroll-component'
 import useDeepCompareEffect from 'use-deep-compare-effect'
 import clsx from 'clsx'
 import TableFilters from './table-filters'
 import TableLoader from './table-loader'
+import TableSelectors from './table-selectors'
+import TableEmpty from './table-empty'
+import TableActions from './table-actions'
 import chevronDown from '../assets/chevron-down.svg'
 import chevronUp from '../assets/chevron-up.svg'
-import chevronUp1 from '../assets/chevron-up.svg'
 import classes from './styles.module.css'
 import {useReactTable, getCoreRowModel, flexRender} from '@tanstack/react-table'
 import {Search} from '../search'
 import {Button, ButtonVariant} from '../button'
 import {SVG} from '../svg'
 import {TableCheckbox} from './table-columns'
-import {CHECKBOX_COL_ID, DROPDOWN_COL_ID} from './constants'
-import type {SortingState, VisibilityState} from '@tanstack/react-table'
+import {TableRadio} from './table-columns'
+import {CHECKBOX_COL_ID, DROPDOWN_COL_ID, RADIO_COL_ID} from './constants'
+import type {SortingState, Table, VisibilityState} from '@tanstack/react-table'
 import type {FilterConfig} from './types'
-import TableSelectors from './table-selectors'
-import {useVirtual} from '@tanstack/react-virtual'
 
-export interface TableProps {
-  data: any
+export type TableProps<T> = {
+  data: T
   columns: any
-  isDropdownActions?: boolean
-  actionsConfig: {
-    menuItems: {label: string; iconSrc?: string; onClick: any}[]
+  actionsConfig?: {
+    isDropdownActions?: boolean
+    menuItems?: {label: string; iconSrc?: string; onClick: any}[]
+    labelText?: boolean
+    key: string
   }
   loaderConfig: {
-    fetchingData: boolean
-    isErrorFetchingData?: boolean
     text?: string
+    isFetching: boolean
+    isError: boolean
+    errMsg?: string
   }
   searchConfig?: {
     placeholder?: string
@@ -48,8 +53,9 @@ export interface TableProps {
   }
   filterConfig?: FilterConfig
   totalText: string
-  checkboxConfig?: {
-    isCheckboxActions?: boolean
+  rowSelectionConfig?: {
+    isCheckbox?: boolean
+    isRadio?: boolean
     actions?: {
       icon: string
       text: string
@@ -61,53 +67,69 @@ export interface TableProps {
   selectorConfig?: {
     selectors: {name: string; onClick: any}[]
   }
-  virtualizationConfig?: {
-    totalFetched: number | null
-    totalRows: number | null
-    fetchNextPage: any
+  paginationConfig?: {
+    metaData: {
+      total_items: number
+    }
+    loader: React.ReactNode
+    fetchNextPage: () => void
   }
+  emptyStateConfig?: {
+    icon: string
+    isCustom?: {
+      value: boolean
+      component: React.ReactNode
+    }
+    title: string
+    desc: string
+    btnText: string
+    onClick: any
+    columns: number
+  }
+  headerText?: string
 }
 
-export function Table({
+export function Table<T>({
   data,
   loaderConfig,
   columns,
   filterConfig,
   sortConfig,
-  checkboxConfig = {
-    isCheckboxActions: false,
+  rowSelectionConfig = {
+    isCheckbox: false,
+    isRadio: false,
   },
-  isDropdownActions = false,
-  actionsConfig,
+  actionsConfig = {
+    isDropdownActions: false,
+    key: '',
+  },
   searchConfig,
   totalText,
   selectorConfig,
-  virtualizationConfig = {totalFetched: null, totalRows: null, fetchNextPage: null},
-}: TableProps) {
+  paginationConfig,
+  emptyStateConfig,
+  headerText,
+}: TableProps<T[]>) {
   const [sorting, setSorting] = React.useState<SortingState>([])
   // used for checkbox visibility
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
   const [rowSelection, setRowSelection] = React.useState({})
 
-  //we need a reference to the scrolling element for logic down below
-  const tableContainerRef = React.useRef<HTMLDivElement>(null)
+  const isEmpty = !loaderConfig.isFetching && !loaderConfig.isError && !data.length
 
-  const {isCheckboxActions, actions, setSelectedRows, iconSrc} = checkboxConfig
+  const {isCheckbox, isRadio, actions, setSelectedRows, iconSrc} = rowSelectionConfig
 
   useDeepCompareEffect(() => {
     if (!sortConfig || !sorting.length) return
     const {setSortOrd, setSortBy, sortMap} = sortConfig
     setSortBy(sortMap[sorting[0].id])
     setSortOrd(sorting[0].desc ? 'desc' : 'asc')
-    return () => {
-      // setSortOrd('')
-    }
   }, [sorting])
 
   useDeepCompareEffect(() => {
-    if (!checkboxConfig || !setSelectedRows) return
+    if (!rowSelectionConfig || !setSelectedRows) return
     const rows = table.getSelectedRowModel().rows.map(row => row.original)
-    setSelectedRows((s: any[]) => [...s, ...rows])
+    setSelectedRows((s: any[]) => [...rows])
   }, [rowSelection])
 
   const _columns = [
@@ -115,81 +137,55 @@ export function Table({
       id: CHECKBOX_COL_ID,
       header: (props: any) => (
         <TableCheckbox
-          row={props.header}
           {...{
             checked: props.table.getIsAllRowsSelected(),
             indeterminate: props.table.getIsSomeRowsSelected(),
             onChange: props.table.getToggleAllRowsSelectedHandler(),
+            row: props.header,
           }}
-          // setSelectedRows={setSelectedRows}
         />
       ),
       cell: ({row}: {row: any}) => (
         <TableCheckbox
-          row={row}
           {...{
             checked: row.getIsSelected(),
             disabled: !row.getCanSelect(),
             indeterminate: row.getIsSomeSelected(),
             onChange: row.getToggleSelectedHandler(),
+            row,
           }}
-          // setSelectedRows={setSelectedRows}
+        />
+      ),
+    },
+    {
+      id: RADIO_COL_ID,
+      cell: ({row}: {row: any}) => (
+        <TableRadio
+          {...{
+            checked: row.getIsSelected(),
+            disabled: !row.getCanSelect(),
+            indeterminate: row.getIsSomeSelected(),
+            onChange: row.getToggleSelectedHandler(),
+
+            row,
+          }}
         />
       ),
     },
     ...columns,
     {
       id: DROPDOWN_COL_ID,
+
       cell: (props: any) => (
-        <Button.ActionsDropdown
-          menuItems={actionsConfig?.menuItems}
+        <TableActions
+          actionsConfig={actionsConfig}
+          id={props.row.original.id || 'dropdown-actions'}
           data={props.row.original}
-          id={props.row.original.id || 'dropdown-action'}
         />
       ),
       header: 'Actions',
     },
   ]
-
-  // if (isDropdownActions) {
-  //   _columns.push({
-  //     id: DROPDOWN_COL_ID,
-  //     cell: (props: any) => (
-  //       <Button.ActionsDropdown
-  //         menuItems={actionsConfig?.menuItems}
-  //         data={props.row.original}
-  //         id={props.row.original.id || 'dropdown-action'}
-  //       />
-  //     ),
-  //     header: 'Actions',
-  //   })
-  // }
-
-  const {totalFetched, totalRows, fetchNextPage} = virtualizationConfig
-
-  //called on scroll and possibly on mount to fetch more data as the user scrolls and reaches bottom of table
-  const fetchMoreOnBottomReached = React.useCallback(
-    (containerRefElement?: HTMLDivElement | null) => {
-      if (!totalFetched || !totalRows) return () => {}
-      if (containerRefElement) {
-        const {scrollHeight, scrollTop, clientHeight} = containerRefElement
-        //once the user has scrolled within 300px of the bottom of the table, fetch more data if there is any
-        if (
-          scrollHeight - scrollTop - clientHeight < 300 &&
-          !loaderConfig?.fetchingData &&
-          totalFetched < totalRows
-        ) {
-          fetchNextPage()
-        }
-      }
-    },
-    [fetchNextPage, loaderConfig?.fetchingData, totalFetched, totalRows],
-  )
-
-  //a check on mount and after a fetch to see if the table is already scrolled to the bottom and immediately needs to fetch more data
-  React.useEffect(() => {
-    fetchMoreOnBottomReached(tableContainerRef.current)
-  }, [fetchMoreOnBottomReached])
 
   const table = useReactTable({
     data,
@@ -202,63 +198,73 @@ export function Table({
     manualSorting: true,
     onSortingChange: setSorting,
     onColumnVisibilityChange: setColumnVisibility,
-    enableRowSelection: true, //enable row selection for all rows
+    enableRowSelection: true,
     // enableRowSelection: row => row.original.age > 18, // or enable row selection conditionally per row
     onRowSelectionChange: setRowSelection,
+    enableMultiRowSelection: isRadio ? false : true,
     manualPagination: true,
     manualFiltering: true,
     getCoreRowModel: getCoreRowModel(),
   })
 
+  React.useLayoutEffect(() => {
+    if (isCheckbox && isRadio)
+      throw new Error(
+        'Hybrid UI<Table>: Can not use both checkbox and radio columns, please use only one',
+      )
+  }, [])
+
   // hide checkbox column
   React.useLayoutEffect(() => {
-    if (isCheckboxActions) return
+    if (isCheckbox) return
     table.getColumn(CHECKBOX_COL_ID)?.toggleVisibility(false)
+  }, [])
+
+  // hide checkbox column
+  React.useLayoutEffect(() => {
+    if (isRadio) return
+    table.getColumn(RADIO_COL_ID)?.toggleVisibility(false)
   }, [])
 
   // hide actions dropdown column
   React.useLayoutEffect(() => {
-    if (isDropdownActions) return
+    console.log(actionsConfig)
+    if (actionsConfig.isDropdownActions) return
     table.getColumn(DROPDOWN_COL_ID)?.toggleVisibility(false)
   }, [])
 
-  const {rows} = table.getRowModel()
-
-  //Virtualizing is optional, but might be necessary if we are going to potentially have hundreds or thousands of rows
-  const rowVirtualizer = useVirtual({
-    parentRef: tableContainerRef,
-    size: rows.length,
-    overscan: 10,
-  })
-  const {virtualItems: virtualRows, totalSize} = rowVirtualizer
-  const paddingTop = virtualRows.length > 0 ? virtualRows?.[0]?.start || 0 : 0
-  const paddingBottom =
-    virtualRows.length > 0 ? totalSize - (virtualRows?.[virtualRows.length - 1]?.end || 0) : 0
-
   return (
     <div className={classes.box}>
-      <div className={classes.header}>
-        <div className={classes.meta}>
-          <div className={classes.total}>{totalText}</div>
-          {typeof filterConfig === 'object' && <TableFilters filterConfig={filterConfig} />}
-        </div>
-
-        <div className={classes.selectorGrp}>
-          {typeof selectorConfig === 'object' && <TableSelectors selectorConfig={selectorConfig} />}
-          {typeof searchConfig === 'object' && (
-            <div className={classes.search}>
-              <Search
-                id="table-search"
-                search={searchConfig.search}
-                setSearch={searchConfig.setSearch}
-                placeholder={searchConfig.placeholder}
-              />
+      {!loaderConfig.isError && (
+        <div className={classes.header}>
+          {!headerText && (
+            <div className={classes.meta}>
+              <div className={classes.total}>{totalText}</div>
+              {typeof filterConfig === 'object' && <TableFilters filterConfig={filterConfig} />}
             </div>
           )}
-        </div>
-      </div>
 
-      {isCheckboxActions && Object.keys(rowSelection).length > 0 && (
+          {headerText && <div className={classes.headerTxt}>{headerText}</div>}
+
+          <div className={classes.selectorGrp}>
+            {typeof selectorConfig === 'object' && (
+              <TableSelectors selectorConfig={selectorConfig} />
+            )}
+            {typeof searchConfig === 'object' && (
+              <div className={classes.search}>
+                <Search
+                  id="table-search"
+                  search={searchConfig.search}
+                  setSearch={searchConfig.setSearch}
+                  placeholder={searchConfig.placeholder}
+                />
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {isCheckbox && Object.keys(rowSelection).length > 0 && (
         <div className={classes.selectedActions}>
           <div className={classes.selectedAction}>
             <div>
@@ -281,87 +287,148 @@ export function Table({
           <div className={classes.selectedInfo}>{Object.keys(rowSelection).length} selected</div>
         </div>
       )}
-      <div
-        className="container"
-        onScroll={e => fetchMoreOnBottomReached(e.target as HTMLDivElement)}
-        ref={tableContainerRef}
-      >
-        <table className={classes.table}>
-          <thead className={clsx(classes.tableHead, isCheckboxActions && classes.tableHead2)}>
-            {table.getHeaderGroups().map(headerGroup => (
-              <tr key={headerGroup.id} className={classes.tableRow}>
-                {headerGroup.headers.map(header => {
-                  const HeaderDef = header.column.columnDef.header
-                  return (
-                    <th key={header.id} className={clsx(classes.tableHeader)}>
-                      {header.isPlaceholder ? null : (
-                        <div
-                          {...{
-                            onClick: header.column.getToggleSortingHandler(),
-                            style: {
-                              display: 'flex',
-                              alignItems: 'center',
-                              justifyContent: 'center',
-                            },
-                          }}
-                        >
-                          {flexRender(header.column.columnDef.header, header.getContext())}
-                          {{
-                            asc: (
-                              <SVG
-                                path={chevronUp}
-                                spanClassName={classes.tableHeaderSortSpan}
-                                svgClassName={classes.tableHeaderSort}
-                              />
-                            ),
-                            desc: (
-                              <SVG
-                                path={chevronDown}
-                                spanClassName={classes.tableHeaderSortSpan}
-                                svgClassName={classes.tableHeaderSort}
-                              />
-                            ),
-                          }[header.column.getIsSorted() as string] ?? null}
-                        </div>
-                      )}
-                    </th>
-                  )
-                })}
-              </tr>
-            ))}
-          </thead>
-
-          {loaderConfig.fetchingData ? (
-            <TableLoader text={loaderConfig.text} />
-          ) : (
-            <tbody className={classes.tableBody}>
-              {table.getRowModel().rows.map(row => (
-                <tr key={row.id} className={classes.tableRow}>
-                  {row.getVisibleCells().map(cell => (
-                    <td key={cell.id} className={classes.tableData}>
-                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                    </td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          )}
-
-          <tfoot className={classes.tableFoot}>
-            {table.getFooterGroups().map(footerGroup => (
-              <tr key={footerGroup.id} className={classes.tableRow}>
-                {footerGroup.headers.map(header => (
-                  <th key={header.id}>
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(header.column.columnDef.footer, header.getContext())}
-                  </th>
-                ))}
-              </tr>
-            ))}
-          </tfoot>
-        </table>
-      </div>
+      {paginationConfig ? (
+        <InfiniteScroll
+          dataLength={data.length}
+          next={paginationConfig.fetchNextPage}
+          hasMore={data?.length < paginationConfig.metaData?.total_items}
+          loader={paginationConfig.loader}
+        >
+          <TableComp
+            table={table}
+            isCheckbox={isCheckbox}
+            isRadio={isRadio}
+            loaderConfig={loaderConfig}
+            isEmpty={isEmpty}
+            emptyStateConfig={emptyStateConfig}
+          />
+        </InfiniteScroll>
+      ) : (
+        <TableComp
+          table={table}
+          isCheckbox={isCheckbox}
+          isRadio={isRadio}
+          loaderConfig={loaderConfig}
+          isEmpty={isEmpty}
+          emptyStateConfig={emptyStateConfig}
+        />
+      )}
     </div>
+  )
+}
+
+function TableComp({
+  table,
+  isCheckbox,
+  isRadio,
+  loaderConfig,
+  emptyStateConfig,
+  isEmpty,
+}: {
+  table: Table<any>
+  isCheckbox?: boolean
+  isRadio?: boolean
+  loaderConfig: TableProps<any>['loaderConfig']
+  emptyStateConfig: TableProps<any>['emptyStateConfig']
+  isEmpty: boolean
+}) {
+  return (
+    <table className={classes.table}>
+      <thead
+        className={clsx(
+          classes.tableHead,
+          isCheckbox && classes.tableHead2,
+          isRadio && classes.tableHead3,
+        )}
+      >
+        {table.getHeaderGroups().map(headerGroup => (
+          <tr key={headerGroup.id} className={classes.tableRow}>
+            {headerGroup.headers.map(header => {
+              const HeaderDef = header.column.columnDef.header
+              return (
+                <th key={header.id} className={clsx(classes.tableHeader)}>
+                  {header.isPlaceholder ? null : (
+                    <div
+                      {...{
+                        onClick: header.column.getToggleSortingHandler(),
+                        style: {
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                        },
+                      }}
+                    >
+                      {flexRender(header.column.columnDef.header, header.getContext())}
+                      {{
+                        asc: (
+                          <SVG
+                            path={chevronUp}
+                            spanClassName={classes.tableHeaderSortSpan}
+                            svgClassName={classes.tableHeaderSort}
+                          />
+                        ),
+                        desc: (
+                          <SVG
+                            path={chevronDown}
+                            spanClassName={classes.tableHeaderSortSpan}
+                            svgClassName={classes.tableHeaderSort}
+                          />
+                        ),
+                      }[header.column.getIsSorted() as string] ?? null}
+                    </div>
+                  )}
+                </th>
+              )
+            })}
+          </tr>
+        ))}
+      </thead>
+
+      {loaderConfig.isFetching ? (
+        <TableLoader
+          text={loaderConfig.text}
+          isError={loaderConfig.isError}
+          isFetching={loaderConfig.isFetching}
+        />
+      ) : isEmpty ? (
+        <TableEmpty emptyStateConfig={emptyStateConfig} />
+      ) : (
+        <tbody className={classes.tableBody}>
+          {table.getRowModel().rows.map(row => (
+            <tr key={row.id} className={classes.tableRow}>
+              {row.getVisibleCells().map(cell => (
+                <td key={cell.id} className={classes.tableData}>
+                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      )}
+
+      {loaderConfig.isError && (
+        <tbody style={{height: '200px'}}>
+          <tr>
+            <td colSpan={emptyStateConfig?.columns} style={{textAlign: 'center'}}>
+              {loaderConfig.errMsg || 'Error getting data, please try again later.'}
+            </td>
+          </tr>
+        </tbody>
+      )}
+
+      <tfoot className={classes.tableFoot}>
+        {table.getFooterGroups().map(footerGroup => (
+          <tr key={footerGroup.id} className={classes.tableRow}>
+            {footerGroup.headers.map(header => (
+              <th key={header.id}>
+                {header.isPlaceholder
+                  ? null
+                  : flexRender(header.column.columnDef.footer, header.getContext())}
+              </th>
+            ))}
+          </tr>
+        ))}
+      </tfoot>
+    </table>
   )
 }

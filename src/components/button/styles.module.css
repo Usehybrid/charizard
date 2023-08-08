@@ -16,6 +16,10 @@
   white-space: nowrap;
 }
 
+.btn:focus-visible {
+  outline: none;
+}
+
 .btnSm {
   font-size: 14px;
   font-weight: 400;
@@ -121,15 +125,13 @@
   height: 20px;
 }
 
-.btnAddon [data-part='trigger'][data-focus] {
-  outline: none;
-}
-
 .menus {
   padding: 4px;
   border-radius: 4px;
   background: #fff;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15);
+  z-index: 1;
+  min-width: 200px;
 }
 
 .menus:focus-visible {
@@ -141,7 +143,7 @@
   align-items: center;
   gap: 4px;
   padding: 8px 10px;
-  color: var(--primary);
+  color: var(--text-secondary);
   font-size: 1rem;
   line-height: 1.5rem;
   border-radius: 6px;
@@ -156,7 +158,12 @@
   width: 20px;
   height: 20px;
   margin-right: 8px;
-  filter: invert(82%) sepia(3%) saturate(333%) hue-rotate(210deg) brightness(90%) contrast(82%);
+  /* filter: invert(82%) sepia(3%) saturate(333%) hue-rotate(210deg) brightness(90%) contrast(82%); */
+}
+
+.menuIcon > g > path,
+.menuIcon > path {
+  fill: var(--slate-800);
 }
 
 .customTrigger {
