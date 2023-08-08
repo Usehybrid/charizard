@@ -419,6 +419,7 @@ function App() {
         }}
         rowSelectionConfig={{
           isRadio: true,
+          // isCheckbox: true,
           actions: [
             {
               icon: randomIcon,

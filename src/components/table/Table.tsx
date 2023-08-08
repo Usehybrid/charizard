@@ -70,9 +70,11 @@ export type TableProps<T> = {
   paginationConfig?: {
     metaData: {
       total_items: number
+      items_on_page: number
     }
     loader: React.ReactNode
     fetchNextPage: () => void
+    height?: string
   }
   emptyStateConfig?: {
     icon: string
@@ -88,6 +90,9 @@ export type TableProps<T> = {
   }
   headerText?: string
 }
+
+// todo
+// * alignment of table
 
 export function Table<T>({
   data,
@@ -293,6 +298,7 @@ export function Table<T>({
           next={paginationConfig.fetchNextPage}
           hasMore={data?.length < paginationConfig.metaData?.total_items}
           loader={paginationConfig.loader}
+          height={paginationConfig.height}
         >
           <TableComp
             table={table}
@@ -343,43 +349,40 @@ function TableComp({
       >
         {table.getHeaderGroups().map(headerGroup => (
           <tr key={headerGroup.id} className={classes.tableRow}>
-            {headerGroup.headers.map(header => {
-              const HeaderDef = header.column.columnDef.header
-              return (
-                <th key={header.id} className={clsx(classes.tableHeader)}>
-                  {header.isPlaceholder ? null : (
-                    <div
-                      {...{
-                        onClick: header.column.getToggleSortingHandler(),
-                        style: {
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                        },
-                      }}
-                    >
-                      {flexRender(header.column.columnDef.header, header.getContext())}
-                      {{
-                        asc: (
-                          <SVG
-                            path={chevronUp}
-                            spanClassName={classes.tableHeaderSortSpan}
-                            svgClassName={classes.tableHeaderSort}
-                          />
-                        ),
-                        desc: (
-                          <SVG
-                            path={chevronDown}
-                            spanClassName={classes.tableHeaderSortSpan}
-                            svgClassName={classes.tableHeaderSort}
-                          />
-                        ),
-                      }[header.column.getIsSorted() as string] ?? null}
-                    </div>
-                  )}
-                </th>
-              )
-            })}
+            {headerGroup.headers.map(header => (
+              <th key={header.id} className={clsx(classes.tableHeader)}>
+                {header.isPlaceholder ? null : (
+                  <div
+                    {...{
+                      onClick: header.column.getToggleSortingHandler(),
+                      style: {
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                      },
+                    }}
+                  >
+                    {flexRender(header.column.columnDef.header, header.getContext())}
+                    {{
+                      asc: (
+                        <SVG
+                          path={chevronUp}
+                          spanClassName={classes.tableHeaderSortSpan}
+                          svgClassName={classes.tableHeaderSort}
+                        />
+                      ),
+                      desc: (
+                        <SVG
+                          path={chevronDown}
+                          spanClassName={classes.tableHeaderSortSpan}
+                          svgClassName={classes.tableHeaderSort}
+                        />
+                      ),
+                    }[header.column.getIsSorted() as string] ?? null}
+                  </div>
+                )}
+              </th>
+            ))}
           </tr>
         ))}
       </thead>
