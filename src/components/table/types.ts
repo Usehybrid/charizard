@@ -16,11 +16,6 @@ export type FilterConfig = {
   isLoading: boolean
   isError: boolean
   filterDispatch: (value: any) => void
-  // tableFilters: InternalTableFilters[]
-  // setDefaultFilters: SetInternalTableFilters
-  // addFilters: (filterKey: string, value: string) => void
-  // removeFilters: (filterKey: string, value: string) => void
-  // resetFilters: (filterKey: string) => void
   // todo future apis
   // defaultSelected, same type as InternalTableFilters
 }
@@ -31,3 +26,18 @@ export type InternalTableFilters = {
 }
 
 export type SetInternalTableFilters = (filters: InternalTableFilters[]) => void
+
+const d = {
+  id: 'inventory-brand',
+  name: 'Inventory Brand',
+  key: 'filter_brand',
+  options: [
+    {
+      name: 'Apple',
+      value: '971b5fd2-a20e-4639-9fb7-dde915c13534',
+    },
+  ],
+  config: {
+    hideSearch: true,
+  },
+}
