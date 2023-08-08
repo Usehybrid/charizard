@@ -448,6 +448,7 @@ function App() {
         onFinalStepClick={() => {}}
         showSkipBtn
         stepToShowSkipBtn={3}
+        jumpToStep={1}
       />
       {/* <InputContainer size="md">
         <InputLabel
@@ -458,6 +459,9 @@ function App() {
         </InputLabel>
         <InputGroup>
           <Input type="date" value={'value'} />
+          <InputRightAddon isDropdown={true} dropdownOptions={items}>
+            +
+          </InputRightAddon>
         </InputGroup>
       </InputContainer> */}
       {/* <Tooltip tooltipId="tooltip">
