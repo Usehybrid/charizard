@@ -14,7 +14,12 @@ interface ProgressProps {
    * steps to show
    * if there isError is true, user won't be able to click on Continue or finish button
    */
-  steps: {label: string; component: React.ReactNode; isError: boolean}[]
+  steps: {
+    label: string
+    component: React.ReactNode
+    isError: boolean
+    onContinueClick?: () => void
+  }[]
   /**
    * handle cancel click
    */
@@ -76,7 +81,11 @@ export function Progress({
   const isError = steps[currentStep].isError
 
   const onContinueClick = () => {
-    if (currentStep < steps.length - 1 && !isError) setCurrentStep(currentStep + 1)
+    if (currentStep < steps.length - 1 && !isError) {
+      setCurrentStep(currentStep + 1)
+      const onClick = steps[currentStep].onContinueClick
+      onClick && onClick()
+    }
   }
 
   const onBackClick = () => {

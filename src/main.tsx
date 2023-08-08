@@ -14,6 +14,7 @@ import {
   PopoverContent,
   PopoverDescription,
   PopoverTrigger,
+  Progress,
   SegmentedControl,
   Table,
 } from './components'
@@ -315,6 +316,51 @@ function App() {
     {label: 'Lease', value: 'lease', component: <>lease</>},
   ]
 
+  const steps = [
+    {
+      label: 'Asset Type',
+      component: <>Asset type</>,
+      // isError: check
+      isError: false,
+      onContinueClick: () => {
+        console.log('asset type')
+      },
+    },
+    {
+      label: 'Specification',
+      component: <>specification</>,
+      // isError: checkIsError(formik, 'specification', ['serialNumber']),
+      isError: false,
+      onContinueClick: () => {
+        console.log('specification')
+      },
+    },
+    {
+      label: 'Finance',
+      component: <>finance</>,
+      isError: false,
+      onContinueClick: () => {
+        console.log('finance')
+      },
+    },
+    {
+      label: 'Allocation',
+      component: <>Allocation</>,
+      isError: false,
+      onContinueClick: () => {
+        console.log('allocation')
+      },
+    },
+    {
+      label: 'Review',
+      component: <>review</>,
+      isError: false,
+      onContinueClick: () => {
+        console.log('review')
+      },
+    },
+  ]
+
   return (
     <div style={styles}>
       {/* <Table
@@ -367,7 +413,15 @@ function App() {
           ],
         }}
       /> */}
-      <SegmentedControl items={items} defaultValue="purchase" />
+      {/* <SegmentedControl items={items} defaultValue="purchase" /> */}
+      <Progress
+        steps={steps}
+        lastStepFooterContinueBtnText="Confirm and add to inventory"
+        onCancelClick={() => console.log('cancel')}
+        onFinalStepClick={() => {}}
+        showSkipBtn
+        stepToShowSkipBtn={3}
+      />
       {/* <InputContainer size="md">
         <InputLabel
           infoText="big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text "
