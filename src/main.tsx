@@ -3,8 +3,22 @@ import ReactDOM from 'react-dom/client'
 import {createColumnHelper} from '@tanstack/react-table'
 
 import randomIcon from './components/assets/check.svg'
+import {
+  Button,
+  Input,
+  InputContainer,
+  InputGroup,
+  InputLabel,
+  InputRightAddon,
+  Popover,
+  PopoverContent,
+  PopoverDescription,
+  PopoverTrigger,
+  Progress,
+  SegmentedControl,
+  Table,
+} from './components'
 import randomIcon2 from './components/assets/search-2.svg'
-import {Button, Table} from './components'
 
 const styles = {
   width: '90%',
@@ -279,9 +293,107 @@ const columns = [
 function App() {
   const [search, setSearch] = React.useState('')
 
+  const columns = [
+    columnHelper.accessor('software', {
+      header: 'Software Name',
+      cell: info => info.getValue().name,
+    }),
+
+    columnHelper.accessor('software_owners', {
+      header: 'Software Owners',
+
+      cell: info => {
+        return <div>{getFullName(info.row.original.software_owners[0])}</div>
+      },
+      enableSorting: false,
+    }),
+    columnHelper.accessor('software_users', {
+      header: 'Users',
+      cell: info => {
+        return <div>{info.row.original.software_users_count}</div>
+      },
+    }),
+    columnHelper.accessor('software_license', {
+      header: 'Licenses',
+      cell: info => {
+        return <div>{info.row.original.software_license_count}</div>
+      },
+    }),
+  ]
+
+  const options = [
+    {label: 'Red', value: 'red'},
+    {label: 'Blue', value: 'blue'},
+    {label: 'Pink', value: 'pink'},
+    {label: 'White', value: 'white'},
+    {label: 'Yellow', value: 'yellow'},
+    {label: 'Light blue', value: 'light_blue'},
+    {label: 'Saffron', value: 'saffron'},
+  ]
+  const [selectedVal, setSelectedVal] = React.useState({label: '', value: ''})
+
+  const items = [
+    {
+      label: 'Purchase',
+      value: 'purchase',
+      component: <>purchase</>,
+    },
+    {
+      label: 'Rental',
+      value: 'rental',
+      component: <>rental</>,
+    },
+    {label: 'Lease', value: 'lease', component: <>lease</>},
+  ]
+
+  const steps = [
+    {
+      label: 'Asset Type',
+      component: <>Asset type</>,
+      // isError: check
+      isError: false,
+      onContinueClick: () => {
+        console.log('asset type')
+      },
+    },
+    {
+      label: 'Specification',
+      component: <>specification</>,
+      // isError: checkIsError(formik, 'specification', ['serialNumber']),
+      isError: false,
+      onContinueClick: () => {
+        console.log('specification')
+      },
+    },
+    {
+      label: 'Finance',
+      component: <>finance</>,
+      isError: false,
+      onContinueClick: () => {
+        console.log('finance')
+      },
+    },
+    {
+      label: 'Allocation',
+      component: <>Allocation</>,
+      isError: false,
+      onContinueClick: () => {
+        console.log('allocation')
+      },
+    },
+    {
+      label: 'Review',
+      component: <>review</>,
+      isError: false,
+      onContinueClick: () => {
+        console.log('review')
+      },
+    },
+  ]
+
   return (
     <div style={styles}>
-      <Table<Software>
+      {/* <Table<Software>
         data={data}
         loaderConfig={{isFetching: false, isError: false, text: 'Getting employees...'}}
         columns={columns}
@@ -327,19 +439,31 @@ function App() {
           },
           columns: 6,
         }}
-        // selectorConfig={{
-        //   selectors: [
-        //     {
-        //       name: 'Active',
-        //       onClick: () => {
-        //         console.log('test')
-        //       },
-        //     },
-        //     {name: 'New hire', onClick: () => {}},
-        //   ],
-        // }}
-        // headerText="Choose your employee to ship the asset"
+      />  */}
+      {/* <SegmentedControl items={items} defaultValue="purchase" /> */}
+      <Progress
+        steps={steps}
+        lastStepFooterContinueBtnText="Confirm and add to inventory"
+        onCancelClick={() => console.log('cancel')}
+        onFinalStepClick={() => {}}
+        showSkipBtn
+        stepToShowSkipBtn={3}
       />
+      {/* <InputContainer size="md">
+        <InputLabel
+          infoText="big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text "
+          infoTextTooltipStyles={{maxWidth: '300px', minWidth: '300px'}}
+        >
+          Label
+        </InputLabel>
+        <InputGroup>
+          <Input type="date" value={'value'} />
+        </InputGroup>
+      </InputContainer> */}
+      {/* <Tooltip tooltipId="tooltip">
+        <TooltipTrigger>trigger</TooltipTrigger>
+        <TooltipContent>content</TooltipContent>
+      </Tooltip> */}
 
       {/* <div style={{display: 'flex', alignItems: 'center'}}>
         <Button.MenuButton menuItems={menuItems} id="add-software-menu">
