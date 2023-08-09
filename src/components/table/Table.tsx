@@ -24,8 +24,8 @@ import {CHECKBOX_COL_ID, DROPDOWN_COL_ID, RADIO_COL_ID} from './constants'
 import type {SortingState, Table, VisibilityState} from '@tanstack/react-table'
 import type {FilterConfig} from './types'
 
-export type TableProps<T> = {
-  data: T
+export type TableProps = {
+  data: any
   columns: any
   actionsConfig?: {
     isDropdownActions?: boolean
@@ -114,7 +114,7 @@ export function Table<T>({
   paginationConfig,
   emptyStateConfig,
   headerText,
-}: TableProps<T[]>) {
+}: TableProps) {
   const [sorting, setSorting] = React.useState<SortingState>([])
   // used for checkbox visibility
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
@@ -334,8 +334,8 @@ function TableComp({
   table: Table<any>
   isCheckbox?: boolean
   isRadio?: boolean
-  loaderConfig: TableProps<any>['loaderConfig']
-  emptyStateConfig: TableProps<any>['emptyStateConfig']
+  loaderConfig: TableProps['loaderConfig']
+  emptyStateConfig: TableProps['emptyStateConfig']
   isEmpty: boolean
 }) {
   return (
