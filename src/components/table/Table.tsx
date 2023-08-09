@@ -108,7 +108,6 @@ export type TableProps = {
 // todo
 // * alignment of table
 // ! bugs
-// * reset btn for single and all isn't updating filterDispatch
 // * after performing multi select action, clear the previous rowSelection
 // * differentiate searched empty state with data empty state
 
@@ -152,7 +151,7 @@ export function Table({
   useDeepCompareEffect(() => {
     if (!rowSelectionConfig || !setSelectedRows) return
     const rows = table.getSelectedRowModel().rows.map(row => row.original)
-    setSelectedRows((s: any[]) => [...rows])
+    setSelectedRows([...rows])
   }, [rowSelection])
 
   const _columns = [
@@ -299,7 +298,10 @@ export function Table({
                 variant={ButtonVariant.SECONDARY}
                 size="sm"
                 customStyles={{color: 'var(--gray-700)'}}
-                onClick={action.onClick}
+                onClick={() => {
+                  action.onClick()
+                  setRowSelection({})
+                }}
               >
                 {action.icon && <SVG path={action.icon} svgClassName={classes.actionsBtnIcon} />}
                 {action.text}
