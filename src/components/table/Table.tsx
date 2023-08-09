@@ -25,25 +25,35 @@ import type {SortingState, Table, VisibilityState} from '@tanstack/react-table'
 import type {FilterConfig} from './types'
 
 export type TableProps = {
+  // the table data
   data: any
+  // table column definition with column api from tanstack
   columns: any
+  // column for actions dropdown in the row
   actionsConfig?: {
     isDropdownActions?: boolean
+    // menu list for the dropdown
     menuItems?: {label: string; iconSrc?: string; onClick: any}[]
     labelText?: boolean
-    key: string
+    key?: string
   }
+  // api loading/refetching states
   loaderConfig: {
     text?: string
     isFetching: boolean
     isError: boolean
     errMsg?: string
   }
+  // table search
   searchConfig?: {
     placeholder?: string
     search: string
     setSearch: any
   }
+  /**
+   * table sorting
+   * @param sortBy used for
+   */
   sortConfig?: {
     sortBy: string
     setSortBy: any
@@ -51,6 +61,10 @@ export type TableProps = {
     setSortOrd: any
     sortMap: Record<string, string>
   }
+  /**
+   * table filtering, data comes from an api
+   *
+   */
   filterConfig?: FilterConfig
   totalText: string
   rowSelectionConfig?: {
@@ -93,6 +107,10 @@ export type TableProps = {
 
 // todo
 // * alignment of table
+// ! bugs
+// * reset btn for single and all isn't updating filterDispatch
+// * after performing multi select action, clear the previous rowSelection
+// * differentiate searched empty state with data empty state
 
 export function Table({
   data,
