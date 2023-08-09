@@ -3,7 +3,7 @@ import {Button} from '../../button'
 import {TableProps} from '../Table'
 
 type TableActionsProps = {
-  actionsConfig: TableProps<any>['actionsConfig']
+  actionsConfig: TableProps['actionsConfig']
   data: any
   id: string
 }
