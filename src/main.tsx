@@ -407,6 +407,7 @@ function App() {
           isLoading: false,
           isError: false,
           filterDispatch: () => {},
+          filterReset: () => {},
         }}
         sortConfig={{
           sortBy: '',
