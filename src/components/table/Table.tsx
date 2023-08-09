@@ -94,7 +94,7 @@ export type TableProps = {
 // todo
 // * alignment of table
 
-export function Table<T>({
+export function Table({
   data,
   loaderConfig,
   columns,

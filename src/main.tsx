@@ -393,7 +393,7 @@ function App() {
 
   return (
     <div style={styles}>
-      {/* <Table
+      <Table
         data={data}
         loaderConfig={{isFetching: false, isError: false, text: 'Getting employees...'}}
         columns={columns}
@@ -440,16 +440,16 @@ function App() {
           },
           columns: 6,
         }}
-      />  */}
+      />
       {/* <SegmentedControl items={items} defaultValue="purchase" /> */}
-      <Progress
+      {/* <Progress
         steps={steps}
         lastStepFooterContinueBtnText="Confirm and add to inventory"
         onCancelClick={() => console.log('cancel')}
         onFinalStepClick={() => {}}
         showSkipBtn
         stepToShowSkipBtn={3}
-      />
+      /> */}
       {/* <InputContainer size="md">
         <InputLabel
           infoText="big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text "
