@@ -60,6 +60,10 @@ interface ProgressProps {
    * skip button text
    */
   skipBtnText?: string
+  /**
+   * directly jump to particular step (index starts from 0)
+   */
+  jumpToStep?: number
 }
 
 export function Progress({
@@ -74,8 +78,9 @@ export function Progress({
   lastStepHeaderContinueBtnText = 'Finish',
   allowNavigationOnStepClick = true,
   skipBtnText = 'Skip and continue',
+  jumpToStep = 0,
 }: ProgressProps) {
-  const [currentStep, setCurrentStep] = React.useState(0)
+  const [currentStep, setCurrentStep] = React.useState(jumpToStep)
 
   const isFinalStep = currentStep === steps.length - 1
   const isError = steps[currentStep].isError

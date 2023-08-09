@@ -450,7 +450,8 @@ function App() {
         onFinalStepClick={() => {}}
         showSkipBtn
         stepToShowSkipBtn={3}
-      /> */}
+        jumpToStep={1}
+      />
       {/* <InputContainer size="md">
         <InputLabel
           infoText="big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text "
@@ -460,6 +461,9 @@ function App() {
         </InputLabel>
         <InputGroup>
           <Input type="date" value={'value'} />
+          <InputRightAddon isDropdown={true} dropdownOptions={items}>
+            +
+          </InputRightAddon>
         </InputGroup>
       </InputContainer> */}
       {/* <Tooltip tooltipId="tooltip">
