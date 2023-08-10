@@ -137,7 +137,7 @@ export function Progress({
             <Button variant={ButtonVariant.SECONDARY} onClick={onCancelClick}>
               Cancel
             </Button>
-            <Button disabled={isError} onClick={isFinalStep ? onFinalStepClick : onContinueClick}>
+            <Button onClick={isFinalStep ? onFinalStepClick : onContinueClick}>
               {isFinalStep ? lastStepHeaderContinueBtnText : 'Continue'}
             </Button>
           </div>
@@ -160,7 +160,7 @@ export function Progress({
             {showSkipBtn && currentStep === stepToShowSkipBtn && (
               <Button onClick={onSkipClick}>{skipBtnText}</Button>
             )}
-            <Button disabled={isError} onClick={isFinalStep ? onFinalStepClick : onContinueClick}>
+            <Button onClick={isFinalStep ? onFinalStepClick : onContinueClick}>
               {isFinalStep ? lastStepFooterContinueBtnText : 'Continue'}
             </Button>
           </div>

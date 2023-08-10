@@ -35,6 +35,10 @@ interface RadioGroupProps {
    * if radio group is required
    * */
   required?: boolean
+  /**
+   * error msg to display
+   */
+  errorMsg?: string
 }
 
 export function RadioGroup({
@@ -43,6 +47,7 @@ export function RadioGroup({
   defaultValue,
   onChange,
   required = false,
+  errorMsg,
 }: RadioGroupProps) {
   const controlId = React.useId()
 
@@ -88,6 +93,7 @@ export function RadioGroup({
           ))}
         </div>
       </div>
+      {errorMsg && <p className={classes.errorMsg}>{errorMsg}</p>}
     </div>
   )
 }

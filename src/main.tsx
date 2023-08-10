@@ -15,6 +15,7 @@ import {
   PopoverDescription,
   PopoverTrigger,
   Progress,
+  RadioGroup,
   SegmentedControl,
   Table,
 } from './components'
@@ -393,7 +394,7 @@ function App() {
 
   return (
     <div style={styles}>
-      <Table
+      {/* <Table
         data={data}
         loaderConfig={{isFetching: false, isError: false, text: 'Getting employees...'}}
         columns={columns}
@@ -441,7 +442,7 @@ function App() {
           },
           columns: 6,
         }}
-      />
+      /> */}
       {/* <SegmentedControl items={items} defaultValue="purchase" /> */}
       {/* <Progress
         steps={steps}
@@ -481,6 +482,15 @@ function App() {
           <Button.ActionsDropdown menuItems={menuItems} id={'software-list-dropdown-action'} />
         </div>
       </div> */}
+      <RadioGroup
+        items={[
+          {label: {heading: 'heading'}, value: 'heading'},
+          {label: {heading: 'heading 2'}, value: 'heading 2'},
+        ]}
+        onChange={() => {}}
+        radioHeading="heding"
+        errorMsg="thisi serror smngs"
+      />
     </div>
   )
 }
