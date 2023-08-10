@@ -108,6 +108,11 @@ export function Progress({
     if (allowNavigationOnStepClick && step < currentStep) setCurrentStep(step)
   }
 
+  const handleOnSkipClick = () => {
+    onSkipClick()
+    setCurrentStep(currentStep + 1)
+  }
+
   return (
     <div className={classes.progressContainer}>
       <div className={classes.header}>
@@ -158,7 +163,7 @@ export function Progress({
               Back
             </Button>
             {showSkipBtn && currentStep === stepToShowSkipBtn && (
-              <Button onClick={onSkipClick}>{skipBtnText}</Button>
+              <Button onClick={handleOnSkipClick}>{skipBtnText}</Button>
             )}
             <Button onClick={isFinalStep ? onFinalStepClick : onContinueClick}>
               {isFinalStep ? lastStepFooterContinueBtnText : 'Continue'}
