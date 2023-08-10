@@ -37,10 +37,6 @@ export function SegmentedControl({items, defaultValue, handleOnChange}: Segmente
   )
   const api = radio.connect(state, send, normalizeProps)
 
-  const componentToShow = React.useMemo(() => {
-    return items?.find(item => item.value === api.value)?.component
-  }, [api?.value])
-
   return (
     <div className={classes.segmentedControl}>
       <div {...api.rootProps} className={classes.root}>
@@ -59,7 +55,9 @@ export function SegmentedControl({items, defaultValue, handleOnChange}: Segmente
           </label>
         ))}
       </div>
-      <div className={classes.content}>{componentToShow}</div>
+      <div className={classes.content}>
+        {items?.find(item => item.value === api.value)?.component}
+      </div>
     </div>
   )
 }
