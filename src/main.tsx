@@ -446,7 +446,9 @@ function App() {
         steps={steps}
         lastStepFooterContinueBtnText="Confirm and add to inventory"
         onCancelClick={() => console.log('cancel')}
-        onFinalStepClick={() => {}}
+        onFinalStepClick={() => {
+          console.log('final')
+        }}
         showSkipBtn
         stepToShowSkipBtn={3}
         jumpToStep={1}
