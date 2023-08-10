@@ -24,26 +24,36 @@ import {CHECKBOX_COL_ID, DROPDOWN_COL_ID, RADIO_COL_ID} from './constants'
 import type {SortingState, Table, VisibilityState} from '@tanstack/react-table'
 import type {FilterConfig} from './types'
 
-export type TableProps<T> = {
-  data: T
+export type TableProps = {
+  // the table data
+  data: any
+  // table column definition with column api from tanstack
   columns: any
+  // column for actions dropdown in the row
   actionsConfig?: {
     isDropdownActions?: boolean
+    // menu list for the dropdown
     menuItems?: {label: string; iconSrc?: string; onClick: any}[]
     labelText?: boolean
-    key: string
+    key?: string
   }
+  // api loading/refetching states
   loaderConfig: {
     text?: string
     isFetching: boolean
     isError: boolean
     errMsg?: string
   }
+  // table search
   searchConfig?: {
     placeholder?: string
     search: string
     setSearch: any
   }
+  /**
+   * table sorting
+   * @param sortBy used for
+   */
   sortConfig?: {
     sortBy: string
     setSortBy: any
@@ -51,6 +61,10 @@ export type TableProps<T> = {
     setSortOrd: any
     sortMap: Record<string, string>
   }
+  /**
+   * table filtering, data comes from an api
+   *
+   */
   filterConfig?: FilterConfig
   totalText: string
   rowSelectionConfig?: {
@@ -93,8 +107,11 @@ export type TableProps<T> = {
 
 // todo
 // * alignment of table
+// ! bugs
+// * after performing multi select action, clear the previous rowSelection
+// * differentiate searched empty state with data empty state
 
-export function Table<T>({
+export function Table({
   data,
   loaderConfig,
   columns,
@@ -114,7 +131,7 @@ export function Table<T>({
   paginationConfig,
   emptyStateConfig,
   headerText,
-}: TableProps<T[]>) {
+}: TableProps) {
   const [sorting, setSorting] = React.useState<SortingState>([])
   // used for checkbox visibility
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
@@ -134,7 +151,7 @@ export function Table<T>({
   useDeepCompareEffect(() => {
     if (!rowSelectionConfig || !setSelectedRows) return
     const rows = table.getSelectedRowModel().rows.map(row => row.original)
-    setSelectedRows((s: any[]) => [...rows])
+    setSelectedRows([...rows])
   }, [rowSelection])
 
   const _columns = [
@@ -281,7 +298,10 @@ export function Table<T>({
                 variant={ButtonVariant.SECONDARY}
                 size="sm"
                 customStyles={{color: 'var(--gray-700)'}}
-                onClick={action.onClick}
+                onClick={() => {
+                  action.onClick()
+                  setRowSelection({})
+                }}
               >
                 {action.icon && <SVG path={action.icon} svgClassName={classes.actionsBtnIcon} />}
                 {action.text}
@@ -334,8 +354,8 @@ function TableComp({
   table: Table<any>
   isCheckbox?: boolean
   isRadio?: boolean
-  loaderConfig: TableProps<any>['loaderConfig']
-  emptyStateConfig: TableProps<any>['emptyStateConfig']
+  loaderConfig: TableProps['loaderConfig']
+  emptyStateConfig: TableProps['emptyStateConfig']
   isEmpty: boolean
 }) {
   return (

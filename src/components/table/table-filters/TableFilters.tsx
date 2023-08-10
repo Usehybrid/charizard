@@ -11,7 +11,7 @@ interface TableFiltersProps {
 }
 
 export default function TableFilters({filterConfig}: TableFiltersProps) {
-  const {filters, isLoading, isError, filterDispatch} = filterConfig
+  const {filters, isLoading, isError, filterDispatch, filterReset} = filterConfig
 
   const tableFilters = useTableStore(s => s.filters)
 
@@ -59,7 +59,7 @@ export default function TableFilters({filterConfig}: TableFiltersProps) {
           alt="reset all filters"
           className={classes.resetIcon2}
           onClick={() => {
-            resetAllFilters()
+            resetAllFilters(filterReset)
           }}
         />
       )}

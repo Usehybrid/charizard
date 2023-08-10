@@ -3,7 +3,7 @@ import {Button} from '../../button'
 import {TableProps} from '../Table'
 
 type TableActionsProps = {
-  actionsConfig: TableProps<any>['actionsConfig']
+  actionsConfig: TableProps['actionsConfig']
   data: any
   id: string
 }
@@ -13,7 +13,8 @@ export default function TableActions({actionsConfig, data, id}: TableActionsProp
   const {menuItems = [], isDropdownActions, labelText, key} = actionsConfig
   if (!isDropdownActions) return
 
-  if (!labelText) return <Button.ActionsDropdown menuItems={menuItems} data={data} id={id} />
+  if (!labelText || !key)
+    return <Button.ActionsDropdown menuItems={menuItems} data={data} id={id} />
 
   return (
     <div className={classes.box}>

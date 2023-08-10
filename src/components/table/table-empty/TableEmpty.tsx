@@ -5,7 +5,7 @@ import {EmptyState} from '../../empty-state'
 export default function TableEmpty({
   emptyStateConfig,
 }: {
-  emptyStateConfig: TableProps<any>['emptyStateConfig']
+  emptyStateConfig: TableProps['emptyStateConfig']
 }) {
   if (!emptyStateConfig) return null
   return (

@@ -7,8 +7,8 @@ export interface TableStore {
   setDefaultFilters: (filters: InternalTableFilters[]) => void
   addFilters: (filterKey: string, value: string, filterDispatch?: any) => void
   removeFilters: (filterKey: string, value: string, filterDispatch?: any) => void
-  resetFilters: (filterKey: string) => void
-  resetAllFilters: () => void
+  resetFilters: (filterKey: string, filterDispatch?: any) => void
+  resetAllFilters: (filterReset?: any) => void
 }
 
 export const useTableStore = create<TableStore>()(
@@ -44,17 +44,27 @@ export const useTableStore = create<TableStore>()(
         })
         return {filters}
       }),
-    resetFilters: filterKey =>
+    resetFilters: (filterKey, filterDispatch) =>
       set(state => {
         const filters = state.filters.map(obj => {
           if (obj.key === filterKey) {
+            if (typeof filterDispatch === 'function') {
+              filterDispatch({filterType: filterKey, value: ''})
+            }
             return {...obj, values: []}
           }
           return obj
         })
         return {filters}
       }),
-    resetAllFilters: () =>
-      set(state => ({filters: state.filters.map(obj => ({...obj, values: []}))})),
+    resetAllFilters: filterReset =>
+      set(state => ({
+        filters: state.filters.map(obj => {
+          if (typeof filterReset === 'function') {
+            filterReset()
+          }
+          return {...obj, values: []}
+        }),
+      })),
   })),
 )

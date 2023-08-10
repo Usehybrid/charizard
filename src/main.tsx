@@ -393,7 +393,7 @@ function App() {
 
   return (
     <div style={styles}>
-      {/* <Table<Software>
+      <Table
         data={data}
         loaderConfig={{isFetching: false, isError: false, text: 'Getting employees...'}}
         columns={columns}
@@ -407,6 +407,7 @@ function App() {
           isLoading: false,
           isError: false,
           filterDispatch: () => {},
+          filterReset: () => {},
         }}
         sortConfig={{
           sortBy: '',
@@ -440,9 +441,9 @@ function App() {
           },
           columns: 6,
         }}
-      />  */}
+      />
       {/* <SegmentedControl items={items} defaultValue="purchase" /> */}
-      <Progress
+      {/* <Progress
         steps={steps}
         lastStepFooterContinueBtnText="Confirm and add to inventory"
         onCancelClick={() => console.log('cancel')}
