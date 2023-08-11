@@ -69,3 +69,13 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+.radioGroup .errorMsg {
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  margin: 0;
+  color: var(--danger);
+  text-align: left;
+}

@@ -64,6 +64,10 @@ interface ProgressProps {
    * directly jump to particular step (index starts from 0)
    */
   jumpToStep?: number
+  /**
+   * on skip click
+   */
+  onSkipClick?: () => void
 }
 
 export function Progress({
@@ -79,6 +83,7 @@ export function Progress({
   allowNavigationOnStepClick = true,
   skipBtnText = 'Skip and continue',
   jumpToStep = 0,
+  onSkipClick = () => {},
 }: ProgressProps) {
   const [currentStep, setCurrentStep] = React.useState(jumpToStep)
 
@@ -86,10 +91,12 @@ export function Progress({
   const isError = steps[currentStep].isError
 
   const onContinueClick = () => {
+    // onClick = formik.handlesubmit
+    const onClick = steps[currentStep].onContinueClick
+    onClick && onClick()
+
     if (currentStep < steps.length - 1 && !isError) {
       setCurrentStep(currentStep + 1)
-      const onClick = steps[currentStep].onContinueClick
-      onClick && onClick()
     }
   }
 
@@ -99,6 +106,11 @@ export function Progress({
 
   const navigateOnClick = (step: number) => {
     if (allowNavigationOnStepClick && step < currentStep) setCurrentStep(step)
+  }
+
+  const handleOnSkipClick = () => {
+    onSkipClick()
+    setCurrentStep(currentStep + 1)
   }
 
   return (
@@ -130,7 +142,7 @@ export function Progress({
             <Button variant={ButtonVariant.SECONDARY} onClick={onCancelClick}>
               Cancel
             </Button>
-            <Button disabled={isError} onClick={isFinalStep ? onFinalStepClick : onContinueClick}>
+            <Button onClick={isFinalStep ? onFinalStepClick : onContinueClick}>
               {isFinalStep ? lastStepHeaderContinueBtnText : 'Continue'}
             </Button>
           </div>
@@ -151,11 +163,9 @@ export function Progress({
               Back
             </Button>
             {showSkipBtn && currentStep === stepToShowSkipBtn && (
-              <Button onClick={isFinalStep ? onFinalStepClick : onContinueClick}>
-                {skipBtnText}
-              </Button>
+              <Button onClick={handleOnSkipClick}>{skipBtnText}</Button>
             )}
-            <Button disabled={isError} onClick={isFinalStep ? onFinalStepClick : onContinueClick}>
+            <Button onClick={isFinalStep ? onFinalStepClick : onContinueClick}>
               {isFinalStep ? lastStepFooterContinueBtnText : 'Continue'}
             </Button>
           </div>
