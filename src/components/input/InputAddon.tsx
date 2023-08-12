@@ -89,6 +89,7 @@ function InputAddon({
                   onClick={e => {
                     e.stopPropagation()
                     handleOptionClick(opt)
+                    setIsDropdownOpen(false)
                   }}
                 >
                   {opt.label}
