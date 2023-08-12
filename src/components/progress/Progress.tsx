@@ -161,7 +161,7 @@ export function Progress({
         )}
       </div>
       <div className={classes.body}>{steps[currentStep].component}</div>
-      {showFooter && !finalStepClicked && (
+      {showFooter && (
         <div className={classes.footer}>
           <Button variant={ButtonVariant.SECONDARY} onClick={onCancelClick}>
             Cancel
