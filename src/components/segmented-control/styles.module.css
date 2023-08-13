@@ -15,18 +15,20 @@
   margin-bottom: 20px;
 }
 
-.segmentedControl .root .indicator {
+/* .segmentedControl .root .indicator {
   border-radius: 24px;
   border: 1px solid var(--iris);
-}
+} */
 
 .segmentedControl .root .radio {
   border: 1px solid transparent;
 }
 
-.segmentedControl .root .radio[data-focus] {
+.segmentedControl .root .radio[data-state='checked'] {
   color: var(--primary);
   background: #f8f8ff;
+  border-radius: 24px;
+  border: 1px solid var(--iris);
 }
 
 .segmentedControl .root .radio:hover {

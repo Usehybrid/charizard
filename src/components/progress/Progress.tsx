@@ -85,23 +85,31 @@ export function Progress({
   jumpToStep = 0,
   onSkipClick = () => {},
 }: ProgressProps) {
-  const [currentStep, setCurrentStep] = React.useState(jumpToStep)
+  const [currentStep, setCurrentStep] = React.useState(0)
+  const [finalStepClicked, setFinalStepClicked] = React.useState(false)
 
   const isFinalStep = currentStep === steps.length - 1
   const isError = steps[currentStep].isError
 
+  React.useEffect(() => {
+    setCurrentStep(jumpToStep)
+  }, [jumpToStep])
+
   const onContinueClick = () => {
-    // onClick = formik.handlesubmit
     const onClick = steps[currentStep].onContinueClick
     onClick && onClick()
 
-    if (currentStep < steps.length - 1 && !isError) {
+    if (isFinalStep && !isError) {
+      onFinalStepClick()
+      setFinalStepClicked(true)
+    } else if (currentStep < steps.length - 1 && !isError) {
       setCurrentStep(currentStep + 1)
     }
   }
 
   const onBackClick = () => {
     setCurrentStep(currentStep - 1)
+    setFinalStepClicked(false)
   }
 
   const navigateOnClick = (step: number) => {
@@ -124,11 +132,15 @@ export function Progress({
                 <div
                   className={clsx(
                     classes.circle,
-                    currentStep === idx && classes.active,
-                    idx < currentStep && classes.completed,
+                    currentStep === idx && !finalStepClicked && classes.active,
+                    (idx < currentStep || finalStepClicked) && classes.completed,
                   )}
                 >
-                  {idx < currentStep ? <SVG path={checkIcon} width={20} /> : idx + 1}
+                  {idx < currentStep || finalStepClicked ? (
+                    <SVG path={checkIcon} width={20} />
+                  ) : (
+                    idx + 1
+                  )}
                 </div>
                 <div className={clsx(classes.label, currentStep === idx && classes.active)}>
                   {step.label}
@@ -155,17 +167,15 @@ export function Progress({
             Cancel
           </Button>
           <div className={classes.btnsFlex}>
-            <Button
-              variant={ButtonVariant.SECONDARY}
-              onClick={onBackClick}
-              disabled={currentStep === 0}
-            >
-              Back
-            </Button>
+            {currentStep > 0 && (
+              <Button variant={ButtonVariant.SECONDARY} onClick={onBackClick}>
+                Back
+              </Button>
+            )}
             {showSkipBtn && currentStep === stepToShowSkipBtn && (
               <Button onClick={handleOnSkipClick}>{skipBtnText}</Button>
             )}
-            <Button onClick={isFinalStep ? onFinalStepClick : onContinueClick}>
+            <Button onClick={onContinueClick}>
               {isFinalStep ? lastStepFooterContinueBtnText : 'Continue'}
             </Button>
           </div>

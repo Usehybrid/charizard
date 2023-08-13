@@ -443,7 +443,7 @@ function App() {
           columns: 6,
         }}
       /> */}
-      {/* <SegmentedControl items={items} defaultValue="purchase" /> */}
+      <SegmentedControl items={items} defaultValue="purchase" />
       {/* <Progress
         steps={steps}
         lastStepFooterContinueBtnText="Confirm and add to inventory"
@@ -453,8 +453,8 @@ function App() {
         }}
         showSkipBtn
         stepToShowSkipBtn={3}
-        jumpToStep={1}
-      />
+        jumpToStep={2}
+      /> */}
       {/* <InputContainer size="md">
         <InputLabel
           infoText="big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text "
@@ -482,7 +482,7 @@ function App() {
           <Button.ActionsDropdown menuItems={menuItems} id={'software-list-dropdown-action'} />
         </div>
       </div> */}
-      <RadioGroup
+      {/* <RadioGroup
         items={[
           {label: {heading: 'heading'}, value: 'heading'},
           {label: {heading: 'heading 2'}, value: 'heading 2'},
@@ -490,7 +490,7 @@ function App() {
         onChange={() => {}}
         radioHeading="heding"
         errorMsg="thisi serror smngs"
-      />
+      /> */}
     </div>
   )
 }
