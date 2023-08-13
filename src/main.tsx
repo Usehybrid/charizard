@@ -507,6 +507,7 @@ function App() {
                   {label: 'TB', value: 'TB'},
                   {label: 'MB', value: 'MB'},
                 ]}
+                showDropdownSearch={false}
               >
                 GB
               </InputRightAddon>
