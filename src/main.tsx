@@ -5,6 +5,7 @@ import {createColumnHelper} from '@tanstack/react-table'
 import randomIcon from './components/assets/check.svg'
 import {
   Button,
+  Drawer,
   Input,
   InputContainer,
   InputGroup,
@@ -392,6 +393,8 @@ function App() {
     },
   ]
 
+  const [isOpen, setIsOpen] = React.useState(false)
+
   return (
     <div style={styles}>
       {/* <Table
@@ -443,7 +446,7 @@ function App() {
           columns: 6,
         }}
       /> */}
-      <SegmentedControl items={items} defaultValue="purchase" />
+      {/* <SegmentedControl items={items} defaultValue="purchase" /> */}
       {/* <Progress
         steps={steps}
         lastStepFooterContinueBtnText="Confirm and add to inventory"
@@ -491,6 +494,27 @@ function App() {
         radioHeading="heding"
         errorMsg="thisi serror smngs"
       /> */}
+      <button onClick={() => setIsOpen(true)}>open</button>
+      {isOpen && (
+        <Drawer isOpen={isOpen} onClose={() => setIsOpen(false)} title="heading">
+          <InputContainer>
+            <InputGroup>
+              <Input />
+              <InputRightAddon
+                isDropdown
+                dropdownOptions={[
+                  {label: 'GB', value: 'GB'},
+                  {label: 'TB', value: 'TB'},
+                  {label: 'MB', value: 'MB'},
+                ]}
+                showDropdownSearch={false}
+              >
+                GB
+              </InputRightAddon>
+            </InputGroup>
+          </InputContainer>
+        </Drawer>
+      )}
     </div>
   )
 }
