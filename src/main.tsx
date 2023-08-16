@@ -253,7 +253,18 @@ const getFullName = (owner: any) => {
 
 const menuItems = [
   {
-    label: 'Edit details',
+    label: 'Allocate',
+    iconSrc: randomIcon,
+    onClick: (data: any) => {
+      console.log('Editing details', data)
+    },
+    hide: (data: any) => {
+      return data.software.name === 'Figma'
+    },
+  },
+
+  {
+    label: 'De-allocate',
     iconSrc: randomIcon,
     onClick: (data: any) => {
       console.log('Editing details', data)

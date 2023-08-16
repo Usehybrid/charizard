@@ -69,7 +69,7 @@ export interface MenuButtonProps {
   children: React.ReactNode
   variant?: 'primary' | 'secondary' | 'ghost'
   disabled?: boolean
-  menuItems: {label: string; iconSrc?: string; onClick: any}[]
+  menuItems: {label: string; iconSrc?: string; onClick: any; hide?: any}[]
   onClick?: React.MouseEventHandler<HTMLButtonElement>
   isCustomTrigger?: boolean
   // exists on why it's a custom trigger, used to pass the whole row
@@ -154,17 +154,23 @@ function MenuButton({
 
       <div {...api.positionerProps} className={classes.menusPos}>
         <div {...api.contentProps} className={classes.menus}>
-          {menuItems.map(menu => (
-            <div
-              key={menu.label}
-              className={classes.menu}
-              {...api.getItemProps({id: menu.label.toLowerCase()})}
-              onClick={isCustomTrigger ? () => menu.onClick(customData) : menu.onClick}
-            >
-              {menu.iconSrc && <SVG path={menu.iconSrc} svgClassName={classes.menuIcon} />}
-              {menu.label}
-            </div>
-          ))}
+          {menuItems
+            .filter(menu => {
+              if (!menu.hide) return true
+              // used to pass the table row data in the hide callback
+              return menu.hide(customData)
+            })
+            .map(menu => (
+              <div
+                key={menu.label}
+                className={classes.menu}
+                {...api.getItemProps({id: menu.label.toLowerCase()})}
+                onClick={isCustomTrigger ? () => menu.onClick(customData) : menu.onClick}
+              >
+                {menu.iconSrc && <SVG path={menu.iconSrc} svgClassName={classes.menuIcon} />}
+                {menu.label}
+              </div>
+            ))}
         </div>
       </div>
     </div>
