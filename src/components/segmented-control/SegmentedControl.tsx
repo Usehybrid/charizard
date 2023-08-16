@@ -37,6 +37,12 @@ export function SegmentedControl({items, defaultValue, handleOnChange}: Segmente
   )
   const api = radio.connect(state, send, normalizeProps)
 
+  React.useEffect(() => {
+    if (defaultValue && defaultValue !== api.value) {
+      api.setValue(defaultValue)
+    }
+  }, [defaultValue])
+
   return (
     <div className={classes.segmentedControl}>
       <div {...api.rootProps} className={classes.root}>

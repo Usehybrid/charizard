@@ -21,6 +21,7 @@ import {
   Table,
 } from './components'
 import randomIcon2 from './components/assets/search-2.svg'
+import {CreatableSelect} from './components/select/CreatableSelect'
 
 const styles = {
   width: '90%',
@@ -395,6 +396,12 @@ function App() {
 
   const [isOpen, setIsOpen] = React.useState(false)
 
+  const [defVal, setDefVal] = React.useState('purchase')
+
+  setTimeout(() => {
+    setDefVal('rental')
+  }, 3000)
+
   return (
     <div style={styles}>
       {/* <Table
@@ -446,8 +453,8 @@ function App() {
           columns: 6,
         }}
       /> */}
-      {/* <SegmentedControl items={items} defaultValue="purchase" /> */}
-      <Progress
+      <SegmentedControl items={items} defaultValue={defVal} />
+      {/* <Progress
         steps={steps}
         lastStepFooterContinueBtnText="Confirm and add to inventory"
         onCancelClick={() => console.log('cancel')}
@@ -457,7 +464,27 @@ function App() {
         showSkipBtn
         stepToShowSkipBtn={3}
         jumpToStep={2}
-      />
+      /> */}
+      {/* <CreatableSelect
+        options={options}
+        createNewOptionMutate={async (value: any) => {
+          console.log(value)
+          return {
+            data: {
+              data: {
+                id: value.optionToAdd,
+              },
+            },
+          }
+        }}
+        refetchOptions={() => {
+          console.log('refetching')
+        }}
+        onChange={value => {
+          console.log(value)
+        }}
+        isMulti
+      /> */}
       {/* <InputContainer size="md">
         <InputLabel
           infoText="big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text "
