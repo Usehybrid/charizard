@@ -355,7 +355,7 @@ function App() {
       // isError: check
       isError: false,
       onContinueClick: () => {
-        console.log('asset type')
+        throw new Error('This is error')
       },
     },
     {
@@ -447,7 +447,7 @@ function App() {
         }}
       /> */}
       {/* <SegmentedControl items={items} defaultValue="purchase" /> */}
-      {/* <Progress
+      <Progress
         steps={steps}
         lastStepFooterContinueBtnText="Confirm and add to inventory"
         onCancelClick={() => console.log('cancel')}
@@ -457,7 +457,7 @@ function App() {
         showSkipBtn
         stepToShowSkipBtn={3}
         jumpToStep={2}
-      /> */}
+      />
       {/* <InputContainer size="md">
         <InputLabel
           infoText="big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text "
@@ -494,7 +494,7 @@ function App() {
         radioHeading="heding"
         errorMsg="thisi serror smngs"
       /> */}
-      <button onClick={() => setIsOpen(true)}>open</button>
+      {/* <button onClick={() => setIsOpen(true)}>open</button>
       {isOpen && (
         <Drawer isOpen={isOpen} onClose={() => setIsOpen(false)} title="heading">
           <InputContainer>
@@ -514,7 +514,7 @@ function App() {
             </InputGroup>
           </InputContainer>
         </Drawer>
-      )}
+      )} */}
     </div>
   )
 }
