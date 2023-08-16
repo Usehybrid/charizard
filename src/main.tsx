@@ -5,6 +5,7 @@ import {createColumnHelper} from '@tanstack/react-table'
 import randomIcon from './components/assets/check.svg'
 import {
   Button,
+  Drawer,
   Input,
   InputContainer,
   InputGroup,
@@ -15,6 +16,7 @@ import {
   PopoverDescription,
   PopoverTrigger,
   Progress,
+  RadioGroup,
   SegmentedControl,
   Table,
 } from './components'
@@ -391,9 +393,11 @@ function App() {
     },
   ]
 
+  const [isOpen, setIsOpen] = React.useState(false)
+
   return (
     <div style={styles}>
-      <Table
+      {/* <Table
         data={data}
         loaderConfig={{isFetching: false, isError: false, text: 'Getting employees...'}}
         columns={columns}
@@ -441,17 +445,19 @@ function App() {
           },
           columns: 6,
         }}
-      />
+      /> */}
       {/* <SegmentedControl items={items} defaultValue="purchase" /> */}
       {/* <Progress
         steps={steps}
         lastStepFooterContinueBtnText="Confirm and add to inventory"
         onCancelClick={() => console.log('cancel')}
-        onFinalStepClick={() => {}}
+        onFinalStepClick={() => {
+          console.log('final')
+        }}
         showSkipBtn
         stepToShowSkipBtn={3}
-        jumpToStep={1}
-      />
+        jumpToStep={2}
+      /> */}
       {/* <InputContainer size="md">
         <InputLabel
           infoText="big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text "
@@ -479,6 +485,36 @@ function App() {
           <Button.ActionsDropdown menuItems={menuItems} id={'software-list-dropdown-action'} />
         </div>
       </div> */}
+      {/* <RadioGroup
+        items={[
+          {label: {heading: 'heading'}, value: 'heading'},
+          {label: {heading: 'heading 2'}, value: 'heading 2'},
+        ]}
+        onChange={() => {}}
+        radioHeading="heding"
+        errorMsg="thisi serror smngs"
+      /> */}
+      <button onClick={() => setIsOpen(true)}>open</button>
+      {isOpen && (
+        <Drawer isOpen={isOpen} onClose={() => setIsOpen(false)} title="heading">
+          <InputContainer>
+            <InputGroup>
+              <Input />
+              <InputRightAddon
+                isDropdown
+                dropdownOptions={[
+                  {label: 'GB', value: 'GB'},
+                  {label: 'TB', value: 'TB'},
+                  {label: 'MB', value: 'MB'},
+                ]}
+                showDropdownSearch={false}
+              >
+                GB
+              </InputRightAddon>
+            </InputGroup>
+          </InputContainer>
+        </Drawer>
+      )}
     </div>
   )
 }

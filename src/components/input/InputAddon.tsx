@@ -31,6 +31,10 @@ interface InputAddonProps {
    * handle dropdown option click
    */
   handleOptionClick?: (selectedOption: {label: string; value: string}) => void
+  /**
+   * show dropdown search
+   */
+  showDropdownSearch?: boolean
 }
 
 function InputAddon({
@@ -39,11 +43,13 @@ function InputAddon({
   isDropdown = false,
   dropdownOptions,
   handleOptionClick = () => {},
+  showDropdownSearch = true,
 }: InputAddonProps) {
   const attr = placement === 'left' ? 'left' : 'right'
   const [isDropdownOpen, setIsDropdownOpen] = React.useState(false)
   const dropdownRef = React.useRef<HTMLDivElement>(null)
   const [search, setSearch] = React.useState('')
+  const [isEntirelyVisible, setIsEntirelyVisible] = React.useState(true)
 
   React.useEffect(() => {
     document.addEventListener('click', handleClickOutside)
@@ -59,6 +65,22 @@ function InputAddon({
     }
   }
 
+  const toggleDropdown = () => {
+    if (isDropdownOpen) {
+      setIsDropdownOpen(false)
+      setIsEntirelyVisible(true)
+    } else {
+      setIsDropdownOpen(true)
+      // detect if dropdown would be cut off by the right edge of the screen and reposition it if so
+      const dropdownRect = dropdownRef.current?.getBoundingClientRect()
+      const dropdownRight = dropdownRect?.right! + dropdownRect?.width!
+      const windowRight = window.innerWidth - 100
+      if (dropdownRight > windowRight) {
+        setIsEntirelyVisible(false)
+      }
+    }
+  }
+
   const searchFilter = (option: {label: string; value: string}) =>
     (option.label + ' ' + option.value).toLowerCase().includes(search.toLowerCase())
 
@@ -67,7 +89,7 @@ function InputAddon({
       className={clsx(classes.inputAddon, classes[attr])}
       onClick={() => {
         if (isDropdown) {
-          setIsDropdownOpen(!isDropdownOpen)
+          toggleDropdown()
         }
       }}
       ref={dropdownRef}
@@ -78,10 +100,19 @@ function InputAddon({
         <>
           <SVG path={chevronDownIcon} width={20} customSpanStyles={{width: '20px'}} />
           {isDropdownOpen && (
-            <div className={classes.dropdownContainer}>
-              <div className={classes.searchContainer} onClick={e => e.stopPropagation()}>
-                <Search search={search} setSearch={setSearch} id="input-add-on-search" />
-              </div>
+            <div
+              className={classes.dropdownContainer}
+              style={{
+                left: isEntirelyVisible ? '0' : 'inherit',
+                right: isEntirelyVisible ? 'inherit' : '0',
+                paddingTop: showDropdownSearch ? '0' : '12px',
+              }}
+            >
+              {showDropdownSearch && (
+                <div className={classes.searchContainer} onClick={e => e.stopPropagation()}>
+                  <Search search={search} setSearch={setSearch} id="input-add-on-search" />
+                </div>
+              )}
               {dropdownOptions?.filter(searchFilter)?.map(opt => (
                 <div
                   className={classes.dropdownOption}
@@ -89,6 +120,7 @@ function InputAddon({
                   onClick={e => {
                     e.stopPropagation()
                     handleOptionClick(opt)
+                    toggleDropdown()
                   }}
                 >
                   {opt.label}
@@ -119,6 +151,10 @@ interface InputDirectionAddonProps {
    * handle dropdown option click
    */
   handleOptionClick?: (selectedOption: {label: string; value: string}) => void
+  /**
+   * show dropdown search
+   */
+  showDropdownSearch?: boolean
 }
 
 export function InputLeftAddon({
@@ -126,6 +162,7 @@ export function InputLeftAddon({
   isDropdown = false,
   dropdownOptions = [],
   handleOptionClick = () => {},
+  showDropdownSearch = true,
 }: InputDirectionAddonProps) {
   return (
     <InputAddon
@@ -133,6 +170,7 @@ export function InputLeftAddon({
       isDropdown={isDropdown}
       dropdownOptions={dropdownOptions}
       handleOptionClick={handleOptionClick}
+      showDropdownSearch={showDropdownSearch}
     >
       {children}
     </InputAddon>
@@ -144,6 +182,7 @@ export function InputRightAddon({
   isDropdown = false,
   dropdownOptions = [],
   handleOptionClick = () => {},
+  showDropdownSearch = true,
 }: InputDirectionAddonProps) {
   return (
     <InputAddon
@@ -151,6 +190,7 @@ export function InputRightAddon({
       isDropdown={isDropdown}
       dropdownOptions={dropdownOptions}
       handleOptionClick={handleOptionClick}
+      showDropdownSearch={showDropdownSearch}
     >
       {children}
     </InputAddon>
