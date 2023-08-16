@@ -33,7 +33,7 @@ export type TableProps = {
   actionsConfig?: {
     isDropdownActions?: boolean
     // menu list for the dropdown
-    menuItems?: {label: string; iconSrc?: string; onClick: any}[]
+    menuItems?: {label: string; iconSrc?: string; onClick: any; hide?: any}[]
     labelText?: boolean
     key?: string
   }

@@ -152,7 +152,7 @@ function MenuButton({
         </div>
       )}
 
-      <div {...api.positionerProps}>
+      <div {...api.positionerProps} className={classes.menusPos}>
         <div {...api.contentProps} className={classes.menus}>
           {menuItems.map(menu => (
             <div
@@ -172,7 +172,7 @@ function MenuButton({
 }
 export interface MenuActionsDropdownProps {
   id: string
-  menuItems: {label: string; iconSrc?: string; onClick: any}[]
+  menuItems: {label: string; iconSrc?: string; onClick: any; hide?: any}[]
   data?: any
   size?: 'md' | 'lg'
 }

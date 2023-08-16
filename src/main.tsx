@@ -17,6 +17,8 @@ import {
   PopoverTrigger,
   Progress,
   RadioGroup,
+  SVG,
+  Search,
   SegmentedControl,
   Table,
 } from './components'
@@ -397,7 +399,7 @@ function App() {
 
   return (
     <div style={styles}>
-      {/* <Table
+      <Table
         data={data}
         loaderConfig={{isFetching: false, isError: false, text: 'Getting employees...'}}
         columns={columns}
@@ -445,7 +447,7 @@ function App() {
           },
           columns: 6,
         }}
-      /> */}
+      />
       {/* <SegmentedControl items={items} defaultValue="purchase" /> */}
       {/* <Progress
         steps={steps}
@@ -479,11 +481,16 @@ function App() {
 
       {/* <div style={{display: 'flex', alignItems: 'center'}}>
         <Button.MenuButton menuItems={menuItems} id="add-software-menu">
+          <SVG path={randomIcon} customSpanStyles={{width: '16px', height: '16px'}} />
           Add software
         </Button.MenuButton>
         <div style={{marginLeft: '12px'}}>
           <Button.ActionsDropdown menuItems={menuItems} id={'software-list-dropdown-action'} />
         </div>
+      </div>
+
+      <div>
+        <Search id="table-search" />
       </div> */}
       {/* <RadioGroup
         items={[
@@ -494,7 +501,7 @@ function App() {
         radioHeading="heding"
         errorMsg="thisi serror smngs"
       /> */}
-      <button onClick={() => setIsOpen(true)}>open</button>
+      {/* <button onClick={() => setIsOpen(true)}>open</button>
       {isOpen && (
         <Drawer isOpen={isOpen} onClose={() => setIsOpen(false)} title="heading">
           <InputContainer>
@@ -514,7 +521,7 @@ function App() {
             </InputGroup>
           </InputContainer>
         </Drawer>
-      )}
+      )} */}
     </div>
   )
 }
