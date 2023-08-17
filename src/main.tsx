@@ -23,6 +23,7 @@ import {
   Table,
 } from './components'
 import randomIcon2 from './components/assets/search-2.svg'
+import {SOFTWARE_ACTION_TYPES, useSoftwareStore} from './test'
 
 const styles = {
   width: '90%',
@@ -258,7 +259,7 @@ const menuItems = [
     onClick: (data: any) => {
       console.log('Editing details', data)
     },
-    hide: (data: any) => {
+    filterFn: (data: any) => {
       return data.software.name === 'Figma'
     },
   },
@@ -408,6 +409,10 @@ function App() {
 
   const [isOpen, setIsOpen] = React.useState(false)
 
+  const query = useSoftwareStore(s => s.query)
+  const dispatch = useSoftwareStore(s => s.dispatch)
+  console.log(query)
+
   return (
     <div style={styles}>
       <Table
@@ -423,8 +428,9 @@ function App() {
           filters,
           isLoading: false,
           isError: false,
-          filterDispatch: () => {},
-          filterReset: () => {},
+          filterDispatch: value => dispatch({type: SOFTWARE_ACTION_TYPES.FILTER, payload: value}),
+          filterReset: value =>
+            dispatch({type: SOFTWARE_ACTION_TYPES.RESET_FILTERS, payload: value}),
         }}
         sortConfig={{
           sortBy: '',

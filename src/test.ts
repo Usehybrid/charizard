@@ -18,6 +18,7 @@ const softwareInitialQueries = {
   filters: {
     is_archived: false,
     filter_software_owners: '',
+    filter_software_name: '',
   },
 }
 
@@ -28,7 +29,8 @@ export type SoftwareQueries = {
   sort_order: string
   filters: {
     is_archived: boolean
-    software_owners?: string
+    filter_software_owners: string
+    filter_software_name: string
   }
 }
 
@@ -79,7 +81,6 @@ const softwareQueryDispatcher = (state: SoftwareStore, action) => {
 export const useSoftwareStore = create<SoftwareStore>(set => ({
   query: softwareInitialQueries,
   dispatch: action => set(state => softwareQueryDispatcher(state, action)),
-  filters: [],
   setDefaultFilters: filters => set({filters}),
   addFilters: (filterKey, value) =>
     set(state => {

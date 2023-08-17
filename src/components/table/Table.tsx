@@ -252,7 +252,6 @@ export function Table({
 
   // hide actions dropdown column
   React.useLayoutEffect(() => {
-    console.log(actionsConfig)
     if (actionsConfig.isDropdownActions) return
     table.getColumn(DROPDOWN_COL_ID)?.toggleVisibility(false)
   }, [])
