@@ -95,7 +95,7 @@ interface CreatableSelectProps {
   /**
    * refetch options to show options in dropdown
    */
-  refetchOptions: Function
+  refetchOptions?: Function
 }
 
 export type OptionType = {
@@ -123,7 +123,7 @@ export function CreatableSelect({
   isMulti = false,
   isClearable = false,
   createNewOption,
-  refetchOptions,
+  refetchOptions = () => {},
 }: CreatableSelectProps) {
   return (
     <div
