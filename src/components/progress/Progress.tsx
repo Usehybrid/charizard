@@ -109,6 +109,7 @@ export function Progress({
         }
       } else if (isFinalStep) {
         onFinalStepClick()
+        setFinalStepClicked(true)
       }
     } catch (error) {
       return
