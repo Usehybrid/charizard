@@ -18,7 +18,7 @@ interface ProgressProps {
     label: string
     component: React.ReactNode
     isError: boolean
-    onContinueClick?: () => void
+    onContinueClick?: Function
   }[]
   /**
    * handle cancel click
@@ -95,10 +95,28 @@ export function Progress({
     setCurrentStep(jumpToStep)
   }, [jumpToStep])
 
-  const onContinueClick = () => {
+  const onContinueClick = async () => {
     const onClick = steps[currentStep].onContinueClick
-    onClick && onClick()
 
+    try {
+      if (onClick) {
+        if (onClick.constructor && onClick.constructor.name === 'AsyncFunction') {
+          await onClick()
+          handleNextStepClick()
+        } else {
+          onClick()
+          handleNextStepClick()
+        }
+      } else if (isFinalStep) {
+        onFinalStepClick()
+        setFinalStepClicked(true)
+      }
+    } catch (error) {
+      return
+    }
+  }
+
+  const handleNextStepClick = () => {
     if (isFinalStep && !isError) {
       onFinalStepClick()
       setFinalStepClicked(true)
@@ -154,7 +172,7 @@ export function Progress({
             <Button variant={ButtonVariant.SECONDARY} onClick={onCancelClick}>
               Cancel
             </Button>
-            <Button onClick={isFinalStep ? onFinalStepClick : onContinueClick}>
+            <Button onClick={onContinueClick}>
               {isFinalStep ? lastStepHeaderContinueBtnText : 'Continue'}
             </Button>
           </div>

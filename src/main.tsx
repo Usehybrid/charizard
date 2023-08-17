@@ -23,6 +23,9 @@ import {
   Table,
 } from './components'
 import randomIcon2 from './components/assets/search-2.svg'
+
+import {CreatableSelect} from './components/select/CreatableSelect'
+import { useSoftwareStore } from './test'
 import {SOFTWARE_ACTION_TYPES, useSoftwareStore} from './test'
 
 const styles = {
@@ -363,7 +366,7 @@ function App() {
       // isError: check
       isError: false,
       onContinueClick: () => {
-        console.log('asset type')
+        console.log('asset')
       },
     },
     {
@@ -395,9 +398,6 @@ function App() {
       label: 'Review',
       component: <>review</>,
       isError: false,
-      onContinueClick: () => {
-        console.log('review')
-      },
     },
   ]
 
@@ -405,7 +405,7 @@ function App() {
 
   return (
     <div style={styles}>
-      <Table
+      {/* <Table
         data={data}
         loaderConfig={{isFetching: false, isError: false, text: 'Getting employees...'}}
         columns={columns}
@@ -456,9 +456,9 @@ function App() {
           },
           columns: 6,
         }}
-      />
+      /> */}
       {/* <SegmentedControl items={items} defaultValue="purchase" /> */}
-      {/* <Progress
+      <Progress
         steps={steps}
         lastStepFooterContinueBtnText="Confirm and add to inventory"
         onCancelClick={() => console.log('cancel')}
@@ -467,7 +467,22 @@ function App() {
         }}
         showSkipBtn
         stepToShowSkipBtn={3}
-        jumpToStep={2}
+      />
+      {/* <CreatableSelect
+        options={options}
+        createNewOption={async (value: any) => {
+          return value.map((val: any) => ({
+            label: val,
+            value: val,
+          }))
+        }}
+        refetchOptions={() => {
+          console.log('refetching')
+        }}
+        onChange={value => {
+          console.log(value)
+        }}
+        isMulti
       /> */}
       {/* <InputContainer size="md">
         <InputLabel
