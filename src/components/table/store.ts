@@ -55,7 +55,6 @@ export const useTableStore = create<TableStore>()(
           }
           return obj
         })
-        console.log(filters, 'test')
         return {filters}
       }),
     resetAllFilters: filterReset =>
