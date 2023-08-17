@@ -256,9 +256,7 @@ const menuItems = [
   {
     label: 'Allocate',
     iconSrc: randomIcon,
-    onClick: (data: any) => {
-      console.log('Editing details', data)
-    },
+    onClick: (data: any) => {},
     filterFn: (data: any) => {
       return data.software.name === 'Figma'
     },
@@ -267,16 +265,12 @@ const menuItems = [
   {
     label: 'De-allocate',
     iconSrc: randomIcon,
-    onClick: (data: any) => {
-      console.log('Editing details', data)
-    },
+    onClick: (data: any) => {},
   },
   {
     label: 'Archive',
     iconSrc: randomIcon2,
-    onClick: (data: any) => {
-      console.log('Archiving', data)
-    },
+    onClick: (data: any) => {},
   },
 ]
 
@@ -409,10 +403,6 @@ function App() {
 
   const [isOpen, setIsOpen] = React.useState(false)
 
-  const query = useSoftwareStore(s => s.query)
-  const dispatch = useSoftwareStore(s => s.dispatch)
-  console.log(query)
-
   return (
     <div style={styles}>
       <Table
@@ -428,9 +418,11 @@ function App() {
           filters,
           isLoading: false,
           isError: false,
-          filterDispatch: value => dispatch({type: SOFTWARE_ACTION_TYPES.FILTER, payload: value}),
-          filterReset: value =>
-            dispatch({type: SOFTWARE_ACTION_TYPES.RESET_FILTERS, payload: value}),
+          // filterDispatch: value => dispatch({type: SOFTWARE_ACTION_TYPES.FILTER, payload: value}),
+          // filterReset: value =>
+          //   dispatch({type: SOFTWARE_ACTION_TYPES.RESET_FILTERS, payload: value}),
+          filterDispatch: () => {},
+          filterReset: () => {},
         }}
         sortConfig={{
           sortBy: '',
@@ -442,8 +434,8 @@ function App() {
           },
         }}
         rowSelectionConfig={{
-          isRadio: true,
-          // isCheckbox: true,
+          // isRadio: true,
+          isCheckbox: true,
           actions: [
             {
               icon: randomIcon,
