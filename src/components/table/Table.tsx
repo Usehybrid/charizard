@@ -33,7 +33,7 @@ export type TableProps = {
   actionsConfig?: {
     isDropdownActions?: boolean
     // menu list for the dropdown
-    menuItems?: {label: string; iconSrc?: string; onClick: any}[]
+    menuItems?: {label: string; iconSrc?: string; onClick: any; hide?: any}[]
     labelText?: boolean
     key?: string
   }
@@ -77,6 +77,7 @@ export type TableProps = {
     }[]
     setSelectedRows?: React.Dispatch<React.SetStateAction<any>>
     iconSrc?: string
+    shouldClear?: boolean
   }
   selectorConfig?: {
     selectors: {name: string; onClick: any}[]
@@ -106,9 +107,9 @@ export type TableProps = {
 }
 
 // todo
+// * figure out clearing of row selection after overlay closes
 // * alignment of table
 // ! bugs
-// * after performing multi select action, clear the previous rowSelection
 // * differentiate searched empty state with data empty state
 
 export function Table({
@@ -137,6 +138,7 @@ export function Table({
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
   const [rowSelection, setRowSelection] = React.useState({})
 
+  // account for search state here itself
   const isEmpty = !loaderConfig.isFetching && !loaderConfig.isError && !data.length
 
   const {isCheckbox, isRadio, actions, setSelectedRows, iconSrc} = rowSelectionConfig
@@ -300,7 +302,6 @@ export function Table({
                 customStyles={{color: 'var(--gray-700)'}}
                 onClick={() => {
                   action.onClick()
-                  setRowSelection({})
                 }}
               >
                 {action.icon && <SVG path={action.icon} svgClassName={classes.actionsBtnIcon} />}

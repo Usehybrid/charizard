@@ -125,6 +125,10 @@
   height: 20px;
 }
 
+.menusPos {
+  z-index: 1;
+}
+
 .menus {
   padding: 4px;
   border-radius: 4px;

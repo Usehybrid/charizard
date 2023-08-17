@@ -17,6 +17,8 @@ import {
   PopoverTrigger,
   Progress,
   RadioGroup,
+  SVG,
+  Search,
   SegmentedControl,
   Table,
 } from './components'
@@ -252,7 +254,18 @@ const getFullName = (owner: any) => {
 
 const menuItems = [
   {
-    label: 'Edit details',
+    label: 'Allocate',
+    iconSrc: randomIcon,
+    onClick: (data: any) => {
+      console.log('Editing details', data)
+    },
+    hide: (data: any) => {
+      return data.software.name === 'Figma'
+    },
+  },
+
+  {
+    label: 'De-allocate',
     iconSrc: randomIcon,
     onClick: (data: any) => {
       console.log('Editing details', data)
@@ -404,7 +417,7 @@ function App() {
 
   return (
     <div style={styles}>
-      {/* <Table
+      <Table
         data={data}
         loaderConfig={{isFetching: false, isError: false, text: 'Getting employees...'}}
         columns={columns}
@@ -452,9 +465,9 @@ function App() {
           },
           columns: 6,
         }}
-      /> */}
-      {/* <SegmentedControl items={items} defaultValue={defVal} /> */}
-      <Progress
+      />
+      {/* <SegmentedControl items={items} defaultValue="purchase" /> */}
+      {/* <Progress
         steps={steps}
         lastStepFooterContinueBtnText="Confirm and add to inventory"
         onCancelClick={() => console.log('cancel')}
@@ -501,11 +514,16 @@ function App() {
 
       {/* <div style={{display: 'flex', alignItems: 'center'}}>
         <Button.MenuButton menuItems={menuItems} id="add-software-menu">
+          <SVG path={randomIcon} customSpanStyles={{width: '16px', height: '16px'}} />
           Add software
         </Button.MenuButton>
         <div style={{marginLeft: '12px'}}>
           <Button.ActionsDropdown menuItems={menuItems} id={'software-list-dropdown-action'} />
         </div>
+      </div>
+
+      <div>
+        <Search id="table-search" />
       </div> */}
       {/* <RadioGroup
         items={[
