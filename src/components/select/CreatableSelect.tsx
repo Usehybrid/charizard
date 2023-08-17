@@ -91,9 +91,9 @@ interface CreatableSelectProps {
   /**
    * create new option api mutate function
    */
-  createNewOptionMutate: Function
+  createNewOption: (value: string | string[]) => Promise<OptionType | Array<OptionType>>
   /**
-   * refetch options
+   * refetch options to show options in dropdown
    */
   refetchOptions: Function
 }
@@ -122,7 +122,7 @@ export function CreatableSelect({
   isSearchable = true,
   isMulti = false,
   isClearable = false,
-  createNewOptionMutate,
+  createNewOption,
   refetchOptions,
 }: CreatableSelectProps) {
   return (
@@ -153,29 +153,27 @@ export function CreatableSelect({
         }}
         isDisabled={isDisabled}
         onChange={async (data: any) => {
-          // ! TODOOOOOOO
           if (isMulti) {
-            const newValue = data.filter((d: OptionType) => d.__isNew__)
-            if (newValue.length > 0) {
-              const res = await createNewOptionMutate({
-                optionToAdd: newValue.map((v: OptionType) => v.value),
-              })
+            const newSelectedValues = data.filter((d: OptionType) => d.__isNew__)
+            const oldSelectedValues = data.filter((d: OptionType) => !d.__isNew__)
+
+            if (newSelectedValues.length > 0) {
+              const updatedDatas = await createNewOption(
+                newSelectedValues.map((val: OptionType) => val.value),
+              )
               await refetchOptions()
-              const newValues = [
-                ...data.filter((d: OptionType) => !d.__isNew__),
-                {label: newValue.value, id: res.data?.data?.id},
-              ]
+              const totalSelectedValues = [...oldSelectedValues, ...(updatedDatas as OptionType[])]
               onChange(
-                (newValues as SelectMultiValue).map(val => val.value),
+                totalSelectedValues.map((val: OptionType) => val.value),
                 data.actionMeta,
               )
             }
           } else {
             let value
             if (data.__isNew__) {
-              const res = await createNewOptionMutate({optionToAdd: data.value})
+              const updatedData = await createNewOption(data.value)
               await refetchOptions()
-              value = res.data.data?.id
+              value = (updatedData as OptionType).value
             } else {
               value = data.value
             }

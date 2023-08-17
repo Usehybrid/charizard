@@ -453,7 +453,7 @@ function App() {
           columns: 6,
         }}
       /> */}
-      <SegmentedControl items={items} defaultValue={defVal} />
+      {/* <SegmentedControl items={items} defaultValue={defVal} /> */}
       {/* <Progress
         steps={steps}
         lastStepFooterContinueBtnText="Confirm and add to inventory"
@@ -465,17 +465,13 @@ function App() {
         stepToShowSkipBtn={3}
         jumpToStep={2}
       /> */}
-      {/* <CreatableSelect
+      <CreatableSelect
         options={options}
-        createNewOptionMutate={async (value: any) => {
-          console.log(value)
-          return {
-            data: {
-              data: {
-                id: value.optionToAdd,
-              },
-            },
-          }
+        createNewOption={async (value: any) => {
+          return value.map((val: any) => ({
+            label: val,
+            value: val,
+          }))
         }}
         refetchOptions={() => {
           console.log('refetching')
@@ -484,7 +480,7 @@ function App() {
           console.log(value)
         }}
         isMulti
-      /> */}
+      />
       {/* <InputContainer size="md">
         <InputLabel
           infoText="big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text "
