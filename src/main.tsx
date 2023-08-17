@@ -24,10 +24,6 @@ import {
 } from './components'
 import randomIcon2 from './components/assets/search-2.svg'
 
-import {CreatableSelect} from './components/select/CreatableSelect'
-import { useSoftwareStore } from './test'
-import {SOFTWARE_ACTION_TYPES, useSoftwareStore} from './test'
-
 const styles = {
   width: '90%',
   margin: 'auto',
@@ -405,7 +401,7 @@ function App() {
 
   return (
     <div style={styles}>
-      {/* <Table
+      <Table
         data={data}
         loaderConfig={{isFetching: false, isError: false, text: 'Getting employees...'}}
         columns={columns}
@@ -456,9 +452,9 @@ function App() {
           },
           columns: 6,
         }}
-      /> */}
+      />
       {/* <SegmentedControl items={items} defaultValue="purchase" /> */}
-      <Progress
+      {/* <Progress
         steps={steps}
         lastStepFooterContinueBtnText="Confirm and add to inventory"
         onCancelClick={() => console.log('cancel')}
@@ -467,7 +463,7 @@ function App() {
         }}
         showSkipBtn
         stepToShowSkipBtn={3}
-      />
+      /> */}
       {/* <CreatableSelect
         options={options}
         createNewOption={async (value: any) => {
