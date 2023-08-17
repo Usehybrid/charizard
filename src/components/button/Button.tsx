@@ -69,7 +69,7 @@ export interface MenuButtonProps {
   children: React.ReactNode
   variant?: 'primary' | 'secondary' | 'ghost'
   disabled?: boolean
-  menuItems: {label: string; iconSrc?: string; onClick: any; hide?: any}[]
+  menuItems: {label: string; iconSrc?: string; onClick: any; filterFn?: any}[]
   onClick?: React.MouseEventHandler<HTMLButtonElement>
   isCustomTrigger?: boolean
   // exists on why it's a custom trigger, used to pass the whole row
@@ -156,9 +156,9 @@ function MenuButton({
         <div {...api.contentProps} className={classes.menus}>
           {menuItems
             .filter(menu => {
-              if (!menu.hide) return true
+              if (!menu.filterFn) return true
               // used to pass the table row data in the hide callback
-              return menu.hide(customData)
+              return menu.filterFn(customData)
             })
             .map(menu => (
               <div

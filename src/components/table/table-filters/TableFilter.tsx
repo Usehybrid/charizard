@@ -22,7 +22,7 @@ interface TableFilterProps {
   tableFilter: InternalTableFilters
   addFilters: TableStore['addFilters']
   removeFilters: TableStore['removeFilters']
-  resetFilters: (filterKey: string) => void
+  resetFilters: (filterKey: string, filterDispatch: any) => void
   filterDispatch: (value: any) => void
 }
 
@@ -51,7 +51,7 @@ export default function TableFilter({
   const selectedFilters = tableFilter?.values.length
 
   const handleResetFilter = () => {
-    resetFilters(tableFilter?.key)
+    resetFilters(tableFilter?.key, filterDispatch)
     api.close()
   }
 

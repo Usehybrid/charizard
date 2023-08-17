@@ -23,7 +23,12 @@ import {
   Table,
 } from './components'
 import randomIcon2 from './components/assets/search-2.svg'
+<<<<<<< HEAD
 import {CreatableSelect} from './components/select/CreatableSelect'
+import { useSoftwareStore } from './test'
+=======
+import {SOFTWARE_ACTION_TYPES, useSoftwareStore} from './test'
+>>>>>>> f36135f87c75189fd716a77d9484ddb89ddbca8c
 
 const styles = {
   width: '90%',
@@ -259,7 +264,7 @@ const menuItems = [
     onClick: (data: any) => {
       console.log('Editing details', data)
     },
-    hide: (data: any) => {
+    filterFn: (data: any) => {
       return data.software.name === 'Figma'
     },
   },
@@ -411,6 +416,9 @@ function App() {
   setTimeout(() => {
     setDefVal('rental')
   }, 3000)
+  const query = useSoftwareStore(s => s.query)
+  const dispatch = useSoftwareStore(s => s.dispatch)
+  console.log(query)
 
   return (
     <div style={styles}>
@@ -427,8 +435,9 @@ function App() {
           filters,
           isLoading: false,
           isError: false,
-          filterDispatch: () => {},
-          filterReset: () => {},
+          filterDispatch: value => dispatch({type: SOFTWARE_ACTION_TYPES.FILTER, payload: value}),
+          filterReset: value =>
+            dispatch({type: SOFTWARE_ACTION_TYPES.RESET_FILTERS, payload: value}),
         }}
         sortConfig={{
           sortBy: '',
