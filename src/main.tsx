@@ -454,7 +454,7 @@ function App() {
         }}
       /> */}
       {/* <SegmentedControl items={items} defaultValue={defVal} /> */}
-      {/* <Progress
+      <Progress
         steps={steps}
         lastStepFooterContinueBtnText="Confirm and add to inventory"
         onCancelClick={() => console.log('cancel')}
@@ -463,9 +463,8 @@ function App() {
         }}
         showSkipBtn
         stepToShowSkipBtn={3}
-        jumpToStep={2}
-      /> */}
-      <CreatableSelect
+      />
+      {/* <CreatableSelect
         options={options}
         createNewOption={async (value: any) => {
           return value.map((val: any) => ({
@@ -480,7 +479,7 @@ function App() {
           console.log(value)
         }}
         isMulti
-      />
+      /> */}
       {/* <InputContainer size="md">
         <InputLabel
           infoText="big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text "
