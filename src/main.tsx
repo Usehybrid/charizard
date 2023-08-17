@@ -369,7 +369,7 @@ function App() {
       // isError: check
       isError: false,
       onContinueClick: () => {
-        throw new Error('This is error')
+        console.log('asset')
       },
     },
     {
@@ -401,9 +401,6 @@ function App() {
       label: 'Review',
       component: <>review</>,
       isError: false,
-      onContinueClick: () => {
-        console.log('review')
-      },
     },
   ]
 
@@ -417,7 +414,7 @@ function App() {
 
   return (
     <div style={styles}>
-      <Table
+      {/* <Table
         data={data}
         loaderConfig={{isFetching: false, isError: false, text: 'Getting employees...'}}
         columns={columns}
@@ -465,9 +462,9 @@ function App() {
           },
           columns: 6,
         }}
-      />
+      /> */}
       {/* <SegmentedControl items={items} defaultValue="purchase" /> */}
-      {/* <Progress
+      <Progress
         steps={steps}
         lastStepFooterContinueBtnText="Confirm and add to inventory"
         onCancelClick={() => console.log('cancel')}

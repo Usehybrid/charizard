@@ -107,6 +107,8 @@ export function Progress({
           onClick()
           handleNextStepClick()
         }
+      } else if (isFinalStep) {
+        onFinalStepClick()
       }
     } catch (error) {
       return
@@ -169,7 +171,7 @@ export function Progress({
             <Button variant={ButtonVariant.SECONDARY} onClick={onCancelClick}>
               Cancel
             </Button>
-            <Button onClick={isFinalStep ? onFinalStepClick : onContinueClick}>
+            <Button onClick={onContinueClick}>
               {isFinalStep ? lastStepHeaderContinueBtnText : 'Continue'}
             </Button>
           </div>
