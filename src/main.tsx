@@ -23,12 +23,10 @@ import {
   Table,
 } from './components'
 import randomIcon2 from './components/assets/search-2.svg'
-<<<<<<< HEAD
+
 import {CreatableSelect} from './components/select/CreatableSelect'
 import { useSoftwareStore } from './test'
-=======
 import {SOFTWARE_ACTION_TYPES, useSoftwareStore} from './test'
->>>>>>> f36135f87c75189fd716a77d9484ddb89ddbca8c
 
 const styles = {
   width: '90%',
@@ -261,9 +259,7 @@ const menuItems = [
   {
     label: 'Allocate',
     iconSrc: randomIcon,
-    onClick: (data: any) => {
-      console.log('Editing details', data)
-    },
+    onClick: (data: any) => {},
     filterFn: (data: any) => {
       return data.software.name === 'Figma'
     },
@@ -272,16 +268,12 @@ const menuItems = [
   {
     label: 'De-allocate',
     iconSrc: randomIcon,
-    onClick: (data: any) => {
-      console.log('Editing details', data)
-    },
+    onClick: (data: any) => {},
   },
   {
     label: 'Archive',
     iconSrc: randomIcon2,
-    onClick: (data: any) => {
-      console.log('Archiving', data)
-    },
+    onClick: (data: any) => {},
   },
 ]
 
@@ -411,15 +403,6 @@ function App() {
 
   const [isOpen, setIsOpen] = React.useState(false)
 
-  const [defVal, setDefVal] = React.useState('purchase')
-
-  setTimeout(() => {
-    setDefVal('rental')
-  }, 3000)
-  const query = useSoftwareStore(s => s.query)
-  const dispatch = useSoftwareStore(s => s.dispatch)
-  console.log(query)
-
   return (
     <div style={styles}>
       {/* <Table
@@ -435,9 +418,11 @@ function App() {
           filters,
           isLoading: false,
           isError: false,
-          filterDispatch: value => dispatch({type: SOFTWARE_ACTION_TYPES.FILTER, payload: value}),
-          filterReset: value =>
-            dispatch({type: SOFTWARE_ACTION_TYPES.RESET_FILTERS, payload: value}),
+          // filterDispatch: value => dispatch({type: SOFTWARE_ACTION_TYPES.FILTER, payload: value}),
+          // filterReset: value =>
+          //   dispatch({type: SOFTWARE_ACTION_TYPES.RESET_FILTERS, payload: value}),
+          filterDispatch: () => {},
+          filterReset: () => {},
         }}
         sortConfig={{
           sortBy: '',
@@ -449,8 +434,8 @@ function App() {
           },
         }}
         rowSelectionConfig={{
-          isRadio: true,
-          // isCheckbox: true,
+          // isRadio: true,
+          isCheckbox: true,
           actions: [
             {
               icon: randomIcon,
