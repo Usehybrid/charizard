@@ -5,9 +5,9 @@ import {devtools} from 'zustand/middleware'
 export interface TableStore {
   filters: InternalTableFilters[]
   setDefaultFilters: (filters: InternalTableFilters[]) => void
-  addFilters: (filterKey: string, value: string, filterDispatch?: any) => void
-  removeFilters: (filterKey: string, value: string, filterDispatch?: any) => void
-  resetFilters: (filterKey: string, filterDispatch?: any) => void
+  addFilters: (filterKey: string, value: string, filterDispatch: any) => void
+  removeFilters: (filterKey: string, value: string, filterDispatch: any) => void
+  resetFilters: (filterKey: string, filterDispatch: any) => void
   resetAllFilters: (filterReset?: any) => void
 }
 
