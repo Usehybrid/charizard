@@ -1,3 +1,7 @@
+.checkboxSpan {
+  margin: auto;
+}
+
 .checkboxSpan > input[type='checkbox'] {
   -webkit-appearance: none;
   appearance: none;
@@ -13,6 +17,7 @@
   border-radius: 3px;
   border: 2px solid var(--slate-200);
   accent-color: var(--iris);
+  margin: auto;
 }
 
 .checkboxSpan > input[type='checkbox']:checked {

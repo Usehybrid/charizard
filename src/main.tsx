@@ -275,32 +275,6 @@ const menuItems = [
   },
 ]
 
-const columns = [
-  columnHelper.accessor('software', {
-    header: 'Software Name',
-    cell: info => info.getValue().name,
-  }),
-  columnHelper.accessor('software_owners', {
-    header: 'Software Owners',
-    cell: info => {
-      return <div>{getFullName(info.row.original.software_owners[0])}</div>
-    },
-    enableSorting: false,
-  }),
-  columnHelper.accessor('software_users', {
-    header: 'Users',
-    cell: info => {
-      return <div>{info.row.original.software_users_count}</div>
-    },
-  }),
-  columnHelper.accessor('software_license', {
-    header: 'Licenses',
-    cell: info => {
-      return <div>{info.row.original.software_license_count}</div>
-    },
-  }),
-]
-
 function App() {
   const [search, setSearch] = React.useState('')
 
@@ -329,77 +303,9 @@ function App() {
       cell: info => {
         return <div>{info.row.original.software_license_count}</div>
       },
+      // size: 80,
     }),
   ]
-
-  const options = [
-    {label: 'Red', value: 'red'},
-    {label: 'Blue', value: 'blue'},
-    {label: 'Pink', value: 'pink'},
-    {label: 'White', value: 'white'},
-    {label: 'Yellow', value: 'yellow'},
-    {label: 'Light blue', value: 'light_blue'},
-    {label: 'Saffron', value: 'saffron'},
-  ]
-  const [selectedVal, setSelectedVal] = React.useState({label: '', value: ''})
-
-  const items = [
-    {
-      label: 'Purchase',
-      value: 'purchase',
-      component: <>purchase</>,
-    },
-    {
-      label: 'Rental',
-      value: 'rental',
-      component: <>rental</>,
-    },
-    {label: 'Lease', value: 'lease', component: <>lease</>},
-  ]
-
-  const steps = [
-    {
-      label: 'Asset Type',
-      component: <>Asset type</>,
-      // isError: check
-      isError: false,
-      onContinueClick: () => {
-        console.log('asset')
-      },
-    },
-    {
-      label: 'Specification',
-      component: <>specification</>,
-      // isError: checkIsError(formik, 'specification', ['serialNumber']),
-      isError: false,
-      onContinueClick: () => {
-        console.log('specification')
-      },
-    },
-    {
-      label: 'Finance',
-      component: <>finance</>,
-      isError: false,
-      onContinueClick: () => {
-        console.log('finance')
-      },
-    },
-    {
-      label: 'Allocation',
-      component: <>Allocation</>,
-      isError: false,
-      onContinueClick: () => {
-        console.log('allocation')
-      },
-    },
-    {
-      label: 'Review',
-      component: <>review</>,
-      isError: false,
-    },
-  ]
-
-  const [isOpen, setIsOpen] = React.useState(false)
 
   return (
     <div style={styles}>
@@ -432,8 +338,8 @@ function App() {
           },
         }}
         rowSelectionConfig={{
-          // isRadio: true,
-          isCheckbox: true,
+          isRadio: true,
+          // isCheckbox: true,
           actions: [
             {
               icon: randomIcon,
@@ -459,96 +365,7 @@ function App() {
           columns: 6,
           emptySearchTitle: 'No inventories found',
         }}
-      /> */}
-      {/* <SegmentedControl items={items} defaultValue="purchase" /> */}
-      <Progress
-        steps={steps}
-        lastStepFooterContinueBtnText="Confirm and add to inventory"
-        onCancelClick={() => console.log('cancel')}
-        onFinalStepClick={() => {
-          console.log('final')
-        }}
-        showSkipBtn
-        stepToShowSkipBtn={3}
-      />
-      {/* <CreatableSelect
-        options={options}
-        createNewOption={async (value: any) => {
-          return value.map((val: any) => ({
-            label: val,
-            value: val,
-          }))
-        }}
-        refetchOptions={() => {
-          console.log('refetching')
-        }}
-        onChange={value => {
-          console.log(value)
-        }}
-        isMulti
-      /> */}
-      {/* <InputContainer size="md">
-        <InputLabel
-          infoText="big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text big info text "
-          infoTextTooltipStyles={{maxWidth: '300px', minWidth: '300px'}}
-        >
-          Label
-        </InputLabel>
-        <InputGroup>
-          <Input type="date" value={'value'} />
-          <InputRightAddon isDropdown={true} dropdownOptions={items}>
-            +
-          </InputRightAddon>
-        </InputGroup>
-      </InputContainer> */}
-      {/* <Tooltip tooltipId="tooltip">
-        <TooltipTrigger>trigger</TooltipTrigger>
-        <TooltipContent>content</TooltipContent>
-      </Tooltip> */}
-
-      {/* <div style={{display: 'flex', alignItems: 'center'}}>
-        <Button.MenuButton menuItems={menuItems} id="add-software-menu">
-          <SVG path={randomIcon} customSpanStyles={{width: '16px', height: '16px'}} />
-          Add software
-        </Button.MenuButton>
-        <div style={{marginLeft: '12px'}}>
-          <Button.ActionsDropdown menuItems={menuItems} id={'software-list-dropdown-action'} />
-        </div>
-      </div>
-
-      <div>
-        <Search id="table-search" />
-      </div> */}
-      {/* <RadioGroup
-        items={[
-          {label: {heading: 'heading'}, value: 'heading'},
-          {label: {heading: 'heading 2'}, value: 'heading 2'},
-        ]}
-        onChange={() => {}}
-        radioHeading="heding"
-        errorMsg="thisi serror smngs"
-      /> */}
-      {/* <button onClick={() => setIsOpen(true)}>open</button>
-      {isOpen && (
-        <Drawer isOpen={isOpen} onClose={() => setIsOpen(false)} title="heading">
-          <InputContainer>
-            <InputGroup>
-              <Input />
-              <InputRightAddon
-                isDropdown
-                dropdownOptions={[
-                  {label: 'GB', value: 'GB'},
-                  {label: 'TB', value: 'TB'},
-                  {label: 'MB', value: 'MB'},
-                ]}
-                showDropdownSearch={false}
-              >
-                GB
-              </InputRightAddon>
-            </InputGroup>
-          </InputContainer>
-        </Drawer>
-      )} */}
+      />*/}
     </div>
   )
 }

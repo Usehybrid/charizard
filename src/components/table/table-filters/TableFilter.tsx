@@ -79,7 +79,6 @@ export default function TableFilter({
           tableFilter={tableFilter}
           selectedFilters={selectedFilters}
         />
-        {/* <div className={classes.filterCol}>{filter.name}</div> */}
         {selectedFilters !== 0 && <span className={classes.totalSelected}>{selectedFilters}</span>}
         <img src={chevronDown} alt="dropdown" className={classes.filterIcon2} />
       </button>
@@ -93,7 +92,7 @@ export default function TableFilter({
                   id="filter-search"
                   search={search}
                   setSearch={setSearch}
-                  placeholder="Search"
+                  placeholder={filter.config?.placeholder || 'Search'}
                 />
               </div>
             )}
@@ -125,7 +124,7 @@ export default function TableFilter({
 
             <div className={classes.footerBox}>
               <div className={classes.footer}>
-                <div className={classes.selectedFilters}>{selectedFilters} selected</div>
+                <div className={classes.selectedFilters}>{selectedFilters} Selected</div>
 
                 <button
                   className={clsx('hybr1d-ui-reset-btn', classes.resetBtn)}

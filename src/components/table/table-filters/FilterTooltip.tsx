@@ -2,7 +2,6 @@
  * @author Soham Sarkar <soham@hybr1d.io>
  */
 
-import * as React from 'react'
 import * as tooltip from '@zag-js/tooltip'
 import classes from './styles.module.css'
 import {useMachine, normalizeProps} from '@zag-js/react'
