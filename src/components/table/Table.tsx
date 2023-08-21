@@ -33,9 +33,10 @@ export type TableProps = {
   actionsConfig?: {
     isDropdownActions?: boolean
     // menu list for the dropdown
-    menuItems?: {label: string; iconSrc?: string; onClick: any; hide?: any}[]
+    menuItems?: {label: string; iconSrc?: string; onClick: any; filterFn?: any}[]
     labelText?: boolean
     key?: string
+    customComp?: React.ReactNode
   }
   // api loading/refetching states
   loaderConfig: {
@@ -102,6 +103,7 @@ export type TableProps = {
     btnText: string
     onClick: any
     columns: number
+    emptySearchTitle?: string
   }
   headerText?: string
 }
@@ -109,8 +111,13 @@ export type TableProps = {
 // todo
 // * figure out clearing of row selection after overlay closes
 // * alignment of table
+// * responsiveness
+// * active filter popover in filter
+
 // ! bugs
-// * differentiate searched empty state with data empty state
+// * random selection number in filter bug
+// * loading text not showing up
+// * number flickering issue, might be better to move the filter to the right side
 
 export function Table({
   data,
@@ -327,6 +334,7 @@ export function Table({
             loaderConfig={loaderConfig}
             isEmpty={isEmpty}
             emptyStateConfig={emptyStateConfig}
+            search={searchConfig?.search}
           />
         </InfiniteScroll>
       ) : (
@@ -337,6 +345,7 @@ export function Table({
           loaderConfig={loaderConfig}
           isEmpty={isEmpty}
           emptyStateConfig={emptyStateConfig}
+          search={searchConfig?.search}
         />
       )}
     </div>
@@ -350,12 +359,14 @@ function TableComp({
   loaderConfig,
   emptyStateConfig,
   isEmpty,
+  search,
 }: {
   table: Table<any>
   isCheckbox?: boolean
   isRadio?: boolean
   loaderConfig: TableProps['loaderConfig']
   emptyStateConfig: TableProps['emptyStateConfig']
+  search?: string
   isEmpty: boolean
 }) {
   return (
@@ -408,13 +419,9 @@ function TableComp({
       </thead>
 
       {loaderConfig.isFetching ? (
-        <TableLoader
-          text={loaderConfig.text}
-          isError={loaderConfig.isError}
-          isFetching={loaderConfig.isFetching}
-        />
+        <TableLoader text={loaderConfig.text} isError={loaderConfig.isError} />
       ) : isEmpty ? (
-        <TableEmpty emptyStateConfig={emptyStateConfig} />
+        <TableEmpty emptyStateConfig={emptyStateConfig} search={search} />
       ) : (
         <tbody className={classes.tableBody}>
           {table.getRowModel().rows.map(row => (

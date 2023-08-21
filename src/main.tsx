@@ -442,7 +442,11 @@ function App() {
             },
           ],
         }}
-        actionsConfig={{menuItems, isDropdownActions: true, labelText: true, key: 'status'}}
+        actionsConfig={{
+          menuItems,
+          isDropdownActions: true,
+          customComp: <div onClick={() => console.log('works')}>View more info</div>,
+        }}
         totalText={`${4} softwares`}
         emptyStateConfig={{
           icon: './components/assets/check.svg',
@@ -453,6 +457,7 @@ function App() {
             console.log('works')
           },
           columns: 6,
+          emptySearchTitle: 'No inventories found',
         }}
       />
       {/* <SegmentedControl items={items} defaultValue="purchase" /> */}
@@ -559,12 +564,52 @@ export const filters = [
         value: 'o1',
       },
       {
+        name: 'Owner 2',
+        value: 'o2',
+      },
+      {
+        name: 'Owner 3',
+        value: 'o3',
+      },
+      {
+        name: 'Owner 4',
+        value: 'o4',
+      },
+      {
+        name: 'Owner 5',
+        value: 'o5',
+      },
+      {
+        name: 'Owner 6',
+        value: 'o6',
+      },
+      {
+        name: 'Owner 7',
+        value: 'o7',
+      },
+      {
         name: 'Figma',
         value: '123-156a',
       },
       {
         name: 'Figma e',
-        value: '123-156aadf214',
+        value: '123-156aadf24',
+      },
+      {
+        name: 'Figma e',
+        value: '123-15aadf214',
+      },
+      {
+        name: 'Figma e',
+        value: '13-156aadf214',
+      },
+      {
+        name: 'Figma e',
+        value: '123-156af24',
+      },
+      {
+        name: 'Figma e',
+        value: '23-156aadf214',
       },
     ],
   },

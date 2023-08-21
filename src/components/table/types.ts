@@ -5,6 +5,7 @@ export type FilterOptions = {
   options: {
     name: string
     value: string
+    country_code?: string
   }[]
   config?: {
     hideSearch?: boolean
@@ -34,21 +35,4 @@ export type FilterConfig = {
 export type InternalTableFilters = {
   key: string
   values: string[]
-}
-
-export type SetInternalTableFilters = (filters: InternalTableFilters[]) => void
-
-const d = {
-  id: 'inventory-brand',
-  name: 'Inventory Brand',
-  key: 'filter_brand',
-  options: [
-    {
-      name: 'Apple',
-      value: '971b5fd2-a20e-4639-9fb7-dde915c13534',
-    },
-  ],
-  config: {
-    hideSearch: true,
-  },
 }

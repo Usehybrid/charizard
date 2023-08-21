@@ -3,9 +3,9 @@
  */
 
 import * as checkbox from '@zag-js/checkbox'
+import ReactCountryFlag from 'react-country-flag'
 import classes from './styles.module.css'
 import {useMachine, normalizeProps} from '@zag-js/react'
-import {InternalTableFilters, SetInternalTableFilters} from '../types'
 import {TableStore} from '../store'
 
 export default function FilterCheckbox({
@@ -16,6 +16,7 @@ export default function FilterCheckbox({
   checked,
   filterKey,
   filterDispatch,
+  countryCode,
 }: {
   label: string
   value: string
@@ -24,6 +25,7 @@ export default function FilterCheckbox({
   addFilters: TableStore['addFilters']
   removeFilters: TableStore['removeFilters']
   filterDispatch: (value: any) => void
+  countryCode?: string
 }) {
   const [state, send] = useMachine(
     checkbox.machine({
@@ -46,7 +48,21 @@ export default function FilterCheckbox({
   return (
     <label {...api.rootProps} className={classes.optionLabel}>
       <div {...api.controlProps} />
-      <span {...api.labelProps}>{label}</span>
+      <span {...api.labelProps}>
+        {countryCode && (
+          <ReactCountryFlag
+            countryCode={countryCode || 'IN'}
+            style={{
+              fontSize: '15px',
+              lineHeight: '15px',
+              marginLeft: '-5px',
+              marginRight: '7px',
+            }}
+          />
+        )}
+
+        {label}
+      </span>
       <input {...api.inputProps} />
     </label>
   )
