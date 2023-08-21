@@ -23,12 +23,8 @@ import {
   Table,
 } from './components'
 import randomIcon2 from './components/assets/search-2.svg'
-<<<<<<< HEAD
 import {CreatableSelect} from './components/select/CreatableSelect'
-import { useSoftwareStore } from './test'
-=======
 import {SOFTWARE_ACTION_TYPES, useSoftwareStore} from './test'
->>>>>>> f36135f87c75189fd716a77d9484ddb89ddbca8c
 
 const styles = {
   width: '90%',
