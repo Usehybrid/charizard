@@ -93,7 +93,7 @@ export default function TableFilter({
                   id="filter-search"
                   search={search}
                   setSearch={setSearch}
-                  placeholder="Search"
+                  placeholder={filter.config?.placeholder || 'Search'}
                 />
               </div>
             )}
