@@ -55,6 +55,8 @@ export default function FilterCheckbox({
             style={{
               fontSize: '15px',
               lineHeight: '15px',
+              marginLeft: '-5px',
+              marginRight: '7px',
             }}
           />
         )}

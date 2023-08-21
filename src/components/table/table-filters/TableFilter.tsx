@@ -123,16 +123,18 @@ export default function TableFilter({
               )}
             </div>
 
-            <div className={classes.footer}>
-              <div className={classes.selectedFilters}>{selectedFilters} selected</div>
+            <div className={classes.footerBox}>
+              <div className={classes.footer}>
+                <div className={classes.selectedFilters}>{selectedFilters} selected</div>
 
-              <button
-                className={clsx('hybr1d-ui-reset-btn', classes.resetBtn)}
-                onClick={handleResetFilter}
-              >
-                <SVG path={resetIcon} svgClassName={classes.resetIcon} />
-                Reset
-              </button>
+                <button
+                  className={clsx('hybr1d-ui-reset-btn', classes.resetBtn)}
+                  onClick={handleResetFilter}
+                >
+                  <SVG path={resetIcon} svgClassName={classes.resetIcon} />
+                  Reset
+                </button>
+              </div>
             </div>
           </div>
         )}

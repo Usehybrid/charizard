@@ -403,7 +403,7 @@ function App() {
     <div style={styles}>
       <Table
         data={data}
-        loaderConfig={{isFetching: true, isError: false, text: 'Getting employees...'}}
+        loaderConfig={{isFetching: false, isError: false, text: 'Getting employees...'}}
         columns={columns}
         searchConfig={{
           search,
@@ -562,12 +562,52 @@ export const filters = [
         value: 'o1',
       },
       {
+        name: 'Owner 2',
+        value: 'o2',
+      },
+      {
+        name: 'Owner 3',
+        value: 'o3',
+      },
+      {
+        name: 'Owner 4',
+        value: 'o4',
+      },
+      {
+        name: 'Owner 5',
+        value: 'o5',
+      },
+      {
+        name: 'Owner 6',
+        value: 'o6',
+      },
+      {
+        name: 'Owner 7',
+        value: 'o7',
+      },
+      {
         name: 'Figma',
         value: '123-156a',
       },
       {
         name: 'Figma e',
-        value: '123-156aadf214',
+        value: '123-156aadf24',
+      },
+      {
+        name: 'Figma e',
+        value: '123-15aadf214',
+      },
+      {
+        name: 'Figma e',
+        value: '13-156aadf214',
+      },
+      {
+        name: 'Figma e',
+        value: '123-156af24',
+      },
+      {
+        name: 'Figma e',
+        value: '23-156aadf214',
       },
     ],
   },

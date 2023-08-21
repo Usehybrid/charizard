@@ -75,11 +75,7 @@
   max-height: 316px;
   position: relative;
   overflow-y: scroll;
-  display: inline-flex;
   padding: 8px;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 6px;
   border-radius: 12px;
   background: var(--white);
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
@@ -94,6 +90,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  margin-bottom: 6px;
 }
 
 .optionsEmpty {
@@ -131,6 +128,14 @@
 .dropdownSearch {
   position: sticky;
   top: 0;
+  margin-bottom: 6px;
+}
+
+.footerBox {
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+  padding-bottom: 4px;
 }
 
 .footer {
@@ -139,10 +144,7 @@
   justify-content: space-between;
   padding-left: 8px;
   padding-right: 8px;
-  position: sticky;
-  bottom: 0;
   background-color: white;
-  padding-bottom: 4px;
 }
 
 .resetBtn {
