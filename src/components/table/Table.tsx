@@ -271,6 +271,11 @@ export function Table({
     table.getColumn(DROPDOWN_COL_ID)?.toggleVisibility(false)
   }, [])
 
+  React.useEffect(() => {
+    if (!searchConfig?.search.length) return
+    setRowSelection({})
+  }, [searchConfig?.search])
+
   return (
     <div className={classes.box}>
       {!loaderConfig.isError && (
@@ -379,7 +384,7 @@ function TableComp({
 }) {
   return (
     <table className={classes.table}>
-      <thead className={clsx(classes.tableHead)}>
+      <thead className={classes.tableHead}>
         {table.getHeaderGroups().map(headerGroup => (
           <tr key={headerGroup.id} className={classes.tableRow}>
             {headerGroup.headers.map(header => (
