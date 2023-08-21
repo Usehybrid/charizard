@@ -79,7 +79,6 @@ export default function TableFilter({
           tableFilter={tableFilter}
           selectedFilters={selectedFilters}
         />
-        {/* <div className={classes.filterCol}>{filter.name}</div> */}
         {selectedFilters !== 0 && <span className={classes.totalSelected}>{selectedFilters}</span>}
         <img src={chevronDown} alt="dropdown" className={classes.filterIcon2} />
       </button>

@@ -191,7 +191,9 @@ export function Progress({
               </Button>
             )}
             {showSkipBtn && currentStep === stepToShowSkipBtn && (
-              <Button onClick={handleOnSkipClick}>{skipBtnText}</Button>
+              <Button onClick={handleOnSkipClick} variant={ButtonVariant.GHOST}>
+                {skipBtnText}
+              </Button>
             )}
             <Button onClick={onContinueClick}>
               {isFinalStep ? lastStepFooterContinueBtnText : 'Continue'}

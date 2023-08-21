@@ -67,7 +67,7 @@ export type TableProps = {
    *
    */
   filterConfig?: FilterConfig
-  totalText: string
+  totalText?: string
   rowSelectionConfig?: {
     isCheckbox?: boolean
     isRadio?: boolean
