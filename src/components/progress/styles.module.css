@@ -6,7 +6,7 @@
 .progressContainer .header {
   width: 100%;
   height: 60px;
-  padding: 16px 35px;
+  padding: 16px 15px;
   background: var(--slate-50);
 
   position: sticky;
@@ -120,7 +120,7 @@
 .progressContainer .body {
   width: 100%;
   height: calc(100vh - 70px);
-  padding: 24px 40px;
+  padding: 24px 20px;
   overflow-y: scroll;
   overflow-x: hidden;
 }
