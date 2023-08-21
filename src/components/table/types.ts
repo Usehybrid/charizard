@@ -9,6 +9,7 @@ export type FilterOptions = {
   }[]
   config?: {
     hideSearch?: boolean
+    placeholder?: string
   }
 }
 

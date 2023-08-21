@@ -45,9 +45,12 @@
 }
 
 .tableData {
-  text-align: center;
   padding-top: 12px;
   padding-bottom: 12px;
+}
+
+.tableDataWithSelection:first-child {
+  text-align: center;
 }
 
 .tableBody > .tableRow {
@@ -68,23 +71,13 @@
 }
 
 .tableHeader {
-  color: var(--secondary);
-  font-size: 10px;
-  font-weight: 400;
+  color: var(--slate-600);
+  font-size: 12px;
+  font-weight: 500;
   line-height: 20px;
   letter-spacing: 0.2px;
   text-transform: uppercase;
-  text-align: center;
-}
-
-/* for width for checkbox column if used */
-.tableHead2 th:first-child {
-  width: 4%;
-}
-
-/* for width for radio column if used */
-.tableHead3 th:first-child {
-  width: 7%;
+  text-align: left;
 }
 
 .tableHeaderSortSpan {

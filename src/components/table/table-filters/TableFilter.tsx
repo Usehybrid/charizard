@@ -125,7 +125,7 @@ export default function TableFilter({
 
             <div className={classes.footerBox}>
               <div className={classes.footer}>
-                <div className={classes.selectedFilters}>{selectedFilters} selected</div>
+                <div className={classes.selectedFilters}>{selectedFilters} Selected</div>
 
                 <button
                   className={clsx('hybr1d-ui-reset-btn', classes.resetBtn)}

@@ -187,6 +187,7 @@ export function Table({
           }}
         />
       ),
+      size: 55,
     },
     {
       id: RADIO_COL_ID,
@@ -202,6 +203,7 @@ export function Table({
           }}
         />
       ),
+      size: 55,
     },
     ...columns,
     {
@@ -215,6 +217,7 @@ export function Table({
         />
       ),
       header: 'Actions',
+      maxSize: 150,
     },
   ]
 
@@ -236,6 +239,11 @@ export function Table({
     manualPagination: true,
     manualFiltering: true,
     getCoreRowModel: getCoreRowModel(),
+    defaultColumn: {
+      minSize: 0,
+      size: Number.MAX_SAFE_INTEGER,
+      maxSize: Number.MAX_SAFE_INTEGER,
+    },
   })
 
   React.useLayoutEffect(() => {
@@ -371,17 +379,17 @@ function TableComp({
 }) {
   return (
     <table className={classes.table}>
-      <thead
-        className={clsx(
-          classes.tableHead,
-          isCheckbox && classes.tableHead2,
-          isRadio && classes.tableHead3,
-        )}
-      >
+      <thead className={clsx(classes.tableHead)}>
         {table.getHeaderGroups().map(headerGroup => (
           <tr key={headerGroup.id} className={classes.tableRow}>
             {headerGroup.headers.map(header => (
-              <th key={header.id} className={clsx(classes.tableHeader)}>
+              <th
+                key={header.id}
+                className={classes.tableHeader}
+                style={{
+                  width: header.getSize() === Number.MAX_SAFE_INTEGER ? 'auto' : header.getSize(),
+                }}
+              >
                 {header.isPlaceholder ? null : (
                   <div
                     {...{
@@ -389,7 +397,6 @@ function TableComp({
                       style: {
                         display: 'flex',
                         alignItems: 'center',
-                        justifyContent: 'center',
                       },
                     }}
                   >
@@ -427,7 +434,19 @@ function TableComp({
           {table.getRowModel().rows.map(row => (
             <tr key={row.id} className={classes.tableRow}>
               {row.getVisibleCells().map(cell => (
-                <td key={cell.id} className={classes.tableData}>
+                <td
+                  key={cell.id}
+                  className={clsx(
+                    classes.tableData,
+                    (isCheckbox || isRadio) && classes.tableDataWithSelection,
+                  )}
+                  style={{
+                    width:
+                      cell.column.getSize() === Number.MAX_SAFE_INTEGER
+                        ? 'auto'
+                        : cell.column.getSize(),
+                  }}
+                >
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
               ))}
