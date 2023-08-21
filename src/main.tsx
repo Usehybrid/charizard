@@ -440,7 +440,11 @@ function App() {
             },
           ],
         }}
-        actionsConfig={{menuItems, isDropdownActions: true, labelText: true, key: 'status'}}
+        actionsConfig={{
+          menuItems,
+          isDropdownActions: true,
+          customComp: <div onClick={() => console.log('works')}>View more info</div>,
+        }}
         totalText={`${4} softwares`}
         emptyStateConfig={{
           icon: './components/assets/check.svg',

@@ -33,9 +33,10 @@ export type TableProps = {
   actionsConfig?: {
     isDropdownActions?: boolean
     // menu list for the dropdown
-    menuItems?: {label: string; iconSrc?: string; onClick: any; hide?: any}[]
+    menuItems?: {label: string; iconSrc?: string; onClick: any; filterFn?: any}[]
     labelText?: boolean
     key?: string
+    customComp?: React.ReactNode
   }
   // api loading/refetching states
   loaderConfig: {
@@ -109,8 +110,14 @@ export type TableProps = {
 // todo
 // * figure out clearing of row selection after overlay closes
 // * alignment of table
+// * responsiveness
+// * active filter popover in filter
+// * add country flag (custom react node) in filter dropdown
 // ! bugs
 // * differentiate searched empty state with data empty state
+// * random selection number in filter bug
+// * loading text not showing up
+// * number flickering issue, might be better to move the filter to the right side
 
 export function Table({
   data,
