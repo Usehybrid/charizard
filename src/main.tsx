@@ -403,7 +403,7 @@ function App() {
     <div style={styles}>
       <Table
         data={data}
-        loaderConfig={{isFetching: false, isError: false, text: 'Getting employees...'}}
+        loaderConfig={{isFetching: true, isError: false, text: 'Getting employees...'}}
         columns={columns}
         searchConfig={{
           search,

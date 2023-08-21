@@ -115,7 +115,6 @@ export type TableProps = {
 // * active filter popover in filter
 
 // ! bugs
-// * differentiate searched empty state with data empty state
 // * random selection number in filter bug
 // * loading text not showing up
 // * number flickering issue, might be better to move the filter to the right side
@@ -420,11 +419,7 @@ function TableComp({
       </thead>
 
       {loaderConfig.isFetching ? (
-        <TableLoader
-          text={loaderConfig.text}
-          isError={loaderConfig.isError}
-          isFetching={loaderConfig.isFetching}
-        />
+        <TableLoader text={loaderConfig.text} isError={loaderConfig.isError} />
       ) : isEmpty ? (
         <TableEmpty emptyStateConfig={emptyStateConfig} search={search} />
       ) : (
