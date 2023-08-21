@@ -4,8 +4,10 @@ import {EmptyState} from '../../empty-state'
 
 export default function TableEmpty({
   emptyStateConfig,
+  search,
 }: {
   emptyStateConfig: TableProps['emptyStateConfig']
+  search?: string
 }) {
   if (!emptyStateConfig) return null
   return (
@@ -14,8 +16,10 @@ export default function TableEmpty({
         <td className={classes.empty} colSpan={emptyStateConfig.columns}>
           <EmptyState
             icon={emptyStateConfig.icon}
-            title={emptyStateConfig.title}
-            desc={emptyStateConfig.desc}
+            title={
+              !search?.length ? emptyStateConfig.title : emptyStateConfig.emptySearchTitle || ''
+            }
+            desc={!search?.length ? emptyStateConfig.desc : ''}
             btnText={emptyStateConfig.btnText}
             onClick={emptyStateConfig.onClick}
           />

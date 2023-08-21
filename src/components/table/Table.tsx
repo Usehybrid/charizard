@@ -103,6 +103,7 @@ export type TableProps = {
     btnText: string
     onClick: any
     columns: number
+    emptySearchTitle?: string
   }
   headerText?: string
 }
@@ -112,7 +113,7 @@ export type TableProps = {
 // * alignment of table
 // * responsiveness
 // * active filter popover in filter
-// * add country flag (custom react node) in filter dropdown
+
 // ! bugs
 // * differentiate searched empty state with data empty state
 // * random selection number in filter bug
@@ -334,6 +335,7 @@ export function Table({
             loaderConfig={loaderConfig}
             isEmpty={isEmpty}
             emptyStateConfig={emptyStateConfig}
+            search={searchConfig?.search}
           />
         </InfiniteScroll>
       ) : (
@@ -344,6 +346,7 @@ export function Table({
           loaderConfig={loaderConfig}
           isEmpty={isEmpty}
           emptyStateConfig={emptyStateConfig}
+          search={searchConfig?.search}
         />
       )}
     </div>
@@ -357,12 +360,14 @@ function TableComp({
   loaderConfig,
   emptyStateConfig,
   isEmpty,
+  search,
 }: {
   table: Table<any>
   isCheckbox?: boolean
   isRadio?: boolean
   loaderConfig: TableProps['loaderConfig']
   emptyStateConfig: TableProps['emptyStateConfig']
+  search?: string
   isEmpty: boolean
 }) {
   return (
@@ -421,7 +426,7 @@ function TableComp({
           isFetching={loaderConfig.isFetching}
         />
       ) : isEmpty ? (
-        <TableEmpty emptyStateConfig={emptyStateConfig} />
+        <TableEmpty emptyStateConfig={emptyStateConfig} search={search} />
       ) : (
         <tbody className={classes.tableBody}>
           {table.getRowModel().rows.map(row => (

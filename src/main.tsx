@@ -455,6 +455,7 @@ function App() {
             console.log('works')
           },
           columns: 6,
+          emptySearchTitle: 'No inventories found',
         }}
       />
       {/* <SegmentedControl items={items} defaultValue="purchase" /> */}
