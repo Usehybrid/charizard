@@ -172,6 +172,11 @@ export function Progress({
             <Button variant={ButtonVariant.SECONDARY} onClick={onCancelClick}>
               Cancel
             </Button>
+            {showSkipBtn && currentStep === stepToShowSkipBtn && (
+              <Button onClick={handleOnSkipClick} variant={ButtonVariant.GHOST}>
+                {skipBtnText}
+              </Button>
+            )}
             <Button onClick={onContinueClick}>
               {isFinalStep ? lastStepHeaderContinueBtnText : 'Continue'}
             </Button>
