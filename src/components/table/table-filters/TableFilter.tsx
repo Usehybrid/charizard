@@ -44,9 +44,10 @@ export default function TableFilter({
   )
   const api = menu.connect(state, send, normalizeProps)
 
-  const filteredOptions = filter.options.filter(option =>
-    option.name.toLowerCase().includes(search.toLowerCase()),
-  )
+  const filteredOptions = filter.options.filter(option => {
+    if (!option.name) return false
+    return option.name.toLowerCase().includes(search.toLowerCase())
+  })
 
   const selectedFilters = tableFilter?.values.length
 
