@@ -336,8 +336,8 @@ function App() {
           },
         }}
         rowSelectionConfig={{
-          isRadio: true,
-          // isCheckbox: true,
+          // isRadio: true,
+          isCheckbox: true,
           actions: [
             {
               icon: randomIcon,
@@ -349,7 +349,7 @@ function App() {
         actionsConfig={{
           menuItems,
           isDropdownActions: true,
-          customComp: <div onClick={() => console.log('works')}>View more info</div>,
+          // customComp: <div onClick={() => console.log('works')}>View more info</div>,
         }}
         totalText={`${4} softwares`}
         emptyStateConfig={{

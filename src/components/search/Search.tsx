@@ -7,21 +7,25 @@ import classes from './styles.module.css'
 import searchIcon from '../assets/search-2.svg'
 import closeIcon from '../assets/close.svg'
 
-export interface SearchProps {
+export type SearchProps = {
   id: string
   search?: string
   setSearch?: React.Dispatch<React.SetStateAction<string>>
   placeholder?: string
+  clearIconClearFn?: any
 }
 
-export function Search({id, search, setSearch, placeholder = 'Search'}: SearchProps) {
+export function Search({
+  id,
+  search,
+  setSearch,
+  placeholder = 'Search',
+  clearIconClearFn,
+}: SearchProps) {
   const isControlled = typeof setSearch === 'function' && typeof search === 'string'
-  // const isControlled = true
-  // console.log({isControlled, search})
 
   return (
     <div className={classes.box}>
-      {/* <input value={se} onChange={onChange} /> */}
       {isControlled ? (
         <input
           id={id}
@@ -41,7 +45,14 @@ export function Search({id, search, setSearch, placeholder = 'Search'}: SearchPr
       </span>
 
       {isControlled && search.length !== 0 && (
-        <span onClick={() => setSearch('')}>
+        <span
+          onClick={() => {
+            if (typeof clearIconClearFn === 'function') {
+              clearIconClearFn()
+            }
+            setSearch('')
+          }}
+        >
           <img src={closeIcon} alt="Clear Search" className={classes.clearIcon} />
         </span>
       )}

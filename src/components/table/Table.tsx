@@ -173,6 +173,7 @@ export function Table({
             indeterminate: props.table.getIsSomeRowsSelected(),
             onChange: props.table.getToggleAllRowsSelectedHandler(),
             row: props.header,
+            isHeader: true,
           }}
         />
       ),
@@ -272,7 +273,6 @@ export function Table({
   }, [])
 
   React.useEffect(() => {
-    if (!searchConfig?.search.length) return
     setRowSelection({})
   }, [searchConfig?.search])
 
@@ -300,6 +300,7 @@ export function Table({
                   search={searchConfig.search}
                   setSearch={searchConfig.setSearch}
                   placeholder={searchConfig.placeholder}
+                  clearIconClearFn={() => setRowSelection({})}
                 />
               </div>
             )}
@@ -393,6 +394,8 @@ function TableComp({
                 className={classes.tableHeader}
                 style={{
                   width: header.getSize() === Number.MAX_SAFE_INTEGER ? 'auto' : header.getSize(),
+                  // minWidth: header.getSize === Number.MAX_SAFE_INTEGER ? 'auto' : header.getSize(),
+                  // maxWidth: header.getSize() === Number.MAX_SAFE_INTEGER ? 'auto' : header.getSize(),
                 }}
               >
                 {header.isPlaceholder ? null : (
@@ -436,25 +439,31 @@ function TableComp({
         <TableEmpty emptyStateConfig={emptyStateConfig} search={search} />
       ) : (
         <tbody className={classes.tableBody}>
-          {table.getRowModel().rows.map(row => (
+          {table.getRowModel().rows.map((row, idx) => (
             <tr key={row.id} className={classes.tableRow}>
-              {row.getVisibleCells().map(cell => (
-                <td
-                  key={cell.id}
-                  className={clsx(
-                    classes.tableData,
-                    (isCheckbox || isRadio) && classes.tableDataWithSelection,
-                  )}
-                  style={{
-                    width:
-                      cell.column.getSize() === Number.MAX_SAFE_INTEGER
-                        ? 'auto'
-                        : cell.column.getSize(),
-                  }}
-                >
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </td>
-              ))}
+              {row.getVisibleCells().map(cell => {
+                const isSelectionCell =
+                  (isCheckbox || isRadio) &&
+                  (cell.id === `${idx}_${RADIO_COL_ID}` || cell.id === `${idx}_${CHECKBOX_COL_ID}`)
+                return (
+                  <td
+                    key={cell.id}
+                    className={clsx(
+                      classes.tableData,
+                      (isCheckbox || isRadio) && classes.tableDataWithSelection,
+                    )}
+                    style={{
+                      width:
+                        cell.column.getSize() === Number.MAX_SAFE_INTEGER
+                          ? 'auto'
+                          : cell.column.getSize(),
+                      verticalAlign: isSelectionCell ? 'middle' : undefined,
+                    }}
+                  >
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </td>
+                )
+              })}
             </tr>
           ))}
         </tbody>

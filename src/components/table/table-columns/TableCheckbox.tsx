@@ -11,11 +11,13 @@ import type {Row} from '@tanstack/react-table'
 export function TableCheckbox({
   indeterminate,
   row,
+  isHeader,
   ...rest
 }: {
   indeterminate: boolean
   row: Row<unknown>
   setSelectedRows?: any
+  isHeader?: boolean
 } & React.HTMLProps<HTMLInputElement>) {
   const ref = React.useRef<HTMLInputElement>(null!)
 
@@ -26,7 +28,7 @@ export function TableCheckbox({
   }, [ref, indeterminate])
 
   return (
-    <span className={classes.checkboxSpan}>
+    <span className={classes.checkboxSpan} style={{display: isHeader ? 'flex' : undefined}}>
       <input
         type="checkbox"
         ref={ref}

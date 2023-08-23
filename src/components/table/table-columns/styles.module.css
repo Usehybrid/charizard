@@ -1,5 +1,6 @@
 .checkboxSpan {
   margin: auto;
+  /* display: flex; */
 }
 
 .checkboxSpan > input[type='checkbox'] {
