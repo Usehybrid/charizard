@@ -23,6 +23,8 @@ import {
   Table,
 } from './components'
 import randomIcon2 from './components/assets/search-2.svg'
+import {CreatableSelect} from './components/select/CreatableSelect'
+import {SOFTWARE_ACTION_TYPES, useSoftwareStore} from './test'
 
 const styles = {
   width: '90%',
@@ -307,7 +309,7 @@ function App() {
 
   return (
     <div style={styles}>
-      <Table
+      {/* <Table
         data={data}
         loaderConfig={{isFetching: false, isError: false, text: 'Getting employees...'}}
         columns={columns}
@@ -363,7 +365,7 @@ function App() {
           columns: 6,
           emptySearchTitle: 'No inventories found',
         }}
-      />
+      />*/}
     </div>
   )
 }
