@@ -24,6 +24,8 @@ import {
   Table,
 } from './components'
 import randomIcon2 from './components/assets/search-2.svg'
+import {CreatableSelect} from './components/select/CreatableSelect'
+import {SOFTWARE_ACTION_TYPES, useSoftwareStore} from './test'
 
 const styles = {
   width: '90%',
@@ -387,6 +389,7 @@ function App() {
           columns: 6,
           emptySearchTitle: 'No inventories found',
         }}
+
       /> */}
       <LayoutTabs tabs={data} defaultValue="product" />
     </div>
