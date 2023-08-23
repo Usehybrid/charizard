@@ -1,1 +1,1 @@
-export { LayoutTabs } from './LayoutTabs'
+export * from './LayoutTabs'
