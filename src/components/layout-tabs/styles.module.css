@@ -1,0 +1,70 @@
+.tabList {
+  display: flex;
+  align-items: flex-start;
+  padding: 0px 30px;
+  margin: 0 -30px;
+  gap: 40px;
+  height: 40px;
+  background: var(--slate-10);
+  border: 1px solid var(--slate-200);
+  border-radius: 0px 0px 4px 4px;
+}
+
+.tabList .tab {
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  overflow: visible;
+
+  background: transparent;
+  appearance: none;
+
+  /* inherit font & color from ancestor */
+  color: inherit;
+  font: inherit;
+
+  /* Normalize `line-height`. Cannot be changed from `normal` in Firefox 4+. */
+  line-height: normal;
+
+  /* Corrects font smoothing for webkit */
+  -webkit-font-smoothing: inherit;
+  -moz-osx-font-smoothing: inherit;
+
+  /* Corrects inability to style clickable `input` types in iOS */
+  -webkit-appearance: none;
+
+  font-weight: 400;
+  font-size: 1.08rem;
+  line-height: 1.54rem;
+  color: var(--secondary);
+  height: 100%;
+  border-bottom: 2px solid transparent;
+
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: space-between; */
+  padding-top: 7px;
+  cursor: pointer;
+}
+
+.tabList .tab:hover {
+  font-weight: 500;
+}
+
+.tabList .tab::after {
+  content: attr(data-text) / '';
+  height: 0;
+  visibility: hidden;
+  overflow: hidden;
+  user-select: none;
+  pointer-events: none;
+  font-weight: 500;
+}
+
+.tabList .tab[data-selected] {
+  color: var(--text-primary);
+  border-bottom-color: var(--iris);
+  font-weight: 500;
+}
