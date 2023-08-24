@@ -34,7 +34,6 @@ export type TableProps = {
     isDropdownActions?: boolean
     // menu list for the dropdown
     menuItems?: {label: string; iconSrc?: string; onClick: any; filterFn?: any}[]
-    labelText?: boolean
     key?: string
     customComp?: React.ReactNode
   }
@@ -110,14 +109,8 @@ export type TableProps = {
 
 // todo
 // * figure out clearing of row selection after overlay closes
-// * alignment of table
 // * responsiveness
 // * active filter popover in filter
-
-// ! bugs
-// * random selection number in filter bug
-// * loading text not showing up
-// * number flickering issue, might be better to move the filter to the right side
 
 export function Table({
   data,
@@ -388,47 +381,60 @@ function TableComp({
       <thead className={classes.tableHead}>
         {table.getHeaderGroups().map(headerGroup => (
           <tr key={headerGroup.id} className={classes.tableRow}>
-            {headerGroup.headers.map(header => (
-              <th
-                key={header.id}
-                className={classes.tableHeader}
-                style={{
-                  width: header.getSize() === Number.MAX_SAFE_INTEGER ? 'auto' : header.getSize(),
-                  // minWidth: header.getSize === Number.MAX_SAFE_INTEGER ? 'auto' : header.getSize(),
-                  // maxWidth: header.getSize() === Number.MAX_SAFE_INTEGER ? 'auto' : header.getSize(),
-                }}
-              >
-                {header.isPlaceholder ? null : (
-                  <div
-                    {...{
-                      onClick: header.column.getToggleSortingHandler(),
-                      style: {
-                        display: 'flex',
-                        alignItems: 'center',
-                      },
-                    }}
-                  >
-                    {flexRender(header.column.columnDef.header, header.getContext())}
-                    {{
-                      asc: (
-                        <SVG
-                          path={chevronUp}
-                          spanClassName={classes.tableHeaderSortSpan}
-                          svgClassName={classes.tableHeaderSort}
-                        />
-                      ),
-                      desc: (
-                        <SVG
-                          path={chevronDown}
-                          spanClassName={classes.tableHeaderSortSpan}
-                          svgClassName={classes.tableHeaderSort}
-                        />
-                      ),
-                    }[header.column.getIsSorted() as string] ?? null}
-                  </div>
-                )}
-              </th>
-            ))}
+            {headerGroup.headers.map(header => {
+              if (header.index === 0) {
+                console.log(header)
+              }
+              return (
+                <th
+                  key={header.id}
+                  className={classes.tableHeader}
+                  style={{
+                    width: header.getSize() === Number.MAX_SAFE_INTEGER ? 'auto' : header.getSize(),
+                    paddingRight: header.id === DROPDOWN_COL_ID ? '20px' : undefined,
+                    paddingLeft:
+                      header.index === 0 &&
+                      header.id !== CHECKBOX_COL_ID &&
+                      header.id !== RADIO_COL_ID
+                        ? '20px'
+                        : undefined,
+                    // minWidth: header.getSize === Number.MAX_SAFE_INTEGER ? 'auto' : header.getSize(),
+                    // maxWidth: header.getSize() === Number.MAX_SAFE_INTEGER ? 'auto' : header.getSize(),
+                  }}
+                >
+                  {header.isPlaceholder ? null : (
+                    <div
+                      {...{
+                        onClick: header.column.getToggleSortingHandler(),
+                        style: {
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: header.id === DROPDOWN_COL_ID ? 'flex-end' : undefined,
+                        },
+                      }}
+                    >
+                      {flexRender(header.column.columnDef.header, header.getContext())}
+                      {{
+                        asc: (
+                          <SVG
+                            path={chevronUp}
+                            spanClassName={classes.tableHeaderSortSpan}
+                            svgClassName={classes.tableHeaderSort}
+                          />
+                        ),
+                        desc: (
+                          <SVG
+                            path={chevronDown}
+                            spanClassName={classes.tableHeaderSortSpan}
+                            svgClassName={classes.tableHeaderSort}
+                          />
+                        ),
+                      }[header.column.getIsSorted() as string] ?? null}
+                    </div>
+                  )}
+                </th>
+              )
+            })}
           </tr>
         ))}
       </thead>

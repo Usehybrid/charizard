@@ -92,7 +92,7 @@ function MenuButton({
   const api = menu.connect(state, send, normalizeProps)
 
   return (
-    <div>
+    <>
       {isCustomTrigger ? (
         <button
           className={clsx(
@@ -173,7 +173,7 @@ function MenuButton({
             ))}
         </div>
       </div>
-    </div>
+    </>
   )
 }
 export interface MenuActionsDropdownProps {
@@ -185,20 +185,18 @@ export interface MenuActionsDropdownProps {
 
 function MenuActionsDropdown({id, menuItems, data, size = 'md'}: MenuActionsDropdownProps) {
   return (
-    <div>
-      <MenuButton
-        id={id}
-        menuItems={menuItems}
-        onClick={() => {}}
-        isCustomTrigger={true}
-        customData={data}
-        size={size === 'md' ? 'sm' : 'md'}
-      >
-        <div className={clsx(classes.actionsBox, size === 'lg' && classes.actionsBoxLg)}>
-          <img src={threeDots} className={classes.actionsDropdown} />
-        </div>
-      </MenuButton>
-    </div>
+    <MenuButton
+      id={id}
+      menuItems={menuItems}
+      onClick={() => {}}
+      isCustomTrigger={true}
+      customData={data}
+      size={size === 'md' ? 'sm' : 'md'}
+    >
+      <div className={clsx(classes.actionsBox, size === 'lg' && classes.actionsBoxLg)}>
+        <img src={threeDots} className={classes.actionsDropdown} />
+      </div>
+    </MenuButton>
   )
 }
 

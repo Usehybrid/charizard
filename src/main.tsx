@@ -111,7 +111,7 @@ const data: Software[] = [
   {
     id: 'f8e6f802-c1e8-437f-8507-1d68b1336b37',
     notes: 'Updated Adobde Xd Design',
-    description: "This will be used for designing purpose and it's updated",
+    description: 'In transit',
     is_deleted: false,
     status: 'In transit',
     account_manager_name: null,
@@ -276,64 +276,41 @@ const menuItems = [
   },
 ]
 
+const columns = [
+  columnHelper.accessor('software', {
+    header: 'Software Name',
+    cell: info => info.getValue().name,
+  }),
+
+  columnHelper.accessor('software_owners', {
+    header: 'Software Owners',
+
+    cell: info => {
+      return <div>{getFullName(info.row.original.software_owners[0])}</div>
+    },
+    enableSorting: false,
+  }),
+  columnHelper.accessor('software_users', {
+    header: 'Users',
+    cell: info => {
+      return <div>{info.row.original.software_users_count}</div>
+    },
+  }),
+  columnHelper.accessor('software_license', {
+    header: 'Licenses',
+    cell: info => {
+      return <div>{info.row.original.software_license_count}</div>
+    },
+    // size: 80,
+  }),
+]
+
 function App() {
   const [search, setSearch] = React.useState('')
 
-  const columns = [
-    columnHelper.accessor('software', {
-      header: 'Software Name',
-      cell: info => info.getValue().name,
-    }),
-
-    columnHelper.accessor('software_owners', {
-      header: 'Software Owners',
-
-      cell: info => {
-        return <div>{getFullName(info.row.original.software_owners[0])}</div>
-      },
-      enableSorting: false,
-    }),
-    columnHelper.accessor('software_users', {
-      header: 'Users',
-      cell: info => {
-        return <div>{info.row.original.software_users_count}</div>
-      },
-    }),
-    columnHelper.accessor('software_license', {
-      header: 'Licenses',
-      cell: info => {
-        return <div>{info.row.original.software_license_count}</div>
-      },
-      // size: 80,
-    }),
-  ]
-
-  const data = [
-    {
-      label: 'Product',
-      value: 'product',
-      content: <>PRoduct</>,
-    },
-    {
-      label: 'Finance',
-      value: 'finance',
-      content: <>Finance</>,
-    },
-    {
-      label: 'Activity',
-      value: 'activity',
-      content: <>Activity</>,
-    },
-    {
-      label: 'Allocation History',
-      value: 'allocation-history',
-      content: <>Allocation history</>,
-    },
-  ]
-
   return (
     <div style={styles}>
-      {/* <Table
+      <Table
         data={data}
         loaderConfig={{isFetching: false, isError: false, text: 'Getting employees...'}}
         columns={columns}
@@ -363,7 +340,7 @@ function App() {
         }}
         rowSelectionConfig={{
           // isRadio: true,
-          isCheckbox: true,
+          // isCheckbox: true,
           actions: [
             {
               icon: randomIcon,
@@ -375,6 +352,7 @@ function App() {
         actionsConfig={{
           menuItems,
           isDropdownActions: true,
+          key: 'description',
           // customComp: <div onClick={() => console.log('works')}>View more info</div>,
         }}
         totalText={`${4} softwares`}
@@ -389,9 +367,7 @@ function App() {
           columns: 6,
           emptySearchTitle: 'No inventories found',
         }}
-
-      /> */}
-      <LayoutTabs tabs={data} defaultValue="product" />
+      />
     </div>
   )
 }
