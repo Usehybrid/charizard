@@ -37,6 +37,7 @@
   width: 100%;
   border-collapse: collapse;
   border: 1px solid var(--slate-200);
+  height: 100%;
 }
 
 .tableHead {
