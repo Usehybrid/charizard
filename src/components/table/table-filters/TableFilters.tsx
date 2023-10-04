@@ -39,7 +39,7 @@ export default function TableFilters({filterConfig}: TableFiltersProps) {
 
   return (
     <div className={classes.filters}>
-      <img src={filterLines} alt="filters" className={classes.filterIcon} />
+      {/* <img src={filterLines} alt="filters" className={classes.filterIcon} /> */}
       {filters.map((filter, idx) => (
         <TableFilter
           key={filter.id}
