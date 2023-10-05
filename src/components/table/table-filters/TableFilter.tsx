@@ -60,7 +60,7 @@ export default function TableFilter({
     let isChecked = false
     tableFilters.forEach(filter => {
       filter.values.forEach(obj => {
-        if (obj.includes(value)) {
+        if (obj === value) {
           isChecked = true
           return
         }
