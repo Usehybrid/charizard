@@ -382,9 +382,6 @@ function TableComp({
         {table.getHeaderGroups().map(headerGroup => (
           <tr key={headerGroup.id} className={classes.tableRow}>
             {headerGroup.headers.map(header => {
-              if (header.index === 0) {
-                console.log(header)
-              }
               return (
                 <th
                   key={header.id}
