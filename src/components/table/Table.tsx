@@ -383,7 +383,7 @@ function TableComp({
           <tr key={headerGroup.id} className={classes.tableRow}>
             {headerGroup.headers.map(header => {
               if (header.index === 0) {
-                console.log(header)
+                // console.log(header)
               }
               return (
                 <th
