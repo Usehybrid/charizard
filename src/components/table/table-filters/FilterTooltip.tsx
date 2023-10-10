@@ -15,6 +15,9 @@ interface FilterTooltipProps {
 export default function FilterTooltip({filter, tableFilter, selectedFilters}: FilterTooltipProps) {
   const [tooltipState, tooltipSend] = useMachine(tooltip.machine({id: filter.key}))
   const tooltipApi = tooltip.connect(tooltipState, tooltipSend, normalizeProps)
+
+  const tableFilterWithName = filter.options?.filter(op => tableFilter?.values.includes(op.value))
+
   return (
     <>
       {/* @ts-ignore */}
@@ -24,9 +27,9 @@ export default function FilterTooltip({filter, tableFilter, selectedFilters}: Fi
       {tooltipApi.isOpen && selectedFilters !== 0 && (
         <div {...tooltipApi.positionerProps}>
           <div {...tooltipApi.contentProps} className={classes.filterTooltip}>
-            {tableFilter.values.map(value => (
-              <div key={value} className={classes.filterValue}>
-                {value}
+            {tableFilterWithName.map(value => (
+              <div key={value.value} className={classes.filterValue}>
+                {value.name}
               </div>
             ))}
           </div>
