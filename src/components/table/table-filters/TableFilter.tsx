@@ -117,6 +117,7 @@ export default function TableFilter({
                       checked={getIsChecked(option.value)}
                       filterDispatch={filterDispatch}
                       countryCode={option.country_code}
+                      key={option.value}
                     />
                   </div>
                 ))
