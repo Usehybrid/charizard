@@ -8,7 +8,7 @@ import useDeepCompareEffect from 'use-deep-compare-effect'
 import clsx from 'clsx'
 import TableFilters from './table-filters'
 import TableLoader from './table-loader'
-import Selector from '../selector'
+
 import TableEmpty from './table-empty'
 import TableActions from './table-actions'
 import chevronDown from '../assets/chevron-down.svg'
@@ -17,6 +17,7 @@ import classes from './styles.module.css'
 import {useReactTable, getCoreRowModel, flexRender} from '@tanstack/react-table'
 import {Search} from '../search'
 import {Button, ButtonVariant} from '../button'
+import {Selectors} from '../selector'
 import {SVG} from '../svg'
 import {TableCheckbox} from './table-columns'
 import {TableRadio} from './table-columns'
@@ -284,7 +285,7 @@ export function Table({
 
           <div className={classes.selectorGrp}>
             {typeof selectorConfig === 'object' && (
-              <Selector selectors={selectorConfig?.selectors} />
+              <Selectors selectors={selectorConfig?.selectors} />
             )}
             {typeof searchConfig === 'object' && (
               <div className={classes.search}>

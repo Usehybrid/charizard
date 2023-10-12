@@ -6,7 +6,7 @@ type SelectorsProps = {
   selectors: {name: string; onClick: any}[]
 }
 
-export default function Selectors({selectors}: SelectorsProps) {
+export function Selectors({selectors}: SelectorsProps) {
   const [active, setActive] = React.useState(0)
   return (
     <div className={classes.box}>
