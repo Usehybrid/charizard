@@ -16,6 +16,7 @@ export enum ButtonVariant {
   SECONDARY = 'secondary',
   GHOST = 'ghost',
   DANGER = 'danger',
+  LINK = 'link',
 }
 
 export type ButtonProps = {
@@ -45,10 +46,11 @@ export function Button({
     <button
       className={clsx(
         classes.btn,
-        variant === 'primary' && classes.btnPrimary,
-        variant === 'secondary' && classes.btnSecondary,
-        variant === 'ghost' && classes.btnGhost,
-        variant === 'danger' && classes.btnDanger,
+        variant === ButtonVariant.PRIMARY && classes.btnPrimary,
+        variant === ButtonVariant.SECONDARY && classes.btnSecondary,
+        variant === ButtonVariant.GHOST && classes.btnGhost,
+        variant === ButtonVariant.DANGER && classes.btnDanger,
+        variant === ButtonVariant.LINK && classes.btnLink,
         size === 'sm' && classes.btnSm,
         size === 'adapt' && classes.btnAdapt,
         size === 'xs' && classes.btnXs,
