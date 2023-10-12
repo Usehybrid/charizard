@@ -30,5 +30,5 @@
 .active {
   background-color: var(--iris-10);
   color: var(--iris);
-  font-size: 600;
+  font-weight: 600;
 }
