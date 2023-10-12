@@ -5,6 +5,7 @@ import {createColumnHelper} from '@tanstack/react-table'
 import randomIcon from './components/assets/check.svg'
 import {
   Button,
+  ButtonVariant,
   Drawer,
   Input,
   InputContainer,
@@ -310,6 +311,9 @@ function App() {
 
   return (
     <div style={styles}>
+      <Button variant={ButtonVariant.LINK} size="sm">
+        Link
+      </Button>
       <Table
         data={data}
         loaderConfig={{isFetching: false, isError: false, text: 'Getting employees...'}}
