@@ -2,7 +2,7 @@ import * as React from 'react'
 import clsx from 'clsx'
 import classes from './styles.module.css'
 
-type SelectorsProps = {
+export type SelectorsProps = {
   selectors: {name: string; onClick: any}[]
 }
 
