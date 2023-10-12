@@ -9,9 +9,9 @@ type TableActionsProps = {
 }
 
 export default function TableActions({actionsConfig, data, id}: TableActionsProps) {
-  if (!actionsConfig) return
+  if (!actionsConfig) return null
   const {menuItems = [], isDropdownActions, key, customComp} = actionsConfig
-  if (!isDropdownActions) return
+  if (!isDropdownActions) return null
 
   if (!key && !customComp)
     return <Button.ActionsDropdown menuItems={menuItems} data={data} id={id} />
