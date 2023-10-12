@@ -78,6 +78,11 @@
   background-color: var(--danger);
 }
 
+.btnLink {
+  background: none;
+  color: var(--iris);
+}
+
 /* Menu Button styles  */
 
 .btnGrp {
