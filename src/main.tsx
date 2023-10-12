@@ -1,31 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import {createColumnHelper} from '@tanstack/react-table'
-
 import randomIcon from './components/assets/check.svg'
-import {
-  Button,
-  Drawer,
-  Input,
-  InputContainer,
-  InputGroup,
-  InputLabel,
-  InputRightAddon,
-  LayoutTabs,
-  Popover,
-  PopoverContent,
-  PopoverDescription,
-  PopoverTrigger,
-  Progress,
-  RadioGroup,
-  SVG,
-  Search,
-  SegmentedControl,
-  Table,
-} from './components'
 import randomIcon2 from './components/assets/search-2.svg'
-import {CreatableSelect} from './components/select/CreatableSelect'
-import {SOFTWARE_ACTION_TYPES, useSoftwareStore} from './test'
+import {createColumnHelper} from '@tanstack/react-table'
+import {Table} from './components'
 
 const styles = {
   width: '90%',
@@ -310,64 +288,72 @@ function App() {
 
   return (
     <div style={styles}>
-      <Table
-        data={data}
-        loaderConfig={{isFetching: false, isError: false, text: 'Getting employees...'}}
-        columns={columns}
-        searchConfig={{
-          search,
-          setSearch,
-          placeholder: 'Search your employees',
-        }}
-        filterConfig={{
-          filters,
-          isLoading: false,
-          isError: false,
-          // filterDispatch: value => dispatch({type: SOFTWARE_ACTION_TYPES.FILTER, payload: value}),
-          // filterReset: value =>
-          //   dispatch({type: SOFTWARE_ACTION_TYPES.RESET_FILTERS, payload: value}),
-          filterDispatch: () => {},
-          filterReset: () => {},
-        }}
-        sortConfig={{
-          sortBy: '',
-          setSortBy: () => {},
-          sortOrd: '',
-          setSortOrd: () => {},
-          sortMap: {
-            software: 'softwares.names',
-          },
-        }}
-        rowSelectionConfig={{
-          // isRadio: true,
-          // isCheckbox: true,
-          actions: [
-            {
-              icon: randomIcon,
-              text: 'Archive',
-              onClick: () => {},
+      <div style={styles}>
+        <Table
+          data={data}
+          loaderConfig={{isFetching: false, isError: false, text: 'Getting employees...'}}
+          columns={columns}
+          searchConfig={{
+            search,
+            setSearch,
+            placeholder: 'Search your employees',
+          }}
+          filterConfig={{
+            filters,
+            isLoading: false,
+            isError: false,
+            // filterDispatch: value => dispatch({type: SOFTWARE_ACTION_TYPES.FILTER, payload: value}),
+            // filterReset: value =>
+            //   dispatch({type: SOFTWARE_ACTION_TYPES.RESET_FILTERS, payload: value}),
+            filterDispatch: () => {},
+            filterReset: () => {},
+          }}
+          selectorConfig={{
+            selectors: [
+              {name: 'All devices', onClick: () => {}},
+              {name: 'Approved devices', onClick: () => {}},
+            ],
+          }}
+          sortConfig={{
+            sortBy: '',
+            setSortBy: () => {},
+            sortOrd: '',
+            setSortOrd: () => {},
+            sortMap: {
+              software: 'softwares.names',
             },
-          ],
-        }}
-        actionsConfig={{
-          menuItems,
-          isDropdownActions: true,
-          key: 'description',
-          // customComp: <div onClick={() => console.log('works')}>View more info</div>,
-        }}
-        totalText={`${4} softwares`}
-        emptyStateConfig={{
-          icon: './components/assets/check.svg',
-          title: 'Get started by adding your first inventory',
-          desc: '',
-          btnText: 'add inventory',
-          onClick: () => {
-            console.log('works')
-          },
-          columns: 6,
-          emptySearchTitle: 'No inventories found',
-        }}
-      />
+          }}
+          rowSelectionConfig={{
+            // isRadio: true,
+            // isCheckbox: true,
+            actions: [
+              {
+                icon: randomIcon,
+                text: 'Archive',
+                onClick: () => {},
+              },
+            ],
+          }}
+          actionsConfig={{
+            menuItems,
+            isDropdownActions: true,
+            key: 'description',
+            // customComp: <div onClick={() => console.log('works')}>View more info</div>,
+          }}
+          totalText={`${4} softwares`}
+          emptyStateConfig={{
+            icon: './components/assets/check.svg',
+            title: 'Get started by adding your first inventory',
+            desc: '',
+            btnText: 'add inventory',
+            onClick: () => {
+              console.log('works')
+            },
+            columns: 6,
+            emptySearchTitle: 'No inventories found',
+          }}
+        />
+      </div>
     </div>
   )
 }

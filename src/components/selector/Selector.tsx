@@ -1,18 +1,16 @@
 import * as React from 'react'
-import classes from './styles.module.css'
 import clsx from 'clsx'
+import classes from './styles.module.css'
 
-interface TableSelectorsProps {
-  selectorConfig: {
-    selectors: {name: string; onClick: any}[]
-  }
+type SelectorsProps = {
+  selectors: {name: string; onClick: any}[]
 }
 
-export default function TableSelectors({selectorConfig}: TableSelectorsProps) {
+export default function Selectors({selectors}: SelectorsProps) {
   const [active, setActive] = React.useState(0)
   return (
     <div className={classes.box}>
-      {selectorConfig.selectors.map((selector, idx) => (
+      {selectors.map((selector, idx) => (
         <div
           key={selector.name}
           onClick={() => {
@@ -22,11 +20,7 @@ export default function TableSelectors({selectorConfig}: TableSelectorsProps) {
           className={clsx(classes.selector, idx === active && classes.active)}
           style={{
             borderRadius:
-              idx === 0
-                ? '4px 0px 0px 4px'
-                : idx === selectorConfig.selectors.length - 1
-                ? '0px 4px 4px 0px'
-                : 0,
+              idx === 0 ? '4px 0px 0px 4px' : idx === selectors.length - 1 ? '0px 4px 4px 0px' : 0,
             boxShadow: idx === 0 ? 'none' : '',
           }}
         >

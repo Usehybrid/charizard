@@ -8,7 +8,7 @@ import useDeepCompareEffect from 'use-deep-compare-effect'
 import clsx from 'clsx'
 import TableFilters from './table-filters'
 import TableLoader from './table-loader'
-import TableSelectors from './table-selectors'
+import Selector from '../selector'
 import TableEmpty from './table-empty'
 import TableActions from './table-actions'
 import chevronDown from '../assets/chevron-down.svg'
@@ -284,7 +284,7 @@ export function Table({
 
           <div className={classes.selectorGrp}>
             {typeof selectorConfig === 'object' && (
-              <TableSelectors selectorConfig={selectorConfig} />
+              <Selector selectors={selectorConfig?.selectors} />
             )}
             {typeof searchConfig === 'object' && (
               <div className={classes.search}>
