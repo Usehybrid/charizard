@@ -20,6 +20,14 @@
   outline: none;
 }
 
+.btn.disabled {
+  opacity: 0.5;
+}
+
+.btn.disabled:hover {
+  cursor: not-allowed;
+}
+
 .btnSm {
   font-size: 14px;
   font-weight: 400;
@@ -81,6 +89,16 @@
 .btnLink {
   background: none;
   color: var(--iris);
+}
+
+.btnMinimal {
+  border: 1px solid var(--slate-300);
+  background: var(--white);
+  color: var(--primary);
+}
+
+.btnMinimal:hover {
+  background: var(--slate-100);
 }
 
 /* Menu Button styles  */
