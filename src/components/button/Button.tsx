@@ -17,6 +17,7 @@ export enum ButtonVariant {
   GHOST = 'ghost',
   DANGER = 'danger',
   LINK = 'link',
+  MINIMAL = 'minimal',
 }
 
 export type ButtonProps = {
@@ -51,6 +52,7 @@ export function Button({
         variant === ButtonVariant.GHOST && classes.btnGhost,
         variant === ButtonVariant.DANGER && classes.btnDanger,
         variant === ButtonVariant.LINK && classes.btnLink,
+        variant === ButtonVariant.MINIMAL && classes.btnMinimal,
         size === 'sm' && classes.btnSm,
         size === 'adapt' && classes.btnAdapt,
         size === 'xs' && classes.btnXs,
