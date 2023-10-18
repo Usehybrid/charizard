@@ -10,6 +10,7 @@ export type FooterButtons = Array<{
   variant: ButtonVariant
   onClick: () => void
   btnText: string
+  btnSize?: 'xs' | 'sm' | 'md' | 'adapt'
 }>
 
 interface ModalFooterProps {
@@ -50,6 +51,7 @@ export function ModalFooter({children, api, buttons, showBorder = true}: ModalFo
                 btn.onClick()
                 // api?.close()
               }}
+              size={btn.btnSize}
             >
               {btn.btnText}
             </Button>
