@@ -8,7 +8,7 @@ import classes from './styles.module.css'
 import {Button} from '../button'
 import {FooterButtons} from '../modal/ModalFooter'
 
-interface DrawerProps {
+type DrawerProps = {
   /**
    * Drawer is open or not
    */
@@ -53,6 +53,7 @@ interface DrawerProps {
    * footer buttons to show
    */
   buttons?: FooterButtons
+  footerAddon?: React.ReactNode
 }
 
 export function Drawer({
@@ -67,6 +68,7 @@ export function Drawer({
   showHeader = true,
   showFooter = true,
   buttons,
+  footerAddon,
 }: DrawerProps) {
   const containerRef = React.useRef<HTMLDivElement>(null)
   const descriptionRef = React.useRef<HTMLDivElement>(null)
@@ -127,18 +129,22 @@ export function Drawer({
                 ? customFooter
                 : buttons && (
                     <div className={classes.footerBtnContainer}>
-                      {buttons.map((btn, idx) => (
-                        <Button
-                          key={idx}
-                          variant={btn.variant}
-                          onClick={() => {
-                            btn.onClick()
-                            // onClose()
-                          }}
-                        >
-                          {btn.btnText}
-                        </Button>
-                      ))}
+                      <div className={classes.footerBtn}>
+                        {buttons.map((btn, idx) => (
+                          <Button
+                            key={idx}
+                            variant={btn.variant}
+                            onClick={() => {
+                              btn.onClick()
+                              // onClose()
+                            }}
+                          >
+                            {btn.btnText}
+                          </Button>
+                        ))}
+                      </div>
+
+                      {footerAddon && <div>{footerAddon}</div>}
                     </div>
                   )}
             </div>

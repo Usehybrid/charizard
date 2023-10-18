@@ -57,7 +57,7 @@
 }
 
 .container.xxlg {
-  width: 92.30rem;
+  width: 92.3rem;
 }
 
 .container .content {
@@ -133,6 +133,12 @@
   line-height: 1.9rem;
   padding: 8px 16px;
   border-radius: 6px;
+}
+
+.footerBtn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 @media screen and (max-width: 600px) {
