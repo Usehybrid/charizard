@@ -13,7 +13,7 @@
   visibility: visible;
 }
 
-.backdropLayer .backdrop {
+.backdrop {
   width: 100%;
   height: 100%;
   background-color: var(--black);
@@ -21,7 +21,7 @@
   transition: all 0.3s ease-in-out;
 }
 
-.backdropLayer .backdrop.showBackdrop {
+.backdrop.showBackdrop {
   opacity: 0.3;
 }
 
@@ -60,13 +60,13 @@
   width: 92.3rem;
 }
 
-.container .content {
+.content {
   height: 100%;
   overflow-y: auto;
   position: relative;
 }
 
-.container .content .headerContainer {
+.headerContainer {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -74,7 +74,7 @@
   border-bottom: 1px solid var(--slate-300);
 }
 
-.container .content .headerContainer .title {
+.title {
   font-style: normal;
   font-weight: 500;
   font-size: 1.54rem;
@@ -82,7 +82,7 @@
   color: var(--text-primary);
 }
 
-.container .content .headerContainer .closeBtn {
+.closeBtn {
   background: transparent
     url('data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27 fill=%27%23434053%27%3e%3cpath d=%27M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z%27/%3e%3c/svg%3e')
     center/0.8rem auto no-repeat;
@@ -95,14 +95,14 @@
   cursor: pointer;
 }
 
-.container .content .descriptionContainer {
+.descriptionContainer {
   padding: 20px;
   max-height: calc(100vh - (1.75rem * 2));
   height: calc(100vh - (1.75rem * 2));
   overflow: scroll;
 }
 
-.container .content .footer {
+.footer {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -118,7 +118,13 @@
   background: var(--white);
 }
 
-.container .content .footer .footerBtnContainer {
+.footerBtnContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footerBtn {
   width: 100%;
   display: flex;
   align-items: center;
@@ -126,19 +132,13 @@
   gap: 12px;
 }
 
-.container .content .footer .saveBtn,
-.container .content .footer .cancelBtn {
+.saveBtn,
+.cancelBtn {
   font-weight: 400;
   font-size: 1.23rem;
   line-height: 1.9rem;
   padding: 8px 16px;
   border-radius: 6px;
-}
-
-.footerBtn {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 
 @media screen and (max-width: 600px) {
