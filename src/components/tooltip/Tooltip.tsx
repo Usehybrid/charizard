@@ -61,5 +61,5 @@ export function Tooltip({
   return <>{clones}</>
 }
 
-Tooltip.TooltipTrigger = TooltipTrigger
-Tooltip.TooltipContent = TooltipContent
+Tooltip.Trigger = TooltipTrigger
+Tooltip.Content = TooltipContent

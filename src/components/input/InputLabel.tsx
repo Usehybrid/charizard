@@ -8,9 +8,9 @@ import infoCircleIcon from '../assets/info-circle.svg'
 import classes from './styles.module.css'
 import {Inputs} from './types'
 import {SVG} from '../svg'
-import {Tooltip, TooltipContent, TooltipTrigger} from '../tooltip'
+import {Tooltip} from '../tooltip'
 
-interface InputLabelProps {
+type InputLabelProps = {
   /**
    * Children of the input label
    */
@@ -69,10 +69,10 @@ export function InputLabel({
       </label>
       {infoText && (
         <Tooltip>
-          <TooltipTrigger>
+          <Tooltip.Trigger>
             <SVG path={infoCircleIcon} svgClassName={classes.infoCircleSvg} />
-          </TooltipTrigger>
-          <TooltipContent positionerStyles={infoTextTooltipStyles}>{infoText}</TooltipContent>
+          </Tooltip.Trigger>
+          <Tooltip.Content positionerStyles={infoTextTooltipStyles}>{infoText}</Tooltip.Content>
         </Tooltip>
       )}
     </div>
