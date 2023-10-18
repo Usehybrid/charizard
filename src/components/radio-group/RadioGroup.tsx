@@ -13,12 +13,12 @@ interface RadioGroupProps {
   /**
    * heading for radio group
    */
-  radioHeading: string
+  radioHeading?: string
   /**
    * items to show in radio group
    */
   items: Array<{
-    label: {heading: string; subHeading?: string}
+    label: {heading: string | React.ReactNode; subHeading?: string}
     value: string
   }>
   /**
@@ -66,12 +66,14 @@ export function RadioGroup({
   return (
     <div className={classes.radioGroup}>
       <div {...api.rootProps} className={classes.root}>
-        <InputContainer customClassName={classes.labelContainer}>
-          <InputLabel required={required} customClasses={classes.heading}>
-            {radioHeading}
-          </InputLabel>
-        </InputContainer>
-        <div className={classes.optionsContainer}>
+        {radioHeading && (
+          <InputContainer customClassName={classes.labelContainer}>
+            <InputLabel required={required} customClasses={classes.heading}>
+              {radioHeading}
+            </InputLabel>
+          </InputContainer>
+        )}
+        <div className={clsx(classes.optionsContainer, {[classes.topMargin]: !radioHeading})}>
           {items.map(opt => (
             <label
               key={opt.value}
