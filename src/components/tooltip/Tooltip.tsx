@@ -1,13 +1,16 @@
 /**
  * @author Pratik Awaik <pratik@hybr1d.io>
+ * @description https://zagjs.com/components/react/tooltip
  */
 
 import * as React from 'react'
 import * as tooltip from '@zag-js/tooltip'
 import {useMachine, normalizeProps} from '@zag-js/react'
+import {TooltipTrigger} from './TooltipTrigger'
+import {TooltipContent} from './TooltipContent'
 import type {Placement} from '@zag-js/popper'
 
-interface TooltipProps {
+type TooltipProps = {
   /**
    * tooltip children
    */
@@ -57,3 +60,6 @@ export function Tooltip({
 
   return <>{clones}</>
 }
+
+Tooltip.TooltipTrigger = TooltipTrigger
+Tooltip.TooltipContent = TooltipContent

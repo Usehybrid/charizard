@@ -15,6 +15,7 @@ export type SearchProps = {
   clearIconClearFn?: any
 }
 
+// todo @sohhamm add debounce built in, hover and active state, improve UI and add variations
 export function Search({
   id,
   search,
