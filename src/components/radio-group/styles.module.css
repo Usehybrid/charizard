@@ -16,6 +16,10 @@
   gap: 10px;
 }
 
+.topMargin {
+  margin-top: 10px;
+}
+
 .radioGroup .root .optionsContainer .radio {
   display: flex;
   gap: 10px;
@@ -49,6 +53,7 @@
   height: 16px;
   border-radius: 50%;
   border: 2px solid var(--blue-20, #e2e8f0);
+  flex-shrink: 0;
 }
 
 .radioGroup .root .optionsContainer .radio .radioControl.radioControlActive {
