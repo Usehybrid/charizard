@@ -1,7 +1,7 @@
 import * as React from 'react'
 import classes from './styles.module.css'
 
-type SpinnerProps = {
+export type SpinnerProps = {
   overrideStyle?: React.CSSProperties
   spinnerStyle?: React.CSSProperties
 }
