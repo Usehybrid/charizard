@@ -6,7 +6,7 @@ export type SpinnerProps = {
   spinnerStyle?: React.CSSProperties
 }
 
-export default function Spinner({overrideStyle, spinnerStyle}: SpinnerProps) {
+export function Spinner({overrideStyle, spinnerStyle}: SpinnerProps) {
   return (
     <div className={classes.box} style={overrideStyle}>
       <div className={classes.spinner} style={spinnerStyle}>
