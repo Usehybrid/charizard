@@ -6,8 +6,10 @@ import * as React from 'react'
 import * as zagTabs from '@zag-js/tabs'
 import classes from './styles.module.css'
 import {normalizeProps, useMachine} from '@zag-js/react'
+import clsx from 'clsx'
 
 type LayoutTabsProps = {
+  tabClassName?: string
   /**
    * tabs to render
    */
@@ -20,7 +22,7 @@ type LayoutTabsProps = {
 
 const SEARCH_PARAM_KEY = 'active-tab'
 
-export function LayoutTabs({tabs, defaultValue}: LayoutTabsProps) {
+export function LayoutTabs({tabs, defaultValue, tabClassName}: LayoutTabsProps) {
   const url = React.useMemo(() => new URL(window.location.href), [])
 
   const [state, send] = useMachine(
@@ -43,7 +45,7 @@ export function LayoutTabs({tabs, defaultValue}: LayoutTabsProps) {
 
   return (
     <div {...api.rootProps}>
-      <div {...api.tablistProps} className={classes.tabList}>
+      <div {...api.tablistProps} className={clsx(classes.tabList, tabClassName)}>
         {tabs.map(item => (
           <button
             {...api.getTriggerProps({value: item.value})}
