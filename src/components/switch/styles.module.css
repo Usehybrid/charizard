@@ -1,0 +1,89 @@
+.component {
+  display: flex;
+  justify-content: space-between;
+  gap: 4px;
+}
+
+.switchLabel {
+  font-size: 1.08rem;
+  line-height: 1.54rem;
+  color: var(--primary);
+}
+
+.subText {
+  font-size: 0.923rem;
+  line-height: 1.385rem;
+  margin-top: 0.75rem;
+}
+
+.switch {
+  margin-top: 1px;
+  position: relative;
+  display: inline-block;
+}
+.switch.sm {
+  width: 2rem;
+  height: 1.231rem;
+}
+.switch.sm input:checked + .slider::before {
+  transform: translateX(0.769rem);
+}
+.switch.sm .slider::before {
+  width: 0.923rem;
+  height: 0.923rem;
+}
+.switch.md {
+  width: 2.615rem;
+  height: 1.538rem;
+}
+.switch.md input:checked + .slider::before {
+  transform: translateX(1.077rem);
+}
+.switch.md .slider::before {
+  height: 1.231rem;
+  width: 1.231rem;
+}
+.switch.lg {
+  width: 3.846rem;
+  height: 2.154rem;
+}
+.switch.lg input:checked + .slider::before {
+  transform: translateX(1.692rem);
+}
+.switch.lg .slider::before {
+  width: 1.846rem;
+  height: 1.846rem;
+}
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.switch input:checked + .slider {
+  background-color: #6c5bd2;
+}
+.switch.disabled .slider {
+  opacity: 0.5;
+  cursor: not-allowed !important;
+}
+.switch .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #cbd5e0;
+  border-radius: 9999px;
+  transition: 0.25s;
+}
+.switch .slider::before {
+  position: absolute;
+  content: '';
+  left: 0.154rem;
+  bottom: 0.154rem;
+  top: 0.154rem;
+  background-color: white;
+  border-radius: 50%;
+  transition: 0.25s;
+}
