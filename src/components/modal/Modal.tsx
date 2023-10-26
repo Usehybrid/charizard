@@ -28,10 +28,24 @@ interface ModalProps {
    * show overlay
    */
   showOverlay?: boolean
+
+  /**
+   * Machine Props
+   */
+  machineProps?: dialog.Context | {}
 }
 
-export function Modal({isOpen, onClose, children, size = 'md', showOverlay = true}: ModalProps) {
-  const [state, send] = useMachine(dialog.machine({id: React.useId(), open: isOpen, onClose}))
+export function Modal({
+  isOpen,
+  onClose,
+  children,
+  size = 'md',
+  showOverlay = true,
+  machineProps = {},
+}: ModalProps) {
+  const [state, send] = useMachine(
+    dialog.machine({id: React.useId(), open: isOpen, onClose, ...machineProps}),
+  )
   const api = dialog.connect(state, send, normalizeProps)
 
   const clones = React.Children.toArray(children).map((child: any) => {
