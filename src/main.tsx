@@ -297,14 +297,6 @@ function App() {
         </InputGroup>
       </InputContainer> */}
       <button onClick={() => setOpen(true)}>Open</button>
-      <Drawer
-        showHeaderBorder={false}
-        isOpen={isOpen}
-        onClose={() => setOpen(false)}
-        title="your mom"
-      >
-        body
-      </Drawer>
       <Table
         data={data}
         loaderConfig={{isFetching: false, isError: false, text: 'Getting employees...'}}
