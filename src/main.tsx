@@ -1,9 +1,9 @@
-import React from 'react'
+import React, {useState} from 'react'
 import ReactDOM from 'react-dom/client'
 import randomIcon from './components/assets/check.svg'
 import randomIcon2 from './components/assets/search-2.svg'
 import {createColumnHelper} from '@tanstack/react-table'
-import {Button, LOADER_VARIANT, Loader, Table} from './components'
+import {Drawer, LOADER_VARIANT, Loader, Table} from './components'
 
 const styles = {
   width: '90%',
@@ -286,9 +286,26 @@ const columns = [
 function App() {
   const [search, setSearch] = React.useState('')
 
+  const [isOpen, setOpen] = useState(false)
+
   return (
     <div style={styles}>
-      {/* <Table
+      {/* <InputContainer>
+        <InputLabel>your mom</InputLabel>
+        <InputGroup>
+          <Input type="date" />
+        </InputGroup>
+      </InputContainer> */}
+      <button onClick={() => setOpen(true)}>Open</button>
+      <Drawer
+        showHeaderBorder={false}
+        isOpen={isOpen}
+        onClose={() => setOpen(false)}
+        title="your mom"
+      >
+        body
+      </Drawer>
+      <Table
         data={data}
         loaderConfig={{isFetching: false, isError: false, text: 'Getting employees...'}}
         columns={columns}
@@ -351,7 +368,7 @@ function App() {
           columns: 6,
           emptySearchTitle: 'No inventories found',
         }}
-      /> */}
+      />
 
       <Loader variant={LOADER_VARIANT.DUAL_RING} />
     </div>
