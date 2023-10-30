@@ -71,6 +71,9 @@
   align-items: center;
   justify-content: space-between;
   padding: 12px 20px;
+}
+
+.headerContainer.showBorder {
   border-bottom: 1px solid var(--slate-300);
 }
 

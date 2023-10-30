@@ -66,6 +66,10 @@ type DrawerProps = {
    */
   buttons?: FooterButtons
   footerAddon?: React.ReactNode
+  /**
+   * show header border or not
+   */
+  showHeaderBorder?: boolean
 }
 
 export function Drawer({
@@ -81,9 +85,10 @@ export function Drawer({
   showFooter = true,
   buttons,
   footerAddon,
-  headerClassName, 
+  headerClassName,
   contentClassName,
-  footerClassName
+  footerClassName,
+  showHeaderBorder = true,
 }: DrawerProps) {
   const containerRef = React.useRef<HTMLDivElement>(null)
   const descriptionRef = React.useRef<HTMLDivElement>(null)
@@ -121,7 +126,13 @@ export function Drawer({
         <div className={classes.content}>
           {/* header */}
           {showHeader && (
-            <div className={clsx(classes.headerContainer, headerClassName)}>
+            <div
+              className={clsx(
+                classes.headerContainer,
+                {[classes.showBorder]: showHeaderBorder},
+                headerClassName,
+              )}
+            >
               {customHeader ? (
                 customHeader
               ) : (
@@ -133,7 +144,10 @@ export function Drawer({
             </div>
           )}
           {/* description */}
-          <div className={clsx(classes.descriptionContainer, contentClassName)} ref={descriptionRef}>
+          <div
+            className={clsx(classes.descriptionContainer, contentClassName)}
+            ref={descriptionRef}
+          >
             {/* children are shown here */}
             {children}
           </div>
