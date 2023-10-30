@@ -1,5 +1,5 @@
 import type {Meta, StoryObj} from '@storybook/react'
-import {Button, ButtonVariant} from './Button'
+import {Button, BUTTON_VARIANT} from './Button'
 
 const meta: Meta<typeof Button> = {
   component: Button,
@@ -11,20 +11,35 @@ type Story = StoryObj<typeof Button>
 
 export const Primary: Story = {
   args: {
-    children: 'Primary',
+    children: 'Click me',
+    variant: BUTTON_VARIANT.PRIMARY,
   },
 }
 
 export const Secondary: Story = {
   args: {
-    children: 'Secondary',
-    variant: ButtonVariant.SECONDARY,
+    children: 'Click me',
+    variant: BUTTON_VARIANT.SECONDARY,
   },
 }
 
 export const Ghost: Story = {
   args: {
-    children: 'Ghost',
-    variant: ButtonVariant.GHOST,
+    children: 'Click me',
+    variant: BUTTON_VARIANT.GHOST,
+  },
+}
+
+export const Link: Story = {
+  args: {
+    children: 'Click me',
+    variant: BUTTON_VARIANT.LINK,
+  },
+}
+
+export const Minimal: Story = {
+  args: {
+    children: 'Click me',
+    variant: BUTTON_VARIANT.MINIMAL,
   },
 }

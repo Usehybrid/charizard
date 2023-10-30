@@ -16,7 +16,7 @@ import chevronUp from '../assets/chevron-up.svg'
 import classes from './styles.module.css'
 import {useReactTable, getCoreRowModel, flexRender} from '@tanstack/react-table'
 import {Search} from '../search'
-import {Button, ButtonVariant} from '../button'
+import {Button, BUTTON_VARIANT} from '../button'
 import {Selectors} from '../selectors'
 import {SVG} from '../svg'
 import {TableCheckbox} from './table-columns'
@@ -311,7 +311,7 @@ export function Table({
             {actions?.map((action, idx) => (
               <Button
                 key={idx}
-                variant={ButtonVariant.SECONDARY}
+                variant={BUTTON_VARIANT.SECONDARY}
                 size="sm"
                 customStyles={{color: 'var(--gray-700)'}}
                 onClick={() => {
