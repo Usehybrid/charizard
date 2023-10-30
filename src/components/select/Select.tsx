@@ -88,6 +88,10 @@ interface SelectProps {
    * extra props to pass for select component
    */
   extraprops?: any
+  /**
+   * props to add custom dropdown
+   */
+  customDropdownIndicator?: React.ReactNode
 }
 
 export function Select({
@@ -108,6 +112,7 @@ export function Select({
   isSearchable = true,
   isMulti = false,
   isClearable = false,
+  customDropdownIndicator,
 }: SelectProps) {
   return (
     <div
@@ -131,7 +136,7 @@ export function Select({
           Option,
           MultiValueLabel,
           MultiValueRemove,
-          DropdownIndicator,
+          DropdownIndicator: customDropdownIndicator ? customDropdownIndicator : DropdownIndicator,
           ClearIndicator,
           SingleValue,
         }}
