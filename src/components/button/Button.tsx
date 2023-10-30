@@ -1,7 +1,3 @@
-/**
- * @author Soham Sarkar <soham@hybr1d.io>
- */
-
 import * as React from 'react'
 import * as menu from '@zag-js/menu'
 import clsx from 'clsx'
@@ -11,7 +7,7 @@ import classes from './styles.module.css'
 import {useMachine, normalizeProps} from '@zag-js/react'
 import {SVG} from '../svg'
 
-export enum ButtonVariant {
+export enum BUTTON_VARIANT {
   PRIMARY = 'primary',
   SECONDARY = 'secondary',
   GHOST = 'ghost',
@@ -22,7 +18,7 @@ export enum ButtonVariant {
 
 export type ButtonProps = {
   children: React.ReactNode
-  variant?: ButtonVariant
+  variant?: BUTTON_VARIANT
   disabled?: boolean
   onClick?: React.MouseEventHandler<HTMLButtonElement>
   type?: 'button' | 'submit' | 'reset'
@@ -36,7 +32,7 @@ export type ButtonProps = {
 
 export function Button({
   children,
-  variant = ButtonVariant.PRIMARY,
+  variant = BUTTON_VARIANT.PRIMARY,
   disabled = false,
   onClick,
   type = 'button',
@@ -47,12 +43,12 @@ export function Button({
     <button
       className={clsx(
         classes.btn,
-        variant === ButtonVariant.PRIMARY && classes.btnPrimary,
-        variant === ButtonVariant.SECONDARY && classes.btnSecondary,
-        variant === ButtonVariant.GHOST && classes.btnGhost,
-        variant === ButtonVariant.DANGER && classes.btnDanger,
-        variant === ButtonVariant.LINK && classes.btnLink,
-        variant === ButtonVariant.MINIMAL && classes.btnMinimal,
+        variant === BUTTON_VARIANT.PRIMARY && classes.btnPrimary,
+        variant === BUTTON_VARIANT.SECONDARY && classes.btnSecondary,
+        variant === BUTTON_VARIANT.GHOST && classes.btnGhost,
+        variant === BUTTON_VARIANT.DANGER && classes.btnDanger,
+        variant === BUTTON_VARIANT.LINK && classes.btnLink,
+        variant === BUTTON_VARIANT.MINIMAL && classes.btnMinimal,
         size === 'sm' && classes.btnSm,
         size === 'adapt' && classes.btnAdapt,
         size === 'xs' && classes.btnXs,
@@ -68,32 +64,47 @@ export function Button({
   )
 }
 
+export type MenuItem = {label: string; iconSrc?: string; onClick: any; filterFn?: any}
+
 export interface MenuButtonProps {
-  id?: string
+  // required for correct placement of positioner
+  id: string
   children: React.ReactNode
-  variant?: 'primary' | 'secondary' | 'ghost'
+  variant?: BUTTON_VARIANT
   disabled?: boolean
-  menuItems: {label: string; iconSrc?: string; onClick: any; filterFn?: any}[]
+  menuItems: MenuItem[]
   onClick?: React.MouseEventHandler<HTMLButtonElement>
   isCustomTrigger?: boolean
-  // exists on why it's a custom trigger, used to pass the whole row
+  // exists when it's a custom trigger, used to pass the whole row
   customData?: any
   size?: 'sm' | 'md'
+  // props for actions dropdown
+  actionsDropdownOptions?: {
+    setIsActive: React.Dispatch<React.SetStateAction<boolean>>
+  }
 }
 
 function MenuButton({
-  id = 'hui-menu-button',
+  id,
   children,
-  variant = 'primary',
+  variant = BUTTON_VARIANT.PRIMARY,
   disabled = false,
   menuItems,
   onClick,
   isCustomTrigger = false,
   customData,
   size = 'md',
+  actionsDropdownOptions,
 }: MenuButtonProps) {
   const [state, send] = useMachine(menu.machine({id, positioning: {placement: 'bottom-end'}}))
   const api = menu.connect(state, send, normalizeProps)
+
+  // to sync with actions dropdown
+  React.useEffect(() => {
+    if (!isCustomTrigger || !actionsDropdownOptions?.setIsActive) return
+
+    actionsDropdownOptions.setIsActive(api.isOpen)
+  }, [api.isOpen])
 
   return (
     <>
@@ -182,23 +193,34 @@ function MenuButton({
 }
 export interface MenuActionsDropdownProps {
   id: string
-  menuItems: {label: string; iconSrc?: string; onClick: any; hide?: any}[]
+  menuItems: MenuItem[]
   data?: any
-  size?: 'md' | 'lg'
+  variant?: 'regular' | 'small'
 }
 
-function MenuActionsDropdown({id, menuItems, data, size = 'md'}: MenuActionsDropdownProps) {
+function MenuActionsDropdown({id, menuItems, data, variant = 'regular'}: MenuActionsDropdownProps) {
+  const [isActive, setIsActive] = React.useState(false)
+
   return (
     <MenuButton
       id={id}
       menuItems={menuItems}
-      onClick={() => {}}
       isCustomTrigger={true}
       customData={data}
-      size={size === 'md' ? 'sm' : 'md'}
+      actionsDropdownOptions={{setIsActive}}
     >
-      <div className={clsx(classes.actionsBox, size === 'lg' && classes.actionsBoxLg)}>
-        <img src={threeDots} className={classes.actionsDropdown} />
+      <div
+        className={clsx(
+          variant === 'regular' && classes.actionsBoxRegular,
+          variant === 'small' && classes.actionsBoxSmall,
+          isActive && classes.actionsBoxActive,
+        )}
+      >
+        <SVG
+          path={threeDots}
+          svgClassName={clsx(classes.actionsDropdown, isActive && classes.actionsDropdownActive)}
+          spanClassName={classes.actionsDropdownSpan}
+        />
       </div>
     </MenuButton>
   )
