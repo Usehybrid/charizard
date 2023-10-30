@@ -34,7 +34,7 @@ export function Switch({
   return (
     <div className={classes.switchComponent}>
       <div className={classes.component}>
-        <label htmlFor="toggle" className={classes.switchLabel}>
+        <label htmlFor={`${name}-switch`} className={classes.switchLabel}>
           <span>{title}</span>
         </label>
         <label
@@ -47,7 +47,7 @@ export function Switch({
             onChange={e => handleToggleChange(e.target.checked)}
             name={name}
             disabled={disabled}
-            id="toggle"
+            id={`${name}-switch`}
           />{' '}
           <span className={classes.slider} />
         </label>
