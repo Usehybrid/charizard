@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import randomIcon from './components/assets/check.svg'
 import randomIcon2 from './components/assets/search-2.svg'
 import {createColumnHelper} from '@tanstack/react-table'
-import {Button, Table} from './components'
+import {Button, LOADER_VARIANT, Loader, Table} from './components'
 
 const styles = {
   width: '90%',
@@ -353,16 +353,7 @@ function App() {
         }}
       /> */}
 
-      <Button.ActionsDropdown
-        id="tester"
-        menuItems={[
-          {label: 'Item 1', onClick: () => {}, iconSrc: randomIcon},
-          {label: 'Item 2', onClick: () => {}, iconSrc: randomIcon},
-          {label: 'Item 3', onClick: () => {}, iconSrc: randomIcon},
-          {label: 'Item 4', onClick: () => {}, iconSrc: randomIcon},
-        ]}
-        variant="regular"
-      />
+      <Loader variant={LOADER_VARIANT.DUAL_RING} />
     </div>
   )
 }
