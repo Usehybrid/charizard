@@ -4,10 +4,10 @@
 
 import clsx from 'clsx'
 import classes from './styles.module.css'
-import {Button, ButtonVariant} from '../button'
+import {Button, BUTTON_VARIANT} from '../button'
 
 export type FooterButtons = Array<{
-  variant: ButtonVariant
+  variant: BUTTON_VARIANT
   onClick: () => void
   btnText: string
   btnSize?: 'xs' | 'sm' | 'md' | 'adapt'

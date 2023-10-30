@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import randomIcon from './components/assets/check.svg'
 import randomIcon2 from './components/assets/search-2.svg'
 import {createColumnHelper} from '@tanstack/react-table'
-import {Table} from './components'
+import {Button, Table} from './components'
 
 const styles = {
   width: '90%',
@@ -288,7 +288,7 @@ function App() {
 
   return (
     <div style={styles}>
-      <Table
+      {/* <Table
         data={data}
         loaderConfig={{isFetching: false, isError: false, text: 'Getting employees...'}}
         columns={columns}
@@ -351,6 +351,17 @@ function App() {
           columns: 6,
           emptySearchTitle: 'No inventories found',
         }}
+      /> */}
+
+      <Button.ActionsDropdown
+        id="tester"
+        menuItems={[
+          {label: 'Item 1', onClick: () => {}, iconSrc: randomIcon},
+          {label: 'Item 2', onClick: () => {}, iconSrc: randomIcon},
+          {label: 'Item 3', onClick: () => {}, iconSrc: randomIcon},
+          {label: 'Item 4', onClick: () => {}, iconSrc: randomIcon},
+        ]}
+        variant="regular"
       />
     </div>
   )

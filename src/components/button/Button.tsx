@@ -64,7 +64,7 @@ export function Button({
   )
 }
 
-type MenuItem = {label: string; iconSrc?: string; onClick: any; filterFn?: any}
+export type MenuItem = {label: string; iconSrc?: string; onClick: any; filterFn?: any}
 
 export interface MenuButtonProps {
   // required for correct placement of positioner
@@ -78,6 +78,10 @@ export interface MenuButtonProps {
   // exists when it's a custom trigger, used to pass the whole row
   customData?: any
   size?: 'sm' | 'md'
+  // props for actions dropdown
+  actionsDropdownOptions?: {
+    setIsActive: React.Dispatch<React.SetStateAction<boolean>>
+  }
 }
 
 function MenuButton({
@@ -90,9 +94,17 @@ function MenuButton({
   isCustomTrigger = false,
   customData,
   size = 'md',
+  actionsDropdownOptions,
 }: MenuButtonProps) {
   const [state, send] = useMachine(menu.machine({id, positioning: {placement: 'bottom-end'}}))
   const api = menu.connect(state, send, normalizeProps)
+
+  // to sync with actions dropdown
+  React.useEffect(() => {
+    if (!isCustomTrigger || !actionsDropdownOptions?.setIsActive) return
+
+    actionsDropdownOptions.setIsActive(api.isOpen)
+  }, [api.isOpen])
 
   return (
     <>
@@ -183,20 +195,32 @@ export interface MenuActionsDropdownProps {
   id: string
   menuItems: MenuItem[]
   data?: any
-  size?: 'md' | 'lg'
+  variant?: 'regular' | 'small'
 }
 
-function MenuActionsDropdown({id, menuItems, data, size = 'md'}: MenuActionsDropdownProps) {
+function MenuActionsDropdown({id, menuItems, data, variant = 'regular'}: MenuActionsDropdownProps) {
+  const [isActive, setIsActive] = React.useState(false)
+
   return (
     <MenuButton
       id={id}
       menuItems={menuItems}
       isCustomTrigger={true}
       customData={data}
-      size={size === 'md' ? 'sm' : 'md'}
+      actionsDropdownOptions={{setIsActive}}
     >
-      <div className={clsx(classes.actionsBox, size === 'lg' && classes.actionsBoxLg)}>
-        <img src={threeDots} className={classes.actionsDropdown} />
+      <div
+        className={clsx(
+          variant === 'regular' && classes.actionsBoxRegular,
+          variant === 'small' && classes.actionsBoxSmall,
+          isActive && classes.actionsBoxActive,
+        )}
+      >
+        <SVG
+          path={threeDots}
+          svgClassName={clsx(classes.actionsDropdown, isActive && classes.actionsDropdownActive)}
+          spanClassName={classes.actionsDropdownSpan}
+        />
       </div>
     </MenuButton>
   )

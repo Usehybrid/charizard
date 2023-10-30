@@ -6,7 +6,7 @@ import * as React from 'react'
 import clsx from 'clsx'
 import classes from './styles.module.css'
 import checkIcon from '../assets/check.svg'
-import {Button, ButtonVariant} from '../button'
+import {Button, BUTTON_VARIANT} from '../button'
 import {SVG} from '../svg'
 
 interface ProgressProps {
@@ -169,11 +169,11 @@ export function Progress({
         </div>
         {showHeaderBtns && (
           <div className={classes.btnsFlex}>
-            <Button variant={ButtonVariant.SECONDARY} onClick={onCancelClick}>
+            <Button variant={BUTTON_VARIANT.SECONDARY} onClick={onCancelClick}>
               Cancel
             </Button>
             {showSkipBtn && currentStep === stepToShowSkipBtn && (
-              <Button onClick={handleOnSkipClick} variant={ButtonVariant.GHOST}>
+              <Button onClick={handleOnSkipClick} variant={BUTTON_VARIANT.GHOST}>
                 {skipBtnText}
               </Button>
             )}
@@ -186,17 +186,17 @@ export function Progress({
       <div className={classes.body}>{steps[currentStep].component}</div>
       {showFooter && (
         <div className={classes.footer}>
-          <Button variant={ButtonVariant.SECONDARY} onClick={onCancelClick}>
+          <Button variant={BUTTON_VARIANT.SECONDARY} onClick={onCancelClick}>
             Cancel
           </Button>
           <div className={classes.btnsFlex}>
             {currentStep > 0 && (
-              <Button variant={ButtonVariant.SECONDARY} onClick={onBackClick}>
+              <Button variant={BUTTON_VARIANT.SECONDARY} onClick={onBackClick}>
                 Back
               </Button>
             )}
             {showSkipBtn && currentStep === stepToShowSkipBtn && (
-              <Button onClick={handleOnSkipClick} variant={ButtonVariant.GHOST}>
+              <Button onClick={handleOnSkipClick} variant={BUTTON_VARIANT.GHOST}>
                 {skipBtnText}
               </Button>
             )}
