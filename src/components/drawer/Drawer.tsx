@@ -36,7 +36,7 @@ type DrawerProps = {
   /**
    * Drawer title
    */
-  title: string
+  title?: string
   /**
    * Custom drawer header
    */
