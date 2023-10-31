@@ -66,6 +66,10 @@ type DrawerProps = {
    */
   buttons?: FooterButtons
   footerAddon?: React.ReactNode
+  /**
+   * Drawer position
+   */
+  drawerPosition?: 'left' | 'right'
 }
 
 export function Drawer({
@@ -81,18 +85,23 @@ export function Drawer({
   showFooter = true,
   buttons,
   footerAddon,
-  headerClassName, 
+  headerClassName,
   contentClassName,
-  footerClassName
+  footerClassName,
+  drawerPosition = 'right',
 }: DrawerProps) {
   const containerRef = React.useRef<HTMLDivElement>(null)
   const descriptionRef = React.useRef<HTMLDivElement>(null)
   const footerRef = React.useRef<HTMLDivElement>(null)
+  const translateXOffset = drawerPosition === 'left' ? '-100%' : '100%'
+  const isFullBodyHeight = !showHeader && !showFooter
 
   React.useEffect(() => {
     const timeout = setTimeout(() => {
       if (containerRef.current && descriptionRef && footerRef) {
-        containerRef.current.style.transform = isOpen ? 'translateX(0)' : 'translateX(100%)'
+        containerRef.current.style.transform = isOpen
+          ? 'translateX(0)'
+          : `translateX(${translateXOffset})`
         ;(
           descriptionRef.current as HTMLDivElement
         ).style.maxHeight = `calc(100vh - (1.75rem * 2) - ${footerRef.current?.clientHeight}px)`
@@ -116,7 +125,10 @@ export function Drawer({
       </div>
 
       {/* container */}
-      <div className={clsx(classes.container, classes[size])} ref={containerRef}>
+      <div
+        className={clsx(classes.container, classes[size], classes[`${drawerPosition}Align`])}
+        ref={containerRef}
+      >
         {/* content */}
         <div className={classes.content}>
           {/* header */}
@@ -133,7 +145,14 @@ export function Drawer({
             </div>
           )}
           {/* description */}
-          <div className={clsx(classes.descriptionContainer, contentClassName)} ref={descriptionRef}>
+          <div
+            className={clsx(
+              classes.descriptionContainer,
+              {[classes.fullHeight]: isFullBodyHeight},
+              contentClassName,
+            )}
+            ref={descriptionRef}
+          >
             {/* children are shown here */}
             {children}
           </div>
