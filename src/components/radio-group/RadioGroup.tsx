@@ -1,7 +1,3 @@
-/**
- * @author Piyush Gupta <piyush@hybr1d.io>
- */
-
 import * as React from 'react'
 import * as radio from '@zag-js/radio-group'
 import clsx from 'clsx'
@@ -9,7 +5,8 @@ import classes from './styles.module.css'
 import {useMachine, normalizeProps} from '@zag-js/react'
 import {InputContainer, InputLabel} from '../input'
 
-interface RadioGroupProps {
+type RadioGroupProps = {
+  id: string
   /**
    * heading for radio group
    */
@@ -42,6 +39,7 @@ interface RadioGroupProps {
 }
 
 export function RadioGroup({
+  id,
   items,
   radioHeading,
   defaultValue,
@@ -49,13 +47,11 @@ export function RadioGroup({
   required = false,
   errorMsg,
 }: RadioGroupProps) {
-  const controlId = React.useId()
-
   const [state, send] = useMachine(
     radio.machine({
-      id: controlId,
+      id,
       value: defaultValue,
-      onChange: ({value}) => {
+      onValueChange: ({value}) => {
         onChange(value)
       },
     }),
@@ -77,16 +73,16 @@ export function RadioGroup({
           {items.map(opt => (
             <label
               key={opt.value}
-              {...api.getRadioProps({value: opt.value})}
+              {...api.getItemProps({value: opt.value})}
               className={classes.radio}
             >
-              <span {...api.getRadioLabelProps({value: opt.value})} className={classes.radioLabel}>
+              <span {...api.getItemTextProps({value: opt.value})} className={classes.radioLabel}>
                 <span className={classes.heading}>{opt.label.heading}</span>
                 <span className={classes.subHeading}>{opt.label.subHeading}</span>
               </span>
-              <input {...api.getRadioInputProps({value: opt.value})} />
+              <input {...api.getItemHiddenInputProps({value: opt.value})} />
               <div
-                {...api.getRadioControlProps({value: opt.value})}
+                {...api.getItemControlProps({value: opt.value})}
                 className={clsx(classes.radioControl, {
                   [classes.radioControlActive]: api.value === opt.value,
                 })}

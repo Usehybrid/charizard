@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import randomIcon from './components/assets/check.svg'
 import randomIcon2 from './components/assets/search-2.svg'
 import {createColumnHelper} from '@tanstack/react-table'
-import {Button, LOADER_VARIANT, Loader, Table} from './components'
+import {Button, LOADER_VARIANT, Loader, SegmentedControl, Table} from './components'
 
 const styles = {
   width: '90%',
@@ -353,7 +353,12 @@ function App() {
         }}
       /> */}
 
-      <Loader variant={LOADER_VARIANT.DUAL_RING} />
+      <SegmentedControl
+        items={[
+          {label: '1', value: '1', component: <div>Test 1</div>},
+          {label: '2', value: '2', component: <div>Test 2</div>},
+        ]}
+      />
     </div>
   )
 }

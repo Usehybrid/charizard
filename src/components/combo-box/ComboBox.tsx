@@ -1,13 +1,9 @@
-/**
- * @author Bimlendu Kumar <bimlendu@hybr1d.io>
- */
-
 import * as React from 'react'
 import * as combobox from '@zag-js/combobox'
-import {useId} from 'react'
-import {useMachine, normalizeProps} from '@zag-js/react'
 import classes from './style.module.css'
 import clsx from 'clsx'
+import {useMachine, normalizeProps} from '@zag-js/react'
+import {useId} from 'react'
 
 export type option = {
   disabled?: boolean
@@ -72,7 +68,7 @@ export function Combobox({
           onChange(value)
         }
       },
-      onSelect(details) {
+      onSelect({details}) {
         if (details.label && details.value) {
           onSelect({value: details.value, label: details.label})
         }

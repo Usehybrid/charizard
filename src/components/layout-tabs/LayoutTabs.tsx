@@ -1,14 +1,11 @@
-/**
- * @author Pratik Awaik <pratik@hybr1d.io>
- */
-
 import * as React from 'react'
 import * as zagTabs from '@zag-js/tabs'
+import clsx from 'clsx'
 import classes from './styles.module.css'
 import {normalizeProps, useMachine} from '@zag-js/react'
-import clsx from 'clsx'
 
 type LayoutTabsProps = {
+  id: string
   tabClassName?: string
   /**
    * tabs to render
@@ -22,14 +19,14 @@ type LayoutTabsProps = {
 
 const SEARCH_PARAM_KEY = 'active-tab'
 
-export function LayoutTabs({tabs, defaultValue, tabClassName}: LayoutTabsProps) {
+export function LayoutTabs({id, tabs, defaultValue, tabClassName}: LayoutTabsProps) {
   const url = React.useMemo(() => new URL(window.location.href), [])
 
   const [state, send] = useMachine(
     zagTabs.machine({
-      id: 'inventory-detail-tabs',
+      id,
       value: url.searchParams.get(SEARCH_PARAM_KEY) || defaultValue,
-      onChange(details) {
+      onValueChange(details) {
         const value = details.value as string
         if (!url.searchParams.has(SEARCH_PARAM_KEY)) {
           url.searchParams.append(SEARCH_PARAM_KEY, value)
