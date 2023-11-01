@@ -43,7 +43,7 @@ export function Modal({
     dialog.machine({
       id: React.useId(),
       open: isOpen,
-      onClose,
+      // onClose,
       ...machineProps,
     }),
   )
