@@ -11,7 +11,7 @@ export type option = {
   value: string
   listComponent?: React.ReactNode
 }
-export interface ComboboxProps {
+export type ComboboxProps = {
   value: string
   label?: string
   isLoading?: boolean
@@ -45,35 +45,78 @@ export function Combobox({
   const [options, setOptions] = React.useState<option[] | []>(defaultOptions)
   const [searchText, setSearchText] = React.useState('')
 
+  // const [state, send] = useMachine(
+  //   combobox.machine({
+  //     id: useId(),
+  //     disabled,
+  //     inputValue: value,
+  //     placeholder,
+  //     onOpen() {
+  //       setOptions(defaultOptions)
+  //     },
+  //     async onInputChange({value}) {
+  //       setSearchText(value)
+  //       if (!isAPIFilter) {
+  //         const filtered = options.filter(item =>
+  //           item.label.toLowerCase().includes(value.toLowerCase()),
+  //         )
+  //         setOptions(filtered)
+  //         return
+  //       }
+  //       if (value && onChange) {
+  //         setOptions([])
+  //         onChange(value)
+  //       }
+  //     },
+  //     onSelect({details}) {
+  //       if (details.label && details.value) {
+  //         onSelect({value: details.value, label: details.label})
+  //       }
+  //     },
+  //   }),
+  // )
+
+  const collection = combobox.collection({
+    items: defaultOptions,
+    itemToValue: item => item.value,
+    itemToString: item => item.label,
+  })
+
   const [state, send] = useMachine(
     combobox.machine({
       id: useId(),
-      disabled,
-      inputValue: value,
-      placeholder,
-      onOpen() {
+      collection,
+      onOpenChange(details) {
+        if (!details.open) return
         setOptions(defaultOptions)
       },
-      async onInputChange({value}) {
-        setSearchText(value)
+      async onInputValueChange({value}) {
+        setSearchText(value[0])
         if (!isAPIFilter) {
           const filtered = options.filter(item =>
-            item.label.toLowerCase().includes(value.toLowerCase()),
+            item.label.toLowerCase().includes(value[0].toLowerCase()),
           )
           setOptions(filtered)
           return
         }
-        if (value && onChange) {
+        if (value[0] && onChange) {
           setOptions([])
-          onChange(value)
+          onChange(value[0])
         }
       },
-      onSelect({details}) {
-        if (details.label && details.value) {
-          onSelect({value: details.value, label: details.label})
-        }
+      disabled,
+      inputValue: value,
+      // when multiple is allowed the onValueChange function will change
+      multiple: false,
+      onValueChange(details) {
+        // if (details.label && details.value) {
+        //   onSelect({value: details.value, label: details.label})
+        // }
       },
     }),
+    {
+      context: {collection},
+    },
   )
 
   const api = combobox.connect(state, send, normalizeProps)
@@ -111,11 +154,8 @@ export function Combobox({
               <li
                 className={classes.option}
                 key={`${item.value}:${index}`}
-                {...api.getOptionProps({
-                  label: item.label,
-                  value: item.value,
-                  index,
-                  disabled: item.disabled,
+                {...api.getItemProps({
+                  item,
                 })}
               >
                 {item.listComponent ? item.listComponent : item.label}
@@ -132,10 +172,8 @@ export function Combobox({
               {isAPIFilter && !isLoading && !options.length && (
                 <li
                   className={classes.option}
-                  {...api.getOptionProps({
-                    label: '',
-                    value: '',
-                    disabled: true,
+                  {...api.getItemProps({
+                    item: {label: '', value: ''},
                   })}
                 >
                   No result found
@@ -144,10 +182,8 @@ export function Combobox({
               {!isAPIFilter && !options.length && (
                 <li
                   className={classes.option}
-                  {...api.getOptionProps({
-                    label: 'No result found',
-                    value: 'No result found',
-                    disabled: true,
+                  {...api.getItemProps({
+                    item: {label: 'No result found', value: 'No result found', disabled: true},
                   })}
                 >
                   No result found

@@ -12,7 +12,7 @@ export default function Example({isOpen, onClose}: any) {
     {variant: BUTTON_VARIANT.PRIMARY, onClick: () => console.log('save'), btnText: 'Save'},
   ]
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size="sm">
+    <Modal id="test id " isOpen={isOpen} onClose={onClose} size="sm">
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>Header</ModalHeader>
