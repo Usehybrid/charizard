@@ -39,11 +39,18 @@ export function Modal({
   showOverlay = true,
   machineProps = {},
 }: ModalProps) {
+  const handleOpenChange = React.useCallback(
+    (open: boolean) => {
+      if (!open) onClose()
+    },
+    [onClose],
+  )
+
   const [state, send] = useMachine(
     dialog.machine({
       id: React.useId(),
       open: isOpen,
-      // onClose,
+      onOpenChange: details => handleOpenChange(details.open),
       ...machineProps,
     }),
   )
