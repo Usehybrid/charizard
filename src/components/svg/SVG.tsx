@@ -1,6 +1,6 @@
 import {default as ReactInlineSVG} from 'react-inlinesvg'
 
-type SVGProps = {
+export type SVGProps = {
   path: string
   width?: number
   height?: number
