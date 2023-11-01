@@ -12,7 +12,6 @@ type Story = StoryObj<typeof Button.MenuButton>
 
 export const MenuButton: Story = {
   args: {
-    id: 'hui-menu-button',
     children: 'Add Something',
     menuItems: [
       {

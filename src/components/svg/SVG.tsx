@@ -1,10 +1,6 @@
-/**
- * @author Pratik Awaik <pratik@hybr1d.io>
- */
-
 import {default as ReactInlineSVG} from 'react-inlinesvg'
 
-interface SVGProps {
+type SVGProps = {
   path: string
   width?: number
   height?: number

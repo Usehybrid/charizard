@@ -1,11 +1,7 @@
-/**
- * @author Piyush Gupta @gupta-piyush19 <piyush@hybr1d.io>
- */
-
 import clsx from 'clsx'
 import classes from './styles.module.css'
 
-interface SwitchProps {
+type SwitchProps = {
   isToggled: boolean | any
   handleToggleChange: (val: boolean) => void
   name: string

@@ -20,11 +20,9 @@ type SegmentedControlProps = {
 }
 
 export function SegmentedControl({items, defaultValue, handleOnChange}: SegmentedControlProps) {
-  const controlId = React.useId()
-
   const [state, send] = useMachine(
     radio.machine({
-      id: controlId,
+      id: React.useId(),
       value: defaultValue ?? items?.[0]?.value,
       onValueChange(details) {
         handleOnChange && handleOnChange(details.value)

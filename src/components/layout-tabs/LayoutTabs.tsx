@@ -5,7 +5,6 @@ import classes from './styles.module.css'
 import {normalizeProps, useMachine} from '@zag-js/react'
 
 type LayoutTabsProps = {
-  id: string
   tabClassName?: string
   /**
    * tabs to render
@@ -19,12 +18,12 @@ type LayoutTabsProps = {
 
 const SEARCH_PARAM_KEY = 'active-tab'
 
-export function LayoutTabs({id, tabs, defaultValue, tabClassName}: LayoutTabsProps) {
+export function LayoutTabs({tabs, defaultValue, tabClassName}: LayoutTabsProps) {
   const url = React.useMemo(() => new URL(window.location.href), [])
 
   const [state, send] = useMachine(
     zagTabs.machine({
-      id,
+      id: React.useId(),
       value: url.searchParams.get(SEARCH_PARAM_KEY) || defaultValue,
       onValueChange(details) {
         const value = details.value as string

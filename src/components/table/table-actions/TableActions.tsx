@@ -5,20 +5,18 @@ import {TableProps} from '../Table'
 type TableActionsProps = {
   actionsConfig: TableProps['actionsConfig']
   data: any
-  id: string
 }
 
-export default function TableActions({actionsConfig, data, id}: TableActionsProps) {
+export default function TableActions({actionsConfig, data}: TableActionsProps) {
   if (!actionsConfig) return null
   const {menuItems = [], isDropdownActions, key, customComp} = actionsConfig
   if (!isDropdownActions) return null
 
-  if (!key && !customComp)
-    return <Button.ActionsDropdown menuItems={menuItems} data={data} id={id} />
+  if (!key && !customComp) return <Button.ActionsDropdown menuItems={menuItems} data={data} />
 
   return (
     <div className={classes.box}>
-      <Button.ActionsDropdown menuItems={menuItems} data={data} id={id} />
+      <Button.ActionsDropdown menuItems={menuItems} data={data} />
       {customComp ? (
         customComp
       ) : key && data[key] ? (

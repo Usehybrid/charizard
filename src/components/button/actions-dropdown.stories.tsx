@@ -12,7 +12,6 @@ type Story = StoryObj<typeof Button.ActionsDropdown>
 
 export const ActionsDropdown: Story = {
   args: {
-    id: 'hui-menu-actions-button',
     menuItems: [
       {
         label: 'Item 1',

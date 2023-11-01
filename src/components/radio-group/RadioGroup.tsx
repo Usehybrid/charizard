@@ -6,7 +6,6 @@ import {useMachine, normalizeProps} from '@zag-js/react'
 import {InputContainer, InputLabel} from '../input'
 
 type RadioGroupProps = {
-  id: string
   /**
    * heading for radio group
    */
@@ -39,7 +38,6 @@ type RadioGroupProps = {
 }
 
 export function RadioGroup({
-  id,
   items,
   radioHeading,
   defaultValue,
@@ -49,7 +47,7 @@ export function RadioGroup({
 }: RadioGroupProps) {
   const [state, send] = useMachine(
     radio.machine({
-      id,
+      id: React.useId(),
       value: defaultValue,
       onValueChange: ({value}) => {
         onChange(value)

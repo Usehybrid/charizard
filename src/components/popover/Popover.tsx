@@ -1,13 +1,9 @@
-/**
- * @author Pratik Awaik <pratik@hybr1d.io>
- */
-
 import * as React from 'react'
 import * as popover from '@zag-js/popover'
 import type {Placement} from '@zag-js/popper'
 import {normalizeProps, useMachine} from '@zag-js/react'
 
-interface PopoverProps {
+type PopoverProps = {
   /**
    * Content of the trigger
    */

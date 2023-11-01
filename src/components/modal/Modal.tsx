@@ -4,7 +4,6 @@ import {Portal, normalizeProps, useMachine} from '@zag-js/react'
 import {ModalOverlay} from './ModalOverlay'
 
 type ModalProps = {
-  id: string
   /**
    * Modal is open or not
    */
@@ -33,7 +32,6 @@ type ModalProps = {
 }
 
 export function Modal({
-  id,
   isOpen,
   onClose,
   children,
@@ -43,7 +41,7 @@ export function Modal({
 }: ModalProps) {
   const [state, send] = useMachine(
     dialog.machine({
-      id,
+      id: React.useId(),
       open: isOpen,
       onClose,
       ...machineProps,
