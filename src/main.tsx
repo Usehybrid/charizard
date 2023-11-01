@@ -3,7 +3,19 @@ import ReactDOM from 'react-dom/client'
 import randomIcon from './components/assets/check.svg'
 import randomIcon2 from './components/assets/search-2.svg'
 import {createColumnHelper} from '@tanstack/react-table'
-import {Button, LOADER_VARIANT, Loader, SegmentedControl, Table} from './components'
+import {
+  BUTTON_VARIANT,
+  Button,
+  LOADER_VARIANT,
+  Loader,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  SegmentedControl,
+  Table,
+} from './components'
 
 const styles = {
   width: '90%',
@@ -285,6 +297,7 @@ const columns = [
 
 function App() {
   const [search, setSearch] = React.useState('')
+  const [open, setOpen] = React.useState(false)
 
   return (
     <div style={styles}>
@@ -353,12 +366,27 @@ function App() {
         }}
       /> */}
 
-      <SegmentedControl
+      {/* Modal Template */}
+      {/* {open && (
+        <Modal isOpen={open} onClose={() => setOpen(false)} id="Test-modal">
+          <ModalContent>
+            <ModalHeader>testing header</ModalHeader>
+            <ModalBody>body</ModalBody>
+            <ModalFooter buttons={[]}>Footer</ModalFooter>
+          </ModalContent>
+        </Modal>
+      )}
+
+      <Button variant={BUTTON_VARIANT.PRIMARY} onClick={() => setOpen(true)}>
+        Open
+      </Button> */}
+
+      {/* <SegmentedControl
         items={[
           {label: '1', value: '1', component: <div>Test 1</div>},
           {label: '2', value: '2', component: <div>Test 2</div>},
         ]}
-      />
+      /> */}
     </div>
   )
 }
