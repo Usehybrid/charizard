@@ -366,27 +366,8 @@ function App() {
         }}
       /> */}
 
-      {/* Modal Template */}
-      {/* {open && (
-        <Modal isOpen={open} onClose={() => setOpen(false)} id="Test-modal">
-          <ModalContent>
-            <ModalHeader>testing header</ModalHeader>
-            <ModalBody>body</ModalBody>
-            <ModalFooter buttons={[]}>Footer</ModalFooter>
-          </ModalContent>
-        </Modal>
-      )}
-
-      <Button variant={BUTTON_VARIANT.PRIMARY} onClick={() => setOpen(true)}>
-        Open
-      </Button> */}
-
-      {/* <SegmentedControl
-        items={[
-          {label: '1', value: '1', component: <div>Test 1</div>},
-          {label: '2', value: '2', component: <div>Test 2</div>},
-        ]}
-      /> */}
+      <Loader />
+      <Loader variant={LOADER_VARIANT.ROLLER} />
     </div>
   )
 }
