@@ -1,10 +1,6 @@
 {
   "name": "hybr1d-ui",
-<<<<<<< HEAD
-  "version": "0.3.2",
-=======
   "version": "0.3.6",
->>>>>>> 9528db7527488a51eddadea665a6a712cfa4ef47
   "type": "module",
   "files": [
     "dist"
