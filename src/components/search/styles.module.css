@@ -7,7 +7,7 @@
   border: 1px solid var(--slate-300);
   background: var(--white);
   display: flex;
-  max-width: fit-content;
+  /* max-width: fit-content; */
   width: 100%;
   padding: 6px 12px;
   align-items: center;

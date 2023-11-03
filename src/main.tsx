@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom/client'
 import randomIcon from './components/assets/check.svg'
 import randomIcon2 from './components/assets/search-2.svg'
 import {createColumnHelper} from '@tanstack/react-table'
-import {Drawer, LOADER_VARIANT, Loader, Table} from './components'
+import {CreatableSelect, Drawer, LOADER_VARIANT, Loader, Table} from './components'
+import {OptionType} from './components/select/CreatableSelect'
 
 const styles = {
   width: '90%',
@@ -288,6 +289,13 @@ function App() {
 
   const [isOpen, setOpen] = useState(false)
 
+  const options = [
+    {label: 'one', value: 'one'},
+    {label: 'two', value: 'two'},
+    {label: 'three', value: 'three'},
+    {label: 'four', value: 'four'},
+  ]
+
   return (
     <div style={styles}>
       {/* <InputContainer>
@@ -296,6 +304,20 @@ function App() {
           <Input type="date" />
         </InputGroup>
       </InputContainer> */}
+      <CreatableSelect
+        options={options}
+        // isMulti={true}
+        createNewOption={async value => {
+          console.log(value)
+          return {
+            label: value[value.length - 1],
+            value: value[value.length - 1],
+          } as OptionType
+        }}
+        onChange={newValue => {
+          console.log(newValue)
+        }}
+      />
       <button onClick={() => setOpen(true)}>Open</button>
       <Table
         data={data}

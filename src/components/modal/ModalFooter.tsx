@@ -12,6 +12,8 @@ export type FooterButtons = Array<{
   btnText: string
   btnSize?: 'xs' | 'sm' | 'md' | 'adapt'
   disabled?: boolean
+  isLoading?: boolean
+  loadingText?: string
 }>
 
 interface ModalFooterProps {
@@ -55,7 +57,7 @@ export function ModalFooter({children, api, buttons, showBorder = true}: ModalFo
               }}
               size={btn.btnSize}
             >
-              {btn.btnText}
+              {btn.isLoading ? btn.loadingText : btn.btnText}
             </Button>
           ))}
         </div>

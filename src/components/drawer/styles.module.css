@@ -27,7 +27,7 @@
 
 .container {
   height: 100vh;
-  overflow: hidden;
+  /* overflow: hidden; */
   position: fixed;
   top: 0;
   background: var(--white);
@@ -62,7 +62,7 @@
 
 .content {
   height: 100%;
-  overflow-y: auto;
+  /* overflow-y: auto; */
   position: relative;
 }
 

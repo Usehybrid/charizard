@@ -153,31 +153,46 @@ export function CreatableSelect({
         }}
         isDisabled={isDisabled}
         onChange={async (data: any) => {
-          if (isMulti) {
-            const newSelectedValues = data.filter((d: OptionType) => d.__isNew__)
-            const oldSelectedValues = data.filter((d: OptionType) => !d.__isNew__)
+          if (data) {
+            if (isMulti) {
+              const newSelectedValues = data.filter((d: OptionType) => d.__isNew__)
+              const oldSelectedValues = data.filter((d: OptionType) => !d.__isNew__)
+              let totalSelectedValues = oldSelectedValues
 
-            if (newSelectedValues.length > 0) {
-              const updatedDatas = await createNewOption(
-                newSelectedValues.map((val: OptionType) => val.value),
-              )
-              await refetchOptions()
-              const totalSelectedValues = [...oldSelectedValues, ...(updatedDatas as OptionType[])]
+              if (newSelectedValues.length > 0) {
+                const updatedDatas = await createNewOption(
+                  newSelectedValues.map((val: OptionType) => val.value),
+                )
+                // updatedDatas would be undefined or null if there's an error (like new value's length validation error) in createNewOption
+                if (updatedDatas) {
+                  // remove __isNew__ key since the option is already present in the dropdown and saved through API call
+                  data = data.map((opt: OptionType) => {
+                    if (opt.__isNew__) {
+                      delete opt.__isNew__
+                    }
+                    return opt
+                  })
+                  await refetchOptions()
+                  totalSelectedValues = [...oldSelectedValues, ...(updatedDatas as OptionType[])]
+                }
+              }
               onChange(
                 totalSelectedValues.map((val: OptionType) => val.value),
                 data.actionMeta,
               )
-            }
-          } else {
-            let value
-            if (data.__isNew__) {
-              const updatedData = await createNewOption(data.value)
-              await refetchOptions()
-              value = (updatedData as OptionType).value
             } else {
-              value = data.value
+              let value
+              if (data.__isNew__) {
+                const updatedData = await createNewOption(data.value)
+                await refetchOptions()
+                // remove __isNew__ key since the option is already present in the dropdown and saved through API call
+                delete data.__isNew__
+                value = (updatedData as OptionType).value
+              } else {
+                value = data.value
+              }
+              onChange(value ?? '', data.actionMeta)
             }
-            onChange(value ?? '', data.actionMeta)
           }
         }}
         formatGroupLabel={formatGroupLabel}
