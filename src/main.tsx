@@ -289,10 +289,10 @@ function App() {
   const [open, setOpen] = React.useState(false)
 
   const options = [
-    {label: 'one', value: 'one'},
-    {label: 'two', value: 'two'},
-    {label: 'three', value: 'three'},
-    {label: 'four', value: 'four'},
+    {label: 'one', value: 'one-value'},
+    {label: 'two', value: 'two-value'},
+    {label: 'three', value: 'three-value'},
+    {label: 'four', value: 'four-value'},
   ]
 
   return (
@@ -305,13 +305,15 @@ function App() {
       </InputContainer> */}
       <CreatableSelect
         options={options}
-        // isMulti={true}
+        isMulti={true}
         createNewOption={async value => {
           console.log(value)
-          return {
-            label: value[value.length - 1],
-            value: value[value.length - 1],
-          } as OptionType
+          return [
+            {
+              label: value[value.length - 1],
+              value: `${value[value.length - 1]}-value`,
+            } as OptionType,
+          ]
         }}
         onChange={newValue => {
           console.log(newValue)

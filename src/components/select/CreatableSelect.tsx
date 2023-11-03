@@ -168,6 +168,8 @@ export function CreatableSelect({
                   // remove __isNew__ key since the option is already present in the dropdown and saved through API call
                   data = data.map((opt: OptionType) => {
                     if (opt.__isNew__) {
+                      // update value in existing data
+                      opt.value = (updatedDatas as OptionType[])[0].value
                       delete opt.__isNew__
                     }
                     return opt
