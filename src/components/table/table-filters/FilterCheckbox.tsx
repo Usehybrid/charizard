@@ -1,7 +1,3 @@
-/**
- * @author Soham Sarkar <soham@hybr1d.io>
- */
-
 import * as checkbox from '@zag-js/checkbox'
 import ReactCountryFlag from 'react-country-flag'
 import classes from './styles.module.css'
@@ -32,7 +28,7 @@ export default function FilterCheckbox({
       id: value,
       name: label,
       checked: checked,
-      onChange: ({checked}) => {
+      onCheckedChange: ({checked}: {checked: any}) => {
         // sync internal table state
         if (checked) {
           addFilters(filterKey, value, filterDispatch)
@@ -63,7 +59,7 @@ export default function FilterCheckbox({
 
         {label}
       </span>
-      <input {...api.inputProps} />
+      <input {...api.hiddenInputProps} />
     </label>
   )
 }

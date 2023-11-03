@@ -1,14 +1,10 @@
-/**
- * @author Soham Sarkar <soham@hybr1d.io>
- */
-
 import * as React from 'react'
 import clsx from 'clsx'
 import classes from './styles.module.css'
 import {Button, BUTTON_VARIANT} from '../button'
 import {SVG} from '../svg'
 
-export interface EmptyStateProps {
+export type EmptyStateProps = {
   icon: string
   title: string
   desc: string

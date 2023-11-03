@@ -1,14 +1,9 @@
-/**
- * @author Soham Sarkar <soham@hybr1d.io>
- */
-
 import * as React from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import useDeepCompareEffect from 'use-deep-compare-effect'
 import clsx from 'clsx'
 import TableFilters from './table-filters'
 import TableLoader from './table-loader'
-
 import TableEmpty from './table-empty'
 import TableActions from './table-actions'
 import chevronDown from '../assets/chevron-down.svg'
@@ -205,11 +200,7 @@ export function Table({
       id: DROPDOWN_COL_ID,
 
       cell: (props: any) => (
-        <TableActions
-          actionsConfig={actionsConfig}
-          id={props.row.original.id || 'dropdown-actions'}
-          data={props.row.original}
-        />
+        <TableActions actionsConfig={actionsConfig} data={props.row.original} />
       ),
       header: 'Actions',
       maxSize: 150,

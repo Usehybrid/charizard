@@ -67,8 +67,6 @@ export function Button({
 export type MenuItem = {label: string; iconSrc?: string; onClick: any; filterFn?: any}
 
 export interface MenuButtonProps {
-  // required for correct placement of positioner
-  id: string
   children: React.ReactNode
   variant?: BUTTON_VARIANT
   disabled?: boolean
@@ -85,7 +83,6 @@ export interface MenuButtonProps {
 }
 
 function MenuButton({
-  id,
   children,
   variant = BUTTON_VARIANT.PRIMARY,
   disabled = false,
@@ -96,7 +93,9 @@ function MenuButton({
   size = 'md',
   actionsDropdownOptions,
 }: MenuButtonProps) {
-  const [state, send] = useMachine(menu.machine({id, positioning: {placement: 'bottom-end'}}))
+  const [state, send] = useMachine(
+    menu.machine({id: React.useId(), positioning: {placement: 'bottom-end'}}),
+  )
   const api = menu.connect(state, send, normalizeProps)
 
   // to sync with actions dropdown
@@ -191,19 +190,17 @@ function MenuButton({
     </>
   )
 }
-export interface MenuActionsDropdownProps {
-  id: string
+export type MenuActionsDropdownProps = {
   menuItems: MenuItem[]
   data?: any
   variant?: 'regular' | 'small'
 }
 
-function MenuActionsDropdown({id, menuItems, data, variant = 'regular'}: MenuActionsDropdownProps) {
+function MenuActionsDropdown({menuItems, data, variant = 'regular'}: MenuActionsDropdownProps) {
   const [isActive, setIsActive] = React.useState(false)
 
   return (
     <MenuButton
-      id={id}
       menuItems={menuItems}
       isCustomTrigger={true}
       customData={data}

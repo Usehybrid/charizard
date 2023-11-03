@@ -286,8 +286,7 @@ const columns = [
 
 function App() {
   const [search, setSearch] = React.useState('')
-
-  const [isOpen, setOpen] = useState(false)
+  const [open, setOpen] = React.useState(false)
 
   const options = [
     {label: 'one', value: 'one'},
@@ -384,7 +383,8 @@ function App() {
         }}
       />
 
-      <Loader variant={LOADER_VARIANT.DUAL_RING} />
+      <Loader />
+      <Loader variant={LOADER_VARIANT.ROLLER} />
     </div>
   )
 }

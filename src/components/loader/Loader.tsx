@@ -42,7 +42,7 @@ export function Loader({containerStyle, loaderStyle, variant = LOADER_VARIANT.RI
   return (
     <div className={classes.box} style={containerStyle}>
       {getSpinnerVariants(variant)}
-      <span style={{visibility: 'hidden'}} aria-label="loading">
+      <span style={{visibility: 'hidden', position: 'absolute'}} aria-label="loading">
         Loading...
       </span>
     </div>

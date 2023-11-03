@@ -1,11 +1,7 @@
-/**
- * @author Soham Sarkar <soham@hybr1d.io>
- */
-
 import * as React from 'react'
-import classes from './styles.module.css'
 import searchIcon from '../assets/search-2.svg'
 import closeIcon from '../assets/close.svg'
+import classes from './styles.module.css'
 
 export type SearchProps = {
   id: string

@@ -1,13 +1,9 @@
-/**
- * @author Pratik Awaik <pratik@hybr1d.io>
- */
-
 import * as React from 'react'
 import * as dialog from '@zag-js/dialog'
 import {Portal, normalizeProps, useMachine} from '@zag-js/react'
 import {ModalOverlay} from './ModalOverlay'
 
-interface ModalProps {
+type ModalProps = {
   /**
    * Modal is open or not
    */
@@ -43,8 +39,20 @@ export function Modal({
   showOverlay = true,
   machineProps = {},
 }: ModalProps) {
+  const handleOpenChange = React.useCallback(
+    (open: boolean) => {
+      if (!open) onClose()
+    },
+    [onClose],
+  )
+
   const [state, send] = useMachine(
-    dialog.machine({id: React.useId(), open: isOpen, onClose, ...machineProps}),
+    dialog.machine({
+      id: React.useId(),
+      open: isOpen,
+      onOpenChange: details => handleOpenChange(details.open),
+      ...machineProps,
+    }),
   )
   const api = dialog.connect(state, send, normalizeProps)
 

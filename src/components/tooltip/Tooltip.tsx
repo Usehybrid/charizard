@@ -1,5 +1,4 @@
 /**
- * @author Pratik Awaik <pratik@hybr1d.io>
  * @description https://zagjs.com/components/react/tooltip
  */
 
@@ -37,10 +36,9 @@ export function Tooltip({
   closeDelay = 0,
   placement = 'top',
 }: TooltipProps) {
-  const tooltipId = React.useId()
   const [state, send] = useMachine(
     tooltip.machine({
-      id: tooltipId,
+      id: React.useId(),
       openDelay,
       closeDelay,
       positioning: {

@@ -1,7 +1,3 @@
-/**
- * @author Pratik Awaik <pratik@hybr1d.io>
- */
-
 import * as React from 'react'
 import clsx from 'clsx'
 import classes from './styles.module.css'
@@ -9,7 +5,7 @@ import checkIcon from '../assets/check.svg'
 import {Button, BUTTON_VARIANT} from '../button'
 import {SVG} from '../svg'
 
-interface ProgressProps {
+type ProgressProps = {
   /**
    * steps to show
    * if there isError is true, user won't be able to click on Continue or finish button
