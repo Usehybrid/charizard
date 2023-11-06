@@ -32,7 +32,7 @@ type DrawerProps = {
   /**
    * Drawer title
    */
-  title: string
+  title?: string
   /**
    * Custom drawer header
    */
@@ -63,6 +63,10 @@ type DrawerProps = {
   buttons?: FooterButtons
   footerAddon?: React.ReactNode
   /**
+   * show header border or not
+   */
+  showHeaderBorder?: boolean
+  /**
    * Drawer position
    */
   drawerPosition?: 'left' | 'right'
@@ -84,6 +88,7 @@ export function Drawer({
   headerClassName,
   contentClassName,
   footerClassName,
+  showHeaderBorder = true,
   drawerPosition = 'right',
 }: DrawerProps) {
   const containerRef = React.useRef<HTMLDivElement>(null)
@@ -129,7 +134,13 @@ export function Drawer({
         <div className={classes.content}>
           {/* header */}
           {showHeader && (
-            <div className={clsx(classes.headerContainer, headerClassName)}>
+            <div
+              className={clsx(
+                classes.headerContainer,
+                {[classes.showBorder]: showHeaderBorder},
+                headerClassName,
+              )}
+            >
               {customHeader ? (
                 customHeader
               ) : (
