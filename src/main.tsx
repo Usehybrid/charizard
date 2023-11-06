@@ -1,21 +1,10 @@
-import React from 'react'
+import React, {useState} from 'react'
 import ReactDOM from 'react-dom/client'
 import randomIcon from './components/assets/check.svg'
 import randomIcon2 from './components/assets/search-2.svg'
 import {createColumnHelper} from '@tanstack/react-table'
-import {
-  BUTTON_VARIANT,
-  Button,
-  LOADER_VARIANT,
-  Loader,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  SegmentedControl,
-  Table,
-} from './components'
+import {CreatableSelect, Drawer, LOADER_VARIANT, Loader, Table} from './components'
+import {OptionType} from './components/select/CreatableSelect'
 
 const styles = {
   width: '90%',
@@ -299,9 +288,39 @@ function App() {
   const [search, setSearch] = React.useState('')
   const [open, setOpen] = React.useState(false)
 
+  const options = [
+    {label: 'one', value: 'one-value'},
+    {label: 'two', value: 'two-value'},
+    {label: 'three', value: 'three-value'},
+    {label: 'four', value: 'four-value'},
+  ]
+
   return (
     <div style={styles}>
-      {/* <Table
+      {/* <InputContainer>
+        <InputLabel>your mom</InputLabel>
+        <InputGroup>
+          <Input type="date" />
+        </InputGroup>
+      </InputContainer> */}
+      <CreatableSelect
+        options={options}
+        isMulti={true}
+        createNewOption={async value => {
+          console.log(value)
+          return [
+            {
+              label: value[value.length - 1],
+              value: `${value[value.length - 1]}-value`,
+            } as OptionType,
+          ]
+        }}
+        onChange={newValue => {
+          console.log(newValue)
+        }}
+      />
+      <button onClick={() => setOpen(true)}>Open</button>
+      <Table
         data={data}
         loaderConfig={{isFetching: false, isError: false, text: 'Getting employees...'}}
         columns={columns}
@@ -364,7 +383,7 @@ function App() {
           columns: 6,
           emptySearchTitle: 'No inventories found',
         }}
-      /> */}
+      />
 
       <Loader />
       <Loader variant={LOADER_VARIANT.ROLLER} />
