@@ -365,9 +365,7 @@ function App() {
           emptySearchTitle: 'No inventories found',
         }}
       /> */}
-
-      <Loader />
-      <Loader variant={LOADER_VARIANT.ROLLER} />
+      <Button variant={BUTTON_VARIANT.PRIMARY}>Primary</Button>
     </div>
   )
 }
