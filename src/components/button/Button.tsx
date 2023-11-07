@@ -6,6 +6,7 @@ import threeDots from '../assets/three-dots.svg'
 import classes from './styles.module.css'
 import {useMachine, normalizeProps} from '@zag-js/react'
 import {SVG} from '../svg'
+import {PositioningOptions} from '@zag-js/popper'
 
 export enum BUTTON_VARIANT {
   PRIMARY = 'primary',
@@ -80,6 +81,7 @@ export interface MenuButtonProps {
   actionsDropdownOptions?: {
     setIsActive: React.Dispatch<React.SetStateAction<boolean>>
   }
+  positionerProps?: PositioningOptions
 }
 
 function MenuButton({
@@ -92,9 +94,13 @@ function MenuButton({
   customData,
   size = 'md',
   actionsDropdownOptions,
+  positionerProps,
 }: MenuButtonProps) {
   const [state, send] = useMachine(
-    menu.machine({id: React.useId(), positioning: {placement: 'bottom-end'}}),
+    menu.machine({
+      id: React.useId(),
+      positioning: {placement: positionerProps?.placement || 'bottom-end'},
+    }),
   )
   const api = menu.connect(state, send, normalizeProps)
 

@@ -1,0 +1,64 @@
+.selectedActions {
+  padding: 0 20px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--slate-200);
+  border-bottom: none;
+  gap: 18px;
+}
+
+.selectedAction {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.selectedInfo {
+  display: flex;
+  width: 24px;
+  height: 24px;
+  padding: 0px 2px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  flex-shrink: 0;
+  border-radius: 44px;
+  background: var(--slate-20);
+
+  font-size: 0.625rem;
+  line-height: 1.25rem; /* 200% */
+  letter-spacing: 0.0125rem;
+  color: var(--text-primary);
+}
+
+.actionsBtnIconSpan {
+  width: 16px;
+  height: 16px;
+}
+
+.actionsBtnIcon {
+  width: 16px;
+  height: 16px;
+}
+
+.selectedIcon {
+  width: 20px;
+  height: 20px;
+}
+
+.actionsBtnIcon g,
+.selectedIcon g {
+  clip-path: context-box;
+}
+
+.actionsBtnIcon > path,
+.actionsBtnIcon > g > path {
+  fill: var(--slate-600);
+}
+
+.selectedIcon > path,
+.selectedIcon > g > path {
+  fill: var(--slate-400);
+}

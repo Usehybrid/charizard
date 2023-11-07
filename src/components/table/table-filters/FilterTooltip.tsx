@@ -1,13 +1,10 @@
-/**
- * @author Soham Sarkar <soham@hybr1d.io>
- */
-
 import * as tooltip from '@zag-js/tooltip'
 import classes from './styles.module.css'
 import {useMachine, normalizeProps} from '@zag-js/react'
 import {FilterOptions, InternalTableFilters} from '../types'
+import clsx from 'clsx'
 
-interface FilterTooltipProps {
+type FilterTooltipProps = {
   filter: FilterOptions
   tableFilter: InternalTableFilters
   selectedFilters: number
@@ -21,8 +18,12 @@ export default function FilterTooltip({filter, tableFilter, selectedFilters}: Fi
   return (
     <>
       {/* @ts-ignore */}
-      <div {...tooltipApi.triggerProps} className={'hybr1d-ui-reset-btn'}>
+      <div
+        {...tooltipApi.triggerProps}
+        className={clsx('hybr1d-ui-reset-btn', classes.filterTooltipTrigger)}
+      >
         <div className={classes.filterCol}>{filter.name}</div>
+        {selectedFilters !== 0 && <span className={classes.totalSelected}>{selectedFilters}</span>}
       </div>
       {tooltipApi.isOpen && selectedFilters !== 0 && (
         <div {...tooltipApi.positionerProps}>

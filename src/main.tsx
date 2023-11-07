@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import randomIcon from './components/assets/check.svg'
 import randomIcon2 from './components/assets/search-2.svg'
 import {createColumnHelper} from '@tanstack/react-table'
-import {Button, BUTTON_VARIANT, Table} from './components'
+import {Table} from './components'
 
 const styles = {
   width: '90%',
@@ -285,18 +285,10 @@ const columns = [
 
 function App() {
   const [search, setSearch] = React.useState('')
-  const [open, setOpen] = React.useState(false)
-
-  const options = [
-    {label: 'one', value: 'one-value'},
-    {label: 'two', value: 'two-value'},
-    {label: 'three', value: 'three-value'},
-    {label: 'four', value: 'four-value'},
-  ]
 
   return (
     <div style={styles}>
-      {/* <Table
+      <Table
         data={data}
         loaderConfig={{isFetching: false, isError: false, text: 'Getting employees...'}}
         columns={columns}
@@ -332,11 +324,23 @@ function App() {
         }}
         rowSelectionConfig={{
           // isRadio: true,
-          // isCheckbox: true,
+          isCheckbox: true,
           actions: [
             {
               icon: randomIcon,
               text: 'Archive',
+              onClick: () => {},
+            },
+
+            {
+              icon: randomIcon,
+              text: 'Archive 2',
+              onClick: () => {},
+            },
+
+            {
+              icon: randomIcon,
+              text: 'Archive 3',
               onClick: () => {},
             },
           ],
@@ -359,8 +363,7 @@ function App() {
           columns: 6,
           emptySearchTitle: 'No inventories found',
         }}
-      />  */}
-      <Button variant={BUTTON_VARIANT.PRIMARY}>Primary</Button>
+      />
     </div>
   )
 }

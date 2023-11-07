@@ -80,8 +80,7 @@ export default function TableFilter({
           tableFilter={tableFilter}
           selectedFilters={selectedFilters}
         />
-        {selectedFilters !== 0 && <span className={classes.totalSelected}>{selectedFilters}</span>}
-        <img src={chevronDown} alt="dropdown" className={classes.filterIcon2} />
+        <SVG path={chevronDown} svgClassName={classes.filterIcon2} />
       </button>
 
       <div {...api.positionerProps} className={classes.positioner}>

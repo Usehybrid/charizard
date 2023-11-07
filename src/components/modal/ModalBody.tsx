@@ -1,7 +1,3 @@
-/**
- * @author Pratik Awaik <pratik@hybr1d.io>
- */
-
 import classes from './styles.module.css'
 
 interface ModalBodyProps {

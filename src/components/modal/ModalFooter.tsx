@@ -1,7 +1,3 @@
-/**
- * @author Pratik Awaik <pratik@hybr1d.io>
- */
-
 import clsx from 'clsx'
 import classes from './styles.module.css'
 import {Button, BUTTON_VARIANT} from '../button'

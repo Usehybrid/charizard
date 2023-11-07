@@ -1,12 +1,11 @@
 import * as React from 'react'
-import filterLines from '../../assets/filter-lines.svg'
 import history from '../../assets/history.svg'
 import TableFilter from './TableFilter'
 import classes from './styles.module.css'
 import {useTableStore} from '../store'
 import type {FilterConfig} from '../types'
 
-interface TableFiltersProps {
+type TableFiltersProps = {
   filterConfig: FilterConfig
 }
 
@@ -39,7 +38,17 @@ export default function TableFilters({filterConfig}: TableFiltersProps) {
 
   return (
     <div className={classes.filters}>
-      {/* <img src={filterLines} alt="filters" className={classes.filterIcon} /> */}
+      {selectedFilters.length > 0 && (
+        <img
+          title="Reset filters"
+          src={history}
+          alt="reset all filters"
+          className={classes.resetIcon2}
+          onClick={() => {
+            resetAllFilters(filterReset)
+          }}
+        />
+      )}
       {filters.map((filter, idx) => (
         <TableFilter
           key={filter.id}
@@ -52,17 +61,6 @@ export default function TableFilters({filterConfig}: TableFiltersProps) {
           filterDispatch={filterDispatch}
         />
       ))}
-      {selectedFilters.length > 0 && (
-        <img
-          title="Reset filters"
-          src={history}
-          alt="reset all filters"
-          className={classes.resetIcon2}
-          onClick={() => {
-            resetAllFilters(filterReset)
-          }}
-        />
-      )}
     </div>
   )
 }

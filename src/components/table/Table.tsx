@@ -6,12 +6,12 @@ import TableFilters from './table-filters'
 import TableLoader from './table-loader'
 import TableEmpty from './table-empty'
 import TableActions from './table-actions'
+import TableSelectedActions from './table-selected-actions'
 import chevronDown from '../assets/chevron-down.svg'
 import chevronUp from '../assets/chevron-up.svg'
 import classes from './styles.module.css'
 import {useReactTable, getCoreRowModel, flexRender} from '@tanstack/react-table'
 import {Search} from '../search'
-import {Button, BUTTON_VARIANT} from '../button'
 import {Selectors} from '../selectors'
 import {SVG} from '../svg'
 import {TableCheckbox} from './table-columns'
@@ -20,7 +20,7 @@ import {CHECKBOX_COL_ID, DROPDOWN_COL_ID, RADIO_COL_ID} from './constants'
 import type {SortingState, Table, VisibilityState} from '@tanstack/react-table'
 import type {FilterConfig} from './types'
 
-export type TableProps = {
+export interface TableProps {
   // the table data
   data: any
   // table column definition with column api from tanstack
@@ -106,7 +106,7 @@ export type TableProps = {
 // todo
 // * figure out clearing of row selection after overlay closes
 // * responsiveness
-// * active filter popover in filter
+// * sync all the table states with url
 
 export function Table({
   data,
@@ -293,31 +293,9 @@ export function Table({
         </div>
       )}
 
-      {isCheckbox && Object.keys(rowSelection).length > 0 && (
-        <div className={classes.selectedActions}>
-          <div className={classes.selectedAction}>
-            <div>
-              <SVG path={iconSrc || ''} svgClassName={classes.selectedIcon} />
-            </div>
-            {actions?.map((action, idx) => (
-              <Button
-                key={idx}
-                variant={BUTTON_VARIANT.SECONDARY}
-                size="sm"
-                customStyles={{color: 'var(--gray-700)'}}
-                onClick={() => {
-                  action.onClick()
-                }}
-              >
-                {action.icon && <SVG path={action.icon} svgClassName={classes.actionsBtnIcon} />}
-                {action.text}
-              </Button>
-            ))}
-          </div>
+      {/* multi selected actions */}
+      <TableSelectedActions rowSelectionConfig={rowSelectionConfig} rowSelection={rowSelection} />
 
-          <div className={classes.selectedInfo}>{Object.keys(rowSelection).length} selected</div>
-        </div>
-      )}
       {paginationConfig ? (
         <InfiniteScroll
           dataLength={data.length}
@@ -380,7 +358,10 @@ function TableComp({
               return (
                 <th
                   key={header.id}
-                  className={classes.tableHeader}
+                  className={clsx(
+                    classes.tableHeader,
+                    header.column.getCanSort() && classes.tableHeaderSort,
+                  )}
                   style={{
                     width: header.getSize() === Number.MAX_SAFE_INTEGER ? 'auto' : header.getSize(),
                     paddingRight: header.id === DROPDOWN_COL_ID ? '20px' : undefined,
