@@ -9,6 +9,9 @@ import TableActions from './table-actions'
 import TableSelectedActions from './table-selected-actions'
 import chevronDown from '../assets/chevron-down.svg'
 import chevronUp from '../assets/chevron-up.svg'
+import sortIcon from '../assets/swap-2.svg'
+import sortAscIcon from '../assets/swap-2-asc.svg'
+import sortDescIcon from '../assets/swap-2-desc.svg'
 import classes from './styles.module.css'
 import {useReactTable, getCoreRowModel, flexRender} from '@tanstack/react-table'
 import {Search} from '../search'
@@ -388,20 +391,17 @@ function TableComp({
                     >
                       {flexRender(header.column.columnDef.header, header.getContext())}
                       {{
-                        asc: (
-                          <SVG
-                            path={chevronUp}
-                            spanClassName={classes.tableHeaderSortSpan}
-                            svgClassName={classes.tableHeaderSort}
-                          />
-                        ),
+                        asc: <SVG path={sortAscIcon} spanClassName={classes.tableHeaderSortSpan} />,
                         desc: (
+                          <SVG path={sortDescIcon} spanClassName={classes.tableHeaderSortSpan} />
+                        ),
+                        false: header.column.getCanSort() ? (
                           <SVG
-                            path={chevronDown}
+                            path={sortIcon}
                             spanClassName={classes.tableHeaderSortSpan}
                             svgClassName={classes.tableHeaderSort}
                           />
-                        ),
+                        ) : null,
                       }[header.column.getIsSorted() as string] ?? null}
                     </div>
                   )}

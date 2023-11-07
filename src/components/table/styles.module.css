@@ -106,3 +106,7 @@
   width: 18px;
   height: 18px;
 }
+
+.tableHeaderSort:hover .tableHeaderSortSpan .tableHeaderSortIcon > g > path {
+  fill: var(--slate-700);
+}
