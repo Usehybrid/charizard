@@ -172,7 +172,7 @@ function MenuButton({
         </div>
       )}
 
-      <div {...api.positionerProps} className={classes.menusPos}>
+      <div {...api.positionerProps}>
         <div {...api.contentProps} className={classes.menus}>
           {menuItems
             .filter(menu => {

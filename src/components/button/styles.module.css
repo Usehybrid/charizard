@@ -148,11 +148,8 @@
   height: 20px;
 }
 
-.menusPos {
-  z-index: 10;
-}
-
 .menus {
+  z-index: 10;
   padding: 4px;
   border-radius: 4px;
   background: #fff;
