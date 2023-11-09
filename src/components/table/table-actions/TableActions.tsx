@@ -12,7 +12,12 @@ export default function TableActions({actionsConfig, data}: TableActionsProps) {
   const {menuItems = [], isDropdownActions, key, customComp} = actionsConfig
   if (!isDropdownActions) return null
 
-  if (!key && !customComp) return <Button.ActionsDropdown menuItems={menuItems} data={data} />
+  if (!key && !customComp)
+    return (
+      <div className={classes.box}>
+        <Button.ActionsDropdown menuItems={menuItems} data={data} />
+      </div>
+    )
 
   return (
     <div className={classes.box}>
