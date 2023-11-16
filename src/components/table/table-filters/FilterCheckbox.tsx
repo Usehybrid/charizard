@@ -13,6 +13,7 @@ export default function FilterCheckbox({
   filterKey,
   filterDispatch,
   countryCode,
+  customName,
 }: {
   label: string
   value: string
@@ -22,6 +23,7 @@ export default function FilterCheckbox({
   removeFilters: TableStore['removeFilters']
   filterDispatch: (value: any) => void
   countryCode?: string
+  customName?: string
 }) {
   const [state, send] = useMachine(
     checkbox.machine({
@@ -57,7 +59,7 @@ export default function FilterCheckbox({
           />
         )}
 
-        {label}
+        {customName ? <div dangerouslySetInnerHTML={{__html: customName}}></div> : label}
       </span>
       <input {...api.hiddenInputProps} />
     </label>

@@ -1,7 +1,3 @@
-/**
- * @author Soham Sarkar <soham@hybr1d.io>
- */
-
 import * as React from 'react'
 import * as menu from '@zag-js/menu'
 import clsx from 'clsx'
@@ -117,6 +113,7 @@ export default function TableFilter({
                       filterDispatch={filterDispatch}
                       countryCode={option.country_code}
                       key={option.value}
+                      customName={option.customName}
                     />
                   </div>
                 ))

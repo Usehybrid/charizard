@@ -6,6 +6,8 @@ export type FilterOptions = {
     name: string
     value: string
     country_code?: string
+    // custom jsx from api
+    customName?: string
   }[]
   config?: {
     hideSearch?: boolean

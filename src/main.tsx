@@ -440,4 +440,17 @@ export const filters = [
       },
     ],
   },
+
+  {
+    id: 'software-name2',
+    name: 'Software Test',
+    key: 'filter_software_name_test',
+    options: [
+      {
+        name: 'Maximum',
+        value: '123-156afdafd-iohfuitg',
+        customName: `<div style="width: 149px"><span style="color: #171718; font-size: 14px; font-family: Instrument Sans; font-weight: 400; line-height: 20px; word-wrap: break-word">Harsha Vardhan<br/></span><span style="color: #767676; font-size: 14px; font-family: Instrument Sans; font-weight: 400; line-height: 20px; word-wrap: break-word">harsha@hybr1d.io</span></div>`,
+      },
+    ],
+  },
 ]
