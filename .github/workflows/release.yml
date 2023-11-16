@@ -15,7 +15,7 @@ jobs:
 
     steps:
       - name: Setup repo + install pnpm
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - uses: pnpm/action-setup@v2
         with:
           version: 8     
@@ -23,7 +23,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 20
           registry-url: "https://registry.npmjs.org"
           cache: 'pnpm'
           
@@ -52,7 +52,7 @@ jobs:
           status: ${{ job.status }}
           channel: '#alerts-deploys'
           message:
-            'Hybrid UI publishing has failed'
+            'Hybrid UI has failed to publish to npm'
         if: failure()
 
    
