@@ -13,19 +13,6 @@
   gap: 1.62rem;
 }
 
-.huiEmptyStateIconContainer {
-  width: 5.4rem;
-  height: 5.4rem;
-  margin-bottom: 1.23rem;
-  flex-shrink: 0;
-}
-
-.huiEmptyStateIconContainer .huiEmptyStateIcon {
-  width: 100%;
-  height: 100%;
-  max-width: 100%;
-}
-
 .title {
   font-weight: 600;
   font-size: 1.23rem;
@@ -53,4 +40,21 @@
 
 .info {
   margin-bottom: 20px;
+}
+
+.iconBox {
+  width: 5.4rem;
+  height: 5.4rem;
+  margin-bottom: 10px;
+  flex-shrink: 0;
+}
+
+.icon {
+  width: 70px;
+  height: 70px;
+}
+
+.icon > path,
+.icon > g > path {
+  fill: var(--slate-400);
 }
