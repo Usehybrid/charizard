@@ -19,23 +19,25 @@ interface LayoutTabsProps {
 const SEARCH_PARAM_KEY = 'active-tab'
 
 export function LayoutTabs({tabs, defaultValue, tabClassName}: LayoutTabsProps) {
-  const url = React.useMemo(() => new URL(window.location.href), [])
-  const value = url.searchParams.get(SEARCH_PARAM_KEY) ?? defaultValue
+  // const url = React.useMemo(() => new URL(window.location.href), [])
+  // const value = url.searchParams.get(SEARCH_PARAM_KEY) ?? defaultValue
 
-  React.useEffect(() => {
-    if (url.searchParams.has(SEARCH_PARAM_KEY)) return
-    url.searchParams.append(SEARCH_PARAM_KEY, value)
-    history.pushState({...history.state}, '', url.href)
-  }, [])
+  // todo sync with url, without affecting browser history/default behaviour
+
+  // React.useEffect(() => {
+  //   if (url.searchParams.has(SEARCH_PARAM_KEY)) return
+  //   url.searchParams.append(SEARCH_PARAM_KEY, value)
+  //   history.pushState({...history.state}, '', url.href)
+  // }, [])
 
   const [state, send] = useMachine(
     zagTabs.machine({
       id: React.useId(),
-      value,
-      onValueChange(details) {
-        url.searchParams.set(SEARCH_PARAM_KEY, details.value)
-        history.pushState({...history.state}, '', url.href)
-      },
+      value: defaultValue,
+      // onValueChange(details) {
+      //   url.searchParams.set(SEARCH_PARAM_KEY, details.value)
+      //   history.pushState({...history.state}, '', url.href)
+      // },
     }),
   )
 
