@@ -19,20 +19,23 @@ interface LayoutTabsProps {
 const SEARCH_PARAM_KEY = 'active-tab'
 
 export function LayoutTabs({tabs, defaultValue, tabClassName}: LayoutTabsProps) {
-  const url = React.useMemo(() => new URL(window.location.href), [])
+  const {searchParams, href} = React.useMemo(() => new URL(window.location.href), [])
+  const value = searchParams.get(SEARCH_PARAM_KEY) ?? defaultValue
+
+  React.useEffect(() => {
+    if (searchParams.has(SEARCH_PARAM_KEY)) return
+    searchParams.append(SEARCH_PARAM_KEY, value)
+    location.search = searchParams.toString()
+  }, [])
 
   const [state, send] = useMachine(
     zagTabs.machine({
       id: React.useId(),
-      value: url.searchParams.get(SEARCH_PARAM_KEY) || defaultValue,
+      value,
       onValueChange(details) {
         const value = details.value as string
-        if (!url.searchParams.has(SEARCH_PARAM_KEY)) {
-          url.searchParams.append(SEARCH_PARAM_KEY, value)
-        } else {
-          url.searchParams.set(SEARCH_PARAM_KEY, value)
-        }
-        history.replaceState({}, '', url.href)
+        searchParams.set(SEARCH_PARAM_KEY, value)
+        location.search = searchParams.toString()
       },
     }),
   )
@@ -55,7 +58,7 @@ export function LayoutTabs({tabs, defaultValue, tabClassName}: LayoutTabsProps) 
       </div>
       {tabs.map(item => (
         <div {...api.getContentProps({value: item.value})} key={item.value}>
-          <div>{item.content}</div>
+          {item.content}
         </div>
       ))}
     </div>
