@@ -1,10 +1,10 @@
 import * as React from 'react'
 import * as zagTabs from '@zag-js/tabs'
 import clsx from 'clsx'
-import classes from './styles.module.css'
+import classes from './layout-tabs.module.css'
 import {normalizeProps, useMachine} from '@zag-js/react'
 
-type LayoutTabsProps = {
+interface LayoutTabsProps {
   tabClassName?: string
   /**
    * tabs to render
@@ -32,7 +32,7 @@ export function LayoutTabs({tabs, defaultValue, tabClassName}: LayoutTabsProps) 
         } else {
           url.searchParams.set(SEARCH_PARAM_KEY, value)
         }
-        history.pushState({}, '', url.href)
+        history.replaceState({}, '', url.href)
       },
     }),
   )
