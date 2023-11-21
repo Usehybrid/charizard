@@ -25,9 +25,7 @@ export function LayoutTabs({tabs, defaultValue, tabClassName}: LayoutTabsProps) 
   React.useEffect(() => {
     if (url.searchParams.has(SEARCH_PARAM_KEY)) return
     url.searchParams.append(SEARCH_PARAM_KEY, value)
-
-    history.replaceState({...history.state}, '', url.href)
-    // location.search = url.searchParams.toString()
+    history.pushState({...history.state}, '', url.href)
   }, [])
 
   const [state, send] = useMachine(
@@ -35,11 +33,8 @@ export function LayoutTabs({tabs, defaultValue, tabClassName}: LayoutTabsProps) 
       id: React.useId(),
       value,
       onValueChange(details) {
-        const value = details.value as string
-
-        url.searchParams.set(SEARCH_PARAM_KEY, value)
-        history.replaceState({...history.state}, '', url.href)
-        // location.search = url.searchParams.toString()
+        url.searchParams.set(SEARCH_PARAM_KEY, details.value)
+        history.pushState({...history.state}, '', url.href)
       },
     }),
   )
