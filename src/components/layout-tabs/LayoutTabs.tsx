@@ -19,13 +19,13 @@ interface LayoutTabsProps {
 const SEARCH_PARAM_KEY = 'active-tab'
 
 export function LayoutTabs({tabs, defaultValue, tabClassName}: LayoutTabsProps) {
-  const {searchParams, href} = React.useMemo(() => new URL(window.location.href), [])
-  const value = searchParams.get(SEARCH_PARAM_KEY) ?? defaultValue
+  const url = React.useMemo(() => new URL(window.location.href), [])
+  const value = url.searchParams.get(SEARCH_PARAM_KEY) ?? defaultValue
 
   React.useEffect(() => {
-    if (searchParams.has(SEARCH_PARAM_KEY)) return
-    searchParams.append(SEARCH_PARAM_KEY, value)
-    location.search = searchParams.toString()
+    if (url.searchParams.has(SEARCH_PARAM_KEY)) return
+    url.searchParams.append(SEARCH_PARAM_KEY, value)
+    history.replaceState({}, '', url.href)
   }, [])
 
   const [state, send] = useMachine(
@@ -34,8 +34,8 @@ export function LayoutTabs({tabs, defaultValue, tabClassName}: LayoutTabsProps) 
       value,
       onValueChange(details) {
         const value = details.value as string
-        searchParams.set(SEARCH_PARAM_KEY, value)
-        location.search = searchParams.toString()
+        url.searchParams.set(SEARCH_PARAM_KEY, value)
+        history.replaceState({}, '', url.href)
       },
     }),
   )
