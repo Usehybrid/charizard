@@ -119,8 +119,8 @@
   font-size: 14px;
   line-height: 180%;
   width: 100%;
-  padding: 4px 8px;
-  padding-bottom: 0;
+  padding: 2px 8px;
+  /* padding-bottom: 0; */
 
   display: flex;
   align-items: center;

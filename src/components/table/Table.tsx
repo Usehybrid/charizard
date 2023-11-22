@@ -107,6 +107,9 @@ export interface TableProps {
 }
 
 // todo
+// * min size and max size of table not working
+// * handle undefined filter (while loading)
+// * use deferred while value when data is being re-fetched for total row count flickering issue
 // * figure out clearing of row selection after overlay closes
 // * responsiveness
 // * sync all the table states with url

@@ -1,7 +1,3 @@
-/**
- * @description https://zagjs.com/components/react/tooltip
- */
-
 import * as React from 'react'
 import * as tooltip from '@zag-js/tooltip'
 import {useMachine, normalizeProps} from '@zag-js/react'
@@ -9,7 +5,7 @@ import {TooltipTrigger} from './TooltipTrigger'
 import {TooltipContent} from './TooltipContent'
 import type {Placement} from '@zag-js/popper'
 
-type TooltipProps = {
+interface TooltipProps {
   /**
    * tooltip children
    */
@@ -29,6 +25,8 @@ type TooltipProps = {
    */
   placement?: Placement
 }
+
+// todo add default max width in the container here
 
 export function Tooltip({
   children,
