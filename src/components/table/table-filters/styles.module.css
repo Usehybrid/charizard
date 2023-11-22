@@ -201,6 +201,7 @@
   display: flex;
   align-items: center;
   column-gap: 16px;
+  text-wrap: pretty;
 }
 
 .optionLabel:hover {
@@ -213,6 +214,7 @@
   border-radius: 3px;
   border: 2px solid var(--slate-200);
   background-color: white;
+  flex-shrink: 0;
 }
 
 .optionLabel > [data-part='control'][data-state='checked'] {
