@@ -35,6 +35,7 @@ type RadioGroupProps = {
    * error msg to display
    */
   errorMsg?: string
+  containerStyles?: React.CSSProperties
 }
 
 export function RadioGroup({
@@ -44,6 +45,7 @@ export function RadioGroup({
   onChange,
   required = false,
   errorMsg,
+  containerStyles,
 }: RadioGroupProps) {
   const [state, send] = useMachine(
     radio.machine({
@@ -58,7 +60,7 @@ export function RadioGroup({
   const api = radio.connect(state, send, normalizeProps)
 
   return (
-    <div className={classes.radioGroup}>
+    <div className={classes.radioGroup} style={containerStyles}>
       <div {...api.rootProps} className={classes.root}>
         {radioHeading && (
           <InputContainer customClassName={classes.labelContainer}>
