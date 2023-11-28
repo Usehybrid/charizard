@@ -10,6 +10,9 @@
   position: relative;
   background: var(--slate-800);
   color: var(--white);
+  font-size: 14px;
+  line-height: 20px;
+  max-width: 300px;
 }
 
 .arrow {

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import randomIcon from './components/assets/check.svg'
 import randomIcon2 from './components/assets/search-2.svg'
 import {createColumnHelper} from '@tanstack/react-table'
-import {LayoutTabs, Table} from './components'
+import {InputContainer, InputGroup, InputLabel, LayoutTabs, RadioGroup, Table} from './components'
 
 const styles = {
   width: '90%',
@@ -364,26 +364,40 @@ function App() {
           emptySearchTitle: 'No inventories found',
         }}
       /> */}
-      <LayoutTabs tabs={tabs} defaultValue="product" />
+      <InputContainer>
+        <InputLabel required>Pricing structure</InputLabel>
+        <InputGroup>
+          <RadioGroup
+            optionsContainerStyles={{flexDirection: 'row', gap: '40px'}}
+            defaultValue={'advanced'}
+            items={i}
+            required
+            onChange={() => {}}
+          />
+        </InputGroup>
+      </InputContainer>
     </div>
   )
 }
 
-const tabs = [
+const i = [
   {
-    label: 'Product',
-    value: 'product',
-    content: <></>,
+    label: {
+      heading: 'Advance license procurement',
+    },
+    value: 'advanced',
+    tooltip: {
+      txt: 'Purchasing a set number of licenses at the beginning of the subscription period. For example, buying 100 licenses at the start of the year.',
+    },
   },
   {
-    label: 'Finance',
-    value: 'finance',
-    content: <></>,
-  },
-  {
-    label: 'Activity',
-    value: 'activity',
-    content: <></>,
+    label: {
+      heading: 'Pay as you go',
+    },
+    value: 'pay',
+    tooltip: {
+      txt: 'Paying for licenses as they are assigned to new users. For example, starting with 50 licenses and adding more one by one as new employees join',
+    },
   },
 ]
 

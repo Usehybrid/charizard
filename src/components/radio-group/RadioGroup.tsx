@@ -1,9 +1,12 @@
 import * as React from 'react'
 import * as radio from '@zag-js/radio-group'
 import clsx from 'clsx'
+import infoCircleIcon from '../assets/info-circle.svg'
 import classes from './styles.module.css'
 import {useMachine, normalizeProps} from '@zag-js/react'
 import {InputContainer, InputLabel} from '../input'
+import {Tooltip} from '../tooltip'
+import {SVG} from '../svg'
 
 type RadioGroupProps = {
   /**
@@ -16,6 +19,10 @@ type RadioGroupProps = {
   items: Array<{
     label: {heading: string | React.ReactNode; subHeading?: string}
     value: string
+    tooltip?: {
+      txt: string
+      trigger?: React.ReactNode
+    }
   }>
   /**
    * default value to be selected on first render
@@ -35,7 +42,7 @@ type RadioGroupProps = {
    * error msg to display
    */
   errorMsg?: string
-  containerStyles?: React.CSSProperties
+  optionsContainerStyles?: React.CSSProperties
 }
 
 export function RadioGroup({
@@ -45,7 +52,7 @@ export function RadioGroup({
   onChange,
   required = false,
   errorMsg,
-  containerStyles,
+  optionsContainerStyles,
 }: RadioGroupProps) {
   const [state, send] = useMachine(
     radio.machine({
@@ -60,7 +67,7 @@ export function RadioGroup({
   const api = radio.connect(state, send, normalizeProps)
 
   return (
-    <div className={classes.radioGroup} style={containerStyles}>
+    <div className={classes.radioGroup}>
       <div {...api.rootProps} className={classes.root}>
         {radioHeading && (
           <InputContainer customClassName={classes.labelContainer}>
@@ -69,25 +76,42 @@ export function RadioGroup({
             </InputLabel>
           </InputContainer>
         )}
-        <div className={clsx(classes.optionsContainer, {[classes.topMargin]: !radioHeading})}>
+        <div
+          className={clsx(classes.optionsContainer, {[classes.topMargin]: !radioHeading})}
+          style={optionsContainerStyles}
+        >
           {items.map(opt => (
-            <label
-              key={opt.value}
-              {...api.getItemProps({value: opt.value})}
-              className={classes.radio}
-            >
-              <span {...api.getItemTextProps({value: opt.value})} className={classes.radioLabel}>
-                <span className={classes.heading}>{opt.label.heading}</span>
-                <span className={classes.subHeading}>{opt.label.subHeading}</span>
-              </span>
-              <input {...api.getItemHiddenInputProps({value: opt.value})} />
-              <div
-                {...api.getItemControlProps({value: opt.value})}
-                className={clsx(classes.radioControl, {
-                  [classes.radioControlActive]: api.value === opt.value,
-                })}
-              />
-            </label>
+            <div key={opt.value} style={{display: 'flex', gap: '4px'}}>
+              <label {...api.getItemProps({value: opt.value})} className={classes.radio}>
+                <span {...api.getItemTextProps({value: opt.value})} className={classes.radioLabel}>
+                  <span className={classes.heading}>{opt.label.heading}</span>
+                  <span className={classes.subHeading}>{opt.label.subHeading}</span>
+                </span>
+                <input {...api.getItemHiddenInputProps({value: opt.value})} />
+                <div
+                  {...api.getItemControlProps({value: opt.value})}
+                  className={clsx(classes.radioControl, {
+                    [classes.radioControlActive]: api.value === opt.value,
+                  })}
+                />
+              </label>
+              {!!opt.tooltip && (
+                <Tooltip>
+                  <Tooltip.Trigger>
+                    {opt.tooltip.trigger ? (
+                      opt.tooltip.trigger
+                    ) : (
+                      <SVG
+                        path={infoCircleIcon}
+                        svgClassName={classes.infoIcon}
+                        spanClassName={classes.infoIconSpan}
+                      />
+                    )}
+                  </Tooltip.Trigger>
+                  <Tooltip.Content>{opt.tooltip.txt}</Tooltip.Content>
+                </Tooltip>
+              )}
+            </div>
           ))}
         </div>
       </div>
