@@ -7,6 +7,7 @@ import {useMachine, normalizeProps} from '@zag-js/react'
 import {InputContainer, InputLabel} from '../input'
 import {Tooltip} from '../tooltip'
 import {SVG} from '../svg'
+import {Placement} from '@zag-js/popper'
 
 type RadioGroupProps = {
   /**
@@ -22,6 +23,7 @@ type RadioGroupProps = {
     tooltip?: {
       txt: string
       trigger?: React.ReactNode
+      placement?: string
     }
   }>
   /**
@@ -96,7 +98,7 @@ export function RadioGroup({
                 />
               </label>
               {!!opt.tooltip && (
-                <Tooltip>
+                <Tooltip placement={opt.tooltip.placement as Placement}>
                   <Tooltip.Trigger>
                     {opt.tooltip.trigger ? (
                       opt.tooltip.trigger

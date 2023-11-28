@@ -10,7 +10,7 @@
   margin-bottom: 0;
 }
 
-.radioGroup .root .optionsContainer {
+.optionsContainer {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -20,7 +20,7 @@
   margin-top: 10px;
 }
 
-.radioGroup .root .optionsContainer .radio {
+.radio {
   display: flex;
   gap: 10px;
   user-select: none;
@@ -29,25 +29,26 @@
   align-items: center;
 }
 
-.radioGroup .root .optionsContainer .radio .radioLabel {
+.radioLabel {
   order: 2;
   display: flex;
   flex-direction: column;
 }
 
-.radioGroup .root .optionsContainer .radio .radioLabel .heading {
+.heading {
   font-size: 14px;
   line-height: 20px;
+  font-weight: 400;
   color: var(--primary);
 }
 
-.radioGroup .root .optionsContainer .radio .radioLabel .subHeading {
+.subHeading {
   font-size: 12px;
   line-height: 16px;
   color: var(--secondary);
 }
 
-.radioGroup .root .optionsContainer .radio .radioControl {
+.radioControl {
   order: 1;
   width: 16px;
   height: 16px;
@@ -56,13 +57,13 @@
   flex-shrink: 0;
 }
 
-.radioGroup .root .optionsContainer .radio .radioControl.radioControlActive {
+.radioControlActive {
   border-color: var(--iris, #6c5bd2);
   background-color: var(--iris, #6c5bd2);
   position: relative;
 }
 
-.radioGroup .root .optionsContainer .radio .radioControl.radioControlActive::after {
+.radioControlActive::after {
   content: '';
   display: block;
   width: 6px;
@@ -75,7 +76,7 @@
   transform: translate(-50%, -50%);
 }
 
-.radioGroup .errorMsg {
+.errorMsg {
   font-size: 13px;
   font-style: normal;
   font-weight: 400;

@@ -22,6 +22,7 @@ interface TooltipContentProps {
    * positioner styles
    */
   positionerStyles?: React.CSSProperties
+  containerStyles?: React.CSSProperties
 }
 
 export function TooltipContent({
@@ -29,6 +30,7 @@ export function TooltipContent({
   api,
   bg = 'black',
   positionerStyles = {},
+  containerStyles = {},
 }: TooltipContentProps) {
   const isCustomBg = !['black', 'gray'].includes(bg)
 
@@ -52,7 +54,7 @@ export function TooltipContent({
           <div
             {...api.contentProps}
             className={clsx(classes.content, classes[bg])}
-            style={{background: isCustomBg ? bg : ''}}
+            style={{background: isCustomBg ? bg : '', ...containerStyles}}
           >
             {children}
           </div>

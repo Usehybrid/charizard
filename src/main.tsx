@@ -3,7 +3,15 @@ import ReactDOM from 'react-dom/client'
 import randomIcon from './components/assets/check.svg'
 import randomIcon2 from './components/assets/search-2.svg'
 import {createColumnHelper} from '@tanstack/react-table'
-import {InputContainer, InputGroup, InputLabel, LayoutTabs, RadioGroup, Table} from './components'
+import {
+  Input,
+  InputContainer,
+  InputGroup,
+  InputLabel,
+  LayoutTabs,
+  RadioGroup,
+  Table,
+} from './components'
 
 const styles = {
   width: '90%',
@@ -364,18 +372,26 @@ function App() {
           emptySearchTitle: 'No inventories found',
         }}
       /> */}
-      <InputContainer>
-        <InputLabel required>Pricing structure</InputLabel>
-        <InputGroup>
-          <RadioGroup
-            optionsContainerStyles={{flexDirection: 'row', gap: '40px'}}
-            defaultValue={'advanced'}
-            items={i}
-            required
-            onChange={() => {}}
-          />
-        </InputGroup>
-      </InputContainer>
+      <div>
+        <InputContainer>
+          <InputLabel required>Pricing structure</InputLabel>
+          <InputGroup>
+            <RadioGroup
+              optionsContainerStyles={{flexDirection: 'row', gap: '40px'}}
+              defaultValue={'advanced'}
+              items={i}
+              required
+              onChange={() => {}}
+            />
+          </InputGroup>
+        </InputContainer>
+        <InputContainer>
+          <InputLabel required>No of licenses purchased</InputLabel>
+          <InputGroup>
+            <Input type="number" placeholder="e.g 10" />
+          </InputGroup>
+        </InputContainer>
+      </div>
     </div>
   )
 }
@@ -387,6 +403,7 @@ const i = [
     },
     value: 'advanced',
     tooltip: {
+      placement: 'left',
       txt: 'Purchasing a set number of licenses at the beginning of the subscription period. For example, buying 100 licenses at the start of the year.',
     },
   },
