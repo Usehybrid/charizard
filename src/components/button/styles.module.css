@@ -114,6 +114,11 @@
   padding-right: 8px;
   border-right: none !important;
 }
+
+.btnMenuSingle {
+  border-radius: 6px;
+}
+
 .btnAddon {
   border-radius: 0 6px 6px 0;
   padding: 0 8px;
@@ -245,4 +250,8 @@
 
 .actionsDropdownSpan > .actionsDropdown.actionsDropdownActive > path {
   fill: var(--iris);
+}
+
+.chevronDown > g > path {
+  fill: white;
 }

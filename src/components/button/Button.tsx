@@ -74,6 +74,7 @@ export interface MenuButtonProps {
   menuItems: MenuItem[]
   onClick?: React.MouseEventHandler<HTMLButtonElement>
   isCustomTrigger?: boolean
+  isSingleBtnTrigger?: boolean
   // exists when it's a custom trigger, used to pass the whole row
   customData?: any
   size?: 'sm' | 'md'
@@ -91,6 +92,7 @@ function MenuButton({
   menuItems,
   onClick,
   isCustomTrigger = false,
+  isSingleBtnTrigger = false,
   customData,
   size = 'md',
   actionsDropdownOptions,
@@ -113,7 +115,24 @@ function MenuButton({
 
   return (
     <>
-      {isCustomTrigger ? (
+      {isSingleBtnTrigger ? (
+        <button
+          className={clsx(
+            classes.btn,
+            classes.btnMenuSingle,
+            variant === 'primary' && classes.btnPrimary,
+            variant === 'secondary' && classes.btnSecondary,
+            variant === 'ghost' && classes.btnGhost,
+            size === 'sm' && classes.btnSm,
+            disabled && classes.disabled,
+          )}
+          disabled={disabled}
+          {...api.triggerProps}
+        >
+          {children}
+          <SVG path={chevronDown} width={24} height={24} svgClassName={classes.chevronDown} />
+        </button>
+      ) : isCustomTrigger ? (
         <button
           className={clsx(
             'hybr1d-ui-reset-btn',

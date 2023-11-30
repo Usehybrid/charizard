@@ -4,6 +4,7 @@ import randomIcon from './components/assets/check.svg'
 import randomIcon2 from './components/assets/search-2.svg'
 import {createColumnHelper} from '@tanstack/react-table'
 import {
+  Button,
   Input,
   InputContainer,
   InputGroup,
@@ -372,51 +373,18 @@ function App() {
           emptySearchTitle: 'No inventories found',
         }}
       /> */}
-      <div>
-        <InputContainer>
-          <InputLabel required>Pricing structure</InputLabel>
-          <InputGroup>
-            <RadioGroup
-              optionsContainerStyles={{flexDirection: 'row', gap: '40px'}}
-              defaultValue={'advanced'}
-              items={i}
-              required
-              onChange={() => {}}
-            />
-          </InputGroup>
-        </InputContainer>
-        <InputContainer>
-          <InputLabel required>No of licenses purchased</InputLabel>
-          <InputGroup>
-            <Input type="number" placeholder="e.g 10" />
-          </InputGroup>
-        </InputContainer>
-      </div>
+      <Button.MenuButton
+        menuItems={[
+          {label: 'Custom software', onClick: () => {}},
+          {label: 'Add from app store', onClick: () => {}},
+        ]}
+        isSingleBtnTrigger
+      >
+        Add software
+      </Button.MenuButton>
     </div>
   )
 }
-
-const i = [
-  {
-    label: {
-      heading: 'Advance license procurement',
-    },
-    value: 'advanced',
-    tooltip: {
-      placement: 'left',
-      txt: 'Purchasing a set number of licenses at the beginning of the subscription period. For example, buying 100 licenses at the start of the year.',
-    },
-  },
-  {
-    label: {
-      heading: 'Pay as you go',
-    },
-    value: 'pay',
-    tooltip: {
-      txt: 'Paying for licenses as they are assigned to new users. For example, starting with 50 licenses and adding more one by one as new employees join',
-    },
-  },
-]
 
 export const filters = [
   {
