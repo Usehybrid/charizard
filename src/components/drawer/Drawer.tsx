@@ -176,10 +176,8 @@ export function Drawer({
                             key={idx}
                             disabled={btn.disabled}
                             variant={btn.variant}
-                            onClick={() => {
-                              btn.onClick()
-                              // onClose()
-                            }}
+                            onClick={btn.onClick ? btn.onClick : undefined}
+                            type={btn.btnType}
                           >
                             {btn.btnText}
                           </Button>

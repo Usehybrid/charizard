@@ -6,6 +6,7 @@ export type FooterButtons = Array<{
   variant: BUTTON_VARIANT
   onClick: () => void
   btnText: string
+  btnType?: 'button' | 'submit' | 'reset'
   btnSize?: 'xs' | 'sm' | 'md' | 'adapt'
   disabled?: boolean
   isLoading?: boolean
