@@ -19,7 +19,7 @@
   justify-content: space-between;
 }
 
-.progressContainer .header .steps {
+.steps {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -30,32 +30,32 @@
   padding: 0 5px;
 }
 
-.progressContainer .header .btnsFlex {
+.btnsFlex {
   display: flex;
   align-items: center;
   gap: 12px;
 }
 
-.progressContainer .header .steps .step {
+.step {
   display: flex;
   align-items: center;
   gap: 12px;
 }
 
-.progressContainer .header .steps .step .line {
+.line {
   width: 2.8rem;
   height: 1px;
   background: var(--black);
 }
 
-.progressContainer .header .steps .step .labelContainer {
+.labelContainer {
   display: flex;
   align-items: center;
   gap: 12px;
   height: 40px;
 }
 
-.progressContainer .header .steps .step .labelContainer .circle {
+.circle {
   width: 24px;
   height: 24px;
   flex-shrink: 0;
@@ -75,12 +75,12 @@
   position: relative;
 }
 
-.progressContainer .header .steps .step .labelContainer .circle.active {
+.circle.active {
   background: var(--iris-40);
   color: var(--white);
 }
 
-.progressContainer .header .steps .step .labelContainer .circle.active::after {
+.circle.active::after {
   content: '';
   width: 28px;
   height: 28px;
@@ -95,12 +95,12 @@
   transform: translate(-2px, -2px);
 }
 
-.progressContainer .header .steps .step .labelContainer .circle.completed {
+.circle.completed {
   background: var(--iris-60);
   padding: 6px;
 }
 
-.progressContainer .header .steps .step .labelContainer .label {
+.label {
   color: var(--secondary);
   font-size: 16px;
   font-style: normal;
@@ -109,7 +109,7 @@
   white-space: nowrap;
 }
 
-.progressContainer .header .steps .step .labelContainer .label.active {
+.label.active {
   color: var(--primary);
   font-size: 16px;
   font-style: normal;
