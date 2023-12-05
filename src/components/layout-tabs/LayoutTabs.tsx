@@ -14,11 +14,15 @@ interface LayoutTabsProps {
    * default value (initial tab to render)
    */
   defaultValue: string
+  /**
+   * callback function when tab is changed
+   */
+  onValueChange?: (value: string) => void
 }
 
 const SEARCH_PARAM_KEY = 'active-tab'
 
-export function LayoutTabs({tabs, defaultValue, tabClassName}: LayoutTabsProps) {
+export function LayoutTabs({tabs, defaultValue, tabClassName, onValueChange}: LayoutTabsProps) {
   // const url = React.useMemo(() => new URL(window.location.href), [])
   // const value = url.searchParams.get(SEARCH_PARAM_KEY) ?? defaultValue
 
@@ -34,6 +38,9 @@ export function LayoutTabs({tabs, defaultValue, tabClassName}: LayoutTabsProps) 
     zagTabs.machine({
       id: React.useId(),
       value: defaultValue,
+      onValueChange(details) {
+        onValueChange?.(details.value)
+      },
       // onValueChange(details) {
       //   url.searchParams.set(SEARCH_PARAM_KEY, details.value)
       //   history.pushState({...history.state}, '', url.href)
