@@ -3,16 +3,7 @@ import ReactDOM from 'react-dom/client'
 import randomIcon from './components/assets/check.svg'
 import randomIcon2 from './components/assets/search-2.svg'
 import {createColumnHelper} from '@tanstack/react-table'
-import {
-  Button,
-  Input,
-  InputContainer,
-  InputGroup,
-  InputLabel,
-  LayoutTabs,
-  RadioGroup,
-  Table,
-} from './components'
+import {Table} from './components'
 
 const styles = {
   width: '90%',
@@ -297,8 +288,8 @@ function App() {
 
   return (
     <div style={styles}>
-      {/* <Table
-        data={data}
+      <Table
+        data={[] || data}
         loaderConfig={{isFetching: false, isError: false, text: 'Getting employees...'}}
         columns={columns}
         searchConfig={{
@@ -372,16 +363,7 @@ function App() {
           columns: 6,
           emptySearchTitle: 'No inventories found',
         }}
-      /> */}
-      <Button.MenuButton
-        menuItems={[
-          {label: 'Custom software', onClick: () => {}},
-          {label: 'Add from app store', onClick: () => {}},
-        ]}
-        isSingleBtnTrigger
-      >
-        Add software
-      </Button.MenuButton>
+      />
     </div>
   )
 }

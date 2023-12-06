@@ -1,6 +1,6 @@
 # Charizard (Hybr1d UI)
 
-[![npm version](https://badge.fury.io/js/hybr1d-ui.svg)](https://badge.fury.io/js/hybr1d-ui)
+[![npm version](https://badge.fury.io/js/@hybr1d/charizard.svg)](https://badge.fury.io/js/@hybr1d/charizard)
 
 A collection of reusable React components for building beautiful user interfaces. This library is
 built using Vite for fast development and Storybook for component documentation and showcase.

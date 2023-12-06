@@ -274,17 +274,19 @@ export function Table({
           {!headerText && (
             <div className={classes.meta}>
               <div className={classes.total}>{totalText}</div>
-              {typeof filterConfig === 'object' && <TableFilters filterConfig={filterConfig} />}
+              {typeof filterConfig === 'object' && !isEmpty && (
+                <TableFilters filterConfig={filterConfig} />
+              )}
             </div>
           )}
 
           {headerText && <div className={classes.headerTxt}>{headerText}</div>}
 
           <div className={classes.selectorGrp}>
-            {typeof selectorConfig === 'object' && (
+            {typeof selectorConfig === 'object' && !isEmpty && (
               <Selectors selectors={selectorConfig?.selectors} />
             )}
-            {typeof searchConfig === 'object' && (
+            {typeof searchConfig === 'object' && !isEmpty && (
               <div className={classes.search}>
                 <Search
                   id="table-search"

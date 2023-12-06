@@ -8,6 +8,7 @@ export type SelectorsProps = {
 
 export function Selectors({selectors}: SelectorsProps) {
   const [active, setActive] = React.useState(0)
+
   return (
     <div className={classes.box}>
       {selectors.map((selector, idx) => (
