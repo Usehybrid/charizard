@@ -1,5 +1,5 @@
 {
-  "name": "hybr1d-ui",
+  "name": "@hybr1d/charizard",
   "version": "0.3.33",
   "type": "module",
   "files": [
@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Usehybrid/hybrid-ui"
+    "url": "https://github.com/Usehybrid/charizard"
   },
   "scripts": {
     "dev": "vite",
@@ -68,5 +68,8 @@
     "vite-plugin-checker": "^0.6.2",
     "vite-plugin-dts": "^3.6.3",
     "vite-plugin-libcss": "^1.1.1"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

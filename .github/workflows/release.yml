@@ -44,7 +44,7 @@ jobs:
           status: ${{ job.status }}
           channel: '#alerts-deploys'
           message:
-            'Hybrid UI was successfully published to npm'
+            'Charizard was successfully published to npm'
         if: success()
       - name: slack - build failed
         uses: act10ns/slack@v2.0.0
@@ -52,7 +52,7 @@ jobs:
           status: ${{ job.status }}
           channel: '#alerts-deploys'
           message:
-            'Hybrid UI has failed to publish to npm'
+            'Charizard has failed to publish to npm'
         if: failure()
 
    

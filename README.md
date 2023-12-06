@@ -1,4 +1,4 @@
-# Hybrid UI
+# Charizard (Hybr1d UI)
 
 [![npm version](https://badge.fury.io/js/hybr1d-ui.svg)](https://badge.fury.io/js/hybr1d-ui)
 
@@ -10,12 +10,18 @@ built using Vite for fast development and Storybook for component documentation 
 To install the library, use pnpm i
 
 ```bash
-pnpm up hybr1d-ui -L
+pnpm i @hybr1d/charizard
+```
+
+To update the library
+
+```bash
+pnpm up @hybr1d/charizard -L
 ```
 
 ## Publishing to npm
 
-_follow semver for version upgrade_
+Use the following commands, _follow semver for version upgrade_
 
 ```bash
 pnpm version patch

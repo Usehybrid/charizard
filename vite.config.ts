@@ -22,7 +22,7 @@ export default defineConfig({
   build: {
     lib: {
       entry: resolve(__dirname, 'src/components/index.ts'),
-      name: 'Hybr1d UI',
+      name: 'Charizard',
       fileName: 'hybr1d-ui',
     },
     rollupOptions: {
