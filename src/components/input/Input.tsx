@@ -57,6 +57,16 @@ type InputProps = {
    * Error message of the input
    */
   errorMsg?: string | false
+
+  /** Multiple select? */
+  multiple?: boolean
+  /** Blur event handler */
+  onBlur?: {
+    /** Classic React blur handler, keyed by input name */
+    (e: React.FocusEvent<any>): void
+    /** Preact-like linkState. Will return a handleBlur function. */
+    <T = string | any>(fieldOrEvent: T): T extends string ? (e: any) => void : void
+  }
 }
 
 export function Input({
@@ -73,6 +83,7 @@ export function Input({
   rows = 2,
   type = 'text',
   placeholder = 'Placeholder',
+  onBlur,
 }: InputProps) {
   // ref to show picker
   const inputRef = React.useRef<HTMLInputElement>(null)
@@ -91,6 +102,7 @@ export function Input({
           value={value}
           onChange={onChange}
           disabled={disabled}
+          onBlur={onBlur}
           {...restprops}
         ></textarea>
       ) : (
@@ -106,6 +118,7 @@ export function Input({
           onChange={onChange}
           disabled={disabled}
           onClick={() => inputRef.current?.showPicker()}
+          onBlur={onBlur}
           {...restprops}
         />
       )}

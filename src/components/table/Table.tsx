@@ -112,7 +112,11 @@ export interface TableProps {
 // * use deferred while value when data is being re-fetched for total row count flickering issue
 // * figure out clearing of row selection after overlay closes
 // * responsiveness
-// * sync all the table states with url
+// * sync all the table states with url (automatic reset state in table when route changes (or sync filter with url) (p1))
+// * empty state center aligned
+// ?p1: DATE FILTER https://www.figma.com/file/gVfOsoM56qfu6BmwQ9XEaR/SaaS-V1.1?node-id=60%3A6727&mode=dev
+//? Single filter https://www.figma.com/file/gVfOsoM56qfu6BmwQ9XEaR/SaaS-V1.1?node-id=60%3A6383&mode=dev
+//?table when results are under 10 height issue, it keeps loading
 
 export function Table({
   data,
@@ -274,19 +278,17 @@ export function Table({
           {!headerText && (
             <div className={classes.meta}>
               <div className={classes.total}>{totalText}</div>
-              {typeof filterConfig === 'object' && !isEmpty && (
-                <TableFilters filterConfig={filterConfig} />
-              )}
+              {typeof filterConfig === 'object' && <TableFilters filterConfig={filterConfig} />}
             </div>
           )}
 
           {headerText && <div className={classes.headerTxt}>{headerText}</div>}
 
           <div className={classes.selectorGrp}>
-            {typeof selectorConfig === 'object' && !isEmpty && (
+            {typeof selectorConfig === 'object' && (
               <Selectors selectors={selectorConfig?.selectors} />
             )}
-            {typeof searchConfig === 'object' && !isEmpty && (
+            {typeof searchConfig === 'object' && (
               <div className={classes.search}>
                 <Search
                   id="table-search"
