@@ -289,7 +289,7 @@ function App() {
   return (
     <div style={styles}>
       <Table
-        data={[] || data}
+        data={data}
         loaderConfig={{isFetching: false, isError: false, text: 'Getting employees...'}}
         columns={columns}
         searchConfig={{

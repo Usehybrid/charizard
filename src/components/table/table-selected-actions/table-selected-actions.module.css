@@ -27,7 +27,8 @@
   border-radius: 44px;
   background: var(--slate-20);
 
-  font-size: 0.625rem;
+  font-size: 10px;
+  font-weight: 500;
   line-height: 1.25rem; /* 200% */
   letter-spacing: 0.0125rem;
   color: var(--text-primary);
