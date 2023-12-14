@@ -34,7 +34,6 @@ export default function TableSelectedActions({
                   <SVG path={iconSrc || ''} svgClassName={classes.selectedIcon} />
                 </div>
               )}
-
               <Button.MenuButton
                 variant={BUTTON_VARIANT.SECONDARY}
                 size="sm"
