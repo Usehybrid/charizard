@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import randomIcon from './components/assets/check.svg'
 import randomIcon2 from './components/assets/search-2.svg'
 import {createColumnHelper} from '@tanstack/react-table'
-import {Table} from './components'
+import {Input, InputGroup, InputRightAddon, Table} from './components'
 
 const styles = {
   width: '90%',
