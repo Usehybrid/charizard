@@ -304,7 +304,9 @@ export function Table({
       )}
 
       {/* multi selected actions */}
-      <TableSelectedActions rowSelectionConfig={rowSelectionConfig} rowSelection={rowSelection} />
+      {rowSelectionConfig?.actions && rowSelectionConfig.actions.length > 0 && (
+        <TableSelectedActions rowSelectionConfig={rowSelectionConfig} rowSelection={rowSelection} />
+      )}
 
       {paginationConfig ? (
         <InfiniteScroll
@@ -362,9 +364,6 @@ function TableComp({
         {table.getHeaderGroups().map(headerGroup => (
           <tr key={headerGroup.id} className={classes.tableRow}>
             {headerGroup.headers.map(header => {
-              if (header.index === 0) {
-                // console.log(header)
-              }
               return (
                 <th
                   key={header.id}

@@ -26,40 +26,35 @@ export default function TableSelectedActions({
       {isCheckbox && Object.keys(rowSelection).length > 0 && (
         <div className={classes.selectedActions}>
           <div className={classes.selectedInfo}>{Object.keys(rowSelection).length}</div>
-
-          {actions?.length ? (
-            <div className={classes.selectedAction}>
-              {iconSrc && (
-                <div>
-                  <SVG path={iconSrc || ''} svgClassName={classes.selectedIcon} />
-                </div>
-              )}
-              <Button.MenuButton
-                variant={BUTTON_VARIANT.SECONDARY}
-                size="sm"
-                isCustomTrigger
-                menuItems={
-                  actions?.map(action => ({
-                    label: action.text,
-                    onClick: action.onClick,
-                    iconSrc: action.icon,
-                  })) || []
-                }
-                positionerProps={{placement: 'bottom-start'}}
-              >
-                <Button variant={BUTTON_VARIANT.SECONDARY} size="sm">
-                  Actions
-                  <SVG
-                    svgClassName={classes.actionsBtnIcon}
-                    path={chevronDown}
-                    spanClassName={classes.actionsBtnIconSpan}
-                  />
-                </Button>
-              </Button.MenuButton>
-            </div>
-          ) : (
-            <></>
-          )}
+          <div className={classes.selectedAction}>
+            {iconSrc && (
+              <div>
+                <SVG path={iconSrc || ''} svgClassName={classes.selectedIcon} />
+              </div>
+            )}
+            <Button.MenuButton
+              variant={BUTTON_VARIANT.SECONDARY}
+              size="sm"
+              isCustomTrigger
+              menuItems={
+                actions?.map(action => ({
+                  label: action.text,
+                  onClick: action.onClick,
+                  iconSrc: action.icon,
+                })) || []
+              }
+              positionerProps={{placement: 'bottom-start'}}
+            >
+              <Button variant={BUTTON_VARIANT.SECONDARY} size="sm">
+                Actions
+                <SVG
+                  svgClassName={classes.actionsBtnIcon}
+                  path={chevronDown}
+                  spanClassName={classes.actionsBtnIconSpan}
+                />
+              </Button>
+            </Button.MenuButton>
+          </div>
         </div>
       )}
     </>

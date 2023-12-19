@@ -12,6 +12,12 @@ export default function TableActions({actionsConfig, data}: TableActionsProps) {
   const {menuItems = [], isDropdownActions, key, customComp} = actionsConfig
   if (!isDropdownActions) return null
 
+  const filteredMenuItems = actionsConfig.menuItems?.filter(item => {
+    return typeof item.filterFn === 'function' ? item.filterFn(data) : true
+  })
+
+  if (!filteredMenuItems?.length) return null
+
   if (!key && !customComp)
     return (
       <div className={classes.box}>

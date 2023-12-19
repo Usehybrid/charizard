@@ -228,7 +228,6 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 
 const getFullName = (owner: any) => {
   if (!owner) return 'N/A'
-
   return `${owner.first_name} ${owner.last_name}`
 }
 
@@ -238,6 +237,7 @@ const menuItems = [
     iconSrc: randomIcon,
     onClick: (data: any) => {},
     filterFn: (data: any) => {
+      console.log(data, 'works')
       return data.software.name === 'Figma'
     },
   },
@@ -246,12 +246,16 @@ const menuItems = [
     label: 'De-allocate',
     iconSrc: randomIcon,
     onClick: (data: any) => {},
+    filterFn: (data: any) => {
+      // return data.software.name === 'Figma'
+      return false
+    },
   },
-  {
-    label: 'Archive',
-    iconSrc: randomIcon2,
-    onClick: (data: any) => {},
-  },
+  // {
+  //   label: 'Archive',
+  //   iconSrc: randomIcon2,
+  //   onClick: (data: any) => {},
+  // },
 ]
 
 const columns = [
