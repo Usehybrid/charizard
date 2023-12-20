@@ -26,7 +26,7 @@ export default defineConfig({
       fileName: 'hybr1d-ui',
     },
     rollupOptions: {
-      external: Object.keys(pkg.peerDependencies || {}),
+      external: [...Object.keys(pkg.peerDependencies), '@emotion/react'],
       output: {
         globals: {
           react: 'React',
