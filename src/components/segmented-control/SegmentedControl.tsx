@@ -18,23 +18,9 @@ type SegmentedControlProps = {
    * use this if you are controlling the behavior of segmented control from an external entity
    */
   handleOnChange?: (value: string) => void
-  /**
-   * custom classes to override segmented control default styles
-   */
-  customStyles?: Record<string, string>
-  /**
-   * custom class name to override segmented control default styles
-   */
-  customClassName?: string
 }
 
-export function SegmentedControl({
-  items,
-  defaultValue,
-  handleOnChange,
-  customClassName,
-  customStyles,
-}: SegmentedControlProps) {
+export function SegmentedControl({items, defaultValue, handleOnChange}: SegmentedControlProps) {
   const [state, send] = useMachine(
     radio.machine({
       id: React.useId(),
@@ -53,7 +39,7 @@ export function SegmentedControl({
   }, [defaultValue])
 
   return (
-    <div className={clsx(classes.segmentedControl, customClassName)} style={customStyles}>
+    <div className={classes.segmentedControl}>
       <div {...api.rootProps} className={classes.root}>
         <div {...api.indicatorProps} className={classes.indicator} />
         {items.map(opt => (
