@@ -85,10 +85,13 @@ export interface TableProps {
     metaData: {
       total_items: number
       items_on_page: number
+      page_no: number
     }
     loader: React.ReactNode
     fetchNextPage: () => void
     height?: string
+    scrollThreshold?: string | number
+    scrollableTarget?: string
   }
   emptyStateConfig?: {
     icon: string
@@ -315,6 +318,8 @@ export function Table({
           hasMore={data?.length < paginationConfig.metaData?.total_items}
           loader={paginationConfig.loader}
           height={paginationConfig.height}
+          scrollThreshold={paginationConfig.scrollThreshold}
+          scrollableTarget={paginationConfig.scrollableTarget}
         >
           <TableComp
             table={table}
