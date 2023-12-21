@@ -13,6 +13,7 @@ import sortIcon from '../assets/swap-2.svg'
 import sortAscIcon from '../assets/swap-2-asc.svg'
 import sortDescIcon from '../assets/swap-2-desc.svg'
 import classes from './styles.module.css'
+import {useInView} from 'react-intersection-observer'
 import {useReactTable, getCoreRowModel, flexRender} from '@tanstack/react-table'
 import {Search} from '../search'
 import {Selectors} from '../selectors'
@@ -28,7 +29,9 @@ export interface TableProps {
   data: any
   // table column definition with column api from tanstack
   columns: any
-  // column for actions dropdown in the row
+  /**
+   * column for actions dropdown in the last row
+   */
   actionsConfig?: {
     isDropdownActions?: boolean
     // menu list for the dropdown
@@ -43,7 +46,9 @@ export interface TableProps {
     isError: boolean
     errMsg?: string
   }
-  // table search
+  /**
+   * table search
+   */
   searchConfig?: {
     placeholder?: string
     search: string
@@ -62,10 +67,12 @@ export interface TableProps {
   }
   /**
    * table filtering, data comes from an api
-   *
    */
   filterConfig?: FilterConfig
   totalText?: string
+  /**
+   * Row checkbox or radio selection config
+   */
   rowSelectionConfig?: {
     isCheckbox?: boolean
     isRadio?: boolean
@@ -81,6 +88,9 @@ export interface TableProps {
   selectorConfig?: {
     selectors: {name: string; onClick: any}[]
   }
+  /**
+   * @deprecated use infiniteScrollConfig
+   */
   paginationConfig?: {
     metaData: {
       total_items: number
@@ -92,6 +102,13 @@ export interface TableProps {
     height?: string
     scrollThreshold?: string | number
     scrollableTarget?: string
+  }
+  /**
+   * Used for infinite scroll, all the properties comes from useInfiniteQuery
+   */
+  infiniteScrollConfig?: {
+    fetchNextPage: () => void
+    isFetchingNextPage: boolean
   }
   emptyStateConfig?: {
     icon: string
@@ -141,16 +158,19 @@ export function Table({
   paginationConfig,
   emptyStateConfig,
   headerText,
+  infiniteScrollConfig,
 }: TableProps) {
   const [sorting, setSorting] = React.useState<SortingState>([])
   // used for checkbox visibility
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
   const [rowSelection, setRowSelection] = React.useState({})
+  // used with infiniteScrollConfig
+  const {ref, inView} = useInView()
 
   // account for search state here itself
   const isEmpty = !loaderConfig.isFetching && !loaderConfig.isError && !data.length
 
-  const {isCheckbox, isRadio, actions, setSelectedRows, iconSrc} = rowSelectionConfig
+  const {isCheckbox, isRadio, setSelectedRows} = rowSelectionConfig
 
   useDeepCompareEffect(() => {
     if (!sortConfig || !sorting.length) return
@@ -164,6 +184,13 @@ export function Table({
     const rows = table.getSelectedRowModel().rows.map(row => row.original)
     setSelectedRows([...rows])
   }, [rowSelection])
+
+  React.useEffect(() => {
+    if (!infiniteScrollConfig) return
+    if (inView) {
+      infiniteScrollConfig.fetchNextPage()
+    }
+  }, [infiniteScrollConfig?.fetchNextPage, inView])
 
   const _columns = [
     {
@@ -341,6 +368,11 @@ export function Table({
           emptyStateConfig={emptyStateConfig}
           search={searchConfig?.search}
         />
+      )}
+      {infiniteScrollConfig && (
+        <div>
+          <div ref={ref} />
+        </div>
       )}
     </div>
   )
