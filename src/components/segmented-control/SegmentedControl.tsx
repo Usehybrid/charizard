@@ -2,7 +2,6 @@ import * as React from 'react'
 import * as radio from '@zag-js/radio-group'
 import classes from './styles.module.css'
 import {useMachine, normalizeProps} from '@zag-js/react'
-import clsx from 'clsx'
 
 type SegmentedControlProps = {
   /**
