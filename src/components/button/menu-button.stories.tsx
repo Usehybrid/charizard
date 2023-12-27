@@ -20,6 +20,13 @@ export const MenuButton: Story = {
         onClick: () => console.log('Item 1 clicked'),
         filterFn: () => {},
       },
+      {
+        label: 'Disabled Item',
+        iconSrc: icon,
+        onClick: () => console.log('Item 1 clicked'),
+        disabled: true,
+        filterFn: () => {},
+      },
     ],
   },
 }
