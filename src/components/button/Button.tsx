@@ -65,7 +65,13 @@ export function Button({
   )
 }
 
-export type MenuItem = {label: string; iconSrc?: string; onClick: any; filterFn?: any}
+export type MenuItem = {
+  label: string
+  iconSrc?: string
+  onClick: any
+  filterFn?: any
+  disabled?: boolean
+}
 
 export interface MenuButtonProps {
   children: React.ReactNode
@@ -202,9 +208,15 @@ function MenuButton({
             .map(menu => (
               <div
                 key={menu.label}
-                className={classes.menu}
+                className={clsx(classes.menu, {[classes.menuDisabled]: menu.disabled})}
                 {...api.getItemProps({id: menu.label.toLowerCase()})}
-                onClick={isCustomTrigger ? () => menu.onClick(customData) : menu.onClick}
+                onClick={
+                  menu.disabled
+                    ? undefined
+                    : isCustomTrigger
+                    ? () => menu.onClick(customData)
+                    : menu.onClick
+                }
               >
                 {menu.iconSrc && <SVG path={menu.iconSrc} svgClassName={classes.menuIcon} />}
                 {menu.label}

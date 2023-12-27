@@ -35,7 +35,13 @@ export interface TableProps {
   actionsConfig?: {
     isDropdownActions?: boolean
     // menu list for the dropdown
-    menuItems?: {label: string; iconSrc?: string; onClick: any; filterFn?: any}[]
+    menuItems?: {
+      label: string
+      iconSrc?: string
+      onClick: any
+      filterFn?: any
+      disabled?: boolean
+    }[]
     key?: string
     customComp?: React.ReactNode
   }
