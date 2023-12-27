@@ -40,7 +40,7 @@ export interface TableProps {
       iconSrc?: string
       onClick: any
       filterFn?: any
-      disabled?: boolean
+      disabled?: boolean | ((data: any) => boolean)
     }[]
     key?: string
     customComp?: React.ReactNode

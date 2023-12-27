@@ -18,16 +18,21 @@ export default function TableActions({actionsConfig, data}: TableActionsProps) {
 
   if (!filteredMenuItems?.length) return null
 
+  const items = menuItems.map(item => ({
+    ...item,
+    disabled: typeof item.disabled === 'function' ? item.disabled(data) : false,
+  }))
+
   if (!key && !customComp)
     return (
       <div className={classes.box}>
-        <Button.ActionsDropdown menuItems={menuItems} data={data} />
+        <Button.ActionsDropdown menuItems={items} data={data} />
       </div>
     )
 
   return (
     <div className={classes.box}>
-      <Button.ActionsDropdown menuItems={menuItems} data={data} variant="small" />
+      <Button.ActionsDropdown menuItems={items} data={data} variant="small" />
       {customComp ? (
         customComp
       ) : key && data[key] ? (
