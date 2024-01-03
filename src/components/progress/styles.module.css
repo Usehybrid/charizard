@@ -7,7 +7,6 @@
   width: 100%;
   height: 60px;
   padding: 16px 15px;
-  background: var(--slate-50);
 
   position: sticky;
   top: 0;
@@ -45,7 +44,7 @@
 .line {
   width: 2.8rem;
   height: 1px;
-  background: var(--black);
+  background: var(--neutral-arch-500);
 }
 
 .labelContainer {
@@ -59,13 +58,14 @@
   width: 24px;
   height: 24px;
   flex-shrink: 0;
-  background: var(--slate-200);
+  background: var(--neutral-arch-30);
+
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
 
-  color: var(--secondary);
+  color: var(--text-secondary);
   font-family: Instrument Sans;
   font-size: 12px;
   font-style: normal;
@@ -76,8 +76,9 @@
 }
 
 .circle.active {
-  background: var(--iris-40);
-  color: var(--white);
+  background: var(--theme-royal-blue-tint);
+  font-weight: 700;
+  color: var(--neutral-white);
 }
 
 .circle.active::after {
@@ -90,18 +91,18 @@
   position: absolute;
   top: 0;
   left: 0;
-  border: 1px dashed var(--iris-40);
+  border: 1px dashed var(--theme-royal-blue-tint);
   border-radius: 50%;
   transform: translate(-2px, -2px);
 }
 
 .circle.completed {
-  background: var(--iris-60);
+  background: var(--theme-blue);
   padding: 6px;
 }
 
 .label {
-  color: var(--secondary);
+  color: var(--text-secondary);
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -110,7 +111,7 @@
 }
 
 .label.active {
-  color: var(--primary);
+  color: var(--text-primary);
   font-size: 16px;
   font-style: normal;
   font-weight: 600;

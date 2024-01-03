@@ -53,4 +53,69 @@
   /* grays */
 
   --gray-700: #2d3748;
+
+  /* ! NEW VARIABLES */
+  /* https://www.figma.com/file/oifEB5HVoXf36YyO4DJKhN/%F0%9F%8E%A8-Hybr1dge-DS-2?type=design&node-id=167-46&mode=design&t=xqz7njIqVMHMysXo-0 */
+
+  /* * text colors */
+  --text-primary: #000041;
+  --text-secondary: #555580;
+  --text-hint: #a3a3be;
+
+  /* * neutral colors */
+  --neutral-white: #ffffff;
+  --neutral-arch-10: #fafafb;
+  --neutral-arch-20: #f7f8fd;
+  --neutral-arch-30: #f2f5fd;
+  --neutral-arch-40: #f5f5f7;
+  --neutral-arch-50: #f0f0f4;
+  --neutral-arch-70: #eef1fc;
+  --neutral-arch-100: #eaeefb;
+  --neutral-arch-200: #ebebf0;
+  --neutral-arch-300: #e6e6ec;
+  --neutral-arch-400: #b6c3f2;
+  --neutral-arch-500: #abbbf0;
+  --neutral-arch-600: #9d9db6;
+  --neutral-arch-700: #97aaed;
+  --neutral-arch-800: #79799b;
+  --neutral-arch-900: #616189;
+
+  /* * theme colors */
+  --theme-blue: #254dda;
+  --theme-blue-gradient: linear-gradient(180deg, #6d88e6 0%, #5877e2 100%);
+  --theme-blue-dark: #2145c5;
+  --theme-royal-blue-tint: #4e6ee1;
+
+  /* *status colors */
+  --status-error: #e74c3c;
+  --status-warning: #f39c12;
+  --status-success: #36b37e;
+  --status-info: #3498db;
+
+  /* *disabled colors */
+  --disabled-50: #f9f9f9;
+  --disabled-100: #efefef;
+  --disabled-500: #999999;
+
+  /* *accent colors */
+  --accent-aqua: #beffda;
+  --accent-azure: #b8d3f0;
+  --accent-blossom: #dd7eaa;
+  --accent-citrus: #fba468;
+  --accent-cream: #ffede1;
+  --accent-dune: #ebe1b9;
+  --accent-fern: #7ecaa0;
+  --accent-lagoon: #52c4c4;
+  --accent-meadow: #c1d985;
+  --accent-mint: #d5eadc;
+  --accent-olive: #babdab;
+  --accent-orchid: #d6a3f1;
+  --accent-petal: #eaa8b8;
+  --accent-sky: #92a7ed;
+  --accent-tangerine: #ffc576;
+  --accent-tidal: #a5d6dc;
+  --accent-twilight: #8883c9;
+  --accent-wave: #52a7e0;
+  --accent-wisteria: #e2cbf7;
+  --accent-zest: #f4f5ad;
 }
