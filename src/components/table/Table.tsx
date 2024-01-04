@@ -79,7 +79,7 @@ export interface TableProps {
   /**
    * Row checkbox or radio selection config
    *
-   * @param getRowId: needed to keep the selected rows when search is being used server side https://tanstack.com/table/v8/docs/guide/row-selection#useful-row-ids
+   * @param rowIdKey: needed to keep the selected rows when search is being used server side https://tanstack.com/table/v8/docs/guide/row-selection#useful-row-ids
    */
   rowSelectionConfig?: {
     isCheckbox?: boolean
@@ -92,7 +92,7 @@ export interface TableProps {
     setSelectedRows?: React.Dispatch<React.SetStateAction<any>>
     iconSrc?: string
     clearOnSearch?: boolean
-    getRowId?: (row: any) => string
+    rowIdKey?: string
   }
   selectorConfig?: {
     selectors: {name: string; onClick: any}[]
@@ -157,7 +157,6 @@ export function Table({
     isCheckbox: false,
     isRadio: false,
     clearOnSearch: true,
-    getRowId: row => row.index,
   },
   actionsConfig = {
     isDropdownActions: false,
@@ -177,8 +176,6 @@ export function Table({
   const [rowSelection, setRowSelection] = React.useState({})
   // used with infiniteScrollConfig
   const {ref, inView} = useInView()
-
-  console.log(rowSelection)
 
   // account for search state here itself
   const isEmpty = !loaderConfig.isFetching && !loaderConfig.isError && !data.length
@@ -283,7 +280,9 @@ export function Table({
       size: Number.MAX_SAFE_INTEGER,
       maxSize: Number.MAX_SAFE_INTEGER,
     },
-    // getRowId: row => rowSelectionConfig?.getRowId(row),
+    getRowId: rowSelectionConfig?.rowIdKey
+      ? (row: any) => row[rowSelectionConfig?.rowIdKey as string]
+      : undefined,
   })
 
   React.useLayoutEffect(() => {

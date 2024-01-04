@@ -291,7 +291,6 @@ function App() {
 
   return (
     <div style={styles}>
-      {/* <ProgressComponentTest /> */}
       <Table
         data={data}
         loaderConfig={{isFetching: false, isError: false, text: 'Getting employees...'}}
@@ -348,6 +347,7 @@ function App() {
               onClick: () => {},
             },
           ],
+          // rowIdKey: 'id',
         }}
         actionsConfig={{
           menuItems,
@@ -366,33 +366,6 @@ function App() {
         }}
       />
     </div>
-  )
-}
-
-const ProgressComponentTest = () => {
-  return (
-    <Progress
-      lastStepFooterContinueBtnText="Finish"
-      onCancelClick={() => {}}
-      onFinalStepClick={() => {}}
-      steps={[
-        {
-          label: 'Step 1',
-          component: <div>Step 1</div>,
-          isError: false,
-          onContinueClick: () => {},
-        },
-        {
-          label: 'Step 2',
-          component: <div>Step 2</div>,
-          isError: false,
-          onContinueClick: () => {},
-        },
-      ]}
-      showSkipBtn
-      skipBtnText="Skip and continue"
-      showHeaderBtns
-    />
   )
 }
 
