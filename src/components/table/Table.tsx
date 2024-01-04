@@ -93,6 +93,8 @@ export interface TableProps {
     iconSrc?: string
     clearOnSearch?: boolean
     rowIdKey?: string
+    rowSelection?: {}
+    setRowSelection?: React.Dispatch<React.SetStateAction<{}>>
   }
   selectorConfig?: {
     selectors: {name: string; onClick: any}[]
@@ -263,14 +265,14 @@ export function Table({
     state: {
       sorting,
       columnVisibility,
-      rowSelection,
+      rowSelection: rowSelectionConfig?.rowSelection || rowSelection,
     },
     manualSorting: true,
     onSortingChange: setSorting,
     onColumnVisibilityChange: setColumnVisibility,
     enableRowSelection: true,
     // enableRowSelection: row => row.original.age > 18, // or enable row selection conditionally per row
-    onRowSelectionChange: setRowSelection,
+    onRowSelectionChange: rowSelectionConfig?.setRowSelection || setRowSelection,
     enableMultiRowSelection: isRadio ? false : true,
     manualPagination: true,
     manualFiltering: true,
