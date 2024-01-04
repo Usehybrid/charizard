@@ -237,7 +237,6 @@ const menuItems = [
     iconSrc: randomIcon,
     onClick: (data: any) => {},
     filterFn: (data: any) => {
-      console.log(data, 'works')
       return data.software.name === 'Figma'
     },
   },
@@ -354,7 +353,6 @@ function App() {
           menuItems,
           isDropdownActions: true,
           key: 'description',
-          // customComp: <div onClick={() => console.log('works')}>View more info</div>,
         }}
         totalText={`${4} softwares`}
         emptyStateConfig={{
@@ -362,9 +360,7 @@ function App() {
           title: 'Get started by adding your first inventory',
           desc: '',
           btnText: 'add inventory',
-          onClick: () => {
-            console.log('works')
-          },
+          onClick: () => {},
           columns: 6,
           emptySearchTitle: 'No inventories found',
         }}
