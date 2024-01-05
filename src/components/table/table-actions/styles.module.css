@@ -10,8 +10,8 @@
   padding: 4px;
   max-width: fit-content;
   border-radius: 2px;
-  background: rgba(125, 125, 161, 0.1);
-  color: #7d7da1;
+  background: var(--neutral-arch-200);
+  color: var(--text-secondary);
   font-size: 12px;
   font-weight: 500;
   line-height: 16px;

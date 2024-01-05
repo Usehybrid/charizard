@@ -6,7 +6,7 @@
 
 .filtersInfo {
   font-size: 12px;
-  color: var(--secondary);
+  color: var(--text-secondary);
 }
 
 .filter {
@@ -32,7 +32,7 @@
 }
 
 .filterActive {
-  background-color: var(--slate-50);
+  background-color: var(--neutral-arch-40);
 }
 
 .filterIcon {
@@ -57,11 +57,11 @@
   height: 20px;
 }
 .filterIcon2 > path {
-  fill: var(--slate-600);
+  fill: var(--neutral-arch-600);
 }
 
 .filterCol {
-  color: var(--secondary);
+  color: var(--text-primary);
   font-size: 14px;
   line-height: 20px;
   margin-inline-end: 4px;
@@ -69,7 +69,7 @@
 
 .totalSelected {
   border-radius: 3px;
-  background: var(--slate-800);
+  background: var(--neutral-arch-900);
   color: var(--white);
   font-size: 12px;
   font-weight: 500;
@@ -132,7 +132,7 @@
 }
 
 .selectedFilters {
-  color: var(--secondary);
+  color: var(--text-primary);
   font-size: 12px;
   font-weight: 500;
   line-height: 180%;
@@ -177,7 +177,7 @@
 
   border-radius: 6px;
   border: 1px solid var(--slate-200);
-  color: var(--secondary);
+  color: var(--text-primary);
   font-size: 12px;
   font-weight: 500;
   line-height: 16px;
@@ -191,7 +191,7 @@
 .resetIcon {
   width: 12px;
   height: 12px;
-  /* color: var(--secondary); */
+  /* color: var(--tex); */
   filter: invert(42%) sepia(91%) saturate(0%) hue-rotate(161deg) brightness(91%) contrast(93%);
 }
 

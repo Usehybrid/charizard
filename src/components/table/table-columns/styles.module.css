@@ -16,14 +16,14 @@
   width: 20px;
   height: 20px;
   border-radius: 3px;
-  border: 2px solid var(--slate-200);
-  accent-color: var(--iris);
+  border: 2px solid var(--neutral-arch-200);
+  accent-color: var(--theme-blue);
   margin: auto;
 }
 
 .checkboxSpan > input[type='checkbox']:checked {
-  border-color: var(--iris);
-  background-color: var(--iris);
+  border-color: var(--theme-blue);
+  background-color: var(--theme-blue);
   background-image: url('../../assets/check.svg');
   background-position: center;
   background-size: 12px;
@@ -39,6 +39,6 @@
 .radio {
   width: 20px;
   height: 20px;
-  border: 2px solid var(--slate-200);
-  accent-color: var(--iris);
+  border: 2px solid var(--neutral-arch-200);
+  accent-color: var(--theme-blue);
 }

@@ -11,7 +11,7 @@
   justify-content: space-between;
   padding: 8.33px 20px;
   border-radius: 4px 4px 0px 0px;
-  border: 1px solid var(--slate-200);
+  border: 1px solid var(--neutral-arch-100);
   border-bottom: none;
 }
 
@@ -23,7 +23,7 @@
 }
 
 .total {
-  color: var(--secondary);
+  color: var(--text-primary);
   font-size: 12px;
   line-height: 16px;
   margin-inline-end: 10px;
@@ -39,14 +39,14 @@
   table-layout: fixed;
   width: 100%;
   border-collapse: collapse;
-  border: 1px solid var(--slate-200);
+  border: 1px solid var(--neutral-arch-200);
   height: 100%;
   max-width: 100%;
   overflow-x: scroll;
 }
 
 .tableHead {
-  background: var(--slate-50);
+  background: var(--neutral-arch-20);
   height: 36px;
 }
 
@@ -65,34 +65,37 @@
 }
 
 .tableBody > .tableRow {
-  border: 1px solid var(--slate-200);
+  border: 1px solid var(--neutral-arch-200);
   border-bottom: none;
 }
 
 .tableHead > .tableRow {
-  border-left: 1px solid var(--slate-200);
-  border-right: 1px solid var(--slate-200);
+  border-left: 1px solid var(--neutral-arch-200);
+  border-right: 1px solid var(--neutral-arch-200);
 }
 
 .headerTxt {
-  color: var(--gray-700);
+  color: var(--text-secondary);
   font-size: 14px;
   font-weight: 500;
   line-height: 24px;
 }
 
 .tableHeader {
-  color: var(--slate-600);
+  color: var(--text-secondary);
+
   font-size: 12px;
+  font-style: normal;
   font-weight: 500;
-  line-height: 20px;
-  letter-spacing: 0.2px;
+  line-height: normal;
+  letter-spacing: -0.24px;
+
   text-transform: uppercase;
   text-align: left;
 }
 
 .tableHeaderSort:hover {
-  color: var(--slate-700);
+  color: var(--text-primary);
   cursor: pointer;
 }
 
@@ -107,6 +110,7 @@
   height: 18px;
 }
 
-.tableHeaderSort:hover .tableHeaderSortSpan .tableHeaderSortIcon > g > path {
-  fill: var(--slate-700);
+.tableHeaderSort:hover .tableHeaderSortSpan .tableHeaderSortIcon > g > path,
+.tableHeaderSort:hover .tableHeaderSortSpan .tableHeaderSortIcon > path {
+  fill: var(--text-primary);
 }
