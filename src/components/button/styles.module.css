@@ -9,7 +9,7 @@
   line-height: 24px;
   padding: 0px 16px;
   height: 40px;
-  border-radius: 6px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -40,7 +40,7 @@
 }
 
 .btnXs {
-  color: var(--iris);
+  color: var(--theme-blue);
   font-size: 12px;
   font-style: normal;
   font-weight: 500;
@@ -54,31 +54,31 @@
 }
 
 .btnPrimary {
-  background-color: var(--iris);
+  background-color: var(--theme-blue);
   color: white;
 }
 
 .btnPrimary:hover {
-  background-color: var(--iris-60);
+  background-color: var(--theme-blue-dark);
 }
 
 .btnSecondary {
-  background-color: var(--slate-20);
-  color: var(--primary);
+  background-color: var(--neutral-arch-30);
+  color: var(--text-primary);
 }
 
 .btnSecondary:hover {
-  background-color: var(--slate-50);
+  background-color: var(--neutral-arch-70);
 }
 
 .btnGhost {
-  background-color: var(--iris-5);
-  color: var(--iris);
-  border: 1px solid var(--iris);
+  background-color: var(--neutral-arch-20);
+  color: var(--theme-blue);
+  border: 1px solid var(--theme-blue);
 }
 
 .btnGhost:hover {
-  background-color: var(--iris-10);
+  background-color: var(--neutral-arch-30);
 }
 
 .btnDanger {
@@ -88,17 +88,17 @@
 
 .btnLink {
   background: none;
-  color: var(--iris);
+  color: var(--theme-blue);
 }
 
 .btnMinimal {
-  border: 1px solid var(--slate-300);
+  border: 1px solid var(--neutral-arch-300);
   background: var(--white);
-  color: var(--primary);
+  color: var(--text-primary);
 }
 
 .btnMinimal:hover {
-  background: var(--slate-100);
+  background: var(--neutral-arch-100);
 }
 
 /* Menu Button styles  */
@@ -110,42 +110,43 @@
 }
 
 .btnMenu {
-  border-radius: 6px 0 0 6px;
+  border-radius: 8px 0 0 8px;
   padding-right: 8px;
   border-right: none !important;
 }
 
 .btnMenuSingle {
-  border-radius: 6px;
+  border-radius: 8px;
 }
 
 .btnAddon {
-  border-radius: 0 6px 6px 0;
+  border-radius: 0 8px 8px 0;
   padding: 0 8px;
 }
 
 .btnAddonPrimary {
-  border-left: 1px solid var(--iris-40);
+  border-left: 1px solid white;
 }
 
+/* todo ask design team */
 .btnAddonSecondary {
-  border-left: 1px solid var(--slate-300);
+  border-left: 1px solid #dfe5f9;
 }
 
 .btnAddonGhost {
-  border-left: 1px solid var(--iris);
+  border-left: 1px solid #dfe5f9;
 }
 
 .btnImgPrimary {
-  filter: invert(100%) sepia(1%) saturate(7478%) hue-rotate(16deg) brightness(107%) contrast(100%);
+  filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(188deg) brightness(109%) contrast(111%);
 }
 
 .btnImgSecondary {
-  filter: invert(6%) sepia(7%) saturate(287%) hue-rotate(201deg) brightness(97%) contrast(93%);
+  filter: invert(33%) sepia(18%) saturate(1079%) hue-rotate(201deg) brightness(92%) contrast(85%);
 }
 
 .btnImgGhost {
-  filter: invert(37%) sepia(89%) saturate(3140%) hue-rotate(234deg) brightness(90%) contrast(81%);
+  filter: invert(27%) sepia(98%) saturate(3567%) hue-rotate(225deg) brightness(86%) contrast(99%);
 }
 
 .btnImgSm {
@@ -178,7 +179,7 @@
 }
 
 .menu:hover {
-  background: var(--slate-100);
+  background: var(--neutral-arch-100);
   cursor: pointer;
 }
 
@@ -199,11 +200,11 @@
 
 .menuIcon > g > path,
 .menuIcon > path {
-  fill: var(--slate-700);
+  fill: var(--neutral-arch-800);
 }
 
 .customTrigger {
-  border-radius: 6px;
+  border-radius: 8px;
 }
 
 .customTrigger:focus-visible {
@@ -211,11 +212,11 @@
 }
 
 .customTrigger:hover {
-  background-color: var(--slate-100);
+  background-color: var(--neutral-arch-100);
 }
 
 .customTriggerActive {
-  background-color: var(--iris-20) !important;
+  background-color: var(--neutral-arch-30) !important;
 }
 
 /* Actions Dropdown Styles */
@@ -250,15 +251,15 @@
 }
 
 .actionsDropdown > path {
-  fill: var(--slate-600);
+  fill: var(--neutral-arch-600);
 }
 
 .actionsDropdownSpan:hover > .actionsDropdown > path {
-  fill: var(--secondary);
+  fill: var(--text-secondary);
 }
 
 .actionsDropdownSpan > .actionsDropdown.actionsDropdownActive > path {
-  fill: var(--iris);
+  fill: var(--theme-blue);
 }
 
 .chevronDown > g > path {
