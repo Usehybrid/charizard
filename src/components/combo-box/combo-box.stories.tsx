@@ -10,11 +10,11 @@ export default meta
 type Story = StoryObj<typeof Combobox>
 
 export const clientSideSearch: Story = {
-  storyName: 'Combo box without backend searching',
+  name: 'Combo box without backend searching',
   args: {
     defaultOptions: [
       {label: 'Zambia', value: 'ZA', disabled: false},
-      { label: 'Benin', value: 'BN', disabled: false },
+      {label: 'Benin', value: 'BN', disabled: false},
     ],
     label: 'Combo Box',
     disabled: false,
@@ -23,11 +23,11 @@ export const clientSideSearch: Story = {
 }
 
 export const serverSideSearch: Story = {
-  storyName: 'Combo box with backend searching',
+  name: 'Combo box with backend searching',
   args: {
     defaultOptions: [
       {label: 'Zambia', value: 'ZA', disabled: false},
-      { label: 'Benin', value: 'BN', disabled: false },
+      {label: 'Benin', value: 'BN', disabled: false},
     ],
     disabled: false,
     isAPIFilter: true,
@@ -37,7 +37,7 @@ export const serverSideSearch: Story = {
 }
 
 export const disabledCombobox: Story = {
-  storyName: 'Combo box disabled',
+  name: 'Combo box disabled',
   args: {
     defaultOptions: [
       {label: 'Zambia', value: 'ZA', disabled: false},
@@ -50,7 +50,7 @@ export const disabledCombobox: Story = {
 }
 
 export const clientSideSearchWithNoResult: Story = {
-  storyName: 'Combo box disabled',
+  name: 'Combo box disabled',
   args: {
     defaultOptions: [],
     label: 'Combo Box',
@@ -60,7 +60,7 @@ export const clientSideSearchWithNoResult: Story = {
 }
 
 export const serverSideSearchWithNoResult: Story = {
-  storyName: 'Combo box with backend searching',
+  name: 'Combo box with backend searching',
   args: {
     defaultOptions: [
       {label: 'Zambia', value: 'ZA', disabled: false},

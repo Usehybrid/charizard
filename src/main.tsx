@@ -3,7 +3,16 @@ import ReactDOM from 'react-dom/client'
 import randomIcon from './components/assets/check.svg'
 import randomIcon2 from './components/assets/search-2.svg'
 import {createColumnHelper} from '@tanstack/react-table'
-import {Input, InputGroup, InputRightAddon, Progress, Table} from './components'
+import {
+  Input,
+  InputContainer,
+  InputGroup,
+  InputLabel,
+  InputRightAddon,
+  InputRightElement,
+  Progress,
+  Table,
+} from './components'
 
 const styles = {
   width: '90%',
@@ -291,7 +300,7 @@ function App() {
 
   return (
     <div style={styles}>
-      <Table
+      {/* <Table
         data={data}
         loaderConfig={{isFetching: false, isError: false, text: 'Getting employees...'}}
         columns={columns}
@@ -364,7 +373,17 @@ function App() {
           columns: 6,
           emptySearchTitle: 'No inventories found',
         }}
-      />
+      /> */}
+
+      <InputContainer>
+        <InputLabel>Input label</InputLabel>
+        <InputGroup>
+          <Input />
+          <InputRightElement>
+            <div>test</div>
+          </InputRightElement>
+        </InputGroup>
+      </InputContainer>
     </div>
   )
 }

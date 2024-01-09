@@ -1,7 +1,3 @@
-/**
- * @author Pratik Awaik <pratik@hybr1d.io>
- */
-
 import * as React from 'react'
 import classes from './styles.module.css'
 import {Inputs} from './types'

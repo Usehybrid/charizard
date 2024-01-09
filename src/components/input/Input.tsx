@@ -4,7 +4,7 @@ import classes from './styles.module.css'
 import {HTMLInputTypeAttribute} from 'react'
 import {Inputs} from './types'
 
-type InputProps = {
+interface InputProps {
   /**
    * Custom classes to be applied to the input
    */
