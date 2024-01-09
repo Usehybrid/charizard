@@ -1,9 +1,9 @@
 import * as React from 'react'
-import searchIcon from '../assets/search-2.svg'
+import searchIcon from '../assets/search.svg'
 import closeIcon from '../assets/close.svg'
 import classes from './styles.module.css'
 
-export type SearchProps = {
+export interface SearchProps {
   id: string
   search?: string
   setSearch?: React.Dispatch<React.SetStateAction<string>>

@@ -47,8 +47,8 @@
   --warning: #ff8b00;
 
   /* svg filters */
-  --filter-slate-600: invert(79%) sepia(7%) saturate(161%) hue-rotate(210deg) brightness(92%)
-    contrast(85%);
+  --filter-slate-600: invert(65%) sepia(29%) saturate(182%) hue-rotate(202deg) brightness(91%)
+    contrast(93%);
 
   /* grays */
 

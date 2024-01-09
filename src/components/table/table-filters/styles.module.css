@@ -12,19 +12,19 @@
 .filter {
   display: flex;
   align-items: center;
-  padding: 6px 8px;
-  border-radius: 4px;
+  padding: 4px 8px;
+  border-radius: 8px;
 }
 .filter:hover {
   cursor: pointer;
 }
 
 .filter:hover .filterIcon2 > path {
-  fill: var(--slate-700);
+  fill: var(--text-primary);
 }
 
 .filter:hover [data-scope='tooltip'] .filterCol {
-  color: var(--slate-700);
+  color: var(--text-primary);
 }
 
 .filter:focus-visible {
@@ -115,7 +115,7 @@
 .option {
   border-radius: 6px;
   background: var(--white);
-  color: var(--primary);
+  color: var(--text-primary);
   font-size: 14px;
   line-height: 180%;
   width: 100%;
@@ -128,7 +128,7 @@
 }
 
 .option:hover {
-  background: var(--slate-50);
+  background: var(--neutral-arch-40);
 }
 
 .selectedFilters {
@@ -176,12 +176,12 @@
   gap: 6px;
 
   border-radius: 6px;
-  border: 1px solid var(--slate-200);
+  border: 1px solid var(--neutral-arch-200);
   color: var(--text-primary);
   font-size: 12px;
   font-weight: 500;
   line-height: 16px;
-  background-color: var(--slate-20);
+  background-color: var(--neutral-arch-20);
 }
 
 .resetBtn:hover {
@@ -212,14 +212,14 @@
   width: 16px;
   height: 16px;
   border-radius: 3px;
-  border: 2px solid var(--slate-200);
+  border: 2px solid var(--neutral-arch-300);
   background-color: white;
   flex-shrink: 0;
 }
 
 .optionLabel > [data-part='control'][data-state='checked'] {
-  border-color: var(--iris);
-  background-color: var(--iris);
+  border-color: var(--theme-blue);
+  background-color: var(--theme-blue);
   background-image: url('../../assets/check.svg');
   background-position: center;
   background-size: 10px;
@@ -244,7 +244,7 @@
 }
 
 .filterValue {
-  color: var(--primary);
+  color: var(--text-primary);
   width: 100%;
   font-size: 14px;
   font-weight: 400;
@@ -254,7 +254,7 @@
   padding: 6px 4px 6px 6px;
   align-items: center;
   border-radius: 4px;
-  background: var(--slate-50);
+  background: var(--neutral-arch-50);
 }
 
 .filterTooltipTrigger {
