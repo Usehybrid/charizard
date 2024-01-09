@@ -1,8 +1,10 @@
 import * as React from 'react'
 import clsx from 'clsx'
 import classes from './styles.module.css'
+import closeIcon from '../assets/close.svg'
 import {Button} from '../button'
 import {FooterButtons} from '../modal/ModalFooter'
+import {SVG} from '../svg'
 
 type DrawerProps = {
   /**
@@ -88,7 +90,7 @@ export function Drawer({
   headerClassName,
   contentClassName,
   footerClassName,
-  showHeaderBorder = true,
+  showHeaderBorder = false,
   drawerPosition = 'right',
 }: DrawerProps) {
   const containerRef = React.useRef<HTMLDivElement>(null)
@@ -146,7 +148,9 @@ export function Drawer({
               ) : (
                 <>
                   <h1 className={classes.title}>{title}</h1>
-                  <button type="button" className={classes.closeBtn} onClick={onClose}></button>
+                  <div onClick={onClose}>
+                    <SVG path={closeIcon} svgClassName={classes.closeBtnIcon} />
+                  </div>
                 </>
               )}
             </div>

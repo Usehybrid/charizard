@@ -4,6 +4,7 @@ import randomIcon from './components/assets/check.svg'
 import randomIcon2 from './components/assets/search-2.svg'
 import {createColumnHelper} from '@tanstack/react-table'
 import {
+  Drawer,
   Input,
   InputContainer,
   InputGroup,
@@ -298,6 +299,8 @@ const columns = [
 function App() {
   const [search, setSearch] = React.useState('')
 
+  const [open, setOpen] = React.useState(false)
+
   return (
     <div style={styles}>
       {/* <Table
@@ -375,15 +378,12 @@ function App() {
         }}
       /> */}
 
-      <InputContainer>
-        <InputLabel>Input label</InputLabel>
-        <InputGroup>
-          <Input />
-          <InputRightElement>
-            <div>test</div>
-          </InputRightElement>
-        </InputGroup>
-      </InputContainer>
+      <button onClick={() => setOpen(true)}>Open drawer</button>
+      {open && (
+        <Drawer isOpen={open} onClose={() => setOpen(false)} title="Title">
+          test drawer
+        </Drawer>
+      )}
     </div>
   )
 }

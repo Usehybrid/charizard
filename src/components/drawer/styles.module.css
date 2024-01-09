@@ -76,10 +76,11 @@
   align-items: center;
   justify-content: space-between;
   padding: 12px 20px;
+  background-color: var(--neutral-arch-10);
 }
 
 .headerContainer.showBorder {
-  border-bottom: 1px solid var(--slate-300);
+  border-bottom: 1px solid var(--neutral-arch-300);
 }
 
 .title {
@@ -90,17 +91,14 @@
   color: var(--text-primary);
 }
 
-.closeBtn {
-  background: transparent
-    url('data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27 fill=%27%23434053%27%3e%3cpath d=%27M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z%27/%3e%3c/svg%3e')
-    center/0.8rem auto no-repeat;
-
-  color: var(--slate-700);
-  width: 11.5px;
-  height: 11.5px;
-  outline: none;
-  border: none;
+.closeBtnIcon {
+  width: 24px;
+  height: 24px;
   cursor: pointer;
+}
+
+.closeBtnIcon > path {
+  fill: var(--neutral-arch-600);
 }
 
 .descriptionContainer {
