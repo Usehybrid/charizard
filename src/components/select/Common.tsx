@@ -1,7 +1,3 @@
-/**
- * @author Pratik Awaik <pratik@hybr1d.io>
- */
-
 import clsx from 'clsx'
 import classes from './styles.module.css'
 import closeIcon from '../assets/close.svg'

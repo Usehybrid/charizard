@@ -6,7 +6,7 @@ import {Button} from '../button'
 import {FooterButtons} from '../modal/ModalFooter'
 import {SVG} from '../svg'
 
-type DrawerProps = {
+interface DrawerProps {
   /**
    * Drawer footer className
    */
@@ -35,6 +35,10 @@ type DrawerProps = {
    * Drawer title
    */
   title?: string
+  /**
+   * Drawer subTitle
+   */
+  subTitle?: string
   /**
    * Custom drawer header
    */
@@ -79,6 +83,7 @@ export function Drawer({
   onClose,
   children,
   title,
+  subTitle,
   customHeader,
   customFooter,
   size = 'md',
@@ -147,7 +152,10 @@ export function Drawer({
                 customHeader
               ) : (
                 <>
-                  <h1 className={classes.title}>{title}</h1>
+                  <div className="titleBox">
+                    <h1 className={classes.title}>{title}</h1>
+                    {subTitle && <h2 className={classes.subTitle}>{subTitle}</h2>}
+                  </div>
                   <div onClick={onClose}>
                     <SVG path={closeIcon} svgClassName={classes.closeBtnIcon} />
                   </div>

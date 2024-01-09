@@ -15,22 +15,22 @@ export const colourStyles: StylesConfig<any> = {
         : isSelected
         ? data.color
         : isFocused
-        ? '#f7f7f7'
+        ? 'var(--neutral-arch-30)'
         : '#ffffff',
-      color: '#171718',
+      color: 'var(--text-primary)',
       cursor: isDisabled ? 'not-allowed' : 'default',
       padding: '8px 12px',
       fontSize: '16px',
       lineHeight: '24px',
       ':hover': {
-        backgroundColor: '#f7f7f7',
+        backgroundColor: 'var(--neutral-arch-30)',
       },
     }
   },
   singleValue: (styles, {data}) => {
     return {
       ...styles,
-      color: '#171718',
+      color: 'var(--text-primary)',
       fontSize: '16px',
       lineHeight: '24px',
       display: 'flex',
@@ -43,7 +43,7 @@ export const colourStyles: StylesConfig<any> = {
   multiValue: (styles, {data, isFocused}) => {
     return {
       ...styles,
-      backgroundColor: '#f5f5f8',
+      backgroundColor: 'var(--neutral-arch-50)',
       padding: data.profileImgUrl ? '0px 8px 0 0' : '0 8px',
       display: 'flex',
       alignItems: 'center',
@@ -55,22 +55,22 @@ export const colourStyles: StylesConfig<any> = {
   },
   multiValueLabel: (styles, {data}) => ({
     ...styles,
-    color: '#171718',
+    color: 'var(--text-primary)',
     fontSize: '16px',
     lineHeight: '24px',
     padding: '0 !important',
   }),
   multiValueRemove: (styles, {data}) => ({
     ...styles,
-    color: '#b3b2b8',
+    color: 'var(--neutral-arch-600)',
     padding: '0',
     ':hover': {
       backgroundColor: 'transparent',
-      color: '#b3b2b8',
+      color: 'var(--neutral-arch-600)',
     },
     svg: {
       filter:
-        'invert(76%) sepia(5%) saturate(209%) hue-rotate(210deg) brightness(95%) contrast(89%)',
+        'invert(66%) sepia(16%) saturate(358%) hue-rotate(202deg) brightness(95%) contrast(83%)',
     },
   }),
   indicatorSeparator: styles => ({
@@ -81,14 +81,14 @@ export const colourStyles: StylesConfig<any> = {
     ...styles,
     svg: {
       filter:
-        'invert(76%) sepia(5%) saturate(209%) hue-rotate(210deg) brightness(95%) contrast(89%)',
+        'invert(66%) sepia(16%) saturate(358%) hue-rotate(202deg) brightness(95%) contrast(83%)',
     },
   }),
   clearIndicator: styles => ({
     ...styles,
     svg: {
       filter:
-        'invert(76%) sepia(5%) saturate(209%) hue-rotate(210deg) brightness(95%) contrast(89%)',
+        'invert(66%) sepia(16%) saturate(358%) hue-rotate(202deg) brightness(95%) contrast(83%)',
     },
   }),
 }
@@ -99,22 +99,22 @@ export const getControlStyles = (
   return {
     control: (styles, {isDisabled, isFocused}) => ({
       ...styles,
-      backgroundColor: isDisabled ? '#f5f5f8' : 'transparent',
-      color: '#171718',
-      border: '1px solid #e2e0eb',
+      backgroundColor: isDisabled ? 'var(--disabled-50)' : 'transparent',
+      color: 'var(--text-primary)',
+      border: '1px solid var(--neutral-arch-300)',
       borderColor: errorMsg
-        ? '#de350b !important'
+        ? 'var(--status-error) !important'
         : isFocused
-        ? '#6c5bd2 !important'
-        : '#e2e0eb !important',
+        ? 'var(--theme-blue) !important'
+        : 'var(--neutral-arch-300) !important',
       fontSize: '16px',
       boxShadow: 'none',
       transition: 'all 0.3s ease-in-out',
       ':hover': {
-        borderColor: errorMsg ? '#de350b !important' : '#6c5bd2 !important',
+        borderColor: errorMsg ? 'var(--status-error) !important' : 'var(--theme-blue) !important',
       },
       ':focus-within': {
-        boxShadow: errorMsg ? '#de350b !important' : '#6c5bd2 !important',
+        boxShadow: errorMsg ? 'var(--status-error) !important' : 'var(--theme-blue) !important',
       },
     }),
   }

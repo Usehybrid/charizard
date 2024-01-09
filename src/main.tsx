@@ -12,6 +12,7 @@ import {
   InputRightAddon,
   InputRightElement,
   Progress,
+  Select,
   Table,
 } from './components'
 
@@ -380,10 +381,28 @@ function App() {
 
       <button onClick={() => setOpen(true)}>Open drawer</button>
       {open && (
-        <Drawer isOpen={open} onClose={() => setOpen(false)} title="Title">
+        <Drawer
+          isOpen={open}
+          onClose={() => setOpen(false)}
+          title="Title"
+          subTitle="Test out this subtitle"
+        >
           test drawer
         </Drawer>
       )}
+
+      {/* <Select
+        placeholder="Choose your reason for archiving"
+        customContainerStyles={{marginBottom: '20px'}}
+        options={[
+          {label: 'test1', value: '242'},
+          {label: 'test1', value: '242'},
+          {label: 'test1', value: '242'},
+          {label: 'test1', value: '242'},
+        ]}
+        onChange={value => {}}
+        isMulti
+      /> */}
     </div>
   )
 }

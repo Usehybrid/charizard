@@ -88,9 +88,13 @@
 
   /* *status colors */
   --status-error: #e74c3c;
+  --status-error-10: #fef4f3;
   --status-warning: #f39c12;
+  --status-warning-10: #fef9f1;
   --status-success: #36b37e;
+  --status-success-10: #f3faf7;
   --status-info: #3498db;
+  --status-info-10: #f3f9fd;
 
   /* *disabled colors */
   --disabled-50: #f9f9f9;

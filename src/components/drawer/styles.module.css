@@ -91,6 +91,15 @@
   color: var(--text-primary);
 }
 
+.subTitle {
+  color: var(--text-secondary);
+
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; /* 142.857% */
+}
+
 .closeBtnIcon {
   width: 24px;
   height: 24px;
