@@ -20,10 +20,10 @@
   width: 29px;
   height: 29px;
   margin: 8px;
-  border: 3px solid var(--iris-40);
+  border: 3px solid var(--theme-blue-dark);
   border-radius: 50%;
   animation: ldsRing 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-  border-color: var(--iris-40) transparent transparent transparent;
+  border-color: var(--theme-blue-dark) transparent transparent transparent;
 }
 .ldsRing div:nth-child(1) {
   animation-delay: -0.45s;
@@ -57,8 +57,8 @@
   height: 29px;
   margin: 8px;
   border-radius: 50%;
-  border: 3px solid var(--iris-40);
-  border-color: var(--iris-40) transparent var(--iris-40) transparent;
+  border: 3px solid var(--theme-blue-dark);
+  border-color: var(--theme-blue-dark) transparent var(--theme-blue-dark) transparent;
   animation: ldsDualRing 1.2s linear infinite;
 }
 @keyframes ldsDualRing {
@@ -131,7 +131,7 @@
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: var(--iris-40);
+  background: var(--theme-blue-dark);
   animation-timing-function: cubic-bezier(0, 1, 1, 0);
 }
 .ldsEllipsis div:nth-child(1) {
@@ -193,7 +193,7 @@
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: var(--iris-40);
+  background: var(--theme-blue-dark);
   margin: -4px 0 0 -4px;
 }
 .ldsRoller div:nth-child(1) {
@@ -282,7 +282,7 @@
   width: 6px;
   height: 18px;
   border-radius: 20%;
-  background: var(--iris-40);
+  background: var(--theme-blue-dark);
 }
 .ldsSpinner div:nth-child(1) {
   transform: rotate(0deg);
@@ -356,8 +356,8 @@
   height: 0;
   margin: 8px;
   box-sizing: border-box;
-  border: 22px solid var(--iris-40);
-  border-color: var(--iris-40) transparent var(--iris-40) transparent;
+  border: 22px solid var(--theme-blue-dark);
+  border-color: var(--theme-blue-dark) transparent var(--theme-blue-dark) transparent;
   animation: ldsHourglass 1.2s infinite;
 }
 @keyframes ldsHourglass {
@@ -386,7 +386,7 @@
   width: 11px;
   height: 11px;
   border-radius: 50%;
-  background: var(--iris-40);
+  background: var(--theme-blue-dark);
   animation: ldsGrid 1.2s linear infinite;
 }
 .ldsGrid div:nth-child(1) {
