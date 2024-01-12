@@ -8,7 +8,7 @@
   padding: 8px 12px;
   border-radius: 4px;
   position: relative;
-  background: var(--slate-800);
+  background: var(--text-primary);
   color: var(--white);
   font-size: 14px;
   line-height: 20px;
@@ -17,6 +17,6 @@
 
 .arrow {
   --arrow-size: 6px;
-  --arrow-background: var(--slate-800);
+  --arrow-background: var(--text-primary);
   transition: 0.3s all ease-in-out;
 }

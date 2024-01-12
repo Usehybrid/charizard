@@ -3,9 +3,8 @@
   align-items: center;
   cursor: pointer;
 
-  color: var(--primary);
+  color: var(--text-primary);
   font-size: 14px;
-  font-family: Instrument Sans;
   line-height: 20px;
 }
 
@@ -21,7 +20,7 @@
   width: 1.143em;
   height: 1.143em;
   border-radius: 2px;
-  border: 2px solid var(--slate-300);
+  border: 2px solid var(--neutral-arch-100);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -35,14 +34,14 @@
 }
 
 .checkbox .checkboxBox.disabled {
-  background: var(--slate-50);
+  background: var(--disabled-50);
   pointer-events: none;
   cursor: not-allowed;
 }
 
 .checkbox .checkboxInput:checked + .checkboxBox {
-  border: 2px solid var(--iris);
-  background: var(--iris);
+  border: 2px solid var(--theme-blue);
+  background: var(--theme-blue);
 }
 
 .checkbox .checkboxInput + .checkboxBox::after {

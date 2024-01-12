@@ -10,13 +10,13 @@
   gap: 6px;
 
   border-radius: 30px;
-  background: var(--slate-20);
+  background: var(--neutral-arch-30);
   margin-bottom: 20px;
 }
 
 /* .segmentedControl .root .indicator {
   border-radius: 24px;
-  border: 1px solid var(--iris);
+  border: 1px solid var(--theme-blue);
 } */
 
 .segmentedControl .root .radio {
@@ -24,19 +24,19 @@
 }
 
 .segmentedControl .root .radio[data-state='checked'] {
-  color: var(--primary);
+  color: var(--text-primary);
   background: #f8f8ff;
   border-radius: 24px;
-  border: 1px solid var(--iris);
+  border: 1px solid var(--theme-blue);
 }
 
 .segmentedControl .root .radio:hover {
-  background: var(--slate-100);
+  background: var(--neutral-arch-100);
   border-radius: 24px;
 }
 
 .segmentedControl .root .radio .radioLabel {
-  color: var(--secondary);
+  color: var(--text-secondary);
   text-align: center;
 
   font-size: 16px;
@@ -49,5 +49,5 @@
 }
 
 .segmentedControl .root .radio .radioLabel[data-state='checked'] {
-  color: var(--primary);
+  color: var(--text-primary);
 }

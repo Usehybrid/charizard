@@ -9,12 +9,12 @@
 }
 
 .content.black {
-  background: var(--slate-800);
+  background: var(--text-primary);
   color: var(--white);
 }
 
 .content.white {
-  background: var(--slate-200);
+  background: var(--neutral-arch-200);
   color: var(--primary);
 }
 
@@ -32,11 +32,11 @@
 }
 
 .arrow.black {
-  --arrow-background: var(--slate-800);
+  --arrow-background: var(--text-primary);
 }
 
 .arrow.white {
-  --arrow-background: var(--slate-200);
+  --arrow-background: var(--neutral-arch-200);
 }
 
 .trigger[aria-expanded='true'] ~ .positioner > .arrow {

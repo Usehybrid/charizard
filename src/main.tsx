@@ -4,6 +4,7 @@ import randomIcon from './components/assets/check.svg'
 import randomIcon2 from './components/assets/search-2.svg'
 import {createColumnHelper} from '@tanstack/react-table'
 import {
+  BUTTON_VARIANT,
   Drawer,
   Input,
   InputContainer,
@@ -11,8 +12,14 @@ import {
   InputLabel,
   InputRightAddon,
   InputRightElement,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
   Progress,
   Select,
+  Switch,
   Table,
 } from './components'
 
@@ -302,6 +309,11 @@ function App() {
 
   const [open, setOpen] = React.useState(false)
 
+  const buttons = [
+    {variant: BUTTON_VARIANT.SECONDARY, onClick: () => setOpen(false), btnText: 'Cancel'},
+    {variant: BUTTON_VARIANT.PRIMARY, onClick: () => {}, btnText: 'Update'},
+  ]
+
   return (
     <div style={styles}>
       {/* <Table
@@ -380,7 +392,7 @@ function App() {
       /> */}
 
       <button onClick={() => setOpen(true)}>Open drawer</button>
-      {open && (
+      {/* {open && (
         <Drawer
           isOpen={open}
           onClose={() => setOpen(false)}
@@ -389,6 +401,25 @@ function App() {
         >
           test drawer
         </Drawer>
+      )} */}
+
+      <Switch
+        handleToggleChange={() => {}}
+        isToggled={true}
+        name="working_weekends"
+        title="Bypass working schedule"
+        subText="If people book time off over their non-working days, those days will be deducted
+              from their balance"
+      />
+
+      {open && (
+        <Modal isOpen={open} onClose={() => setOpen(false)}>
+          <ModalContent>
+            <ModalHeader showBorder={false}>Update status</ModalHeader>
+            <ModalBody>Are you sure you want to update the status of this device to test</ModalBody>
+            <ModalFooter buttons={buttons} showBorder={false} />
+          </ModalContent>
+        </Modal>
       )}
 
       {/* <Select

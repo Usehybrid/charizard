@@ -18,7 +18,7 @@
   font-size: 1.23rem;
   line-height: 1.85rem;
   text-align: center;
-  color: #939393;
+  color: var(--text-primary);
   margin-bottom: 8px;
 }
 
@@ -31,7 +31,7 @@
   font-size: 1.08rem;
   line-height: 1.54rem;
   text-align: center;
-  color: #939393;
+  color: var(--neutral-arch-800);
 }
 
 .desc.textRow {
@@ -56,5 +56,5 @@
 
 .icon > path,
 .icon > g > path {
-  fill: var(--slate-400);
+  fill: var(--neutral-arch-400);
 }
