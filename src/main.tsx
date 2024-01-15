@@ -280,6 +280,30 @@ const columns = [
     header: 'Software Name',
     cell: info => info.getValue().name,
   }),
+  columnHelper.accessor('software', {
+    header: 'Software Name',
+    cell: info => info.getValue().name,
+  }),
+  columnHelper.accessor('software', {
+    header: 'Software Name',
+    cell: info => info.getValue().name,
+  }),
+  columnHelper.accessor('software', {
+    header: 'Software Name',
+    cell: info => info.getValue().name,
+  }),
+  columnHelper.accessor('software', {
+    header: 'Software Name',
+    cell: info => info.getValue().name,
+  }),
+  columnHelper.accessor('software', {
+    header: 'Software Name',
+    cell: info => info.getValue().name,
+  }),
+  columnHelper.accessor('software', {
+    header: 'Software Name',
+    cell: info => info.getValue().name,
+  }),
 
   columnHelper.accessor('software_owners', {
     header: 'Software Owners',
@@ -316,7 +340,7 @@ function App() {
 
   return (
     <div style={styles}>
-      {/* <Table
+      <Table
         data={data}
         loaderConfig={{isFetching: false, isError: false, text: 'Getting employees...'}}
         columns={columns}
@@ -389,9 +413,9 @@ function App() {
           columns: 6,
           emptySearchTitle: 'No inventories found',
         }}
-      /> */}
+      />
 
-      <button onClick={() => setOpen(true)}>Open drawer</button>
+      {/* <button onClick={() => setOpen(true)}>Open drawer</button> */}
       {/* {open && (
         <Drawer
           isOpen={open}
@@ -403,7 +427,7 @@ function App() {
         </Drawer>
       )} */}
 
-      <Switch
+      {/* <Switch
         handleToggleChange={() => {}}
         isToggled={true}
         name="working_weekends"
@@ -420,7 +444,7 @@ function App() {
             <ModalFooter buttons={buttons} showBorder={false} />
           </ModalContent>
         </Modal>
-      )}
+      )} */}
 
       {/* <Select
         placeholder="Choose your reason for archiving"

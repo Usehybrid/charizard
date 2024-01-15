@@ -412,124 +412,130 @@ function TableComp({
   isEmpty: boolean
 }) {
   return (
-    <table className={classes.table}>
-      <thead className={classes.tableHead}>
-        {table.getHeaderGroups().map(headerGroup => (
-          <tr key={headerGroup.id} className={classes.tableRow}>
-            {headerGroup.headers.map(header => {
-              return (
-                <th
-                  key={header.id}
-                  className={clsx(
-                    classes.tableHeader,
-                    header.column.getCanSort() && classes.tableHeaderSort,
-                  )}
-                  style={{
-                    width: header.getSize() === Number.MAX_SAFE_INTEGER ? 'auto' : header.getSize(),
-                    paddingRight: header.id === DROPDOWN_COL_ID ? '20px' : undefined,
-                    paddingLeft:
-                      header.index === 0 &&
-                      header.id !== CHECKBOX_COL_ID &&
-                      header.id !== RADIO_COL_ID
-                        ? '20px'
-                        : undefined,
-                    // minWidth: header.getSize === Number.MAX_SAFE_INTEGER ? 'auto' : header.getSize(),
-                    // maxWidth: header.getSize() === Number.MAX_SAFE_INTEGER ? 'auto' : header.getSize(),
-                  }}
-                >
-                  {header.isPlaceholder ? null : (
-                    <div
-                      {...{
-                        onClick: header.column.getToggleSortingHandler(),
-                        style: {
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: header.id === DROPDOWN_COL_ID ? 'flex-end' : undefined,
-                        },
-                      }}
-                    >
-                      {flexRender(header.column.columnDef.header, header.getContext())}
-                      {{
-                        asc: <SVG path={sortAscIcon} spanClassName={classes.tableHeaderSortSpan} />,
-                        desc: (
-                          <SVG path={sortDescIcon} spanClassName={classes.tableHeaderSortSpan} />
-                        ),
-                        false: header.column.getCanSort() ? (
-                          <SVG
-                            path={sortIcon}
-                            spanClassName={classes.tableHeaderSortSpan}
-                            svgClassName={classes.tableHeaderSort}
-                          />
-                        ) : null,
-                      }[header.column.getIsSorted() as string] ?? null}
-                    </div>
-                  )}
-                </th>
-              )
-            })}
-          </tr>
-        ))}
-      </thead>
-
-      {loaderConfig.isFetching ? (
-        <TableLoader text={loaderConfig.text} isError={loaderConfig.isError} />
-      ) : isEmpty ? (
-        <TableEmpty emptyStateConfig={emptyStateConfig} search={search} />
-      ) : (
-        <tbody className={classes.tableBody}>
-          {table.getRowModel().rows.map((row, idx) => (
-            <tr key={row.id} className={classes.tableRow}>
-              {row.getVisibleCells().map(cell => {
-                const isSelectionCell =
-                  (isCheckbox || isRadio) &&
-                  (cell.id === `${idx}_${RADIO_COL_ID}` || cell.id === `${idx}_${CHECKBOX_COL_ID}`)
+    <div className={classes.tableScrollContainer}>
+      <table className={classes.table}>
+        <thead className={classes.tableHead}>
+          {table.getHeaderGroups().map(headerGroup => (
+            <tr key={headerGroup.id} className={classes.tableRow}>
+              {headerGroup.headers.map(header => {
                 return (
-                  <td
-                    key={cell.id}
+                  <th
+                    key={header.id}
                     className={clsx(
-                      classes.tableData,
-                      (isCheckbox || isRadio) && classes.tableDataWithSelection,
+                      classes.tableHeader,
+                      header.column.getCanSort() && classes.tableHeaderSort,
                     )}
                     style={{
                       width:
-                        cell.column.getSize() === Number.MAX_SAFE_INTEGER
-                          ? 'auto'
-                          : cell.column.getSize(),
-                      verticalAlign: isSelectionCell ? 'middle' : undefined,
+                        header.getSize() === Number.MAX_SAFE_INTEGER ? 'auto' : header.getSize(),
+                      paddingRight: header.id === DROPDOWN_COL_ID ? '20px' : undefined,
+                      paddingLeft:
+                        header.index === 0 &&
+                        header.id !== CHECKBOX_COL_ID &&
+                        header.id !== RADIO_COL_ID
+                          ? '20px'
+                          : undefined,
+                      // minWidth: header.getSize === Number.MAX_SAFE_INTEGER ? 'auto' : header.getSize(),
+                      // maxWidth: header.getSize() === Number.MAX_SAFE_INTEGER ? 'auto' : header.getSize(),
                     }}
                   >
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </td>
+                    {header.isPlaceholder ? null : (
+                      <div
+                        {...{
+                          onClick: header.column.getToggleSortingHandler(),
+                          style: {
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: header.id === DROPDOWN_COL_ID ? 'flex-end' : undefined,
+                          },
+                        }}
+                      >
+                        {flexRender(header.column.columnDef.header, header.getContext())}
+                        {{
+                          asc: (
+                            <SVG path={sortAscIcon} spanClassName={classes.tableHeaderSortSpan} />
+                          ),
+                          desc: (
+                            <SVG path={sortDescIcon} spanClassName={classes.tableHeaderSortSpan} />
+                          ),
+                          false: header.column.getCanSort() ? (
+                            <SVG
+                              path={sortIcon}
+                              spanClassName={classes.tableHeaderSortSpan}
+                              svgClassName={classes.tableHeaderSort}
+                            />
+                          ) : null,
+                        }[header.column.getIsSorted() as string] ?? null}
+                      </div>
+                    )}
+                  </th>
                 )
               })}
             </tr>
           ))}
-        </tbody>
-      )}
+        </thead>
 
-      {loaderConfig.isError && (
-        <tbody style={{height: '200px'}}>
-          <tr>
-            <td colSpan={emptyStateConfig?.columns} style={{textAlign: 'center'}}>
-              {loaderConfig.errMsg || 'Error getting data, please try again later.'}
-            </td>
-          </tr>
-        </tbody>
-      )}
-
-      <tfoot className={classes.tableFoot}>
-        {table.getFooterGroups().map(footerGroup => (
-          <tr key={footerGroup.id} className={classes.tableRow}>
-            {footerGroup.headers.map(header => (
-              <th key={header.id}>
-                {header.isPlaceholder
-                  ? null
-                  : flexRender(header.column.columnDef.footer, header.getContext())}
-              </th>
+        {loaderConfig.isFetching ? (
+          <TableLoader text={loaderConfig.text} isError={loaderConfig.isError} />
+        ) : isEmpty ? (
+          <TableEmpty emptyStateConfig={emptyStateConfig} search={search} />
+        ) : (
+          <tbody className={classes.tableBody}>
+            {table.getRowModel().rows.map((row, idx) => (
+              <tr key={row.id} className={classes.tableRow}>
+                {row.getVisibleCells().map(cell => {
+                  const isSelectionCell =
+                    (isCheckbox || isRadio) &&
+                    (cell.id === `${idx}_${RADIO_COL_ID}` ||
+                      cell.id === `${idx}_${CHECKBOX_COL_ID}`)
+                  return (
+                    <td
+                      key={cell.id}
+                      className={clsx(
+                        classes.tableData,
+                        (isCheckbox || isRadio) && classes.tableDataWithSelection,
+                      )}
+                      style={{
+                        width:
+                          cell.column.getSize() === Number.MAX_SAFE_INTEGER
+                            ? 'auto'
+                            : cell.column.getSize(),
+                        verticalAlign: isSelectionCell ? 'middle' : undefined,
+                      }}
+                    >
+                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                    </td>
+                  )
+                })}
+              </tr>
             ))}
-          </tr>
-        ))}
-      </tfoot>
-    </table>
+          </tbody>
+        )}
+
+        {loaderConfig.isError && (
+          <tbody style={{height: '200px'}}>
+            <tr>
+              <td colSpan={emptyStateConfig?.columns} style={{textAlign: 'center'}}>
+                {loaderConfig.errMsg || 'Error getting data, please try again later.'}
+              </td>
+            </tr>
+          </tbody>
+        )}
+
+        <tfoot className={classes.tableFoot}>
+          {table.getFooterGroups().map(footerGroup => (
+            <tr key={footerGroup.id} className={classes.tableRow}>
+              {footerGroup.headers.map(header => (
+                <th key={header.id}>
+                  {header.isPlaceholder
+                    ? null
+                    : flexRender(header.column.columnDef.footer, header.getContext())}
+                </th>
+              ))}
+            </tr>
+          ))}
+        </tfoot>
+      </table>
+    </div>
   )
 }

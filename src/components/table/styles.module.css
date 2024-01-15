@@ -41,8 +41,6 @@
   border-collapse: collapse;
   border: 1px solid var(--neutral-arch-200);
   height: 100%;
-  max-width: 100%;
-  overflow-x: scroll;
 }
 
 .tableHead {
@@ -113,4 +111,9 @@
 .tableHeaderSort:hover .tableHeaderSortSpan .tableHeaderSortIcon > g > path,
 .tableHeaderSort:hover .tableHeaderSortSpan .tableHeaderSortIcon > path {
   fill: var(--text-primary);
+}
+
+.tableScrollContainer {
+  width: 100%;
+  overflow-x: scroll;
 }
