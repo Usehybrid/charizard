@@ -280,31 +280,6 @@ const columns = [
     header: 'Software Name',
     cell: info => info.getValue().name,
   }),
-  columnHelper.accessor('software', {
-    header: 'Software Name',
-    cell: info => info.getValue().name,
-  }),
-  columnHelper.accessor('software', {
-    header: 'Software Name',
-    cell: info => info.getValue().name,
-  }),
-  columnHelper.accessor('software', {
-    header: 'Software Name',
-    cell: info => info.getValue().name,
-  }),
-  columnHelper.accessor('software', {
-    header: 'Software Name',
-    cell: info => info.getValue().name,
-  }),
-  columnHelper.accessor('software', {
-    header: 'Software Name',
-    cell: info => info.getValue().name,
-  }),
-  columnHelper.accessor('software', {
-    header: 'Software Name',
-    cell: info => info.getValue().name,
-  }),
-
   columnHelper.accessor('software_owners', {
     header: 'Software Owners',
 

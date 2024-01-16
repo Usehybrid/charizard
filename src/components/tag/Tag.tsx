@@ -43,7 +43,7 @@ const statusMap = {
   },
 }
 
-export default function Tag({status, text, icon}: TagProps) {
+export function Tag({status, text, icon}: TagProps) {
   return (
     <div
       className={classes.status}
