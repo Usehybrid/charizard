@@ -56,7 +56,7 @@
 
 .actionsBtnIcon > path,
 .actionsBtnIcon > g > path {
-  fill: var(--slate-600);
+  fill: var(--neutral-arch-600);
 }
 
 .selectedIcon > path,

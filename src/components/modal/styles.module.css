@@ -31,7 +31,7 @@
   width: 100%;
   /* took a random number of 1.75, might have to change it later according to preferences */
   /* max-height: calc(100vh - (1.75rem * 2)); */
-  background-color: var(--white);
+  background-color: var(--neutral-white);
   /* overflow-x: hidden; */
   border-radius: 4px;
 }
@@ -62,7 +62,7 @@
   justify-content: space-between;
   gap: 12px;
   padding: 20px;
-  background-color: var(--white);
+  background-color: var(--neutral-white);
 
   color: var(--text-primary);
   font-size: 20px;
@@ -106,7 +106,7 @@
   justify-content: flex-end;
   gap: 12px;
   padding: 20px;
-  background-color: var(--white);
+  background-color: var(--neutral-white);
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
 }

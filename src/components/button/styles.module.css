@@ -83,7 +83,7 @@
 
 .btnDanger {
   color: white;
-  background-color: var(--danger);
+  background-color: var(--status-danger);
 }
 
 .btnLink {
@@ -93,7 +93,7 @@
 
 .btnMinimal {
   border: 1px solid var(--neutral-arch-300);
-  background: var(--white);
+  background: var(--neutral-white);
   color: var(--text-primary);
 }
 

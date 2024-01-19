@@ -9,7 +9,7 @@
   border-radius: 4px;
   position: relative;
   background: var(--text-primary);
-  color: var(--white);
+  color: var(--neutral-white);
   font-size: 14px;
   line-height: 20px;
   max-width: 400px;

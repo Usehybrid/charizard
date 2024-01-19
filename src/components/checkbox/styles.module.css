@@ -30,7 +30,7 @@
 }
 
 .checkbox .checkboxBox.error {
-  border: 2px solid var(--danger) !important;
+  border: 2px solid var(--status-danger) !important;
 }
 
 .checkbox .checkboxBox.disabled {
@@ -73,6 +73,6 @@
   font-weight: 400;
   line-height: 20px;
   margin: 0;
-  color: var(--danger);
+  color: var(--status-danger);
   text-align: left;
 }

@@ -1,58 +1,10 @@
 :root {
-  --text-primary: #171718;
-  --text-secondary: #37373d;
-  --text-tertiary: #8e8e8e;
-
-  --primary: #171718;
-  --secondary: #767676;
-  --iris: #6c5bd2;
-  --iris-5: #f8f7fd;
-  --iris-10: #f0effb;
-  --iris-20: #edebfa;
-  --iris-40: #8a7cdb;
-  /* hover */
-  --iris-60: #503bc9;
-
-  /* brand */
-  --lemon: #fffa80;
-  --lavender: #bfb4fe;
-
-  /* grays */
-  --slate-10: #f9f9f9;
-  --slate-20: #f7f7f7;
-  --slate-50: #f5f5f8;
-  --slate-100: #f0eff4;
-  --slate-200: #ebe9f1;
-  --slate-300: #e2e0eb;
-  --slate-400: #d2cfe0;
-  --slate-600: #b3b2b8;
-  --slate-700: #434053;
-  --slate-800: #2e2b40;
-
-  --hint: #939393;
-
-  --blue-10: #cbd5e0;
-  --blue-20: #e2e8f0;
-
-  --orange-10: #e78a75;
-  --orange-20: #e06c52;
-
   /* default */
   --black: #000000;
-  --white: #ffffff;
-
-  /* states */
-  --danger: #de350b;
-  --success: #36b37e;
-  --warning: #ff8b00;
 
   /* svg filters */
   --filter-slate-600: invert(65%) sepia(29%) saturate(182%) hue-rotate(202deg) brightness(91%)
     contrast(93%);
-
-  /* grays */
-
-  --gray-700: #2d3748;
 
   /* ! NEW VARIABLES */
   /* https://www.figma.com/file/oifEB5HVoXf36YyO4DJKhN/%F0%9F%8E%A8-Hybr1dge-DS-2?type=design&node-id=167-46&mode=design&t=xqz7njIqVMHMysXo-0 */
@@ -87,6 +39,7 @@
   --theme-royal-blue-tint: #4e6ee1;
 
   /* *status colors */
+  --status-danger: #de350b;
   --status-error: #e74c3c;
   --status-error-10: #fef4f3;
   --status-warning: #f39c12;

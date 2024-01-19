@@ -10,12 +10,12 @@
 
 .content.black {
   background: var(--text-primary);
-  color: var(--white);
+  color: var(--neutral-white);
 }
 
 .content.white {
   background: var(--neutral-arch-200);
-  color: var(--primary);
+  color: var(--text-primary);
 }
 
 .closeBtn {

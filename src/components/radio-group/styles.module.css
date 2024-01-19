@@ -82,7 +82,7 @@
   font-weight: 400;
   line-height: 20px;
   margin: 0;
-  color: var(--danger);
+  color: var(--status-danger);
   text-align: left;
 }
 

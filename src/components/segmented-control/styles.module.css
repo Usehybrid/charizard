@@ -3,7 +3,7 @@
   flex-direction: column;
 }
 
-.segmentedControl .root {
+.root {
   display: inline-flex;
   padding: 6px;
   align-items: flex-start;
@@ -19,23 +19,23 @@
   border: 1px solid var(--theme-blue);
 } */
 
-.segmentedControl .root .radio {
+.radio {
   border: 1px solid transparent;
 }
 
-.segmentedControl .root .radio[data-state='checked'] {
+.radio[data-state='checked'] {
   color: var(--text-primary);
   background: #f8f8ff;
   border-radius: 24px;
   border: 1px solid var(--theme-blue);
 }
 
-.segmentedControl .root .radio:hover {
+.radio:hover {
   background: var(--neutral-arch-100);
   border-radius: 24px;
 }
 
-.segmentedControl .root .radio .radioLabel {
+.radioLabel {
   color: var(--text-secondary);
   text-align: center;
 
@@ -48,6 +48,6 @@
   display: block;
 }
 
-.segmentedControl .root .radio .radioLabel[data-state='checked'] {
+.radioLabel[data-state='checked'] {
   color: var(--text-primary);
 }

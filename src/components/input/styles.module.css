@@ -40,7 +40,7 @@
 
 .inputLabel.required::after {
   content: '*';
-  color: var(--danger);
+  color: var(--status-danger);
   margin-left: 2px;
 }
 
@@ -87,8 +87,8 @@
 }
 
 .input.error {
-  border-color: var(--danger);
-  caret-color: var(--danger);
+  border-color: var(--status-danger);
+  caret-color: var(--status-danger);
 }
 
 .input:disabled {
@@ -107,7 +107,7 @@ input[type='date']::-webkit-inner-spin-button,
   font-weight: 400;
   font-size: 1rem;
   line-height: 1.54rem;
-  color: var(--danger);
+  color: var(--status-danger);
   margin: 0;
   text-align: left;
 }
@@ -165,7 +165,7 @@ input[type='date']::-webkit-inner-spin-button,
   top: 120%;
   left: 0;
   width: fit-content;
-  background-color: var(--white);
+  background-color: var(--neutral-white);
   border-radius: 8px;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15);
   padding: 0 0 12px 0;
@@ -180,7 +180,7 @@ input[type='date']::-webkit-inner-spin-button,
   position: sticky;
   top: 0;
   left: 0;
-  background-color: var(--white);
+  background-color: var(--neutral-white);
 }
 
 .inputAddon .dropdownContainer .dropdownOption {

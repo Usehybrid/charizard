@@ -1,9 +1,7 @@
 import clsx from 'clsx'
 import classes from './styles.module.css'
 
-// todo @PratikAwaik use zag for checkbox
-
-type CheckboxProps = {
+interface CheckboxProps {
   /**
    * Checkbox id
    */
