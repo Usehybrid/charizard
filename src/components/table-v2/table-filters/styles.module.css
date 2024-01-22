@@ -1,0 +1,264 @@
+.filters {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.filtersInfo {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.filter {
+  display: flex;
+  align-items: center;
+  padding: 4px 8px;
+  border-radius: 8px;
+}
+.filter:hover {
+  cursor: pointer;
+}
+
+.filter:hover .filterIcon2 > path {
+  fill: var(--text-primary);
+}
+
+.filter:hover [data-scope='tooltip'] .filterCol {
+  color: var(--text-primary);
+}
+
+.filter:focus-visible {
+  outline: none;
+}
+
+.filterActive {
+  background-color: var(--neutral-arch-40);
+}
+
+.filterIcon {
+  margin-inline-end: 12px;
+  width: 24px;
+  height: 24px;
+}
+
+.resetIcon2 {
+  margin-inline-end: 8px;
+  width: 16px;
+  height: 16px;
+  filter: invert(42%) sepia(91%) saturate(0%) hue-rotate(161deg) brightness(91%) contrast(93%);
+}
+
+.resetIcon2:hover {
+  cursor: pointer;
+}
+
+.filterIcon2 {
+  width: 20px;
+  height: 20px;
+}
+.filterIcon2 > path {
+  fill: var(--neutral-arch-600);
+}
+
+.filterCol {
+  color: var(--text-primary);
+  font-size: 14px;
+  line-height: 20px;
+  margin-inline-end: 4px;
+}
+
+.totalSelected {
+  border-radius: 3px;
+  background: var(--neutral-arch-900);
+  color: var(--neutral-white);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: normal;
+  padding: 0 3px;
+}
+
+/* filter dropdown */
+
+.positioner {
+  z-index: 1;
+}
+
+.dropdown {
+  width: 256px;
+  max-height: 316px;
+  position: relative;
+  overflow-y: scroll;
+  padding: 8px;
+  border-radius: 12px;
+  background: var(--neutral-white);
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.dropdown:focus-visible {
+  outline: none;
+}
+
+.options {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 6px;
+}
+
+.optionsEmpty {
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.option {
+  border-radius: 6px;
+  background: var(--neutral-white);
+  color: var(--text-primary);
+  font-size: 14px;
+  line-height: 180%;
+  width: 100%;
+  padding: 2px 8px;
+  /* padding-bottom: 0; */
+
+  display: flex;
+  align-items: center;
+  column-gap: 16px;
+}
+
+.option:hover {
+  background: var(--neutral-arch-40);
+}
+
+.selectedFilters {
+  color: var(--text-primary);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 180%;
+}
+
+.dropdownSearch {
+  position: sticky;
+  top: -10px;
+  margin-bottom: 6px;
+  padding-top: 10px;
+  background-color: white;
+  margin-top: -10px;
+}
+
+.footerBox {
+  position: sticky;
+  bottom: 0;
+  padding-bottom: 4px;
+  margin-left: -8px;
+  margin-right: -8px;
+  padding-left: 6px;
+}
+
+.footer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding-left: 8px;
+  padding-right: 8px;
+  background-color: white;
+  margin-bottom: -13px;
+  padding-bottom: 6px;
+}
+
+.resetBtn {
+  display: inline-flex;
+  height: 24px;
+  padding: 0px 8px;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+
+  border-radius: 6px;
+  border: 1px solid var(--neutral-arch-200);
+  color: var(--text-primary);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  background-color: var(--neutral-arch-20);
+}
+
+.resetBtn:hover {
+  cursor: pointer;
+}
+
+.resetIcon {
+  width: 12px;
+  height: 12px;
+  /* color: var(--tex); */
+  filter: invert(42%) sepia(91%) saturate(0%) hue-rotate(161deg) brightness(91%) contrast(93%);
+}
+
+/* checkbox */
+
+.optionLabel {
+  display: flex;
+  align-items: center;
+  column-gap: 16px;
+  text-wrap: pretty;
+}
+
+.optionLabel:hover {
+  cursor: pointer;
+}
+
+.optionLabel > [data-part='control'] {
+  width: 16px;
+  height: 16px;
+  border-radius: 3px;
+  border: 2px solid var(--neutral-arch-300);
+  background-color: white;
+  flex-shrink: 0;
+}
+
+.optionLabel > [data-part='control'][data-state='checked'] {
+  border-color: var(--theme-blue);
+  background-color: var(--theme-blue);
+  background-image: url('../../assets/check.svg');
+  background-position: center;
+  background-size: 10px;
+  background-repeat: no-repeat;
+}
+
+/* filter tooltip */
+.filterTooltip {
+  display: inline-flex;
+  padding: 6px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+
+  border-radius: 6px;
+  background: var(--neutral-white);
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+  min-width: 120px;
+  overflow-x: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.filterValue {
+  color: var(--text-primary);
+  width: 100%;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  display: flex;
+  height: 24px;
+  padding: 6px 4px 6px 6px;
+  align-items: center;
+  border-radius: 4px;
+  background: var(--neutral-arch-50);
+}
+
+.filterTooltipTrigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

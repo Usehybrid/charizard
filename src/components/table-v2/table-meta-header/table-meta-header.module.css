@@ -1,0 +1,22 @@
+.box {
+  height: 76px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 8px 8px 0px 0px;
+  background: #fff;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.texts {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.heading {
+  color: var(--text-secondary);
+  font-size: 16px;
+  line-height: 24px; /* 150% */
+}

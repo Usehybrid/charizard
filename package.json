@@ -66,7 +66,7 @@
     "storybook": "^7.6.10",
     "storybook-css-modules-preset": "^1.1.1",
     "typescript": "^5.3.3",
-    "vite": "^5.0.11",
+    "vite": "^5.0.12",
     "vite-plugin-checker": "^0.6.2",
     "vite-plugin-dts": "^3.7.1",
     "vite-plugin-libcss": "^1.1.1"

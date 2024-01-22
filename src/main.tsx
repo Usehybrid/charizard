@@ -20,7 +20,7 @@ import {
   Progress,
   Select,
   Switch,
-  Table,
+  TableV2,
 } from './components'
 
 const styles = {
@@ -30,7 +30,7 @@ const styles = {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  backgroundColor: 'white',
+  backgroundColor: '#FAFAFB',
   flexDir: 'column',
 }
 
@@ -315,7 +315,7 @@ function App() {
 
   return (
     <div style={styles}>
-      <Table
+      <TableV2
         data={data}
         loaderConfig={{isFetching: false, isError: false, text: 'Getting employees...'}}
         columns={columns}
@@ -351,24 +351,31 @@ function App() {
         }}
         rowSelectionConfig={{
           // isRadio: true,
+          entityName: 'Software',
           isCheckbox: true,
           actions: [
             {
               icon: randomIcon,
-              text: 'Archive',
-              onClick: () => {},
+              text: 'Action 1',
+              onClick: () => {
+                console.log('action 1 clicked')
+              },
             },
 
             {
               icon: randomIcon,
-              text: 'Archive 2',
-              onClick: () => {},
+              text: 'Action 2',
+              onClick: () => {
+                console.log('action 2 clicked')
+              },
             },
 
             {
               icon: randomIcon,
-              text: 'Archive 3',
-              onClick: () => {},
+              text: 'Action 3',
+              onClick: () => {
+                console.log('action 3 clicked')
+              },
             },
           ],
           // rowIdKey: 'id',
@@ -378,7 +385,7 @@ function App() {
           isDropdownActions: true,
           key: 'description',
         }}
-        totalText={`${4} softwares`}
+        totalText={`${4} Softwares`}
         emptyStateConfig={{
           icon: './components/assets/check.svg',
           title: 'Get started by adding your first inventory',
@@ -389,50 +396,6 @@ function App() {
           emptySearchTitle: 'No inventories found',
         }}
       />
-
-      {/* <button onClick={() => setOpen(true)}>Open drawer</button> */}
-      {/* {open && (
-        <Drawer
-          isOpen={open}
-          onClose={() => setOpen(false)}
-          title="Title"
-          subTitle="Test out this subtitle"
-        >
-          test drawer
-        </Drawer>
-      )} */}
-
-      {/* <Switch
-        handleToggleChange={() => {}}
-        isToggled={true}
-        name="working_weekends"
-        title="Bypass working schedule"
-        subText="If people book time off over their non-working days, those days will be deducted
-              from their balance"
-      />
-
-      {open && (
-        <Modal isOpen={open} onClose={() => setOpen(false)}>
-          <ModalContent>
-            <ModalHeader showBorder={false}>Update status</ModalHeader>
-            <ModalBody>Are you sure you want to update the status of this device to test</ModalBody>
-            <ModalFooter buttons={buttons} showBorder={false} />
-          </ModalContent>
-        </Modal>
-      )} */}
-
-      {/* <Select
-        placeholder="Choose your reason for archiving"
-        customContainerStyles={{marginBottom: '20px'}}
-        options={[
-          {label: 'test1', value: '242'},
-          {label: 'test1', value: '242'},
-          {label: 'test1', value: '242'},
-          {label: 'test1', value: '242'},
-        ]}
-        onChange={value => {}}
-        isMulti
-      /> */}
     </div>
   )
 }
