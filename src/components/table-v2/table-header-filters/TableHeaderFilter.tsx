@@ -12,7 +12,7 @@ import {Search} from '../../search'
 import {TableStore} from '../store'
 import type {FilterOptions, InternalTableFilters} from '../types'
 
-interface TableFilterProps {
+interface TableHeaderFilterProps {
   filter: FilterOptions
   tableFilters: TableStore['filters']
   tableFilter: InternalTableFilters
@@ -22,7 +22,7 @@ interface TableFilterProps {
   filterDispatch: (value: any) => void
 }
 
-export default function TableFilter({
+export default function TableHeaderFilter({
   filter,
   tableFilters,
   tableFilter,
@@ -30,7 +30,7 @@ export default function TableFilter({
   removeFilters,
   resetFilters,
   filterDispatch,
-}: TableFilterProps) {
+}: TableHeaderFilterProps) {
   const [search, setSearch] = React.useState('')
   const [state, send] = useMachine(
     menu.machine({
@@ -66,7 +66,7 @@ export default function TableFilter({
   }
 
   return (
-    <div>
+    <>
       <button
         className={clsx('hybr1d-ui-reset-btn', classes.filter, api.isOpen && classes.filterActive)}
         {...api.triggerProps}
@@ -136,6 +136,6 @@ export default function TableFilter({
           </div>
         )}
       </div>
-    </div>
+    </>
   )
 }

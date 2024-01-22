@@ -20,3 +20,26 @@
   font-size: 16px;
   line-height: 24px; /* 150% */
 }
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.actionCommon {
+  display: flex;
+  width: 40px;
+  height: 36px;
+  padding: 6px 8px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  background: var(--neutral-arch-30);
+}
+
+.actionCommon svg > g > path,
+.actionCommon svg > path {
+  fill: var(--neutral-arch-900);
+}

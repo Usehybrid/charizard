@@ -1,16 +1,16 @@
 import * as React from 'react'
-import history from '../../assets/history.svg'
-import TableFilter from './TableFilter'
+import TableFilter from './TableHeaderFilter'
 import classes from './styles.module.css'
 import {useTableStore} from '../store'
 import type {FilterConfig} from '../types'
 
-type TableFiltersProps = {
+interface TableHeaderFiltersProps {
   filterConfig: FilterConfig
+  filters: FilterConfig['filters']
 }
 
-export default function TableFilters({filterConfig}: TableFiltersProps) {
-  const {filters, isLoading, isError, filterDispatch, filterReset} = filterConfig
+export default function TableHeaderFilters({filterConfig, filters}: TableHeaderFiltersProps) {
+  const {isLoading, isError, filterDispatch, filterReset} = filterConfig
 
   const tableFilters = useTableStore(s => s.filters)
 
@@ -34,21 +34,10 @@ export default function TableFilters({filterConfig}: TableFiltersProps) {
 
   if (isLoading) return <div className={classes.filtersInfo}>Getting filters...</div>
 
-  const selectedFilters = tableFilters.map(filter => filter.values).flat()
+  // const selectedFilters = tableFilters.map(filter => filter.values).flat()
 
   return (
     <div className={classes.filters}>
-      {selectedFilters.length > 0 && (
-        <img
-          title="Reset filters"
-          src={history}
-          alt="reset all filters"
-          className={classes.resetIcon2}
-          onClick={() => {
-            resetAllFilters(filterReset)
-          }}
-        />
-      )}
       {filters.map((filter, idx) => (
         <TableFilter
           key={filter.id}

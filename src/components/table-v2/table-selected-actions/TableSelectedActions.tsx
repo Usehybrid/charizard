@@ -24,10 +24,8 @@ export default function TableSelectedActions({
   const {isCheckbox, actions, iconSrc} = rowSelectionConfig
 
   const showDropdown = actions?.length && actions.length > 2
-
   const firstAction = actions?.length ? actions[0] : null
 
-  console.log({showDropdown})
   return (
     <>
       {isCheckbox && Object.keys(rowSelection).length > 0 && (

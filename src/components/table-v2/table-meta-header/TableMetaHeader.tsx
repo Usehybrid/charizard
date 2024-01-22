@@ -4,6 +4,8 @@ import {TableV2Props} from '../TableV2'
 import TableSelectedActions from '../table-selected-actions'
 import {Search} from '../../search'
 import {pluralize} from '../../../utils/text'
+import TableHeaderFilters from '../table-header-filters'
+import {SVG} from '../../svg'
 
 interface TableMetaHeaderProps {
   rowSelectionConfig: TableV2Props['rowSelectionConfig']
@@ -34,6 +36,14 @@ export default function TableMetaHeader({
     `${rowSelectionConfig?.entityName}s`,
   )}`
 
+  // console.log(filterConfig?.headerFilterIds, 'name')
+
+  const headerFilter = filterConfig?.headerFilterIds
+    ? filterConfig.filters.filter(f => filterConfig.headerFilterIds?.includes(f.id))
+    : null
+
+  console.log(headerFilter)
+
   return (
     <div className={classes.box}>
       <div className={classes.texts}>
@@ -48,7 +58,7 @@ export default function TableMetaHeader({
         )}
       </div>
 
-      <div>
+      <div className={classes.actions}>
         {typeof searchConfig === 'object' && (
           <div className={classes.search}>
             <Search
@@ -60,6 +70,16 @@ export default function TableMetaHeader({
             />
           </div>
         )}
+
+        {typeof filterConfig === 'object' && !!headerFilter && (
+          <TableHeaderFilters filterConfig={filterConfig} filters={headerFilter} />
+        )}
+
+        {
+          // typeof customColumnConfig === 'object'
+
+          <div className={classes.customCols}>{/* <SVG path="" /> */}</div>
+        }
       </div>
     </div>
   )

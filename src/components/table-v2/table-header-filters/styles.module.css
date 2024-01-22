@@ -11,9 +11,13 @@
 
 .filter {
   display: flex;
+  padding: 6px 12px 6px 8px;
+  justify-content: center;
   align-items: center;
-  padding: 4px 8px;
+  gap: 8px;
+  height: 36px;
   border-radius: 8px;
+  background: var(--neutral-arch-30);
 }
 .filter:hover {
   cursor: pointer;
@@ -30,10 +34,10 @@
 .filter:focus-visible {
   outline: none;
 }
-
+/* 
 .filterActive {
   background-color: var(--neutral-arch-40);
-}
+} */
 
 .filterIcon {
   margin-inline-end: 12px;
@@ -57,7 +61,7 @@
   height: 20px;
 }
 .filterIcon2 > path {
-  fill: var(--neutral-arch-600);
+  fill: var(--neutral-arch-900);
 }
 
 .filterCol {
@@ -186,13 +190,6 @@
 
 .resetBtn:hover {
   cursor: pointer;
-}
-
-.resetIcon {
-  width: 12px;
-  height: 12px;
-  /* color: var(--tex); */
-  filter: invert(42%) sepia(91%) saturate(0%) hue-rotate(161deg) brightness(91%) contrast(93%);
 }
 
 /* checkbox */

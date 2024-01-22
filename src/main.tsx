@@ -333,6 +333,8 @@ function App() {
           //   dispatch({type: SOFTWARE_ACTION_TYPES.RESET_FILTERS, payload: value}),
           filterDispatch: () => {},
           filterReset: () => {},
+
+          headerFilterIds: ['software-name'],
         }}
         selectorConfig={{
           selectors: [
