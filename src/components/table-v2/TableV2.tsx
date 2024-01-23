@@ -44,7 +44,7 @@ export interface TableV2Props {
       disabled?: boolean | ((data: any) => boolean)
     }[]
     key?: string
-    customComp?: (data: any) => React.ReactNode
+    customComp?: (data: any) => React.ReactNode | JSX.Element
   }
   // api loading/refetching states
   loaderConfig: {
