@@ -34,7 +34,7 @@ export default function TableActions({actionsConfig, data}: TableActionsProps) {
     <div className={classes.box}>
       <Button.ActionsDropdown menuItems={items} data={data} variant="small" />
       {customComp ? (
-        customComp
+        customComp(data)
       ) : key && data[key] ? (
         <div className={classes.label}>{data[key]}</div>
       ) : null}
