@@ -6,12 +6,10 @@ import {Search} from '../../search'
 import TableHeaderFilters from '../table-header-filters'
 import viewColIcon from '../../assets/view-columns.svg'
 import fileDownloadIcon from '../../assets/file-download.svg'
-import filterIcon from '../../assets/filter-lines.svg'
 import clsx from 'clsx'
 import {pluralize} from '../../../utils/text'
 import {SVG} from '../../svg'
-import {useDisclosure} from '../../../utils/hooks/use-disclosure'
-import TableFiltersDrawer from '../table-filters-drawer/TableFiltersDrawer'
+import TableFiltersDrawer from '../table-filters-drawer'
 
 interface TableMetaHeaderProps {
   rowSelectionConfig: TableV2Props['rowSelectionConfig']
@@ -30,7 +28,6 @@ export default function TableMetaHeader({
   rowSelection,
   setRowSelection,
 }: TableMetaHeaderProps) {
-  const {isOpen, onOpen, onClose} = useDisclosure()
   const hasRowActions = rowSelectionConfig?.actions && rowSelectionConfig.actions.length > 0
 
   const rowsSelected = Object.keys(rowSelection).length
@@ -48,8 +45,6 @@ export default function TableMetaHeader({
   const headerFilter = filterConfig?.headerFilterIds
     ? filterConfig.filters.filter(f => filterConfig.headerFilterIds?.includes(f.id))
     : null
-
-  console.log(headerFilter)
 
   return (
     <>

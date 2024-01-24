@@ -41,6 +41,7 @@
 
 .content {
   background-color: white;
+  color: var(--text-primary);
   height: 100dvh;
   padding-top: 1px;
   display: flex;
@@ -153,4 +154,22 @@
 .filterSingle {
   flex-shrink: 0;
   padding: 10px 23px 10px 10px;
+}
+
+/* filter options */
+
+.options {
+  margin-top: 6px;
+}
+
+.option {
+  border-radius: 6px;
+  min-height: 36px;
+  display: flex;
+  align-items: center;
+  padding: 4px 8px;
+
+  &:hover {
+    background: var(--neutral-arch-50);
+  }
 }

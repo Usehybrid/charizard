@@ -334,7 +334,7 @@ function App() {
           filterDispatch: () => {},
           filterReset: () => {},
 
-          headerFilterIds: ['software-name'],
+          headerFilterIds: ['software-name2'],
         }}
         selectorConfig={{
           selectors: [

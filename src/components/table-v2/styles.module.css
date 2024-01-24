@@ -39,12 +39,12 @@
   table-layout: fixed;
   width: 100%;
   border-collapse: collapse;
-  border: 1px solid var(--neutral-arch-200);
+  border-bottom: 1px solid var(--neutral-arch-200);
   height: 100%;
 }
 
 .tableHead {
-  background: var(--neutral-arch-20);
+  background: var(--neutral-arch-10);
   height: 36px;
 }
 
@@ -82,13 +82,9 @@
 .tableHeader {
   color: var(--text-secondary);
 
-  font-size: 12px;
-  font-style: normal;
+  font-size: 14px;
+  line-height: 20px;
   font-weight: 500;
-  line-height: normal;
-  letter-spacing: -0.24px;
-
-  text-transform: uppercase;
   text-align: left;
 }
 
