@@ -42,11 +42,9 @@
 .content {
   background-color: white;
   height: 100dvh;
-  display: flex;
-
   padding-top: 1px;
+  display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   transition: width 0.3s ease-in-out;
 
@@ -67,4 +65,92 @@
 
 .content [data-state='open'] {
   width: 593px;
+}
+
+.title {
+  display: flex;
+  padding: 10px 20px;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+
+  background: var(--neutral-arch-10);
+}
+
+.closeIconSpan {
+  cursor: pointer;
+}
+
+.closeIcon {
+  width: 24px;
+  height: 24px;
+}
+
+.closeIcon > path {
+  fill: var(--neutral-arch-600);
+}
+
+.title span {
+  color: var(--text-primary);
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 36px;
+}
+
+.footer {
+  height: 60px;
+  width: 100%;
+  margin-top: auto;
+  padding: 0 20px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: flex-end;
+
+  border-top: 1px solid var(--neutral-arch-200);
+}
+
+.filterBox {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.filters {
+  border-right: 1px solid var(--neutral-arch-200);
+  background: var(--neutral-white);
+  width: 200px;
+  /* height: 100%; */
+  flex-shrink: 0;
+}
+
+.filter {
+  padding: 10px 20px;
+}
+
+.filter.active {
+  background: var(--neutral-arch-30);
+  position: relative;
+  color: var(--theme-blue);
+  font-weight: 500;
+}
+
+.filter:not(.active) {
+  cursor: pointer;
+}
+
+.filter.active::before {
+  height: 100%;
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: var(--theme-blue);
+  width: 4px;
+}
+
+.filterSingle {
+  flex-shrink: 0;
+  padding: 10px 23px 10px 10px;
 }

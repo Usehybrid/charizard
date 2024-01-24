@@ -90,7 +90,7 @@ export default function TableMetaHeader({
             </div>
           )} */}
 
-          {typeof filterConfig === 'object' && <TableFiltersDrawer />}
+          {typeof filterConfig === 'object' && <TableFiltersDrawer filterConfig={filterConfig} />}
 
           {
             // typeof customColumnConfig === 'object'
