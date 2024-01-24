@@ -23,3 +23,48 @@
   line-height: 24px; /* 171.429% */
   width: auto;
 }
+
+/* drawer */
+
+.backdrop {
+  position: fixed;
+  width: 100dvw;
+  height: 100dvh;
+  background: var(--black);
+  opacity: 0.2;
+  z-index: 1023;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+}
+
+.content {
+  background-color: white;
+  height: 100dvh;
+  display: flex;
+
+  padding-top: 1px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: width 0.3s ease-in-out;
+
+  position: fixed;
+  top: 0;
+  right: 0;
+  /* width: 100vw; */
+  height: 100dvh;
+  /* background-color: transparent; */
+
+  z-index: 1040;
+  overflow: hidden;
+}
+
+.content [data-state='closed'] {
+  width: 0px;
+}
+
+.content [data-state='open'] {
+  width: 593px;
+}

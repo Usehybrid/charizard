@@ -25,9 +25,9 @@ export default function TableFiltersDrawer({a}: TableFiltersDrawerProps) {
       </button>
       {api.isOpen && (
         <Portal>
-          <div {...api.backdropProps} />
-          <div {...api.positionerProps}>
-            <div {...api.contentProps}>
+          <div {...api.backdropProps} className={classes.backdrop} />
+          <div {...api.positionerProps} style={{...api.positionerProps.style}}>
+            <div {...api.contentProps} className={classes.content}>
               <h2 {...api.titleProps}>Edit profile</h2>
               <p {...api.descriptionProps}>
                 Make changes to your profile here. Click save when you are done.
