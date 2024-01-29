@@ -11,7 +11,7 @@
 
 .filter {
   display: flex;
-  padding: 6px 12px 6px 8px;
+  padding: 6px 8px 6px 12px;
   justify-content: center;
   align-items: center;
   gap: 8px;

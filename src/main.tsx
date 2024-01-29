@@ -3,25 +3,8 @@ import ReactDOM from 'react-dom/client'
 import randomIcon from './components/assets/check.svg'
 import randomIcon2 from './components/assets/search-2.svg'
 import {createColumnHelper} from '@tanstack/react-table'
-import {
-  BUTTON_VARIANT,
-  Drawer,
-  Input,
-  InputContainer,
-  InputGroup,
-  InputLabel,
-  InputRightAddon,
-  InputRightElement,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  Progress,
-  Select,
-  Switch,
-  TableV2,
-} from './components'
+import {BUTTON_VARIANT, TableV2} from './components'
+import {INV_ACTION_TYPES, useInventoryStore} from './components/table-v2/inventory/inventory.store'
 
 const styles = {
   width: '90%',
@@ -306,12 +289,10 @@ const columns = [
 function App() {
   const [search, setSearch] = React.useState('')
 
-  const [open, setOpen] = React.useState(false)
+  const query = useInventoryStore(s => s.query)
+  const dispatch = useInventoryStore(s => s.dispatch)
 
-  const buttons = [
-    {variant: BUTTON_VARIANT.SECONDARY, onClick: () => setOpen(false), btnText: 'Cancel'},
-    {variant: BUTTON_VARIANT.PRIMARY, onClick: () => {}, btnText: 'Update'},
-  ]
+  console.log(query, 'query')
 
   return (
     <div style={styles}>
@@ -325,22 +306,14 @@ function App() {
           placeholder: 'Search your employees',
         }}
         filterConfig={{
-          filters,
+          filters: filtersV2,
           isLoading: false,
           isError: false,
           // filterDispatch: value => dispatch({type: SOFTWARE_ACTION_TYPES.FILTER, payload: value}),
           // filterReset: value =>
           //   dispatch({type: SOFTWARE_ACTION_TYPES.RESET_FILTERS, payload: value}),
-          filterDispatch: () => {},
-          filterReset: () => {},
-
-          headerFilterIds: ['software-name2'],
-        }}
-        selectorConfig={{
-          selectors: [
-            {name: 'All devices', onClick: () => {}},
-            {name: 'Approved devices', onClick: () => {}},
-          ],
+          filterDispatch: value => dispatch({type: INV_ACTION_TYPES.FILTER, payload: value}),
+          filterReset: () => dispatch({type: INV_ACTION_TYPES.RESET_FILTERS, payload: null}),
         }}
         sortConfig={{
           sortBy: '',
@@ -488,3 +461,305 @@ export const filters = [
     ],
   },
 ]
+
+const filtersV2 = {
+  header: [
+    {
+      id: 'inventory-status',
+      name: 'Status',
+      key: 'filter_status',
+      options: [
+        {
+          value: 'assigned',
+          name: 'Assigned',
+        },
+        {
+          value: 'unassigned',
+          name: 'Unassigned',
+        },
+        {
+          value: 'under_maintenance',
+          name: 'Under Maintenance',
+        },
+        {
+          value: 'in_transition',
+          name: 'In Transition',
+        },
+      ],
+      config: {
+        hideSearch: true,
+        placeholder: 'Search status',
+      },
+    },
+  ],
+  drawer: [
+    {
+      id: 'inventory-type',
+      name: 'Type',
+      key: 'filter_type',
+      options: [
+        {
+          name: 'Laptops',
+          value: '4fc805cc-d453-4f40-87d4-57185333eac1',
+        },
+        {
+          name: 'Headsets',
+          value: 'f497c3da-9751-48c9-8f07-e59dca26b688',
+        },
+        {
+          name: 'Routers',
+          value: '2d7ab2b4-4d5f-450a-836d-3f562b348e3b',
+        },
+        {
+          name: 'Mouses',
+          value: '3beeb99a-60af-4c12-9e19-4b81b2fb7760',
+        },
+        {
+          name: 'Peripheral devices',
+          value: '5c6516bd-fcc0-4991-ab7f-1aa86b5d5eee',
+        },
+        {
+          name: 'Monitors',
+          value: '7b846171-486b-4c8e-b5df-9cc063a1eb36',
+        },
+        {
+          name: 'Printers',
+          value: '96cfcc5e-5099-4a7b-b36b-0f9e1391f9a9',
+        },
+        {
+          name: 'Trackpads',
+          value: 'b1307d3c-7170-4f4c-960e-b1a36bb7b8a6',
+        },
+        {
+          name: 'Keyboards',
+          value: '5fda988d-9ea4-4db3-931d-2a1b3ac9ebed',
+        },
+        {
+          name: 'Tablets',
+          value: 'd65398b7-efec-4969-82b0-d8984fba5160',
+        },
+        {
+          name: 'Microphones',
+          value: 'ed3484eb-8fc3-4b4b-b41d-5de83cf26821',
+        },
+        {
+          name: 'Webcams',
+          value: 'ef2e6a9e-e3c4-492d-9630-7f2170715a5d',
+        },
+        {
+          name: 'Webcams1',
+          value: 'ef2e6a9e-e3c4-492d-9630-7f2170715a5d1',
+        },
+        {
+          name: 'Webcams2',
+          value: 'ef2e6a9e-e3c4-492d-9630-7f2170715a5d2',
+        },
+        {
+          name: 'Webcams3',
+          value: 'ef2e6a9e-e3c4-492d-9630-7f2170715a5d3',
+        },
+        {
+          name: 'Webcams4',
+          value: 'ef2e6a9e-e3c4-492d-9630-7f2170715a5d4',
+        },
+        {
+          name: 'Webcams5',
+          value: 'ef2e6a9e-e3c4-492d-9630-7f2170715a5d5',
+        },
+        {
+          name: 'Webcams6',
+          value: 'ef2e6a9e-e3c4-492d-9630-7f2170715a5d6',
+        },
+        {
+          name: 'Webcams7',
+          value: 'ef2e6a9e-e3c4-492d-9630-7f2170715a5d7',
+        },
+        {
+          name: 'Webcams8',
+          value: 'ef2e6a9e-e3c4-492d-9630-7f2170715a5d8',
+        },
+        {
+          name: 'Webcams9',
+          value: 'ef2e6a9e-e3c4-492d-9630-7f2170715a5d9',
+        },
+        {
+          name: 'Webcams10',
+          value: 'ef2e6a9e-e3c4-492d-9630-7f2170715a5d10',
+        },
+        {
+          name: 'Webcams11',
+          value: 'ef2e6a9e-e3c4-492d-9630-7f2170715a5d11',
+        },
+        {
+          name: 'Webcams12',
+          value: 'ef2e6a9e-e3c4-492d-9630-7f2170715a5d12',
+        },
+      ],
+      config: {
+        hideSearch: false,
+        placeholder: 'Search asset types',
+      },
+    },
+    {
+      id: 'inventory-brand',
+      name: 'Brand',
+      key: 'filter_brand',
+      options: [
+        {
+          name: 'Apple',
+          value: '971b5fd2-a20e-4639-9fb7-dde915c13534',
+        },
+        {
+          name: 'Acer',
+          value: 'f76e669c-78b0-4b7b-93a5-37a5bfa4d29c',
+        },
+        {
+          name: 'Samsung',
+          value: '74b0f28e-57e8-4e5e-8e2f-19fe3e475970',
+        },
+        {
+          name: 'Benq',
+          value: '6b7328d2-780d-486a-ad17-65e3cb1364bd',
+        },
+        {
+          name: 'Hp',
+          value: '6ccd7d42-27c0-47c0-bbae-b750046a19b9',
+        },
+        {
+          name: 'Asus',
+          value: '53666b40-bb23-40ba-a950-b5be8dac65f1',
+        },
+        {
+          name: 'Lenovo',
+          value: 'b9badb8e-61bf-4200-83f9-5b63f03915ce',
+        },
+        {
+          name: 'Microsoft',
+          value: '97d48a36-a958-45c8-85e1-1ad61baf85b4',
+        },
+        {
+          name: 'Dell',
+          value: 'e533b40a-e3ac-4001-9f4f-6dc05b2b6197',
+        },
+        {
+          name: 'Xiaomi',
+          value: '855df100-0d07-4e73-bc04-846df8a5fc2a',
+        },
+        {
+          name: 'Compaq',
+          value: 'cdb744a5-2db8-41d3-b7a4-4cc301f91ba4',
+        },
+        {
+          name: 'Plantronics',
+          value: '6cf35b74-8612-436f-995e-94ac98be2ad9',
+        },
+        {
+          name: 'DELL',
+          value: '7ca47c47-1f6f-4f0d-80c8-745485c6c98e',
+        },
+        {
+          name: 'Iball',
+          value: '1869df28-e6b9-48ae-83b5-ab67e0bdfa90',
+        },
+        {
+          name: 'LINKQNET',
+          value: '3fbc8042-6c9d-479b-bd79-c806cb657e64',
+        },
+        {
+          name: 'Logitech',
+          value: '64ff36ab-6234-4f1a-9f22-93e5ce9124ef',
+        },
+      ],
+      config: {
+        hideSearch: true,
+        placeholder: 'Search brands',
+      },
+    },
+    {
+      id: 'inventory-country',
+      name: 'Country',
+      key: 'filter_country',
+      options: [
+        {
+          value: 'c05429a4-f8d5-4284-9b9a-ba40e35879b7',
+          name: 'India',
+          country_code: 'IN',
+        },
+        {
+          value: 'f0270896-0ab1-46f2-8925-a9072a21113c',
+          name: 'Indonesia',
+          country_code: 'ID',
+        },
+        {
+          value: 'abdadf28-76e0-412e-ad18-068dfbe43ec9',
+          name: 'Afghanistan',
+          country_code: 'AF',
+        },
+        {
+          value: 'cc6ba9d9-dabc-4ab4-9d7a-bd6444236a52',
+          name: 'Argentina',
+          country_code: 'AR',
+        },
+        {
+          value: 'e7ed5bc5-b286-4a45-a07b-d85d53f848dc',
+          name: 'United Kingdom',
+          country_code: 'GB',
+        },
+        {
+          value: '38fa6b25-7709-41b3-8dca-a27c3747520c',
+          name: 'Aland Islands',
+          country_code: 'AX',
+        },
+        {
+          value: '9ba0db04-6264-41d3-8d26-39b9c6b90f41',
+          name: 'Albania',
+          country_code: 'AL',
+        },
+        {
+          value: 'bbf59d1e-4d91-4b09-b018-3a16a14aaf5f',
+          name: 'Singapore',
+          country_code: 'SG',
+        },
+        {
+          value: '0f7540d0-1abd-4605-a7a4-834b6c834688',
+          name: 'Hong Kong',
+          country_code: 'HK',
+        },
+        {
+          value: 'd8f3d737-401a-4530-9984-0a88b79b9ac6',
+          name: 'Benin',
+          country_code: 'BJ',
+        },
+        {
+          value: '47cf3af5-2c13-42bb-ad0c-bca7d5ec8dff',
+          name: 'Armenia',
+          country_code: 'AM',
+        },
+        {
+          value: '896d0896-3f2b-4f1d-be9b-ff22335bf5c1',
+          name: 'Kyrgyzstan',
+          country_code: 'KG',
+        },
+        {
+          value: '464dea8b-8fc7-4d69-af22-035768ee3839',
+          name: 'Kazakhstan',
+          country_code: 'KZ',
+        },
+        {
+          value: '32aa4257-1d07-4975-ada0-93300229e6c2',
+          name: 'Costa Rica',
+          country_code: 'CR',
+        },
+        {
+          value: '586ef8eb-85c8-4093-a07a-d5c02d020d89',
+          name: 'Barbados',
+          country_code: 'BB',
+        },
+      ],
+      config: {
+        hideSearch: false,
+        placeholder: 'Search countries',
+      },
+    },
+  ],
+}

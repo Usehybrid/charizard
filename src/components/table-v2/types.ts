@@ -27,7 +27,10 @@ export type FilterOptions = {
  *
  */
 export type FilterConfig = {
-  filters: FilterOptions[]
+  filters: {
+    header?: FilterOptions[]
+    drawer?: FilterOptions[]
+  }
   isLoading: boolean
   isError: boolean
   filterDispatch: (value: any) => void

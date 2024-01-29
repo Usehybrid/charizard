@@ -42,9 +42,7 @@ export default function TableMetaHeader({
 
   // console.log(filterConfig?.headerFilterIds, 'name')
 
-  const headerFilter = filterConfig?.headerFilterIds
-    ? filterConfig.filters.filter(f => filterConfig.headerFilterIds?.includes(f.id))
-    : null
+  const headerFilter = filterConfig?.filters.header ? filterConfig?.filters.header : null
 
   return (
     <>
@@ -78,18 +76,10 @@ export default function TableMetaHeader({
             <TableHeaderFilters filterConfig={filterConfig} filters={headerFilter} />
           )}
 
-          {/* {typeof filterConfig === 'object' && (
-            <div className={clsx(classes.actionCommon, classes.filterBtn)} onClick={onOpen}>
-              <SVG path={filterIcon} width={22} height={22} />
-              Filter
-            </div>
-          )} */}
-
           {typeof filterConfig === 'object' && <TableFiltersDrawer filterConfig={filterConfig} />}
 
           {
             // typeof customColumnConfig === 'object'
-
             <div className={classes.actionCommon}>
               <SVG path={viewColIcon} width={22} height={22} />
             </div>

@@ -2,11 +2,11 @@ import * as React from 'react'
 import TableFilter from './TableHeaderFilter'
 import classes from './styles.module.css'
 import {useTableStore} from '../store'
-import type {FilterConfig} from '../types'
+import type {FilterConfig, FilterOptions} from '../types'
 
 interface TableHeaderFiltersProps {
   filterConfig: FilterConfig
-  filters: FilterConfig['filters']
+  filters: FilterOptions[]
 }
 
 export default function TableHeaderFilters({filterConfig, filters}: TableHeaderFiltersProps) {

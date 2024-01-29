@@ -4,6 +4,7 @@ import useDeepCompareEffect from 'use-deep-compare-effect'
 import clsx from 'clsx'
 import TableLoader from './table-loader'
 import TableEmpty from './table-empty'
+import TableMetaHeader from './table-meta-header'
 import TableActions from './table-actions'
 import sortIcon from '../assets/sorting.svg'
 import sortAscIcon from '../assets/sort-asc.svg'
@@ -17,7 +18,6 @@ import {TableRadio} from './table-columns'
 import {CHECKBOX_COL_ID, DROPDOWN_COL_ID, RADIO_COL_ID} from './constants'
 import type {SortingState, Table, VisibilityState} from '@tanstack/react-table'
 import type {FilterConfig} from './types'
-import TableMetaHeader from './table-meta-header/TableMetaHeader'
 
 export interface TableV2Props {
   // the table data
@@ -93,12 +93,6 @@ export interface TableV2Props {
     rowSelection?: {}
     setRowSelection?: React.Dispatch<React.SetStateAction<{}>>
   }
-  selectorConfig?: {
-    selectors: {name: string; onClick: any}[]
-  }
-  /**
-   * @deprecated use infiniteScrollConfig
-   */
   paginationConfig?: {
     metaData: {
       total_items: number
@@ -110,13 +104,6 @@ export interface TableV2Props {
     height?: string
     scrollThreshold?: string | number
     scrollableTarget?: string
-  }
-  /**
-   * Used for infinite scroll, all the properties comes from useInfiniteQuery
-   */
-  infiniteScrollConfig?: {
-    fetchNextPage: () => void
-    isFetchingNextPage: boolean
   }
   emptyStateConfig?: {
     icon: string
@@ -164,18 +151,14 @@ export function TableV2({
   },
   searchConfig,
   totalText,
-  selectorConfig,
   paginationConfig,
   emptyStateConfig,
   headerText,
-  infiniteScrollConfig,
 }: TableV2Props) {
   const [sorting, setSorting] = React.useState<SortingState>([])
   // used for checkbox visibility
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
   const [rowSelection, setRowSelection] = React.useState({})
-  // used with infiniteScrollConfig
-  const {ref, inView} = useInView()
 
   // account for search state here itself
   const isEmpty = !loaderConfig.isFetching && !loaderConfig.isError && !data.length
@@ -194,13 +177,6 @@ export function TableV2({
     const rows = table.getSelectedRowModel().rows.map(row => row.original)
     setSelectedRows([...rows])
   }, [rowSelection])
-
-  React.useEffect(() => {
-    if (!infiniteScrollConfig) return
-    if (inView) {
-      infiniteScrollConfig.fetchNextPage()
-    }
-  }, [infiniteScrollConfig?.fetchNextPage, inView])
 
   const _columns = [
     {
@@ -327,43 +303,15 @@ export function TableV2({
           filterConfig={filterConfig}
         />
       )}
-
-      {paginationConfig ? (
-        <InfiniteScroll
-          dataLength={data.length}
-          next={paginationConfig.fetchNextPage}
-          hasMore={data?.length < paginationConfig.metaData?.total_items}
-          loader={paginationConfig.loader}
-          height={paginationConfig.height}
-          scrollThreshold={paginationConfig.scrollThreshold}
-          scrollableTarget={paginationConfig.scrollableTarget}
-        >
-          <TableComp
-            table={table}
-            isCheckbox={isCheckbox}
-            isRadio={isRadio}
-            loaderConfig={loaderConfig}
-            isEmpty={isEmpty}
-            emptyStateConfig={emptyStateConfig}
-            search={searchConfig?.search}
-          />
-        </InfiniteScroll>
-      ) : (
-        <TableComp
-          table={table}
-          isCheckbox={isCheckbox}
-          isRadio={isRadio}
-          loaderConfig={loaderConfig}
-          isEmpty={isEmpty}
-          emptyStateConfig={emptyStateConfig}
-          search={searchConfig?.search}
-        />
-      )}
-      {infiniteScrollConfig && (
-        <div>
-          <div ref={ref} />
-        </div>
-      )}
+      <TableComp
+        table={table}
+        isCheckbox={isCheckbox}
+        isRadio={isRadio}
+        loaderConfig={loaderConfig}
+        isEmpty={isEmpty}
+        emptyStateConfig={emptyStateConfig}
+        search={searchConfig?.search}
+      />
     </div>
   )
 }
