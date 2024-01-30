@@ -188,3 +188,13 @@
   background-color: white;
   margin-top: -10px;
 }
+
+.totalSelected {
+  border-radius: 3px;
+  background: var(--neutral-arch-900);
+  color: var(--neutral-white);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: normal;
+  padding: 0 3px;
+}

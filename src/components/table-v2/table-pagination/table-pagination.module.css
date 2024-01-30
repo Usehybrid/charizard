@@ -1,0 +1,9 @@
+.box {
+  display: flex;
+  justify-content: space-between;
+}
+
+.pageBoxes {
+  display: flex;
+  gap: 8px;
+}

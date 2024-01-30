@@ -7,106 +7,95 @@ import classes from './table-filters-drawer.module.css'
 import {useMachine, normalizeProps, Portal} from '@zag-js/react'
 import {SVG} from '../../svg'
 import {BUTTON_VARIANT, Button} from '../../button'
-
 import {FilterConfig} from '../types'
 import {Search} from '../../search'
 import {useTableStore} from '../store'
 import FilterDrawerCheckbox from '../table-header-filters/FilterDrawerCheckbox'
+import {getDefaultCheckedState, removeUncheckedItems} from './utils'
 
 interface TableFiltersDrawerProps {
   filterConfig: FilterConfig
 }
 
 export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerProps) {
-  const [state, send] = useMachine(dialog.machine({id: 'charizard-table-filters'}))
+  const [filterCheckedState, setFilterCheckedState] = React.useState<Record<string, any[]>>({})
   const [search, setSearch] = React.useState('')
+  const {setDefaultFilters, resetAllFilters, changeFiltersDrawer} = useTableStore(s => ({
+    setDefaultFilters: s.setDefaultFilters,
+    resetAllFilters: s.resetAllFilters,
+    changeFiltersDrawer: s.changeFiltersDrawer,
+  }))
+  const tableFilters = useTableStore(s => s.filters)
+  const {isLoading, isError, headerFilterIds, filterDispatch} = filterConfig
 
-  const {isLoading, isError, headerFilterIds} = filterConfig
+  const [state, send] = useMachine(
+    dialog.machine({
+      id: 'charizard-table-filters',
+      onOpenChange(details) {
+        if (!details.open) {
+          setFilterCheckedState({})
+        }
+      },
+    }),
+  )
 
   const filters = filterConfig.filters.drawer ? filterConfig.filters.drawer : []
+  const [currFilter, setCurrFilter] = React.useState(filters[0])
 
   const api = dialog.connect(state, send, normalizeProps)
 
-  const {
-    setDefaultFilters,
-    addFilters,
-    removeFilters,
-    resetFilters,
-    resetAllFilters,
-    addFiltersDrawer,
-    tF,
-  } = useTableStore(s => ({
-    setDefaultFilters: s.setDefaultFilters,
-    addFilters: s.addFilters,
-    removeFilters: s.removeFilters,
-    resetFilters: s.resetFilters,
-    resetAllFilters: s.resetAllFilters,
-    addFiltersDrawer: s.addFiltersDrawer,
-    tF: s.filters,
-  }))
-  const tableFilters = useTableStore(s => s.filters)
-  const [currFilter, setCurrFilter] = React.useState(filters[0])
-
-  console.log(tF, '<=TF')
+  // console.log(tableFilters)
 
   React.useEffect(() => {
     if (!filters?.length || isLoading) return
 
     const mapFn = (filter: any) => ({key: filter.key, values: []})
     setDefaultFilters(
-      [
-        ...filters?.map(filter => ({key: filter.key, values: []})),
-        // ...filterConfig.filters.header?.map(mapFn),
-      ] || [],
+      [...(filterConfig.filters.header?.map(mapFn) || []), ...filters?.map(mapFn)] || [],
     )
   }, [filters?.length, isLoading])
 
-  const filteredOptions = currFilter.options.filter(option => {
-    if (!option.name) return false
-    return option.name.toLowerCase().includes(search.toLowerCase())
-  })
-  // console.log(filters)
-
-  const [filterCheckedState, setFilterCheckedState] = React.useState<Record<string, any[]>>({})
-
-  // console.log(filterCheckedState, 'fC')
+  const filteredOptions = currFilter.options
+    .filter(option => {
+      if (!option.name) return false
+      return option.name.toLowerCase().includes(search.toLowerCase())
+    })
+    .map(op => op.value)
 
   React.useEffect(() => {
     if (!filters.length) return
-
-    const obj: Record<string, any[]> = {}
-
-    filters.forEach(filter => {
-      // plus 1 due to 'All'
-      obj[filter.key] = Array(filter.options.length + 1).fill({checked: false})
-    })
-
+    const obj = getDefaultCheckedState(filters, tableFilters)
     setFilterCheckedState(obj)
   }, [])
 
-  // console.log(tableFilters)
+  React.useEffect(() => {
+    // console.log(api.isOpen, filterCheckedState, tableFilters)
 
-  const selectedFilters = tableFilters.find(tf => tf.key === currFilter.key)?.values.length
+    // if (!Object.keys(filterCheckedState).length) return
+    const obj = getDefaultCheckedState(filters, tableFilters)
+    setFilterCheckedState(obj)
+    // return () => {}
+  }, [api.isOpen])
 
   const getIsChecked = (key: string, idx: number) => {
     const l = Object.keys(filterCheckedState).length
     if (!l || !filterCheckedState[key]) return false
-    // console.log(filterCheckedState[key])
     return filterCheckedState[key][idx].checked
   }
 
+  // console.log(filterCheckedState, tableFilters)
+
   const handleApplyFilters = () => {
-    // console.log(filterCheckedState)
-
     const checkedState = removeUncheckedItems(filterCheckedState)
-
-    // console.log(checkedState, 'test')
-
     for (let [k, v] of Object.entries(checkedState)) {
-      console.log(k, v)
-      addFiltersDrawer(k, v.split(','), filterConfig.filterDispatch)
+      if (v.length) changeFiltersDrawer(k, v.split(','), filterDispatch)
     }
+    api.close()
   }
+
+  const totalSelectedFilters = tableFilters.reduce((acc, curr) => {
+    return (acc += curr.values.length)
+  }, 0)
 
   return (
     <>
@@ -116,6 +105,9 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
       >
         <SVG path={filterIcon} width={22} height={22} />
         Filter
+        {totalSelectedFilters !== 0 && (
+          <span className={classes.totalSelected}>{totalSelectedFilters}</span>
+        )}
       </button>
       {api.isOpen && (
         <Portal>
@@ -152,10 +144,9 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
                         key={filter.id}
                       >
                         {filter.name}{' '}
-                        {isActive &&
-                          `${
-                            internalFilter?.values.length ? `(${internalFilter.values.length})` : ''
-                          }`}
+                        {`${
+                          internalFilter?.values.length ? `(${internalFilter.values.length})` : ''
+                        }`}
                       </div>
                     )
                   })}
@@ -178,25 +169,33 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
                       {filteredOptions.length === 0 ? (
                         <div className={classes.optionsEmpty}>No results found</div>
                       ) : (
-                        filteredOptions.map((option, idx) => (
-                          <div key={idx} className={classes.option}>
-                            <FilterDrawerCheckbox
-                              label={option.name}
-                              value={option.value}
-                              filterKey={currFilter.key}
-                              filterId={currFilter.id}
-                              addFilters={addFilters}
-                              removeFilters={removeFilters}
-                              checked={getIsChecked(currFilter.key, idx)}
-                              filterDispatch={filterConfig.filterDispatch}
-                              countryCode={option.country_code}
-                              key={option.value}
-                              customName={option.customName}
-                              setFilterCheckedState={setFilterCheckedState}
-                              idx={idx}
-                            />
-                          </div>
-                        ))
+                        <>
+                          {currFilter.options.map((option, idx) => (
+                            <div
+                              key={idx}
+                              className={classes.option}
+                              style={{
+                                display: search.length
+                                  ? !filteredOptions.includes(option.value)
+                                    ? 'none'
+                                    : undefined
+                                  : undefined,
+                              }}
+                            >
+                              <FilterDrawerCheckbox
+                                label={option.name}
+                                value={option.value}
+                                filterKey={currFilter.key}
+                                checked={getIsChecked(currFilter.key, idx)}
+                                countryCode={option.country_code}
+                                key={option.value}
+                                customName={option.customName}
+                                setFilterCheckedState={setFilterCheckedState}
+                                idx={idx}
+                              />
+                            </div>
+                          ))}
+                        </>
                       )}
                     </div>
                   }
@@ -208,7 +207,11 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
                 </Button>
                 <Button
                   variant={BUTTON_VARIANT.GHOST}
-                  onClick={() => resetAllFilters(filterConfig.filterReset)}
+                  onClick={() => {
+                    resetAllFilters(filterConfig.filterReset)
+                    api.close()
+                  }}
+                  disabled={totalSelectedFilters === 0}
                 >
                   Reset All
                 </Button>
@@ -220,32 +223,4 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
       )}
     </>
   )
-}
-
-type FilterItem = {
-  label?: string
-  value?: string
-  checked: boolean
-}
-
-type Filters = {
-  [key: string]: FilterItem[]
-}
-
-type FilterResults = {
-  [key: string]: string
-}
-
-function removeUncheckedItems(input: Filters): FilterResults {
-  const result: FilterResults = {}
-
-  for (const key in input) {
-    const checkedItems = input[key].filter(item => item.checked)
-
-    // Join the values of checked items into a single string, separated by commas
-    const formattedValues = checkedItems.map(item => item.value).join(',')
-    result[key] = formattedValues
-  }
-
-  return result
 }

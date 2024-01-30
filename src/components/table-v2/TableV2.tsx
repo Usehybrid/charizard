@@ -18,6 +18,7 @@ import {TableRadio} from './table-columns'
 import {CHECKBOX_COL_ID, DROPDOWN_COL_ID, RADIO_COL_ID} from './constants'
 import type {SortingState, Table, VisibilityState} from '@tanstack/react-table'
 import type {FilterConfig} from './types'
+import TablePagination from './table-pagination'
 
 export interface TableV2Props {
   // the table data
@@ -101,9 +102,7 @@ export interface TableV2Props {
     }
     loader: React.ReactNode
     fetchNextPage: () => void
-    height?: string
-    scrollThreshold?: string | number
-    scrollableTarget?: string
+    fetchPrevPage: () => void
   }
   emptyStateConfig?: {
     icon: string
@@ -224,7 +223,6 @@ export function TableV2({
     ...columns,
     {
       id: DROPDOWN_COL_ID,
-
       cell: (props: any) => (
         <TableActions actionsConfig={actionsConfig} data={props.row.original} />
       ),
@@ -311,6 +309,7 @@ export function TableV2({
         isEmpty={isEmpty}
         emptyStateConfig={emptyStateConfig}
         search={searchConfig?.search}
+        paginationConfig={paginationConfig}
       />
     </div>
   )
@@ -322,6 +321,7 @@ function TableComp({
   isRadio,
   loaderConfig,
   emptyStateConfig,
+  paginationConfig,
   isEmpty,
   search,
 }: {
@@ -330,6 +330,7 @@ function TableComp({
   isRadio?: boolean
   loaderConfig: TableV2Props['loaderConfig']
   emptyStateConfig: TableV2Props['emptyStateConfig']
+  paginationConfig: TableV2Props['paginationConfig']
   search?: string
   isEmpty: boolean
 }) {
@@ -458,6 +459,10 @@ function TableComp({
           ))}
         </tfoot>
       </table>
+
+      {typeof paginationConfig === 'object' && (
+        <TablePagination paginationConfig={paginationConfig} />
+      )}
     </div>
   )
 }
