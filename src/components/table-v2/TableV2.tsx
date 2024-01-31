@@ -454,7 +454,7 @@ function TableComp({
           </tbody>
         )}
 
-        <tfoot className={classes.tableFoot}>
+        {/* <tfoot className={classes.tableFoot}>
           {table.getFooterGroups().map(footerGroup => (
             <tr key={footerGroup.id} className={classes.tableRow}>
               {footerGroup.headers.map(header => (
@@ -466,7 +466,7 @@ function TableComp({
               ))}
             </tr>
           ))}
-        </tfoot>
+        </tfoot> */}
       </table>
     </div>
   )
