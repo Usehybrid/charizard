@@ -103,6 +103,11 @@ export interface TableV2Props {
     loader: React.ReactNode
     fetchNextPage: () => void
     fetchPrevPage: () => void
+    page: number
+    setPage: (page: number) => void
+    limit: number
+    setLimit: (limit: number) => void
+    defaultLimit?: string
   }
   emptyStateConfig?: {
     icon: string
@@ -290,27 +295,31 @@ export function TableV2({
   }, [searchConfig?.search])
 
   return (
-    <div className={classes.box}>
-      {!loaderConfig.isError && (
-        <TableMetaHeader
-          rowSelectionConfig={rowSelectionConfig}
-          searchConfig={searchConfig}
-          totalText={totalText}
-          rowSelection={rowSelection}
-          setRowSelection={setRowSelection}
-          filterConfig={filterConfig}
+    <div style={{display: 'flex', flexDirection: 'column', gap: '15px'}}>
+      <div className={classes.box}>
+        {!loaderConfig.isError && (
+          <TableMetaHeader
+            rowSelectionConfig={rowSelectionConfig}
+            searchConfig={searchConfig}
+            totalText={totalText}
+            rowSelection={rowSelection}
+            setRowSelection={setRowSelection}
+            filterConfig={filterConfig}
+          />
+        )}
+        <TableComp
+          table={table}
+          isCheckbox={isCheckbox}
+          isRadio={isRadio}
+          loaderConfig={loaderConfig}
+          isEmpty={isEmpty}
+          emptyStateConfig={emptyStateConfig}
+          search={searchConfig?.search}
         />
+      </div>
+      {typeof paginationConfig === 'object' && (
+        <TablePagination paginationConfig={paginationConfig} />
       )}
-      <TableComp
-        table={table}
-        isCheckbox={isCheckbox}
-        isRadio={isRadio}
-        loaderConfig={loaderConfig}
-        isEmpty={isEmpty}
-        emptyStateConfig={emptyStateConfig}
-        search={searchConfig?.search}
-        paginationConfig={paginationConfig}
-      />
     </div>
   )
 }
@@ -321,7 +330,7 @@ function TableComp({
   isRadio,
   loaderConfig,
   emptyStateConfig,
-  paginationConfig,
+
   isEmpty,
   search,
 }: {
@@ -330,7 +339,7 @@ function TableComp({
   isRadio?: boolean
   loaderConfig: TableV2Props['loaderConfig']
   emptyStateConfig: TableV2Props['emptyStateConfig']
-  paginationConfig: TableV2Props['paginationConfig']
+
   search?: string
   isEmpty: boolean
 }) {
@@ -459,10 +468,6 @@ function TableComp({
           ))}
         </tfoot>
       </table>
-
-      {typeof paginationConfig === 'object' && (
-        <TablePagination paginationConfig={paginationConfig} />
-      )}
     </div>
   )
 }

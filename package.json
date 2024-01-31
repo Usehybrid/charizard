@@ -36,6 +36,7 @@
     "@zag-js/popper": "^0.34.0",
     "@zag-js/radio-group": "^0.34.0",
     "@zag-js/react": "^0.34.0",
+    "@zag-js/select": "^0.34.0",
     "@zag-js/tabs": "^0.34.0",
     "@zag-js/tooltip": "^0.34.0",
     "clsx": "^2.1.0",
@@ -73,5 +74,8 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "dependencies": {
+    "@zag-js/pagination": "^0.34.0"
   }
 }

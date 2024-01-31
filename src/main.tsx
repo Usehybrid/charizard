@@ -292,7 +292,12 @@ function App() {
   const query = useInventoryStore(s => s.query)
   const dispatch = useInventoryStore(s => s.dispatch)
 
-  console.log(query, 'query')
+  // console.log(query, 'query')
+
+  const [page, setPage] = React.useState(0)
+  const [limit, setLimit] = React.useState(10)
+
+  console.log({page, limit})
 
   return (
     <div style={styles}>
@@ -323,6 +328,20 @@ function App() {
           sortMap: {
             software: 'softwares.names',
           },
+        }}
+        paginationConfig={{
+          page,
+          setPage,
+          limit,
+          setLimit,
+          fetchNextPage: () => {},
+          fetchPrevPage: () => {},
+          metaData: {
+            total_items: 120,
+            items_on_page: limit,
+            page_no: page,
+          },
+          loader: 'loading',
         }}
         rowSelectionConfig={{
           // isRadio: true,
