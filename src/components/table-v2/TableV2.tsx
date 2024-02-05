@@ -123,6 +123,9 @@ export interface TableV2Props {
     emptySearchTitle?: string
   }
   headerText?: string
+  tableStyleConfig?: {
+    maxHeight: string
+  }
 }
 
 // todo
@@ -158,6 +161,7 @@ export function TableV2({
   paginationConfig,
   emptyStateConfig,
   headerText,
+  tableStyleConfig,
 }: TableV2Props) {
   const [sorting, setSorting] = React.useState<SortingState>([])
   // used for checkbox visibility
@@ -295,7 +299,15 @@ export function TableV2({
   }, [searchConfig?.search])
 
   return (
-    <div style={{display: 'flex', flexDirection: 'column', gap: '15px'}}>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '15px',
+        overflowY: 'scroll',
+        maxHeight: tableStyleConfig?.maxHeight,
+      }}
+    >
       <div className={classes.box}>
         {!loaderConfig.isError && (
           <TableMetaHeader
@@ -343,6 +355,11 @@ function TableComp({
   search?: string
   isEmpty: boolean
 }) {
+  // const sticky = ['name', 'age']
+  // ...
+  // headers.map(header => {
+  // return <th style={sticky.includes(header.id) ? {{ left:  header.getStart('left'), position: 'sticky', top: 0 } : {}}>{header.column.columnDef.header}</th>
+
   return (
     <div className={classes.tableScrollContainer}>
       <table className={classes.table}>

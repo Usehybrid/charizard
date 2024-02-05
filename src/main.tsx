@@ -298,7 +298,43 @@ function App() {
   const [page, setPage] = React.useState(0)
   const [limit, setLimit] = React.useState(10)
 
-  console.log({page, limit})
+  const [md, setMd] = React.useState<any>(undefined)
+
+  React.useEffect(() => {
+    setTimeout(() => {
+      const obj = {
+        total_items: 120,
+        items_on_page: 20,
+        page_no: page,
+      }
+      setMd(obj)
+    }, 2000)
+
+    return () => {}
+  }, [])
+
+  const pc = {
+    page,
+    setPage,
+    limit,
+    setLimit,
+    fetchNextPage: () => {},
+    fetchPrevPage: () => {},
+    metaData: {
+      total_items: 120,
+      items_on_page: 20,
+      page_no: page,
+    },
+    //   {
+    //     "total_items": 207,
+    //     "page_no": 0,
+    //     "items_on_page": 20
+    // }
+    // metaData: md,
+    loader: 'loading',
+  }
+
+  console.log(pc.metaData)
 
   return (
     <div style={styles}>
@@ -312,8 +348,7 @@ function App() {
           placeholder: 'Search your employees',
         }}
         filterConfig={{
-          // filters: filtersV2,
-          filters: undefined,
+          filters: filtersV2,
           isLoading: false,
           isError: false,
           // filterDispatch: value => dispatch({type: SOFTWARE_ACTION_TYPES.FILTER, payload: value}),
@@ -331,21 +366,7 @@ function App() {
             software: 'softwares.names',
           },
         }}
-        paginationConfig={{
-          page,
-          setPage,
-          limit,
-          setLimit,
-          fetchNextPage: () => {},
-          fetchPrevPage: () => {},
-          metaData: {
-            total_items: 120,
-            items_on_page: limit,
-            page_no: page,
-          },
-          // metaData: undefined,
-          loader: 'loading',
-        }}
+        paginationConfig={pc}
         rowSelectionConfig={{
           // isRadio: true,
           entityName: 'Software',

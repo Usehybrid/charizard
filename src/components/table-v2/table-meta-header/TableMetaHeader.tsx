@@ -43,56 +43,54 @@ export default function TableMetaHeader({
   const headerFilter = filterConfig?.filters?.header ? filterConfig?.filters.header : null
 
   return (
-    <>
-      <div className={classes.box}>
-        <div className={classes.texts}>
-          <p className={classes.heading}>
-            {isRowSelected ? selectedText : totalText} {isRowSelected ? 'Selected' : ''}
-          </p>
-          {hasRowActions && (
-            <TableSelectedActions
-              rowSelectionConfig={rowSelectionConfig}
-              rowSelection={rowSelection}
-            />
-          )}
-        </div>
-
-        <div className={classes.actions}>
-          {typeof searchConfig === 'object' && (
-            <div className={classes.search}>
-              <Search
-                id="table-search"
-                search={searchConfig.search}
-                setSearch={searchConfig.setSearch}
-                placeholder={searchConfig.placeholder}
-                clearIconClearFn={() => setRowSelection({})}
-              />
-            </div>
-          )}
-
-          {typeof filterConfig === 'object' && !!headerFilter && (
-            <TableHeaderFilters filterConfig={filterConfig} filters={headerFilter} />
-          )}
-
-          {typeof filterConfig === 'object' && !!filterConfig.filters && (
-            <TableFiltersDrawer filterConfig={filterConfig} />
-          )}
-
-          {
-            // typeof customColumnConfig === 'object'
-            <div className={classes.actionCommon}>
-              <SVG path={viewColIcon} width={22} height={22} />
-            </div>
-          }
-
-          {
-            // typeof exportConfig === 'object'
-            <div className={classes.actionCommon}>
-              <SVG path={fileDownloadIcon} width={22} height={22} />
-            </div>
-          }
-        </div>
+    <div className={classes.box}>
+      <div className={classes.texts}>
+        <p className={classes.heading}>
+          {isRowSelected ? selectedText : totalText} {isRowSelected ? 'Selected' : ''}
+        </p>
+        {hasRowActions && (
+          <TableSelectedActions
+            rowSelectionConfig={rowSelectionConfig}
+            rowSelection={rowSelection}
+          />
+        )}
       </div>
-    </>
+
+      <div className={classes.actions}>
+        {typeof searchConfig === 'object' && (
+          <div className={classes.search}>
+            <Search
+              id="table-search"
+              search={searchConfig.search}
+              setSearch={searchConfig.setSearch}
+              placeholder={searchConfig.placeholder}
+              clearIconClearFn={() => setRowSelection({})}
+            />
+          </div>
+        )}
+
+        {typeof filterConfig === 'object' && !!headerFilter && (
+          <TableHeaderFilters filterConfig={filterConfig} filters={headerFilter} />
+        )}
+
+        {typeof filterConfig === 'object' && !!filterConfig.filters && (
+          <TableFiltersDrawer filterConfig={filterConfig} />
+        )}
+
+        {
+          // typeof customColumnConfig === 'object'
+          <div className={classes.actionCommon}>
+            <SVG path={viewColIcon} width={22} height={22} />
+          </div>
+        }
+
+        {
+          // typeof exportConfig === 'object'
+          <div className={classes.actionCommon}>
+            <SVG path={fileDownloadIcon} width={22} height={22} />
+          </div>
+        }
+      </div>
+    </div>
   )
 }

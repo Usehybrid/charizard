@@ -12,15 +12,16 @@ import {TableV2Props} from '../TableV2'
 import {SVG} from '../../svg'
 
 interface TablePaginationProps {
-  paginationConfig?: TableV2Props['paginationConfig']
+  paginationConfig: TableV2Props['paginationConfig']
 }
 
 export default function TablePagination({paginationConfig}: TablePaginationProps) {
   if (!paginationConfig) return null
+  const {setLimit, defaultLimit, metaData} = paginationConfig
   const [state, send] = useMachine(
     pagination.machine({
       id: React.useId(),
-      count: paginationConfig?.metaData?.total_items || 0,
+      count: metaData?.total_items || 0,
       onPageChange(details) {
         paginationConfig?.setPage(details.page - 1)
       },
@@ -29,7 +30,7 @@ export default function TablePagination({paginationConfig}: TablePaginationProps
 
   const paginationApi = pagination.connect(state, send, normalizeProps)
 
-  const {setLimit, defaultLimit, metaData} = paginationConfig
+  console.log(paginationApi, 'pAPI')
 
   return (
     <div className={classes.box}>
