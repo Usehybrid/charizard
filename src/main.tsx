@@ -321,9 +321,9 @@ function App() {
     fetchNextPage: () => {},
     fetchPrevPage: () => {},
     metaData: {
-      total_items: 120,
+      total_items: 207,
+      page_no: 0,
       items_on_page: 20,
-      page_no: page,
     },
     //   {
     //     "total_items": 207,
