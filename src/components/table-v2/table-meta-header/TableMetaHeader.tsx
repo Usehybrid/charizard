@@ -42,7 +42,7 @@ export default function TableMetaHeader({
 
   // console.log(filterConfig?.headerFilterIds, 'name')
 
-  const headerFilter = filterConfig?.filters.header ? filterConfig?.filters.header : null
+  const headerFilter = filterConfig?.filters?.header ? filterConfig?.filters.header : null
 
   return (
     <>

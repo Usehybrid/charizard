@@ -39,7 +39,7 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
     }),
   )
 
-  const filters = filterConfig.filters.drawer ? filterConfig.filters.drawer : []
+  const filters = filterConfig.filters?.drawer ? filterConfig.filters.drawer : []
   const [currFilter, setCurrFilter] = React.useState(filters[0])
 
   const api = dialog.connect(state, send, normalizeProps)
@@ -51,7 +51,7 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
 
     const mapFn = (filter: any) => ({key: filter.key, values: []})
     setDefaultFilters(
-      [...(filterConfig.filters.header?.map(mapFn) || []), ...filters?.map(mapFn)] || [],
+      [...(filterConfig.filters?.header?.map(mapFn) || []), ...filters?.map(mapFn)] || [],
     )
   }, [filters?.length, isLoading])
 

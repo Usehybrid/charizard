@@ -27,7 +27,7 @@ export type FilterOptions = {
  *
  */
 export type FilterConfig = {
-  filters: {
+  filters?: {
     header?: FilterOptions[]
     drawer?: FilterOptions[]
   }

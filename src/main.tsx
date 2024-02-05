@@ -313,6 +313,7 @@ function App() {
         }}
         filterConfig={{
           filters: filtersV2,
+          // filters: undefined,
           isLoading: false,
           isError: false,
           // filterDispatch: value => dispatch({type: SOFTWARE_ACTION_TYPES.FILTER, payload: value}),
