@@ -14,7 +14,6 @@ interface TablePaginationProps {
 }
 
 export default function TablePagination({paginationConfig}: TablePaginationProps) {
-  console.log(paginationConfig, 'line 19: pConfig')
   if (!paginationConfig) return null
   const {setLimit, defaultLimit, metaData} = paginationConfig
   const [state, send] = useMachine(
@@ -28,8 +27,6 @@ export default function TablePagination({paginationConfig}: TablePaginationProps
   )
 
   const paginationApi = pagination.connect(state, send, normalizeProps)
-
-  console.log(paginationApi, 'line 34: pAPI')
 
   return (
     <div className={classes.box}>

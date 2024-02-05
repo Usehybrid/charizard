@@ -304,8 +304,6 @@ export function TableV2({
         display: 'flex',
         flexDirection: 'column',
         gap: '15px',
-        overflowY: 'scroll',
-        maxHeight: tableStyleConfig?.maxHeight,
       }}
     >
       <div className={classes.box}>
@@ -327,6 +325,7 @@ export function TableV2({
           isEmpty={isEmpty}
           emptyStateConfig={emptyStateConfig}
           search={searchConfig?.search}
+          tableStyleConfig={tableStyleConfig}
         />
       </div>
       {typeof paginationConfig === 'object' && !!paginationConfig.metaData && (
@@ -342,7 +341,7 @@ function TableComp({
   isRadio,
   loaderConfig,
   emptyStateConfig,
-
+  tableStyleConfig,
   isEmpty,
   search,
 }: {
@@ -351,7 +350,7 @@ function TableComp({
   isRadio?: boolean
   loaderConfig: TableV2Props['loaderConfig']
   emptyStateConfig: TableV2Props['emptyStateConfig']
-
+  tableStyleConfig: TableV2Props['tableStyleConfig']
   search?: string
   isEmpty: boolean
 }) {
@@ -361,7 +360,10 @@ function TableComp({
   // return <th style={sticky.includes(header.id) ? {{ left:  header.getStart('left'), position: 'sticky', top: 0 } : {}}>{header.column.columnDef.header}</th>
 
   return (
-    <div className={classes.tableScrollContainer}>
+    <div
+      className={classes.tableScrollContainer}
+      style={{overflowY: 'scroll', maxHeight: tableStyleConfig?.maxHeight}}
+    >
       <table className={classes.table}>
         <thead className={classes.tableHead}>
           {table.getHeaderGroups().map(headerGroup => (
