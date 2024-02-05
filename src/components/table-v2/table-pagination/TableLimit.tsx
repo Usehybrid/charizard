@@ -8,7 +8,7 @@ import {SVG} from '../../svg'
 interface TableLimitProps {
   setLimit: (l: number) => void
   defaultLimit?: string
-  totalItems: number
+  totalItems?: number
 }
 
 const selectData = [

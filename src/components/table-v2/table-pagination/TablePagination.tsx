@@ -16,10 +16,11 @@ interface TablePaginationProps {
 }
 
 export default function TablePagination({paginationConfig}: TablePaginationProps) {
+  if (!paginationConfig) return null
   const [state, send] = useMachine(
     pagination.machine({
       id: React.useId(),
-      count: paginationConfig?.metaData.total_items || 0,
+      count: paginationConfig?.metaData?.total_items || 0,
       onPageChange(details) {
         paginationConfig?.setPage(details.page - 1)
       },
@@ -28,7 +29,6 @@ export default function TablePagination({paginationConfig}: TablePaginationProps
 
   const paginationApi = pagination.connect(state, send, normalizeProps)
 
-  if (!paginationConfig) return null
   const {setLimit, defaultLimit, metaData} = paginationConfig
 
   return (
@@ -36,7 +36,7 @@ export default function TablePagination({paginationConfig}: TablePaginationProps
       <TableLimit
         setLimit={setLimit}
         defaultLimit={defaultLimit}
-        totalItems={metaData.total_items}
+        totalItems={metaData?.total_items}
       />
       {paginationApi.totalPages > 1 && (
         <nav {...paginationApi.rootProps}>

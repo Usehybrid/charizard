@@ -95,7 +95,7 @@ export interface TableV2Props {
     setRowSelection?: React.Dispatch<React.SetStateAction<{}>>
   }
   paginationConfig?: {
-    metaData: {
+    metaData?: {
       total_items: number
       items_on_page: number
       page_no: number

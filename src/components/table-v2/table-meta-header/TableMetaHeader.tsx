@@ -40,8 +40,6 @@ export default function TableMetaHeader({
     `${rowSelectionConfig?.entityName}s`,
   )}`
 
-  // console.log(filterConfig?.headerFilterIds, 'name')
-
   const headerFilter = filterConfig?.filters?.header ? filterConfig?.filters.header : null
 
   return (
@@ -76,7 +74,9 @@ export default function TableMetaHeader({
             <TableHeaderFilters filterConfig={filterConfig} filters={headerFilter} />
           )}
 
-          {typeof filterConfig === 'object' && <TableFiltersDrawer filterConfig={filterConfig} />}
+          {typeof filterConfig === 'object' && !!filterConfig.filters && (
+            <TableFiltersDrawer filterConfig={filterConfig} />
+          )}
 
           {
             // typeof customColumnConfig === 'object'

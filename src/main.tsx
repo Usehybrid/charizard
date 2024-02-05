@@ -312,8 +312,8 @@ function App() {
           placeholder: 'Search your employees',
         }}
         filterConfig={{
-          filters: filtersV2,
-          // filters: undefined,
+          // filters: filtersV2,
+          filters: undefined,
           isLoading: false,
           isError: false,
           // filterDispatch: value => dispatch({type: SOFTWARE_ACTION_TYPES.FILTER, payload: value}),
@@ -343,6 +343,7 @@ function App() {
             items_on_page: limit,
             page_no: page,
           },
+          // metaData: undefined,
           loader: 'loading',
         }}
         rowSelectionConfig={{
