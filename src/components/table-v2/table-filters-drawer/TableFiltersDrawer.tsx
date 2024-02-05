@@ -55,7 +55,7 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
     )
   }, [filters?.length, isLoading])
 
-  const filteredOptions = currFilter.options
+  const filteredOptions = currFilter?.options
     .filter(option => {
       if (!option.name) return false
       return option.name.toLowerCase().includes(search.toLowerCase())
@@ -170,7 +170,7 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
                         <div className={classes.optionsEmpty}>No results found</div>
                       ) : (
                         <>
-                          {currFilter.options.map((option, idx) => (
+                          {currFilter?.options.map((option, idx) => (
                             <div
                               key={idx}
                               className={classes.option}

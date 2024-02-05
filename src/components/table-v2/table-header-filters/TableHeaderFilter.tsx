@@ -40,7 +40,7 @@ export default function TableHeaderFilter({
   )
   const api = menu.connect(state, send, normalizeProps)
 
-  const filteredOptions = filter.options.filter(option => {
+  const filteredOptions = filter?.options.filter(option => {
     if (!option.name) return false
     return option.name.toLowerCase().includes(search.toLowerCase())
   })
