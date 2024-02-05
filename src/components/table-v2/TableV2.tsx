@@ -317,7 +317,7 @@ export function TableV2({
           search={searchConfig?.search}
         />
       </div>
-      {typeof paginationConfig === 'object' && (
+      {typeof paginationConfig === 'object' && !!paginationConfig.metaData && (
         <TablePagination paginationConfig={paginationConfig} />
       )}
     </div>
