@@ -3,7 +3,7 @@ import {create} from 'zustand'
 // * inventory list store
 interface InventoryStore {
   query: InventoryQueries
-  dispatch: (action: {type: INV_ACTION_TYPES; payload: Partial<InventoryQueries> | null}) => void
+  dispatch: (action: {type: INV_ACTION_TYPES; payload: string | number | null}) => void
 }
 
 const invInitialQueries = {

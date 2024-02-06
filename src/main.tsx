@@ -328,19 +328,14 @@ function App() {
         paginationConfig={{
           page: query.page,
           limit: query.limit,
-          // @ts-ignore
           setPage: value => dispatch({type: INV_ACTION_TYPES.PAGE, payload: value}),
-          // @ts-ignore
           setLimit: value => dispatch({type: INV_ACTION_TYPES.LIMIT, payload: value}),
-          fetchNextPage: () => {},
-          fetchPrevPage: () => {},
           metaData: {
             total_items: 207,
             page_no: 0,
             items_on_page: 20,
           },
-          loader: 'loading',
-          defaultLimit: '10',
+          defaultLimit: '20',
         }}
         rowSelectionConfig={{
           // isRadio: true,

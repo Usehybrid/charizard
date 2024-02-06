@@ -132,7 +132,7 @@
 }
 
 .option:hover {
-  background: var(--neutral-arch-40);
+  background: var(--neutral-arch-50);
 }
 
 .selectedFilters {

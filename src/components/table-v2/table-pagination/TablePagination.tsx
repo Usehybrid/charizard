@@ -15,10 +15,11 @@ interface TablePaginationProps {
 
 export default function TablePagination({paginationConfig}: TablePaginationProps) {
   if (!paginationConfig) return null
+  // * table page is non zero indexed whereas the db is zero indexed
   const {setLimit, defaultLimit, metaData} = paginationConfig
   const [state, send] = useMachine(
     pagination.machine({
-      id: React.useId(),
+      id: 'hui-charizard-table',
       count: metaData?.total_items || 0,
       onPageChange(details) {
         paginationConfig?.setPage(details.page - 1)
@@ -27,6 +28,10 @@ export default function TablePagination({paginationConfig}: TablePaginationProps
   )
 
   const paginationApi = pagination.connect(state, send, normalizeProps)
+
+  React.useEffect(() => {
+    paginationApi.setPage(paginationConfig.page + 1)
+  }, [])
 
   return (
     <div className={classes.box}>

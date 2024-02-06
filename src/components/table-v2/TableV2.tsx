@@ -100,9 +100,6 @@ export interface TableV2Props {
       items_on_page: number
       page_no: number
     }
-    loader: React.ReactNode
-    fetchNextPage: () => void
-    fetchPrevPage: () => void
     page: number
     setPage: (page: number) => void
     limit: number
@@ -146,7 +143,6 @@ export interface TableV2Props {
 // * empty state center aligned
 // ?p1: DATE FILTER https://www.figma.com/file/gVfOsoM56qfu6BmwQ9XEaR/SaaS-V1.1?node-id=60%3A6727&mode=dev
 //? Single filter https://www.figma.com/file/gVfOsoM56qfu6BmwQ9XEaR/SaaS-V1.1?node-id=60%3A6383&mode=dev
-//?table when results are under 10 height issue, it keeps loading
 
 export function TableV2({
   data,
@@ -184,8 +180,13 @@ export function TableV2({
   const {isCheckbox, isRadio, setSelectedRows} = rowSelectionConfig
 
   useDeepCompareEffect(() => {
-    if (!sortConfig || !sorting.length) return
+    if (!sortConfig) return
     const {setSortOrd, setSortBy, sortMap} = sortConfig
+    if (!sorting.length) {
+      setSortBy('')
+      setSortOrd('')
+      return
+    }
     setSortBy(sortMap[sorting[0].id])
     setSortOrd(sorting[0].desc ? 'desc' : 'asc')
   }, [sorting])

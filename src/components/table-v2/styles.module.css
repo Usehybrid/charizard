@@ -47,6 +47,8 @@
 .tableHead {
   background: var(--neutral-arch-10);
   height: 36px;
+  position: sticky;
+  top: 0;
 }
 
 .tableData {
