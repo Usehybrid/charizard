@@ -7,7 +7,7 @@ import {SVG} from '../../svg'
 
 interface TableLimitProps {
   setLimit: (l: number) => void
-  defaultLimit?: string
+  defaultLimit: string
   totalItems?: number
 }
 
@@ -18,7 +18,7 @@ const selectData = [
   {label: '25', value: '25'},
 ]
 
-export default function TableLimit({setLimit, defaultLimit = '10', totalItems}: TableLimitProps) {
+export default function TableLimit({setLimit, defaultLimit, totalItems}: TableLimitProps) {
   const collection = select.collection({
     items: selectData,
     itemToString: item => item.label,

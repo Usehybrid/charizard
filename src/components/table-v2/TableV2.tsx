@@ -107,7 +107,7 @@ export interface TableV2Props {
     setPage: (page: number) => void
     limit: number
     setLimit: (limit: number) => void
-    defaultLimit?: string
+    defaultLimit: string
   }
   emptyStateConfig?: {
     icon: string
@@ -126,6 +126,14 @@ export interface TableV2Props {
   tableStyleConfig?: {
     maxHeight: string
   }
+  /**
+   * custom columns
+   */
+  customColumnConfig?: {}
+  /**
+   * export config (csv)
+   */
+  exportConfig?: {}
 }
 
 // todo
@@ -162,6 +170,8 @@ export function TableV2({
   emptyStateConfig,
   headerText,
   tableStyleConfig,
+  customColumnConfig,
+  exportConfig,
 }: TableV2Props) {
   const [sorting, setSorting] = React.useState<SortingState>([])
   // used for checkbox visibility
@@ -315,6 +325,8 @@ export function TableV2({
             rowSelection={rowSelection}
             setRowSelection={setRowSelection}
             filterConfig={filterConfig}
+            customColumnConfig={customColumnConfig}
+            exportConfig={exportConfig}
           />
         )}
         <TableComp

@@ -40,6 +40,9 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
   )
 
   const filters = filterConfig.filters?.drawer ? filterConfig.filters.drawer : []
+  const headerFilterKeys = filterConfig.filters?.header
+    ? filterConfig.filters.header.map(f => f.key)
+    : []
   const [currFilter, setCurrFilter] = React.useState(filters[0])
 
   const api = dialog.connect(state, send, normalizeProps)
@@ -48,7 +51,6 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
 
   React.useEffect(() => {
     if (!filters?.length || isLoading) return
-
     const mapFn = (filter: any) => ({key: filter.key, values: []})
     setDefaultFilters(
       [...(filterConfig.filters?.header?.map(mapFn) || []), ...filters?.map(mapFn)] || [],
@@ -69,12 +71,8 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
   }, [])
 
   React.useEffect(() => {
-    // console.log(api.isOpen, filterCheckedState, tableFilters)
-
-    // if (!Object.keys(filterCheckedState).length) return
     const obj = getDefaultCheckedState(filters, tableFilters)
     setFilterCheckedState(obj)
-    // return () => {}
   }, [api.isOpen])
 
   const getIsChecked = (key: string, idx: number) => {
@@ -82,8 +80,6 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
     if (!l || !filterCheckedState[key]) return false
     return filterCheckedState[key][idx].checked
   }
-
-  // console.log(filterCheckedState, tableFilters)
 
   const handleApplyFilters = () => {
     const checkedState = removeUncheckedItems(filterCheckedState)
@@ -93,9 +89,11 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
     api.close()
   }
 
-  const totalSelectedFilters = tableFilters.reduce((acc, curr) => {
-    return (acc += curr.values.length)
-  }, 0)
+  const totalSelectedFilters = tableFilters
+    .filter(tF => !headerFilterKeys.includes(tF.key))
+    .reduce((acc, curr) => {
+      return (acc += curr.values.length)
+    }, 0)
 
   return (
     <>

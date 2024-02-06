@@ -32,10 +32,13 @@ export enum INV_ACTION_TYPES {
   RESET_FILTERS = 'reset_filters',
   RESET_ALL = 'reset_all',
   SELECTOR_FILTER = 'selector_filter',
+  PAGE = 'page',
+  LIMIT = 'limit',
 }
 
 // @ts-ignore
 export const invQueryReducer = (query, {payload, type}) => {
+  console.log({payload, type})
   switch (type) {
     case INV_ACTION_TYPES.SEARCH:
       return {...query, search: payload}
@@ -67,6 +70,10 @@ export const invQueryReducer = (query, {payload, type}) => {
           filter_status: payload,
         },
       }
+    case INV_ACTION_TYPES.PAGE:
+      return {...query, page: payload}
+    case INV_ACTION_TYPES.LIMIT:
+      return {...query, limit: payload}
     default:
       throw new Error(`Unhandled action type:${type} in inventory query reducer`)
   }

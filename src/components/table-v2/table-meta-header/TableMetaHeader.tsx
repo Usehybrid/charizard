@@ -16,6 +16,8 @@ interface TableMetaHeaderProps {
   totalText: TableV2Props['totalText']
   searchConfig: TableV2Props['searchConfig']
   filterConfig: TableV2Props['filterConfig']
+  customColumnConfig: TableV2Props['customColumnConfig']
+  exportConfig: TableV2Props['exportConfig']
   rowSelection: {}
   setRowSelection: React.Dispatch<React.SetStateAction<{}>>
 }
@@ -25,6 +27,8 @@ export default function TableMetaHeader({
   totalText,
   searchConfig,
   filterConfig,
+  customColumnConfig,
+  exportConfig,
   rowSelection,
   setRowSelection,
 }: TableMetaHeaderProps) {
@@ -77,19 +81,17 @@ export default function TableMetaHeader({
           <TableFiltersDrawer filterConfig={filterConfig} />
         )}
 
-        {
-          // typeof customColumnConfig === 'object'
+        {typeof customColumnConfig === 'object' && (
           <div className={classes.actionCommon}>
             <SVG path={viewColIcon} width={22} height={22} />
           </div>
-        }
+        )}
 
-        {
-          // typeof exportConfig === 'object'
+        {typeof exportConfig === 'object' && (
           <div className={classes.actionCommon}>
             <SVG path={fileDownloadIcon} width={22} height={22} />
           </div>
-        }
+        )}
       </div>
     </div>
   )

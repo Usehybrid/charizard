@@ -293,48 +293,7 @@ function App() {
   const query = useInventoryStore(s => s.query)
   const dispatch = useInventoryStore(s => s.dispatch)
 
-  // console.log(query, 'query')
-
-  const [page, setPage] = React.useState(0)
-  const [limit, setLimit] = React.useState(10)
-
-  const [md, setMd] = React.useState<any>(undefined)
-
-  React.useEffect(() => {
-    setTimeout(() => {
-      const obj = {
-        total_items: 120,
-        items_on_page: 20,
-        page_no: page,
-      }
-      setMd(obj)
-    }, 2000)
-
-    return () => {}
-  }, [])
-
-  const pc = {
-    page,
-    setPage,
-    limit,
-    setLimit,
-    fetchNextPage: () => {},
-    fetchPrevPage: () => {},
-    metaData: {
-      total_items: 207,
-      page_no: 0,
-      items_on_page: 20,
-    },
-    //   {
-    //     "total_items": 207,
-    //     "page_no": 0,
-    //     "items_on_page": 20
-    // }
-    // metaData: md,
-    loader: 'loading',
-  }
-
-  console.log(pc.metaData)
+  console.log(query)
 
   return (
     <div style={styles}>
@@ -359,14 +318,30 @@ function App() {
         }}
         sortConfig={{
           sortBy: '',
-          setSortBy: () => {},
           sortOrd: '',
-          setSortOrd: () => {},
+          setSortBy: (value: any) => dispatch({type: INV_ACTION_TYPES.SORT_BY, payload: value}),
+          setSortOrd: (value: any) => dispatch({type: INV_ACTION_TYPES.SORT_ORDER, payload: value}),
           sortMap: {
             software: 'softwares.names',
           },
         }}
-        paginationConfig={pc}
+        paginationConfig={{
+          page: query.page,
+          limit: query.limit,
+          // @ts-ignore
+          setPage: value => dispatch({type: INV_ACTION_TYPES.PAGE, payload: value}),
+          // @ts-ignore
+          setLimit: value => dispatch({type: INV_ACTION_TYPES.LIMIT, payload: value}),
+          fetchNextPage: () => {},
+          fetchPrevPage: () => {},
+          metaData: {
+            total_items: 207,
+            page_no: 0,
+            items_on_page: 20,
+          },
+          loader: 'loading',
+          defaultLimit: '10',
+        }}
         rowSelectionConfig={{
           // isRadio: true,
           entityName: 'Software',
