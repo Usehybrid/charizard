@@ -341,6 +341,7 @@ function App() {
           // isRadio: true,
           entityName: 'Software',
           isCheckbox: true,
+          rowIdKey: 'id',
           actions: [
             {
               icon: randomIcon,

@@ -56,7 +56,12 @@ export default function TableSelectedActions({
           ) : (
             <div className={classes.selectedActions}>
               {actions?.map(action => (
-                <Button onClick={action.onClick} variant={BUTTON_VARIANT.GHOST} size="sm">
+                <Button
+                  onClick={action.onClick}
+                  variant={BUTTON_VARIANT.GHOST}
+                  size="sm"
+                  key={action.text}
+                >
                   <SVG path={action.icon} svgClassName={classes.btnIcon} />
                   {action.text}
                 </Button>

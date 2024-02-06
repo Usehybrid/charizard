@@ -90,7 +90,7 @@ export interface TableV2Props {
     setSelectedRows?: React.Dispatch<React.SetStateAction<any>>
     iconSrc?: string
     clearOnSearch?: boolean
-    rowIdKey?: string
+    rowIdKey: string
     rowSelection?: {}
     setRowSelection?: React.Dispatch<React.SetStateAction<{}>>
   }
@@ -155,6 +155,7 @@ export function TableV2({
     isRadio: false,
     clearOnSearch: true,
     entityName: '',
+    rowIdKey: 'id',
   },
   actionsConfig = {
     isDropdownActions: false,

@@ -24,6 +24,7 @@ export default function TablePagination({paginationConfig}: TablePaginationProps
       onPageChange(details) {
         paginationConfig?.setPage(details.page - 1)
       },
+      pageSize: paginationConfig.limit,
     }),
   )
 
