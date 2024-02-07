@@ -122,6 +122,7 @@ export interface TableV2Props {
   headerText?: string
   tableStyleConfig?: {
     maxHeight: string
+    stickyIds?: string[]
   }
   /**
    * custom columns
@@ -369,6 +370,8 @@ function TableComp({
   search?: string
   isEmpty: boolean
 }) {
+  const stickyIds = tableStyleConfig?.stickyIds || []
+  const sticky = [...stickyIds, DROPDOWN_COL_ID, RADIO_COL_ID, CHECKBOX_COL_ID]
   // const sticky = ['name', 'age']
   // ...
   // headers.map(header => {
@@ -401,6 +404,8 @@ function TableComp({
                         header.id !== RADIO_COL_ID
                           ? '10px'
                           : undefined,
+                      position: sticky.includes(header.id) ? 'sticky' : undefined,
+                      left: sticky.includes(header.id) ? header.getStart('left') : undefined,
                       // minWidth: header.getSize === Number.MAX_SAFE_INTEGER ? 'auto' : header.getSize(),
                       // maxWidth: header.getSize() === Number.MAX_SAFE_INTEGER ? 'auto' : header.getSize(),
                     }}
@@ -454,6 +459,9 @@ function TableComp({
                     (isCheckbox || isRadio) &&
                     (cell.id === `${idx}_${RADIO_COL_ID}` ||
                       cell.id === `${idx}_${CHECKBOX_COL_ID}`)
+
+                  const isSticky = sticky.includes(cell.column.id)
+
                   return (
                     <td
                       key={cell.id}
@@ -467,6 +475,9 @@ function TableComp({
                             ? 'auto'
                             : cell.column.getSize(),
                         verticalAlign: isSelectionCell ? 'middle' : undefined,
+                        position: isSticky ? 'sticky' : undefined,
+                        left: isSticky ? cell.column.getStart('left') : undefined,
+                        backgroundColor: 'white',
                       }}
                     >
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -487,20 +498,6 @@ function TableComp({
             </tr>
           </tbody>
         )}
-
-        {/* <tfoot className={classes.tableFoot}>
-          {table.getFooterGroups().map(footerGroup => (
-            <tr key={footerGroup.id} className={classes.tableRow}>
-              {footerGroup.headers.map(header => (
-                <th key={header.id}>
-                  {header.isPlaceholder
-                    ? null
-                    : flexRender(header.column.columnDef.footer, header.getContext())}
-                </th>
-              ))}
-            </tr>
-          ))}
-        </tfoot> */}
       </table>
     </div>
   )
