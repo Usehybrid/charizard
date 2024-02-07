@@ -223,7 +223,7 @@ export function TableV2({
           }}
         />
       ),
-      size: 55,
+      size: 40,
     },
     {
       id: RADIO_COL_ID,
@@ -239,7 +239,7 @@ export function TableV2({
           }}
         />
       ),
-      size: 55,
+      size: 40,
     },
     ...columns,
     {
@@ -249,6 +249,7 @@ export function TableV2({
       ),
       header: 'Actions',
       maxSize: 150,
+      minSize: 70,
     },
   ]
 
@@ -393,12 +394,12 @@ function TableComp({
                     style={{
                       width:
                         header.getSize() === Number.MAX_SAFE_INTEGER ? 'auto' : header.getSize(),
-                      paddingRight: header.id === DROPDOWN_COL_ID ? '20px' : undefined,
+                      paddingRight: header.id === DROPDOWN_COL_ID ? '10px' : undefined,
                       paddingLeft:
                         header.index === 0 &&
                         header.id !== CHECKBOX_COL_ID &&
                         header.id !== RADIO_COL_ID
-                          ? '20px'
+                          ? '10px'
                           : undefined,
                       // minWidth: header.getSize === Number.MAX_SAFE_INTEGER ? 'auto' : header.getSize(),
                       // maxWidth: header.getSize() === Number.MAX_SAFE_INTEGER ? 'auto' : header.getSize(),

@@ -19,6 +19,7 @@
   border: 2px solid var(--neutral-arch-200);
   accent-color: var(--theme-blue);
   margin: auto;
+  vertical-align: bottom;
 }
 
 .checkboxSpan > input[type='checkbox']:checked {
