@@ -463,6 +463,8 @@ function TableComp({
 
                   const isSticky = sticky.includes(cell.column.id)
 
+                  // console.log(cell.column.getSize())
+
                   return (
                     <td
                       key={cell.id}
@@ -479,7 +481,7 @@ function TableComp({
                         position: isSticky ? 'sticky' : undefined,
                         left: isSticky ? cell.column.getStart('left') : undefined,
                         backgroundColor: 'white',
-                        zIndex: isSticky ? 1 : undefined,
+                        zIndex: isSticky ? 2 : undefined,
                       }}
                     >
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
