@@ -1,13 +1,15 @@
 import * as React from 'react'
 import * as pagination from '@zag-js/pagination'
+import * as select from '@zag-js/select'
 import chevronLeft from '../../assets/chevron-left.svg'
 import chevronRight from '../../assets/chevron-right.svg'
 import threeDots from '../../assets/three-dots.svg'
 import TableLimit from './TableLimit'
 import classes from './table-pagination.module.css'
-import {useMachine, normalizeProps} from '@zag-js/react'
+import {useMachine, normalizeProps, Portal} from '@zag-js/react'
 import {TableV2Props} from '../TableV2'
 import {SVG} from '../../svg'
+import TableEllipses from './TableEllipses'
 
 interface TablePaginationProps {
   paginationConfig: TableV2Props['paginationConfig']
@@ -16,7 +18,8 @@ interface TablePaginationProps {
 export default function TablePagination({paginationConfig}: TablePaginationProps) {
   if (!paginationConfig) return null
   // * table page is non zero indexed whereas the db is zero indexed
-  const {setLimit, defaultLimit, metaData} = paginationConfig
+  const {setLimit, limit, metaData} = paginationConfig
+
   const [state, send] = useMachine(
     pagination.machine({
       id: 'hui-charizard-table',
@@ -36,11 +39,7 @@ export default function TablePagination({paginationConfig}: TablePaginationProps
 
   return (
     <div className={classes.box}>
-      <TableLimit
-        setLimit={setLimit}
-        defaultLimit={defaultLimit}
-        totalItems={metaData?.total_items}
-      />
+      <TableLimit setLimit={setLimit} limit={limit} totalItems={metaData?.total_items} />
       {paginationApi.totalPages > 1 && (
         <nav {...paginationApi.rootProps}>
           <div className={classes.pageBoxes}>
@@ -60,13 +59,16 @@ export default function TablePagination({paginationConfig}: TablePaginationProps
                 )
               else
                 return (
-                  <div
-                    key={`ellipsis-${i}`}
-                    {...paginationApi.getEllipsisProps({index: i})}
-                    className={classes.pageBox}
-                  >
-                    <SVG path={threeDots} svgClassName={classes.arrowIcon} />
-                  </div>
+                  <React.Fragment key={`ellipsis-${i}`}>
+                    {/* <div
+                      key={`ellipsis-${i}`}
+                      {...paginationApi.getEllipsisProps({index: i})}
+                      className={classes.pageBox}
+                    >
+                      <SVG path={threeDots} svgClassName={classes.arrowIcon} />
+                    </div> */}
+                    <TableEllipses paginationApi={paginationApi} i={i} />
+                  </React.Fragment>
                 )
             })}
             <div {...paginationApi.nextTriggerProps} className={classes.pageBox}>

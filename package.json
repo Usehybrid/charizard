@@ -27,7 +27,7 @@
     "prepublishOnly": "npm run build"
   },
   "peerDependencies": {
-    "@tanstack/react-table": "^8.11.7",
+    "@tanstack/react-table": "^8.11.8",
     "@zag-js/checkbox": "^0.34.0",
     "@zag-js/combobox": "^0.34.0",
     "@zag-js/dialog": "^0.34.0",

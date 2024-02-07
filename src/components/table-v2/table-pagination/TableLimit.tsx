@@ -7,7 +7,7 @@ import {SVG} from '../../svg'
 
 interface TableLimitProps {
   setLimit: (l: number) => void
-  defaultLimit: string
+  limit: number
   totalItems?: number
 }
 
@@ -18,7 +18,7 @@ const selectData = [
   {label: '25', value: '25'},
 ]
 
-export default function TableLimit({setLimit, defaultLimit, totalItems}: TableLimitProps) {
+export default function TableLimit({setLimit, limit, totalItems}: TableLimitProps) {
   const collection = select.collection({
     items: selectData,
     itemToString: item => item.label,
@@ -29,7 +29,7 @@ export default function TableLimit({setLimit, defaultLimit, totalItems}: TableLi
     select.machine({
       id: React.useId(),
       collection,
-      value: [defaultLimit],
+      value: [limit.toString()],
       onValueChange(details) {
         const val = details.value[0]
         setLimit(+val)
@@ -38,6 +38,10 @@ export default function TableLimit({setLimit, defaultLimit, totalItems}: TableLi
   )
 
   const selectApi = select.connect(state, send, normalizeProps)
+
+  // React.useEffect(() => {
+  //   selectApi.setValue([defaultLimit])
+  // }, [])
 
   return (
     <div className={classes.limitBox}>

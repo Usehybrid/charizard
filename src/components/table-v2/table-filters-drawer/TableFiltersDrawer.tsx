@@ -209,7 +209,7 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
                     resetAllFilters(filterConfig.filterReset)
                     api.close()
                   }}
-                  disabled={totalSelectedFilters === 0}
+                  // disabled={totalSelectedFilters === 0}
                 >
                   Reset All
                 </Button>
