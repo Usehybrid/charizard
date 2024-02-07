@@ -271,6 +271,7 @@ export function TableV2({
     enableMultiRowSelection: isRadio ? false : true,
     manualPagination: true,
     manualFiltering: true,
+    // enableColumnResizing: true,
     getCoreRowModel: getCoreRowModel(),
     defaultColumn: {
       minSize: 0,

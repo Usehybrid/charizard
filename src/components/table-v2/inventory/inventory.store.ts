@@ -38,7 +38,6 @@ export enum INV_ACTION_TYPES {
 
 // @ts-ignore
 export const invQueryReducer = (query, {payload, type}) => {
-  console.log({payload, type})
   switch (type) {
     case INV_ACTION_TYPES.SEARCH:
       return {...query, search: payload}
