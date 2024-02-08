@@ -10,6 +10,7 @@ import clsx from 'clsx'
 import {pluralize} from '../../../utils/text'
 import {SVG} from '../../svg'
 import TableFiltersDrawer from '../table-filters-drawer'
+import TableCustomCols from '../table-custom-cols'
 
 interface TableMetaHeaderProps {
   rowSelectionConfig: TableV2Props['rowSelectionConfig']
@@ -82,9 +83,7 @@ export default function TableMetaHeader({
         )}
 
         {typeof customColumnConfig === 'object' && (
-          <div className={classes.actionCommon}>
-            <SVG path={viewColIcon} width={22} height={22} />
-          </div>
+          <TableCustomCols customColumnConfig={customColumnConfig} />
         )}
 
         {typeof exportConfig === 'object' && (

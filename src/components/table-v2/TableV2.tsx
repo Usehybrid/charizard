@@ -1,16 +1,15 @@
 import * as React from 'react'
-import InfiniteScroll from 'react-infinite-scroll-component'
 import useDeepCompareEffect from 'use-deep-compare-effect'
 import clsx from 'clsx'
 import TableLoader from './table-loader'
 import TableEmpty from './table-empty'
 import TableMetaHeader from './table-meta-header'
 import TableActions from './table-actions'
+import TablePagination from './table-pagination'
 import sortIcon from '../assets/sorting.svg'
 import sortAscIcon from '../assets/sort-asc.svg'
 import sortDescIcon from '../assets/sort-desc.svg'
 import classes from './styles.module.css'
-import {useInView} from 'react-intersection-observer'
 import {useReactTable, getCoreRowModel, flexRender} from '@tanstack/react-table'
 import {SVG} from '../svg'
 import {TableCheckbox} from './table-columns'
@@ -18,7 +17,6 @@ import {TableRadio} from './table-columns'
 import {CHECKBOX_COL_ID, DROPDOWN_COL_ID, RADIO_COL_ID} from './constants'
 import type {SortingState, Table, VisibilityState} from '@tanstack/react-table'
 import type {FilterConfig} from './types'
-import TablePagination from './table-pagination'
 
 export interface TableV2Props {
   // the table data
@@ -373,10 +371,6 @@ function TableComp({
 }) {
   const stickyIds = tableStyleConfig?.stickyIds || []
   const sticky = [...stickyIds, DROPDOWN_COL_ID, RADIO_COL_ID, CHECKBOX_COL_ID]
-  // const sticky = ['name', 'age']
-  // ...
-  // headers.map(header => {
-  // return <th style={sticky.includes(header.id) ? {{ left:  header.getStart('left'), position: 'sticky', top: 0 } : {}}>{header.column.columnDef.header}</th>
 
   return (
     <div

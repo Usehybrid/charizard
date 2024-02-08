@@ -384,6 +384,7 @@ function App() {
           columns: 6,
           emptySearchTitle: 'No inventories found',
         }}
+        customColumnConfig={{}}
       />
     </div>
   )
