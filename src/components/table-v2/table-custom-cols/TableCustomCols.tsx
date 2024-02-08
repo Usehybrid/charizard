@@ -1,16 +1,20 @@
 import * as React from 'react'
 import * as dialog from '@zag-js/dialog'
 import clsx from 'clsx'
+import CustomColCheckbox from './CustomColCheckbox'
 import viewColIcon from '../../assets/view-columns.svg'
 import closeIcon from '../../assets/close.svg'
 import classes from './table-custom-cols.module.css'
+import {DndContext} from '@dnd-kit/core'
+import {Table} from '@tanstack/react-table'
 import {useMachine, normalizeProps, Portal} from '@zag-js/react'
 import {SVG} from '../../svg'
 import {BUTTON_VARIANT, Button} from '../../button'
 import {Search} from '../../search'
 import {TableV2Props} from '../TableV2'
-import {Column, Table} from '@tanstack/react-table'
-import CustomColCheckbox from './CustomColCheckbox'
+import Droppable from './Dropable'
+import Draggable from './Draggable'
+import {SortableList} from './sortable/SortableList'
 
 interface TableCustomColsProps {
   customColumnConfig: TableV2Props['customColumnConfig']
@@ -63,6 +67,14 @@ export default function TableCustomCols({customColumnConfig, table}: TableCustom
     })
 
     api.close()
+  }
+
+  const [isDropped, setIsDropped] = React.useState(false)
+
+  function handleDragEnd(event: any) {
+    if (event.over && event.over.id === 'droppable') {
+      setIsDropped(true)
+    }
   }
 
   return (
@@ -120,13 +132,36 @@ export default function TableCustomCols({customColumnConfig, table}: TableCustom
                   </label>
                 </div>
 
-                <Options
+                <>
+                  {draggableCols.length > 0 && <p className={classes.info}>Selected</p>}
+                  <SortableList
+                    // items={draggableCols}
+                    items={checkedState}
+                    onChange={setCheckedState}
+                    renderItem={column => (
+                      <SortableList.Item id={column.id}>
+                        <CustomColCheckbox
+                          label={column.label}
+                          id={column.id}
+                          checked={
+                            checkedState[checkedState.findIndex(obj => obj.id === column.id)]
+                              .checked
+                          }
+                          setCheckedState={setCheckedState}
+                        />
+                        <SortableList.DragHandle />
+                      </SortableList.Item>
+                    )}
+                  />
+                </>
+                {/* <Options
                   cols={draggableCols}
                   text="Selected"
                   textCn={classes.info}
                   checkedState={checkedState}
                   setCheckedState={setCheckedState}
-                />
+                /> */}
+
                 <Options
                   cols={nonDraggableCols}
                   text="Not Selected"
@@ -156,6 +191,7 @@ export interface OptionsProp {
   textCn: string
   checkedState: CheckedState[]
   setCheckedState: React.Dispatch<React.SetStateAction<CheckedState[]>>
+  isDraggable?: boolean
 }
 
 function Options({cols, text, textCn, checkedState, setCheckedState}: OptionsProp) {
@@ -165,18 +201,6 @@ function Options({cols, text, textCn, checkedState, setCheckedState}: OptionsPro
       {cols.map((column: CheckedState) => {
         return (
           <div key={column.id} className={classes.option}>
-            {/* <label className={classes.optionLabel}>
-              <input
-                {...{
-                  type: 'checkbox',
-                  checked: column.getIsVisible(),
-                  onChange: column.getToggleVisibilityHandler(),
-                  className: classes.checkbox,
-                }}
-              />{' '}
-              {header}
-            </label> */}
-
             <CustomColCheckbox
               label={column.label}
               id={column.id}

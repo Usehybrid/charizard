@@ -209,3 +209,7 @@
   background-size: 10px;
   background-repeat: no-repeat;
 }
+
+.draggable {
+  width: 100%;
+}
