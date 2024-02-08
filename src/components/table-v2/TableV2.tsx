@@ -15,7 +15,7 @@ import {SVG} from '../svg'
 import {TableCheckbox} from './table-columns'
 import {TableRadio} from './table-columns'
 import {CHECKBOX_COL_ID, DROPDOWN_COL_ID, RADIO_COL_ID} from './constants'
-import type {SortingState, Table, VisibilityState} from '@tanstack/react-table'
+import type {ColumnOrderState, SortingState, Table, VisibilityState} from '@tanstack/react-table'
 import type {FilterConfig} from './types'
 
 export interface TableV2Props {
@@ -172,6 +172,7 @@ export function TableV2({
   const [sorting, setSorting] = React.useState<SortingState>([])
   // used for checkbox visibility
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
+  const [columnOrder, setColumnOrder] = React.useState<ColumnOrderState>([])
   const [rowSelection, setRowSelection] = React.useState({})
 
   // account for search state here itself
@@ -223,6 +224,7 @@ export function TableV2({
         />
       ),
       size: 40,
+      // enableHiding: false,
     },
     {
       id: RADIO_COL_ID,
@@ -239,6 +241,7 @@ export function TableV2({
         />
       ),
       size: 40,
+      // enableHiding: true,
     },
     ...columns,
     {
@@ -249,6 +252,7 @@ export function TableV2({
       header: 'Actions',
       maxSize: 150,
       minSize: 70,
+      enableHiding: false,
     },
   ]
 
@@ -258,11 +262,13 @@ export function TableV2({
     state: {
       sorting,
       columnVisibility,
+      columnOrder,
       rowSelection: rowSelectionConfig?.rowSelection || rowSelection,
     },
     manualSorting: true,
     onSortingChange: setSorting,
     onColumnVisibilityChange: setColumnVisibility,
+    onColumnOrderChange: setColumnOrder,
     enableRowSelection: true,
     // enableRowSelection: row => row.original.age > 18, // or enable row selection conditionally per row
     onRowSelectionChange: rowSelectionConfig?.setRowSelection || setRowSelection,
@@ -330,6 +336,7 @@ export function TableV2({
             filterConfig={filterConfig}
             customColumnConfig={customColumnConfig}
             exportConfig={exportConfig}
+            table={table}
           />
         )}
         <TableComp

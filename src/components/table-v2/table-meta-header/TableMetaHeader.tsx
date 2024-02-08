@@ -11,6 +11,7 @@ import {pluralize} from '../../../utils/text'
 import {SVG} from '../../svg'
 import TableFiltersDrawer from '../table-filters-drawer'
 import TableCustomCols from '../table-custom-cols'
+import {Table} from '@tanstack/react-table'
 
 interface TableMetaHeaderProps {
   rowSelectionConfig: TableV2Props['rowSelectionConfig']
@@ -21,6 +22,7 @@ interface TableMetaHeaderProps {
   exportConfig: TableV2Props['exportConfig']
   rowSelection: {}
   setRowSelection: React.Dispatch<React.SetStateAction<{}>>
+  table: Table<any>
 }
 
 export default function TableMetaHeader({
@@ -32,6 +34,7 @@ export default function TableMetaHeader({
   exportConfig,
   rowSelection,
   setRowSelection,
+  table,
 }: TableMetaHeaderProps) {
   const hasRowActions = rowSelectionConfig?.actions && rowSelectionConfig.actions.length > 0
 
@@ -83,7 +86,7 @@ export default function TableMetaHeader({
         )}
 
         {typeof customColumnConfig === 'object' && (
-          <TableCustomCols customColumnConfig={customColumnConfig} />
+          <TableCustomCols customColumnConfig={customColumnConfig} table={table} />
         )}
 
         {typeof exportConfig === 'object' && (

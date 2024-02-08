@@ -209,8 +209,8 @@
 .optionLabel > [data-part='control'] {
   width: 16px;
   height: 16px;
-  border-radius: 3px;
-  border: 2px solid var(--neutral-arch-300);
+  border-radius: 4px;
+  border: 2px solid var(--neutral-arch-100);
   background-color: white;
   flex-shrink: 0;
 }

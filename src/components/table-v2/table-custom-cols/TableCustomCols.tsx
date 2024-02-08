@@ -9,21 +9,30 @@ import {SVG} from '../../svg'
 import {BUTTON_VARIANT, Button} from '../../button'
 import {Search} from '../../search'
 import {TableV2Props} from '../TableV2'
+import {Column, Table} from '@tanstack/react-table'
+import CustomColCheckbox from './CustomColCheckbox'
 
 interface TableCustomColsProps {
   customColumnConfig: TableV2Props['customColumnConfig']
+  table: Table<any>
 }
 
-export default function TableCustomCols({customColumnConfig}: TableCustomColsProps) {
-  // const [filterCheckedState, setFilterCheckedState] = React.useState<Record<string, any[]>>({})
+export type CheckedState = {
+  id: string
+  label: string
+  checked: boolean
+}
+
+export default function TableCustomCols({customColumnConfig, table}: TableCustomColsProps) {
+  const [checkedState, setCheckedState] = React.useState<CheckedState[]>([])
   const [search, setSearch] = React.useState('')
 
   const [state, send] = useMachine(
     dialog.machine({
-      id: 'charizard-table-filters',
+      id: 'charizard-table-custom-cols',
       onOpenChange(details) {
         if (!details.open) {
-          // setFilterCheckedState({})
+          // setCheckedState([])
         }
       },
     }),
@@ -31,11 +40,30 @@ export default function TableCustomCols({customColumnConfig}: TableCustomColsPro
 
   const api = dialog.connect(state, send, normalizeProps)
 
-  const handleSave = () => {}
+  const enabledCols = table.getAllLeafColumns().filter(c => c.columnDef.enableHiding)
 
-  const columns = [{id: 'test1'}]
+  React.useEffect(() => {
+    setCheckedState(() => {
+      const arr = enabledCols.map(c => ({
+        id: c.id,
+        checked: c.getIsVisible(),
+        label: typeof c.columnDef.header === 'string' ? c.columnDef.header : '',
+      }))
+      return arr
+    })
+  }, [])
 
-  const filteredCols = [{id: 'test'}]
+  const draggableCols = checkedState.filter(c => c.checked)
+  const nonDraggableCols = checkedState.filter(c => !c.checked)
+
+  const handleSave = () => {
+    checkedState.forEach(obj => {
+      const col = table.getColumn(obj.id)
+      col?.toggleVisibility(obj.checked)
+    })
+
+    api.close()
+  }
 
   return (
     <>
@@ -74,35 +102,38 @@ export default function TableCustomCols({customColumnConfig}: TableCustomColsPro
                     id="table-custom-column-search"
                     search={search}
                     setSearch={setSearch}
-                    placeholder={'Search'}
+                    placeholder={'Search columns'}
                   />
                 </div>
 
-                {
-                  <div className={classes.options}>
-                    {filteredCols.length === 0 ? (
-                      <div className={classes.optionsEmpty}>No results found</div>
-                    ) : (
-                      <>
-                        {columns?.map((column, idx) => (
-                          <div
-                            key={idx}
-                            className={classes.option}
-                            // style={{
-                            //   display: search.length
-                            //     ? !filteredOptions.includes(option.value)
-                            //       ? 'none'
-                            //       : undefined
-                            //     : undefined,
-                            // }}
-                          >
-                            test
-                          </div>
-                        ))}
-                      </>
-                    )}
-                  </div>
-                }
+                <div className={classes.option}>
+                  <label className={classes.optionLabel}>
+                    <input
+                      {...{
+                        type: 'checkbox',
+                        checked: table.getIsAllColumnsVisible(),
+                        onChange: table.getToggleAllColumnsVisibilityHandler(),
+                        className: classes.checkbox,
+                      }}
+                    />{' '}
+                    All
+                  </label>
+                </div>
+
+                <Options
+                  cols={draggableCols}
+                  text="Selected"
+                  textCn={classes.info}
+                  checkedState={checkedState}
+                  setCheckedState={setCheckedState}
+                />
+                <Options
+                  cols={nonDraggableCols}
+                  text="Not Selected"
+                  textCn={classes.info2}
+                  checkedState={checkedState}
+                  setCheckedState={setCheckedState}
+                />
               </div>
 
               <div className={classes.footer}>
@@ -115,6 +146,46 @@ export default function TableCustomCols({customColumnConfig}: TableCustomColsPro
           </div>
         </Portal>
       )}
+    </>
+  )
+}
+
+export interface OptionsProp {
+  cols: CheckedState[]
+  text: string
+  textCn: string
+  checkedState: CheckedState[]
+  setCheckedState: React.Dispatch<React.SetStateAction<CheckedState[]>>
+}
+
+function Options({cols, text, textCn, checkedState, setCheckedState}: OptionsProp) {
+  return (
+    <>
+      {cols.length > 0 && <p className={textCn}>{text}</p>}
+      {cols.map((column: CheckedState) => {
+        return (
+          <div key={column.id} className={classes.option}>
+            {/* <label className={classes.optionLabel}>
+              <input
+                {...{
+                  type: 'checkbox',
+                  checked: column.getIsVisible(),
+                  onChange: column.getToggleVisibilityHandler(),
+                  className: classes.checkbox,
+                }}
+              />{' '}
+              {header}
+            </label> */}
+
+            <CustomColCheckbox
+              label={column.label}
+              id={column.id}
+              checked={checkedState[checkedState.findIndex(obj => obj.id === column.id)].checked}
+              setCheckedState={setCheckedState}
+            />
+          </div>
+        )
+      })}
     </>
   )
 }
