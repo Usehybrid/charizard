@@ -14,6 +14,9 @@ dependencies:
   '@dnd-kit/sortable':
     specifier: ^8.0.0
     version: 8.0.0(@dnd-kit/core@6.1.0)(react@18.2.0)
+  '@dnd-kit/utilities':
+    specifier: ^3.2.2
+    version: 3.2.2(react@18.2.0)
   '@tanstack/react-table':
     specifier: ^8.11.8
     version: 8.11.8(react-dom@18.2.0)(react@18.2.0)
@@ -82,9 +85,6 @@ dependencies:
     version: 4.5.0(@types/react@18.2.55)(react@18.2.0)
 
 devDependencies:
-  '@dnd-kit/utilities':
-    specifier: ^3.2.2
-    version: 3.2.2(react@18.2.0)
   '@storybook/addon-essentials':
     specifier: ^7.6.13
     version: 7.6.13(@types/react-dom@18.2.18)(@types/react@18.2.55)(react-dom@18.2.0)(react@18.2.0)
@@ -1512,6 +1512,7 @@ packages:
     dependencies:
       react: 18.2.0
       tslib: 2.6.2
+    dev: false
 
   /@emotion/babel-plugin@11.11.0:
     resolution: {integrity: sha512-m4HEDZleaaCH+XgDDsPF15Ht6wTLsgDTeR3WYj9Q/k76JtWhrJjcP4+/XlG8LGT/Rol9qUfOIztXeA84ATpqPQ==}
