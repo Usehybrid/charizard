@@ -43,6 +43,7 @@
   height: 100%;
   max-width: 100%;
   overflow-x: scroll;
+  background-color: white;
 }
 
 .tableHead {
