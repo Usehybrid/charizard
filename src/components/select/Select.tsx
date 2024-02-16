@@ -92,6 +92,7 @@ interface SelectProps {
    * props to add custom dropdown
    */
   CustomDropdownIndicator?: React.ReactNode
+  customValue?: any
 }
 
 export function Select({
@@ -112,6 +113,7 @@ export function Select({
   isSearchable = true,
   isMulti = false,
   isClearable = false,
+  customValue,
   CustomDropdownIndicator,
 }: SelectProps) {
   return (
@@ -121,6 +123,7 @@ export function Select({
       className={classes.selectContainer}
     >
       <ReactSelect
+        value={customValue}
         isMulti={isMulti}
         placeholder={placeholder}
         defaultValue={defaultValue}
