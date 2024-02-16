@@ -4,7 +4,7 @@
   height: 100vh;
   background-color: var(--black);
   opacity: 0.3;
-  z-index: 1000;
+  z-index: 1400;
   top: 0;
   left: 0;
   display: flex;
@@ -23,7 +23,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1040;
+  z-index: 1440;
   overflow: hidden;
 }
 
@@ -77,6 +77,7 @@
 }
 
 .closeIconSpan {
+  filter: invert(76%) sepia(11%) saturate(92%) hue-rotate(210deg) brightness(91%) contrast(95%);
   cursor: pointer;
 }
 

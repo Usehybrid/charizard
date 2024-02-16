@@ -41,6 +41,9 @@
   border-collapse: collapse;
   border: 1px solid var(--neutral-arch-200);
   height: 100%;
+  max-width: 100%;
+  overflow-x: scroll;
+  background-color: white;
 }
 
 .tableHead {
