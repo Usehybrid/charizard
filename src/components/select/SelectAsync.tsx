@@ -90,6 +90,7 @@ interface SelectAsyncProps {
    * extra props to pass for select component
    */
   extraProps?: any
+  customValue?: any
 }
 
 export function SelectAsync({
@@ -110,6 +111,7 @@ export function SelectAsync({
   isSearchable = true,
   isMulti = false,
   isClearable = false,
+  customValue,
 }: SelectAsyncProps) {
   return (
     <div
@@ -118,6 +120,7 @@ export function SelectAsync({
       className={classes.selectContainer}
     >
       <ReactSelectAsync
+        value={customValue}
         isMulti={isMulti}
         placeholder={placeholder}
         defaultValue={defaultValue}
