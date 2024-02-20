@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom/client'
 import randomIcon from './components/assets/check.svg'
 import randomIcon2 from './components/assets/search-2.svg'
 import {createColumnHelper} from '@tanstack/react-table'
-import {Input, InputGroup, InputRightAddon, Progress, Table} from './components'
+import {Input, InputGroup, InputRightAddon, Progress, Select, Table} from './components'
+import {allTimeOptions} from './components/select/test'
 
 const styles = {
   width: '90%',
@@ -291,7 +292,7 @@ function App() {
 
   return (
     <div style={styles}>
-      <Table
+      {/* <Table
         data={data}
         loaderConfig={{isFetching: false, isError: false, text: 'Getting employees...'}}
         columns={columns}
@@ -364,6 +365,16 @@ function App() {
           columns: 6,
           emptySearchTitle: 'No inventories found',
         }}
+      /> */}
+
+      <Select
+        placeholder="Choose"
+        id="at"
+        key={'at'}
+        // defaultValue={formik.values.at}
+        options={allTimeOptions}
+        isVirtualized
+        onChange={() => {}}
       />
     </div>
   )
