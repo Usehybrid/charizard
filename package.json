@@ -52,6 +52,7 @@
     "react-inlinesvg": "^4.1.1",
     "react-intersection-observer": "^9.5.3",
     "react-select": "^5.8.0",
+    "react-window": "^1.8.10",
     "use-deep-compare-effect": "^1.8.1",
     "zustand": "^4.5.0"
   },
@@ -66,9 +67,9 @@
     "@types/node": "^20.11.16",
     "@types/react": "^18.2.55",
     "@types/react-dom": "^18.2.18",
+    "@types/react-window": "^1.8.8",
     "@vitejs/plugin-react": "^4.2.1",
     "prop-types": "^15.8.1",
-    "react-intersection-observer": "^9.7.0",
     "storybook": "^7.6.13",
     "storybook-css-modules-preset": "^1.1.1",
     "typescript": "^5.3.3",
