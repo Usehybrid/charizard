@@ -6,7 +6,7 @@ import * as React from 'react'
 import clsx from 'clsx'
 import classes from './styles.module.css'
 import {colourStyles, getControlStyles} from './config'
-import {default as ReactSelect, components} from 'react-select'
+import {default as ReactSelect, components, createFilter} from 'react-select'
 import type {MenuPlacement, StylesConfig} from 'react-select'
 import {
   Option,
@@ -158,6 +158,7 @@ export function Select({
         }}
         formatGroupLabel={formatGroupLabel}
         menuPlacement={menuPlacement}
+        filterOption={isVirtualized ? createFilter({ignoreAccents: false}) : false}
         {...extraprops}
       />
       {errorMsg && <p className={classes.errorMsg}>{errorMsg}</p>}

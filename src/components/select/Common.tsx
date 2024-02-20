@@ -100,9 +100,9 @@ export const MenuList = (props: any) => {
   const initialOffset = options.indexOf(value) * height
   return (
     <List
-      // style={{height: 'max-content', maxHeight: maxHeight}}
-      className={classes.windowBox}
+      style={{height: 'max-content', maxHeight: maxHeight}}
       height={maxHeight}
+      className={classes.windowBox}
       itemCount={children.length}
       itemSize={height}
       width={'100%'}
