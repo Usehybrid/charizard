@@ -482,7 +482,7 @@ function TableComp({
                         position: isSticky ? 'sticky' : undefined,
                         left: isSticky ? cell.column.getStart('left') : undefined,
                         backgroundColor: 'white',
-                        zIndex: isSticky ? 2 : undefined,
+                        zIndex: isSticky ? 3 : undefined,
                       }}
                     >
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
