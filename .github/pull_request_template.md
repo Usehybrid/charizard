@@ -11,8 +11,6 @@ Please include a summary of the changes and the related issue.
       expected or a change which requires a backend deploy)
 - [ ] Other (mention the change in the description)
 
-
-
 ## Checklist
 
 - [ ] My code follows the style guidelines of this project
