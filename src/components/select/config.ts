@@ -1,4 +1,8 @@
+// @ts-nocheck
 import {StylesConfig} from 'react-select'
+import {Option} from './Common'
+
+// todo @sohhamm, figure out ts generics for styles config
 
 export const colourStyles: StylesConfig<any> = {
   valueContainer: styles => {
