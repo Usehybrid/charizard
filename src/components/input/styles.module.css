@@ -21,10 +21,11 @@
 }
 
 .inputLabelContainer .inputLabel {
+  font-size: 14px;
+  font-style: normal;
   font-weight: 400;
-  font-size: 1.08rem;
-  line-height: 1.54rem;
-  color: var(--primary);
+  line-height: 20px;
+  color: var(--text-primary);
   margin-bottom: 4px;
 
   display: flex;
@@ -39,14 +40,14 @@
 
 .inputLabel.required::after {
   content: '*';
-  color: var(--danger);
+  color: var(--status-danger);
   margin-left: 2px;
 }
 
 .inputGroup {
   display: flex;
   position: relative;
-  border-radius: 4px;
+  border-radius: 8px;
 }
 
 .inputWrapper {
@@ -59,11 +60,11 @@
   font-weight: 400;
   font-size: 1.23rem;
   line-height: 1.85rem;
-  color: var(--primary);
+  color: var(--text-primary);
   width: 100%;
 
-  border: 1px solid var(--slate-300);
-  border-radius: 4px;
+  border: 1px solid var(--neutral-arch-100);
+  border-radius: 8px;
 
   outline: none;
   transition: all 0.3s ease-in-out;
@@ -77,21 +78,21 @@
 
 .input::placeholder,
 .textarea::placeholder {
-  color: var(--hint);
+  color: var(--text-hint);
 }
 
 .input:focus,
 .textarea:focus {
-  border: 1px solid var(--iris);
+  border: 1px solid var(--theme-blue);
 }
 
 .input.error {
-  border-color: var(--danger);
-  caret-color: var(--danger);
+  border-color: var(--status-danger);
+  caret-color: var(--status-danger);
 }
 
 .input:disabled {
-  background-color: var(--slate-50);
+  background-color: var(--disabled-50);
   pointer-events: none;
   cursor: not-allowed;
 }
@@ -106,7 +107,7 @@ input[type='date']::-webkit-inner-spin-button,
   font-weight: 400;
   font-size: 1rem;
   line-height: 1.54rem;
-  color: var(--danger);
+  color: var(--status-danger);
   margin: 0;
   text-align: left;
 }
@@ -136,9 +137,9 @@ input[type='date']::-webkit-inner-spin-button,
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--slate-100);
-  border-top: 1px solid var(--slate-300);
-  border-bottom: 1px solid var(--slate-300);
+  background-color: var(--neutral-arch-20);
+  border-top: 1px solid var(--neutral-arch-100);
+  border-bottom: 1px solid var(--neutral-arch-100);
   padding: 6px 12px;
   position: relative;
   gap: 4px;
@@ -149,14 +150,14 @@ input[type='date']::-webkit-inner-spin-button,
   left: 0;
   border-top-left-radius: 4px;
   border-bottom-left-radius: 4px;
-  border-left: 1px solid var(--slate-300);
+  border-left: 1px solid var(--neutral-arch-100);
 }
 
 .inputAddon.right {
   right: 0;
   border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;
-  border-right: 1px solid var(--slate-300);
+  border-right: 1px solid var(--neutral-arch-100);
 }
 
 .inputAddon .dropdownContainer {
@@ -164,8 +165,8 @@ input[type='date']::-webkit-inner-spin-button,
   top: 120%;
   left: 0;
   width: fit-content;
-  background-color: var(--white);
-  border-radius: 4px;
+  background-color: var(--neutral-white);
+  border-radius: 8px;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15);
   padding: 0 0 12px 0;
   max-height: 15rem;
@@ -179,12 +180,12 @@ input[type='date']::-webkit-inner-spin-button,
   position: sticky;
   top: 0;
   left: 0;
-  background-color: var(--white);
+  background-color: var(--neutral-white);
 }
 
 .inputAddon .dropdownContainer .dropdownOption {
   padding: 8px 12px;
-  color: var(--primary);
+  color: var(--text-primary);
   font-size: 16px;
   line-height: 24px;
   cursor: pointer;
@@ -192,7 +193,7 @@ input[type='date']::-webkit-inner-spin-button,
 }
 
 .inputAddon .dropdownContainer .dropdownOption:hover {
-  background-color: var(--slate-20);
+  background-color: var(--neutral-arch-30);
 }
 
 @media screen and (max-width: 300px) {

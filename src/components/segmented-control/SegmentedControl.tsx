@@ -3,7 +3,7 @@ import * as radio from '@zag-js/radio-group'
 import classes from './styles.module.css'
 import {useMachine, normalizeProps} from '@zag-js/react'
 
-type SegmentedControlProps = {
+interface SegmentedControlProps {
   /**
    * items to show in segmented control
    */

@@ -7,13 +7,14 @@
 .switchLabel {
   font-size: 1.08rem;
   line-height: 1.54rem;
-  color: var(--primary);
+  color: var(--text-primary);
 }
 
 .subText {
   font-size: 0.923rem;
   line-height: 1.385rem;
   margin-top: 0.75rem;
+  color: var(--text-secondary);
 }
 
 .switch {
@@ -60,7 +61,7 @@
   height: 0;
 }
 .switch input:checked + .slider {
-  background-color: #6c5bd2;
+  background-color: var(--theme-blue);
 }
 .switch.disabled .slider {
   opacity: 0.5;
@@ -73,7 +74,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #cbd5e0;
+  background-color: var(--neutral-arch-100);
   border-radius: 9999px;
   transition: 0.25s;
 }

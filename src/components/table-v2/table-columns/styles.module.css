@@ -1,0 +1,45 @@
+.checkboxSpan {
+  margin: auto;
+  /* display: flex; */
+}
+
+.checkboxSpan > input[type='checkbox'] {
+  -webkit-appearance: none;
+  appearance: none;
+  /* For iOS < 15 to remove gradient background */
+  background-color: #fff;
+  /* Not removed via appearance */
+  margin: 0;
+}
+
+.checkbox {
+  width: 20px;
+  height: 20px;
+  border-radius: 3px;
+  border: 2px solid var(--neutral-arch-200);
+  accent-color: var(--theme-blue);
+  margin: auto;
+  vertical-align: bottom;
+}
+
+.checkboxSpan > input[type='checkbox']:checked {
+  border-color: var(--theme-blue);
+  background-color: var(--theme-blue);
+  background-image: url('../../assets/check.svg');
+  background-position: center;
+  background-size: 12px;
+  background-repeat: no-repeat;
+}
+
+.checkboxSpan > input[type='checkbox']:checked.checkboxSelect {
+  background-image: url('../../assets/minus.svg');
+}
+
+/* for radio */
+
+.radio {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--neutral-arch-200);
+  accent-color: var(--theme-blue);
+}

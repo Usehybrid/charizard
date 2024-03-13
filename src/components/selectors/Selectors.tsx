@@ -2,7 +2,7 @@ import * as React from 'react'
 import clsx from 'clsx'
 import classes from './styles.module.css'
 
-export type SelectorsProps = {
+export interface SelectorsProps {
   selectors: {name: string; onClick: any}[]
 }
 
@@ -21,7 +21,7 @@ export function Selectors({selectors}: SelectorsProps) {
           className={clsx(classes.selector, idx === active && classes.active)}
           style={{
             borderRadius:
-              idx === 0 ? '4px 0px 0px 4px' : idx === selectors.length - 1 ? '0px 4px 4px 0px' : 0,
+              idx === 0 ? '8px 0px 0px 8px' : idx === selectors.length - 1 ? '0px 8px 8px 0px' : 0,
             boxShadow: idx === 0 ? 'none' : '',
           }}
         >

@@ -1,0 +1,105 @@
+.box {
+  display: flex;
+  justify-content: space-between;
+}
+
+.pageBoxes {
+  display: flex;
+  gap: 8px;
+}
+
+.arrowIcon {
+  width: 20px;
+  height: 20px;
+}
+
+.arrowIcon > path {
+  fill: var(--text-secondary);
+}
+
+.pageBox {
+  width: 36px;
+  height: 36px;
+  border-radius: 3px;
+  border: 1px solid var(--neutral-arch-100);
+  background: var(--neutral-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+
+  font-size: 14px;
+  line-height: 20px;
+  cursor: pointer;
+}
+
+.pageBox[data-selected] {
+  border-color: var(--neutral-arch-900);
+  background: #f4f4f5;
+  font-weight: 700;
+}
+
+/* .pageBox[data-part='ellipses'] {
+} */
+
+/* limit component */
+
+.limitBox {
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 20px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.limitContent {
+  border-radius: 8px;
+  background: var(--neutral-white);
+  min-width: 37px;
+  max-height: 330px;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  padding: 3px;
+  color: var(--text-primary);
+}
+
+.limitItem {
+  height: 36px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+}
+
+.limitItem:hover {
+  background-color: var(--neutral-arch-50);
+  cursor: pointer;
+}
+
+.limitTrigger {
+  min-width: 54px;
+  max-width: fit-content;
+  height: 36px;
+
+  border-radius: 3px;
+  border: 1px solid var(--neutral-arch-100);
+  background: var(--neutral-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  padding: 1px 2px 1px 6px;
+  color: var(--text-secondary);
+}
+
+.chevdownIcon {
+  width: 20px;
+  height: 20px;
+}
+
+.chevdownIcon > path {
+  fill: var(--neutral-arch-600);
+}

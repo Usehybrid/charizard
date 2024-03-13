@@ -9,7 +9,7 @@ import {Tooltip} from '../tooltip'
 import {SVG} from '../svg'
 import {Placement} from '@zag-js/popper'
 
-type RadioGroupProps = {
+interface RadioGroupProps  {
   /**
    * heading for radio group
    */

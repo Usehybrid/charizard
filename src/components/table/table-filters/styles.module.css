@@ -6,25 +6,25 @@
 
 .filtersInfo {
   font-size: 12px;
-  color: var(--secondary);
+  color: var(--text-secondary);
 }
 
 .filter {
   display: flex;
   align-items: center;
-  padding: 6px 8px;
-  border-radius: 4px;
+  padding: 4px 8px;
+  border-radius: 8px;
 }
 .filter:hover {
   cursor: pointer;
 }
 
 .filter:hover .filterIcon2 > path {
-  fill: var(--slate-700);
+  fill: var(--text-primary);
 }
 
 .filter:hover [data-scope='tooltip'] .filterCol {
-  color: var(--slate-700);
+  color: var(--text-primary);
 }
 
 .filter:focus-visible {
@@ -32,7 +32,7 @@
 }
 
 .filterActive {
-  background-color: var(--slate-50);
+  background-color: var(--neutral-arch-40);
 }
 
 .filterIcon {
@@ -57,11 +57,11 @@
   height: 20px;
 }
 .filterIcon2 > path {
-  fill: var(--slate-600);
+  fill: var(--neutral-arch-600);
 }
 
 .filterCol {
-  color: var(--secondary);
+  color: var(--text-primary);
   font-size: 14px;
   line-height: 20px;
   margin-inline-end: 4px;
@@ -69,8 +69,8 @@
 
 .totalSelected {
   border-radius: 3px;
-  background: var(--slate-800);
-  color: var(--white);
+  background: var(--neutral-arch-900);
+  color: var(--neutral-white);
   font-size: 12px;
   font-weight: 500;
   line-height: normal;
@@ -90,7 +90,7 @@
   overflow-y: scroll;
   padding: 8px;
   border-radius: 12px;
-  background: var(--white);
+  background: var(--neutral-white);
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 
@@ -114,8 +114,8 @@
 
 .option {
   border-radius: 6px;
-  background: var(--white);
-  color: var(--primary);
+  background: var(--neutral-white);
+  color: var(--text-primary);
   font-size: 14px;
   line-height: 180%;
   width: 100%;
@@ -128,11 +128,11 @@
 }
 
 .option:hover {
-  background: var(--slate-50);
+  background: var(--neutral-arch-40);
 }
 
 .selectedFilters {
-  color: var(--secondary);
+  color: var(--text-primary);
   font-size: 12px;
   font-weight: 500;
   line-height: 180%;
@@ -176,12 +176,12 @@
   gap: 6px;
 
   border-radius: 6px;
-  border: 1px solid var(--slate-200);
-  color: var(--secondary);
+  border: 1px solid var(--neutral-arch-200);
+  color: var(--text-primary);
   font-size: 12px;
   font-weight: 500;
   line-height: 16px;
-  background-color: var(--slate-20);
+  background-color: var(--neutral-arch-20);
 }
 
 .resetBtn:hover {
@@ -191,7 +191,7 @@
 .resetIcon {
   width: 12px;
   height: 12px;
-  /* color: var(--secondary); */
+  /* color: var(--tex); */
   filter: invert(42%) sepia(91%) saturate(0%) hue-rotate(161deg) brightness(91%) contrast(93%);
 }
 
@@ -212,14 +212,14 @@
   width: 16px;
   height: 16px;
   border-radius: 3px;
-  border: 2px solid var(--slate-200);
+  border: 2px solid var(--neutral-arch-300);
   background-color: white;
   flex-shrink: 0;
 }
 
 .optionLabel > [data-part='control'][data-state='checked'] {
-  border-color: var(--iris);
-  background-color: var(--iris);
+  border-color: var(--theme-blue);
+  background-color: var(--theme-blue);
   background-image: url('../../assets/check.svg');
   background-position: center;
   background-size: 10px;
@@ -235,7 +235,7 @@
   gap: 8px;
 
   border-radius: 6px;
-  background: var(--white);
+  background: var(--neutral-white);
   box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
   min-width: 120px;
   overflow-x: hidden;
@@ -244,7 +244,7 @@
 }
 
 .filterValue {
-  color: var(--primary);
+  color: var(--text-primary);
   width: 100%;
   font-size: 14px;
   font-weight: 400;
@@ -254,7 +254,7 @@
   padding: 6px 4px 6px 6px;
   align-items: center;
   border-radius: 4px;
-  background: var(--slate-50);
+  background: var(--neutral-arch-50);
 }
 
 .filterTooltipTrigger {

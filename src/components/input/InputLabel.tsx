@@ -6,7 +6,7 @@ import {Inputs} from './types'
 import {SVG} from '../svg'
 import {Tooltip} from '../tooltip'
 
-type InputLabelProps = {
+interface InputLabelProps {
   /**
    * Children of the input label
    */
@@ -51,8 +51,6 @@ export function InputLabel({
   infoText,
   infoTextTooltipStyles = {},
 }: InputLabelProps) {
-  const tooltipId = React.useId()
-
   return (
     <div className={classes.inputLabelContainer}>
       <label

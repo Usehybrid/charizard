@@ -39,13 +39,13 @@
   font-size: 14px;
   line-height: 20px;
   font-weight: 400;
-  color: var(--primary);
+  color: var(--text-primary);
 }
 
 .subHeading {
   font-size: 12px;
   line-height: 16px;
-  color: var(--secondary);
+  color: var(--text-secondary);
 }
 
 .radioControl {
@@ -53,13 +53,13 @@
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  border: 2px solid var(--blue-20, #e2e8f0);
+  border: 2px solid var(--neutral-arch-100);
   flex-shrink: 0;
 }
 
 .radioControlActive {
-  border-color: var(--iris, #6c5bd2);
-  background-color: var(--iris, #6c5bd2);
+  border-color: var(--theme-blue);
+  background-color: var(--theme-blue);
   position: relative;
 }
 
@@ -69,7 +69,7 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background-color: var(--white, #ffffff);
+  background-color: var(--neutral-white);
   position: absolute;
   top: 50%;
   left: 50%;
@@ -82,7 +82,7 @@
   font-weight: 400;
   line-height: 20px;
   margin: 0;
-  color: var(--danger);
+  color: var(--status-danger);
   text-align: left;
 }
 
@@ -100,5 +100,5 @@
 }
 
 .infoIcon > path {
-  fill: var(--slate-600);
+  fill: var(--neutral-arch-600);
 }

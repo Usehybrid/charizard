@@ -4,7 +4,7 @@ import classes from './styles.module.css'
 import {Button, BUTTON_VARIANT} from '../button'
 import {SVG} from '../svg'
 
-export type EmptyStateProps = {
+interface EmptyStateProps {
   icon: string
   title: string
   desc?: string
