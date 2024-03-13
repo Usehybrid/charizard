@@ -53,6 +53,7 @@ export function Tag({status, text, icon}: TagProps) {
         <SVG
           path={icon}
           customSvgStyles={{fill: statusMap[status].color, width: '20px', height: '20px'}}
+          customSpanStyles={{marginLeft: '-2px'}}
         />
       )}
       {text}
