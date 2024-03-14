@@ -4,7 +4,6 @@ import closeIcon from '../assets/close.svg'
 import chevronDownIcon from '../assets/chevron-down.svg'
 import {components} from 'react-select'
 import {SVG} from '../svg'
-import {FixedSizeList as List} from 'react-window'
 
 export const Option = (props: any) => {
   return (
@@ -86,25 +85,5 @@ export const SingleValue = (props: any) => {
         </div>
       </div>
     </components.SingleValue>
-  )
-}
-
-export const MenuList = (props: any) => {
-  const height = 35
-  const {options, children, maxHeight, getValue} = props
-  const [value] = getValue()
-  const initialOffset = options.indexOf(value) * height
-  return (
-    <List
-      style={{height: 'max-content', maxHeight: maxHeight}}
-      height={maxHeight}
-      className={classes.windowBox}
-      itemCount={children.length}
-      itemSize={height}
-      width={'100%'}
-      initialScrollOffset={initialOffset}
-    >
-      {({index, style}) => <div style={style}>{children[index]}</div>}
-    </List>
   )
 }
