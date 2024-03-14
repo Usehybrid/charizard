@@ -6,7 +6,7 @@ import * as React from 'react'
 import clsx from 'clsx'
 import classes from './styles.module.css'
 import {colourStyles, getControlStyles} from './config'
-import {default as ReactSelect, components, createFilter} from 'react-select'
+import {default as ReactSelect} from 'react-select'
 import type {MenuPlacement, StylesConfig} from 'react-select'
 import {
   Option,
@@ -15,7 +15,6 @@ import {
   MultiValueLabel,
   MultiValueRemove,
   SingleValue,
-  MenuList,
 } from './Common'
 import {SelectActionMeta, SelectMultiValue, SelectSingleValue, SelectValue} from './types'
 
@@ -94,7 +93,6 @@ interface SelectProps {
    */
   CustomDropdownIndicator?: React.ReactNode
   customValue?: any
-  isVirtualized?: boolean
 }
 
 export function Select({
@@ -117,7 +115,6 @@ export function Select({
   isClearable = false,
   customValue,
   CustomDropdownIndicator,
-  isVirtualized = false,
 }: SelectProps) {
   return (
     <div
@@ -145,7 +142,6 @@ export function Select({
           DropdownIndicator: CustomDropdownIndicator ? CustomDropdownIndicator : DropdownIndicator,
           ClearIndicator,
           SingleValue,
-          MenuList: isVirtualized ? MenuList : components.MenuList,
         }}
         isDisabled={isDisabled}
         onChange={(newValue: SelectValue, actionMeta: SelectActionMeta) => {
@@ -158,7 +154,6 @@ export function Select({
         }}
         formatGroupLabel={formatGroupLabel}
         menuPlacement={menuPlacement}
-        filterOption={isVirtualized ? createFilter({ignoreAccents: false}) : false}
         {...extraprops}
       />
       {errorMsg && <p className={classes.errorMsg}>{errorMsg}</p>}

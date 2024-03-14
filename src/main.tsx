@@ -3,8 +3,9 @@ import ReactDOM from 'react-dom/client'
 import randomIcon from './components/assets/check.svg'
 import randomIcon2 from './components/assets/search-2.svg'
 import {createColumnHelper} from '@tanstack/react-table'
-import {Input, InputGroup, InputRightAddon, Progress, Select, Table} from './components'
-import {allTimeOptions} from './components/select/test'
+import {Select, Table} from './components'
+import {smallOptions} from './components/select/test'
+import RSelect from 'react-select'
 
 const styles = {
   width: '90%',
@@ -372,13 +373,27 @@ function App() {
         id="at"
         key={'at'}
         // defaultValue={formik.values.at}
-        options={allTimeOptions}
-        isVirtualized
+        options={colourOptions}
+        // isSearchable
+        // isVirtualized
         onChange={() => {}}
       />
     </div>
   )
 }
+
+export const colourOptions = [
+  {value: 'ocean', label: 'Ocean', color: '#00B8D9', isFixed: true},
+  {value: 'blue', label: 'Blue', color: '#0052CC', isDisabled: true},
+  {value: 'purple', label: 'Purple', color: '#5243AA'},
+  {value: 'red', label: 'Red', color: '#FF5630', isFixed: true},
+  {value: 'orange', label: 'Orange', color: '#FF8B00'},
+  {value: 'yellow', label: 'Yellow', color: '#FFC400'},
+  {value: 'green', label: 'Green', color: '#36B37E'},
+  {value: 'forest', label: 'Forest', color: '#00875A'},
+  {value: 'slate', label: 'Slate', color: '#253858'},
+  {value: 'silver', label: 'Silver', color: '#666666'},
+]
 
 export const filters = [
   {
