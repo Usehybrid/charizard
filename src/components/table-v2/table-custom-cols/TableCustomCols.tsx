@@ -5,15 +5,12 @@ import CustomColCheckbox from './CustomColCheckbox'
 import viewColIcon from '../../assets/view-columns.svg'
 import closeIcon from '../../assets/close.svg'
 import classes from './table-custom-cols.module.css'
-import {DndContext} from '@dnd-kit/core'
 import {Table} from '@tanstack/react-table'
 import {useMachine, normalizeProps, Portal} from '@zag-js/react'
 import {SVG} from '../../svg'
 import {BUTTON_VARIANT, Button} from '../../button'
 import {Search} from '../../search'
 import {TableV2Props} from '../TableV2'
-import Droppable from './Dropable'
-import Draggable from './Draggable'
 import {SortableList} from './sortable/SortableList'
 
 interface TableCustomColsProps {
@@ -69,13 +66,7 @@ export default function TableCustomCols({customColumnConfig, table}: TableCustom
     api.close()
   }
 
-  const [isDropped, setIsDropped] = React.useState(false)
-
-  function handleDragEnd(event: any) {
-    if (event.over && event.over.id === 'droppable') {
-      setIsDropped(true)
-    }
-  }
+  console.log(table)
 
   return (
     <>
@@ -136,6 +127,7 @@ export default function TableCustomCols({customColumnConfig, table}: TableCustom
                   {draggableCols.length > 0 && <p className={classes.info}>Selected</p>}
                   <SortableList
                     // items={draggableCols}
+                    // table={table}
                     items={checkedState}
                     onChange={setCheckedState}
                     renderItem={column => (

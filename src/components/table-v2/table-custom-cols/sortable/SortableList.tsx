@@ -1,6 +1,13 @@
 import * as React from 'react'
 import classes from './sortable.module.css'
-import {DndContext, KeyboardSensor, PointerSensor, useSensor, useSensors} from '@dnd-kit/core'
+import {
+  DndContext,
+  KeyboardSensor,
+  MouseSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+} from '@dnd-kit/core'
 import {SortableContext, arrayMove, sortableKeyboardCoordinates} from '@dnd-kit/sortable'
 import {DragHandle, SortableItem} from './SortableItem'
 import {SortableOverlay} from './SortableOverlay'
@@ -26,6 +33,7 @@ export function SortableList<T extends BaseItem>({items: _items, onChange, rende
   )
   const sensors = useSensors(
     useSensor(PointerSensor),
+    useSensor(MouseSensor, {}),
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
     }),
@@ -43,8 +51,18 @@ export function SortableList<T extends BaseItem>({items: _items, onChange, rende
           const overIndex = items.findIndex(({id}) => id === over.id)
 
           onChange(arrayMove(items, activeIndex, overIndex))
+
+          // setColumnOrder(reorderColumn(movingColumnId, targetColumnId))
         }
         setActive(null)
+
+        // if (active && over && active.id !== over.id) {
+        //   setColumnOrder(columnOrder => {
+        //     const oldIndex = columnOrder.indexOf(active.id as string)
+        //     const newIndex = columnOrder.indexOf(over.id as string)
+        //     return arrayMove(columnOrder, oldIndex, newIndex) //this is just a splice util
+        //   })
+        // }
       }}
       onDragCancel={() => {
         setActive(null)

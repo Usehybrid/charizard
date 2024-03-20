@@ -13,7 +13,8 @@
   align-items: center;
   padding: 4px 6px;
   background-color: #fff;
-  box-shadow: 0 0 0 calc(1px / var(--scale-x, 1)) rgba(63, 63, 68, 0.05),
+  box-shadow:
+    0 0 0 calc(1px / var(--scale-x, 1)) rgba(63, 63, 68, 0.05),
     0 1px calc(3px / var(--scale-x, 1)) 0 rgba(34, 33, 81, 0.15);
   border-radius: 6px;
   list-style: none;
@@ -25,8 +26,8 @@
 
 .dragHandle {
   display: flex;
-  width: 12px;
-  padding: 15px;
+
+  padding: 2px;
   align-items: center;
   justify-content: center;
   flex: 0 0 auto;
@@ -45,17 +46,4 @@
 
 .dragHandle:focus-visible {
   box-shadow: 0 0px 0px 2px #4c9ffe;
-}
-
-.dragHandle svg {
-  flex: 0 0 auto;
-  margin: auto;
-  height: 100%;
-  overflow: visible;
-  fill: #919eab;
-}
-
-.dragIcon {
-  width: 23px;
-  height: 23px;
 }

@@ -5,6 +5,7 @@ interface TagProps {
   text: string
   status: STATUS_MAP
   icon?: string
+  customStyles?: React.CSSProperties
 }
 
 export enum STATUS_MAP {
@@ -43,11 +44,15 @@ const statusMap = {
   },
 }
 
-export function Tag({status, text, icon}: TagProps) {
+export function Tag({status, text, icon, customStyles = {}}: TagProps) {
   return (
     <div
       className={classes.status}
-      style={{backgroundColor: statusMap[status].bgColor, color: statusMap[status].color}}
+      style={{
+        backgroundColor: statusMap[status].bgColor,
+        color: statusMap[status].color,
+        ...customStyles,
+      }}
     >
       {icon && (
         <SVG
