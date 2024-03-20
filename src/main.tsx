@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import randomIcon from './components/assets/check.svg'
 import randomIcon2 from './components/assets/search-2.svg'
 import {createColumnHelper} from '@tanstack/react-table'
-import {BUTTON_VARIANT, TableV2} from './components'
+import {Button, BUTTON_VARIANT, TableV2} from './components'
 import {INV_ACTION_TYPES, useInventoryStore} from './components/table-v2/inventory/inventory.store'
 
 const styles = {
@@ -248,7 +248,6 @@ const menuItems = [
     iconSrc: randomIcon,
     onClick: (data: any) => {},
     filterFn: (data: any) => {
-      // return data.software.name === 'Figma'
       return false
     },
   },
@@ -295,8 +294,6 @@ function App() {
 
   const query = useInventoryStore(s => s.query)
   const dispatch = useInventoryStore(s => s.dispatch)
-
-  // console.log(query)
 
   return (
     <div style={styles}>
@@ -392,19 +389,6 @@ function App() {
     </div>
   )
 }
-
-export const colourOptions = [
-  {value: 'ocean', label: 'Ocean', color: '#00B8D9', isFixed: true},
-  {value: 'blue', label: 'Blue', color: '#0052CC', isDisabled: true},
-  {value: 'purple', label: 'Purple', color: '#5243AA'},
-  {value: 'red', label: 'Red', color: '#FF5630', isFixed: true},
-  {value: 'orange', label: 'Orange', color: '#FF8B00'},
-  {value: 'yellow', label: 'Yellow', color: '#FFC400'},
-  {value: 'green', label: 'Green', color: '#36B37E'},
-  {value: 'forest', label: 'Forest', color: '#00875A'},
-  {value: 'slate', label: 'Slate', color: '#253858'},
-  {value: 'silver', label: 'Silver', color: '#666666'},
-]
 
 export const filters = [
   {

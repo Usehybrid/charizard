@@ -197,33 +197,35 @@ function MenuButton({
         </div>
       )}
 
-      <div {...api.positionerProps}>
-        <div {...api.contentProps} className={classes.menus}>
-          {menuItems
-            .filter(menu => {
-              if (!menu.filterFn) return true
-              // used to pass the table row data in the hide callback
-              return menu.filterFn(customData)
-            })
-            .map(menu => (
-              <div
-                key={menu.label}
-                className={clsx(classes.menu, {[classes.menuDisabled]: menu.disabled})}
-                {...api.getItemProps({id: menu.label.toLowerCase()})}
-                onClick={
-                  menu.disabled
-                    ? undefined
-                    : isCustomTrigger
-                    ? () => menu.onClick(customData)
-                    : menu.onClick
-                }
-              >
-                {menu.iconSrc && <SVG path={menu.iconSrc} svgClassName={classes.menuIcon} />}
-                {menu.label}
-              </div>
-            ))}
+      {menuItems.length > 0 && (
+        <div {...api.positionerProps}>
+          <div {...api.contentProps} className={classes.menus}>
+            {menuItems
+              .filter(menu => {
+                if (!menu.filterFn) return true
+                // used to pass the table row data in the hide callback
+                return menu.filterFn(customData)
+              })
+              .map(menu => (
+                <div
+                  key={menu.label}
+                  className={clsx(classes.menu, {[classes.menuDisabled]: menu.disabled})}
+                  {...api.getItemProps({id: menu.label.toLowerCase()})}
+                  onClick={
+                    menu.disabled
+                      ? undefined
+                      : isCustomTrigger
+                        ? () => menu.onClick(customData)
+                        : menu.onClick
+                  }
+                >
+                  {menu.iconSrc && <SVG path={menu.iconSrc} svgClassName={classes.menuIcon} />}
+                  {menu.label}
+                </div>
+              ))}
+          </div>
         </div>
-      </div>
+      )}
     </>
   )
 }
