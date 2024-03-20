@@ -52,7 +52,7 @@ export function LayoutTabs({tabs, defaultValue, tabClassName, onValueChange}: La
 
   return (
     <div {...api.rootProps}>
-      <div {...api.tablistProps} className={clsx(classes.tabList, tabClassName)}>
+      <div {...api.listProps} className={clsx(classes.tabList, tabClassName)}>
         {tabs.map(item => (
           <button
             {...api.getTriggerProps({value: item.value})}
