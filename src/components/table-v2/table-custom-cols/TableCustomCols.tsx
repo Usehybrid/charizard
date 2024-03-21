@@ -74,8 +74,6 @@ export default function TableCustomCols({
   const draggableCols = checkedState.filter(c => c.checked)
   const nonDraggableCols = checkedState.filter(c => !c.checked)
 
-  console.log(checkedState)
-
   const handleSave = () => {
     checkedState.forEach(obj => {
       const col = table.getColumn(obj.id)

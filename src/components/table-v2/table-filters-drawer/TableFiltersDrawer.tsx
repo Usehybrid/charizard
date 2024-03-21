@@ -1,6 +1,7 @@
 import * as React from 'react'
 import * as dialog from '@zag-js/dialog'
 import clsx from 'clsx'
+import FilterDrawerCheckbox from '../table-header-filters/FilterDrawerCheckbox'
 import filterIcon from '../../assets/filter-lines.svg'
 import closeIcon from '../../assets/close.svg'
 import classes from './table-filters-drawer.module.css'
@@ -10,7 +11,6 @@ import {BUTTON_VARIANT, Button} from '../../button'
 import {FilterConfig} from '../types'
 import {Search} from '../../search'
 import {useTableStore} from '../store'
-import FilterDrawerCheckbox from '../table-header-filters/FilterDrawerCheckbox'
 import {getDefaultCheckedState, removeUncheckedItems} from './utils'
 
 interface TableFiltersDrawerProps {
@@ -95,6 +95,9 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
       return (acc += curr.values.length)
     }, 0)
 
+  console.log(filterCheckedState)
+  console.log(filterCheckedState[currFilter.key]?.findIndex(obj => obj.checked === false) === -1)
+
   return (
     <>
       <button
@@ -127,9 +130,6 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
                   />
                 </button>
               </h2>
-              {/* <p {...api.descriptionProps}>
-                Make changes to your profile here. Click save when you are done.
-              </p> */}
               <div className={classes.filterBox}>
                 <div className={classes.filters}>
                   {filters.map(filter => {
@@ -168,31 +168,59 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
                         <div className={classes.optionsEmpty}>No results found</div>
                       ) : (
                         <>
-                          {currFilter?.options.map((option, idx) => (
-                            <div
-                              key={idx}
-                              className={classes.option}
-                              style={{
-                                display: search.length
-                                  ? !filteredOptions.includes(option.value)
-                                    ? 'none'
-                                    : undefined
-                                  : undefined,
-                              }}
-                            >
-                              <FilterDrawerCheckbox
-                                label={option.name}
-                                value={option.value}
-                                filterKey={currFilter.key}
-                                checked={getIsChecked(currFilter.key, idx)}
-                                countryCode={option.country_code}
-                                key={option.value}
-                                customName={option.customName}
-                                setFilterCheckedState={setFilterCheckedState}
-                                idx={idx}
-                              />
-                            </div>
-                          ))}
+                          <div
+                            className={classes.option}
+                            style={{fontWeight: 700}}
+                            onClick={() => {
+                              console.log('HITS')
+                              console.log(currFilter)
+                              setCurrFilter(s => {
+                                const n = {...s}
+                                return n
+                              })
+                            }}
+                          >
+                            <FilterDrawerCheckbox
+                              label={'All'}
+                              value={'all'}
+                              filterKey={currFilter.key}
+                              checked={
+                                filterCheckedState[currFilter.key]?.findIndex(
+                                  obj => obj.checked === false,
+                                ) === -1
+                              }
+                              setFilterCheckedState={setFilterCheckedState}
+                              idx={-1}
+                              setCurrFilter={setCurrFilter}
+                            />
+                          </div>
+                          {currFilter?.options.map((option, idx) => {
+                            return (
+                              <div
+                                key={idx}
+                                className={classes.option}
+                                style={{
+                                  display: search.length
+                                    ? !filteredOptions.includes(option.value)
+                                      ? 'none'
+                                      : undefined
+                                    : undefined,
+                                }}
+                              >
+                                <FilterDrawerCheckbox
+                                  label={option.name}
+                                  value={option.value}
+                                  filterKey={currFilter.key}
+                                  checked={getIsChecked(currFilter.key, idx)}
+                                  countryCode={option.country_code}
+                                  key={option.value}
+                                  customName={option.customName}
+                                  setFilterCheckedState={setFilterCheckedState}
+                                  idx={idx}
+                                />
+                              </div>
+                            )
+                          })}
                         </>
                       )}
                     </div>

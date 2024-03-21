@@ -15,7 +15,13 @@ import {SVG} from '../svg'
 import {TableCheckbox} from './table-columns'
 import {TableRadio} from './table-columns'
 import {CHECKBOX_COL_ID, DROPDOWN_COL_ID, RADIO_COL_ID} from './constants'
-import type {ColumnOrderState, SortingState, Table, VisibilityState} from '@tanstack/react-table'
+import type {
+  Column,
+  ColumnOrderState,
+  SortingState,
+  Table,
+  VisibilityState,
+} from '@tanstack/react-table'
 import type {FilterConfig} from './types'
 
 export interface TableV2Props {
@@ -226,6 +232,7 @@ export function TableV2({
         />
       ),
       size: 40,
+      enablePinning: true,
       // enableHiding: false,
     },
     {
@@ -243,6 +250,7 @@ export function TableV2({
         />
       ),
       size: 40,
+      enablePinning: true,
       // enableHiding: true,
     },
     ...columns,
@@ -255,6 +263,7 @@ export function TableV2({
       maxSize: 150,
       minSize: 70,
       enableHiding: false,
+      enablePinning: true,
     },
   ]
 
@@ -279,9 +288,11 @@ export function TableV2({
     // enableColumnResizing: true,
     getCoreRowModel: getCoreRowModel(),
     defaultColumn: {
-      minSize: 0,
+      // minSize: 0,
       size: Number.MAX_SAFE_INTEGER,
-      maxSize: Number.MAX_SAFE_INTEGER,
+      enablePinning: false,
+      enableSorting: false,
+      // maxSize: Number.MAX_SAFE_INTEGER,
     },
     getRowId: rowSelectionConfig?.rowIdKey
       ? (row: any) => row[rowSelectionConfig?.rowIdKey as string]
@@ -381,6 +392,8 @@ function TableComp({
 }) {
   const stickyIds = tableStyleConfig?.stickyIds || []
   const sticky = [...stickyIds, DROPDOWN_COL_ID, RADIO_COL_ID, CHECKBOX_COL_ID]
+  const leftSticky = [...stickyIds, RADIO_COL_ID, CHECKBOX_COL_ID]
+  const rightSticky = [DROPDOWN_COL_ID]
 
   return (
     <div
@@ -392,9 +405,14 @@ function TableComp({
           {table.getHeaderGroups().map(headerGroup => (
             <tr key={headerGroup.id} className={classes.tableRow}>
               {headerGroup.headers.map(header => {
+                const isLeftSticky = leftSticky.includes(header.column.id)
+                const isRightSticky = rightSticky.includes(header.column.id)
+                if (isLeftSticky) header.column.pin('left')
+                if (isRightSticky) header.column.pin('right')
                 return (
                   <th
                     key={header.id}
+                    colSpan={header.colSpan}
                     className={clsx(
                       classes.tableHeader,
                       header.column.getCanSort() && classes.tableHeaderSort,
@@ -403,16 +421,16 @@ function TableComp({
                       width:
                         header.getSize() === Number.MAX_SAFE_INTEGER ? 'auto' : header.getSize(),
                       paddingRight: header.id === DROPDOWN_COL_ID ? '10px' : undefined,
+
                       paddingLeft:
                         header.index === 0 &&
                         header.id !== CHECKBOX_COL_ID &&
                         header.id !== RADIO_COL_ID
                           ? '10px'
                           : undefined,
-                      position: sticky.includes(header.id) ? 'sticky' : undefined,
-                      left: sticky.includes(header.id) ? header.getStart('left') : undefined,
-                      // minWidth: header.getSize === Number.MAX_SAFE_INTEGER ? 'auto' : header.getSize(),
-                      // maxWidth: header.getSize() === Number.MAX_SAFE_INTEGER ? 'auto' : header.getSize(),
+                      ...getCommonPinningStyles(header.column),
+                      // position: sticky.includes(header.id) ? 'sticky' : undefined,
+                      // left: sticky.includes(header.id) ? header.getStart('left') : undefined,
                     }}
                   >
                     {header.isPlaceholder ? null : (
@@ -465,9 +483,7 @@ function TableComp({
                     (cell.id === `${idx}_${RADIO_COL_ID}` ||
                       cell.id === `${idx}_${CHECKBOX_COL_ID}`)
 
-                  const isSticky = sticky.includes(cell.column.id)
-
-                  // console.log(cell.column.getSize())
+                  // const isSticky = sticky.includes(cell.column.id)
 
                   return (
                     <td
@@ -481,11 +497,12 @@ function TableComp({
                           cell.column.getSize() === Number.MAX_SAFE_INTEGER
                             ? 'auto'
                             : cell.column.getSize(),
-                        verticalAlign: isSelectionCell ? 'middle' : undefined,
-                        position: isSticky ? 'sticky' : undefined,
-                        left: isSticky ? cell.column.getStart('left') : undefined,
                         backgroundColor: 'white',
-                        zIndex: isSticky ? 3 : undefined,
+                        verticalAlign: isSelectionCell ? 'middle' : undefined,
+                        ...getCommonPinningStyles(cell.column),
+                        // position: isSticky ? 'sticky' : undefined,
+                        // left: isSticky ? cell.column.getStart('left') : undefined,
+                        // zIndex: isSticky ? 3 : undefined,
                       }}
                     >
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -509,4 +526,24 @@ function TableComp({
       </table>
     </div>
   )
+}
+
+const getCommonPinningStyles = (column: Column<any>): React.CSSProperties => {
+  const isPinned = column.getIsPinned()
+  const isLastLeftPinnedColumn = isPinned === 'left' && column.getIsLastColumn('left')
+  const isFirstRightPinnedColumn = isPinned === 'right' && column.getIsFirstColumn('right')
+
+  return {
+    boxShadow: isLastLeftPinnedColumn
+      ? '-4px 0 4px -4px gray inset'
+      : isFirstRightPinnedColumn
+        ? '4px 0 4px -4px gray inset'
+        : undefined,
+    left: isPinned === 'left' ? `${column.getStart('left')}px` : undefined,
+    right: isPinned === 'right' ? `${column.getAfter('right')}px` : undefined,
+    opacity: isPinned ? 0.95 : 1,
+    position: isPinned ? 'sticky' : 'relative',
+    width: column.getSize(),
+    zIndex: isPinned ? 1 : 0,
+  }
 }

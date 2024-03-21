@@ -263,6 +263,7 @@ const columns = [
     header: 'Software Name',
     cell: info => info.getValue().name,
     enableHiding: false,
+    enablePinning: true,
   }),
   columnHelper.accessor('software_owners', {
     header: 'Software Owners',
@@ -272,6 +273,7 @@ const columns = [
     },
     enableSorting: false,
     enableHiding: true,
+    // size: 200,
   }),
   columnHelper.accessor('software_users', {
     header: 'Users',
@@ -286,6 +288,7 @@ const columns = [
       return <div>{info.row.original.software_license_count}</div>
     },
     // size: 80,
+
     enableHiding: true,
   }),
 ]

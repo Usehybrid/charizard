@@ -2,45 +2,49 @@ import * as checkbox from '@zag-js/checkbox'
 import ReactCountryFlag from 'react-country-flag'
 import classes from './styles.module.css'
 import {useMachine, normalizeProps} from '@zag-js/react'
-import {useTableStore} from '../store'
+// import {useTableStore} from '../store'
 
 export default function FilterDrawerCheckbox({
   label,
   value,
-
   checked,
   filterKey,
-
   countryCode,
   customName,
   setFilterCheckedState,
   idx,
+  setCurrFilter,
 }: {
   label: string
   value: string
   checked: boolean
   filterKey: string
-
   countryCode?: string
   customName?: string
   setFilterCheckedState: any
   idx: number
+  setCurrFilter?: any
 }) {
-  const tableFilters = useTableStore(s => s.filters)
-
-  // console.log(tableFilters)
   const [state, send] = useMachine(
     checkbox.machine({
       id: value,
       name: label,
-      checked: checked,
+      checked,
       onCheckedChange: ({checked}: {checked: any}) => {
-        // console.log(checked)
-        setFilterCheckedState((s: Record<string, any[]>) => {
-          const n = {...s}
-          n[filterKey][idx] = {label, value, checked}
-          return n
-        })
+        if (value === 'all') {
+          setFilterCheckedState((prevState: Record<string, any[]>) => {
+            return {
+              ...prevState,
+              [filterKey]: prevState[filterKey].map(obj => ({...obj, checked})),
+            }
+          })
+        } else {
+          setFilterCheckedState((s: Record<string, any[]>) => {
+            const n = {...s}
+            n[filterKey][idx] = {label, value, checked}
+            return n
+          })
+        }
       },
     }),
   )
