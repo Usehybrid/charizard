@@ -12,6 +12,7 @@ import {SortableContext, arrayMove, sortableKeyboardCoordinates} from '@dnd-kit/
 import {DragHandle, SortableItem} from './SortableItem'
 import {SortableOverlay} from './SortableOverlay'
 import type {Active, UniqueIdentifier} from '@dnd-kit/core'
+import {CheckedState} from '../TableCustomCols'
 
 interface BaseItem {
   id: UniqueIdentifier
@@ -19,13 +20,15 @@ interface BaseItem {
 
 interface Props<T extends BaseItem> {
   items: T[]
-  onChange(items: T[]): void
+  onChange: React.Dispatch<React.SetStateAction<CheckedState[]>>
   renderItem(item: T): React.ReactNode
 }
 
 export function SortableList<T extends BaseItem>({items: _items, onChange, renderItem}: Props<T>) {
+  // const [items, setItems] = React.useState()
+
   const items = _items.filter((i: any) => i.checked)
-  console.log({items})
+  // console.log({items})
   const [active, setActive] = React.useState<Active | null>(null)
   const activeItem = React.useMemo(
     () => items.find(item => item.id === active?.id),
@@ -50,9 +53,15 @@ export function SortableList<T extends BaseItem>({items: _items, onChange, rende
           const activeIndex = items.findIndex(({id}) => id === active.id)
           const overIndex = items.findIndex(({id}) => id === over.id)
 
-          onChange(arrayMove(items, activeIndex, overIndex))
+          // onChange(arrayMove(items, activeIndex, overIndex) as unknown as CheckedState[])
+          onChange(s => {
+            const newState = [
+              ...(arrayMove(items, activeIndex, overIndex) as unknown as CheckedState[]),
+              ...s.filter((i: any) => !i.checked),
+            ]
 
-          // setColumnOrder(reorderColumn(movingColumnId, targetColumnId))
+            return newState
+          })
         }
         setActive(null)
 

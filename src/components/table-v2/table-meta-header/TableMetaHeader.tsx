@@ -23,6 +23,8 @@ interface TableMetaHeaderProps {
   rowSelection: {}
   setRowSelection: React.Dispatch<React.SetStateAction<{}>>
   table: Table<any>
+  isCheckbox?: boolean
+  isDropdownActions?: boolean
 }
 
 export default function TableMetaHeader({
@@ -35,6 +37,8 @@ export default function TableMetaHeader({
   rowSelection,
   setRowSelection,
   table,
+  isCheckbox,
+  isDropdownActions,
 }: TableMetaHeaderProps) {
   const hasRowActions = rowSelectionConfig?.actions && rowSelectionConfig.actions.length > 0
 
@@ -86,7 +90,12 @@ export default function TableMetaHeader({
         )}
 
         {typeof customColumnConfig === 'object' && (
-          <TableCustomCols customColumnConfig={customColumnConfig} table={table} />
+          <TableCustomCols
+            customColumnConfig={customColumnConfig}
+            table={table}
+            isCheckbox={isCheckbox}
+            isDropdownActions={isDropdownActions}
+          />
         )}
 
         {typeof exportConfig === 'object' && (

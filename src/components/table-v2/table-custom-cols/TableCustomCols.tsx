@@ -12,10 +12,13 @@ import {BUTTON_VARIANT, Button} from '../../button'
 import {Search} from '../../search'
 import {TableV2Props} from '../TableV2'
 import {SortableList} from './sortable/SortableList'
+import {CHECKBOX_COL_ID, DROPDOWN_COL_ID, RADIO_COL_ID} from '../constants'
 
 interface TableCustomColsProps {
   customColumnConfig: TableV2Props['customColumnConfig']
   table: Table<any>
+  isCheckbox?: boolean
+  isDropdownActions?: boolean
 }
 
 export type CheckedState = {
@@ -24,7 +27,12 @@ export type CheckedState = {
   checked: boolean
 }
 
-export default function TableCustomCols({customColumnConfig, table}: TableCustomColsProps) {
+export default function TableCustomCols({
+  customColumnConfig,
+  table,
+  isCheckbox,
+  isDropdownActions,
+}: TableCustomColsProps) {
   const [checkedState, setCheckedState] = React.useState<CheckedState[]>([])
   const [search, setSearch] = React.useState('')
 
@@ -42,6 +50,15 @@ export default function TableCustomCols({customColumnConfig, table}: TableCustom
   const api = dialog.connect(state, send, normalizeProps)
 
   const enabledCols = table.getAllLeafColumns().filter(c => c.columnDef.enableHiding)
+  const disabledCols = table
+    .getAllLeafColumns()
+    .filter(
+      c =>
+        !c.columnDef.enableHiding &&
+        c.id !== CHECKBOX_COL_ID &&
+        c.id !== RADIO_COL_ID &&
+        c.id !== DROPDOWN_COL_ID,
+    )
 
   React.useEffect(() => {
     setCheckedState(() => {
@@ -57,16 +74,31 @@ export default function TableCustomCols({customColumnConfig, table}: TableCustom
   const draggableCols = checkedState.filter(c => c.checked)
   const nonDraggableCols = checkedState.filter(c => !c.checked)
 
+  console.log(checkedState)
+
   const handleSave = () => {
     checkedState.forEach(obj => {
       const col = table.getColumn(obj.id)
       col?.toggleVisibility(obj.checked)
     })
 
+    table.setColumnOrder(() => {
+      const orderableCols = checkedState.map(obj => obj.id)
+      const arr = [
+        isCheckbox ? CHECKBOX_COL_ID : RADIO_COL_ID,
+        ...orderableCols,
+        isDropdownActions ? DROPDOWN_COL_ID : undefined,
+      ].filter(Boolean) as string[]
+
+      disabledCols.forEach(col => {
+        arr.splice(col.getIndex(), 0, col.id)
+      })
+
+      return arr
+    })
+
     api.close()
   }
-
-  console.log(table)
 
   return (
     <>
@@ -82,7 +114,7 @@ export default function TableCustomCols({customColumnConfig, table}: TableCustom
                 <div>
                   <span>Columns</span>
                   <p {...api.descriptionProps} className={classes.desc}>
-                    Description here
+                    {customColumnConfig?.description || `Description here`}
                   </p>
                 </div>
                 <button
@@ -110,24 +142,29 @@ export default function TableCustomCols({customColumnConfig, table}: TableCustom
                 </div>
 
                 <div className={classes.option}>
-                  <label className={classes.optionLabel}>
-                    <input
-                      {...{
-                        type: 'checkbox',
-                        checked: table.getIsAllColumnsVisible(),
-                        onChange: table.getToggleAllColumnsVisibilityHandler(),
-                        className: classes.checkbox,
-                      }}
-                    />{' '}
-                    All
-                  </label>
+                  <CustomColCheckbox
+                    label={'All'}
+                    id={'all'}
+                    checked={nonDraggableCols.length === 0}
+                    setCheckedState={setCheckedState}
+                  />
                 </div>
+
+                {disabledCols.map(column => (
+                  <div key={column.id} className={classes.option}>
+                    <CustomColCheckbox
+                      label={column.columnDef.header as string}
+                      id={column.id}
+                      checked={true}
+                      disabled
+                      setCheckedState={setCheckedState}
+                    />
+                  </div>
+                ))}
 
                 <>
                   {draggableCols.length > 0 && <p className={classes.info}>Selected</p>}
                   <SortableList
-                    // items={draggableCols}
-                    // table={table}
                     items={checkedState}
                     onChange={setCheckedState}
                     renderItem={column => (
@@ -146,13 +183,6 @@ export default function TableCustomCols({customColumnConfig, table}: TableCustom
                     )}
                   />
                 </>
-                {/* <Options
-                  cols={draggableCols}
-                  text="Selected"
-                  textCn={classes.info}
-                  checkedState={checkedState}
-                  setCheckedState={setCheckedState}
-                /> */}
 
                 <Options
                   cols={nonDraggableCols}

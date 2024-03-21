@@ -188,7 +188,7 @@
   line-height: 180%;
 }
 
-.optionLabel:hover {
+.optionLabel:hover:not(.optionDis) {
   cursor: pointer;
 }
 

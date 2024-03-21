@@ -262,6 +262,7 @@ const columns = [
   columnHelper.accessor('software', {
     header: 'Software Name',
     cell: info => info.getValue().name,
+    enableHiding: false,
   }),
   columnHelper.accessor('software_owners', {
     header: 'Software Owners',
@@ -384,7 +385,9 @@ function App() {
           columns: 6,
           emptySearchTitle: 'No inventories found',
         }}
-        customColumnConfig={{}}
+        customColumnConfig={{
+          description: 'Configure inventory columns',
+        }}
       />
     </div>
   )

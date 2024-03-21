@@ -125,7 +125,9 @@ export interface TableV2Props {
   /**
    * custom columns
    */
-  customColumnConfig?: {}
+  customColumnConfig?: {
+    description?: string
+  }
   /**
    * export config (csv)
    */
@@ -270,7 +272,6 @@ export function TableV2({
     onColumnVisibilityChange: setColumnVisibility,
     onColumnOrderChange: setColumnOrder,
     enableRowSelection: true,
-    // enableRowSelection: row => row.original.age > 18, // or enable row selection conditionally per row
     onRowSelectionChange: rowSelectionConfig?.setRowSelection || setRowSelection,
     enableMultiRowSelection: isRadio ? false : true,
     manualPagination: true,
@@ -337,6 +338,8 @@ export function TableV2({
             customColumnConfig={customColumnConfig}
             exportConfig={exportConfig}
             table={table}
+            isCheckbox={isCheckbox}
+            isDropdownActions={actionsConfig.isDropdownActions}
           />
         )}
         <TableComp

@@ -13,15 +13,9 @@
   align-items: center;
   padding: 4px 6px;
   background-color: #fff;
-  box-shadow:
-    0 0 0 calc(1px / var(--scale-x, 1)) rgba(63, 63, 68, 0.05),
-    0 1px calc(3px / var(--scale-x, 1)) 0 rgba(34, 33, 81, 0.15);
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   border-radius: 6px;
   list-style: none;
-  /* color: #333; */
-  /* font-weight: 400; */
-  /* font-size: 1rem; */
-  /* font-family: sans-serif; */
 }
 
 .dragHandle {
