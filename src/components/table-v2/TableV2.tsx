@@ -532,12 +532,17 @@ const getCommonPinningStyles = (column: Column<any>): React.CSSProperties => {
   const isPinned = column.getIsPinned()
   const isLastLeftPinnedColumn = isPinned === 'left' && column.getIsLastColumn('left')
   const isFirstRightPinnedColumn = isPinned === 'right' && column.getIsFirstColumn('right')
-
+  //
+  // boxShadow: isLastLeftPinnedColumn
+  // ? '-4px 0 4px -4px gray inset'
+  // : isFirstRightPinnedColumn
+  //   ? '4px 0 4px -4px gray inset'
+  //   : undefined,
   return {
     boxShadow: isLastLeftPinnedColumn
-      ? '-4px 0 4px -4px gray inset'
+      ? '3px 0px 10px 0px rgba(0, 0, 0, 0.07)'
       : isFirstRightPinnedColumn
-        ? '4px 0 4px -4px gray inset'
+        ? '-3px 0px 10px 0px rgba(0, 0, 0, 0.07)'
         : undefined,
     left: isPinned === 'left' ? `${column.getStart('left')}px` : undefined,
     right: isPinned === 'right' ? `${column.getAfter('right')}px` : undefined,
