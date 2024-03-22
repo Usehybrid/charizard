@@ -185,7 +185,7 @@ export function TableV2({
   const [columnPinning, setColumnPinning] = React.useState<ColumnPinningState>({
     left: tableStyleConfig?.stickyIds
       ? [RADIO_COL_ID, CHECKBOX_COL_ID, ...tableStyleConfig?.stickyIds]
-      : [],
+      : [RADIO_COL_ID, CHECKBOX_COL_ID],
     right: [DROPDOWN_COL_ID],
   })
   const [rowSelection, setRowSelection] = React.useState({})
@@ -428,8 +428,6 @@ function TableComp({
                           ? '10px'
                           : undefined,
                       ...getCommonPinningStyles(header.column),
-                      // position: sticky.includes(header.id) ? 'sticky' : undefined,
-                      // left: sticky.includes(header.id) ? header.getStart('left') : undefined,
                     }}
                   >
                     {header.isPlaceholder ? null : (
@@ -482,8 +480,6 @@ function TableComp({
                     (cell.id === `${idx}_${RADIO_COL_ID}` ||
                       cell.id === `${idx}_${CHECKBOX_COL_ID}`)
 
-                  // const isSticky = sticky.includes(cell.column.id)
-
                   return (
                     <td
                       key={cell.id}
@@ -499,9 +495,6 @@ function TableComp({
                         backgroundColor: 'white',
                         verticalAlign: isSelectionCell ? 'middle' : undefined,
                         ...getCommonPinningStyles(cell.column),
-                        // position: isSticky ? 'sticky' : undefined,
-                        // left: isSticky ? cell.column.getStart('left') : undefined,
-                        // zIndex: isSticky ? 3 : undefined,
                       }}
                     >
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -531,23 +524,18 @@ const getCommonPinningStyles = (column: Column<any>): React.CSSProperties => {
   const isPinned = column.getIsPinned()
   const isLastLeftPinnedColumn = isPinned === 'left' && column.getIsLastColumn('left')
   const isFirstRightPinnedColumn = isPinned === 'right' && column.getIsFirstColumn('right')
-  //
-  // boxShadow: isLastLeftPinnedColumn
-  // ? '-4px 0 4px -4px gray inset'
-  // : isFirstRightPinnedColumn
-  //   ? '4px 0 4px -4px gray inset'
-  //   : undefined,
   return {
     boxShadow: isLastLeftPinnedColumn
-      ? '3px 0px 10px 0px rgba(0, 0, 0, 0.07)'
+      ? '-4px 0 4px -4px rgba(0, 0, 0, 0.07) inset'
       : isFirstRightPinnedColumn
-        ? '-3px 0px 10px 0px rgba(0, 0, 0, 0.07)'
+        ? '4px 0 4px -4px rgba(0, 0, 0, 0.07) inset'
         : undefined,
+
     left: isPinned === 'left' ? `${column.getStart('left')}px` : undefined,
     right: isPinned === 'right' ? `${column.getAfter('right')}px` : undefined,
-    opacity: isPinned ? 0.95 : 1,
+    // opacity: isPinned ? 0.95 : 1,
     position: isPinned ? 'sticky' : undefined,
     // width: column.getSize(),
-    zIndex: isPinned ? 1 : 0,
+    zIndex: isPinned ? 2 : 0,
   }
 }
