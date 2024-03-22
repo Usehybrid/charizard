@@ -391,6 +391,7 @@ function App() {
         customColumnConfig={{
           description: 'Configure inventory columns',
         }}
+        tableStyleConfig={{stickyIds: ['software']}}
       />
     </div>
   )

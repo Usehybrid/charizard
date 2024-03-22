@@ -18,6 +18,7 @@ import {CHECKBOX_COL_ID, DROPDOWN_COL_ID, RADIO_COL_ID} from './constants'
 import type {
   Column,
   ColumnOrderState,
+  ColumnPinningState,
   SortingState,
   Table,
   VisibilityState,
@@ -125,7 +126,7 @@ export interface TableV2Props {
   }
   headerText?: string
   tableStyleConfig?: {
-    maxHeight: string
+    maxHeight?: string
     stickyIds?: string[]
   }
   /**
@@ -181,6 +182,12 @@ export function TableV2({
   // used for checkbox visibility
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
   const [columnOrder, setColumnOrder] = React.useState<ColumnOrderState>([])
+  const [columnPinning, setColumnPinning] = React.useState<ColumnPinningState>({
+    left: tableStyleConfig?.stickyIds
+      ? [RADIO_COL_ID, CHECKBOX_COL_ID, ...tableStyleConfig?.stickyIds]
+      : [],
+    right: [DROPDOWN_COL_ID],
+  })
   const [rowSelection, setRowSelection] = React.useState({})
 
   // account for search state here itself
@@ -275,11 +282,13 @@ export function TableV2({
       columnVisibility,
       columnOrder,
       rowSelection: rowSelectionConfig?.rowSelection || rowSelection,
+      columnPinning,
     },
     manualSorting: true,
     onSortingChange: setSorting,
     onColumnVisibilityChange: setColumnVisibility,
     onColumnOrderChange: setColumnOrder,
+    onColumnPinningChange: setColumnPinning,
     enableRowSelection: true,
     onRowSelectionChange: rowSelectionConfig?.setRowSelection || setRowSelection,
     enableMultiRowSelection: isRadio ? false : true,
@@ -390,11 +399,6 @@ function TableComp({
   search?: string
   isEmpty: boolean
 }) {
-  const stickyIds = tableStyleConfig?.stickyIds || []
-  const sticky = [...stickyIds, DROPDOWN_COL_ID, RADIO_COL_ID, CHECKBOX_COL_ID]
-  const leftSticky = [...stickyIds, RADIO_COL_ID, CHECKBOX_COL_ID]
-  const rightSticky = [DROPDOWN_COL_ID]
-
   return (
     <div
       className={classes.tableScrollContainer}
@@ -405,10 +409,6 @@ function TableComp({
           {table.getHeaderGroups().map(headerGroup => (
             <tr key={headerGroup.id} className={classes.tableRow}>
               {headerGroup.headers.map(header => {
-                const isLeftSticky = leftSticky.includes(header.column.id)
-                const isRightSticky = rightSticky.includes(header.column.id)
-                if (isLeftSticky) header.column.pin('left')
-                if (isRightSticky) header.column.pin('right')
                 return (
                   <th
                     key={header.id}
@@ -421,7 +421,6 @@ function TableComp({
                       width:
                         header.getSize() === Number.MAX_SAFE_INTEGER ? 'auto' : header.getSize(),
                       paddingRight: header.id === DROPDOWN_COL_ID ? '10px' : undefined,
-
                       paddingLeft:
                         header.index === 0 &&
                         header.id !== CHECKBOX_COL_ID &&
@@ -547,8 +546,8 @@ const getCommonPinningStyles = (column: Column<any>): React.CSSProperties => {
     left: isPinned === 'left' ? `${column.getStart('left')}px` : undefined,
     right: isPinned === 'right' ? `${column.getAfter('right')}px` : undefined,
     opacity: isPinned ? 0.95 : 1,
-    position: isPinned ? 'sticky' : 'relative',
-    width: column.getSize(),
+    position: isPinned ? 'sticky' : undefined,
+    // width: column.getSize(),
     zIndex: isPinned ? 1 : 0,
   }
 }

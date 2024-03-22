@@ -95,9 +95,6 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
       return (acc += curr.values.length)
     }, 0)
 
-  console.log(filterCheckedState)
-  console.log(filterCheckedState[currFilter.key]?.findIndex(obj => obj.checked === false) === -1)
-
   return (
     <>
       <button
