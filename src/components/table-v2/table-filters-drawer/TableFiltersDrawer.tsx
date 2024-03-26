@@ -43,7 +43,10 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
   const headerFilterKeys = filterConfig.filters?.header
     ? filterConfig.filters.header.map(f => f.key)
     : []
+
+  console.log('table-1', filters)
   const [currFilter, setCurrFilter] = React.useState(filters[0])
+  console.log('table-2', currFilter)
 
   const api = dialog.connect(state, send, normalizeProps)
 
@@ -154,7 +157,7 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
                 </div>
 
                 <div className={classes.filterSingle}>
-                  {!currFilter.config?.hideSearch && (
+                  {!currFilter?.config?.hideSearch && (
                     <div className={classes.dropdownSearch}>
                       <Search
                         id="filter-search"
