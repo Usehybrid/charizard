@@ -38,8 +38,7 @@ export default function TablePagination({paginationConfig}: TablePaginationProps
   }, [])
 
   React.useEffect(() => {
-    console.log('table', metaData?.total_items)
-    //  console.log(paginationApi.);
+    // used to rerender the component after searching and filtering in the table
     paginationApi.setCount(metaData?.total_items || 0)
   }, [metaData?.total_items])
 

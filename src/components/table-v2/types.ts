@@ -12,6 +12,7 @@ export type FilterOptions = {
   config?: {
     hideSearch?: boolean
     placeholder?: string
+    type?: string
   }
 }
 
@@ -27,10 +28,7 @@ export type FilterOptions = {
  *
  */
 export type FilterConfig = {
-  filters?: {
-    header?: FilterOptions[]
-    drawer?: FilterOptions[]
-  }
+  filters?: TableFilters
   isLoading: boolean
   isError: boolean
   filterDispatch: (value: any) => void
@@ -43,4 +41,9 @@ export type FilterConfig = {
 export type InternalTableFilters = {
   key: string
   values: string[]
+}
+
+export type TableFilters = {
+  header?: FilterOptions[]
+  drawer?: FilterOptions[]
 }

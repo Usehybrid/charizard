@@ -488,6 +488,15 @@ function TableComp({
                     (cell.id === `${idx}_${RADIO_COL_ID}` ||
                       cell.id === `${idx}_${CHECKBOX_COL_ID}`)
 
+                  let isPrevPinned = false
+                  if (tableStyleConfig?.stickyIds?.length) {
+                    // const prev = _rows[idx - 1]?.getCanPin()
+                    // const next = !_rows[idx + 1]?.getCanPin()
+                    // console.log(prev)
+                    // isPrevPinned = prev && next
+                  }
+                  // console.log({name: cell.renderValue(), isPrevPinned})
+
                   return (
                     <td
                       key={cell.id}
@@ -502,6 +511,7 @@ function TableComp({
                             : cell.column.getSize(),
                         backgroundColor: 'white',
                         verticalAlign: isSelectionCell ? 'middle' : undefined,
+                        paddingLeft: isPrevPinned ? '15px' : undefined,
                         ...getCommonPinningStyles(cell.column),
                       }}
                     >
