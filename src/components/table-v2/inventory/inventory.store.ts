@@ -52,6 +52,7 @@ export const invQueryReducer = (query, {payload, type}) => {
       const {value, filterType} = payload
       return {
         ...query,
+        page: 0,
         filters: {
           ...query.filters,
           [filterType]: value,

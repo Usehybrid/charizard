@@ -263,6 +263,7 @@ const columns = [
     header: 'Software Name',
     cell: info => info.getValue().name,
     enableHiding: false,
+    enableSorting: true,
     enablePinning: true,
   }),
   columnHelper.accessor('software_owners', {
@@ -273,7 +274,6 @@ const columns = [
     },
     enableSorting: false,
     enableHiding: true,
-    // size: 200,
   }),
   columnHelper.accessor('software_users', {
     header: 'Users',
@@ -287,8 +287,6 @@ const columns = [
     cell: info => {
       return <div>{info.row.original.software_license_count}</div>
     },
-    // size: 80,
-
     enableHiding: true,
   }),
 ]
@@ -298,6 +296,8 @@ function App() {
 
   const query = useInventoryStore(s => s.query)
   const dispatch = useInventoryStore(s => s.dispatch)
+
+  // console.log(query)
 
   return (
     <div style={styles}>

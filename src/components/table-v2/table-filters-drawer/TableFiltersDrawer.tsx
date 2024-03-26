@@ -47,8 +47,6 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
 
   const api = dialog.connect(state, send, normalizeProps)
 
-  // console.log(tableFilters)
-
   React.useEffect(() => {
     if (!filters?.length || isLoading) return
     const mapFn = (filter: any) => ({key: filter.key, values: []})
@@ -76,6 +74,7 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
   }, [api.isOpen])
 
   const getIsChecked = (key: string, idx: number) => {
+    // console.log(filterCheckedState)
     const l = Object.keys(filterCheckedState).length
     if (!l || !filterCheckedState[key]) return false
     return filterCheckedState[key][idx].checked
@@ -94,6 +93,10 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
     .reduce((acc, curr) => {
       return (acc += curr.values.length)
     }, 0)
+
+  // console.log(filterCheckedState[currFilter.key]?.findIndex(obj => obj.checked === false) === -1)
+
+  // console.log(filterCheckedState)
 
   return (
     <>
@@ -135,7 +138,10 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
                     return (
                       <div
                         className={clsx(classes.filter, isActive && classes.active)}
-                        onClick={() => setCurrFilter(filter)}
+                        onClick={() => {
+                          setSearch('')
+                          setCurrFilter(filter)
+                        }}
                         key={filter.id}
                       >
                         {filter.name}{' '}
@@ -165,18 +171,7 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
                         <div className={classes.optionsEmpty}>No results found</div>
                       ) : (
                         <>
-                          <div
-                            className={classes.option}
-                            style={{fontWeight: 700}}
-                            onClick={() => {
-                              console.log('HITS')
-                              console.log(currFilter)
-                              setCurrFilter(s => {
-                                const n = {...s}
-                                return n
-                              })
-                            }}
-                          >
+                          {/* <div className={classes.option} style={{fontWeight: 700}}>
                             <FilterDrawerCheckbox
                               label={'All'}
                               value={'all'}
@@ -188,9 +183,8 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
                               }
                               setFilterCheckedState={setFilterCheckedState}
                               idx={-1}
-                              setCurrFilter={setCurrFilter}
                             />
-                          </div>
+                          </div> */}
                           {currFilter?.options.map((option, idx) => {
                             return (
                               <div

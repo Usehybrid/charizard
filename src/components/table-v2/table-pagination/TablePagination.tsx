@@ -60,13 +60,6 @@ export default function TablePagination({paginationConfig}: TablePaginationProps
               else
                 return (
                   <React.Fragment key={`ellipsis-${i}`}>
-                    {/* <div
-                      key={`ellipsis-${i}`}
-                      {...paginationApi.getEllipsisProps({index: i})}
-                      className={classes.pageBox}
-                    >
-                      <SVG path={threeDots} svgClassName={classes.arrowIcon} />
-                    </div> */}
                     <TableEllipses paginationApi={paginationApi} i={i} />
                   </React.Fragment>
                 )

@@ -128,6 +128,7 @@ export interface TableV2Props {
   tableStyleConfig?: {
     maxHeight?: string
     stickyIds?: string[]
+    // idxNextToLeftStickyID:
   }
   /**
    * custom columns
@@ -294,7 +295,6 @@ export function TableV2({
     enableMultiRowSelection: isRadio ? false : true,
     manualPagination: true,
     manualFiltering: true,
-    // enableColumnResizing: true,
     getCoreRowModel: getCoreRowModel(),
     defaultColumn: {
       // minSize: 0,
@@ -335,6 +335,15 @@ export function TableV2({
 
   React.useEffect(() => {
     if (!rowSelectionConfig?.clearOnSearch) return
+    setRowSelection({})
+  }, [searchConfig?.search])
+
+  React.useEffect(() => {
+    if (!paginationConfig) return
+
+    if (searchConfig?.search) {
+      paginationConfig.setPage(0)
+    }
     setRowSelection({})
   }, [searchConfig?.search])
 
@@ -408,7 +417,12 @@ function TableComp({
         <thead className={classes.tableHead}>
           {table.getHeaderGroups().map(headerGroup => (
             <tr key={headerGroup.id} className={classes.tableRow}>
-              {headerGroup.headers.map(header => {
+              {headerGroup.headers.map((header, idx, _headers) => {
+                let isNextToPinnedCol = false
+                if (tableStyleConfig?.stickyIds?.length) {
+                  if (tableStyleConfig.stickyIds.includes(_headers[idx - 1]?.id))
+                    isNextToPinnedCol = true
+                }
                 return (
                   <th
                     key={header.id}
@@ -426,8 +440,11 @@ function TableComp({
                         header.id !== CHECKBOX_COL_ID &&
                         header.id !== RADIO_COL_ID
                           ? '10px'
-                          : undefined,
-                      ...getCommonPinningStyles(header.column),
+                          : isNextToPinnedCol
+                            ? '15px'
+                            : undefined,
+
+                      ...getCommonPinningStyles(header.column, true),
                     }}
                   >
                     {header.isPlaceholder ? null : (
@@ -472,7 +489,7 @@ function TableComp({
           <TableEmpty emptyStateConfig={emptyStateConfig} search={search} />
         ) : (
           <tbody className={classes.tableBody}>
-            {table.getRowModel().rows.map((row, idx) => (
+            {table.getRowModel().rows.map((row, idx, _rows) => (
               <tr key={row.id} className={classes.tableRow}>
                 {row.getVisibleCells().map(cell => {
                   const isSelectionCell =
@@ -520,22 +537,22 @@ function TableComp({
   )
 }
 
-const getCommonPinningStyles = (column: Column<any>): React.CSSProperties => {
+const getCommonPinningStyles = (column: Column<any>, isHeader?: boolean): React.CSSProperties => {
   const isPinned = column.getIsPinned()
   const isLastLeftPinnedColumn = isPinned === 'left' && column.getIsLastColumn('left')
   const isFirstRightPinnedColumn = isPinned === 'right' && column.getIsFirstColumn('right')
+
   return {
     boxShadow: isLastLeftPinnedColumn
-      ? '-4px 0 4px -4px rgba(0, 0, 0, 0.07) inset'
+      ? '-4px 0 10px -4px rgba(0, 0, 0, 0.07) inset'
       : isFirstRightPinnedColumn
-        ? '4px 0 4px -4px rgba(0, 0, 0, 0.07) inset'
+        ? '4px 0 10px -4px rgba(0, 0, 0, 0.07) inset'
         : undefined,
-
     left: isPinned === 'left' ? `${column.getStart('left')}px` : undefined,
     right: isPinned === 'right' ? `${column.getAfter('right')}px` : undefined,
-    // opacity: isPinned ? 0.95 : 1,
     position: isPinned ? 'sticky' : undefined,
-    // width: column.getSize(),
     zIndex: isPinned ? 2 : 0,
+    backgroundColor: isHeader ? `var(--neutral-arch-10)` : undefined,
+    marginRight: isLastLeftPinnedColumn ? '20px' : undefined,
   }
 }

@@ -1,3 +1,4 @@
+import * as React from 'react'
 import * as checkbox from '@zag-js/checkbox'
 import ReactCountryFlag from 'react-country-flag'
 import classes from './styles.module.css'
@@ -13,7 +14,6 @@ export default function FilterDrawerCheckbox({
   customName,
   setFilterCheckedState,
   idx,
-  setCurrFilter,
 }: {
   label: string
   value: string
@@ -23,8 +23,14 @@ export default function FilterDrawerCheckbox({
   customName?: string
   setFilterCheckedState: any
   idx: number
-  setCurrFilter?: any
 }) {
+  // React.useEffect(() => {
+  //   // effect to keep the 'All' checkbox changes in sync with the actual initialState
+  //   if (api.isChecked !== checked) {
+  //     api.setChecked(checked)
+  //   }
+  // }, [checked])
+
   const [state, send] = useMachine(
     checkbox.machine({
       id: value,
