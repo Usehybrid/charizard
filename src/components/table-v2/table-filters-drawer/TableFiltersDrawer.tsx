@@ -133,7 +133,7 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
               <div className={classes.filterBox}>
                 <div className={classes.filters}>
                   {filters.map(filter => {
-                    const isActive = currFilter.id === filter.id
+                    const isActive = currFilter?.id === filter.id
                     const internalFilter = tableFilters.find(tf => tf.key === filter.key)
                     return (
                       <div
