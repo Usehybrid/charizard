@@ -37,6 +37,12 @@ export default function TablePagination({paginationConfig}: TablePaginationProps
     paginationApi.setPage(paginationConfig.page + 1)
   }, [])
 
+  React.useEffect(() => {
+    console.log('table', metaData?.total_items)
+    //  console.log(paginationApi.);
+    paginationApi.setCount(metaData?.total_items || 0)
+  }, [metaData?.total_items])
+
   return (
     <div className={classes.box}>
       <TableLimit setLimit={setLimit} limit={limit} totalItems={metaData?.total_items} />

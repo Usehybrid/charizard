@@ -268,7 +268,7 @@ export function TableV2({
         <TableActions actionsConfig={actionsConfig} data={props.row.original} />
       ),
       header: 'Actions',
-      maxSize: 150,
+      size: 70,
       minSize: 70,
       enableHiding: false,
       enablePinning: true,
@@ -335,15 +335,6 @@ export function TableV2({
 
   React.useEffect(() => {
     if (!rowSelectionConfig?.clearOnSearch) return
-    setRowSelection({})
-  }, [searchConfig?.search])
-
-  React.useEffect(() => {
-    if (!paginationConfig) return
-
-    if (searchConfig?.search) {
-      paginationConfig.setPage(0)
-    }
     setRowSelection({})
   }, [searchConfig?.search])
 
@@ -552,7 +543,7 @@ const getCommonPinningStyles = (column: Column<any>, isHeader?: boolean): React.
     right: isPinned === 'right' ? `${column.getAfter('right')}px` : undefined,
     position: isPinned ? 'sticky' : undefined,
     zIndex: isPinned ? 2 : 0,
-    backgroundColor: isHeader ? `var(--neutral-arch-10)` : undefined,
+    backgroundColor: isHeader ? `var(--neutral-arch-10)` : '#ffffff',
     marginRight: isLastLeftPinnedColumn ? '20px' : undefined,
   }
 }
