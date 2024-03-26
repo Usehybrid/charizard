@@ -44,10 +44,7 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
     ? filterConfig.filters.header.map(f => f.key)
     : []
 
-  console.log('table-1', filters)
   const [currFilter, setCurrFilter] = React.useState(filters[0])
-  console.log('table-2', currFilter)
-
   const api = dialog.connect(state, send, normalizeProps)
 
   React.useEffect(() => {
