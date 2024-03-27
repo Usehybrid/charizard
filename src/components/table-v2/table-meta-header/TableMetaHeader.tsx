@@ -41,11 +41,8 @@ export default function TableMetaHeader({
   isDropdownActions,
 }: TableMetaHeaderProps) {
   const hasRowActions = rowSelectionConfig?.actions && rowSelectionConfig.actions.length > 0
-
   const rowsSelected = Object.keys(rowSelection).length
-
   const isRowSelected = rowsSelected > 0
-
   const selectedText = `${rowsSelected} ${pluralize(
     rowsSelected,
     rowSelectionConfig?.entityName || '',
@@ -85,9 +82,11 @@ export default function TableMetaHeader({
           <TableHeaderFilters filterConfig={filterConfig} filters={headerFilter} />
         )}
 
-        {typeof filterConfig === 'object' && !!filterConfig.filters && !filterConfig.isLoading && (
-          <TableFiltersDrawer filterConfig={filterConfig} />
-        )}
+        {typeof filterConfig === 'object' &&
+          !filterConfig.isLoading &&
+          !filterConfig.filters?.header?.length && (
+            <TableFiltersDrawer filterConfig={filterConfig} />
+          )}
 
         {typeof customColumnConfig === 'object' && (
           <TableCustomCols

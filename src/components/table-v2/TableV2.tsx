@@ -240,7 +240,7 @@ export function TableV2({
         />
       ),
       size: 40,
-      enablePinning: true,
+      enablePinning: false,
       // enableHiding: false,
     },
     {
@@ -258,7 +258,7 @@ export function TableV2({
         />
       ),
       size: 40,
-      enableHiding: true,
+      // enableHiding: false,
     },
     ...columns,
     {
@@ -269,6 +269,7 @@ export function TableV2({
       header: 'Actions',
       size: 70,
       enablePinning: true,
+      enableHiding: false,
     },
   ]
 
