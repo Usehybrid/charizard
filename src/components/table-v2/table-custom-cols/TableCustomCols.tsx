@@ -49,7 +49,15 @@ export default function TableCustomCols({
 
   const api = dialog.connect(state, send, normalizeProps)
 
-  const enabledCols = table.getAllLeafColumns().filter(c => c.columnDef.enableHiding)
+  const enabledCols = table
+    .getAllLeafColumns()
+    .filter(
+      c =>
+        c.columnDef.enableHiding &&
+        c.id !== CHECKBOX_COL_ID &&
+        c.id !== RADIO_COL_ID &&
+        c.id !== DROPDOWN_COL_ID,
+    )
   const disabledCols = table
     .getAllLeafColumns()
     .filter(

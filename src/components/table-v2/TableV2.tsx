@@ -269,7 +269,7 @@ export function TableV2({
       header: 'Actions',
       size: 70,
       enablePinning: true,
-      enableHiding: false,
+      // enableHiding: true,
     },
   ]
 

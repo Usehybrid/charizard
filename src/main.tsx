@@ -239,7 +239,7 @@ const menuItems = [
     iconSrc: randomIcon,
     onClick: (data: any) => {},
     filterFn: (data: any) => {
-      return data.software.name === 'Figma'
+      return true
     },
   },
 
@@ -248,7 +248,8 @@ const menuItems = [
     iconSrc: randomIcon,
     onClick: (data: any) => {},
     filterFn: (data: any) => {
-      return false
+      // return false
+      return true
     },
   },
   // {
@@ -376,7 +377,6 @@ function App() {
         actionsConfig={{
           menuItems,
           isDropdownActions: true,
-          key: 'description',
         }}
         totalText={`${4} Softwares`}
         emptyStateConfig={{
