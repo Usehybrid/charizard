@@ -266,6 +266,7 @@ const columns = [
     enableHiding: false,
     enableSorting: true,
     enablePinning: true,
+    size: 300,
   }),
   columnHelper.accessor('software_owners', {
     header: 'Software Owners',
@@ -273,8 +274,8 @@ const columns = [
     cell: info => {
       return <div>{getFullName(info.row.original.software_owners[0])}</div>
     },
-    enableSorting: false,
     enableHiding: true,
+    size: 100,
   }),
   columnHelper.accessor('software_users', {
     header: 'Users',
@@ -282,6 +283,7 @@ const columns = [
       return <div>{info.row.original.software_users_count}</div>
     },
     enableHiding: true,
+    size: 100,
   }),
   columnHelper.accessor('software_license', {
     header: 'Licenses',
@@ -289,6 +291,7 @@ const columns = [
       return <div>{info.row.original.software_license_count}</div>
     },
     enableHiding: true,
+    size: 100,
   }),
 ]
 

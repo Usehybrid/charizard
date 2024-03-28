@@ -480,7 +480,7 @@ function TableComp({
           <tbody className={classes.tableBody}>
             {table.getRowModel().rows.map((row, idx, _rows) => (
               <tr key={row.id} className={classes.tableRow}>
-                {row.getVisibleCells().map(cell => {
+                {row.getVisibleCells().map((cell, idx2, cells) => {
                   const isSelectionCell =
                     (isCheckbox || isRadio) &&
                     (cell.id === `${idx}_${RADIO_COL_ID}` ||
@@ -488,12 +488,8 @@ function TableComp({
 
                   let isPrevPinned = false
                   if (tableStyleConfig?.stickyIds?.length) {
-                    // const prev = _rows[idx - 1]?.getCanPin()
-                    // const next = !_rows[idx + 1]?.getCanPin()
-                    // console.log(prev)
-                    // isPrevPinned = prev && next
+                    isPrevPinned = cells[idx2 - 1]?.column.getCanPin()
                   }
-                  // console.log({name: cell.renderValue(), isPrevPinned})
 
                   return (
                     <td
