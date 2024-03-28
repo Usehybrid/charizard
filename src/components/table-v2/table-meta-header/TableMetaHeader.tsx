@@ -84,7 +84,7 @@ export default function TableMetaHeader({
 
         {typeof filterConfig === 'object' &&
           !filterConfig.isLoading &&
-          !filterConfig.filters?.header?.length && (
+          !!filterConfig.filters?.drawer?.length && (
             <TableFiltersDrawer filterConfig={filterConfig} />
           )}
 
