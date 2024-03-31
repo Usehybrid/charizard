@@ -4,7 +4,7 @@ import clsx from 'clsx'
 import chevronDown from '../assets/chevron-down.svg'
 import threeDots from '../assets/three-dots.svg'
 import classes from './styles.module.css'
-import {useMachine, normalizeProps} from '@zag-js/react'
+import {useMachine, normalizeProps, Portal} from '@zag-js/react'
 import {SVG} from '../svg'
 import {PositioningOptions} from '@zag-js/popper'
 
@@ -89,6 +89,7 @@ export interface MenuButtonProps {
     setIsActive: React.Dispatch<React.SetStateAction<boolean>>
   }
   positionerProps?: PositioningOptions
+  isTable?: boolean
 }
 
 function MenuButton({
@@ -103,6 +104,7 @@ function MenuButton({
   size = 'md',
   actionsDropdownOptions,
   positionerProps,
+  isTable = false,
 }: MenuButtonProps) {
   const [state, send] = useMachine(
     menu.machine({
@@ -112,12 +114,67 @@ function MenuButton({
   )
   const api = menu.connect(state, send, normalizeProps)
 
-  // to sync with actions dropdown
+  // to sync with actions dropdown, to get active state styles
   React.useEffect(() => {
     if (!isCustomTrigger || !actionsDropdownOptions?.setIsActive) return
-
     actionsDropdownOptions.setIsActive(api.isOpen)
   }, [api.isOpen])
+
+  const isOpenRef = React.useRef(api.isOpen)
+
+  React.useEffect(() => {
+    isOpenRef.current = api.isOpen
+  }, [api.isOpen])
+
+  const handleScroll = () => {
+    if (isOpenRef.current) {
+      api.close()
+    }
+  }
+
+  React.useEffect(() => {
+    if (isTable) {
+      const scrollContainer = document.getElementById('hui-table-scroll-container')
+      if (scrollContainer) {
+        scrollContainer.addEventListener('scroll', handleScroll, {passive: true})
+        return () => scrollContainer.removeEventListener('scroll', handleScroll)
+      }
+    }
+  }, [])
+
+  const dropdown = (
+    <>
+      {menuItems.length > 0 && (
+        <div {...api.positionerProps}>
+          <div {...api.contentProps} className={classes.menus}>
+            {menuItems
+              .filter(menu => {
+                if (!menu.filterFn) return true
+                // used to pass the table row data in the hide callback
+                return menu.filterFn(customData)
+              })
+              .map(menu => (
+                <div
+                  key={menu.label}
+                  className={clsx(classes.menu, {[classes.menuDisabled]: menu.disabled})}
+                  {...api.getItemProps({id: menu.label.toLowerCase()})}
+                  onClick={
+                    menu.disabled
+                      ? undefined
+                      : isCustomTrigger
+                        ? () => menu.onClick(customData)
+                        : menu.onClick
+                  }
+                >
+                  {menu.iconSrc && <SVG path={menu.iconSrc} svgClassName={classes.menuIcon} />}
+                  {menu.label}
+                </div>
+              ))}
+          </div>
+        </div>
+      )}
+    </>
+  )
 
   return (
     <>
@@ -196,36 +253,7 @@ function MenuButton({
           </button>
         </div>
       )}
-
-      {menuItems.length > 0 && (
-        <div {...api.positionerProps}>
-          <div {...api.contentProps} className={classes.menus}>
-            {menuItems
-              .filter(menu => {
-                if (!menu.filterFn) return true
-                // used to pass the table row data in the hide callback
-                return menu.filterFn(customData)
-              })
-              .map(menu => (
-                <div
-                  key={menu.label}
-                  className={clsx(classes.menu, {[classes.menuDisabled]: menu.disabled})}
-                  {...api.getItemProps({id: menu.label.toLowerCase()})}
-                  onClick={
-                    menu.disabled
-                      ? undefined
-                      : isCustomTrigger
-                        ? () => menu.onClick(customData)
-                        : menu.onClick
-                  }
-                >
-                  {menu.iconSrc && <SVG path={menu.iconSrc} svgClassName={classes.menuIcon} />}
-                  {menu.label}
-                </div>
-              ))}
-          </div>
-        </div>
-      )}
+      {isTable ? <Portal>{dropdown}</Portal> : dropdown}
     </>
   )
 }
@@ -233,9 +261,15 @@ export type MenuActionsDropdownProps = {
   menuItems: MenuItem[]
   data?: any
   variant?: 'regular' | 'small'
+  isTable?: boolean
 }
 
-function MenuActionsDropdown({menuItems, data, variant = 'regular'}: MenuActionsDropdownProps) {
+function MenuActionsDropdown({
+  menuItems,
+  data,
+  variant = 'regular',
+  isTable = false,
+}: MenuActionsDropdownProps) {
   const [isActive, setIsActive] = React.useState(false)
 
   return (
@@ -244,6 +278,7 @@ function MenuActionsDropdown({menuItems, data, variant = 'regular'}: MenuActions
       isCustomTrigger={true}
       customData={data}
       actionsDropdownOptions={{setIsActive}}
+      isTable={isTable}
     >
       <div
         className={clsx(

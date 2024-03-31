@@ -43,8 +43,6 @@ export interface TableV2Props {
       filterFn?: any
       disabled?: boolean | ((data: any) => boolean)
     }[]
-    key?: string
-    customComp?: (data: any) => React.ReactNode | JSX.Element
   }
   // api loading/refetching states
   loaderConfig: {
@@ -168,7 +166,6 @@ export function TableV2({
   },
   actionsConfig = {
     isDropdownActions: false,
-    key: '',
   },
   searchConfig,
   totalText,
@@ -343,6 +340,7 @@ export function TableV2({
         flexDirection: 'column',
         gap: '15px',
       }}
+      id="actions-container"
     >
       <div className={classes.box}>
         {!loaderConfig.isError && (
@@ -400,6 +398,7 @@ function TableComp({
   return (
     <div
       className={classes.tableScrollContainer}
+      id="hui-table-scroll-container"
       style={{overflowY: 'scroll', maxHeight: tableStyleConfig?.maxHeight}}
     >
       <table className={classes.table}>
@@ -546,6 +545,7 @@ const getCommonPinningStyles = (column: Column<any>, isHeader?: boolean): React.
     left: isPinned === 'left' ? `${column.getStart('left')}px` : undefined,
     right: isPinned === 'right' ? `${column.getAfter('right')}px` : undefined,
     position: isPinned ? 'sticky' : undefined,
+    // zIndex: isPinned ? (column.id === DROPDOWN_COL_ID ? 4 : 2) : 0,
     zIndex: isPinned ? 2 : 0,
     backgroundColor: isHeader ? `var(--neutral-arch-10)` : '#ffffff',
     marginRight: isLastLeftPinnedColumn ? '20px' : undefined,

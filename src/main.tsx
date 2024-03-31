@@ -8,6 +8,7 @@ import {INV_ACTION_TYPES, useInventoryStore} from './components/table-v2/invento
 
 const styles = {
   width: '90%',
+
   margin: 'auto',
   padding: '0 20px',
   height: '100vh',
@@ -218,6 +219,163 @@ const data: Software[] = [
     software_license_count: '0',
     software_users_count: '1',
   },
+  {
+    id: '963a877a-931c-421a-a070-2693ae69af59999',
+    notes: 'Ranomd',
+    description: 'afasdd',
+    is_deleted: false,
+    account_manager_name: null,
+    account_manager_email: null,
+    status: 'Delivered',
+    software: {
+      id: '89b6b8d7-c770-457b-808d-93bf12f028ea',
+      name: 'Figma',
+      logo_url: 'https://miro.medium.com/v2/resize:fit:320/1*j3GPPrDmy2CqnxPw-NtWHg.png',
+      company_id: null,
+      created_at: '2023-06-06T12:38:43+00:00',
+      updated_at: '2023-06-06T12:38:43+00:00',
+      is_deleted: false,
+      landing_page_url: null,
+    },
+    software_users: [
+      {
+        id: 'ba1c3934-0121-44d8-917b-b1b96675d857',
+        last_name: 'Emmerich',
+        first_name: 'Tristin',
+        license_id: null,
+        profile_img_url: null,
+        software_tracking_id: '963a877a-931c-421a-a070-2693ae69af59',
+      },
+    ],
+    software_owners: [],
+    software_license: [],
+    created_by: {
+      id: '5a6858d4-9395-45a2-b329-893c82803d6f',
+      first_name: 'Hybrid',
+      last_name: 'Dev ',
+      profile_img_url:
+        'https://hybrid-dev-test.s3.us-west-2.amazonaws.com/user_document/5a6858d4-9395-45a2-b329-893c82803d6f/T8XYUUcqKQEWsHDblZAdX4AH%40320.png.jpeg',
+    },
+    archived_by: {
+      id: '5a6858d4-9395-45a2-b329-893c82803d6f',
+      first_name: 'Hybrid',
+      last_name: 'Dev ',
+      profile_img_url:
+        'https://hybrid-dev-test.s3.us-west-2.amazonaws.com/user_document/5a6858d4-9395-45a2-b329-893c82803d6f/T8XYUUcqKQEWsHDblZAdX4AH%40320.png.jpeg',
+    },
+    created_at: '2023-06-06T12:59:39.000Z',
+    updated_at: '2023-06-19T17:41:25.000Z',
+    is_archived: true,
+    archived_on: '2023-06-29T19:36:01.000Z',
+    deleted_on: null,
+    software_license_count: '0',
+    software_users_count: '1',
+  },
+  {
+    id: '963a877a-931c-421a-a070-2693ae69af5939128736',
+    notes: 'Ranomd',
+    description: 'afasdd',
+    is_deleted: false,
+    account_manager_name: null,
+    account_manager_email: null,
+    status: 'Delivered',
+    software: {
+      id: '89b6b8d7-c770-457b-808d-93bf12f028ea',
+      name: 'Figma',
+      logo_url: 'https://miro.medium.com/v2/resize:fit:320/1*j3GPPrDmy2CqnxPw-NtWHg.png',
+      company_id: null,
+      created_at: '2023-06-06T12:38:43+00:00',
+      updated_at: '2023-06-06T12:38:43+00:00',
+      is_deleted: false,
+      landing_page_url: null,
+    },
+    software_users: [
+      {
+        id: 'ba1c3934-0121-44d8-917b-b1b96675d857',
+        last_name: 'Emmerich',
+        first_name: 'Tristin',
+        license_id: null,
+        profile_img_url: null,
+        software_tracking_id: '963a877a-931c-421a-a070-2693ae69af59',
+      },
+    ],
+    software_owners: [],
+    software_license: [],
+    created_by: {
+      id: '5a6858d4-9395-45a2-b329-893c82803d6f',
+      first_name: 'Hybrid',
+      last_name: 'Dev ',
+      profile_img_url:
+        'https://hybrid-dev-test.s3.us-west-2.amazonaws.com/user_document/5a6858d4-9395-45a2-b329-893c82803d6f/T8XYUUcqKQEWsHDblZAdX4AH%40320.png.jpeg',
+    },
+    archived_by: {
+      id: '5a6858d4-9395-45a2-b329-893c82803d6f',
+      first_name: 'Hybrid',
+      last_name: 'Dev ',
+      profile_img_url:
+        'https://hybrid-dev-test.s3.us-west-2.amazonaws.com/user_document/5a6858d4-9395-45a2-b329-893c82803d6f/T8XYUUcqKQEWsHDblZAdX4AH%40320.png.jpeg',
+    },
+    created_at: '2023-06-06T12:59:39.000Z',
+    updated_at: '2023-06-19T17:41:25.000Z',
+    is_archived: true,
+    archived_on: '2023-06-29T19:36:01.000Z',
+    deleted_on: null,
+    software_license_count: '0',
+    software_users_count: '1',
+  },
+
+  {
+    id: '963a877a-931c-421a-a070-2693ae69af5313dksb',
+    notes: 'Ranomd',
+    description: 'afasdd',
+    is_deleted: false,
+    account_manager_name: null,
+    account_manager_email: null,
+    status: 'Delivered',
+    software: {
+      id: '89b6b8d7-c770-457b-808d-93bf12f028ea',
+      name: 'Figma',
+      logo_url: 'https://miro.medium.com/v2/resize:fit:320/1*j3GPPrDmy2CqnxPw-NtWHg.png',
+      company_id: null,
+      created_at: '2023-06-06T12:38:43+00:00',
+      updated_at: '2023-06-06T12:38:43+00:00',
+      is_deleted: false,
+      landing_page_url: null,
+    },
+    software_users: [
+      {
+        id: 'ba1c3934-0121-44d8-917b-b1b96675d857',
+        last_name: 'Emmerich',
+        first_name: 'Tristin',
+        license_id: null,
+        profile_img_url: null,
+        software_tracking_id: '963a877a-931c-421a-a070-2693ae69af59',
+      },
+    ],
+    software_owners: [],
+    software_license: [],
+    created_by: {
+      id: '5a6858d4-9395-45a2-b329-893c82803d6f',
+      first_name: 'Hybrid',
+      last_name: 'Dev ',
+      profile_img_url:
+        'https://hybrid-dev-test.s3.us-west-2.amazonaws.com/user_document/5a6858d4-9395-45a2-b329-893c82803d6f/T8XYUUcqKQEWsHDblZAdX4AH%40320.png.jpeg',
+    },
+    archived_by: {
+      id: '5a6858d4-9395-45a2-b329-893c82803d6f',
+      first_name: 'Hybrid',
+      last_name: 'Dev ',
+      profile_img_url:
+        'https://hybrid-dev-test.s3.us-west-2.amazonaws.com/user_document/5a6858d4-9395-45a2-b329-893c82803d6f/T8XYUUcqKQEWsHDblZAdX4AH%40320.png.jpeg',
+    },
+    created_at: '2023-06-06T12:59:39.000Z',
+    updated_at: '2023-06-19T17:41:25.000Z',
+    is_archived: true,
+    archived_on: '2023-06-29T19:36:01.000Z',
+    deleted_on: null,
+    software_license_count: '0',
+    software_users_count: '1',
+  },
 ]
 
 const columnHelper = createColumnHelper<Software>()
@@ -266,7 +424,7 @@ const columns = [
     enableHiding: false,
     enableSorting: true,
     enablePinning: true,
-    size: 300,
+    size: 100,
   }),
   columnHelper.accessor('software_owners', {
     header: 'Software Owners',
@@ -394,7 +552,7 @@ function App() {
         customColumnConfig={{
           description: 'Configure inventory columns',
         }}
-        tableStyleConfig={{stickyIds: ['software']}}
+        tableStyleConfig={{stickyIds: ['software'], maxHeight: '200px'}}
       />
     </div>
   )
