@@ -319,7 +319,7 @@ export function Table({
 
   return (
     <div className={classes.box}>
-      {!loaderConfig.isError && (
+      {!loaderConfig.isError && totalText && (
         <div className={classes.header}>
           {!headerText && (
             <div className={classes.meta}>

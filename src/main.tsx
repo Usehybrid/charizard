@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import randomIcon from './components/assets/check.svg'
 import randomIcon2 from './components/assets/search-2.svg'
 import {createColumnHelper} from '@tanstack/react-table'
-import {Button, BUTTON_VARIANT, TableV2} from './components'
+import {Button, BUTTON_VARIANT, Table, TableV2} from './components'
 import {INV_ACTION_TYPES, useInventoryStore} from './components/table-v2/inventory/inventory.store'
 
 const styles = {
@@ -463,7 +463,7 @@ function App() {
 
   return (
     <div style={styles}>
-      <TableV2
+      {/* <TableV2
         data={data}
         loaderConfig={{isFetching: false, isError: false, text: 'Getting employees...'}}
         columns={columns}
@@ -553,6 +553,20 @@ function App() {
           description: 'Configure inventory columns',
         }}
         tableStyleConfig={{stickyIds: ['software'], maxHeight: '200px'}}
+      /> */}
+      <Table
+        data={data || []}
+        columns={columns}
+        loaderConfig={{isFetching: false, isError: false, text: 'Getting employees...'}}
+        emptyStateConfig={{
+          icon: './components/assets/check.svg',
+          title: 'Get started by adding your first inventory',
+          desc: '',
+          btnText: 'add inventory',
+          onClick: () => {},
+          columns: 6,
+          emptySearchTitle: 'No inventories found',
+        }}
       />
     </div>
   )
