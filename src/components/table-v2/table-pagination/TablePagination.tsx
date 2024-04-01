@@ -44,7 +44,12 @@ export default function TablePagination({paginationConfig}: TablePaginationProps
 
   return (
     <div className={classes.box}>
-      <TableLimit setLimit={setLimit} limit={limit} totalItems={metaData?.total_items} />
+      <TableLimit
+        setLimit={setLimit}
+        limit={limit}
+        totalItems={metaData?.total_items}
+        itemsOnPage={metaData?.items_on_page}
+      />
       {paginationApi.totalPages > 1 && (
         <nav {...paginationApi.rootProps}>
           <div className={classes.pageBoxes}>

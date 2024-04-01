@@ -499,7 +499,7 @@ function App() {
           metaData: {
             total_items: 207,
             page_no: 0,
-            items_on_page: 20,
+            items_on_page: 3,
           },
           defaultLimit: '20',
         }}

@@ -13,6 +13,7 @@ interface TableLimitProps {
   setLimit: (l: number) => void
   limit: number
   totalItems?: number
+  itemsOnPage?: number
 }
 
 const selectData = [
@@ -22,7 +23,7 @@ const selectData = [
   {label: '25', value: '25'},
 ]
 
-export default function TableLimit({setLimit, limit, totalItems}: TableLimitProps) {
+export default function TableLimit({setLimit, limit, totalItems, itemsOnPage}: TableLimitProps) {
   const collection = select.collection({
     items: selectData,
     itemToString: item => item.label,
@@ -49,6 +50,11 @@ export default function TableLimit({setLimit, limit, totalItems}: TableLimitProp
   // React.useEffect(() => {
   //   selectApi.setValue([defaultLimit])
   // }, [])
+
+  // when the filters/search or any items are less than the least possible limit, hide the comp
+  if (itemsOnPage && itemsOnPage < +selectData[0].value) {
+    return <div className={classes.limitBox} />
+  }
 
   return (
     <div className={classes.limitBox}>
