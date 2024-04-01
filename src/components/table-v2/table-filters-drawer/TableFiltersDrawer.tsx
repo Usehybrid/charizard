@@ -220,6 +220,7 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
                 <Button
                   variant={BUTTON_VARIANT.GHOST}
                   onClick={() => {
+                    if (search.length) setSearch('')
                     resetAllFilters(filterConfig.filterReset)
                     api.close()
                   }}
