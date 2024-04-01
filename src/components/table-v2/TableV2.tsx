@@ -339,7 +339,6 @@ export function TableV2({
         flexDirection: 'column',
         gap: '15px',
       }}
-      id="actions-container"
     >
       <div className={classes.box}>
         {!loaderConfig.isError && (

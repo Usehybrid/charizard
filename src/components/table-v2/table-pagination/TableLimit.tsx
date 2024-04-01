@@ -2,7 +2,11 @@ import * as React from 'react'
 import * as select from '@zag-js/select'
 import chevronDown from '../../assets/chevron-down.svg'
 import classes from './table-pagination.module.css'
-import {useMachine, normalizeProps, Portal} from '@zag-js/react'
+import {
+  useMachine,
+  normalizeProps,
+  // Portal
+} from '@zag-js/react'
 import {SVG} from '../../svg'
 
 interface TableLimitProps {
@@ -56,21 +60,21 @@ export default function TableLimit({setLimit, limit, totalItems}: TableLimitProp
           </div>
 
           {selectApi.isOpen && (
-            <Portal>
-              <div {...selectApi.positionerProps}>
-                <ul {...selectApi.contentProps} className={classes.limitContent}>
-                  {selectData.map(item => (
-                    <li
-                      key={item.value}
-                      {...selectApi.getItemProps({item})}
-                      className={classes.limitItem}
-                    >
-                      <span>{item.label}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </Portal>
+            // <Portal>
+            <div {...selectApi.positionerProps}>
+              <ul {...selectApi.contentProps} className={classes.limitContent}>
+                {selectData.map(item => (
+                  <li
+                    key={item.value}
+                    {...selectApi.getItemProps({item})}
+                    className={classes.limitItem}
+                  >
+                    <span>{item.label}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            // </Portal>
           )}
         </div>
       }
