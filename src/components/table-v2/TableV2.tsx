@@ -187,7 +187,6 @@ export function TableV2({
     right: [DROPDOWN_COL_ID],
   })
   const [rowSelection, setRowSelection] = React.useState({})
-
   // account for search state here itself
   const isEmpty = !loaderConfig.isFetching && !loaderConfig.isError && !data.length
 

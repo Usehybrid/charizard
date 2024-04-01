@@ -81,7 +81,7 @@ export default function TableCustomCols({
 
   const draggableCols = checkedState.filter(c => c.checked)
   const nonDraggableCols = checkedState.filter(c => !c.checked)
-  console.log(nonDraggableCols)
+  // console.log(nonDraggableCols)
 
   const handleSave = () => {
     checkedState.forEach(obj => {

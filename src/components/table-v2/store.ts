@@ -35,13 +35,13 @@ export const useTableStore = create<TableStore>()(
       set(state => {
         const filters = state.filters.map(obj => {
           if (obj.key === filterKey) {
-            console.log('store:', value)
             // const values = [...new Set([...obj.values, ...value])]
-            const values = [...new Set([...value])]
+            // const values = [...new Set([...value])]
+            const values = [...new Set(value)]
             if (typeof filterDispatch === 'function') {
               filterDispatch({filterType: filterKey, value: values.join(',')})
             }
-            return {...obj, values: values}
+            return {...obj, values}
           }
           return obj
         })

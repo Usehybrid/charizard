@@ -74,17 +74,16 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
   }, [api.isOpen])
 
   const getIsChecked = (key: string, idx: number) => {
-    // console.log(filterCheckedState)
     const l = Object.keys(filterCheckedState).length
     if (!l || !filterCheckedState[key]) return false
     return filterCheckedState[key][idx].checked
   }
-
   const handleApplyFilters = () => {
     const checkedState = removeUncheckedItems(filterCheckedState)
-    for (let [k, v] of Object.entries(checkedState)) {
-      if (v.length) changeFiltersDrawer(k, v.split(','), filterDispatch)
-    }
+    Object.entries(checkedState).forEach(([key, value]) => {
+      // Call changeFiltersDrawer for every filter, passing the checked values or an empty array if none
+      changeFiltersDrawer(key, value ? value.split(',') : [], filterDispatch)
+    })
     api.close()
   }
 
@@ -93,10 +92,6 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
     .reduce((acc, curr) => {
       return (acc += curr.values.length)
     }, 0)
-
-  // console.log(filterCheckedState[currFilter.key]?.findIndex(obj => obj.checked === false) === -1)
-
-  // console.log(filterCheckedState)
 
   return (
     <>

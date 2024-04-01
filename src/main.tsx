@@ -459,7 +459,7 @@ function App() {
   const query = useInventoryStore(s => s.query)
   const dispatch = useInventoryStore(s => s.dispatch)
 
-  // console.log(query)
+  // console.log(query.filters)
 
   return (
     <div style={styles}>
