@@ -38,6 +38,9 @@ export default function TableLimit({setLimit, limit, totalItems}: TableLimitProp
         const val = details.value[0]
         setLimit(+val)
       },
+      positioning: {
+        placement: 'top',
+      },
     }),
   )
 
@@ -61,7 +64,7 @@ export default function TableLimit({setLimit, limit, totalItems}: TableLimitProp
 
           {selectApi.isOpen && (
             // <Portal>
-            <div {...selectApi.positionerProps}>
+            <div {...selectApi.positionerProps} className={classes.pos}>
               <ul {...selectApi.contentProps} className={classes.limitContent}>
                 {selectData.map(item => (
                   <li

@@ -103,3 +103,7 @@
 .chevdownIcon > path {
   fill: var(--neutral-arch-600);
 }
+
+.pos {
+  --z-index: 10 !important;
+}
