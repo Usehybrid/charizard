@@ -586,6 +586,33 @@ const filtersV2 = {
         placeholder: 'Search status',
       },
     },
+    {
+      id: 'inventory-status2',
+      name: 'Status',
+      key: 'filter_status',
+      options: [
+        {
+          value: 'assigned',
+          name: 'Assigned',
+        },
+        {
+          value: 'unassigned',
+          name: 'Unassigned',
+        },
+        {
+          value: 'under_maintenance',
+          name: 'Under Maintenance',
+        },
+        {
+          value: 'in_transition',
+          name: 'In Transition',
+        },
+      ],
+      config: {
+        hideSearch: true,
+        placeholder: 'Search status',
+      },
+    },
   ],
   drawer: [
     {
