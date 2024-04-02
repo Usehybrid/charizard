@@ -16,7 +16,7 @@ interface TableLimitProps {
   itemsOnPage?: number
 }
 
-const selectData = [
+let selectData = [
   {label: '10', value: '10'},
   {label: '15', value: '15'},
   {label: '20', value: '20'},
@@ -24,6 +24,15 @@ const selectData = [
 ]
 
 export default function TableLimit({setLimit, limit, totalItems, itemsOnPage}: TableLimitProps) {
+  selectData = selectData.filter(obj => {
+    if (itemsOnPage && +obj.value <= itemsOnPage) {
+      return true
+    }
+    return false
+  })
+
+  // console.log(selectData)
+  // console.log(limit, itemsOnPage)
   const collection = select.collection({
     items: selectData,
     itemToString: item => item.label,

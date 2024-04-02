@@ -107,6 +107,9 @@ export default function TableCustomCols({
     api.close()
   }
 
+  const filteredDragCols = draggableCols.filter(c => search.includes(c.label))
+  const filteredNonDragCols = nonDraggableCols.filter(c => search.includes(c.label))
+
   return (
     <>
       <button {...api.triggerProps} className={clsx('hybr1d-ui-reset-btn', classes.actionCommon)}>
@@ -192,7 +195,7 @@ export default function TableCustomCols({
                 </>
 
                 <Options
-                  cols={nonDraggableCols}
+                  cols={filteredNonDragCols}
                   text="Not Selected"
                   textCn={classes.info2}
                   checkedState={checkedState}

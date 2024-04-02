@@ -458,7 +458,7 @@ function App() {
   const query = useInventoryStore(s => s.query)
   const dispatch = useInventoryStore(s => s.dispatch)
 
-  // console.log(query.filters)
+  console.log(query.limit)
 
   return (
     <div style={styles}>
