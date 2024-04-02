@@ -496,9 +496,9 @@ function App() {
           setPage: value => dispatch({type: INV_ACTION_TYPES.PAGE, payload: value}),
           setLimit: value => dispatch({type: INV_ACTION_TYPES.LIMIT, payload: value}),
           metaData: {
-            total_items: 207,
+            total_items: 1000,
             page_no: 0,
-            items_on_page: 3,
+            items_on_page: 10,
           },
           defaultLimit: '20',
         }}

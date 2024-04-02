@@ -63,6 +63,7 @@
   flex-direction: column;
   padding: 3px;
   color: var(--text-primary);
+  gap: 10px;
 }
 
 .limitItem {
@@ -113,4 +114,8 @@
 .paginationMenu {
   box-shadow: #00000029 0 1px 4px;
   border-radius: 8px;
+}
+
+.limitContent:focus-visible {
+  outline: none;
 }
