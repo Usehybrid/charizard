@@ -187,6 +187,7 @@ export function TableV2({
     right: [DROPDOWN_COL_ID],
   })
   const [rowSelection, setRowSelection] = React.useState({})
+
   // account for search state here itself
   const isEmpty = !loaderConfig.isFetching && !loaderConfig.isError && !data.length
 
@@ -393,11 +394,26 @@ function TableComp({
   search?: string
   isEmpty: boolean
 }) {
+  const [showLeftShadow, setShowLeftShadow] = React.useState(false)
+  const [showRightShadow, setShowRightShadow] = React.useState(false)
+  const tableContainerRef = React.useRef(null)
+
+  console.log({showLeftShadow, showRightShadow})
+
+  const handleScroll = () => {
+    if (tableContainerRef.current) {
+      const {scrollLeft, scrollWidth, clientWidth} = tableContainerRef.current
+      setShowLeftShadow(scrollLeft > 0)
+      setShowRightShadow(scrollWidth > clientWidth && scrollLeft < scrollWidth - clientWidth)
+    }
+  }
+
   return (
     <div
       className={classes.tableScrollContainer}
       id="hui-table-scroll-container"
       style={{overflowY: 'scroll', maxHeight: tableStyleConfig?.maxHeight}}
+      ref={tableContainerRef}
     >
       <table className={classes.table}>
         <thead className={classes.tableHead}>
@@ -430,7 +446,12 @@ function TableComp({
                             ? '15px'
                             : undefined,
 
-                      ...getCommonPinningStyles(header.column, true),
+                      ...getCommonPinningStyles(
+                        header.column,
+                        showLeftShadow,
+                        showRightShadow,
+                        true,
+                      ),
                     }}
                   >
                     {header.isPlaceholder ? null : (
@@ -440,7 +461,7 @@ function TableComp({
                           style: {
                             display: 'flex',
                             alignItems: 'center',
-                            justifyContent: header.id === DROPDOWN_COL_ID ? 'flex-end' : undefined,
+                            justifyContent: header.id === DROPDOWN_COL_ID ? 'center' : undefined,
                           },
                         }}
                       >
@@ -503,7 +524,7 @@ function TableComp({
                         backgroundColor: 'white',
                         verticalAlign: isSelectionCell ? 'middle' : undefined,
                         paddingLeft: isPrevPinned ? '15px' : undefined,
-                        ...getCommonPinningStyles(cell.column),
+                        ...getCommonPinningStyles(cell.column, showLeftShadow, showRightShadow),
                       }}
                     >
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -529,17 +550,26 @@ function TableComp({
   )
 }
 
-const getCommonPinningStyles = (column: Column<any>, isHeader?: boolean): React.CSSProperties => {
+const getCommonPinningStyles = (
+  column: Column<any>,
+  showLeftShadow: boolean,
+  showRightShadow: boolean,
+  isHeader?: boolean,
+): React.CSSProperties => {
   const isPinned = column.getIsPinned()
   const isLastLeftPinnedColumn = isPinned === 'left' && column.getIsLastColumn('left')
   const isFirstRightPinnedColumn = isPinned === 'right' && column.getIsFirstColumn('right')
 
+  const leftShadow = 'drop-shadow(3px 0px 10px rgba(0, 0, 0, 0.07))'
+  const rightShadow = 'drop-shadow(-3px 0px 10px rgba(0, 0, 0, 0.07))'
+
   return {
-    boxShadow: isLastLeftPinnedColumn
-      ? '-4px 0 10px -4px rgba(0, 0, 0, 0.07) inset'
-      : isFirstRightPinnedColumn
-        ? '4px 0 10px -4px rgba(0, 0, 0, 0.07) inset'
-        : undefined,
+    filter:
+      isLastLeftPinnedColumn && showLeftShadow
+        ? leftShadow
+        : isFirstRightPinnedColumn && rightShadow
+          ? rightShadow
+          : undefined,
     left: isPinned === 'left' ? `${column.getStart('left')}px` : undefined,
     right: isPinned === 'right' ? `${column.getAfter('right')}px` : undefined,
     position: isPinned ? 'sticky' : undefined,
