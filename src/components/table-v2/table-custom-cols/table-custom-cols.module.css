@@ -165,7 +165,7 @@
 .info2:after {
   content: '';
   position: absolute;
-  right: 13px;
+  right: 3px;
   top: 50%;
   width: 270px;
   height: 1px;
@@ -222,5 +222,8 @@
   width: 360px;
   height: 36px;
   border-radius: 6px;
+}
+
+.optionDisabled:hover {
   background: var(--neutral-arch-50);
 }
