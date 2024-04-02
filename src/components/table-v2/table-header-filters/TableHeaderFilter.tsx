@@ -4,7 +4,6 @@ import clsx from 'clsx'
 import FilterCheckbox from './FilterCheckbox'
 import FilterTooltip from './FilterTooltip'
 import chevronDown from '../../assets/chevron-down.svg'
-import resetIcon from '../../assets/rotate-left.svg'
 import classes from './styles.module.css'
 import {useMachine, normalizeProps} from '@zag-js/react'
 import {SVG} from '../../svg'
@@ -122,13 +121,10 @@ export default function TableHeaderFilter({
 
             <div className={classes.footerBox}>
               <div className={classes.footer}>
-                <div className={classes.selectedFilters}>{selectedFilters} Selected</div>
-
                 <button
                   className={clsx('hybr1d-ui-reset-btn', classes.resetBtn)}
                   onClick={handleResetFilter}
                 >
-                  <SVG path={resetIcon} svgClassName={classes.resetIcon} />
                   Reset
                 </button>
               </div>

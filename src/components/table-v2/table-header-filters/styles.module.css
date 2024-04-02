@@ -93,9 +93,11 @@
   position: relative;
   overflow-y: scroll;
   padding: 8px;
-  border-radius: 12px;
+
   background: var(--neutral-white);
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.07);
 }
 
 .dropdown:focus-visible {
@@ -123,8 +125,8 @@
   font-size: 14px;
   line-height: 180%;
   width: 100%;
-  padding: 2px 8px;
-  /* padding-bottom: 0; */
+  height: 36px;
+  padding: 0 8px;
 
   display: flex;
   align-items: center;
@@ -132,14 +134,7 @@
 }
 
 .option:hover {
-  background: var(--neutral-arch-50);
-}
-
-.selectedFilters {
-  color: var(--text-primary);
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 180%;
+  background: var(--neutral-arch-40);
 }
 
 .dropdownSearch {
@@ -163,7 +158,8 @@
 .footer {
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
+  gap: 7px;
   padding-left: 8px;
   padding-right: 8px;
   background-color: white;
@@ -172,20 +168,20 @@
 }
 
 .resetBtn {
-  display: inline-flex;
-  height: 24px;
-  padding: 0px 8px;
+  display: flex;
+  height: 26px;
+  padding: 6px 12px;
   justify-content: center;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
+  border-radius: 4px;
+  background: var(--neutral-arch-30);
 
-  border-radius: 6px;
-  border: 1px solid var(--neutral-arch-200);
   color: var(--text-primary);
   font-size: 12px;
-  font-weight: 500;
-  line-height: 16px;
-  background-color: var(--neutral-arch-20);
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
 }
 
 .resetBtn:hover {
@@ -199,7 +195,12 @@
   align-items: center;
   column-gap: 16px;
   text-wrap: pretty;
+
   font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 180%; /* 25.2px */
+  /* 1.93846rem */
 }
 
 .optionLabel:hover {

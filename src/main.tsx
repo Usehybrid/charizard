@@ -8,7 +8,6 @@ import {INV_ACTION_TYPES, useInventoryStore} from './components/table-v2/invento
 
 const styles = {
   width: '90%',
-
   margin: 'auto',
   padding: '0 20px',
   height: '100vh',
