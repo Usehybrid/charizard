@@ -228,11 +228,14 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
                     setHasChanges(false)
                     api.close()
                   }}
-                  disabled={!hasChanges}
+                  // disabled={!hasChanges}
                 >
                   Reset All
                 </Button>
-                <Button onClick={handleApplyFilters} disabled={!hasChanges}>
+                <Button
+                  onClick={handleApplyFilters}
+                  //  disabled={!hasChanges}
+                >
                   Apply
                 </Button>
               </div>

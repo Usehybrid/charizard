@@ -414,6 +414,7 @@ function TableComp({
       id="hui-table-scroll-container"
       style={{overflowY: 'scroll', maxHeight: tableStyleConfig?.maxHeight}}
       ref={tableContainerRef}
+      onScroll={handleScroll}
     >
       <table className={classes.table}>
         <thead className={classes.tableHead}>
