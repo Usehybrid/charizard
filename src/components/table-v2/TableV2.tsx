@@ -567,7 +567,7 @@ const getCommonPinningStyles = (
     filter:
       isLastLeftPinnedColumn && showLeftShadow
         ? leftShadow
-        : isFirstRightPinnedColumn && rightShadow
+        : isFirstRightPinnedColumn && showRightShadow
           ? rightShadow
           : undefined,
     left: isPinned === 'left' ? `${column.getStart('left')}px` : undefined,
