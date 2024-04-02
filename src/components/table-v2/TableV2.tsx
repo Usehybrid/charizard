@@ -565,12 +565,18 @@ const getCommonPinningStyles = (
   const rightShadow = 'drop-shadow(-3px 0px 3px rgba(0, 0, 0, 0.07))'
 
   return {
-    filter:
-      isLastLeftPinnedColumn && showLeftShadow
-        ? leftShadow
-        : isFirstRightPinnedColumn && showRightShadow
-          ? rightShadow
-          : undefined,
+    // filter:
+    //   isLastLeftPinnedColumn && showLeftShadow
+    //     ? leftShadow
+    //     : isFirstRightPinnedColumn && showRightShadow
+    //       ? rightShadow
+    //       : undefined,
+
+    filter: isLastLeftPinnedColumn
+      ? leftShadow
+      : isFirstRightPinnedColumn
+        ? rightShadow
+        : undefined,
     left: isPinned === 'left' ? `${column.getStart('left')}px` : undefined,
     right: isPinned === 'right' ? `${column.getAfter('right')}px` : undefined,
     position: isPinned ? 'sticky' : undefined,
