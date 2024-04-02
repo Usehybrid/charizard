@@ -24,12 +24,14 @@ let selectData = [
 ]
 
 export default function TableLimit({setLimit, limit, totalItems, itemsOnPage}: TableLimitProps) {
-  selectData = selectData.filter(obj => {
-    if (itemsOnPage && +obj.value <= itemsOnPage) {
-      return true
-    }
-    return false
-  })
+  if (itemsOnPage && itemsOnPage < limit) {
+    selectData = selectData.filter(obj => {
+      if (itemsOnPage && +obj.value <= itemsOnPage) {
+        return true
+      }
+      return false
+    })
+  }
 
   // console.log(selectData)
   // console.log(limit, itemsOnPage)
