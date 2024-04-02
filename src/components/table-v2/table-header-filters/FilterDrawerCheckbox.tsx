@@ -14,6 +14,7 @@ export default function FilterDrawerCheckbox({
   customName,
   setFilterCheckedState,
   idx,
+  setHasChanges,
 }: {
   label: string
   value: string
@@ -23,6 +24,7 @@ export default function FilterDrawerCheckbox({
   customName?: string
   setFilterCheckedState: any
   idx: number
+  setHasChanges: React.Dispatch<React.SetStateAction<boolean>>
 }) {
   // React.useEffect(() => {
   //   // effect to keep the 'All' checkbox changes in sync with the actual initialState
@@ -37,6 +39,7 @@ export default function FilterDrawerCheckbox({
       name: label,
       checked,
       onCheckedChange: ({checked}: {checked: any}) => {
+        setHasChanges(true)
         if (value === 'all') {
           setFilterCheckedState((prevState: Record<string, any[]>) => {
             return {

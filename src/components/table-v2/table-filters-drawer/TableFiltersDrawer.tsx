@@ -27,6 +27,7 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
   }))
   const tableFilters = useTableStore(s => s.filters)
   const {isLoading, isError, headerFilterIds, filterDispatch} = filterConfig
+  const [hasChanges, setHasChanges] = React.useState(false)
 
   const [state, send] = useMachine(
     dialog.machine({
@@ -34,6 +35,7 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
       onOpenChange(details) {
         if (!details.open) {
           setFilterCheckedState({})
+          setHasChanges(false)
         }
       },
     }),
@@ -203,6 +205,7 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
                                   customName={option.customName}
                                   setFilterCheckedState={setFilterCheckedState}
                                   idx={idx}
+                                  setHasChanges={setHasChanges}
                                 />
                               </div>
                             )
@@ -222,13 +225,16 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
                   onClick={() => {
                     if (search.length) setSearch('')
                     resetAllFilters(filterConfig.filterReset)
+                    setHasChanges(false)
                     api.close()
                   }}
-                  // disabled={totalSelectedFilters === 0}
+                  disabled={!hasChanges}
                 >
                   Reset All
                 </Button>
-                <Button onClick={handleApplyFilters}>Apply</Button>
+                <Button onClick={handleApplyFilters} disabled={!hasChanges}>
+                  Apply
+                </Button>
               </div>
             </div>
           </div>

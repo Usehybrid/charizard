@@ -192,6 +192,10 @@
   cursor: pointer;
 }
 
+.optionDis {
+  opacity: 0.5;
+}
+
 .checkbox {
   width: 16px;
   height: 16px;
@@ -212,4 +216,11 @@
 
 .draggable {
   width: 100%;
+}
+
+.optionDisabled {
+  width: 360px;
+  height: 36px;
+  border-radius: 6px;
+  background: var(--neutral-arch-50);
 }

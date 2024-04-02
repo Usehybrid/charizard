@@ -158,7 +158,7 @@ export default function TableCustomCols({
                 </div>
 
                 {disabledCols.map(column => (
-                  <div key={column.id} className={classes.option}>
+                  <div key={column.id} className={clsx(classes.option, classes.optionDisabled)}>
                     <CustomColCheckbox
                       label={column.columnDef.header as string}
                       id={column.id}
