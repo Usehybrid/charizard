@@ -109,6 +109,7 @@
   --z-index: 10 !important;
   box-shadow: #00000029 0 1px 4px;
   border-radius: 8px;
+  background-color: white;
 }
 
 .paginationMenu {
