@@ -107,7 +107,9 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
             customContainerStyles={{width: '593px'}}
             customFooter={
               <>
-                <Button variant={BUTTON_VARIANT.SECONDARY}>Cancel</Button>
+                <Button variant={BUTTON_VARIANT.SECONDARY} onClick={onClose}>
+                  Cancel
+                </Button>
                 <Button
                   variant={BUTTON_VARIANT.GHOST}
                   onClick={() => {
