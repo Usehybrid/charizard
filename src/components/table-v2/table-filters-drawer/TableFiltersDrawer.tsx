@@ -11,6 +11,7 @@ import {useTableStore} from '../store'
 import {getDefaultCheckedState, removeUncheckedItems} from './utils'
 import {Drawer} from '../../drawer'
 import {useDisclosure} from '../../../utils/hooks/use-disclosure'
+import {Portal} from '@zag-js/react'
 
 interface TableFiltersDrawerProps {
   filterConfig: FilterConfig
@@ -95,78 +96,79 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
         )}
       </button>
 
-      {isOpen && (
-        <Drawer
-          isOpen={isOpen}
-          title="Filter"
-          contentClassName={classes.drawerContent}
-          footerClassName={classes.drawerFooter}
-          onClose={onClose}
-          customContainerStyles={{width: '593px'}}
-          customFooter={
-            <>
-              <Button variant={BUTTON_VARIANT.SECONDARY}>Cancel</Button>
-              <Button
-                variant={BUTTON_VARIANT.GHOST}
-                onClick={() => {
-                  if (search.length) setSearch('')
-                  resetAllFilters(filterConfig.filterReset)
-                  setHasChanges(false)
-                  onClose()
-                }}
-                // disabled={!hasChanges}
-              >
-                Reset All
-              </Button>
-              <Button
-                onClick={handleApplyFilters}
-                //  disabled={!hasChanges}
-              >
-                Apply
-              </Button>
-            </>
-          }
-        >
-          <div className={classes.filterBox}>
-            <div className={classes.filters}>
-              {filters.map(filter => {
-                const isActive = currFilter?.id === filter.id
-                const internalFilter = tableFilters.find(tf => tf.key === filter.key)
-                return (
-                  <div
-                    className={clsx(classes.filter, isActive && classes.active)}
-                    onClick={() => {
-                      setSearch('')
-                      setCurrFilter(filter)
-                    }}
-                    key={filter.id}
-                  >
-                    {filter.name}{' '}
-                    {`${internalFilter?.values.length ? `(${internalFilter.values.length})` : ''}`}
+      <Portal>
+        {isOpen && (
+          <Drawer
+            isOpen={isOpen}
+            title="Filter"
+            contentClassName={classes.drawerContent}
+            footerClassName={classes.drawerFooter}
+            onClose={onClose}
+            customContainerStyles={{width: '593px'}}
+            customFooter={
+              <>
+                <Button variant={BUTTON_VARIANT.SECONDARY}>Cancel</Button>
+                <Button
+                  variant={BUTTON_VARIANT.GHOST}
+                  onClick={() => {
+                    if (search.length) setSearch('')
+                    resetAllFilters(filterConfig.filterReset)
+                    setHasChanges(false)
+                    onClose()
+                  }}
+                  // disabled={!hasChanges}
+                >
+                  Reset All
+                </Button>
+                <Button
+                  onClick={handleApplyFilters}
+                  //  disabled={!hasChanges}
+                >
+                  Apply
+                </Button>
+              </>
+            }
+          >
+            <div className={classes.filterBox}>
+              <div className={classes.filters}>
+                {filters.map(filter => {
+                  const isActive = currFilter?.id === filter.id
+                  const internalFilter = tableFilters.find(tf => tf.key === filter.key)
+                  return (
+                    <div
+                      className={clsx(classes.filter, isActive && classes.active)}
+                      onClick={() => {
+                        setSearch('')
+                        setCurrFilter(filter)
+                      }}
+                      key={filter.id}
+                    >
+                      {filter.name}{' '}
+                      {`${internalFilter?.values.length ? `(${internalFilter.values.length})` : ''}`}
+                    </div>
+                  )
+                })}
+              </div>
+
+              <div className={classes.filterSingle}>
+                {!currFilter?.config?.hideSearch && (
+                  <div className={classes.dropdownSearch}>
+                    <Search
+                      id="filter-search"
+                      search={search}
+                      setSearch={setSearch}
+                      placeholder={currFilter.config?.placeholder || 'Search'}
+                    />
                   </div>
-                )
-              })}
-            </div>
+                )}
 
-            <div className={classes.filterSingle}>
-              {!currFilter?.config?.hideSearch && (
-                <div className={classes.dropdownSearch}>
-                  <Search
-                    id="filter-search"
-                    search={search}
-                    setSearch={setSearch}
-                    placeholder={currFilter.config?.placeholder || 'Search'}
-                  />
-                </div>
-              )}
-
-              {
-                <div className={classes.options}>
-                  {filteredOptions.length === 0 ? (
-                    <div className={classes.optionsEmpty}>No results found</div>
-                  ) : (
-                    <>
-                      {/* <div className={classes.option} style={{fontWeight: 700}}>
+                {
+                  <div className={classes.options}>
+                    {filteredOptions.length === 0 ? (
+                      <div className={classes.optionsEmpty}>No results found</div>
+                    ) : (
+                      <>
+                        {/* <div className={classes.option} style={{fontWeight: 700}}>
                               <FilterDrawerCheckbox
                                 label={'All'}
                                 value={'all'}
@@ -180,42 +182,43 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
                                 idx={-1}
                               />
                             </div> */}
-                      {currFilter?.options.map((option, idx) => {
-                        return (
-                          <div
-                            key={idx}
-                            className={classes.option}
-                            style={{
-                              display: search.length
-                                ? !filteredOptions.includes(option.value)
-                                  ? 'none'
-                                  : undefined
-                                : undefined,
-                            }}
-                          >
-                            <FilterDrawerCheckbox
-                              label={option.name}
-                              value={option.value}
-                              filterKey={currFilter.key}
-                              checked={getIsChecked(currFilter.key, idx)}
-                              countryCode={option.country_code}
-                              key={option.value}
-                              customName={option.customName}
-                              setFilterCheckedState={setFilterCheckedState}
-                              idx={idx}
-                              setHasChanges={setHasChanges}
-                            />
-                          </div>
-                        )
-                      })}
-                    </>
-                  )}
-                </div>
-              }
+                        {currFilter?.options.map((option, idx) => {
+                          return (
+                            <div
+                              key={idx}
+                              className={classes.option}
+                              style={{
+                                display: search.length
+                                  ? !filteredOptions.includes(option.value)
+                                    ? 'none'
+                                    : undefined
+                                  : undefined,
+                              }}
+                            >
+                              <FilterDrawerCheckbox
+                                label={option.name}
+                                value={option.value}
+                                filterKey={currFilter.key}
+                                checked={getIsChecked(currFilter.key, idx)}
+                                countryCode={option.country_code}
+                                key={option.value}
+                                customName={option.customName}
+                                setFilterCheckedState={setFilterCheckedState}
+                                idx={idx}
+                                setHasChanges={setHasChanges}
+                              />
+                            </div>
+                          )
+                        })}
+                      </>
+                    )}
+                  </div>
+                }
+              </div>
             </div>
-          </div>
-        </Drawer>
-      )}
+          </Drawer>
+        )}
+      </Portal>
     </>
   )
 }
