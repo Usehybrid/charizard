@@ -22,13 +22,25 @@ interface Props<T extends BaseItem> {
   items: T[]
   onChange: React.Dispatch<React.SetStateAction<CheckedState[]>>
   renderItem(item: T): React.ReactNode
+  search: string
 }
 
-export function SortableList<T extends BaseItem>({items: _items, onChange, renderItem}: Props<T>) {
+export function SortableList<T extends BaseItem>({
+  items: _items,
+  onChange,
+  renderItem,
+  search,
+}: Props<T>) {
   // const [items, setItems] = React.useState()
 
-  const items = _items.filter((i: any) => i.checked)
-  // console.log({items})
+  // const items = _items.filter((i: any) => i.checked)
+  const items = _items.filter((i: any) => {
+    return i.checked
+    // if (search.length) {
+    //   condition = i.label.toLowerCase().includes(search.toLowerCase())
+    // }
+  })
+
   const [active, setActive] = React.useState<Active | null>(null)
   const activeItem = React.useMemo(
     () => items.find(item => item.id === active?.id),

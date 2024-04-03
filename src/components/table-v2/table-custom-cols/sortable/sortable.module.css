@@ -18,6 +18,10 @@
   list-style: none;
 }
 
+.sortHidden {
+  visibility: hidden;
+}
+
 .dragHandle {
   display: flex;
 

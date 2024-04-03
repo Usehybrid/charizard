@@ -24,18 +24,6 @@ let selectData = [
 ]
 
 export default function TableLimit({setLimit, limit, totalItems, itemsOnPage}: TableLimitProps) {
-  // ! @sohhamm handle this edge case tomorrow, when items on page are less than selectData value
-  // if (itemsOnPage && itemsOnPage < limit) {
-  //   selectData = selectData.filter(obj => {
-  //     if (itemsOnPage && +obj.value <= itemsOnPage) {
-  //       return true
-  //     }
-  //     return false
-  //   })
-  // }
-
-  // console.log(selectData)
-  // console.log(limit, itemsOnPage)
   const collection = select.collection({
     items: selectData,
     itemToString: item => item.label,

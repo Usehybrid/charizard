@@ -4,9 +4,11 @@ import {useSortable} from '@dnd-kit/sortable'
 import {CSS} from '@dnd-kit/utilities'
 import type {DraggableSyntheticListeners, UniqueIdentifier} from '@dnd-kit/core'
 import type {CSSProperties, PropsWithChildren} from 'react'
+import clsx from 'clsx'
 
 interface Props {
   id: UniqueIdentifier
+  isHidden?: boolean
 }
 
 interface Context {
@@ -21,7 +23,7 @@ const SortableItemContext = React.createContext<Context>({
   ref() {},
 })
 
-export function SortableItem({children, id}: PropsWithChildren<Props>) {
+export function SortableItem({children, id, isHidden = false}: PropsWithChildren<Props>) {
   const {
     attributes,
     isDragging,
@@ -47,7 +49,11 @@ export function SortableItem({children, id}: PropsWithChildren<Props>) {
 
   return (
     <SortableItemContext.Provider value={context}>
-      <li className={classes.sort} ref={setNodeRef} style={style}>
+      <li
+        className={clsx(classes.sort, isHidden && classes.sortHidden)}
+        ref={setNodeRef}
+        style={style}
+      >
         {children}
       </li>
     </SortableItemContext.Provider>

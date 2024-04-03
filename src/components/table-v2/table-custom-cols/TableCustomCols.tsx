@@ -107,8 +107,11 @@ export default function TableCustomCols({
     api.close()
   }
 
-  const filteredDragCols = draggableCols.filter(c => search.includes(c.label))
-  const filteredNonDragCols = nonDraggableCols.filter(c => search.includes(c.label))
+  const filteredNonDragCols = nonDraggableCols.filter(c =>
+    c.label.toLowerCase().includes(search.toLowerCase()),
+  )
+
+  // console.log(filteredNonDragCols)
 
   return (
     <>
@@ -177,8 +180,15 @@ export default function TableCustomCols({
                   <SortableList
                     items={checkedState}
                     onChange={setCheckedState}
+                    search={search}
                     renderItem={column => (
-                      <SortableList.Item id={column.id}>
+                      <SortableList.Item
+                        id={column.id}
+                        isHidden={
+                          !!search.length &&
+                          !column.label.toLowerCase().includes(search.toLowerCase())
+                        }
+                      >
                         <CustomColCheckbox
                           label={column.label}
                           id={column.id}

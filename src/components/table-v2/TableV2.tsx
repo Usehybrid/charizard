@@ -398,8 +398,6 @@ function TableComp({
   const [showRightShadow, setShowRightShadow] = React.useState(false)
   const tableContainerRef = React.useRef(null)
 
-  console.log({showLeftShadow, showRightShadow})
-
   const handleScroll = () => {
     if (tableContainerRef.current) {
       const {scrollLeft, scrollWidth, clientWidth} = tableContainerRef.current
