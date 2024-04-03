@@ -76,6 +76,7 @@ interface DrawerProps {
    * Drawer position
    */
   drawerPosition?: 'left' | 'right'
+  customContainerStyles?: React.CSSProperties
 }
 
 export function Drawer({
@@ -97,6 +98,7 @@ export function Drawer({
   footerClassName,
   showHeaderBorder = false,
   drawerPosition = 'right',
+  customContainerStyles,
 }: DrawerProps) {
   const containerRef = React.useRef<HTMLDivElement>(null)
   const descriptionRef = React.useRef<HTMLDivElement>(null)
@@ -110,12 +112,10 @@ export function Drawer({
         containerRef.current.style.transform = isOpen
           ? 'translateX(0)'
           : `translateX(${translateXOffset})`
-        ;(
-          descriptionRef.current as HTMLDivElement
-        ).style.maxHeight = `calc(100vh - (1.75rem * 2) - ${footerRef.current?.clientHeight}px)`
-        ;(
-          descriptionRef.current as HTMLDivElement
-        ).style.height = `calc(100vh - (1.75rem * 2) - ${footerRef.current?.clientHeight}px)`
+        ;(descriptionRef.current as HTMLDivElement).style.maxHeight =
+          `calc(100vh - (1.75rem * 2) - ${footerRef.current?.clientHeight}px)`
+        ;(descriptionRef.current as HTMLDivElement).style.height =
+          `calc(100vh - (1.75rem * 2) - ${footerRef.current?.clientHeight}px)`
       }
     }, 0)
 
@@ -136,6 +136,7 @@ export function Drawer({
       <div
         className={clsx(classes.container, classes[size], classes[`${drawerPosition}Align`])}
         ref={containerRef}
+        style={customContainerStyles}
       >
         {/* content */}
         <div className={classes.content}>

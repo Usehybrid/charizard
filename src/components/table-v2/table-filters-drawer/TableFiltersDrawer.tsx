@@ -1,23 +1,23 @@
 import * as React from 'react'
-import * as dialog from '@zag-js/dialog'
 import clsx from 'clsx'
 import FilterDrawerCheckbox from '../table-header-filters/FilterDrawerCheckbox'
 import filterIcon from '../../assets/filter-lines.svg'
-import closeIcon from '../../assets/close.svg'
 import classes from './table-filters-drawer.module.css'
-import {useMachine, normalizeProps, Portal} from '@zag-js/react'
 import {SVG} from '../../svg'
 import {BUTTON_VARIANT, Button} from '../../button'
 import {FilterConfig} from '../types'
 import {Search} from '../../search'
 import {useTableStore} from '../store'
 import {getDefaultCheckedState, removeUncheckedItems} from './utils'
+import {Drawer} from '../../drawer'
+import {useDisclosure} from '../../../utils/hooks/use-disclosure'
 
 interface TableFiltersDrawerProps {
   filterConfig: FilterConfig
 }
 
 export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerProps) {
+  const {isOpen, onOpen, onClose} = useDisclosure()
   const [filterCheckedState, setFilterCheckedState] = React.useState<Record<string, any[]>>({})
   const [search, setSearch] = React.useState('')
   const {setDefaultFilters, resetAllFilters, changeFiltersDrawer} = useTableStore(s => ({
@@ -29,25 +29,12 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
   const {isLoading, isError, headerFilterIds, filterDispatch} = filterConfig
   const [hasChanges, setHasChanges] = React.useState(false)
 
-  const [state, send] = useMachine(
-    dialog.machine({
-      id: 'charizard-table-filters',
-      onOpenChange(details) {
-        if (!details.open) {
-          setFilterCheckedState({})
-          setHasChanges(false)
-        }
-      },
-    }),
-  )
-
   const filters = filterConfig.filters?.drawer ? filterConfig.filters.drawer : []
   const headerFilterKeys = filterConfig.filters?.header
     ? filterConfig.filters.header.map(f => f.key)
     : []
 
   const [currFilter, setCurrFilter] = React.useState(filters[0])
-  const api = dialog.connect(state, send, normalizeProps)
 
   React.useEffect(() => {
     if (!filters?.length || isLoading) return
@@ -73,7 +60,7 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
   React.useEffect(() => {
     const obj = getDefaultCheckedState(filters, tableFilters)
     setFilterCheckedState(obj)
-  }, [api.isOpen])
+  }, [isOpen])
 
   const getIsChecked = (key: string, idx: number) => {
     const l = Object.keys(filterCheckedState).length
@@ -86,7 +73,7 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
       // Call changeFiltersDrawer for every filter, passing the checked values or an empty array if none
       changeFiltersDrawer(key, value ? value.split(',') : [], filterDispatch)
     })
-    api.close()
+    onClose()
   }
 
   const totalSelectedFilters = tableFilters
@@ -98,8 +85,8 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
   return (
     <>
       <button
-        {...api.triggerProps}
         className={clsx('hybr1d-ui-reset-btn', classes.actionCommon, classes.filterBtn)}
+        onClick={onOpen}
       >
         <SVG path={filterIcon} width={22} height={22} />
         Filter
@@ -107,141 +94,127 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
           <span className={classes.totalSelected}>{totalSelectedFilters}</span>
         )}
       </button>
-      {api.isOpen && (
-        <Portal>
-          <div {...api.backdropProps} className={classes.backdrop} />
-          <div {...api.positionerProps} style={{...api.positionerProps.style}}>
-            <div {...api.contentProps} className={classes.content}>
-              <h2 {...api.titleProps} className={classes.title}>
-                <span>Filters</span>
-                <button
-                  {...api.closeTriggerProps}
-                  type="button"
-                  // onClick={api?.close}
-                  className="hybr1d-ui-reset-btn"
-                >
-                  <SVG
-                    path={closeIcon}
-                    svgClassName={classes.closeIcon}
-                    spanClassName={classes.closeIconSpan}
+
+      {isOpen && (
+        <Drawer
+          isOpen={isOpen}
+          title="Filter"
+          contentClassName={classes.drawerContent}
+          footerClassName={classes.drawerFooter}
+          onClose={onClose}
+          customContainerStyles={{width: '593px'}}
+          customFooter={
+            <>
+              <Button variant={BUTTON_VARIANT.SECONDARY}>Cancel</Button>
+              <Button
+                variant={BUTTON_VARIANT.GHOST}
+                onClick={() => {
+                  if (search.length) setSearch('')
+                  resetAllFilters(filterConfig.filterReset)
+                  setHasChanges(false)
+                  onClose()
+                }}
+                // disabled={!hasChanges}
+              >
+                Reset All
+              </Button>
+              <Button
+                onClick={handleApplyFilters}
+                //  disabled={!hasChanges}
+              >
+                Apply
+              </Button>
+            </>
+          }
+        >
+          <div className={classes.filterBox}>
+            <div className={classes.filters}>
+              {filters.map(filter => {
+                const isActive = currFilter?.id === filter.id
+                const internalFilter = tableFilters.find(tf => tf.key === filter.key)
+                return (
+                  <div
+                    className={clsx(classes.filter, isActive && classes.active)}
+                    onClick={() => {
+                      setSearch('')
+                      setCurrFilter(filter)
+                    }}
+                    key={filter.id}
+                  >
+                    {filter.name}{' '}
+                    {`${internalFilter?.values.length ? `(${internalFilter.values.length})` : ''}`}
+                  </div>
+                )
+              })}
+            </div>
+
+            <div className={classes.filterSingle}>
+              {!currFilter?.config?.hideSearch && (
+                <div className={classes.dropdownSearch}>
+                  <Search
+                    id="filter-search"
+                    search={search}
+                    setSearch={setSearch}
+                    placeholder={currFilter.config?.placeholder || 'Search'}
                   />
-                </button>
-              </h2>
-              <div className={classes.filterBox}>
-                <div className={classes.filters}>
-                  {filters.map(filter => {
-                    const isActive = currFilter?.id === filter.id
-                    const internalFilter = tableFilters.find(tf => tf.key === filter.key)
-                    return (
-                      <div
-                        className={clsx(classes.filter, isActive && classes.active)}
-                        onClick={() => {
-                          setSearch('')
-                          setCurrFilter(filter)
-                        }}
-                        key={filter.id}
-                      >
-                        {filter.name}{' '}
-                        {`${
-                          internalFilter?.values.length ? `(${internalFilter.values.length})` : ''
-                        }`}
-                      </div>
-                    )
-                  })}
                 </div>
+              )}
 
-                <div className={classes.filterSingle}>
-                  {!currFilter?.config?.hideSearch && (
-                    <div className={classes.dropdownSearch}>
-                      <Search
-                        id="filter-search"
-                        search={search}
-                        setSearch={setSearch}
-                        placeholder={currFilter.config?.placeholder || 'Search'}
-                      />
-                    </div>
-                  )}
-
-                  {
-                    <div className={classes.options}>
-                      {filteredOptions.length === 0 ? (
-                        <div className={classes.optionsEmpty}>No results found</div>
-                      ) : (
-                        <>
-                          {/* <div className={classes.option} style={{fontWeight: 700}}>
+              {
+                <div className={classes.options}>
+                  {filteredOptions.length === 0 ? (
+                    <div className={classes.optionsEmpty}>No results found</div>
+                  ) : (
+                    <>
+                      {/* <div className={classes.option} style={{fontWeight: 700}}>
+                              <FilterDrawerCheckbox
+                                label={'All'}
+                                value={'all'}
+                                filterKey={currFilter.key}
+                                checked={
+                                  filterCheckedState[currFilter.key]?.findIndex(
+                                    obj => obj.checked === false,
+                                  ) === -1
+                                }
+                                setFilterCheckedState={setFilterCheckedState}
+                                idx={-1}
+                              />
+                            </div> */}
+                      {currFilter?.options.map((option, idx) => {
+                        return (
+                          <div
+                            key={idx}
+                            className={classes.option}
+                            style={{
+                              display: search.length
+                                ? !filteredOptions.includes(option.value)
+                                  ? 'none'
+                                  : undefined
+                                : undefined,
+                            }}
+                          >
                             <FilterDrawerCheckbox
-                              label={'All'}
-                              value={'all'}
+                              label={option.name}
+                              value={option.value}
                               filterKey={currFilter.key}
-                              checked={
-                                filterCheckedState[currFilter.key]?.findIndex(
-                                  obj => obj.checked === false,
-                                ) === -1
-                              }
+                              checked={getIsChecked(currFilter.key, idx)}
+                              countryCode={option.country_code}
+                              key={option.value}
+                              customName={option.customName}
                               setFilterCheckedState={setFilterCheckedState}
-                              idx={-1}
+                              idx={idx}
+                              setHasChanges={setHasChanges}
                             />
-                          </div> */}
-                          {currFilter?.options.map((option, idx) => {
-                            return (
-                              <div
-                                key={idx}
-                                className={classes.option}
-                                style={{
-                                  display: search.length
-                                    ? !filteredOptions.includes(option.value)
-                                      ? 'none'
-                                      : undefined
-                                    : undefined,
-                                }}
-                              >
-                                <FilterDrawerCheckbox
-                                  label={option.name}
-                                  value={option.value}
-                                  filterKey={currFilter.key}
-                                  checked={getIsChecked(currFilter.key, idx)}
-                                  countryCode={option.country_code}
-                                  key={option.value}
-                                  customName={option.customName}
-                                  setFilterCheckedState={setFilterCheckedState}
-                                  idx={idx}
-                                  setHasChanges={setHasChanges}
-                                />
-                              </div>
-                            )
-                          })}
-                        </>
-                      )}
-                    </div>
-                  }
+                          </div>
+                        )
+                      })}
+                    </>
+                  )}
                 </div>
-              </div>
-              <div className={classes.footer}>
-                <Button {...api.closeTriggerProps} variant={BUTTON_VARIANT.SECONDARY}>
-                  Cancel
-                </Button>
-                <Button
-                  variant={BUTTON_VARIANT.GHOST}
-                  onClick={() => {
-                    if (search.length) setSearch('')
-                    resetAllFilters(filterConfig.filterReset)
-                    setHasChanges(false)
-                    api.close()
-                  }}
-                  // disabled={!hasChanges}
-                >
-                  Reset All
-                </Button>
-                <Button
-                  onClick={handleApplyFilters}
-                  //  disabled={!hasChanges}
-                >
-                  Apply
-                </Button>
-              </div>
+              }
             </div>
           </div>
-        </Portal>
+        </Drawer>
       )}
     </>
   )

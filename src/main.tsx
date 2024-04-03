@@ -716,6 +716,30 @@ const filtersV2 = {
           name: 'Webcams12',
           value: 'ef2e6a9e-e3c4-492d-9630-7f2170715a5d12',
         },
+        {
+          name: 'Webcams13',
+          value: 'ef2e6a9e-e3c4-492d-9630-7f2170715a5d13',
+        },
+        {
+          name: 'Webcams14',
+          value: 'ef2e6a9e-e3c4-492d-9630-7f2170715a5d14',
+        },
+        {
+          name: 'Webcams15',
+          value: 'ef2e6a9e-e3c4-492d-9630-7f2170715a5d15',
+        },
+        {
+          name: 'Webcams16',
+          value: 'ef2e6a9e-e3c4-492d-9630-7f2170715a5d16',
+        },
+        {
+          name: 'Webcams17',
+          value: 'ef2e6a9e-e3c4-492d-9630-7f2170715a5d17',
+        },
+        {
+          name: 'Webcams18',
+          value: 'ef2e6a9e-e3c4-492d-9630-7f2170715a5d18',
+        },
       ],
       config: {
         hideSearch: false,

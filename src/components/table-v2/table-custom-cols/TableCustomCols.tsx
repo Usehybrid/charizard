@@ -42,6 +42,7 @@ export default function TableCustomCols({
       onOpenChange(details) {
         if (!details.open) {
           // setCheckedState([])
+          setSearch('')
         }
       },
     }),
