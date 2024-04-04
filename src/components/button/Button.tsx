@@ -157,7 +157,7 @@ function MenuButton({
                 <div
                   key={menu.label}
                   className={clsx(classes.menu, {[classes.menuDisabled]: menu.disabled})}
-                  {...api.getItemProps({id: menu.label.toLowerCase()})}
+                  {...api.getItemProps({value: menu.label.toLowerCase()})}
                   onClick={
                     menu.disabled
                       ? undefined

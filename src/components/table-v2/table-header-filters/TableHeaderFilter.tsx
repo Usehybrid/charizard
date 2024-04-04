@@ -99,7 +99,7 @@ export default function TableHeaderFilter({
                 filteredOptions.map((option, idx) => (
                   <div
                     key={idx}
-                    {...api.getItemProps({id: option.value})}
+                    {...api.getItemProps({value: option.value})}
                     className={classes.option}
                   >
                     <FilterCheckbox
