@@ -45,6 +45,8 @@ export default function TableCustomCols({
           setSearch('')
         }
       },
+      // todo debug the root cause in zag source code
+      closeOnInteractOutside: false,
     }),
   )
 
