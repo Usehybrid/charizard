@@ -50,7 +50,7 @@ export function ModalFooter({children, api, buttons, showBorder = true}: ModalFo
               variant={btn.variant}
               onClick={async () => {
                 await btn.onClick()
-                api?.close()
+                api?.setOpen(false)
               }}
               size={btn.btnSize}
             >

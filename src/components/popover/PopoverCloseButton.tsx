@@ -29,7 +29,7 @@ export function PopoverCloseButton({children, api, styles, className}: PopoverCl
       {...api?.closeTriggerProps}
       style={styles}
       className={clsx('hybr1d-ui-reset-btn', className)}
-      onClick={api?.close}
+      onClick={() => api?.setOpen(false)}
     >
       {children}
     </button>

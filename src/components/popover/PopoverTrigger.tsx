@@ -40,8 +40,8 @@ export function PopoverTrigger({
   return (
     <button
       {...api?.triggerProps}
-      onMouseEnter={openOnHover ? api?.open : () => {}}
-      onMouseLeave={openOnHover ? api?.close : () => {}}
+      onMouseEnter={openOnHover ? api?.setOpen(true) : () => {}}
+      onMouseLeave={openOnHover ? api?.setOpen(false) : () => {}}
       className={clsx('hybr1d-ui-reset-btn', classes.trigger, className)}
       style={styles}
     >

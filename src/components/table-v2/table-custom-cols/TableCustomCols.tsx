@@ -133,12 +133,7 @@ export default function TableCustomCols({
                     {customColumnConfig?.description || `Description here`}
                   </p>
                 </div>
-                <button
-                  {...api.closeTriggerProps}
-                  type="button"
-                  // onClick={api?.close}
-                  className="hybr1d-ui-reset-btn"
-                >
+                <button {...api.closeTriggerProps} type="button" className="hybr1d-ui-reset-btn">
                   <SVG
                     path={closeIcon}
                     svgClassName={classes.closeIcon}
