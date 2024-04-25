@@ -68,7 +68,7 @@ export default function TableLimit({setLimit, limit, totalItems, itemsOnPage}: T
             </button>
           </div>
 
-          {selectApi.isOpen && (
+          {selectApi.open && (
             // <Portal>
             <div {...selectApi.positionerProps} className={classes.pos}>
               <ul {...selectApi.contentProps} className={classes.limitContent}>

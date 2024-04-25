@@ -47,7 +47,7 @@ export default function TableEllipses({paginationApi, i}: TableEllipsesProps) {
         </button>
       </div>
 
-      {selectApi.isOpen && (
+      {selectApi.open && (
         <Portal>
           <div {...selectApi.positionerProps} className={classes.paginationMenu}>
             <ul {...selectApi.contentProps} className={classes.limitContent}>

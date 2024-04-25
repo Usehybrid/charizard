@@ -25,7 +25,7 @@ export default function FilterTooltip({filter, tableFilter, selectedFilters}: Fi
         <div className={classes.filterCol}>{filter.name}</div>
         {selectedFilters !== 0 && <span className={classes.totalSelected}>{selectedFilters}</span>}
       </div>
-      {tooltipApi.isOpen && selectedFilters !== 0 && (
+      {tooltipApi.open && selectedFilters !== 0 && (
         <div {...tooltipApi.positionerProps}>
           <div {...tooltipApi.contentProps} className={classes.filterTooltip}>
             {tableFilterWithName.map(value => (

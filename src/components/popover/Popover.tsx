@@ -45,7 +45,7 @@ export function Popover({
   const api = popover.connect(state, send, normalizeProps)
 
   function closePopover() {
-    api?.close()
+    api?.setOpen(false)
   }
 
   React.useEffect(() => {

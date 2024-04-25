@@ -107,7 +107,7 @@ export default function TableCustomCols({
       return arr
     })
 
-    api.close()
+    api.setOpen(false)
   }
 
   const filteredNonDragCols = nonDraggableCols.filter(c =>
@@ -121,7 +121,7 @@ export default function TableCustomCols({
       <button {...api.triggerProps} className={clsx('hybr1d-ui-reset-btn', classes.actionCommon)}>
         <SVG path={viewColIcon} width={22} height={22} />
       </button>
-      {api.isOpen && (
+      {api.open && (
         <Portal>
           <div {...api.backdropProps} className={classes.backdrop} />
           <div {...api.positionerProps} style={{...api.positionerProps.style}}>

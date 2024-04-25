@@ -117,18 +117,18 @@ function MenuButton({
   // to sync with actions dropdown, to get active state styles
   React.useEffect(() => {
     if (!isCustomTrigger || !actionsDropdownOptions?.setIsActive) return
-    actionsDropdownOptions.setIsActive(api.isOpen)
-  }, [api.isOpen])
+    actionsDropdownOptions.setIsActive(api.open)
+  }, [api.open])
 
-  const isOpenRef = React.useRef(api.isOpen)
+  const isOpenRef = React.useRef(api.open)
 
   React.useEffect(() => {
-    isOpenRef.current = api.isOpen
-  }, [api.isOpen])
+    isOpenRef.current = api.open
+  }, [api.open])
 
   const handleScroll = () => {
     if (isOpenRef.current) {
-      api.close()
+      api.setOpen(false)
     }
   }
 
@@ -200,7 +200,7 @@ function MenuButton({
           className={clsx(
             'hybr1d-ui-reset-btn',
             classes.customTrigger,
-            api.isOpen && classes.customTriggerActive,
+            api.open && classes.customTriggerActive,
           )}
           {...api.triggerProps}
         >

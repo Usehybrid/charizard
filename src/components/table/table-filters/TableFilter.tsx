@@ -49,7 +49,7 @@ export default function TableFilter({
 
   const handleResetFilter = () => {
     resetFilters(tableFilter?.key, filterDispatch)
-    api.close()
+    api.setOpen(false)
   }
 
   const getIsChecked = (value: string) => {
@@ -68,7 +68,7 @@ export default function TableFilter({
   return (
     <div>
       <button
-        className={clsx('hybr1d-ui-reset-btn', classes.filter, api.isOpen && classes.filterActive)}
+        className={clsx('hybr1d-ui-reset-btn', classes.filter, api.open && classes.filterActive)}
         {...api.triggerProps}
       >
         <FilterTooltip
@@ -80,7 +80,7 @@ export default function TableFilter({
       </button>
 
       <div {...api.positionerProps} className={classes.positioner}>
-        {api.isOpen && (
+        {api.open && (
           <div {...api.contentProps} className={classes.dropdown} onKeyDown={() => {}}>
             {!filter.config?.hideSearch && (
               <div className={classes.dropdownSearch}>
