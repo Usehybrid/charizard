@@ -128,6 +128,7 @@ function MenuButton({
 
   const handleScroll = () => {
     if (isOpenRef.current) {
+      console.log('scrolling...')
       api.setOpen(false)
     }
   }
