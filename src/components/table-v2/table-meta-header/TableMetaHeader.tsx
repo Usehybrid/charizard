@@ -12,6 +12,7 @@ import {SVG} from '../../svg'
 import TableFiltersDrawer from '../table-filters-drawer'
 import TableCustomCols from '../table-custom-cols'
 import {Table} from '@tanstack/react-table'
+import {useTableStore} from '../store'
 
 interface TableMetaHeaderProps {
   rowSelectionConfig: TableV2Props['rowSelectionConfig']
@@ -50,6 +51,14 @@ export default function TableMetaHeader({
   )}`
 
   const headerFilter = filterConfig?.filters?.header ? filterConfig?.filters.header : null
+
+  const resetAll = useTableStore(s => s.resetAllFilters)
+
+  React.useEffect(() => {
+    return () => {
+      resetAll()
+    }
+  }, [])
 
   return (
     <div className={classes.box}>
