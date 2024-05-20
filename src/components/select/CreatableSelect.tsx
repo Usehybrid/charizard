@@ -191,6 +191,8 @@ export function CreatableSelect({
               }
               onChange(value ?? '', data.actionMeta)
             }
+          } else {
+            onChange('', data?.actionMeta)
           }
         }}
         formatGroupLabel={formatGroupLabel}
