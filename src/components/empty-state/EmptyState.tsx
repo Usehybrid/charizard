@@ -12,6 +12,7 @@ interface EmptyStateProps {
   btnText?: string
   onClick?: React.MouseEventHandler<HTMLButtonElement>
   customSvgStyles?: React.CSSProperties
+  customSvgClassName?: string
 }
 
 /**
@@ -24,12 +25,15 @@ export function EmptyState({
   flexDir = 'column',
   btnText,
   onClick,
-  customSvgStyles,
+  customSvgClassName,
 }: EmptyStateProps) {
   return (
     <div className={clsx(classes.container, flexDir === 'row' && classes.containerRow)}>
       <div className={classes.iconBox}>
-        <SVG path={icon} svgClassName={classes.icon} customSvgStyles={customSvgStyles} />
+        <SVG
+          path={icon}
+          svgClassName={clsx(classes.icon, customSvgClassName ? customSvgClassName : undefined)}
+        />
       </div>
       <div className={classes.info}>
         <h6 className={clsx(classes.title, flexDir === 'row' && classes.textRow)}>{title}</h6>
