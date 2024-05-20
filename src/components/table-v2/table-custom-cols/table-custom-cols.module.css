@@ -32,6 +32,7 @@
 }
 
 .content {
+  scrollbar-width: none;
   background-color: white;
   color: var(--text-primary);
   height: 100dvh;
