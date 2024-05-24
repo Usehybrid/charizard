@@ -86,20 +86,25 @@ export default function TableCustomCols({
   React.useEffect(() => {
     if (isError || isPending) return
     setCheckedState(columns?.checked_state || [])
+    configureTable(columns?.checked_state || [])
   }, [isPending, isError])
+
+  // React.useEffect(() => {
+  //   if (isError || isPending) return
+  //   configureTable(columns?.checked_state || [])
+  // }, [columns?.checked_state?.length])
 
   const draggableCols = checkedState.filter(c => c.checked)
   const nonDraggableCols = checkedState.filter(c => !c.checked)
-  // console.log(nonDraggableCols)
 
-  const handleSave = () => {
-    checkedState.forEach(obj => {
+  const configureTable = (_checkedState: TableCustomColumns['checked_state']) => {
+    _checkedState.forEach(obj => {
       const col = table.getColumn(obj.id)
       col?.toggleVisibility(obj.checked)
     })
 
     table.setColumnOrder(() => {
-      const orderableCols = checkedState.map(obj => obj.id)
+      const orderableCols = _checkedState.map(obj => obj.id)
       const arr = [
         isCheckbox ? CHECKBOX_COL_ID : RADIO_COL_ID,
         ...orderableCols,
@@ -112,6 +117,10 @@ export default function TableCustomCols({
 
       return arr
     })
+  }
+
+  const handleSave = () => {
+    configureTable(checkedState)
     handleSaveColumns(checkedState)
     api.setOpen(false)
   }
