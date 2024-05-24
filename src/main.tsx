@@ -553,11 +553,9 @@ function App() {
           columns: cols,
           isPending: false,
           isError: false,
-          handleSaveColumns: () => {
-            console.log('test')
-
-            return Promise.resolve(() => {
-              return 'test'
+          handleSaveColumns: async (columns: any) => {
+            await Promise.resolve(() => {
+              console.log('test')
             })
           },
         }}

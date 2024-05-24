@@ -136,7 +136,7 @@ export interface TableV2Props {
     columns?: TableCustomColumns
     isPending: boolean
     isError: boolean
-    handleSaveColumns: () => Promise<any>
+    handleSaveColumns: (columns: any) => Promise<void>
   }
   /**
    * export config (csv)

@@ -22,7 +22,7 @@ interface TableCustomColsProps {
     columns?: TableCustomColumns
     isPending: boolean
     isError: boolean
-    handleSaveColumns: () => Promise<any>
+    handleSaveColumns: (columns: any) => Promise<void>
   }
   table: Table<any>
   isCheckbox?: boolean
@@ -119,7 +119,7 @@ export default function TableCustomCols({
 
       return arr
     })
-    handleSaveColumns()
+    handleSaveColumns(checkedState)
     api.setOpen(false)
   }
 
