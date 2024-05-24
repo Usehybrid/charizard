@@ -23,7 +23,7 @@ import type {
   Table,
   VisibilityState,
 } from '@tanstack/react-table'
-import type {FilterConfig} from './types'
+import type {FilterConfig, TableCustomColumns} from './types'
 
 export interface TableV2Props {
   // the table data
@@ -133,6 +133,10 @@ export interface TableV2Props {
    */
   customColumnConfig?: {
     description?: string
+    columns?: TableCustomColumns
+    isPending: boolean
+    isError: boolean
+    handleSaveColumns: () => Promise<any>
   }
   /**
    * export config (csv)

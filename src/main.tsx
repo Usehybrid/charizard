@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import randomIcon from './components/assets/check.svg'
 import randomIcon2 from './components/assets/search-2.svg'
 import {createColumnHelper} from '@tanstack/react-table'
-import {Button, BUTTON_VARIANT, Table, TableV2} from './components'
+import {TableV2} from './components'
 import {INV_ACTION_TYPES, useInventoryStore} from './components/table-v2/inventory/inventory.store'
 
 const styles = {
@@ -550,11 +550,68 @@ function App() {
         }}
         customColumnConfig={{
           description: 'Configure inventory columns',
+          columns: cols,
+          isPending: false,
+          isError: false,
+          handleSaveColumns: () => {
+            console.log('test')
+
+            return Promise.resolve(() => {
+              return 'test'
+            })
+          },
         }}
         tableStyleConfig={{stickyIds: ['software'], maxHeight: '200px'}}
       />
     </div>
   )
+}
+
+const cols = {
+  checked_state: [
+    {
+      id: 'id',
+      label: 'Software Name',
+      checked: true,
+    },
+    {
+      id: 'category',
+      label: 'Category',
+      checked: true,
+    },
+    {
+      id: 'type',
+      label: 'Type',
+      checked: true,
+    },
+    {
+      id: 'total_user_count',
+      label: 'Total Users',
+      checked: true,
+    },
+    {
+      id: 'active_user_count',
+      label: 'Active Users',
+      checked: true,
+    },
+    {
+      id: 'inactive_user_count',
+      label: 'Inactive Users',
+      checked: true,
+    },
+    {
+      id: 'last_checked_at',
+      label: 'Last Active',
+      checked: true,
+    },
+    {
+      id: 'dormant_user_count',
+      label: 'Dormant Users',
+      checked: true,
+    },
+  ],
+  is_default: false,
+  table_name: 'software_list',
 }
 
 const filtersV2 = {

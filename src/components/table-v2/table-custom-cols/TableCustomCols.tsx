@@ -13,9 +13,17 @@ import {Search} from '../../search'
 import {TableV2Props} from '../TableV2'
 import {SortableList} from './sortable/SortableList'
 import {CHECKBOX_COL_ID, DROPDOWN_COL_ID, RADIO_COL_ID} from '../constants'
+import {TableCustomColumns} from '../types'
+import {Loader} from '../../loader'
 
 interface TableCustomColsProps {
-  customColumnConfig: TableV2Props['customColumnConfig']
+  customColumnConfig: {
+    description?: string
+    columns?: TableCustomColumns
+    isPending: boolean
+    isError: boolean
+    handleSaveColumns: () => Promise<any>
+  }
   table: Table<any>
   isCheckbox?: boolean
   isDropdownActions?: boolean
@@ -33,7 +41,11 @@ export default function TableCustomCols({
   isCheckbox,
   isDropdownActions,
 }: TableCustomColsProps) {
-  const [checkedState, setCheckedState] = React.useState<CheckedState[]>([])
+  const {columns, isPending, isError, handleSaveColumns} = customColumnConfig
+  const [checkedState, setCheckedState] = React.useState<TableCustomColumns['checked_state']>(
+    columns?.checked_state || [],
+  )
+
   const [search, setSearch] = React.useState('')
 
   const [state, send] = useMachine(
@@ -52,15 +64,16 @@ export default function TableCustomCols({
 
   const api = dialog.connect(state, send, normalizeProps)
 
-  const enabledCols = table
-    .getAllLeafColumns()
-    .filter(
-      c =>
-        c.columnDef.enableHiding &&
-        c.id !== CHECKBOX_COL_ID &&
-        c.id !== RADIO_COL_ID &&
-        c.id !== DROPDOWN_COL_ID,
-    )
+  // const enabledCols = table
+  //   .getAllLeafColumns()
+  //   .filter(
+  //     c =>
+  //       c.columnDef.enableHiding &&
+  //       c.id !== CHECKBOX_COL_ID &&
+  //       c.id !== RADIO_COL_ID &&
+  //       c.id !== DROPDOWN_COL_ID,
+  //   )
+
   const disabledCols = table
     .getAllLeafColumns()
     .filter(
@@ -71,16 +84,16 @@ export default function TableCustomCols({
         c.id !== DROPDOWN_COL_ID,
     )
 
-  React.useEffect(() => {
-    setCheckedState(() => {
-      const arr = enabledCols.map(c => ({
-        id: c.id,
-        checked: c.getIsVisible(),
-        label: typeof c.columnDef.header === 'string' ? c.columnDef.header : '',
-      }))
-      return arr
-    })
-  }, [])
+  // React.useEffect(() => {
+  //   setCheckedState(() => {
+  //     const arr = enabledCols.map(c => ({
+  //       id: c.id,
+  //       checked: c.getIsVisible(),
+  //       label: typeof c.columnDef.header === 'string' ? c.columnDef.header : '',
+  //     }))
+  //     return arr
+  //   })
+  // }, [])
 
   const draggableCols = checkedState.filter(c => c.checked)
   const nonDraggableCols = checkedState.filter(c => !c.checked)
@@ -106,15 +119,13 @@ export default function TableCustomCols({
 
       return arr
     })
-
+    handleSaveColumns()
     api.setOpen(false)
   }
 
   const filteredNonDragCols = nonDraggableCols.filter(c =>
     c.label.toLowerCase().includes(search.toLowerCase()),
   )
-
-  // console.log(filteredNonDragCols)
 
   return (
     <>
@@ -142,74 +153,80 @@ export default function TableCustomCols({
                 </button>
               </h2>
 
-              <div className={classes.colBox}>
-                <div className={classes.dropdownSearch}>
-                  <Search
-                    id="table-custom-column-search"
-                    search={search}
-                    setSearch={setSearch}
-                    placeholder={'Search columns'}
-                  />
-                </div>
+              {isError ? (
+                <div className={classes.error}>Something went wrong, please try again later.</div>
+              ) : isPending ? (
+                <Loader />
+              ) : (
+                <div className={classes.colBox}>
+                  <div className={classes.dropdownSearch}>
+                    <Search
+                      id="table-custom-column-search"
+                      search={search}
+                      setSearch={setSearch}
+                      placeholder={'Search columns'}
+                    />
+                  </div>
 
-                <div className={classes.option}>
-                  <CustomColCheckbox
-                    label={'All'}
-                    id={'all'}
-                    checked={nonDraggableCols.length === 0}
-                    setCheckedState={setCheckedState}
-                  />
-                </div>
-
-                {disabledCols.map(column => (
-                  <div key={column.id} className={clsx(classes.option, classes.optionDisabled)}>
+                  <div className={classes.option}>
                     <CustomColCheckbox
-                      label={column.columnDef.header as string}
-                      id={column.id}
-                      checked={true}
-                      disabled
+                      label={'All'}
+                      id={'all'}
+                      checked={nonDraggableCols.length === 0}
                       setCheckedState={setCheckedState}
                     />
                   </div>
-                ))}
 
-                <>
-                  {draggableCols.length > 0 && <p className={classes.info}>Selected</p>}
-                  <SortableList
-                    items={checkedState}
-                    onChange={setCheckedState}
-                    search={search}
-                    renderItem={column => (
-                      <SortableList.Item
+                  {disabledCols.map(column => (
+                    <div key={column.id} className={clsx(classes.option, classes.optionDisabled)}>
+                      <CustomColCheckbox
+                        label={column.columnDef.header as string}
                         id={column.id}
-                        isHidden={
-                          !!search.length &&
-                          !column.label.toLowerCase().includes(search.toLowerCase())
-                        }
-                      >
-                        <CustomColCheckbox
-                          label={column.label}
-                          id={column.id}
-                          checked={
-                            checkedState[checkedState.findIndex(obj => obj.id === column.id)]
-                              .checked
-                          }
-                          setCheckedState={setCheckedState}
-                        />
-                        <SortableList.DragHandle />
-                      </SortableList.Item>
-                    )}
-                  />
-                </>
+                        checked={true}
+                        disabled
+                        setCheckedState={setCheckedState}
+                      />
+                    </div>
+                  ))}
 
-                <Options
-                  cols={filteredNonDragCols}
-                  text="Not Selected"
-                  textCn={classes.info2}
-                  checkedState={checkedState}
-                  setCheckedState={setCheckedState}
-                />
-              </div>
+                  <>
+                    {draggableCols.length > 0 && <p className={classes.info}>Selected</p>}
+                    <SortableList
+                      items={checkedState}
+                      onChange={setCheckedState}
+                      search={search}
+                      renderItem={column => (
+                        <SortableList.Item
+                          id={column.id}
+                          isHidden={
+                            !!search.length &&
+                            !column.label.toLowerCase().includes(search.toLowerCase())
+                          }
+                        >
+                          <CustomColCheckbox
+                            label={column.label}
+                            id={column.id}
+                            checked={
+                              checkedState[checkedState.findIndex(obj => obj.id === column.id)]
+                                .checked
+                            }
+                            setCheckedState={setCheckedState}
+                          />
+                          <SortableList.DragHandle />
+                        </SortableList.Item>
+                      )}
+                    />
+                  </>
+
+                  <Options
+                    cols={filteredNonDragCols}
+                    text="Not Selected"
+                    textCn={classes.info2}
+                    checkedState={checkedState}
+                    setCheckedState={setCheckedState}
+                  />
+                </div>
+              )}
 
               <div className={classes.footer}>
                 <Button {...api.closeTriggerProps} variant={BUTTON_VARIANT.SECONDARY}>

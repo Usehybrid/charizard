@@ -16,6 +16,15 @@
   fill: var(--neutral-arch-900);
 }
 
+.error {
+  margin-top: 20px;
+  color: var(--text-primary);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 180%;
+}
+
 /* drawer */
 
 .backdrop {

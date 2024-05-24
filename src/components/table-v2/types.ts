@@ -47,3 +47,9 @@ export type TableFilters = {
   header?: FilterOptions[]
   drawer?: FilterOptions[]
 }
+
+export type TableCustomColumns = {
+  checked_state: Array<{id: string; label: string; checked: boolean}>
+  is_default: boolean
+  table_name: string
+}
