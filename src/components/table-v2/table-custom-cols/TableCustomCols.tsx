@@ -42,11 +42,10 @@ export default function TableCustomCols({
   isDropdownActions,
 }: TableCustomColsProps) {
   const {columns, isPending, isError, handleSaveColumns} = customColumnConfig
-  const [checkedState, setCheckedState] = React.useState<TableCustomColumns['checked_state']>(
-    columns?.checked_state || [],
-  )
-
+  const [checkedState, setCheckedState] = React.useState<TableCustomColumns['checked_state']>([])
   const [search, setSearch] = React.useState('')
+
+  console.log({checkedState})
 
   const [state, send] = useMachine(
     dialog.machine({
@@ -84,16 +83,10 @@ export default function TableCustomCols({
         c.id !== DROPDOWN_COL_ID,
     )
 
-  // React.useEffect(() => {
-  //   setCheckedState(() => {
-  //     const arr = enabledCols.map(c => ({
-  //       id: c.id,
-  //       checked: c.getIsVisible(),
-  //       label: typeof c.columnDef.header === 'string' ? c.columnDef.header : '',
-  //     }))
-  //     return arr
-  //   })
-  // }, [])
+  React.useEffect(() => {
+    if (isError || isPending) return
+    setCheckedState(columns?.checked_state || [])
+  }, [isPending, isError])
 
   const draggableCols = checkedState.filter(c => c.checked)
   const nonDraggableCols = checkedState.filter(c => !c.checked)
