@@ -59,6 +59,7 @@
   min-width: 37px;
   max-height: 330px;
   overflow-y: scroll;
+  scrollbar-width: none;
   display: flex;
   flex-direction: column;
   padding: 3px;

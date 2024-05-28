@@ -45,11 +45,11 @@ export default function TableCustomCols({
   const [checkedState, setCheckedState] = React.useState<TableCustomColumns['checked_state']>([])
   const [search, setSearch] = React.useState('')
 
-  console.log({checkedState})
+  // console.log({checkedState})
 
   const [state, send] = useMachine(
     dialog.machine({
-      id: 'charizard-table-custom-cols',
+      id: React.useId(),
       onOpenChange(details) {
         if (!details.open) {
           // setCheckedState([])
@@ -57,7 +57,7 @@ export default function TableCustomCols({
         }
       },
       // todo debug the root cause in zag source code
-      closeOnInteractOutside: false,
+      // closeOnInteractOutside: false,
     }),
   )
 
@@ -88,11 +88,6 @@ export default function TableCustomCols({
     setCheckedState(columns?.checked_state || [])
     configureTable(columns?.checked_state || [])
   }, [isPending, isError])
-
-  // React.useEffect(() => {
-  //   if (isError || isPending) return
-  //   configureTable(columns?.checked_state || [])
-  // }, [columns?.checked_state?.length])
 
   const draggableCols = checkedState.filter(c => c.checked)
   const nonDraggableCols = checkedState.filter(c => !c.checked)
