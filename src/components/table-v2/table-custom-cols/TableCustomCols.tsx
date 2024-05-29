@@ -57,7 +57,7 @@ export default function TableCustomCols({
         }
       },
       // todo debug the root cause in zag source code
-      // closeOnInteractOutside: false,
+      closeOnInteractOutside: false,
     }),
   )
 
