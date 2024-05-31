@@ -98,3 +98,12 @@ h6 {
   /* Corrects inability to style clickable `input` types in iOS */
   appearance: none;
 }
+
+.hybr1d-ui-error-msg {
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.54rem;
+  color: var(--status-danger);
+  margin: 0;
+  text-align: left;
+}

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import randomIcon from './components/assets/check.svg'
 import randomIcon2 from './components/assets/search-2.svg'
 import {createColumnHelper} from '@tanstack/react-table'
-import {TableV2} from './components'
+import {ColorPicker, TableV2} from './components'
 import {INV_ACTION_TYPES, useInventoryStore} from './components/table-v2/inventory/inventory.store'
 
 const styles = {
@@ -462,7 +462,8 @@ function App() {
 
   return (
     <div style={styles}>
-      <TableV2
+      <ColorPicker name="color" label="Color" onChange={color => console.log(color)} />
+      {/* <TableV2
         data={data}
         loaderConfig={{isFetching: false, isError: false, text: 'Getting employees...'}}
         columns={columns}
@@ -560,7 +561,7 @@ function App() {
           },
         }}
         tableStyleConfig={{stickyIds: ['software'], maxHeight: '200px'}}
-      />
+      /> */}
     </div>
   )
 }
