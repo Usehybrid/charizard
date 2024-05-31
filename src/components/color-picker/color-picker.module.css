@@ -36,6 +36,10 @@
   border-radius: 100%;
 }
 
+.positioner {
+  --z-index: 20 !important;
+}
+
 .content {
   border: 1px solid #e2e0eb;
   border-radius: 4px;

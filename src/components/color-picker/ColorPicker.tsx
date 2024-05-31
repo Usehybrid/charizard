@@ -36,7 +36,7 @@ export function ColorPicker({name, label, errorMsg, required = false, onChange}:
           <SVG path={chevronDown} svgClassName={classes.svg} />
         </button>
       </div>
-      <div {...api.positionerProps}>
+      <div {...api.positionerProps} className={classes.positioner}>
         <div {...api.contentProps} className={classes.content}>
           <div {...api.swatchGroupProps} className={classes.swatchGroup}>
             {presets.map(preset => (
