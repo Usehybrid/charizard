@@ -13,14 +13,22 @@ interface ColorPickerProps {
   errorMsg?: string | false
   required?: boolean
   onChange: (color: string) => void
+  defaultColor?: string
 }
 
-export function ColorPicker({name, label, errorMsg, required = false, onChange}: ColorPickerProps) {
+export function ColorPicker({
+  name,
+  label,
+  errorMsg,
+  required = false,
+  onChange,
+  defaultColor,
+}: ColorPickerProps) {
   const [state, send] = useMachine(
     colorPicker.machine({
       name,
       id: React.useId(),
-      value: colorPicker.parse(presets[5]),
+      value: colorPicker.parse(defaultColor ?? presets[5]),
     }),
   )
 
