@@ -157,6 +157,7 @@
   background-color: white;
   /* margin-top: -10px; */
   margin-bottom: 6px;
+  z-index: 1;
 }
 
 .info,
