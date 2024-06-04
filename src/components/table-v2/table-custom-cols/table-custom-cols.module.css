@@ -124,6 +124,7 @@
 .colBox {
   width: 100%;
   padding: 20px;
+  padding-top: 0;
   /* 56px => drawer header, 53px => drawer footer, 10px to make it look better */
   max-height: calc(100vh - 139px + 10px);
   overflow-y: scroll;
@@ -152,8 +153,8 @@
 /* filter search */
 .dropdownSearch {
   position: sticky;
-  top: -10px;
-  /* padding-top: 10px; */
+  top: 0;
+  padding-top: 20px;
   background-color: white;
   /* margin-top: -10px; */
   margin-bottom: 6px;

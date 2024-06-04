@@ -462,8 +462,7 @@ function App() {
 
   return (
     <div style={styles}>
-      <ColorPicker name="color" label="Color" onChange={color => console.log(color)} />
-      {/* <TableV2
+      <TableV2
         data={data}
         loaderConfig={{isFetching: false, isError: false, text: 'Getting employees...'}}
         columns={columns}
@@ -561,7 +560,7 @@ function App() {
           },
         }}
         tableStyleConfig={{stickyIds: ['software'], maxHeight: '200px'}}
-      /> */}
+      />
     </div>
   )
 }
@@ -569,33 +568,38 @@ function App() {
 const cols = {
   checked_state: [
     {
-      id: 'id',
-      label: 'Software Name',
+      id: 'location',
+      label: 'Location',
       checked: true,
     },
     {
-      id: 'category',
-      label: 'Category',
+      id: 'compliant',
+      label: 'Compliant',
       checked: true,
     },
     {
-      id: 'type',
-      label: 'Type',
+      id: 'encrypted',
+      label: 'Encrypted',
       checked: true,
     },
     {
-      id: 'total_user_count',
-      label: 'Total Users',
+      id: 'operating_system',
+      label: 'Operating System',
       checked: true,
     },
     {
-      id: 'active_user_count',
-      label: 'Active Users',
+      id: 'manufacturer',
+      label: 'Manufacturer',
       checked: true,
     },
     {
-      id: 'inactive_user_count',
-      label: 'Inactive Users',
+      id: 'allocated_to',
+      label: 'Allocated to',
+      checked: true,
+    },
+    {
+      id: 'imei_1',
+      label: 'IMEI 1',
       checked: true,
     },
     {
@@ -604,13 +608,63 @@ const cols = {
       checked: true,
     },
     {
-      id: 'dormant_user_count',
-      label: 'Dormant Users',
+      id: 'device_status',
+      label: 'Device Status',
+      checked: true,
+    },
+    {
+      id: 'ram',
+      label: 'RAM',
+      checked: true,
+    },
+    {
+      id: 'enrollment_status',
+      label: 'Enrollment Status',
+      checked: true,
+    },
+    {
+      id: 'total_storage',
+      label: 'Total Storage',
+      checked: true,
+    },
+    {
+      id: 'battery_level',
+      label: 'Battery Level',
+      checked: true,
+    },
+    {
+      id: 'wifi_mac',
+      label: 'Wifi Mac',
+      checked: true,
+    },
+    {
+      id: 'available_storage',
+      label: 'Available Storage',
+      checked: true,
+    },
+    {
+      id: 'os_version',
+      label: 'OS Version',
+      checked: true,
+    },
+    {
+      id: 'build_version',
+      label: 'Build Version',
+      checked: true,
+    },
+    {
+      id: 'wifi_ssid',
+      label: 'Wifi ssid',
+      checked: true,
+    },
+    {
+      id: 'security_pin',
+      label: 'Security Pin',
       checked: true,
     },
   ],
   is_default: false,
-  table_name: 'software_list',
+  table_name: 'mdm_devices',
 }
 
 const filtersV2 = {
