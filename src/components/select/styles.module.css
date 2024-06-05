@@ -1,5 +1,6 @@
 .selectContainer {
   width: 100%;
+  cursor: pointer;
 }
 
 .selectContainer .errorMsg {
