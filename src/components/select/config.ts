@@ -17,10 +17,10 @@ export const colourStyles: StylesConfig<any> = {
       backgroundColor: isDisabled
         ? undefined
         : isSelected
-        ? data.color
-        : isFocused
-        ? 'var(--neutral-arch-30)'
-        : '#ffffff',
+          ? data.color
+          : isFocused
+            ? 'var(--neutral-arch-30)'
+            : '#ffffff',
       color: 'var(--text-primary)',
       cursor: isDisabled ? 'not-allowed' : 'default',
       padding: '8px 12px',
@@ -109,8 +109,8 @@ export const getControlStyles = (
       borderColor: errorMsg
         ? 'var(--status-error) !important'
         : isFocused
-        ? 'var(--theme-blue) !important'
-        : 'var(--neutral-arch-300) !important',
+          ? 'var(--theme-blue) !important'
+          : 'var(--neutral-arch-300) !important',
       fontSize: '16px',
       boxShadow: 'none',
       transition: 'all 0.3s ease-in-out',
@@ -120,6 +120,7 @@ export const getControlStyles = (
       ':focus-within': {
         boxShadow: errorMsg ? 'var(--status-error) !important' : 'var(--theme-blue) !important',
       },
+      cursor: !isFocused ? 'pointer' : undefined,
     }),
   }
 }
