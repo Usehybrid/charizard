@@ -18,7 +18,7 @@ interface ModalBodyProps {
 
 export function ModalBody({children, api, customStyles = {}}: ModalBodyProps) {
   return (
-    <div {...api.descriptionProps} className={classes.body} style={customStyles}>
+    <div {...api.getDescriptionProps()} className={classes.body} style={customStyles}>
       {children}
     </div>
   )

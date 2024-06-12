@@ -60,9 +60,9 @@ export default function TableLimit({setLimit, limit, totalItems, itemsOnPage}: T
     <div className={classes.limitBox}>
       Showing
       {
-        <div {...selectApi.rootProps}>
-          <div {...selectApi.controlProps}>
-            <button {...selectApi.triggerProps} className={classes.limitTrigger}>
+        <div {...selectApi.getRootProps()}>
+          <div {...selectApi.getControlProps()}>
+            <button {...selectApi.getTriggerProps()} className={classes.limitTrigger}>
               {selectApi.valueAsString || 'Select limit'}
               <SVG path={chevronDown} svgClassName={classes.chevdownIcon} />
             </button>
@@ -70,8 +70,8 @@ export default function TableLimit({setLimit, limit, totalItems, itemsOnPage}: T
 
           {selectApi.open && (
             // <Portal>
-            <div {...selectApi.positionerProps} className={classes.pos}>
-              <ul {...selectApi.contentProps} className={classes.limitContent}>
+            <div {...selectApi.getPositionerProps()} className={classes.pos}>
+              <ul {...selectApi.getContentProps()} className={classes.limitContent}>
                 {selectData.map(item => (
                   <li
                     key={item.value}

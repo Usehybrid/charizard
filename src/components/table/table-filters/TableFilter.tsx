@@ -69,7 +69,7 @@ export default function TableFilter({
     <div>
       <button
         className={clsx('hybr1d-ui-reset-btn', classes.filter, api.open && classes.filterActive)}
-        {...api.triggerProps}
+        {...api.getTriggerProps()}
       >
         <FilterTooltip
           filter={filter}
@@ -79,9 +79,9 @@ export default function TableFilter({
         <SVG path={chevronDown} svgClassName={classes.filterIcon2} />
       </button>
 
-      <div {...api.positionerProps} className={classes.positioner}>
+      <div {...api.getPositionerProps()} className={classes.positioner}>
         {api.open && (
-          <div {...api.contentProps} className={classes.dropdown} onKeyDown={() => {}}>
+          <div {...api.getContentProps()} className={classes.dropdown} onKeyDown={() => {}}>
             {!filter.config?.hideSearch && (
               <div className={classes.dropdownSearch}>
                 <Search

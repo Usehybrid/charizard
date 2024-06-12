@@ -47,12 +47,15 @@ export function TooltipContent({
   return (
     <>
       {api.open && (
-        <div {...api.positionerProps} style={{...api?.positionerProps?.style, ...positionerStyles}}>
+        <div
+          {...api.getPositionerProps()}
+          style={{...api?.getPositionerProps()?.style, ...positionerStyles}}
+        >
           <div {...arrowProps} className={clsx(classes.arrow, {[classes[bg]]: !isCustomBg})}>
             <div {...api.arrowTipProps} />
           </div>
           <div
-            {...api.contentProps}
+            {...api.getContentProps()}
             className={clsx(classes.content, classes[bg])}
             style={{background: isCustomBg ? bg : '', ...containerStyles}}
           >

@@ -61,9 +61,9 @@ export default function FilterDrawerCheckbox({
   const api = checkbox.connect(state, send, normalizeProps)
 
   return (
-    <label {...api.rootProps} className={classes.optionLabel}>
-      <div {...api.controlProps} />
-      <span {...api.labelProps}>
+    <label {...api.getRootProps()} className={classes.optionLabel}>
+      <div {...api.getControlProps()} />
+      <span {...api.getLabelProps()}>
         {countryCode && (
           <ReactCountryFlag
             countryCode={countryCode || 'IN'}
@@ -79,7 +79,7 @@ export default function FilterDrawerCheckbox({
 
         {customName ? <div dangerouslySetInnerHTML={{__html: customName}}></div> : label}
       </span>
-      <input {...api.hiddenInputProps} />
+      <input {...api.getHiddenInputProps()} />
     </label>
   )
 }

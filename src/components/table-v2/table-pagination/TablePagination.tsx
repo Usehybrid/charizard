@@ -51,9 +51,9 @@ export default function TablePagination({paginationConfig}: TablePaginationProps
         itemsOnPage={metaData?.items_on_page}
       />
       {paginationApi.totalPages > 1 && (
-        <nav {...paginationApi.rootProps}>
+        <nav {...paginationApi.getRootProps()}>
           <div className={classes.pageBoxes}>
-            <div {...paginationApi.prevTriggerProps} className={classes.pageBox}>
+            <div {...paginationApi.getPrevTriggerProps()} className={classes.pageBox}>
               <SVG path={chevronLeft} svgClassName={classes.arrowIcon} />
             </div>
             {paginationApi.pages.map((page, i) => {
@@ -74,7 +74,7 @@ export default function TablePagination({paginationConfig}: TablePaginationProps
                   </React.Fragment>
                 )
             })}
-            <div {...paginationApi.nextTriggerProps} className={classes.pageBox}>
+            <div {...paginationApi.getNextTriggerProps()} className={classes.pageBox}>
               <SVG path={chevronRight} svgClassName={classes.arrowIcon} />
             </div>
           </div>

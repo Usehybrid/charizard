@@ -41,10 +41,13 @@ export default function CustomColCheckbox({
 
   const api = checkbox.connect(state, send, normalizeProps)
   return (
-    <label {...api.rootProps} className={clsx(classes.optionLabel, disabled && classes.optionDis)}>
-      <div {...api.controlProps} className={classes.checkbox} />
-      <span {...api.labelProps}>{label}</span>
-      <input {...api.hiddenInputProps} />
+    <label
+      {...api.getRootProps()}
+      className={clsx(classes.optionLabel, disabled && classes.optionDis)}
+    >
+      <div {...api.getControlProps()} className={classes.checkbox} />
+      <span {...api.getLabelProps()}>{label}</span>
+      <input {...api.getHiddenInputProps()} />
     </label>
   )
 }

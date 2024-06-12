@@ -9,7 +9,7 @@ import {Tooltip} from '../tooltip'
 import {SVG} from '../svg'
 import {Placement} from '@zag-js/popper'
 
-interface RadioGroupProps  {
+interface RadioGroupProps {
   /**
    * heading for radio group
    */
@@ -70,7 +70,7 @@ export function RadioGroup({
 
   return (
     <div className={classes.radioGroup}>
-      <div {...api.rootProps} className={classes.root}>
+      <div {...api.getRootProps()} className={classes.root}>
         {radioHeading && (
           <InputContainer customClassName={classes.labelContainer}>
             <InputLabel required={required} customClasses={classes.heading}>

@@ -146,8 +146,8 @@ function MenuButton({
   const dropdown = (
     <>
       {menuItems.length > 0 && (
-        <div {...api.positionerProps}>
-          <div {...api.contentProps} className={classes.menus}>
+        <div {...api.getPositionerProps()}>
+          <div {...api.getContentProps()} className={classes.menus}>
             {menuItems
               .filter(menu => {
                 if (!menu.filterFn) return true
@@ -191,7 +191,7 @@ function MenuButton({
             disabled && classes.disabled,
           )}
           disabled={disabled}
-          {...api.triggerProps}
+          {...api.getTriggerProps()}
         >
           {children}
           <SVG path={chevronDown} width={24} height={24} svgClassName={classes.chevronDown} />
@@ -203,7 +203,7 @@ function MenuButton({
             classes.customTrigger,
             api.open && classes.customTriggerActive,
           )}
-          {...api.triggerProps}
+          {...api.getTriggerProps()}
         >
           {children}
         </button>
@@ -239,7 +239,7 @@ function MenuButton({
               disabled && classes.disabled,
             )}
             disabled={disabled}
-            {...api.triggerProps}
+            {...api.getTriggerProps()}
           >
             <img
               src={chevronDown}

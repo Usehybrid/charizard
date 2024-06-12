@@ -51,8 +51,8 @@ export function LayoutTabs({tabs, defaultValue, tabClassName, onValueChange}: La
   const api = zagTabs.connect(state, send, normalizeProps)
 
   return (
-    <div {...api.rootProps}>
-      <div {...api.listProps} className={clsx(classes.tabList, tabClassName)}>
+    <div {...api.getRootProps()}>
+      <div {...api.getListProps()} className={clsx(classes.tabList, tabClassName)}>
         {tabs.map(item => (
           <button
             {...api.getTriggerProps({value: item.value})}

@@ -23,7 +23,7 @@ interface PopoverTitleProps {
 
 export function PopoverTitle({children, api, styles, className}: PopoverTitleProps) {
   return (
-    <div {...api?.titleProps} style={styles} className={className}>
+    <div {...api?.getTitleProps()} style={styles} className={className}>
       {children}
     </div>
   )

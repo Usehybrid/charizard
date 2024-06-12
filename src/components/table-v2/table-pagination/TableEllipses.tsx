@@ -34,9 +34,9 @@ export default function TableEllipses({paginationApi, i}: TableEllipsesProps) {
 
   const selectApi = select.connect(_state, _send, normalizeProps)
   return (
-    <div {...selectApi.rootProps} key={`ellipsis-${i}`}>
-      <div {...selectApi.controlProps}>
-        <button {...selectApi.triggerProps} className={'hybr1d-ui-reset-btn'}>
+    <div {...selectApi.getRootProps()} key={`ellipsis-${i}`}>
+      <div {...selectApi.getControlProps()}>
+        <button {...selectApi.getTriggerProps()} className={'hybr1d-ui-reset-btn'}>
           <div
             key={`ellipsis-${i}`}
             {...paginationApi.getEllipsisProps({index: i})}
@@ -49,8 +49,8 @@ export default function TableEllipses({paginationApi, i}: TableEllipsesProps) {
 
       {selectApi.open && (
         <Portal>
-          <div {...selectApi.positionerProps} className={classes.paginationMenu}>
-            <ul {...selectApi.contentProps} className={classes.limitContent}>
+          <div {...selectApi.getPositionerProps()} className={classes.paginationMenu}>
+            <ul {...selectApi.getContentProps()} className={classes.limitContent}>
               {generateRange(x, y).map(item => (
                 <li
                   key={item.value}

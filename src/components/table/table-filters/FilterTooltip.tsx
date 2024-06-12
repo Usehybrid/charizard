@@ -19,15 +19,15 @@ export default function FilterTooltip({filter, tableFilter, selectedFilters}: Fi
     <>
       {/* @ts-ignore */}
       <div
-        {...tooltipApi.triggerProps}
+        {...tooltipApi.getTriggerProps()}
         className={clsx('hybr1d-ui-reset-btn', classes.filterTooltipTrigger)}
       >
         <div className={classes.filterCol}>{filter.name}</div>
         {selectedFilters !== 0 && <span className={classes.totalSelected}>{selectedFilters}</span>}
       </div>
       {tooltipApi.open && selectedFilters !== 0 && (
-        <div {...tooltipApi.positionerProps}>
-          <div {...tooltipApi.contentProps} className={classes.filterTooltip}>
+        <div {...tooltipApi.getPositionerProps()}>
+          <div {...tooltipApi.getContentProps()} className={classes.filterTooltip}>
             {tableFilterWithName.map(value => (
               <div key={value.value} className={classes.filterValue}>
                 {value.name}

@@ -9,5 +9,5 @@ interface ModalOverlayProps {
 }
 
 export function ModalOverlay({api}: ModalOverlayProps) {
-  return <div {...api?.backdropProps} className={classes.backdrop} />
+  return <div {...api?.getBackdropProps()} className={classes.backdrop} />
 }

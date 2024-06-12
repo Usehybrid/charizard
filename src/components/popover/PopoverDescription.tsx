@@ -23,7 +23,7 @@ interface PopoverDescriptionProps {
 
 export function PopoverDescription({children, api, styles, className}: PopoverDescriptionProps) {
   return (
-    <div {...api?.descriptionProps} style={styles} className={className}>
+    <div {...api?.getDescriptionProps()} style={styles} className={className}>
       {children}
     </div>
   )

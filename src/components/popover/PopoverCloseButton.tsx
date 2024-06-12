@@ -26,7 +26,7 @@ interface PopoverCloseButtonProps {
 export function PopoverCloseButton({children, api, styles, className}: PopoverCloseButtonProps) {
   return (
     <button
-      {...api?.closeTriggerProps}
+      {...api?.getCloseTriggerProps()}
       style={styles}
       className={clsx('hybr1d-ui-reset-btn', className)}
       onClick={() => api?.setOpen(false)}

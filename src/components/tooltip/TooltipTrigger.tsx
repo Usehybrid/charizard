@@ -17,9 +17,14 @@ interface TooltipTriggerProps {
   customStyles?: React.CSSProperties
 }
 
-export function TooltipTrigger({children, api,customStyles={}}: TooltipTriggerProps) {
+export function TooltipTrigger({children, api, customStyles = {}}: TooltipTriggerProps) {
   return (
-    <button {...api.triggerProps} type="button" className={classes.trigger} style={{...customStyles}}>
+    <button
+      {...api.getTriggerProps()}
+      type="button"
+      className={classes.trigger}
+      style={{...customStyles}}
+    >
       {children}
     </button>
   )

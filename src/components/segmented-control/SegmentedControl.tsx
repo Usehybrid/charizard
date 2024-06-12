@@ -39,8 +39,8 @@ export function SegmentedControl({items, defaultValue, handleOnChange}: Segmente
 
   return (
     <div className={classes.segmentedControl}>
-      <div {...api.rootProps} className={classes.root}>
-        <div {...api.indicatorProps} className={classes.indicator} />
+      <div {...api.getRootProps()} className={classes.root}>
+        <div {...api.getIndicatorProps()} className={classes.indicator} />
         {items.map(opt => (
           <label
             key={opt.value}

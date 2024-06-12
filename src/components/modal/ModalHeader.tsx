@@ -30,11 +30,14 @@ export function ModalHeader({
   showBorder = true,
 }: ModalHeaderProps) {
   return (
-    <div {...api?.titleProps} className={clsx(classes.header, {[classes.showBorder]: showBorder})}>
+    <div
+      {...api?.getTitleProps()}
+      className={clsx(classes.header, {[classes.showBorder]: showBorder})}
+    >
       <div>{children}</div>
       {showCrossBtn && (
         <button
-          {...api.closeTriggerProps}
+          {...api.getCloseTriggerProps()}
           type="button"
           onClick={() => api?.setOpen(false)}
           className="hybr1d-ui-reset-btn"

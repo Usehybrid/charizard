@@ -35,18 +35,18 @@ export function ColorPicker({
   const api = colorPicker.connect(state, send, normalizeProps)
 
   return (
-    <div {...api.rootProps} className={classes.root}>
+    <div {...api.getRootProps()} className={classes.root}>
       {label && <InputLabel required={required}>{label}</InputLabel>}
-      <input {...api.hiddenInputProps} />
-      <div {...api.controlProps} className={classes.control}>
-        <button {...api.triggerProps} className={clsx('hybr1d-ui-reset-btn', classes.trigger)}>
+      <input {...api.getHiddenInputProps()} />
+      <div {...api.getControlProps()} className={classes.control}>
+        <button {...api.getTriggerProps()} className={clsx('hybr1d-ui-reset-btn', classes.trigger)}>
           <div {...api.getSwatchProps({value: api.value})} className={classes.swatch} />
           <SVG path={chevronDown} svgClassName={classes.svg} />
         </button>
       </div>
-      <div {...api.positionerProps} className={classes.positioner}>
-        <div {...api.contentProps} className={classes.content}>
-          <div {...api.swatchGroupProps} className={classes.swatchGroup}>
+      <div {...api.getPositionerProps()} className={classes.positioner}>
+        <div {...api.getContentProps()} className={classes.content}>
+          <div {...api.getSwatchGroupProps()} className={classes.swatchGroup}>
             {presets.map(preset => (
               <button
                 key={preset}

@@ -126,22 +126,29 @@ export default function TableCustomCols({
 
   return (
     <>
-      <button {...api.triggerProps} className={clsx('hybr1d-ui-reset-btn', classes.actionCommon)}>
+      <button
+        {...api.getTriggerProps()}
+        className={clsx('hybr1d-ui-reset-btn', classes.actionCommon)}
+      >
         <SVG path={viewColIcon} width={22} height={22} />
       </button>
       {api.open && (
         <Portal>
-          <div {...api.backdropProps} className={classes.backdrop} />
-          <div {...api.positionerProps} style={{...api.positionerProps.style}}>
-            <div {...api.contentProps} className={classes.content}>
-              <h2 {...api.titleProps} className={classes.title}>
+          <div {...api.getBackdropProps()} className={classes.backdrop} />
+          <div {...api.getPositionerProps()} style={{...api.getPositionerProps().style}}>
+            <div {...api.getContentProps()} className={classes.content}>
+              <h2 {...api.getTitleProps()} className={classes.title}>
                 <div>
                   <span>Columns</span>
-                  <p {...api.descriptionProps} className={classes.desc}>
+                  <p {...api.getDescriptionProps()} className={classes.desc}>
                     {customColumnConfig?.description || `Description here`}
                   </p>
                 </div>
-                <button {...api.closeTriggerProps} type="button" className="hybr1d-ui-reset-btn">
+                <button
+                  {...api.getCloseTriggerProps()}
+                  type="button"
+                  className="hybr1d-ui-reset-btn"
+                >
                   <SVG
                     path={closeIcon}
                     svgClassName={classes.closeIcon}
@@ -226,7 +233,7 @@ export default function TableCustomCols({
               )}
 
               <div className={classes.footer}>
-                <Button {...api.closeTriggerProps} variant={BUTTON_VARIANT.SECONDARY}>
+                <Button {...api.getCloseTriggerProps()} variant={BUTTON_VARIANT.SECONDARY}>
                   Cancel
                 </Button>
                 <Button onClick={handleSave}>Save</Button>

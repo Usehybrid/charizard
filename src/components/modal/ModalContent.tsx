@@ -29,7 +29,7 @@ export function ModalContent({children, api, size = 'md'}: ModalContentProps) {
   return (
     <div {...api?.containerProps} className={classes.container}>
       <div className={clsx(classes.contentWrapper, classes[size])}>
-        <div {...api?.contentProps} className={classes.content}>
+        <div {...api?.getContentProps()} className={classes.content}>
           {clones}
         </div>
       </div>

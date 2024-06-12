@@ -66,15 +66,15 @@ export function PopoverContent({
   return (
     <Wrapper>
       <div
-        {...api?.positionerProps}
+        {...api?.getPositionerProps()}
         className={classes.positioner}
-        style={{...api?.positionerProps?.style, ...positionerStyles}}
+        style={{...api?.getPositionerProps()?.style, ...positionerStyles}}
       >
         <div {...arrowProps} className={clsx(classes.arrow, {[classes[bg]]: !isCustomBg})}>
           <div {...api?.arrowTipProps} />
         </div>
         <div
-          {...api?.contentProps}
+          {...api?.getContentProps()}
           className={clsx(classes.content, classes[bg], className)}
           style={{background: isCustomBg ? bg : '', ...styles}}
         >
