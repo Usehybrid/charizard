@@ -45,6 +45,7 @@ interface RadioGroupProps {
    */
   errorMsg?: string
   optionsContainerStyles?: React.CSSProperties
+  disabled?: boolean
 }
 
 export function RadioGroup({
@@ -55,6 +56,7 @@ export function RadioGroup({
   required = false,
   errorMsg,
   optionsContainerStyles,
+  disabled = false,
 }: RadioGroupProps) {
   const [state, send] = useMachine(
     radio.machine({
@@ -63,6 +65,7 @@ export function RadioGroup({
       onValueChange: ({value}) => {
         onChange(value)
       },
+      disabled,
     }),
   )
 
@@ -92,9 +95,14 @@ export function RadioGroup({
                 <input {...api.getItemHiddenInputProps({value: opt.value})} />
                 <div
                   {...api.getItemControlProps({value: opt.value})}
-                  className={clsx(classes.radioControl, {
-                    [classes.radioControlActive]: api.value === opt.value,
-                  })}
+                  className={clsx(
+                    classes.radioControl,
+                    {
+                      [classes.radioControlActive]: api.value === opt.value,
+                    },
+                    disabled && classes.controlDisabled,
+                    disabled && classes.radioControlActiveDisabled,
+                  )}
                 />
               </label>
               {!!opt.tooltip && (

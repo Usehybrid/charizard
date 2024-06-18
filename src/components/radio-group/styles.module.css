@@ -57,10 +57,18 @@
   flex-shrink: 0;
 }
 
+.controlDisabled {
+  cursor: not-allowed;
+}
+
 .radioControlActive {
   border-color: var(--theme-blue);
   background-color: var(--theme-blue);
   position: relative;
+}
+
+.radioControlActive.radioControlActiveDisabled {
+  opacity: 0.6;
 }
 
 .radioControlActive::after {

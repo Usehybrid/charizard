@@ -44,6 +44,10 @@
   background: var(--theme-blue);
 }
 
+.checkbox .checkboxInput:checked + .checkboxBox.disabled {
+  opacity: 0.6;
+}
+
 .checkbox .checkboxInput + .checkboxBox::after {
   content: '';
   width: 0.75em;
