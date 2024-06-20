@@ -35,7 +35,7 @@ export function TooltipContent({
   const isCustomBg = !['black', 'gray'].includes(bg)
 
   const arrowProps = {
-    ...api?.arrowProps,
+    ...api?.getArrowProps(),
     ...(isCustomBg && {
       style: {
         ...api?.arrowProps?.style,

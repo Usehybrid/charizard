@@ -54,10 +54,10 @@ export function PopoverContent({
   const isCustomBg = !['black', 'gray'].includes(bg)
 
   const arrowProps = {
-    ...api?.arrowProps,
+    ...api?.getArrowProps(),
     ...(isCustomBg && {
       style: {
-        ...api?.arrowProps?.style,
+        ...api?.getArrowProps()?.style,
         '--arrow-background': bg,
       },
     }),
