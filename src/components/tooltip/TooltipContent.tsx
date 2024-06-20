@@ -52,7 +52,7 @@ export function TooltipContent({
           style={{...api?.getPositionerProps()?.style, ...positionerStyles}}
         >
           <div {...arrowProps} className={clsx(classes.arrow, {[classes[bg]]: !isCustomBg})}>
-            <div {...api.arrowTipProps} />
+            <div {...api.getArrowTipProps()} />
           </div>
           <div
             {...api.getContentProps()}
