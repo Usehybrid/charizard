@@ -68,9 +68,7 @@ interface SelectProps {
    * The custom styles of the select container
    */
   customContainerStyles?: React.CSSProperties
-  /**
-   * Whether the select is disabled
-   */
+  customErrorStyles?: React.CSSProperties
   isDisabled?: boolean
   /**
    * Default placement of the menu in relation to the control. 'auto' will flip when there isn't enough space below the control.
@@ -102,6 +100,7 @@ export function Select({
   defaultValue,
   formatGroupLabel,
   customContainerStyles,
+  customErrorStyles,
   menuPlacement,
   errorMsg,
   extraprops,
@@ -152,7 +151,11 @@ export function Select({
         menuPlacement={menuPlacement}
         {...extraprops}
       />
-      {errorMsg && <p className={classes.errorMsg}>{errorMsg}</p>}
+      {errorMsg && (
+        <p className={classes.errorMsg} style={customErrorStyles}>
+          {errorMsg}
+        </p>
+      )}
     </div>
   )
 }
