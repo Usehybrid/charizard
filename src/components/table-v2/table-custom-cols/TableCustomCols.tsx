@@ -10,7 +10,6 @@ import {useMachine, normalizeProps, Portal} from '@zag-js/react'
 import {SVG} from '../../svg'
 import {BUTTON_VARIANT, Button} from '../../button'
 import {Search} from '../../search'
-import {TableV2Props} from '../TableV2'
 import {SortableList} from './sortable/SortableList'
 import {CHECKBOX_COL_ID, DROPDOWN_COL_ID, RADIO_COL_ID} from '../constants'
 import {TableCustomColumns} from '../types'
@@ -45,33 +44,21 @@ export default function TableCustomCols({
   const [checkedState, setCheckedState] = React.useState<TableCustomColumns['checked_state']>([])
   const [search, setSearch] = React.useState('')
 
-  // console.log({checkedState})
-
   const [state, send] = useMachine(
     dialog.machine({
       id: React.useId(),
       onOpenChange(details) {
         if (!details.open) {
-          // setCheckedState([])
           setSearch('')
         }
       },
       // todo debug the root cause in zag source code
       closeOnInteractOutside: false,
+      preventScroll: false,
     }),
   )
 
   const api = dialog.connect(state, send, normalizeProps)
-
-  // const enabledCols = table
-  //   .getAllLeafColumns()
-  //   .filter(
-  //     c =>
-  //       c.columnDef.enableHiding &&
-  //       c.id !== CHECKBOX_COL_ID &&
-  //       c.id !== RADIO_COL_ID &&
-  //       c.id !== DROPDOWN_COL_ID,
-  //   )
 
   const disabledCols = table
     .getAllLeafColumns()

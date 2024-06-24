@@ -60,7 +60,7 @@
   /* background-color: transparent; */
 
   z-index: 1040;
-  overflow: hidden;
+  overflow-y: scroll;
 }
 
 .content [data-state='closed'] {
@@ -79,6 +79,10 @@
   gap: 10px;
   width: 100%;
   background: var(--neutral-arch-10);
+
+  position: sticky;
+  top: 0;
+  z-index: 1;
 }
 
 .desc {
@@ -118,7 +122,10 @@
   align-items: center;
   justify-content: flex-end;
 
-  /* border-top: 1px solid var(--neutral-arch-200); */
+  position: sticky;
+  padding-bottom: 20px;
+  bottom: 0;
+  background-color: white;
 }
 
 .colBox {
@@ -126,10 +133,10 @@
   padding: 20px;
   padding-top: 0;
   /* 56px => drawer header, 53px => drawer footer, 10px to make it look better */
-  max-height: calc(100vh - 139px + 10px);
-  overflow-y: scroll;
-  scroll-behavior: smooth;
-  scrollbar-width: none;
+  /* max-height: calc(100vh - 139px + 10px); */
+  /* overflow-y: scroll; */
+  /* scroll-behavior: smooth; */
+  /* scrollbar-width: none; */
 }
 
 /* filter options */
@@ -153,7 +160,7 @@
 /* filter search */
 .dropdownSearch {
   position: sticky;
-  top: 0;
+  top: 76px;
   padding-top: 20px;
   background-color: white;
   /* margin-top: -10px; */
