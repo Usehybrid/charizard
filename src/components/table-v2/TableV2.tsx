@@ -460,11 +460,14 @@ function TableComp({
                     {header.isPlaceholder ? null : (
                       <div
                         {...{
-                          onClick: header.column.getToggleSortingHandler(),
+                          onClick: loaderConfig?.isFetching
+                            ? undefined
+                            : header.column.getToggleSortingHandler(),
                           style: {
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: header.id === DROPDOWN_COL_ID ? 'center' : undefined,
+                            cursor: loaderConfig?.isFetching ? 'not-allowed' : undefined,
                           },
                         }}
                       >

@@ -11,7 +11,7 @@ const invInitialQueries = {
   limit: 20,
   search: '',
   sort_by: '',
-  sort_order: '',
+  sort_order: '' as '' | 'asc' | 'desc',
   filters: {
     filter_type: '',
     filter_brand: '',

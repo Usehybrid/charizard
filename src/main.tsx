@@ -427,11 +427,11 @@ const columns = [
   }),
   columnHelper.accessor('software_owners', {
     header: 'Software Owners',
-
     cell: info => {
       return <div>{getFullName(info.row.original.software_owners[0])}</div>
     },
     enableHiding: true,
+    enableSorting: true,
     size: 100,
   }),
   columnHelper.accessor('software_users', {
@@ -440,6 +440,7 @@ const columns = [
       return <div>{info.row.original.software_users_count}</div>
     },
     enableHiding: true,
+    enableSorting: true,
     size: 100,
   }),
   columnHelper.accessor('software_license', {
@@ -448,6 +449,7 @@ const columns = [
       return <div>{info.row.original.software_license_count}</div>
     },
     enableHiding: true,
+    enableSorting: true,
     size: 100,
   }),
 ]
@@ -482,12 +484,15 @@ function App() {
           filterReset: () => dispatch({type: INV_ACTION_TYPES.RESET_FILTERS, payload: null}),
         }}
         sortConfig={{
-          sortBy: '',
-          sortOrd: '',
+          sortBy: query.sort_by,
+          sortOrd: query.sort_order,
           setSortBy: (value: any) => dispatch({type: INV_ACTION_TYPES.SORT_BY, payload: value}),
           setSortOrd: (value: any) => dispatch({type: INV_ACTION_TYPES.SORT_ORDER, payload: value}),
           sortMap: {
-            software: 'softwares.names',
+            software: 'softwares',
+            software_owners: 'software_owners',
+            software_users: 'software_users',
+            software_license: 'software_license',
           },
         }}
         paginationConfig={{
