@@ -86,7 +86,7 @@ export function RadioGroup({
           style={optionsContainerStyles}
         >
           {items.map(opt => (
-            <div key={opt.value} style={{display: 'flex', gap: '4px'}}>
+            <div key={opt.value} style={{display: 'flex', gap: '6px'}}>
               <label {...api.getItemProps({value: opt.value})} className={classes.radio}>
                 <span {...api.getItemTextProps({value: opt.value})} className={classes.radioLabel}>
                   <span className={classes.heading}>{opt.label.heading}</span>

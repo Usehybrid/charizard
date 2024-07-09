@@ -94,8 +94,7 @@
   text-align: left;
 }
 
-.infoIcon,
-.infoIconSpan {
+.infoIcon {
   width: 16px;
   height: 16px;
 }
@@ -104,7 +103,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-left: -5px;
+  margin-top: 2px;
 }
 
 .infoIcon > path {
