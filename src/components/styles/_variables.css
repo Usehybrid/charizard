@@ -6,9 +6,6 @@
   --filter-slate-600: invert(65%) sepia(29%) saturate(182%) hue-rotate(202deg) brightness(91%)
     contrast(93%);
 
-  /* ! NEW VARIABLES */
-  /* https://www.figma.com/file/oifEB5HVoXf36YyO4DJKhN/%F0%9F%8E%A8-Hybr1dge-DS-2?type=design&node-id=167-46&mode=design&t=xqz7njIqVMHMysXo-0 */
-
   /* * text colors */
   --text-primary: #000041;
   --text-secondary: #555580;
@@ -75,4 +72,22 @@
   --accent-wave: #52a7e0;
   --accent-wisteria: #e2cbf7;
   --accent-zest: #f4f5ad;
+
+  /* NEW VARIABLES */
+  /* primary */
+  --p-p10: #d3dbf8;
+  --p-p70: #162e83;
+  --p-p90: #070f2c;
+
+  --gray-d10: #e1e1e2;
+  --gray-d70: #404041;
+
+  --status-success-g10: #d7f0e5;
+  --status-success-g70: #206b4c;
+  --status-warning-w10: #fdebd0;
+  --status-warning-w70: #925e0b;
+  --status-error-e10: #fadbd8;
+  --status-error-e70: #8b2e24;
+  --status-info-i70: #1f5b83;
+  --status-info-i10: #d6eaf8;
 }

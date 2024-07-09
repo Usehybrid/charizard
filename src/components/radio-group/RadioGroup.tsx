@@ -2,10 +2,10 @@ import * as React from 'react'
 import * as radio from '@zag-js/radio-group'
 import clsx from 'clsx'
 import infoCircleIcon from '../assets/info-circle.svg'
+import {TooltipV2} from '../tooltip-v2'
 import classes from './styles.module.css'
 import {useMachine, normalizeProps} from '@zag-js/react'
 import {InputContainer, InputLabel} from '../input'
-import {Tooltip} from '../tooltip'
 import {SVG} from '../svg'
 import {Placement} from '@zag-js/popper'
 
@@ -106,9 +106,11 @@ export function RadioGroup({
                 />
               </label>
               {!!opt.tooltip && (
-                <Tooltip placement={opt.tooltip.placement as Placement}>
-                  <Tooltip.Trigger>
-                    {opt.tooltip.trigger ? (
+                <TooltipV2
+                  id={'radio-group-tooltip'}
+                  placement={opt.tooltip.placement as Placement}
+                  trigger={
+                    opt.tooltip.trigger ? (
                       opt.tooltip.trigger
                     ) : (
                       <SVG
@@ -116,10 +118,10 @@ export function RadioGroup({
                         svgClassName={classes.infoIcon}
                         spanClassName={classes.infoIconSpan}
                       />
-                    )}
-                  </Tooltip.Trigger>
-                  <Tooltip.Content>{opt.tooltip.txt}</Tooltip.Content>
-                </Tooltip>
+                    )
+                  }
+                  content={opt.tooltip.txt}
+                />
               )}
             </div>
           ))}
