@@ -1,5 +1,4 @@
 import * as React from 'react'
-
 import * as checkbox from '@zag-js/checkbox'
 import classes from './table-custom-cols.module.css'
 import {useMachine, normalizeProps} from '@zag-js/react'
@@ -13,6 +12,10 @@ type CustomColCheckboxProps = Pick<OptionsProp, 'setCheckedState'> & {
   disabled?: boolean
 }
 
+type CheckboxChangeDetails = {
+  checked: boolean
+}
+
 export default function CustomColCheckbox({
   id,
   label,
@@ -20,26 +23,37 @@ export default function CustomColCheckbox({
   setCheckedState,
   disabled = false,
 }: CustomColCheckboxProps) {
-  const [state, send] = useMachine(
-    checkbox.machine({
-      id: React.useId(),
-      disabled,
-      checked,
-      onCheckedChange(details) {
-        setCheckedState(oldState => {
-          let newState = [...oldState]
-          if (id === 'all') {
+  const onCheckedChange = React.useCallback(
+    (details: CheckboxChangeDetails) => {
+      setCheckedState(oldState => {
+        let newState = [...oldState]
+        if (id === 'all') {
+          if (details.checked) {
             newState = newState.map(obj => ({...obj, checked: !!details.checked}))
           } else {
-            newState[newState.findIndex(obj => obj.id === id)].checked = !!details.checked
+            const allChecked = !newState.find(item => !item.checked)
+            if (allChecked) {
+              newState = newState.map(obj => ({...obj, checked: !!details.checked}))
+            }
           }
-          return newState
-        })
-      },
-    }),
+        } else {
+          newState[newState.findIndex(obj => obj.id === id)].checked = !!details.checked
+        }
+        return newState
+      })
+    },
+    [id, setCheckedState],
   )
 
+  const [state, send] = useMachine(
+    checkbox.machine({id: React.useId(), disabled, checked, onCheckedChange}),
+  )
   const api = checkbox.connect(state, send, normalizeProps)
+
+  React.useEffect(() => {
+    api.setChecked(checked)
+  }, [checked, api])
+
   return (
     <label
       {...api.getRootProps()}
