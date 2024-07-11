@@ -19,7 +19,7 @@
 }
 
 .sortHidden {
-  visibility: hidden;
+  display: none;
 }
 
 .dragHandle {
