@@ -213,7 +213,7 @@ export function TableV2({
     if (!rowSelectionConfig || !setSelectedRows) return
     const rows = table.getSelectedRowModel().rows.map(row => row.original)
     setSelectedRows([...rows])
-  }, [rowSelection])
+  }, [rowSelectionConfig?.rowSelection, rowSelection])
 
   const _columns = [
     {
@@ -351,8 +351,8 @@ export function TableV2({
             rowSelectionConfig={rowSelectionConfig}
             searchConfig={searchConfig}
             totalText={totalText}
-            rowSelection={rowSelection}
-            setRowSelection={setRowSelection}
+            rowSelection={rowSelectionConfig?.rowSelection || rowSelection}
+            setRowSelection={rowSelectionConfig?.setRowSelection || setRowSelection}
             filterConfig={filterConfig}
             customColumnConfig={customColumnConfig}
             exportConfig={exportConfig}
