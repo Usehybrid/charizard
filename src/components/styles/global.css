@@ -66,10 +66,10 @@ h6 {
 /*
   8. Create a root stacking context
 */
-#root,
+/* #root,
 #__next {
   isolation: isolate;
-}
+} */
 
 /*
   Reset Button
