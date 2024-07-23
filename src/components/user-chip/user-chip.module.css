@@ -1,0 +1,53 @@
+.box {
+  display: flex;
+  align-items: center;
+  padding-right: 6px;
+  gap: 4px;
+  border-radius: var(--borderfull);
+}
+
+.box.neutral {
+  background-color: var(--dark-d10);
+  color: var(--dark-d70);
+}
+
+.box.default {
+  background-color: var(--p-p10);
+  color: var(--p-p70);
+}
+
+.box.positive {
+  background-color: var(--status-success-s10);
+  color: var(--status-success-s70);
+}
+
+.box.warning {
+  background-color: var(--status-warning-w10);
+  color: var(--status-warning-w70);
+}
+
+.box.error {
+  background-color: var(--status-error-e10);
+  color: var(--status-error-e70);
+}
+
+.box.highlight {
+  background-color: var(--status-info-i10);
+  color: var(--status-info-i70);
+}
+
+.box.white {
+  background-color: var(--neutral-white);
+  color: var(--text-primary);
+}
+
+.avatar {
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+}
