@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import randomIcon from './components/assets/check.svg'
 import randomIcon2 from './components/assets/search-2.svg'
 import {createColumnHelper} from '@tanstack/react-table'
-import {ColorPicker, TableV2, USER_CHIP_STATUS, UserChip} from './components'
+import {ColorPicker, TableV2, USER_CHIP_STATUS, UserChip, Tabs, Tab} from './components'
 import {INV_ACTION_TYPES, useInventoryStore} from './components/table-v2/inventory/inventory.store'
 
 const styles = {
@@ -459,6 +459,8 @@ function App() {
 
   const query = useInventoryStore(s => s.query)
   const dispatch = useInventoryStore(s => s.dispatch)
+  const [activeTab, setActiveTab] = React.useState(tabs?.[0].title);
+
 
   // console.log(query.limit)
 
@@ -567,15 +569,25 @@ function App() {
         tableStyleConfig={{stickyIds: ['software'], maxHeight: '200px'}}
       /> */}
 
-      <UserChip
+      {/* <UserChip
         status={USER_CHIP_STATUS.NEUTRAL}
         username="User"
         profileImgUrl="https://hybrid-dev-test.s3.us-west-2.amazonaws.com/user-avatars/male/2.png?recached=123"
         selected
-      />
+      /> */}
+
+      <Tabs id='test-tab' activeKey={activeTab} onSelect={(id) => setActiveTab(id)}>
+        {
+          tabs.map((tab) => {
+            return <Tab isActive={activeTab === tab.title} key={tab.title} title={tab.title}>{tab.content}</Tab>
+          })
+        }
+      </Tabs>
     </div>
   )
 }
+
+const tabs = [{title: 'All (1)', content: <div>Tab 1</div>}, {title: 'Tab 2', content: <div>Tab 2</div>}, {title: 'Tab 3', content: <div>Tab 3</div>}];
 
 const cols = {
   checked_state: [

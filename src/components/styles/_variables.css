@@ -172,3 +172,11 @@
   font-weight: 600;
   line-height: 16px;
 }
+
+.charizard-subheading-semibold {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: 0.2px;
+}
