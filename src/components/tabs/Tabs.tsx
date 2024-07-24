@@ -6,7 +6,7 @@ import classes from './styles.module.css'
 interface TabsProps {
 	id: string
 	activeKey: string
-	onSelect: (kay: string) => void
+	onSelect: (key: string) => void
 	customClassName?: string
 	customStyles?: React.CSSProperties
 	children: ReactElement[]
@@ -21,9 +21,10 @@ export const Tabs: React.FC<TabsProps> = ({
 	customStyles = {}
 }) => {
 
-	const handleTabChange = (key: string) => {
-		onSelect(key)
-	}
+	const handleTabChange = React.useCallback((key: string) => {
+		onSelect(key);
+	}, [onSelect]);
+
 	return (
 		<div id={id} className={clsx(classes.tabs, customClassName)} style={customStyles}>
 			<div className={classes.tabBar}>
