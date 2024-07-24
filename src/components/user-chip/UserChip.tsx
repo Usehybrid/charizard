@@ -30,7 +30,7 @@ export function UserChip({
   return (
     <div className={clsx(classes.box, classes[status], {[classes.selected]: selected})}>
       <img src={profileImgUrl} alt={username} className={classes.avatar} />
-      <span className="charizard-caption-semibold">{username}</span>
+      <span className="zap-caption-semibold">{username}</span>
       {selected && <SVG path={multiplyIcon} svgClassName={classes.icon} />}
     </div>
   )
