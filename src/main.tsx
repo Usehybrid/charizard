@@ -657,13 +657,13 @@ function App() {
         selected
       /> */}
 
-      <Tabs id='test-tab' activeKey={activeTab} onSelect={(id) => setActiveTab(id)}>
+      {/* <Tabs id='test-tab' activeKey={activeTab} onSelect={(id) => setActiveTab(id)}>
         {
           tabs.map((tab) => {
             return <Tab isActive={activeTab === tab.title} key={tab.title} title={tab.title}>{tab.content}</Tab>
           })
         }
-      </Tabs>
+      </Tabs> */}
       <TaskCard data={tasks} />
     </div>
   )

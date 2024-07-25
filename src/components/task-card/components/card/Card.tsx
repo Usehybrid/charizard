@@ -1,5 +1,6 @@
 import clsx from 'clsx'
 import classes from './styles.module.css'
+import {USER_CHIP_STATUS, UserChip} from '../../../user-chip'
 
 export default function Card({data}: any) {
   return (
@@ -17,7 +18,12 @@ export default function Card({data}: any) {
             ) : typeof detail.value === 'string' ? (
               <div className={classes.detailValue}>{detail.value}</div>
             ) : (
-              <div className={classes.detailValue}>{detail.value.first_name}</div>
+              <UserChip
+                status={USER_CHIP_STATUS.NEUTRAL}
+                username={detail.value.first_name}
+                profileImgUrl={detail.value.profile_img_url}
+                selected
+              />
             )}
           </div>
         ))}
