@@ -1,0 +1,13 @@
+.container {
+  border-radius: 5px;
+  animation: skeleton-loading 0.5s linear infinite alternate;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-color: var(--neutral-arch-200);
+  }
+  100% {
+    background-color: var(--neutral-arch-300);
+  }
+}
