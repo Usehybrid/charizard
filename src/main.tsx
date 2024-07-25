@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import randomIcon from './components/assets/check.svg'
 import randomIcon2 from './components/assets/search-2.svg'
 import {createColumnHelper} from '@tanstack/react-table'
-import {ColorPicker, TableV2, USER_CHIP_STATUS, UserChip, Tabs, Tab} from './components'
+import {ColorPicker, TableV2, TaskCard, USER_CHIP_STATUS, UserChip, Tabs, Tab} from './components'
 import {INV_ACTION_TYPES, useInventoryStore} from './components/table-v2/inventory/inventory.store'
 
 const styles = {
@@ -14,7 +14,7 @@ const styles = {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  backgroundColor: '#FAFAFB',
+  // backgroundColor: '#FAFAFB',
   flexDir: 'column',
 }
 
@@ -454,6 +454,87 @@ const columns = [
   }),
 ]
 
+enum TASK_TYPE {
+  LEAVE = 'leave',
+  IT_ACCESS_REQUEST = 'it_access_request',
+}
+
+enum TASK_STATUS {
+  APPROVED = 'approved',
+  DECLINED = 'declined',
+  PENDING = 'pending',
+  CANCELLED = 'cancelled',
+  PENDING_SECOND_APPROVER = 'pending_second_approver',
+}
+
+const tasks = [
+  {
+    id: '12132-3237',
+    type: TASK_TYPE.LEAVE,
+    name: 'Casual Leave',
+    date: '14 Nov, 2024, 04:44 PM',
+    details: [
+      {
+        key: 'Raised by',
+        value: {
+          first_name: 'Yash',
+          middle_name: null,
+          last_name: 'Mishra',
+          profile_img_url: 'https://assets.zenadmin.ai/profile/yeh.png',
+          work_email: 'yash@hybr1d.io',
+        },
+      },
+      {
+        key: 'Leave duration',
+        value: 'April 19, 2024 (1 day)',
+      },
+      {
+        key: 'Note',
+        value: 'Going out on a family trip',
+      },
+      {
+        key: 'Attachment',
+        value: null,
+      },
+    ],
+    status: TASK_STATUS.PENDING,
+    details_path: '/leave/04297-322-323',
+  },
+
+  {
+    id: '12132-3247',
+    type: TASK_TYPE.IT_ACCESS_REQUEST,
+    name: 'Figma Access',
+    date: '18 Nov, 2024, 04:44 PM',
+    details: [
+      {
+        key: 'Raised by',
+        value: {
+          first_name: 'Yash',
+          middle_name: null,
+          last_name: 'Mishra',
+          profile_img_url: 'https://assets.zenadmin.ai/profile/yeh.png',
+          work_email: 'yash@hybr1d.io',
+        },
+      },
+      {
+        key: 'Request type',
+        value: 'Access',
+      },
+      {
+        key: 'Access for',
+        value: 'Figma',
+      },
+      {
+        key: 'Note',
+        value: null,
+      },
+    ],
+    status: TASK_STATUS.PENDING_SECOND_APPROVER,
+    details_path: '/it-request/04297-322-323',
+  },
+]
+
 function App() {
   const [search, setSearch] = React.useState('')
 
@@ -583,6 +664,7 @@ function App() {
           })
         }
       </Tabs>
+      <TaskCard data={tasks} />
     </div>
   )
 }
