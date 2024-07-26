@@ -664,7 +664,12 @@ function App() {
         tableStyleConfig={{stickyIds: ['software'], maxHeight: '200px'}}
       /> */}
 
-      <TaskCard headers={taskheaders} data={tasks} />
+      {/* <TaskCard headers={taskheaders} data={tasks} /> */}
+
+      <UserChip
+        username="User"
+        profileImgUrl="https://hybrid-dev-test.s3.us-west-2.amazonaws.com/user-avatars/female/10.png?recached=123"
+      />
     </div>
   )
 }

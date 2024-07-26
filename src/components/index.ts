@@ -1,3 +1,4 @@
+import '@hybr1d-tech/groudon/dist/typography.min.css'
 import './styles/_variables.css'
 import './styles/global.css'
 

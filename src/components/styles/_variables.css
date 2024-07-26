@@ -1,4 +1,5 @@
 :root {
+  --base-font-size: 16px !important;
   /* default */
   --black: #000000;
 
@@ -167,13 +168,6 @@
 
   /* border radius */
   --borderfull: 10240px;
-}
-
-.zap-caption-semibold {
-  font-size: 11px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 16px;
 }
 
 .zap-subheading-semibold {

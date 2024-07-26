@@ -81,5 +81,8 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "dependencies": {
+    "@hybr1d-tech/groudon": "^0.1.1"
   }
 }
