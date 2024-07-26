@@ -1,8 +1,14 @@
 import clsx from 'clsx'
 import classes from './styles.module.css'
 import {USER_CHIP_STATUS, UserChip} from '../../../user-chip'
+import {Key} from 'react'
+import {Detail, Task, Value} from '../../types'
 
-export default function Card({data}: any) {
+export default function Card({data}: {data: Task}) {
+  function isObject(value: Value | string | null): value is Value {
+    return typeof value === 'object' && value !== null && 'first_name' in value
+  }
+
   return (
     <div className={classes.card}>
       <div className={classes.taskSection}>
@@ -10,20 +16,20 @@ export default function Card({data}: any) {
         <div className={classes.dateAndTime}>{data.date}</div>
       </div>
       <div className={classes.detailsSection}>
-        {data.details.map((detail: any) => (
-          <div key={detail.key} className={classes.detail}>
+        {data.details.map((detail: Detail, i: Key) => (
+          <div key={i} className={classes.detail}>
             <div className={classes.detailKey}>{detail.key}</div>
-            {detail.value === null ? (
-              <div className={classes.detailValue}>N/A</div>
-            ) : typeof detail.value === 'string' ? (
-              <div className={classes.detailValue}>{detail.value}</div>
-            ) : (
+            {detail.value && isObject(detail.value) ? (
               <UserChip
                 status={USER_CHIP_STATUS.NEUTRAL}
                 username={detail.value.first_name}
                 profileImgUrl={detail.value.profile_img_url}
                 selected
               />
+            ) : detail.value === null ? (
+              <div className={classes.detailValue}>N/A</div>
+            ) : (
+              <div className={classes.detailValue}>{detail.value}</div>
             )}
           </div>
         ))}
