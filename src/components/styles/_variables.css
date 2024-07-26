@@ -8,7 +8,7 @@
 
   /* * text colors */
   --text-primary: #000041;
-  --text-secondary: #66668D;
+  --text-secondary: #66668d;
   --text-hint: #a3a3be;
 
   /* * neutral colors */
@@ -75,9 +75,9 @@
 
   /* NEW VARIABLES */
   /* Colors */
-  --p-p25: #A8B8F0; /* --p-p20 new */
-  --p-p65: #1E3EAE;  /* --p-p60 new */
-  --stroke-border: #E5E9FB;
+  --p-p25: #a8b8f0; /* --p-p20 new */
+  --p-p65: #1e3eae; /* --p-p60 new */
+  --stroke-border: #e5e9fb;
 
   /* Primary colors */
   --p-p10: #d3dbf8;
@@ -176,10 +176,17 @@
   line-height: 16px;
 }
 
-.charizard-subheading-semibold {
+.zap-subheading-semibold {
   font-size: 14px;
   font-style: normal;
   font-weight: 600;
   line-height: 24px;
   letter-spacing: 0.2px;
+}
+
+.zap-caption-medium {
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px; /* 145.455% */
 }
