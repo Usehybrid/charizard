@@ -75,6 +75,9 @@
 
   /* NEW VARIABLES */
   /* Colors */
+  --p-p25: #A8B8F0; /* --p-p20 new */
+  --p-p65: #1E3EAE;  /* --p-p60 new */
+  --stroke-border: #E5E9FB;
 
   /* Primary colors */
   --p-p10: #d3dbf8;
