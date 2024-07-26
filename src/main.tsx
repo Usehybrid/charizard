@@ -535,13 +535,14 @@ const tasks = [
   },
 ]
 
+const taskheaders = ['Task', 'Details', 'Status']
+
 function App() {
   const [search, setSearch] = React.useState('')
 
   const query = useInventoryStore(s => s.query)
   const dispatch = useInventoryStore(s => s.dispatch)
-  const [activeTab, setActiveTab] = React.useState(tabs?.[0].title);
-
+  const [activeTab, setActiveTab] = React.useState(tabs?.[0].title)
 
   // console.log(query.limit)
 
@@ -664,12 +665,16 @@ function App() {
           })
         }
       </Tabs> */}
-      <TaskCard data={tasks} />
+      <TaskCard headers={taskheaders} data={tasks} />
     </div>
   )
 }
 
-const tabs = [{title: 'All (1)', content: <div>Tab 1</div>}, {title: 'Tab 2', content: <div>Tab 2</div>}, {title: 'Tab 3', content: <div>Tab 3</div>}];
+const tabs = [
+  {title: 'All (1)', content: <div>Tab 1</div>},
+  {title: 'Tab 2', content: <div>Tab 2</div>},
+  {title: 'Tab 3', content: <div>Tab 3</div>},
+]
 
 const cols = {
   checked_state: [
