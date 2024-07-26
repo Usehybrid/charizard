@@ -3,9 +3,9 @@ import * as menu from '@zag-js/menu'
 import clsx from 'clsx'
 import chevronDown from '../assets/chevron-down-16.svg'
 import classes from './styles.module.css'
-import { useMachine, normalizeProps, Portal } from '@zag-js/react'
-import { SVG } from '../svg'
-import { PositioningOptions } from '@zag-js/popper'
+import {useMachine, normalizeProps, Portal} from '@zag-js/react'
+import {SVG} from '../svg'
+import {PositioningOptions} from '@zag-js/popper'
 
 export enum BUTTON_V2_VARIANT {
   PRIMARY = 'primary',
@@ -15,14 +15,14 @@ export enum BUTTON_V2_VARIANT {
 
 export enum BUTTON_V2_SIZE {
   SMALL = 'small',
-  DEFAULT = 'deafult',
+  DEFAULT = 'default',
 }
 
 export enum BUTTON_V2_TYPE {
   BASIC = 'basic',
-  ICON_LEFT = 'icon-left',
-  ICON_RIGHT = 'icon-right',
-  ICON_ONLY = 'icon-only'
+  ICON_LEFT = 'iconLeft',
+  ICON_RIGHT = 'iconRight',
+  ICON_ONLY = 'iconOnly',
 }
 
 interface BaseButtonProps {
@@ -46,12 +46,18 @@ interface IconButtonV2TypeProps extends BaseButtonProps {
 }
 
 interface OtherButtonV2TypeProps extends BaseButtonProps {
-  type?: Exclude<BUTTON_V2_TYPE, BUTTON_V2_TYPE.ICON_LEFT | BUTTON_V2_TYPE.ICON_RIGHT | BUTTON_V2_TYPE.ICON_ONLY>
+  type?: Exclude<
+    BUTTON_V2_TYPE,
+    BUTTON_V2_TYPE.ICON_LEFT | BUTTON_V2_TYPE.ICON_RIGHT | BUTTON_V2_TYPE.ICON_ONLY
+  >
   icon?: React.ReactNode // Icon is optional for these types
   children: React.ReactNode
 }
 
-export type ButtonV2Props = IconOnlyButtonV2TypeProps | IconButtonV2TypeProps | OtherButtonV2TypeProps
+export type ButtonV2Props =
+  | IconOnlyButtonV2TypeProps
+  | IconButtonV2TypeProps
+  | OtherButtonV2TypeProps
 
 // 1. Button => primary, secondary, tertiary
 // 2. Button Group => primary
@@ -76,8 +82,10 @@ export function ButtonV2({
         variant === BUTTON_V2_VARIANT.TERTIARY && classes.btnTertiary,
         size === BUTTON_V2_SIZE.DEFAULT && classes.btnDefault,
         size === BUTTON_V2_SIZE.SMALL && classes.btnSmall,
-        (type === BUTTON_V2_TYPE.ICON_ONLY && size === BUTTON_V2_SIZE.DEFAULT) && classes.iconOnlyDefault,
-        (type === BUTTON_V2_TYPE.ICON_ONLY && size === BUTTON_V2_SIZE.SMALL) && classes.iconOnlySmall,
+        type === BUTTON_V2_TYPE.ICON_ONLY &&
+          size === BUTTON_V2_SIZE.DEFAULT &&
+          classes.iconOnlyDefault,
+        type === BUTTON_V2_TYPE.ICON_ONLY && size === BUTTON_V2_SIZE.SMALL && classes.iconOnlySmall,
         disabled && classes.disabled,
       )}
       disabled={disabled}
@@ -128,7 +136,7 @@ function GroupAction({
   const [state, send] = useMachine(
     menu.machine({
       id: React.useId(),
-      positioning: { placement: positionerProps?.placement || 'bottom-end' },
+      positioning: {placement: positionerProps?.placement || 'bottom-end'},
     }),
   )
   const api = menu.connect(state, send, normalizeProps)
@@ -156,7 +164,7 @@ function GroupAction({
     if (isTable) {
       const scrollContainer = document.getElementById('hui-table-scroll-container')
       if (scrollContainer) {
-        scrollContainer.addEventListener('scroll', handleScroll, { passive: true })
+        scrollContainer.addEventListener('scroll', handleScroll, {passive: true})
         return () => scrollContainer.removeEventListener('scroll', handleScroll)
       }
     }
@@ -176,13 +184,9 @@ function GroupAction({
               .map(menu => (
                 <div
                   key={menu.label}
-                  className={clsx(classes.menu, { [classes.menuDisabled]: menu.disabled })}
-                  {...api.getItemProps({ value: menu.label.toLowerCase() })}
-                  onClick={
-                    menu.disabled
-                      ? undefined
-                      : menu.onClick
-                  }
+                  className={clsx(classes.menu, {[classes.menuDisabled]: menu.disabled})}
+                  {...api.getItemProps({value: menu.label.toLowerCase()})}
+                  onClick={menu.disabled ? undefined : menu.onClick}
                 >
                   {menu.label}
                 </div>
@@ -195,38 +199,35 @@ function GroupAction({
 
   return (
     <>
-      
-        <button
+      <button
+        className={clsx(
+          classes.btn,
+          classes.btnGrp,
+          variant === BUTTON_V2_VARIANT.PRIMARY && classes.btnPrimary,
+          variant === BUTTON_V2_VARIANT.SECONDARY && classes.btnSecondary,
+          variant === BUTTON_V2_VARIANT.TERTIARY && classes.btnTertiary,
+          size === BUTTON_V2_SIZE.SMALL && classes.btnSmall,
+          disabled && classes.disabled,
+        )}
+        disabled={disabled}
+        {...api.getTriggerProps()}
+      >
+        <span className={classes.grpTextBtn}>{children}</span>
+        <span
           className={clsx(
-            classes.btn,
-            classes.btnGrp,
-            variant === BUTTON_V2_VARIANT.PRIMARY && classes.btnPrimary,
-            variant === BUTTON_V2_VARIANT.SECONDARY && classes.btnSecondary,
-            variant === BUTTON_V2_VARIANT.TERTIARY && classes.btnTertiary,
-            size === BUTTON_V2_SIZE.SMALL && classes.btnSmall,
-            disabled && classes.disabled,
+            classes.grpIconBtn,
+            variant === BUTTON_V2_VARIANT.PRIMARY && classes.btnAddonPrimary,
+            variant === BUTTON_V2_VARIANT.SECONDARY && classes.btnAddonSecondary,
+            variant === BUTTON_V2_VARIANT.TERTIARY && classes.btnAddonTertiary,
+            size === BUTTON_V2_SIZE.SMALL && classes.btnAddonSmall,
           )}
-          disabled={disabled}
-          {...api.getTriggerProps()}
         >
-          <span className={classes.grpTextBtn}>{children}</span>
-          <span
-            className={clsx(
-              classes.grpIconBtn,
-              variant === BUTTON_V2_VARIANT.PRIMARY && classes.btnAddonPrimary,
-              variant === BUTTON_V2_VARIANT.SECONDARY && classes.btnAddonSecondary,
-              variant === BUTTON_V2_VARIANT.TERTIARY && classes.btnAddonTertiary,
-              size === BUTTON_V2_SIZE.SMALL && classes.btnAddonSmall,
-            )}
-          >
           <SVG path={chevronDown} width={16} height={16} svgClassName={classes.chevronDown} />
-
-          </span>
-        </button>
+        </span>
+      </button>
       {isTable ? <Portal>{dropdown}</Portal> : dropdown}
     </>
   )
 }
-
 
 ButtonV2.GroupAction = GroupAction

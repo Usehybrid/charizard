@@ -29,4 +29,3 @@ export const Tertiary: Story = {
     variant: BUTTON_V2_VARIANT.TERTIARY,
   },
 }
-

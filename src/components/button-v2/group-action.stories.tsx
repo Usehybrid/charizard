@@ -1,6 +1,5 @@
 import type {Meta, StoryObj} from '@storybook/react'
 import {ButtonV2, BUTTON_V2_VARIANT} from './ButtonV2'
-import icon from '../assets/check.svg'
 
 const meta: Meta<typeof ButtonV2.GroupAction> = {
   component: ButtonV2.GroupAction,
