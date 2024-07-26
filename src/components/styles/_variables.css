@@ -8,7 +8,7 @@
 
   /* * text colors */
   --text-primary: #000041;
-  --text-secondary: #555580;
+  --text-secondary: #66668D;
   --text-hint: #a3a3be;
 
   /* * neutral colors */
@@ -147,11 +147,11 @@
   --text-tertiary: #ffffff;
 
   /* Fill colors */
-  --fill-highlight-only: #ffffff;
+  --fill-highlight-only: #fbfbfe;
   --fill-selection-only: #f6f8fe;
 
   /* Border colors */
-  --stroke-tabs-sections: #e1e1f8;
+  --stroke-tabs-sections: #e5e9fb;
   --stroke-buttons-input: #d3dbf8;
 
   /* Link colors */
