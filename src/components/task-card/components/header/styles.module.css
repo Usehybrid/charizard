@@ -6,9 +6,6 @@
   align-items: flex-start;
 
   color: var(--text-secondary);
-  font-feature-settings:
-    'clig' off,
-    'liga' off;
   /* caption_medium */
   font-family: 'Instrument Sans';
   font-size: 0.688rem;
