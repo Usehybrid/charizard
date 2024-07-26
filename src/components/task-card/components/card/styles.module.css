@@ -20,20 +20,20 @@
   color: var(--text-primary);
 
   /* Subheading-Semibold */
-  font-size: 0.875rem;
+  font-size: 14px;
   font-style: normal;
   font-weight: 600;
-  line-height: 1.25rem; /* 142.857% */
-  letter-spacing: 0.013rem;
+  line-height: 20px; /* 142.857% */
+  letter-spacing: 0.2px;
 }
 
 .dateAndTime {
   color: var(--text-secondary);
   /* Caption-Medium */
-  font-size: 0.688rem;
+  font-size: 11px;
   font-style: normal;
   font-weight: 500;
-  line-height: 1rem; /* 145.455% */
+  line-height: 16px; /* 145.455% */
 }
 
 .detailsSection {
@@ -52,27 +52,27 @@
 }
 
 .detailKey {
-  min-width: 8.75rem;
+  min-width: 140px;
   color: var(--text-secondary);
 
   /* Sub Content-Medium */
-  font-size: 0.75rem;
+  font-size: 12px;
   font-style: normal;
   font-weight: 500;
-  line-height: 1.125rem; /* 150% */
-  letter-spacing: 0.013rem;
+  line-height: 18px; /* 150% */
+  letter-spacing: 0.2px;
 }
 
 .detailValue {
-  min-width: 19.25rem;
+  min-width: 308px;
   color: var(--text-primary);
 
   /* Sub Content-Medium */
-  font-size: 0.75rem;
+  font-size: 12px;
   font-style: normal;
   font-weight: 500;
-  line-height: 1.125rem; /* 150% */
-  letter-spacing: 0.013rem;
+  line-height: 18px; /* 150% */
+  letter-spacing: 0.2px;
 }
 
 .statusPill {
@@ -86,17 +86,17 @@
 
 .statusIcon {
   display: inline-block;
-  height: 0.375rem;
-  width: 0.375rem;
+  height: 6px;
+  width: 6px;
   border-radius: 50%;
 }
 
 .status {
   /* caption_medium */
-  font-size: 0.688rem;
+  font-size: 11px;
   font-style: normal;
   font-weight: 500;
-  line-height: 1rem; /* 145.455% */
+  line-height: 16px; /* 145.455% */
 }
 
 .statusPill-pending {

@@ -2,7 +2,7 @@
   display: grid;
   grid-template-columns: 3fr 5fr 2fr 2fr;
   gap: 16px;
-  padding: 8px var(--Spacing-24, 24px);
+  padding: 8px 24px;
   align-items: flex-start;
 
   color: var(--text-secondary);
