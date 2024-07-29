@@ -16,9 +16,12 @@ import {
   BUTTON_V2_TYPE,
   SVG,
   TaskCard,
+  BADGE_STATUS,
+  BADGE_HIGHLIGHT,
 } from './components'
 import {INV_ACTION_TYPES, useInventoryStore} from './components/table-v2/inventory/inventory.store'
 import closeIcon from './components/assets/close.svg'
+import {Badges} from './components'
 
 const styles = {
   width: '90%',
@@ -666,10 +669,18 @@ function App() {
 
       {/* <TaskCard headers={taskheaders} data={tasks} /> */}
 
-      <UserChip
+      {/* <UserChip
         username="User"
         profileImgUrl="https://hybrid-dev-test.s3.us-west-2.amazonaws.com/user-avatars/female/10.png?recached=123"
-      />
+      /> */}
+      <Badges
+        status={BADGE_STATUS.WARNING}
+        selected
+        highlight={BADGE_HIGHLIGHT.ICON}
+        icon={randomIcon}
+      >
+        Test
+      </Badges>
     </div>
   )
 }

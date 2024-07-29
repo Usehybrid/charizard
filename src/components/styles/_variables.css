@@ -169,18 +169,3 @@
   /* border radius */
   --borderfull: 10240px;
 }
-
-.zap-subheading-semibold {
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 24px;
-  letter-spacing: 0.2px;
-}
-
-.zap-caption-medium {
-  font-size: 11px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 16px; /* 145.455% */
-}

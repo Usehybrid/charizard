@@ -1,0 +1,18 @@
+.box {
+  display: inline-flex;
+  padding: 0px 6px;
+  align-items: center;
+  gap: 8px;
+  border-radius: 4px;
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 100%;
+}
