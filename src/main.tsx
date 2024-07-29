@@ -22,6 +22,7 @@ import {
 import {INV_ACTION_TYPES, useInventoryStore} from './components/table-v2/inventory/inventory.store'
 import closeIcon from './components/assets/close.svg'
 import {Badges} from './components'
+import {Pill, PILL_STATUS} from './components'
 
 const styles = {
   width: '90%',
@@ -669,18 +670,7 @@ function App() {
 
       {/* <TaskCard headers={taskheaders} data={tasks} /> */}
 
-      {/* <UserChip
-        username="User"
-        profileImgUrl="https://hybrid-dev-test.s3.us-west-2.amazonaws.com/user-avatars/female/10.png?recached=123"
-      /> */}
-      <Badges
-        status={BADGE_STATUS.WARNING}
-        selected
-        highlight={BADGE_HIGHLIGHT.ICON}
-        icon={randomIcon}
-      >
-        Test
-      </Badges>
+      <Pill status={PILL_STATUS.WARNING}>420</Pill>
     </div>
   )
 }
