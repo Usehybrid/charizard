@@ -16,6 +16,7 @@ import {
   BUTTON_V2_TYPE,
   SVG,
   TaskCard,
+  Breadcrumb,
 } from './components'
 import {INV_ACTION_TYPES, useInventoryStore} from './components/table-v2/inventory/inventory.store'
 import closeIcon from './components/assets/close.svg'
@@ -551,6 +552,16 @@ const tasks = [
 
 const taskheaders = ['Task', 'Details', 'Status']
 
+const pages = [
+  {label: 'Breadcrumb Item 1', to: '/'},
+  {label: 'Breadcrumb Item 2', to: '/'},
+  {label: 'Breadcrumb Item 3', to: '/'},
+  {label: 'Breadcrumb Item 4', to: '/'},
+  {label: 'Breadcrumb Item 5', to: '/'},
+  {label: 'Breadcrumb Item 6', to: '/'},
+  {label: 'Breadcrumb Item 7', to: '/'},
+]
+
 function App() {
   const [search, setSearch] = React.useState('')
 
@@ -666,10 +677,12 @@ function App() {
 
       {/* <TaskCard headers={taskheaders} data={tasks} /> */}
 
-      <UserChip
+      {/* <UserChip
         username="User"
         profileImgUrl="https://hybrid-dev-test.s3.us-west-2.amazonaws.com/user-avatars/female/10.png?recached=123"
-      />
+      /> */}
+
+      <Breadcrumb pages={pages} />
     </div>
   )
 }

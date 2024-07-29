@@ -1,0 +1,30 @@
+.breadcrumb {
+  display: flex;
+  position: relative;
+}
+
+.pageSection {
+  display: flex;
+}
+
+.page {
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.activePage {
+  color: var(--text-primary);
+}
+
+.dots {
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 14px;
+  border: 1px solid transparent;
+}
+
+.dotsActive {
+  border: 1px solid var(--p-p50);
+  border-radius: 2px;
+}
