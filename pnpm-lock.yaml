@@ -21,8 +21,8 @@ importers:
         specifier: ^3.2.2
         version: 3.2.2(react@18.3.1)
       '@hybr1d-tech/groudon':
-        specifier: ^0.1.1
-        version: 0.1.1
+        specifier: ^0.1.2
+        version: 0.1.2
       '@tanstack/react-table':
         specifier: ^8.19.3
         version: 8.19.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -1021,8 +1021,8 @@ packages:
   '@floating-ui/utils@0.2.5':
     resolution: {integrity: sha512-sTcG+QZ6fdEUObICavU+aB3Mp8HY4n14wYHdxK4fXjPmv3PXZZeY5RaguJmGyeH/CJQhX3fqKUtS4qc1LoHwhQ==}
 
-  '@hybr1d-tech/groudon@0.1.1':
-    resolution: {integrity: sha512-imKQzQFfA15Fx/plFMjrdhESFRGcfexpUrp4nkKe05M90afMD5uBxSiG7j4Y4mK2oLgiCa0rHS1SMiYZ12tjXg==}
+  '@hybr1d-tech/groudon@0.1.2':
+    resolution: {integrity: sha512-QWMdJln97ESkCXLY7RgyDCv3vomlT/J4koktkZB0w5tON5mlbShFpXyKrSksDaRMV8kggv5A6musllUWOKhwng==}
 
   '@jest/schemas@29.6.3':
     resolution: {integrity: sha512-mo5j5X+jIZmJQveBKeS/clAueipV7KgiX1vMgCxam1RNYiqE1w62n0/tJJnHtjW8ZHcQco5gY85jA3mi0L+nSA==}
@@ -5057,7 +5057,7 @@ snapshots:
 
   '@floating-ui/utils@0.2.5': {}
 
-  '@hybr1d-tech/groudon@0.1.1':
+  '@hybr1d-tech/groudon@0.1.2':
     dependencies:
       cssnano: 7.0.4(postcss@8.4.40)
       postcss: 8.4.40

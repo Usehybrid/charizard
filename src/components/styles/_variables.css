@@ -149,7 +149,7 @@
 
   /* Fill colors */
   --fill-highlight-only: #fbfbfe;
-  --fill-selection-only: #f6f8fe;
+  --fill-selection: #f6f8fe;
 
   /* Border colors */
   --stroke-tabs-sections: #e5e9fb;

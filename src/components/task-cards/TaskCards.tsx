@@ -1,18 +1,18 @@
-import Card from './components/card/Card'
-import Header from './components/header/Header'
+import Card from './components/task-card/TaskCard'
+import TaskCardHeader from './components/task-card-header/TaskCardHeader'
 import classes from './task-cards.module.css'
-import {Task} from './types'
+import {ITask} from './types'
 
 interface TaskCardProps {
   headers: string[]
-  data: Task[]
+  data: ITask[]
 }
 
 export function TaskCard({headers, data}: TaskCardProps) {
   return (
     <div className={classes.taskCard}>
-      <Header headers={headers} />
-      {data.map((data: Task, idx) => (
+      <TaskCardHeader headers={headers} />
+      {data.map((data: ITask, idx) => (
         <Card data={data} key={idx} />
       ))}
     </div>

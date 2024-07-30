@@ -21,7 +21,7 @@ import {
 } from './components'
 import {INV_ACTION_TYPES, useInventoryStore} from './components/table-v2/inventory/inventory.store'
 import closeIcon from './components/assets/close.svg'
-import {Badges} from './components'
+import {Badge} from './components'
 import {Pill, PILL_STATUS} from './components'
 
 const styles = {

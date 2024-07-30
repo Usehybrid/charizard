@@ -83,6 +83,6 @@
     "access": "public"
   },
   "dependencies": {
-    "@hybr1d-tech/groudon": "^0.1.1"
+    "@hybr1d-tech/groudon": "^0.1.2"
   }
 }

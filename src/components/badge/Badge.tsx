@@ -19,7 +19,7 @@ export enum BADGE_HIGHLIGHT {
   NONE = 'none',
 }
 
-interface BadgesProps {
+interface BadgeProps {
   highlight?: BADGE_HIGHLIGHT
   status?: BADGE_STATUS
   selected?: boolean
@@ -27,13 +27,15 @@ interface BadgesProps {
   icon?: string
 }
 
-export function Badges({
+export function Badge({
   highlight = BADGE_HIGHLIGHT.NONE,
   status = BADGE_STATUS.DEFAULT,
   selected = false,
   children,
   icon,
-}: BadgesProps) {
+}: BadgeProps) {
+  const isCDNIcon = icon ? icon.includes('https://') : false
+
   return (
     <div
       className={clsx(classes.box, 'zap-caption-medium')}
@@ -45,15 +47,16 @@ export function Badges({
       {highlight === BADGE_HIGHLIGHT.DOT && (
         <span className={classes.dot} style={{backgroundColor: statusMap[status].color}} />
       )}
-      {highlight === BADGE_HIGHLIGHT.ICON && icon && (
+      {highlight === BADGE_HIGHLIGHT.ICON && icon && isCDNIcon ? (
+        <img style={{fill: statusMap[status].color, width: '20px', height: '20px'}} src={icon} />
+      ) : (
         <SVG
-          path={icon}
+          path={icon as string}
           customSvgStyles={{fill: statusMap[status].color, width: '20px', height: '20px'}}
           customSpanStyles={{marginLeft: '-2px'}}
         />
       )}
       {children}
-
       {selected && <SVG path={multiplyIcon} svgClassName={classes.icon} />}
     </div>
   )
