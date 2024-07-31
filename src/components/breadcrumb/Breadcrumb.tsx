@@ -3,7 +3,6 @@ import clsx from 'clsx'
 import slash from '../assets/slash.svg'
 import MorePages from './components/more-pages/MorePages'
 import classes from './breadcrumb.module.css'
-import {Key} from 'react'
 import {SVG} from '../svg'
 import {Page} from './types'
 
@@ -32,7 +31,7 @@ export function Breadcrumb({pages}: BreadCrumbProps) {
 
   return (
     <div className={classes.breadcrumb}>
-      {pages.map((page: Page, i: Key) => (
+      {pages.map((page: Page, i: React.Key) => (
         <span key={i} className={classes.pageSection}>
           {Number(i) === 2 && pages.length !== 3 ? (
             <>
