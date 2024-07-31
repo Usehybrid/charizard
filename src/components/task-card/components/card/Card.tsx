@@ -20,12 +20,14 @@ export default function Card({data}: {data: Task}) {
           <div key={i} className={classes.detail}>
             <div className={classes.detailKey}>{detail.key}</div>
             {detail.value && isObject(detail.value) ? (
-              <UserChip
-                status={USER_CHIP_STATUS.NEUTRAL}
-                username={detail.value.first_name}
-                profileImgUrl={detail.value.profile_img_url}
-                selected
-              />
+              <div className={classes.userChip}>
+                <UserChip
+                  status={USER_CHIP_STATUS.NEUTRAL}
+                  username={detail.value.first_name}
+                  profileImgUrl={detail.value.profile_img_url}
+                  selected
+                />
+              </div>
             ) : detail.value === null ? (
               <div className={classes.detailValue}>N/A</div>
             ) : (

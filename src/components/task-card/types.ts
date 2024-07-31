@@ -1,4 +1,4 @@
-export type Value = {
+export interface Value {
   first_name: string
   middle_name: string | null
   last_name: string | null
@@ -6,12 +6,12 @@ export type Value = {
   work_email: string
 }
 
-export type Detail = {
+export interface Detail {
   key: string
   value: Value | string | null
 }
 
-export type Task = {
+export interface Task {
   id: string
   type: string
   name: string

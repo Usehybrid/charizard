@@ -530,7 +530,7 @@ const tasks = [
         value: null,
       },
     ],
-    status: TASK_STATUS.PENDING_SECOND_APPROVER,
+    status: TASK_STATUS.PENDING,
     details_path: '/it-request/04297-322-323',
   },
 ]
