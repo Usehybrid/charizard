@@ -2,28 +2,12 @@ import * as React from 'react'
 import * as menu from '@zag-js/menu'
 import clsx from 'clsx'
 import chevronDown from '../assets/chevron-down-16.svg'
+import moreMenuIcon from '../assets/more-menu.svg'
 import classes from './styles.module.css'
 import {useMachine, normalizeProps, Portal} from '@zag-js/react'
 import {SVG} from '../svg'
 import {PositioningOptions} from '@zag-js/popper'
-
-export enum BUTTON_V2_VARIANT {
-  PRIMARY = 'primary',
-  SECONDARY = 'secondary',
-  TERTIARY = 'tertiary',
-}
-
-export enum BUTTON_V2_SIZE {
-  SMALL = 'small',
-  DEFAULT = 'default',
-}
-
-export enum BUTTON_V2_TYPE {
-  BASIC = 'basic',
-  ICON_LEFT = 'iconLeft',
-  ICON_RIGHT = 'iconRight',
-  ICON_ONLY = 'iconOnly',
-}
+import {BUTTON_V2_SIZE, BUTTON_V2_TYPE, BUTTON_V2_VARIANT} from './types'
 
 interface BaseButtonProps {
   variant?: BUTTON_V2_VARIANT
@@ -230,4 +214,125 @@ function GroupAction({
   )
 }
 
+export interface ActionsDropdownProps {
+  variant?: BUTTON_V2_VARIANT
+  disabled?: boolean
+  menuItems: MenuItemV2[]
+  customData?: any
+  size?: BUTTON_V2_SIZE
+  // props for actions dropdown
+  actionsDropdownOptions?: {
+    setIsActive: React.Dispatch<React.SetStateAction<boolean>>
+  }
+  positionerProps?: PositioningOptions
+  isTable?: boolean
+}
+
+function ActionsDropdown({
+  variant = BUTTON_V2_VARIANT.PRIMARY,
+  disabled = false,
+  menuItems,
+  customData,
+  size = BUTTON_V2_SIZE.DEFAULT,
+  actionsDropdownOptions,
+  positionerProps,
+  isTable = false,
+}: ActionsDropdownProps) {
+  const [state, send] = useMachine(
+    menu.machine({
+      id: React.useId(),
+      positioning: {placement: positionerProps?.placement || 'bottom-end'},
+    }),
+  )
+  const api = menu.connect(state, send, normalizeProps)
+
+  // to sync with actions dropdown, to get active state styles
+  React.useEffect(() => {
+    if (!actionsDropdownOptions?.setIsActive) return
+    actionsDropdownOptions.setIsActive(api.open)
+  }, [api.open])
+
+  const isOpenRef = React.useRef(api.open)
+
+  React.useEffect(() => {
+    isOpenRef.current = api.open
+  }, [api.open])
+
+  const handleScroll = () => {
+    if (isOpenRef.current) {
+      console.log('scrolling...')
+      api.setOpen(false)
+    }
+  }
+
+  React.useEffect(() => {
+    if (isTable) {
+      const scrollContainer = document.getElementById('hui-table-scroll-container')
+      if (scrollContainer) {
+        scrollContainer.addEventListener('scroll', handleScroll, {passive: true})
+        return () => scrollContainer.removeEventListener('scroll', handleScroll)
+      }
+    }
+  }, [])
+
+  const dropdown = (
+    <>
+      {menuItems.length > 0 && (
+        <div {...api.getPositionerProps()}>
+          <div {...api.getContentProps()} className={classes.menus}>
+            {menuItems
+              .filter(menu => {
+                if (!menu.filterFn) return true
+                // used to pass the table row data in the hide callback
+                return menu.filterFn(customData)
+              })
+              .map(menu => (
+                <div
+                  key={menu.label}
+                  className={clsx(classes.menu, {[classes.menuDisabled]: menu.disabled})}
+                  {...api.getItemProps({value: menu.label.toLowerCase()})}
+                  onClick={menu.disabled ? undefined : menu.onClick}
+                >
+                  {menu.label}
+                </div>
+              ))}
+          </div>
+        </div>
+      )}
+    </>
+  )
+
+  return (
+    <>
+      <button
+        className={clsx(
+          classes.btn,
+          classes.btnActions,
+          variant === BUTTON_V2_VARIANT.PRIMARY && classes.btnPrimary,
+          variant === BUTTON_V2_VARIANT.SECONDARY && classes.btnSecondary,
+          variant === BUTTON_V2_VARIANT.TERTIARY && classes.btnTertiary,
+          size === BUTTON_V2_SIZE.SMALL && classes.btnSmall,
+          disabled && classes.disabled,
+          isOpenRef.current && classes.btnActionsActive,
+        )}
+        disabled={disabled}
+        {...api.getTriggerProps()}
+      >
+        <SVG
+          path={moreMenuIcon}
+          width={16}
+          height={16}
+          svgClassName={clsx(
+            variant === BUTTON_V2_VARIANT.PRIMARY && classes.moreMenuIcon,
+            variant === BUTTON_V2_VARIANT.SECONDARY && classes.moreMenuIconSecondary,
+            variant === BUTTON_V2_VARIANT.TERTIARY && classes.moreMenuIconTertiary,
+          )}
+        />
+      </button>
+      {isTable ? <Portal>{dropdown}</Portal> : dropdown}
+    </>
+  )
+}
+
 ButtonV2.GroupAction = GroupAction
+ButtonV2.ActionsDropdown = ActionsDropdown

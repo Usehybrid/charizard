@@ -1,25 +1,10 @@
 import React, {useState} from 'react'
 import ReactDOM from 'react-dom/client'
 import randomIcon from './components/assets/check.svg'
-import randomIcon2 from './components/assets/search-2.svg'
 import {createColumnHelper} from '@tanstack/react-table'
-import {
-  ColorPicker,
-  TableV2,
-  USER_CHIP_STATUS,
-  UserChip,
-  Tabs,
-  Tab,
-  ButtonV2,
-  BUTTON_V2_VARIANT,
-  BUTTON_V2_SIZE,
-  BUTTON_V2_TYPE,
-  SVG,
-  TaskCard,
-  Breadcrumb,
-} from './components'
 import {INV_ACTION_TYPES, useInventoryStore} from './components/table-v2/inventory/inventory.store'
 import closeIcon from './components/assets/close.svg'
+import {Badge, BADGE_HIGHLIGHT, TableV3, TaskCards} from './components'
 
 const styles = {
   width: '90%',
@@ -469,87 +454,127 @@ const columns = [
   }),
 ]
 
-enum TASK_TYPE {
-  LEAVE = 'leave',
-  IT_ACCESS_REQUEST = 'it_access_request',
-}
-
-enum TASK_STATUS {
-  APPROVED = 'approved',
-  DECLINED = 'declined',
-  PENDING = 'pending',
-  CANCELLED = 'cancelled',
-  PENDING_SECOND_APPROVER = 'pending_second_approver',
-}
-
 const tasks = [
   {
-    id: '12132-3237',
-    type: TASK_TYPE.LEAVE,
-    name: 'Casual Leave',
-    date: '14 Nov, 2024, 04:44 PM',
+    module_id: '3e22329e-2e6c-41f3-a55a-577021d00fa1',
+    module_name: 'Attendance',
+    module_reference: 'attendance',
+    icon_url: 'https://assets.zenadmin.ai/zen-ex-icons/tasks/attendance.svg',
+    static_module: true,
+    external_link: null,
+    form_link: null,
+    name: 'Lunch Break',
+    date: '10 Apr, 2023, 04:34 PM',
     details: [
       {
         key: 'Raised by',
         value: {
-          first_name: 'Yash',
-          middle_name: null,
-          last_name: 'Mishra',
-          profile_img_url: 'https://assets.zenadmin.ai/profile/yeh.png',
-          work_email: 'yash@hybr1d.io',
+          first_name: 'Hybr1d',
+          middle_name: 'hi',
+          last_name: 'Dev',
+          profile_img_url:
+            'https://hybrid-dev-test.s3.us-west-2.amazonaws.com/user_document/undefined/Bertram_Gilfoyle.webp',
+          work_email: 'dev@hybr1d.io',
         },
       },
       {
-        key: 'Leave duration',
-        value: 'April 19, 2024 (1 day)',
+        key: 'Clock In',
+        value: '12 PM',
+      },
+      {
+        key: 'Clock Out',
+        value: '1 PM',
       },
       {
         key: 'Note',
-        value: 'Going out on a family trip',
+        value: 'Lunch Break',
+      },
+      {
+        key: 'Cycle',
+        value: '24hrs',
+      },
+    ],
+    status: 'Pending',
+  },
+  {
+    module_id: '29f78540-62da-40c8-be56-131522e752d9',
+    module_name: 'Leave',
+    module_reference: 'leave',
+    icon_url: 'https://assets.zenadmin.ai/zen-ex-icons/tasks/leave.svg',
+    static_module: true,
+    external_link: null,
+    form_link: null,
+    name: 'Sick Leave',
+    date: '10 Apr, 2023, 04:34 PM',
+    details: [
+      {
+        key: 'Raised by',
+        value: {
+          first_name: 'Hybr1d',
+          middle_name: 'hi',
+          last_name: 'Dev',
+          profile_img_url:
+            'https://hybrid-dev-test.s3.us-west-2.amazonaws.com/user_document/undefined/Bertram_Gilfoyle.webp',
+          work_email: 'dev@hybr1d.io',
+        },
+      },
+      {
+        key: 'Leave Duration',
+        value: '3Days',
+      },
+      {
+        key: 'Note',
+        value: 'Fever and Cold',
       },
       {
         key: 'Attachment',
         value: null,
       },
     ],
-    status: TASK_STATUS.PENDING,
-    details_path: '/leave/04297-322-323',
+    status: 'Cancelled',
   },
-
   {
-    id: '12132-3247',
-    type: TASK_TYPE.IT_ACCESS_REQUEST,
-    name: 'Figma Access',
-    date: '18 Nov, 2024, 04:44 PM',
+    module_id: '90640ef8-7d4f-4542-8b9b-cfebaf33ecd5',
+    module_name: 'IT Request',
+    module_reference: 'it-request',
+    icon_url: 'https://assets.zenadmin.ai/zen-ex-icons/tasks/it-request.svg',
+    static_module: true,
+    external_link: null,
+    form_link: null,
+    name: 'AWS Access',
+    date: '10 Apr, 2023, 04:34 PM',
     details: [
       {
         key: 'Raised by',
         value: {
-          first_name: 'Yash',
-          middle_name: null,
-          last_name: 'Mishra',
-          profile_img_url: 'https://assets.zenadmin.ai/profile/yeh.png',
-          work_email: 'yash@hybr1d.io',
+          first_name: 'Hybr1d',
+          middle_name: 'hi',
+          last_name: 'Dev',
+          profile_img_url:
+            'https://hybrid-dev-test.s3.us-west-2.amazonaws.com/user_document/undefined/Bertram_Gilfoyle.webp',
+          work_email: 'dev@hybr1d.io',
         },
+      },
+      {
+        key: 'Access for',
+        value: 'AWS',
+      },
+      {
+        key: 'Access level',
+        value: 'user',
       },
       {
         key: 'Request type',
         value: 'Access',
       },
       {
-        key: 'Access for',
-        value: 'Figma',
-      },
-      {
         key: 'Note',
-        value: null,
+        value: 'To access cloudwatch logs',
       },
     ],
-    status: TASK_STATUS.PENDING_SECOND_APPROVER,
-    details_path: '/it-request/04297-322-323',
+    status: 'Approved',
   },
 ]
-
 const taskheaders = ['Task', 'Details', 'Status']
 
 const pages = [
@@ -572,7 +597,7 @@ function App() {
 
   return (
     <div style={styles}>
-      {/* <TableV2
+      {/* <TableV3
         data={data}
         loaderConfig={{isFetching: false, isError: false, text: 'Getting employees...'}}
         columns={columns}
@@ -675,14 +700,11 @@ function App() {
         tableStyleConfig={{stickyIds: ['software'], maxHeight: '200px'}}
       /> */}
 
-      {/* <TaskCard headers={taskheaders} data={tasks} /> */}
-
-      {/* <UserChip
-        username="User"
-        profileImgUrl="https://hybrid-dev-test.s3.us-west-2.amazonaws.com/user-avatars/female/10.png?recached=123"
-      /> */}
-
-      <Breadcrumb pages={pages} />
+      <TaskCards
+        headers={taskheaders}
+        // data={tasks}
+        data={[]}
+      />
     </div>
   )
 }
