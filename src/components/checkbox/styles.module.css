@@ -4,7 +4,7 @@
   cursor: pointer;
 
   color: var(--text-primary);
-  font-size: 14px;
+  font-size: 16px;
   line-height: 20px;
 }
 
@@ -19,8 +19,8 @@
 .checkbox .checkboxBox {
   width: 1.143em;
   height: 1.143em;
-  border-radius: 2px;
-  border: 2px solid var(--neutral-arch-100);
+  border-radius: 4px;
+  border: 1px solid var(--neutral-arch-100);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -30,22 +30,36 @@
 }
 
 .checkbox .checkboxBox.error {
-  border: 2px solid var(--status-danger) !important;
+  border: 1px solid var(--status-danger) !important;
 }
 
 .checkbox .checkboxBox.disabled {
   background: var(--disabled-50);
+  border: 0;
   pointer-events: none;
   cursor: not-allowed;
 }
-
-.checkbox .checkboxInput:checked + .checkboxBox {
-  border: 2px solid var(--theme-blue);
-  background: var(--theme-blue);
+.checkbox .checkboxBox:hover {
+  border: 1px solid var(--p-p30);
 }
 
+.checkbox .checkboxBox.disabled:hover {
+  background: var(--disabled-50);
+  pointer-events: none;
+  cursor: not-allowed;
+}
+.checkbox .checkboxInput:checked + .checkboxBox {
+  border: 1px solid var(--p-p50);
+  background: var(--p-p50);
+}
+.checkbox .checkboxInput:checked + .checkboxBox:hover {
+  border: 1px solid var(--p-p60);
+  background: var(--p-p60);
+}
 .checkbox .checkboxInput:checked + .checkboxBox.disabled {
-  opacity: 0.6;
+  /* opacity: 0.6; */
+  background: var(--disabled-50);
+  border: 0px solid var(--disabled-50);
 }
 
 .checkbox .checkboxInput + .checkboxBox::after {
@@ -65,12 +79,32 @@
 .checkbox .checkboxInput:checked + .checkboxBox::after {
   transform: scale(1);
 }
+.checkbox.disabled .checkboxInput + .checkboxBox::after {
+  content: '';
+  width: 0.75em;
+  height: 0.75em;
+  background-image: url(../assets/disabled-check.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  transform: scale(0);
+  transition: transform 0.2s ease-in-out;
+  margin-left: 1px;
+  margin-top: 1px;
+}
 
+.checkbox.disabled .checkboxInput:checked + .checkboxBox::after {
+  transform: scale(1);
+}
 .checkbox .checkboxBox.indeterminate::after {
   background-image: url(../assets/minus.svg);
   margin-top: 0;
 }
 
+.checkbox.disabled .checkboxBox.indeterminate::after {
+  background-image: url(../assets/disabled-minus.svg);
+  margin-top: 0;
+}
 .errorMsg {
   font-size: 13px;
   font-style: normal;
