@@ -25,6 +25,7 @@
 
 .dateAndTime {
   color: var(--text-secondary);
+  margin-bottom: 12px;
 }
 
 .detailsSection {

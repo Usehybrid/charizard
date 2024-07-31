@@ -25,6 +25,7 @@ interface BadgeProps {
   selected?: boolean
   children: React.ReactNode
   icon?: string
+  customSvgStyles?: React.CSSProperties
 }
 
 export function Badge({
@@ -33,6 +34,7 @@ export function Badge({
   selected = false,
   children,
   icon,
+  customSvgStyles = {},
 }: BadgeProps) {
   const isCDNIcon = icon ? icon.includes('https://') : false
 
@@ -49,11 +51,24 @@ export function Badge({
       )}
       {highlight === BADGE_HIGHLIGHT.ICON && icon ? (
         isCDNIcon ? (
-          <img style={{fill: statusMap[status].color, width: '20px', height: '20px'}} src={icon} />
+          <img
+            style={{
+              fill: statusMap[status].color,
+              width: '20px',
+              height: '20px',
+              ...customSvgStyles,
+            }}
+            src={icon}
+          />
         ) : (
           <SVG
             path={icon as string}
-            customSvgStyles={{fill: statusMap[status].color, width: '20px', height: '20px'}}
+            customSvgStyles={{
+              fill: statusMap[status].color,
+              width: '20px',
+              height: '20px',
+              ...customSvgStyles,
+            }}
             customSpanStyles={{marginLeft: '-2px'}}
           />
         )

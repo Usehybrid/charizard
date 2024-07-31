@@ -1,12 +1,10 @@
 import clsx from 'clsx'
-import moreMenuIcon from '../../../assets/more-menu.svg'
 import infoOctagonIcon from '../../../assets/info-octagon.svg'
 import classes from './task-card.module.css'
 import {UserChip} from '../../../user-chip'
-import {ITask, ITaskDetails, ITaskObjectValue} from '../../types'
 import {Badge, BADGE_HIGHLIGHT, BADGE_STATUS} from '../../../badge'
 import {BUTTON_V2_SIZE, BUTTON_V2_VARIANT, ButtonV2} from '../../../button-v2'
-import {SVG} from '../../../svg'
+import {ITask, ITaskDetails, ITaskObjectValue} from '../../types'
 
 export default function TaskCard({data}: {data: ITask}) {
   function isObject(value: ITaskObjectValue | string | null): value is ITaskObjectValue {
@@ -22,6 +20,7 @@ export default function TaskCard({data}: {data: ITask}) {
           highlight={BADGE_HIGHLIGHT.ICON}
           icon={data.icon_url}
           status={moduleStatusMap[data.module_reference] || BADGE_STATUS.DEFAULT}
+          customSvgStyles={{width: '16px', height: '16px'}}
         >
           {data.module_name}
         </Badge>
@@ -47,17 +46,15 @@ export default function TaskCard({data}: {data: ITask}) {
       </div>
       <div className={classes.statusSection}>
         <Badge highlight={BADGE_HIGHLIGHT.DOT} status={statusMap[data.status]}>
-          <span style={{textTransform: 'capitalize'}}>{data.status}</span>
+          {data.status}
         </Badge>
       </div>
       <div className={classes.actionSection}>
-        <ButtonV2.GroupAction
+        <ButtonV2.ActionsDropdown
           menuItems={[{label: 'See Details', onClick: () => {}, iconSrc: infoOctagonIcon}]}
           variant={BUTTON_V2_VARIANT.TERTIARY}
           size={BUTTON_V2_SIZE.SMALL}
-        >
-          <SVG path={moreMenuIcon} customSvgStyles={{height: '20px', width: '20px'}} />
-        </ButtonV2.GroupAction>
+        />
       </div>
     </div>
   )
