@@ -123,3 +123,26 @@
 .infoIcon > path {
   fill: var(--neutral-arch-600);
 }
+
+.headingLoader {
+  display: block;
+  height: 18px;
+  width: 130px;
+  margin-bottom: 20px;
+}
+.optionsContainerLoader {
+  display: flex;
+  flex-direction: column;
+}
+.circleLoader {
+  display: block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50% !important;
+}
+.circleTextLoader {
+  display: block;
+  height: 18px;
+  width: 100px;
+  margin-bottom: 20px;
+}

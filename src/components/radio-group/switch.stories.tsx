@@ -12,7 +12,8 @@ type Story = StoryObj<typeof RadioGroup>
 export const RadioGroupDefault: Story = {
   args: {
     radioHeading: 'RadioGroup',
-    disabled: true,
+    disabled: false,
+    showSkeleton: false,
     items: [
       {
         label: {heading: 'label 1'},
