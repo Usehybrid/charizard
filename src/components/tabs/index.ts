@@ -1,2 +1,2 @@
-export { Tabs } from './Tabs'
-export { Tab } from './Tab'
+export * from './Tabs'
+export * from './Tab'
