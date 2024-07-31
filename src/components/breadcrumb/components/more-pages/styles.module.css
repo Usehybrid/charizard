@@ -24,6 +24,11 @@
   background-color: var(--neutral-white);
 }
 
+.menuItem:hover {
+  background-color: var(--fill-selection-only);
+  cursor: pointer;
+}
+
 .page {
   font-size: 12px;
   font-weight: 500;
