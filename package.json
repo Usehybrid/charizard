@@ -83,6 +83,9 @@
     "access": "public"
   },
   "dependencies": {
-    "@hybr1d-tech/groudon": "^0.1.2"
+    "@hybr1d-tech/groudon": "^0.1.2",
+    "@popperjs/core": "^2.11.8",
+    "date-fns": "^3.6.0",
+    "react-day-picker": "8.10.1"
   }
 }

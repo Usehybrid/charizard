@@ -5,6 +5,7 @@ import {createColumnHelper} from '@tanstack/react-table'
 import {INV_ACTION_TYPES, useInventoryStore} from './components/table-v2/inventory/inventory.store'
 import closeIcon from './components/assets/close.svg'
 import {Badge, BADGE_HIGHLIGHT, TableV3, TaskCards} from './components'
+import {DatePicker} from './components/date-picker'
 
 const styles = {
   width: '90%',
@@ -700,11 +701,23 @@ function App() {
         tableStyleConfig={{stickyIds: ['software'], maxHeight: '200px'}}
       /> */}
 
-      <TaskCards
+      {/* <TaskCards
         headers={taskheaders}
         // data={tasks}
         data={[]}
-      />
+      /> */}
+
+      <div>
+        <DatePicker
+          mode="single"
+          onChange={value => console.log(value)}
+          // value={}
+          variant="form"
+          customContainerStyles={{width: '100%'}}
+          disabled={false}
+          // errorMsg={'errorMsg'}
+        />
+      </div>
     </div>
   )
 }
