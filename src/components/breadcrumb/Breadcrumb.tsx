@@ -5,7 +5,7 @@ import MorePages from './components/more-pages/MorePages'
 import classes from './breadcrumb.module.css'
 import {Key} from 'react'
 import {SVG} from '../svg'
-import { Page } from './types'
+import {Page} from './types'
 
 interface BreadCrumbProps {
   pages: Array<Page>
@@ -13,6 +13,22 @@ interface BreadCrumbProps {
 
 export function Breadcrumb({pages}: BreadCrumbProps) {
   const [showMorePages, setShowMorePages] = React.useState(false)
+
+  const menuRef = React.useRef<HTMLDivElement | null>(null)
+
+  const handleHideMenu = (event: MouseEvent) => {
+    if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+      setShowMorePages(false)
+    }
+  }
+
+  React.useEffect(() => {
+    document.addEventListener('mousedown', handleHideMenu)
+
+    return () => {
+      document.removeEventListener('mousedown', handleHideMenu)
+    }
+  }, [])
 
   return (
     <div className={classes.breadcrumb}>
@@ -46,7 +62,11 @@ export function Breadcrumb({pages}: BreadCrumbProps) {
           )}
         </span>
       ))}
-      {showMorePages && <MorePages pages={pages.slice(2, pages.length - 1)} />}
+      {showMorePages && (
+        <div ref={menuRef}>
+          <MorePages pages={pages.slice(2, pages.length - 1)} />
+        </div>
+      )}
     </div>
   )
 }
