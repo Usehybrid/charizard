@@ -1,28 +1,12 @@
 import React, {useState} from 'react'
 import ReactDOM from 'react-dom/client'
 import randomIcon from './components/assets/check.svg'
-import randomIcon2 from './components/assets/search-2.svg'
 import {createColumnHelper} from '@tanstack/react-table'
-import {
-  ColorPicker,
-  TableV2,
-  USER_CHIP_STATUS,
-  UserChip,
-  Tabs,
-  Tab,
-  ButtonV2,
-  BUTTON_V2_VARIANT,
-  BUTTON_V2_SIZE,
-  BUTTON_V2_TYPE,
-  SVG,
-  TaskCard,
-  BADGE_STATUS,
-  BADGE_HIGHLIGHT,
-} from './components'
 import {INV_ACTION_TYPES, useInventoryStore} from './components/table-v2/inventory/inventory.store'
 import closeIcon from './components/assets/close.svg'
-import {Badge} from './components'
-import {Pill, PILL_STATUS} from './components'
+
+import {Badge, BADGE_HIGHLIGHT, ButtonV2, SVG, TableV3} from './components'
+import {BUTTON_V2_SIZE, BUTTON_V2_TYPE, BUTTON_V2_VARIANT} from './components'
 
 const styles = {
   width: '90%',
@@ -565,7 +549,7 @@ function App() {
 
   return (
     <div style={styles}>
-      {/* <TableV2
+      {/* <TableV3
         data={data}
         loaderConfig={{isFetching: false, isError: false, text: 'Getting employees...'}}
         columns={columns}
@@ -668,9 +652,17 @@ function App() {
         tableStyleConfig={{stickyIds: ['software'], maxHeight: '200px'}}
       /> */}
 
-      {/* <TaskCard headers={taskheaders} data={tasks} /> */}
-
-      <Pill status={PILL_STATUS.WARNING}>420</Pill>
+      <div>
+        <div style={{display: 'flex', gap: 150}}>
+          <ButtonV2.ActionsDropdown
+            // size={BUTTON_V2_SIZE.SMALL}
+            variant={BUTTON_V2_VARIANT.SECONDARY}
+            menuItems={menuItems}
+            // type={BUTTON_V2_TYPE.ICON_LEFT}
+            // icon={<SVG path={randomIcon} customSvgStyles={{width: '16px', height: '16px'}} />}
+          ></ButtonV2.ActionsDropdown>
+        </div>
+      </div>
     </div>
   )
 }

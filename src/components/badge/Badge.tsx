@@ -47,15 +47,17 @@ export function Badge({
       {highlight === BADGE_HIGHLIGHT.DOT && (
         <span className={classes.dot} style={{backgroundColor: statusMap[status].color}} />
       )}
-      {highlight === BADGE_HIGHLIGHT.ICON && icon && isCDNIcon ? (
-        <img style={{fill: statusMap[status].color, width: '20px', height: '20px'}} src={icon} />
-      ) : (
-        <SVG
-          path={icon as string}
-          customSvgStyles={{fill: statusMap[status].color, width: '20px', height: '20px'}}
-          customSpanStyles={{marginLeft: '-2px'}}
-        />
-      )}
+      {highlight === BADGE_HIGHLIGHT.ICON && icon ? (
+        isCDNIcon ? (
+          <img style={{fill: statusMap[status].color, width: '20px', height: '20px'}} src={icon} />
+        ) : (
+          <SVG
+            path={icon as string}
+            customSvgStyles={{fill: statusMap[status].color, width: '20px', height: '20px'}}
+            customSpanStyles={{marginLeft: '-2px'}}
+          />
+        )
+      ) : null}
       {children}
       {selected && <SVG path={multiplyIcon} svgClassName={classes.icon} />}
     </div>

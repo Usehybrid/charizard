@@ -9,5 +9,5 @@
 
   border-bottom: 1px solid var(--stroke-tabs-sections);
   border-radius: 10px 10px 0 0;
-  background: var(--fill-highlight-only);
+  background: var(--fill-highlight);
 }

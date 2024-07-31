@@ -148,12 +148,13 @@
   --text-tertiary: #ffffff;
 
   /* Fill colors */
-  --fill-highlight-only: #fbfbfe;
+  --fill-highlight: #fbfbfe;
   --fill-selection: #f6f8fe;
 
   /* Border colors */
   --stroke-tabs-sections: #e5e9fb;
   --stroke-buttons-input: #d3dbf8;
+  --stroke-border: #e5e9fb;
 
   /* Link colors */
   --link-rest: #0072fe;
