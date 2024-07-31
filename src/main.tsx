@@ -4,9 +4,7 @@ import randomIcon from './components/assets/check.svg'
 import {createColumnHelper} from '@tanstack/react-table'
 import {INV_ACTION_TYPES, useInventoryStore} from './components/table-v2/inventory/inventory.store'
 import closeIcon from './components/assets/close.svg'
-
-import {Badge, BADGE_HIGHLIGHT, ButtonV2, SVG, TableV3, TaskCards} from './components'
-import {BUTTON_V2_SIZE, BUTTON_V2_TYPE, BUTTON_V2_VARIANT} from './components'
+import {Badge, BADGE_HIGHLIGHT, TableV3, TaskCards} from './components'
 
 const styles = {
   width: '90%',
@@ -578,6 +576,16 @@ const tasks = [
   },
 ]
 const taskheaders = ['Task', 'Details', 'Status']
+
+const pages = [
+  {label: 'Breadcrumb Item 1', to: '/'},
+  {label: 'Breadcrumb Item 2', to: '/'},
+  {label: 'Breadcrumb Item 3', to: '/'},
+  {label: 'Breadcrumb Item 4', to: '/'},
+  {label: 'Breadcrumb Item 5', to: '/'},
+  {label: 'Breadcrumb Item 6', to: '/'},
+  {label: 'Breadcrumb Item 7', to: '/'},
+]
 
 function App() {
   const [search, setSearch] = React.useState('')
