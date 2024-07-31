@@ -105,15 +105,63 @@
 }
 
 .statusPill-pending {
-  background-color: var(--p-p10);
+  background: var(--status-warning-w10);
 }
 
 .statusIcon-pending {
-  background-color: var(--p-p70);
+  background-color: var(--status-warning-w60);
 }
 
 .status-pending {
-  color: var(--p-p70);
+  color: var(--status-warning-w60);
+}
+
+.statusPill-pending_second_approver {
+  background: var(--status-warning-w10);
+}
+
+.statusIcon-pending_second_approver {
+  background-color: var(--status-warning-w60);
+}
+
+.status-pending_second_approver {
+  color: var(--status-warning-w60);
+}
+
+.statusPill-declined {
+  background: var(--status-error-e10);
+}
+
+.statusIcon-declined {
+  background-color: var(--status-error-e70);
+}
+
+.status-declined {
+  color: var(--status-error-e70);
+}
+
+.statusPill-approved {
+  background: var(--status-success-s10);
+}
+
+.statusIcon-approved {
+  background-color: var(--status-success-s70);
+}
+
+.status-approved {
+  color: var(--status-success-s70);
+}
+
+.statusPill-cancelled {
+  background: var(--dark-d10);
+}
+
+.statusIcon-cancelled {
+  background-color: var(--dark-d70);
+}
+
+.status-cancelled {
+  color: var(--dark-d70);
 }
 
 .userChip{
