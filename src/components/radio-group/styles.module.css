@@ -53,20 +53,34 @@
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  border: 2px solid var(--neutral-arch-100);
+  border: 1px solid var(--neutral-arch-100);
   flex-shrink: 0;
 }
-
+.radioControl:hover {
+  border: 1px solid var(--p-p30);
+  transition: all 100ms;
+}
 .controlDisabled {
   cursor: not-allowed;
+  background-color: var(--disabled-50);
+  border-color: var(--disabled-50);
+}
+.controlDisabled:hover {
+  cursor: not-allowed;
+  background-color: var(--disabled-50);
+  border-color: var(--disabled-50);
 }
 
 .radioControlActive {
-  border-color: var(--theme-blue);
-  background-color: var(--theme-blue);
+  border-color: var(--p-p40);
+  background-color: var(--p-p40);
   position: relative;
 }
-
+.radioControlActive:hover {
+  border-color: var(--p-p60);
+  background-color: var(--p-p60);
+  position: relative;
+}
 .radioControlActive.radioControlActiveDisabled {
   opacity: 0.6;
 }
