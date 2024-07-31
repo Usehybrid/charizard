@@ -26,7 +26,7 @@
 
 .menuItem:hover {
   background-color: var(--fill-selection-only);
-  cursor: pointer;
+  cursor: default;
 }
 
 .page {
