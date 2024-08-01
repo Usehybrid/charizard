@@ -8,11 +8,13 @@ export const styles: StylesConfig<any> = {
       borderStyle: 'solid',
       minHeight: '32px',
       borderRadius: '4px',
-      padding: '6px 12px',
+      padding: '4px 12px',
       ':hover': {
         borderColor: '#254DDA',
       },
       borderColor: state.isFocused ? '#254DDA' : '#E5E9FB',
+      backgroundColor: '#fff',
+      gap: '4px',
     }
   },
   placeholder: baseStyles => {
@@ -24,11 +26,12 @@ export const styles: StylesConfig<any> = {
   menu: baseStyles => {
     return {
       ...baseStyles,
-      //   maxWidth: '240px',
+      maxWidth: '240px',
       maxHeight: '273px',
       borderRadius: '4px',
       boxShadow: '0px 4px 16px 0px rgba(18, 18, 18, 0.04), 0px 2px 8px 0px rgba(18, 18, 18, 0.08)',
       margin: '4px 0',
+      backgroundColor: '#fff',
     }
   },
   menuList: baseStyles => {
@@ -37,6 +40,8 @@ export const styles: StylesConfig<any> = {
       display: 'flex',
       flexDirection: 'column',
       gap: '2px',
+      borderRadius: '4px',
+      maxHeight: '273px',
     }
   },
   option: (baseStyles, state) => {

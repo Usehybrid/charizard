@@ -5,7 +5,7 @@ import {components} from 'react-select'
 import {SVG} from '../svg'
 import clsx from 'clsx'
 import classes from './styles.module.css'
-import {getColorsFromWord} from '../../utils'
+import {useColorsFromWord} from '../../utils/hooks/use-color-from-word'
 import {SELECT_VARIANT} from './types'
 import {getInitials} from '../../utils/text'
 
@@ -36,7 +36,6 @@ export const CustomIndicatorsContainer = (props: any) => {
   return <components.IndicatorsContainer {...props} />
 }
 
-
 /**
  * Custom Menu component for react-select.
  * Displays a loading message if the select is in a loading state.
@@ -65,7 +64,7 @@ export const CustomOption = (props: any) => {
   const {data, isSelected, isMulti, variant} = props
   const {label, subLabel, profileImgUrl, icon} = data
 
-  const {darkerColor, lighterColor} = getColorsFromWord(label)
+  const {darkerColor, lighterColor} = useColorsFromWord(label)
 
   return (
     <components.Option {...props}>
@@ -142,7 +141,7 @@ export const CustomMultiValue = (props: any) => {
   const {label, profileImgUrl, icon} = data
   const {isMulti} = selectProps
 
-  const {darkerColor, lighterColor} = getColorsFromWord(label)
+  const {darkerColor, lighterColor} = useColorsFromWord(label)
   return (
     <div
       className={clsx(

@@ -6,7 +6,7 @@ import {INV_ACTION_TYPES, useInventoryStore} from './components/table-v2/invento
 import closeIcon from './components/assets/close.svg'
 import {Badge, BADGE_HIGHLIGHT, TableV3, TaskCards} from './components'
 import {Pill, PILL_STATUS} from './components'
-import {SelectV2} from './components/select-v2'
+import {SELECT_VARIANT, SelectV2} from './components/select-v2'
 import '@hybr1d-tech/groudon/dist/typography.min.css'
 import './components/styles/_variables.css'
 import './components/styles/global.css'
@@ -747,6 +747,8 @@ function App() {
         onChange={(value, meta) => {
           console.log({value, meta})
         }}
+        // variant={SELECT_VARIANT.TAGS}
+        // isMulti
       />
     </div>
   )

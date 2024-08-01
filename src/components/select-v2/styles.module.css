@@ -1,6 +1,7 @@
 .mainContainer {
+  min-width: 240px;
   width: 100%;
-  line-height: 1;
+  line-height: 1.2;
   font-size: 14px;
   color: var(--text-primary);
   font-weight: 500;
@@ -91,8 +92,8 @@
 }
 
 .selectedIcon svg {
-  width: 80%;
-  height: 80%;
+  width: 65%;
+  height: 65%;
 }
 .option .icon svg path,
 .selectedIcon svg path {
