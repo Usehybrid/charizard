@@ -736,22 +736,22 @@ function App() {
         tableStyleConfig={{stickyIds: ['software'], maxHeight: '200px'}}
       /> */}
 
-      {/* <TaskCards
+      <TaskCards
         headers={taskheaders}
-        // data={tasks}
-        data={[]}
-      /> */}
+        data={tasks}
+        // data={[]}
+      />
       {/* <Pill status={PILL_STATUS.WARNING}>420</Pill> */}
-      <SelectV2
+      {/* <SelectV2
         options={options}
         onChange={(value, meta) => {
           console.log({value, meta})
         }}
-        // isLoading
-        // errorMsg="something went wrong"
-        // variant={SELECT_VARIANT.USERS}
-        // isMulti
-      />
+        isLoading
+        errorMsg="something went wrong"
+        variant={SELECT_VARIANT.USERS}
+        isMulti
+      /> */}
     </div>
   )
 }

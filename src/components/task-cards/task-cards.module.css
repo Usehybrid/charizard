@@ -1,7 +1,12 @@
+.taskCardContainer {
+  overflow-x: auto;
+}
+
 .taskCard {
   border: 1px solid var(--stroke-tabs-sections);
   border-radius: 10px;
   width: 100%;
+  min-width: 1064px;
 }
 
 .emptyBox {
