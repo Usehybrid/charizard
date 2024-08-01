@@ -42,3 +42,20 @@ export function isDeepEqual(
 
   return true
 }
+
+export const getColorsFromWord = (label: string) => {
+  let randomHash = 0
+  for (let i = 0; i < label.length; i++) {
+    const char = label.charCodeAt(i)
+    randomHash = (randomHash << 5) - randomHash + char
+    randomHash |= 0
+  }
+
+  const hue = Math.abs(randomHash) % 360
+  const saturation = Math.abs(randomHash * 2) % 100
+  const baseLightness = Math.min((Math.abs(randomHash * 3) % 50) + 50, 80)
+  const darkerColor = `hsl(${hue}, ${saturation}%, ${baseLightness - 20}%)`
+  const lighterColor = `hsl(${hue}, ${saturation}%, ${baseLightness + 20}%)`
+
+  return {darkerColor, lighterColor}
+}
