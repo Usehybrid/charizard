@@ -35,7 +35,7 @@ export function SelectV2(props: SelectV2Props) {
   const {
     options,
     mainContainerClassName,
-    variant = SELECT_VARIANT.USERS,
+    variant = SELECT_VARIANT.DEFAULT,
     errorMsg,
     onChange,
     ...restProps
