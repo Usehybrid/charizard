@@ -85,14 +85,23 @@ export function DatePicker({
               disabled={disableDatepicker}
               variant={BUTTON_VARIANT.MINIMAL}
               customStyles={{
-                padding: '0 12px',
+                padding: '6px 12px',
                 cursor: disableDatepicker ? 'not-allowed' : 'pointer',
                 caretColor: isError || errorMsg ? 'var(--status-danger)' : undefined,
-                borderColor: isError || errorMsg ? 'var(--status-danger)' : undefined,
+                borderColor: isError || errorMsg ? 'var(--status-danger)' : 'var(--stroke-buttons-input)',
+                borderRadius: '4px'
               }}
             >
               <div className={classes.formButton} ref={btnRef}>
-                <span style={{color: !date ? 'var(--text-secondary)' : undefined}}>
+                <span
+                  style={{
+                    color: !date ? 'var(--text-tertiary)' : undefined,
+                    fontSize: '14px',
+                    fontWeight: 500,
+                    lineHeight: '20px',
+                    letterSpacing: '0.2px'
+                  }}
+                >
                   {displayDate}
                 </span>
                 <SVG path={calender} width={20} />

@@ -1,7 +1,7 @@
 .datePicker {
   display: grid;
   gap: 0.5rem;
-  min-width: 320px;
+  min-width: 240px;
 }
 .formButton {
   width: 100%;
