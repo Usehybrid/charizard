@@ -61,7 +61,10 @@
   height: 0;
 }
 .switch input:checked + .slider {
-  background-color: var(--theme-blue);
+  background-color: var(--p-p50);
+}
+.switch input:checked + .slider:hover {
+  background-color: var(--p-p60);
 }
 .switch.disabled .slider {
   opacity: 0.5;
@@ -74,10 +77,14 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: var(--neutral-arch-100);
+  background-color: var(--p-p20);
   border-radius: 9999px;
   transition: 0.25s;
 }
+.switch .slider:hover {
+ background-color: var(--p-p30);
+}
+
 .switch .slider::before {
   position: absolute;
   content: '';

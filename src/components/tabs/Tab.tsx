@@ -1,5 +1,5 @@
-import React from "react"
-import clsx from "clsx"
+import React from 'react'
+import clsx from 'clsx'
 import classes from './styles.module.css'
 
 export interface TabProps {
@@ -10,16 +10,18 @@ export interface TabProps {
   children: React.ReactNode
 }
 
-export const Tab: React.FC<TabProps> = ({
-  title,
-  isActive,
-  customClassName,
-  customStyles
-}) => {
-
+export const Tab: React.FC<TabProps> = ({title, isActive, customClassName, customStyles}) => {
   return (
-    <button className={clsx(classes.tab, isActive ? classes.activeTab : '', 'charizard-subheading-semibold', customClassName)} style={customStyles}>
+    <button
+      className={clsx(
+        classes.tab,
+        isActive ? classes.activeTab : '',
+        'zap-subheading-semibold',
+        customClassName,
+      )}
+      style={customStyles}
+    >
       {title}
     </button>
-  );
-};
+  )
+}

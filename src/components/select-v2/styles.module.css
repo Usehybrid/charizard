@@ -1,0 +1,149 @@
+.mainContainer {
+  width: 100%;
+  line-height: 1;
+  font-size: 14px;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.dropdownIcon {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.dropdownIcon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.dropdownIcon svg path {
+  fill: var(--dark-d50);
+}
+
+.loadingMessage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  min-height: 30px;
+  color: #9999b3;
+}
+
+.option {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  font-size: 12px;
+}
+
+.tagOption {
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.multiOptionValue {
+  background-color: var(--neutral-arch-50);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.userOption,
+.userOptionValue {
+  padding: 0 6px 0 0;
+  border-radius: 10px;
+}
+
+.selectedOption {
+  font-size: 14px;
+}
+
+.option .label.selectedLabel {
+  color: var(--theme-blue);
+}
+
+.option .profileImg,
+.option .initials {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+
+.option .initials {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--neutral-arch-50);
+}
+
+.option .icon,
+.selectedIcon {
+  width: 16px;
+  height: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.option .icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.selectedIcon svg {
+  width: 80%;
+  height: 80%;
+}
+.option .icon svg path,
+.selectedIcon svg path {
+  fill: var(--p-p90);
+}
+
+.selectedIcon {
+  margin-left: auto;
+}
+
+.option .labelContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.option .info {
+  color: var(--text-secondary);
+  font-weight: 400;
+}
+
+.clearIcon {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.clearIcon svg path {
+  fill: var(--dark-d50);
+}
+
+.removeIcon {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.removeIcon svg,
+.clearIcon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.removeIcon svg path {
+  fill: var(--p-p90);
+}
+
+.mainContainer .errorMsg {
+  font-weight: normal;
+  color: var(--status-error);
+  font-size: 12px;
+  margin-top: 4px;
+  display: block;
+}

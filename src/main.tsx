@@ -1,11 +1,16 @@
 import React, {useState} from 'react'
 import ReactDOM from 'react-dom/client'
 import randomIcon from './components/assets/check.svg'
-import randomIcon2 from './components/assets/search-2.svg'
 import {createColumnHelper} from '@tanstack/react-table'
-import {ColorPicker, TableV2, TaskCard, USER_CHIP_STATUS, UserChip, Tabs, Tab} from './components'
 import {INV_ACTION_TYPES, useInventoryStore} from './components/table-v2/inventory/inventory.store'
-
+import closeIcon from './components/assets/close.svg'
+import {Badge, BADGE_HIGHLIGHT, TableV3, TaskCards} from './components'
+import {Pill, PILL_STATUS} from './components'
+import {SelectV2} from './components/select-v2'
+import '@hybr1d-tech/groudon/dist/typography.min.css'
+import './components/styles/_variables.css'
+import './components/styles/global.css'
+import chevronDownIcon from './components/assets/chevron-down-16.svg'
 const styles = {
   width: '90%',
   margin: 'auto',
@@ -392,28 +397,28 @@ const getFullName = (owner: any) => {
 
 const menuItems = [
   {
-    label: 'Allocate',
-    iconSrc: randomIcon,
-    onClick: (data: any) => {},
+    label: 'Apply leave',
+    onClick: (data: any) => {
+      console.log(data)
+    },
     filterFn: (data: any) => {
       return true
     },
   },
 
   {
-    label: 'De-allocate',
-    iconSrc: randomIcon,
+    label: 'Apply Reimbursement',
     onClick: (data: any) => {},
     filterFn: (data: any) => {
       // return false
       return true
     },
   },
-  // {
-  //   label: 'Archive',
-  //   iconSrc: randomIcon2,
-  //   onClick: (data: any) => {},
-  // },
+  {
+    label: 'Archive',
+    onClick: (data: any) => {},
+    disabled: true,
+  },
 ]
 
 const columns = [
@@ -454,101 +459,181 @@ const columns = [
   }),
 ]
 
-enum TASK_TYPE {
-  LEAVE = 'leave',
-  IT_ACCESS_REQUEST = 'it_access_request',
-}
-
-enum TASK_STATUS {
-  APPROVED = 'approved',
-  DECLINED = 'declined',
-  PENDING = 'pending',
-  CANCELLED = 'cancelled',
-  PENDING_SECOND_APPROVER = 'pending_second_approver',
-}
-
 const tasks = [
   {
-    id: '12132-3237',
-    type: TASK_TYPE.LEAVE,
-    name: 'Casual Leave',
-    date: '14 Nov, 2024, 04:44 PM',
+    module_id: '3e22329e-2e6c-41f3-a55a-577021d00fa1',
+    module_name: 'Attendance',
+    module_reference: 'attendance',
+    icon_url: 'https://assets.zenadmin.ai/zen-ex-icons/tasks/attendance.svg',
+    static_module: true,
+    external_link: null,
+    form_link: null,
+    name: 'Lunch Break',
+    date: '10 Apr, 2023, 04:34 PM',
     details: [
       {
         key: 'Raised by',
         value: {
-          first_name: 'Yash',
-          middle_name: null,
-          last_name: 'Mishra',
-          profile_img_url: 'https://assets.zenadmin.ai/profile/yeh.png',
-          work_email: 'yash@hybr1d.io',
+          first_name: 'Hybr1d',
+          middle_name: 'hi',
+          last_name: 'Dev',
+          profile_img_url:
+            'https://hybrid-dev-test.s3.us-west-2.amazonaws.com/user_document/undefined/Bertram_Gilfoyle.webp',
+          work_email: 'dev@hybr1d.io',
         },
       },
       {
-        key: 'Leave duration',
-        value: 'April 19, 2024 (1 day)',
+        key: 'Clock In',
+        value: '12 PM',
+      },
+      {
+        key: 'Clock Out',
+        value: '1 PM',
       },
       {
         key: 'Note',
-        value: 'Going out on a family trip',
+        value: 'Lunch Break',
+      },
+      {
+        key: 'Cycle',
+        value: '24hrs',
+      },
+    ],
+    status: 'Pending',
+  },
+  {
+    module_id: '29f78540-62da-40c8-be56-131522e752d9',
+    module_name: 'Leave',
+    module_reference: 'leave',
+    icon_url: 'https://assets.zenadmin.ai/zen-ex-icons/tasks/leave.svg',
+    static_module: true,
+    external_link: null,
+    form_link: null,
+    name: 'Sick Leave',
+    date: '10 Apr, 2023, 04:34 PM',
+    details: [
+      {
+        key: 'Raised by',
+        value: {
+          first_name: 'Hybr1d',
+          middle_name: 'hi',
+          last_name: 'Dev',
+          profile_img_url:
+            'https://hybrid-dev-test.s3.us-west-2.amazonaws.com/user_document/undefined/Bertram_Gilfoyle.webp',
+          work_email: 'dev@hybr1d.io',
+        },
+      },
+      {
+        key: 'Leave Duration',
+        value: '3Days',
+      },
+      {
+        key: 'Note',
+        value: 'Fever and Cold',
       },
       {
         key: 'Attachment',
         value: null,
       },
     ],
-    status: TASK_STATUS.PENDING,
-    details_path: '/leave/04297-322-323',
+    status: 'Cancelled',
   },
-
   {
-    id: '12132-3247',
-    type: TASK_TYPE.IT_ACCESS_REQUEST,
-    name: 'Figma Access',
-    date: '18 Nov, 2024, 04:44 PM',
+    module_id: '90640ef8-7d4f-4542-8b9b-cfebaf33ecd5',
+    module_name: 'IT Request',
+    module_reference: 'it-request',
+    icon_url: 'https://assets.zenadmin.ai/zen-ex-icons/tasks/it-request.svg',
+    static_module: true,
+    external_link: null,
+    form_link: null,
+    name: 'AWS Access',
+    date: '10 Apr, 2023, 04:34 PM',
     details: [
       {
         key: 'Raised by',
         value: {
-          first_name: 'Yash',
-          middle_name: null,
-          last_name: 'Mishra',
-          profile_img_url: 'https://assets.zenadmin.ai/profile/yeh.png',
-          work_email: 'yash@hybr1d.io',
+          first_name: 'Hybr1d',
+          middle_name: 'hi',
+          last_name: 'Dev',
+          profile_img_url:
+            'https://hybrid-dev-test.s3.us-west-2.amazonaws.com/user_document/undefined/Bertram_Gilfoyle.webp',
+          work_email: 'dev@hybr1d.io',
         },
+      },
+      {
+        key: 'Access for',
+        value: 'AWS',
+      },
+      {
+        key: 'Access level',
+        value: 'user',
       },
       {
         key: 'Request type',
         value: 'Access',
       },
       {
-        key: 'Access for',
-        value: 'Figma',
-      },
-      {
         key: 'Note',
-        value: null,
+        value: 'To access cloudwatch logs',
       },
     ],
-    status: TASK_STATUS.PENDING,
-    details_path: '/it-request/04297-322-323',
+    status: 'Approved',
   },
 ]
-
 const taskheaders = ['Task', 'Details', 'Status']
+
+const pages = [
+  {label: 'Breadcrumb Item 1', to: '/'},
+  {label: 'Breadcrumb Item 2', to: '/'},
+  {label: 'Breadcrumb Item 3', to: '/'},
+  {label: 'Breadcrumb Item 4', to: '/'},
+  {label: 'Breadcrumb Item 5', to: '/'},
+  {label: 'Breadcrumb Item 6', to: '/'},
+  {label: 'Breadcrumb Item 7', to: '/'},
+]
+
+const options = [
+  {
+    value: '1',
+    label: 'Item vb 1',
+    // icon: chevronDownIcon,
+    // profileImgUrl: 'https://picsum.photos/200',
+    // subLabel: '3123123213213123',
+  },
+  {
+    value: '2',
+    label: 'Itjhjem 2',
+    // icon: chevronDownIcon,
+    // profileImgUrl: 'https://picsum.photos/200',
+    // subLabel: '3123123213213123',
+  },
+  {
+    value: '3',
+    label: 'Itgtem 3',
+    // icon: chevronDownIcon,
+    // profileImgUrl: 'https://picsum.photos/200',
+    // subLabel: '3123123213213123',
+  },
+  {
+    value: '4',
+    label: 'Itdsdem 4',
+    // icon: chevronDownIcon,
+    // profileImgUrl: 'https://picsum.photos/200',
+    // subLabel: '3123123213213123',
+  },
+]
 
 function App() {
   const [search, setSearch] = React.useState('')
 
   const query = useInventoryStore(s => s.query)
   const dispatch = useInventoryStore(s => s.dispatch)
-  const [activeTab, setActiveTab] = React.useState(tabs?.[0].title)
 
   // console.log(query.limit)
 
   return (
     <div style={styles}>
-      {/* <TableV2
+      {/* <TableV3
         data={data}
         loaderConfig={{isFetching: false, isError: false, text: 'Getting employees...'}}
         columns={columns}
@@ -651,30 +736,21 @@ function App() {
         tableStyleConfig={{stickyIds: ['software'], maxHeight: '200px'}}
       /> */}
 
-      {/* <UserChip
-        status={USER_CHIP_STATUS.NEUTRAL}
-        username="User"
-        profileImgUrl="https://hybrid-dev-test.s3.us-west-2.amazonaws.com/user-avatars/male/2.png?recached=123"
-        selected
+      <TaskCards
+        headers={taskheaders}
+        data={tasks}
+        // data={[]}
+      />
+      {/* <Pill status={PILL_STATUS.WARNING}>420</Pill> */}
+      {/* <SelectV2
+        options={options}
+        onChange={(value, meta) => {
+          console.log({value, meta})
+        }}
       /> */}
-
-      {/* <Tabs id='test-tab' activeKey={activeTab} onSelect={(id) => setActiveTab(id)}>
-        {
-          tabs.map((tab) => {
-            return <Tab isActive={activeTab === tab.title} key={tab.title} title={tab.title}>{tab.content}</Tab>
-          })
-        }
-      </Tabs> */}
-      <TaskCard headers={taskheaders} data={tasks} />
     </div>
   )
 }
-
-const tabs = [
-  {title: 'All (1)', content: <div>Tab 1</div>},
-  {title: 'Tab 2', content: <div>Tab 2</div>},
-  {title: 'Tab 3', content: <div>Tab 3</div>},
-]
 
 const cols = {
   checked_state: [

@@ -6,14 +6,8 @@
   align-items: flex-start;
 
   color: var(--text-secondary);
-  /* caption_medium */
-  font-family: 'Instrument Sans';
-  font-size: 0.688rem;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 1rem; /* 145.455% */
 
   border-bottom: 1px solid var(--stroke-tabs-sections);
   border-radius: 10px 10px 0 0;
-  background: var(--fill-highlight-only);
+  background: var(--fill-highlight);
 }

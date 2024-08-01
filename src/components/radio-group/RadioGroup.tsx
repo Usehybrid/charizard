@@ -8,6 +8,7 @@ import {useMachine, normalizeProps} from '@zag-js/react'
 import {InputContainer, InputLabel} from '../input'
 import {SVG} from '../svg'
 import {Placement} from '@zag-js/popper'
+import {Skeleton} from '../skeleton'
 
 interface RadioGroupProps {
   /**
@@ -46,6 +47,7 @@ interface RadioGroupProps {
   errorMsg?: string
   optionsContainerStyles?: React.CSSProperties
   disabled?: boolean
+  showSkeleton?: boolean
 }
 
 export function RadioGroup({
@@ -57,6 +59,7 @@ export function RadioGroup({
   errorMsg,
   optionsContainerStyles,
   disabled = false,
+  showSkeleton = false,
 }: RadioGroupProps) {
   const [state, send] = useMachine(
     radio.machine({
@@ -71,7 +74,25 @@ export function RadioGroup({
 
   const api = radio.connect(state, send, normalizeProps)
 
-  return (
+  return showSkeleton ? (
+    <div className={classes.radioGroup}>
+      <div className={classes.root}>
+        {radioHeading && (
+          <div>
+            <Skeleton className={classes.headingLoader} />
+          </div>
+        )}
+        <div className={clsx(classes.optionsContainerLoader)} style={optionsContainerStyles}>
+          {items.map(opt => (
+            <div key={opt.value} style={{display: 'flex', gap: '6px'}}>
+              <Skeleton className={classes.circleLoader} />
+              {!!opt.label.heading && <Skeleton className={classes.circleTextLoader} />}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  ) : (
     <div className={classes.radioGroup}>
       <div {...api.getRootProps()} className={classes.root}>
         {radioHeading && (

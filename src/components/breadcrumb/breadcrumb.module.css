@@ -1,0 +1,43 @@
+.breadcrumb {
+  display: flex;
+  position: relative;
+}
+
+.pageSection {
+  display: flex;
+}
+
+.page {
+  display: inline-flex;
+  padding: 0px 4px;
+  align-items: flex-start;
+  gap: 8px;
+  color: var(--text-secondary);
+  cursor: default;
+  font-size: 14px;
+}
+
+.page:hover {
+  border-radius: 2px;
+  background: var(--fill-selection-only);
+  color: var(--link-hover);
+}
+
+.activePage {
+  color: var(--text-primary);
+  border: 1px solid var(--p-p50);
+  border-radius: 2px;
+  background: var(--fill-selection-only);
+}
+
+.dots {
+  color: var(--text-secondary);
+  cursor: default;
+  font-size: 14px;
+  border: 1px solid transparent;
+}
+
+.dotsActive {
+  border: 1px solid var(--p-p50);
+  border-radius: 2px;
+}
