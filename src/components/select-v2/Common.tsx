@@ -5,7 +5,7 @@ import {components} from 'react-select'
 import {SVG} from '../svg'
 import clsx from 'clsx'
 import classes from './styles.module.css'
-import {getColorsFromWord} from '../../utils'
+import {useColorsFromWord} from '../../utils/hooks/use-color-from-word'
 import {SELECT_VARIANT} from './types'
 import {getInitials} from '../../utils/text'
 
@@ -36,7 +36,6 @@ export const CustomIndicatorsContainer = (props: any) => {
   return <components.IndicatorsContainer {...props} />
 }
 
-
 /**
  * Custom Menu component for react-select.
  * Displays a loading message if the select is in a loading state.
@@ -65,13 +64,14 @@ export const CustomOption = (props: any) => {
   const {data, isSelected, isMulti, variant} = props
   const {label, subLabel, profileImgUrl, icon} = data
 
-  const {darkerColor, lighterColor} = getColorsFromWord(label)
+  const {darkerColor, lighterColor} = useColorsFromWord(label)
 
   return (
     <components.Option {...props}>
       <div
         className={clsx(
           classes.option,
+          isMulti ? 'zap-caption-medium' : 'zap-subcontent-medium',
           isMulti && variant === SELECT_VARIANT.TAGS && classes.tagOption,
           isMulti && (variant === SELECT_VARIANT.USERS || profileImgUrl) && classes.userOption,
         )}
@@ -99,7 +99,7 @@ export const CustomOption = (props: any) => {
           >
             {label}
           </span>
-          {subLabel && <div className={classes.info}>{subLabel}</div>}
+          {subLabel && <div className={clsx(classes.info, 'zap-caption-regular')}>{subLabel}</div>}
         </div>
       </div>
       {isSelected && <SVG path={checkIcon} spanClassName={classes.selectedIcon} />}
@@ -142,12 +142,13 @@ export const CustomMultiValue = (props: any) => {
   const {label, profileImgUrl, icon} = data
   const {isMulti} = selectProps
 
-  const {darkerColor, lighterColor} = getColorsFromWord(label)
+  const {darkerColor, lighterColor} = useColorsFromWord(label)
   return (
     <div
       className={clsx(
         classes.option,
         classes.multiOptionValue,
+        isMulti && 'zap-caption-medium',
         isMulti && (variant === SELECT_VARIANT.USERS || profileImgUrl) && classes.userOptionValue,
       )}
       style={

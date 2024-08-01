@@ -6,7 +6,7 @@ import {INV_ACTION_TYPES, useInventoryStore} from './components/table-v2/invento
 import closeIcon from './components/assets/close.svg'
 import {Badge, BADGE_HIGHLIGHT, TableV3, TaskCards} from './components'
 import {Pill, PILL_STATUS} from './components'
-import {SelectV2} from './components/select-v2'
+import {SELECT_VARIANT, SelectV2} from './components/select-v2'
 import '@hybr1d-tech/groudon/dist/typography.min.css'
 import './components/styles/_variables.css'
 import './components/styles/global.css'
@@ -595,30 +595,30 @@ const pages = [
 const options = [
   {
     value: '1',
-    label: 'Item vb 1',
+    label: 'Full Time',
     // icon: chevronDownIcon,
-    // profileImgUrl: 'https://picsum.photos/200',
+    profileImgUrl: 'https://picsum.photos/200',
     // subLabel: '3123123213213123',
   },
   {
     value: '2',
-    label: 'Itjhjem 2',
+    label: 'Part Time',
     // icon: chevronDownIcon,
-    // profileImgUrl: 'https://picsum.photos/200',
+    profileImgUrl: 'https://picsum.photos/200',
     // subLabel: '3123123213213123',
   },
   {
     value: '3',
-    label: 'Itgtem 3',
+    label: 'Fixed Term',
     // icon: chevronDownIcon,
-    // profileImgUrl: 'https://picsum.photos/200',
+    profileImgUrl: 'https://picsum.photos/200',
     // subLabel: '3123123213213123',
   },
   {
     value: '4',
-    label: 'Itdsdem 4',
+    label: 'Internship',
     // icon: chevronDownIcon,
-    // profileImgUrl: 'https://picsum.photos/200',
+    profileImgUrl: 'https://picsum.photos/200',
     // subLabel: '3123123213213123',
   },
 ]
@@ -747,6 +747,10 @@ function App() {
         onChange={(value, meta) => {
           console.log({value, meta})
         }}
+        isLoading
+        errorMsg="something went wrong"
+        variant={SELECT_VARIANT.USERS}
+        isMulti
       /> */}
     </div>
   )
