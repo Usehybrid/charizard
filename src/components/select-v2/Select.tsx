@@ -58,7 +58,7 @@ export function SelectV2(props: SelectV2Props) {
     onChange((value as SelectSingleValue)?.value || '', meta)
   }
   return (
-    <div className={clsx(classes.mainContainer, mainContainerClassName)}>
+    <div className={clsx(classes.mainContainer, 'zap-content-medium', mainContainerClassName)}>
       <ReactSelect
         classNamePrefix="react-select"
         options={options}
@@ -80,7 +80,9 @@ export function SelectV2(props: SelectV2Props) {
         onChange={selectOptionHandler}
         {...restProps}
       />
-      {errorMsg && <span className={classes.errorMsg}>{errorMsg}</span>}
+      {errorMsg && (
+        <span className={clsx(classes.errorMsg, 'zap-subcontent-regular')}>{errorMsg}</span>
+      )}
     </div>
   )
 }

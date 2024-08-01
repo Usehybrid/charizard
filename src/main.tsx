@@ -595,30 +595,30 @@ const pages = [
 const options = [
   {
     value: '1',
-    label: 'Item vb 1',
+    label: 'Full Time',
     // icon: chevronDownIcon,
-    // profileImgUrl: 'https://picsum.photos/200',
+    profileImgUrl: 'https://picsum.photos/200',
     // subLabel: '3123123213213123',
   },
   {
     value: '2',
-    label: 'Itjhjem 2',
+    label: 'Part Time',
     // icon: chevronDownIcon,
-    // profileImgUrl: 'https://picsum.photos/200',
+    profileImgUrl: 'https://picsum.photos/200',
     // subLabel: '3123123213213123',
   },
   {
     value: '3',
-    label: 'Itgtem 3',
+    label: 'Fixed Term',
     // icon: chevronDownIcon,
-    // profileImgUrl: 'https://picsum.photos/200',
+    profileImgUrl: 'https://picsum.photos/200',
     // subLabel: '3123123213213123',
   },
   {
     value: '4',
-    label: 'Itdsdem 4',
+    label: 'Internship',
     // icon: chevronDownIcon,
-    // profileImgUrl: 'https://picsum.photos/200',
+    profileImgUrl: 'https://picsum.photos/200',
     // subLabel: '3123123213213123',
   },
 ]
@@ -747,7 +747,9 @@ function App() {
         onChange={(value, meta) => {
           console.log({value, meta})
         }}
-        // variant={SELECT_VARIANT.TAGS}
+        // isLoading
+        // errorMsg="something went wrong"
+        // variant={SELECT_VARIANT.USERS}
         // isMulti
       />
     </div>

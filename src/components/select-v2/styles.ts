@@ -6,8 +6,8 @@ export const styles: StylesConfig<any> = {
       ...baseStyles,
       borderWidth: '1px',
       borderStyle: 'solid',
-      minHeight: '32px',
       borderRadius: '4px',
+      minHeight: '32px',
       padding: '4px 12px',
       ':hover': {
         borderColor: '#254DDA',
@@ -27,7 +27,6 @@ export const styles: StylesConfig<any> = {
     return {
       ...baseStyles,
       maxWidth: '240px',
-      maxHeight: '273px',
       borderRadius: '4px',
       boxShadow: '0px 4px 16px 0px rgba(18, 18, 18, 0.04), 0px 2px 8px 0px rgba(18, 18, 18, 0.08)',
       margin: '4px 0',
@@ -47,8 +46,7 @@ export const styles: StylesConfig<any> = {
   option: (baseStyles, state) => {
     return {
       ...baseStyles,
-      padding: '8px 12px',
-      minHeight: '30px',
+      padding: '6px 12px',
       backgroundColor: state.isSelected ? '#F6F8FE' : '#fff',
       ':hover': {
         backgroundColor: '#F6F8FE',
@@ -57,7 +55,7 @@ export const styles: StylesConfig<any> = {
       alignItems: 'center',
     }
   },
-  noOptionsMessage: (baseStyles, state) => {
+  noOptionsMessage: baseStyles => {
     return {
       ...baseStyles,
       padding: '6px 12px',
@@ -70,6 +68,8 @@ export const styles: StylesConfig<any> = {
     return {
       ...baseStyles,
       gap: '4px',
+      flexWrap: 'nowrap',
+      overflowX: 'scroll',
     }
   },
   multiValue: baseStyles => ({

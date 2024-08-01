@@ -71,6 +71,7 @@ export const CustomOption = (props: any) => {
       <div
         className={clsx(
           classes.option,
+          isMulti ? 'zap-caption-medium' : 'zap-subcontent-medium',
           isMulti && variant === SELECT_VARIANT.TAGS && classes.tagOption,
           isMulti && (variant === SELECT_VARIANT.USERS || profileImgUrl) && classes.userOption,
         )}
@@ -98,7 +99,7 @@ export const CustomOption = (props: any) => {
           >
             {label}
           </span>
-          {subLabel && <div className={classes.info}>{subLabel}</div>}
+          {subLabel && <div className={clsx(classes.info, 'zap-caption-regular')}>{subLabel}</div>}
         </div>
       </div>
       {isSelected && <SVG path={checkIcon} spanClassName={classes.selectedIcon} />}
@@ -147,6 +148,7 @@ export const CustomMultiValue = (props: any) => {
       className={clsx(
         classes.option,
         classes.multiOptionValue,
+        isMulti && 'zap-caption-medium',
         isMulti && (variant === SELECT_VARIANT.USERS || profileImgUrl) && classes.userOptionValue,
       )}
       style={

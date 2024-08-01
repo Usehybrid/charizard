@@ -1,10 +1,8 @@
 .mainContainer {
   min-width: 240px;
   width: 100%;
-  line-height: 1.2;
-  font-size: 14px;
+  max-width: 340px;
   color: var(--text-primary);
-  font-weight: 500;
 }
 
 .dropdownIcon {
@@ -26,7 +24,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 8px 12px;
+  padding: 6px 12px;
   min-height: 30px;
   color: #9999b3;
 }
@@ -35,7 +33,6 @@
   display: flex;
   gap: 4px;
   align-items: center;
-  font-size: 12px;
 }
 
 .tagOption {
@@ -52,11 +49,7 @@
 .userOption,
 .userOptionValue {
   padding: 0 6px 0 0;
-  border-radius: 10px;
-}
-
-.selectedOption {
-  font-size: 14px;
+  border-radius: 10240px;
 }
 
 .option .label.selectedLabel {
@@ -107,12 +100,11 @@
 .option .labelContainer {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 2px;
 }
 
 .option .info {
   color: var(--text-secondary);
-  font-weight: 400;
 }
 
 .clearIcon {
@@ -142,9 +134,7 @@
 }
 
 .mainContainer .errorMsg {
-  font-weight: normal;
   color: var(--status-error);
-  font-size: 12px;
   margin-top: 4px;
   display: block;
 }
