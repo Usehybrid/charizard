@@ -23,9 +23,6 @@ importers:
       '@hybr1d-tech/groudon':
         specifier: ^0.1.2
         version: 0.1.2
-      '@popperjs/core':
-        specifier: ^2.11.8
-        version: 2.11.8
       '@tanstack/react-table':
         specifier: ^8.19.3
         version: 8.19.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -71,18 +68,12 @@ importers:
       clsx:
         specifier: ^2.1.0
         version: 2.1.1
-      date-fns:
-        specifier: ^3.6.0
-        version: 3.6.0
       react:
         specifier: ^18.3.1
         version: 18.3.1
       react-country-flag:
         specifier: ^3.1.0
         version: 3.1.0(react@18.3.1)
-      react-day-picker:
-        specifier: 8.10.1
-        version: 8.10.1(date-fns@3.6.0)(react@18.3.1)
       react-dom:
         specifier: ^18.3.1
         version: 18.3.1(react@18.3.1)
@@ -105,6 +96,9 @@ importers:
         specifier: ^4.5.4
         version: 4.5.4(@types/react@18.3.3)(react@18.3.1)
     devDependencies:
+      '@popperjs/core':
+        specifier: ^2.11.8
+        version: 2.11.8
       '@storybook/addon-essentials':
         specifier: ^8.2.6
         version: 8.2.6(storybook@8.2.6(@babel/preset-env@7.25.0(@babel/core@7.24.9)))
@@ -138,9 +132,15 @@ importers:
       '@vitejs/plugin-react':
         specifier: ^4.3.1
         version: 4.3.1(vite@5.3.5(@types/node@22.0.0))
+      date-fns:
+        specifier: ^3.6.0
+        version: 3.6.0
       prop-types:
         specifier: ^15.8.1
         version: 15.8.1
+      react-day-picker:
+        specifier: 8.10.1
+        version: 8.10.1(date-fns@3.6.0)(react@18.3.1)
       react-tooltip:
         specifier: ^5.27.1
         version: 5.27.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
