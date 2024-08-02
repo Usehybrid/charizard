@@ -1,0 +1,26 @@
+.taskCardContainer {
+  overflow-x: auto;
+}
+
+.taskCard {
+  border: 1px solid var(--stroke-tabs-sections);
+  border-radius: 10px;
+  width: 100%;
+  min-width: 1064px;
+}
+
+.emptyBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 12px;
+  height: 164px;
+}
+.emptyTxt {
+  color: var(--text-primary);
+}
+
+.emptyIcon path {
+  fill: var(--p-p50);
+}

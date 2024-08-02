@@ -1,8 +1,8 @@
 import * as React from 'react'
 import clsx from 'clsx'
+import multiplyIcon from '../assets/multiply.svg'
 import classes from './user-chip.module.css'
 import {SVG} from '../svg'
-import multiplyIcon from '../assets/multiply.svg'
 
 export enum USER_CHIP_STATUS {
   DEFAULT = 'default',
@@ -30,7 +30,7 @@ export function UserChip({
   return (
     <div className={clsx(classes.box, classes[status], {[classes.selected]: selected})}>
       <img src={profileImgUrl} alt={username} className={classes.avatar} />
-      <span className="charizard-caption-semibold">{username}</span>
+      <span className="zap-caption-semibold">{username}</span>
       {selected && <SVG path={multiplyIcon} svgClassName={classes.icon} />}
     </div>
   )

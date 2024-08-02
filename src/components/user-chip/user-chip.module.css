@@ -4,6 +4,7 @@
   padding-right: 6px;
   gap: 4px;
   border-radius: var(--borderfull);
+  max-width: fit-content;
 }
 
 .box.neutral {

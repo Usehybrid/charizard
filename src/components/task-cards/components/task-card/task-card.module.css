@@ -1,0 +1,67 @@
+.card {
+  display: grid;
+  grid-template-columns: 3fr 5fr 2fr 2fr;
+  gap: 16px;
+  padding: 24px;
+  align-items: center;
+  border-bottom: 1px solid var(--stroke-tabs-sections);
+}
+
+.card:hover {
+  background-color: var(--fill-selection);
+}
+
+.taskSection {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.taskName {
+  color: var(--text-primary);
+}
+
+.dateAndTime {
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+}
+
+.detailsSection {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.detail {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  align-self: stretch;
+}
+
+.detailKey {
+  min-width: 140px;
+  color: var(--text-secondary);
+}
+
+.detailValue {
+  min-width: 308px;
+  color: var(--text-primary);
+}
+
+.detailValueNA {
+  min-width: 308px;
+  color: var(--text-secondary);
+}
+
+.actionSection {
+  display: none;
+}
+
+.card:hover .actionSection {
+  display: block;
+}

@@ -1,12 +1,16 @@
-import React, { useState } from 'react'
+import React, {useState} from 'react'
 import ReactDOM from 'react-dom/client'
 import randomIcon from './components/assets/check.svg'
-import randomIcon2 from './components/assets/search-2.svg'
-import { createColumnHelper } from '@tanstack/react-table'
-import { ColorPicker, TableV2, USER_CHIP_STATUS, UserChip, Tabs, Tab, ButtonV2, BUTTON_V2_VARIANT, BUTTON_V2_SIZE, BUTTON_V2_TYPE, SVG } from './components'
-import { INV_ACTION_TYPES, useInventoryStore } from './components/table-v2/inventory/inventory.store'
+import {createColumnHelper} from '@tanstack/react-table'
+import {INV_ACTION_TYPES, useInventoryStore} from './components/table-v2/inventory/inventory.store'
 import closeIcon from './components/assets/close.svg'
-
+import {Badge, BADGE_HIGHLIGHT, TableV3, TaskCards} from './components'
+import {Pill, PILL_STATUS} from './components'
+import {SELECT_VARIANT, SelectV2} from './components/select-v2'
+import '@hybr1d-tech/groudon/dist/typography.min.css'
+import './components/styles/_variables.css'
+import './components/styles/global.css'
+import chevronDownIcon from './components/assets/chevron-down-16.svg'
 const styles = {
   width: '90%',
   margin: 'auto',
@@ -15,7 +19,7 @@ const styles = {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  backgroundColor: '#FAFAFB',
+  // backgroundColor: '#FAFAFB',
   flexDir: 'column',
 }
 
@@ -394,7 +398,9 @@ const getFullName = (owner: any) => {
 const menuItems = [
   {
     label: 'Apply leave',
-    onClick: (data: any) => { console.log(data) },
+    onClick: (data: any) => {
+      console.log(data)
+    },
     filterFn: (data: any) => {
       return true
     },
@@ -402,7 +408,7 @@ const menuItems = [
 
   {
     label: 'Apply Reimbursement',
-    onClick: (data: any) => { },
+    onClick: (data: any) => {},
     filterFn: (data: any) => {
       // return false
       return true
@@ -411,7 +417,7 @@ const menuItems = [
   {
     label: 'Archive',
     onClick: (data: any) => {},
-    disabled: true
+    disabled: true,
   },
 ]
 
@@ -453,19 +459,181 @@ const columns = [
   }),
 ]
 
+const tasks = [
+  {
+    module_id: '3e22329e-2e6c-41f3-a55a-577021d00fa1',
+    module_name: 'Attendance',
+    module_reference: 'attendance',
+    icon_url: 'https://assets.zenadmin.ai/zen-ex-icons/tasks/attendance.svg',
+    static_module: true,
+    external_link: null,
+    form_link: null,
+    name: 'Lunch Break',
+    date: '10 Apr, 2023, 04:34 PM',
+    details: [
+      {
+        key: 'Raised by',
+        value: {
+          first_name: 'Hybr1d',
+          middle_name: 'hi',
+          last_name: 'Dev',
+          profile_img_url:
+            'https://hybrid-dev-test.s3.us-west-2.amazonaws.com/user_document/undefined/Bertram_Gilfoyle.webp',
+          work_email: 'dev@hybr1d.io',
+        },
+      },
+      {
+        key: 'Clock In',
+        value: '12 PM',
+      },
+      {
+        key: 'Clock Out',
+        value: '1 PM',
+      },
+      {
+        key: 'Note',
+        value: 'Lunch Break',
+      },
+      {
+        key: 'Cycle',
+        value: '24hrs',
+      },
+    ],
+    status: 'Pending',
+  },
+  {
+    module_id: '29f78540-62da-40c8-be56-131522e752d9',
+    module_name: 'Leave',
+    module_reference: 'leave',
+    icon_url: 'https://assets.zenadmin.ai/zen-ex-icons/tasks/leave.svg',
+    static_module: true,
+    external_link: null,
+    form_link: null,
+    name: 'Sick Leave',
+    date: '10 Apr, 2023, 04:34 PM',
+    details: [
+      {
+        key: 'Raised by',
+        value: {
+          first_name: 'Hybr1d',
+          middle_name: 'hi',
+          last_name: 'Dev',
+          profile_img_url:
+            'https://hybrid-dev-test.s3.us-west-2.amazonaws.com/user_document/undefined/Bertram_Gilfoyle.webp',
+          work_email: 'dev@hybr1d.io',
+        },
+      },
+      {
+        key: 'Leave Duration',
+        value: '3Days',
+      },
+      {
+        key: 'Note',
+        value: 'Fever and Cold',
+      },
+      {
+        key: 'Attachment',
+        value: null,
+      },
+    ],
+    status: 'Cancelled',
+  },
+  {
+    module_id: '90640ef8-7d4f-4542-8b9b-cfebaf33ecd5',
+    module_name: 'IT Request',
+    module_reference: 'it-request',
+    icon_url: 'https://assets.zenadmin.ai/zen-ex-icons/tasks/it-request.svg',
+    static_module: true,
+    external_link: null,
+    form_link: null,
+    name: 'AWS Access',
+    date: '10 Apr, 2023, 04:34 PM',
+    details: [
+      {
+        key: 'Raised by',
+        value: {
+          first_name: 'Hybr1d',
+          middle_name: 'hi',
+          last_name: 'Dev',
+          profile_img_url:
+            'https://hybrid-dev-test.s3.us-west-2.amazonaws.com/user_document/undefined/Bertram_Gilfoyle.webp',
+          work_email: 'dev@hybr1d.io',
+        },
+      },
+      {
+        key: 'Access for',
+        value: 'AWS',
+      },
+      {
+        key: 'Access level',
+        value: 'user',
+      },
+      {
+        key: 'Request type',
+        value: 'Access',
+      },
+      {
+        key: 'Note',
+        value: 'To access cloudwatch logs',
+      },
+    ],
+    status: 'Approved',
+  },
+]
+const taskheaders = ['Task', 'Details', 'Status']
+
+const pages = [
+  {label: 'Breadcrumb Item 1', to: '/'},
+  {label: 'Breadcrumb Item 2', to: '/'},
+  {label: 'Breadcrumb Item 3', to: '/'},
+  {label: 'Breadcrumb Item 4', to: '/'},
+  {label: 'Breadcrumb Item 5', to: '/'},
+  {label: 'Breadcrumb Item 6', to: '/'},
+  {label: 'Breadcrumb Item 7', to: '/'},
+]
+
+const options = [
+  {
+    value: '1',
+    label: 'Full Time',
+    // icon: chevronDownIcon,
+    profileImgUrl: 'https://picsum.photos/200',
+    // subLabel: '3123123213213123',
+  },
+  {
+    value: '2',
+    label: 'Part Time',
+    // icon: chevronDownIcon,
+    profileImgUrl: 'https://picsum.photos/200',
+    // subLabel: '3123123213213123',
+  },
+  {
+    value: '3',
+    label: 'Fixed Term',
+    // icon: chevronDownIcon,
+    profileImgUrl: 'https://picsum.photos/200',
+    // subLabel: '3123123213213123',
+  },
+  {
+    value: '4',
+    label: 'Internship',
+    // icon: chevronDownIcon,
+    profileImgUrl: 'https://picsum.photos/200',
+    // subLabel: '3123123213213123',
+  },
+]
+
 function App() {
   const [search, setSearch] = React.useState('')
 
   const query = useInventoryStore(s => s.query)
   const dispatch = useInventoryStore(s => s.dispatch)
-  const [activeTab, setActiveTab] = React.useState(tabs?.[0].title);
-
 
   // console.log(query.limit)
 
   return (
     <div style={styles}>
-      {/* <TableV2
+      {/* <TableV3
         data={data}
         loaderConfig={{isFetching: false, isError: false, text: 'Getting employees...'}}
         columns={columns}
@@ -568,148 +736,25 @@ function App() {
         tableStyleConfig={{stickyIds: ['software'], maxHeight: '200px'}}
       /> */}
 
-      {/* <UserChip
-        status={USER_CHIP_STATUS.NEUTRAL}
-        username="User"
-        profileImgUrl="https://hybrid-dev-test.s3.us-west-2.amazonaws.com/user-avatars/male/2.png?recached=123"
-        selected
+      {/* <TaskCards
+        headers={taskheaders}
+        data={tasks}
+        // data={[]}
+      />
+      {/* <Pill status={PILL_STATUS.WARNING}>420</Pill> */}
+      {/* <SelectV2
+        options={options}
+        onChange={(value, meta) => {
+          console.log({value, meta})
+        }}
+        isLoading
+        errorMsg="something went wrong"
+        variant={SELECT_VARIANT.USERS}
+        isMulti
       /> */}
-
-      {/* <Tabs id='test-tab' activeKey={activeTab} onSelect={(id) => setActiveTab(id)}>
-        {
-          tabs.map((tab) => {
-            return <Tab isActive={activeTab === tab.title} key={tab.title} title={tab.title}>{tab.content}</Tab>
-          })
-        }
-      </Tabs> */}
-      <div>
-        <div style={{ display: 'flex', gap: 150 }}>
-          <div style={{ display: 'flex', gap: 10 }}>
-            <ButtonV2 size={BUTTON_V2_SIZE.SMALL}>Button</ButtonV2>
-            <ButtonV2 size={BUTTON_V2_SIZE.SMALL} variant={BUTTON_V2_VARIANT.SECONDARY}>Button</ButtonV2>
-            <ButtonV2 size={BUTTON_V2_SIZE.SMALL} variant={BUTTON_V2_VARIANT.TERTIARY}>Tertiary</ButtonV2>
-          </div>
-          <div style={{ display: 'flex', gap: 10 }}>
-            <ButtonV2 disabled size={BUTTON_V2_SIZE.SMALL}>Button</ButtonV2>
-            <ButtonV2 disabled size={BUTTON_V2_SIZE.SMALL} variant={BUTTON_V2_VARIANT.SECONDARY}>Button</ButtonV2>
-            <ButtonV2 disabled size={BUTTON_V2_SIZE.SMALL} variant={BUTTON_V2_VARIANT.TERTIARY}>Tertiary</ButtonV2>
-          </div>
-          <div style={{ display: 'flex', gap: 10 }}>
-            <ButtonV2>Button</ButtonV2>
-            <ButtonV2 variant={BUTTON_V2_VARIANT.SECONDARY}>Button</ButtonV2>
-            <ButtonV2 variant={BUTTON_V2_VARIANT.TERTIARY}>Tertiary</ButtonV2>
-          </div>
-        </div>
-
-        <div style={{ display: 'flex', gap: 150, marginTop: 20 }}>
-          <div style={{ display: 'flex', gap: 10 }}>
-            <ButtonV2 size={BUTTON_V2_SIZE.SMALL} type={BUTTON_V2_TYPE.ICON_LEFT} icon={<SVG path={closeIcon} width={16} height={16} />
-            }>Button</ButtonV2>
-            <ButtonV2 size={BUTTON_V2_SIZE.SMALL} variant={BUTTON_V2_VARIANT.SECONDARY} type={BUTTON_V2_TYPE.ICON_LEFT} icon={<SVG path={closeIcon} width={16} height={16} />
-            }>Button</ButtonV2>
-            <ButtonV2 size={BUTTON_V2_SIZE.SMALL} variant={BUTTON_V2_VARIANT.TERTIARY} type={BUTTON_V2_TYPE.ICON_LEFT} icon={<SVG path={closeIcon} width={16} height={16} />
-            }>Tertiary</ButtonV2>
-          </div>
-          <div style={{ display: 'flex', gap: 10 }}>
-            <ButtonV2 disabled size={BUTTON_V2_SIZE.SMALL} type={BUTTON_V2_TYPE.ICON_LEFT} icon={<SVG path={closeIcon} width={16} height={16} />
-            }>Button</ButtonV2>
-            <ButtonV2 disabled size={BUTTON_V2_SIZE.SMALL} variant={BUTTON_V2_VARIANT.SECONDARY} type={BUTTON_V2_TYPE.ICON_LEFT} icon={<SVG path={closeIcon} width={16} height={16} />
-            }>Button</ButtonV2>
-            <ButtonV2 disabled size={BUTTON_V2_SIZE.SMALL} variant={BUTTON_V2_VARIANT.TERTIARY} type={BUTTON_V2_TYPE.ICON_LEFT} icon={<SVG path={closeIcon} width={16} height={16} />
-            }>Tertiary</ButtonV2>
-          </div>
-          <div style={{ display: 'flex', gap: 10 }}>
-            <ButtonV2 type={BUTTON_V2_TYPE.ICON_LEFT} icon={<SVG path={closeIcon} width={16} height={16} />
-            }>Button</ButtonV2>
-            <ButtonV2 variant={BUTTON_V2_VARIANT.SECONDARY} type={BUTTON_V2_TYPE.ICON_LEFT} icon={<SVG path={closeIcon} width={16} height={16} />
-            }>Button</ButtonV2>
-            <ButtonV2 variant={BUTTON_V2_VARIANT.TERTIARY} type={BUTTON_V2_TYPE.ICON_LEFT} icon={<SVG path={closeIcon} width={16} height={16} />
-            }>Tertiary</ButtonV2>
-          </div>
-        </div>
-
-        <div style={{ display: 'flex', gap: 150, marginTop: 20 }}>
-          <div style={{ display: 'flex', gap: 10 }}>
-            <ButtonV2 size={BUTTON_V2_SIZE.SMALL} type={BUTTON_V2_TYPE.ICON_RIGHT} icon={<SVG path={closeIcon} width={16} height={16} />
-            }>Button</ButtonV2>
-            <ButtonV2 size={BUTTON_V2_SIZE.SMALL} variant={BUTTON_V2_VARIANT.SECONDARY} type={BUTTON_V2_TYPE.ICON_RIGHT} icon={<SVG path={closeIcon} width={16} height={16} />
-            }>Button</ButtonV2>
-            <ButtonV2 size={BUTTON_V2_SIZE.SMALL} variant={BUTTON_V2_VARIANT.TERTIARY} type={BUTTON_V2_TYPE.ICON_RIGHT} icon={<SVG path={closeIcon} width={16} height={16} />
-            }>Tertiary</ButtonV2>
-          </div>
-          <div style={{ display: 'flex', gap: 10 }}>
-            <ButtonV2 disabled size={BUTTON_V2_SIZE.SMALL} type={BUTTON_V2_TYPE.ICON_RIGHT} icon={<SVG path={closeIcon} width={16} height={16} />
-            }>Button</ButtonV2>
-            <ButtonV2 disabled size={BUTTON_V2_SIZE.SMALL} variant={BUTTON_V2_VARIANT.SECONDARY} type={BUTTON_V2_TYPE.ICON_RIGHT} icon={<SVG path={closeIcon} width={16} height={16} />
-            }>Button</ButtonV2>
-            <ButtonV2 disabled size={BUTTON_V2_SIZE.SMALL} variant={BUTTON_V2_VARIANT.TERTIARY} type={BUTTON_V2_TYPE.ICON_RIGHT} icon={<SVG path={closeIcon} width={16} height={16} />
-            }>Tertiary</ButtonV2>
-          </div>
-          <div style={{ display: 'flex', gap: 10 }}>
-            <ButtonV2 type={BUTTON_V2_TYPE.ICON_RIGHT} icon={<SVG path={closeIcon} width={16} height={16} />
-            }>Button</ButtonV2>
-            <ButtonV2 variant={BUTTON_V2_VARIANT.SECONDARY} type={BUTTON_V2_TYPE.ICON_RIGHT} icon={<SVG path={closeIcon} width={16} height={16} />
-            }>Button</ButtonV2>
-            <ButtonV2 variant={BUTTON_V2_VARIANT.TERTIARY} type={BUTTON_V2_TYPE.ICON_RIGHT} icon={<SVG path={closeIcon} width={16} height={16} />
-            }>Tertiary</ButtonV2>
-          </div>
-        </div>
-
-
-        <div style={{ display: 'flex', gap: 150, marginTop: 20 }}>
-          <div style={{ display: 'flex', gap: 10 }}>
-            <ButtonV2.GroupAction size={BUTTON_V2_SIZE.SMALL} menuItems={menuItems}>Button</ButtonV2.GroupAction>
-            <ButtonV2.GroupAction size={BUTTON_V2_SIZE.SMALL} variant={BUTTON_V2_VARIANT.SECONDARY} menuItems={menuItems}>Button</ButtonV2.GroupAction>
-            <ButtonV2.GroupAction size={BUTTON_V2_SIZE.SMALL} variant={BUTTON_V2_VARIANT.TERTIARY} menuItems={menuItems}>Tertiary</ButtonV2.GroupAction>
-          </div>
-          <div style={{ display: 'flex', gap: 10 }}>
-            <ButtonV2.GroupAction disabled size={BUTTON_V2_SIZE.SMALL} menuItems={menuItems}>Button</ButtonV2.GroupAction>
-            <ButtonV2.GroupAction disabled size={BUTTON_V2_SIZE.SMALL} variant={BUTTON_V2_VARIANT.SECONDARY} menuItems={menuItems}>Button</ButtonV2.GroupAction>
-            <ButtonV2.GroupAction disabled size={BUTTON_V2_SIZE.SMALL} variant={BUTTON_V2_VARIANT.TERTIARY} menuItems={menuItems}>Tertiary</ButtonV2.GroupAction>
-          </div>
-          <div style={{ display: 'flex', gap: 10 }}>
-            <ButtonV2.GroupAction menuItems={menuItems}>Button</ButtonV2.GroupAction>
-            <ButtonV2.GroupAction variant={BUTTON_V2_VARIANT.SECONDARY} menuItems={menuItems}>Button</ButtonV2.GroupAction>
-            <ButtonV2.GroupAction variant={BUTTON_V2_VARIANT.TERTIARY} menuItems={menuItems}>Button</ButtonV2.GroupAction>
-          </div>
-        </div>
-
-        <div style={{ display: 'flex', gap: 150, marginTop: 20 }}>
-          <div style={{ display: 'flex', gap: 10 }}>
-            <ButtonV2 size={BUTTON_V2_SIZE.SMALL} type={BUTTON_V2_TYPE.ICON_ONLY} icon={<SVG path={closeIcon} width={16} height={16} />
-            }>Button</ButtonV2>
-            <ButtonV2 size={BUTTON_V2_SIZE.SMALL} variant={BUTTON_V2_VARIANT.SECONDARY} type={BUTTON_V2_TYPE.ICON_ONLY} icon={<SVG path={closeIcon} width={16} height={16} />
-            }>Button</ButtonV2>
-            <ButtonV2 size={BUTTON_V2_SIZE.SMALL} variant={BUTTON_V2_VARIANT.TERTIARY} type={BUTTON_V2_TYPE.ICON_ONLY} icon={<SVG path={closeIcon} width={16} height={16} />
-            }>Tertiary</ButtonV2>
-          </div>
-          <div style={{ display: 'flex', gap: 10 }}>
-            <ButtonV2 disabled size={BUTTON_V2_SIZE.SMALL} type={BUTTON_V2_TYPE.ICON_ONLY} icon={<SVG path={closeIcon} width={16} height={16} />
-            }>Button</ButtonV2>
-            <ButtonV2 disabled size={BUTTON_V2_SIZE.SMALL} variant={BUTTON_V2_VARIANT.SECONDARY} type={BUTTON_V2_TYPE.ICON_ONLY} icon={<SVG path={closeIcon} width={16} height={16} />
-            }>Button</ButtonV2>
-            <ButtonV2 disabled size={BUTTON_V2_SIZE.SMALL} variant={BUTTON_V2_VARIANT.TERTIARY} type={BUTTON_V2_TYPE.ICON_ONLY} icon={<SVG path={closeIcon} width={16} height={16} />
-            }>Tertiary</ButtonV2>
-          </div>
-          <div style={{ display: 'flex', gap: 10 }}>
-            <ButtonV2 type={BUTTON_V2_TYPE.ICON_ONLY} icon={<SVG path={closeIcon} width={16} height={16} />
-            }>Button</ButtonV2>
-            <ButtonV2 variant={BUTTON_V2_VARIANT.SECONDARY} type={BUTTON_V2_TYPE.ICON_ONLY} icon={<SVG path={closeIcon} width={16} height={16} />
-            }>Button</ButtonV2>
-            <ButtonV2 variant={BUTTON_V2_VARIANT.TERTIARY} type={BUTTON_V2_TYPE.ICON_ONLY} icon={<SVG path={closeIcon} width={16} height={16} />
-            }>Tertiary</ButtonV2>
-          </div>
-        </div>
-      </div>
     </div>
-
-
   )
 }
-
-// const menuItems = [{label: 'Apply leave', onClick: () => {console.log('cl')}}, { label: 'Apply Reimbursement', onClick: () => {console.log('cl')}}];
-
-const tabs = [{ title: 'All (1)', content: <div>Tab 1</div> }, { title: 'Tab 2', content: <div>Tab 2</div> }, { title: 'Tab 3', content: <div>Tab 3</div> }];
 
 const cols = {
   checked_state: [

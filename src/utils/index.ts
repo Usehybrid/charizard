@@ -42,3 +42,35 @@ export function isDeepEqual(
 
   return true
 }
+
+const colorCache = new Map<string, {darkerColor: string; lighterColor: string}>()
+
+/**
+ * Computes and returns colors based on a given word.
+ *
+ * @param word - The word to derive colors from.
+ * @returns An object containing the darker and lighter color values.
+ */
+export const getColorsFromWord = (word: string) => {
+  if (colorCache.has(word)) {
+    return colorCache.get(word)!
+  }
+
+  let randomHash = 0
+  for (let i = 0; i < word.length; i++) {
+    const char = word.charCodeAt(i)
+    randomHash = (randomHash << 5) - randomHash + char
+    randomHash |= 0
+  }
+
+  const hue = Math.abs(randomHash) % 360
+  const saturation = Math.abs(randomHash * 2) % 100
+  const baseLightness = Math.min((Math.abs(randomHash * 3) % 50) + 50, 80)
+  const darkerColor = `hsl(${hue}, ${saturation}%, ${baseLightness - 20}%)`
+  const lighterColor = `hsl(${hue}, ${saturation}%, ${baseLightness + 20}%)`
+
+  const colors = {darkerColor, lighterColor}
+  colorCache.set(word, colors)
+
+  return colors
+}

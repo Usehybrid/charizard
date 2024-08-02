@@ -1,0 +1,58 @@
+.box {
+  height: 76px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 8px 8px 0px 0px;
+  background: #fff;
+  padding-left: 10px;
+  padding-right: 10px;
+  position: sticky;
+  top: 0;
+  z-index: 4;
+}
+
+.texts {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.heading {
+  color: var(--text-secondary);
+  font-size: 16px;
+  line-height: 24px; /* 150% */
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.actionCommon {
+  display: flex;
+  width: 40px;
+  height: 36px;
+  padding: 6px 8px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  background: var(--neutral-arch-30);
+  cursor: pointer;
+  gap: 8px;
+}
+
+.actionCommon svg > g > path,
+.actionCommon svg > path {
+  fill: var(--neutral-arch-900);
+}
+
+.filterBtn {
+  color: var(--text-primary);
+  font-size: 14px;
+  padding: 6px 12px 6px 8px;
+  line-height: 24px; /* 171.429% */
+  width: auto;
+}

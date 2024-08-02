@@ -1,5 +1,6 @@
 import type {Meta, StoryObj} from '@storybook/react'
-import {ButtonV2, BUTTON_V2_VARIANT} from './ButtonV2'
+import {ButtonV2} from './ButtonV2'
+import {BUTTON_V2_VARIANT} from './types'
 
 const meta: Meta<typeof ButtonV2.GroupAction> = {
   component: ButtonV2.GroupAction,

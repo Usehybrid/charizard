@@ -1,0 +1,13 @@
+.taskCardHeader {
+  display: grid;
+  grid-template-columns: 3fr 5fr 2fr 2fr;
+  gap: 16px;
+  padding: 8px 24px;
+  align-items: flex-start;
+
+  color: var(--text-secondary);
+
+  border-bottom: 1px solid var(--stroke-tabs-sections);
+  border-radius: 10px 10px 0 0;
+  background: var(--fill-highlight);
+}
