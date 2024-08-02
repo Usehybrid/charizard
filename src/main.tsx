@@ -736,7 +736,7 @@ function App() {
         tableStyleConfig={{stickyIds: ['software'], maxHeight: '200px'}}
       /> */}
 
-      <TaskCards
+      {/* <TaskCards
         headers={taskheaders}
         data={tasks}
         // data={[]}
