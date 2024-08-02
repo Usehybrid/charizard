@@ -43,10 +43,6 @@ export type ButtonV2Props =
   | IconButtonV2TypeProps
   | OtherButtonV2TypeProps
 
-// 1. Button => primary, secondary, tertiary
-// 2. Button Group => primary
-// 2. Button Menu => primary
-
 export function ButtonV2({
   children,
   variant = BUTTON_V2_VARIANT.PRIMARY,
@@ -89,6 +85,7 @@ export type MenuItemV2 = {
   onClick: any
   filterFn?: any
   disabled?: boolean
+  customStyles?: React.CSSProperties
 }
 
 export interface GroupActionProps {
@@ -98,7 +95,6 @@ export interface GroupActionProps {
   menuItems: MenuItemV2[]
   customData?: any
   size?: BUTTON_V2_SIZE
-  // props for actions dropdown
   actionsDropdownOptions?: {
     setIsActive: React.Dispatch<React.SetStateAction<boolean>>
   }
@@ -123,9 +119,11 @@ function GroupAction({
       positioning: {placement: positionerProps?.placement || 'bottom-end'},
     }),
   )
+  const [isFocused, setIsFocused] = React.useState(false)
+  const buttonRef = React.useRef<HTMLButtonElement>(null)
+  const menuRef = React.useRef<HTMLDivElement>(null)
   const api = menu.connect(state, send, normalizeProps)
 
-  // to sync with actions dropdown, to get active state styles
   React.useEffect(() => {
     if (!actionsDropdownOptions?.setIsActive) return
     actionsDropdownOptions.setIsActive(api.open)
@@ -135,14 +133,55 @@ function GroupAction({
 
   React.useEffect(() => {
     isOpenRef.current = api.open
+    if (api.open) {
+      setIsFocused(true)
+    } else {
+      setIsFocused(false)
+    }
   }, [api.open])
 
   const handleScroll = () => {
     if (isOpenRef.current) {
-      console.log('scrolling...')
       api.setOpen(false)
     }
   }
+
+  React.useEffect(() => {
+    const handleFocus = () => setIsFocused(true)
+    const handleBlur = () => setIsFocused(false)
+
+    const button = buttonRef.current
+    if (button) {
+      button.addEventListener('focus', handleFocus)
+      button.addEventListener('blur', handleBlur)
+    }
+
+    return () => {
+      if (button) {
+        button.removeEventListener('focus', handleFocus)
+        button.removeEventListener('blur', handleBlur)
+      }
+    }
+  }, [])
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (
+      buttonRef.current &&
+      !buttonRef.current.contains(event.target as Node) &&
+      menuRef.current &&
+      !menuRef.current.contains(event.target as Node)
+    ) {
+      setIsFocused(false)
+      api.setOpen(false)
+    }
+  }
+
+  React.useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [])
 
   React.useEffect(() => {
     if (isTable) {
@@ -157,12 +196,11 @@ function GroupAction({
   const dropdown = (
     <>
       {menuItems.length > 0 && (
-        <div {...api.getPositionerProps()}>
+        <div {...api.getPositionerProps()} ref={menuRef}>
           <div {...api.getContentProps()} className={classes.menus}>
             {menuItems
               .filter(menu => {
                 if (!menu.filterFn) return true
-                // used to pass the table row data in the hide callback
                 return menu.filterFn(customData)
               })
               .map(menu => (
@@ -171,6 +209,7 @@ function GroupAction({
                   className={clsx(classes.menu, {[classes.menuDisabled]: menu.disabled})}
                   {...api.getItemProps({value: menu.label.toLowerCase()})}
                   onClick={menu.disabled ? undefined : menu.onClick}
+                  style={menu.customStyles}
                 >
                   {menu.label}
                 </div>
@@ -184,6 +223,7 @@ function GroupAction({
   return (
     <>
       <button
+        ref={buttonRef}
         className={clsx(
           classes.btn,
           classes.btnGrp,
@@ -192,6 +232,7 @@ function GroupAction({
           variant === BUTTON_V2_VARIANT.TERTIARY && classes.btnTertiary,
           size === BUTTON_V2_SIZE.SMALL && classes.btnSmall,
           disabled && classes.disabled,
+          isFocused && classes.focusVisible,
         )}
         disabled={disabled}
         {...api.getTriggerProps()}
