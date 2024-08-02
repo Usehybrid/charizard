@@ -8,3 +8,8 @@ export const truncate = (text: string, max?: number) => {
   }
   return text.length > max ? `${text.substring(0, max)}...` : text
 }
+
+export const getInitials = (name: string) => {
+  const nameParts = name.split(' ').filter(Boolean)
+  return nameParts.slice(0, 2).reduce((acc, part) => acc + (part[0] || '').toUpperCase(), '')
+}

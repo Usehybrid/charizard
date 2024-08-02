@@ -23,17 +23,19 @@ export function TaskCards({
   emptyText = 'No requests',
 }: TaskCardsProps) {
   return (
-    <div className={classes.taskCard}>
-      <TaskCardHeader headers={headers} />
-      {isLoading ? (
-        <Loader containerStyle={{height: '164px'}} />
-      ) : isError ? (
-        <Error />
-      ) : data.length > 0 ? (
-        data.map((data: ITask, idx) => <Card data={data} key={idx} />)
-      ) : (
-        <Empty emptyText={emptyText} />
-      )}
+    <div className={classes.taskCardContainer}>
+      <div className={classes.taskCard}>
+        <TaskCardHeader headers={headers} />
+        {isLoading ? (
+          <Loader containerStyle={{height: '164px'}} />
+        ) : isError ? (
+          <Error />
+        ) : data.length > 0 ? (
+          data.map((data: ITask, idx) => <Card data={data} key={idx} />)
+        ) : (
+          <Empty emptyText={emptyText} />
+        )}
+      </div>
     </div>
   )
 }

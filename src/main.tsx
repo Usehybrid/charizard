@@ -5,8 +5,12 @@ import {createColumnHelper} from '@tanstack/react-table'
 import {INV_ACTION_TYPES, useInventoryStore} from './components/table-v2/inventory/inventory.store'
 import closeIcon from './components/assets/close.svg'
 import {Badge, BADGE_HIGHLIGHT, TableV3, TaskCards} from './components'
-import {DatePicker} from './components/date-picker'
-
+import {Pill, PILL_STATUS} from './components'
+import {SELECT_VARIANT, SelectV2} from './components/select-v2'
+import '@hybr1d-tech/groudon/dist/typography.min.css'
+import './components/styles/_variables.css'
+import './components/styles/global.css'
+import chevronDownIcon from './components/assets/chevron-down-16.svg'
 const styles = {
   width: '90%',
   margin: 'auto',
@@ -588,6 +592,37 @@ const pages = [
   {label: 'Breadcrumb Item 7', to: '/'},
 ]
 
+const options = [
+  {
+    value: '1',
+    label: 'Full Time',
+    // icon: chevronDownIcon,
+    profileImgUrl: 'https://picsum.photos/200',
+    // subLabel: '3123123213213123',
+  },
+  {
+    value: '2',
+    label: 'Part Time',
+    // icon: chevronDownIcon,
+    profileImgUrl: 'https://picsum.photos/200',
+    // subLabel: '3123123213213123',
+  },
+  {
+    value: '3',
+    label: 'Fixed Term',
+    // icon: chevronDownIcon,
+    profileImgUrl: 'https://picsum.photos/200',
+    // subLabel: '3123123213213123',
+  },
+  {
+    value: '4',
+    label: 'Internship',
+    // icon: chevronDownIcon,
+    profileImgUrl: 'https://picsum.photos/200',
+    // subLabel: '3123123213213123',
+  },
+]
+
 function App() {
   const [search, setSearch] = React.useState('')
 
@@ -703,21 +738,20 @@ function App() {
 
       {/* <TaskCards
         headers={taskheaders}
-        // data={tasks}
-        data={[]}
+        data={tasks}
+        // data={[]}
+      />
+      {/* <Pill status={PILL_STATUS.WARNING}>420</Pill> */}
+      {/* <SelectV2
+        options={options}
+        onChange={(value, meta) => {
+          console.log({value, meta})
+        }}
+        isLoading
+        errorMsg="something went wrong"
+        variant={SELECT_VARIANT.USERS}
+        isMulti
       /> */}
-
-      <div>
-        <DatePicker
-          mode="single"
-          onChange={value => console.log(value)}
-          // value={}
-          variant="form"
-          customContainerStyles={{width: '100%'}}
-          disabled={false}
-          // errorMsg={'errorMsg'}
-        />
-      </div>
     </div>
   )
 }
