@@ -1,24 +1,30 @@
-import React from "react"
-import clsx from "clsx"
-import classes from './styles.module.css'
+import React from 'react';
+import clsx from 'clsx';
+import classes from './styles.module.css';
 
 export interface TabProps {
-  title: string
-  isActive: boolean
-  customClassName?: string
-  customStyles?: React.CSSProperties
-  children: React.ReactNode
+  title: string;
+  eventKey: string;
+  isActive: boolean;
+  customClassName?: string;
+  customStyles?: React.CSSProperties;
+  children: React.ReactNode;
+  onClick: () => void; // Added to handle clicks
 }
 
 export const Tab: React.FC<TabProps> = ({
   title,
   isActive,
   customClassName,
-  customStyles
+  customStyles,
+  onClick,
 }) => {
-
   return (
-    <button className={clsx(classes.tab, isActive ? classes.activeTab : '', 'charizard-subheading-semibold', customClassName)} style={customStyles}>
+    <button
+      className={clsx(classes.tab, isActive ? classes.activeTab : '', 'charizard-subheading-semibold', customClassName)}
+      style={customStyles}
+      onClick={onClick}
+    >
       {title}
     </button>
   );
