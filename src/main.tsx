@@ -3,14 +3,12 @@ import ReactDOM from 'react-dom/client'
 import randomIcon from './components/assets/check.svg'
 import {createColumnHelper} from '@tanstack/react-table'
 import {INV_ACTION_TYPES, useInventoryStore} from './components/table-v2/inventory/inventory.store'
-import closeIcon from './components/assets/close.svg'
-import {Badge, BADGE_HIGHLIGHT, TableV3, TaskCards} from './components'
-import {Pill, PILL_STATUS} from './components'
-import {SELECT_VARIANT, SelectV2} from './components/select-v2'
-import '@hybr1d-tech/groudon/dist/typography.min.css'
+
+import {TaskCards} from './components'
+
 import './components/styles/_variables.css'
 import './components/styles/global.css'
-import chevronDownIcon from './components/assets/chevron-down-16.svg'
+
 const styles = {
   width: '90%',
   margin: 'auto',
@@ -736,18 +734,12 @@ function App() {
         tableStyleConfig={{stickyIds: ['software'], maxHeight: '200px'}}
       /> */}
 
-<TaskCards
+      <TaskCards
         headers={taskheaders}
         data={tasks}
         // data={[]}
       />
 
-      {/* <TaskCards
-        headers={taskheaders}
-        data={tasks}
-        // data={[]}
-      />
-      {/* <Pill status={PILL_STATUS.WARNING}>420</Pill> */}
       {/* <SelectV2
         options={options}
         onChange={(value, meta) => {

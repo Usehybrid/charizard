@@ -39,7 +39,7 @@ export function ColorPicker({
       {label && <InputLabel required={required}>{label}</InputLabel>}
       <input {...api.getHiddenInputProps()} />
       <div {...api.getControlProps()} className={classes.control}>
-        <button {...api.getTriggerProps()} className={clsx('hybr1d-ui-reset-btn', classes.trigger)}>
+        <button {...api.getTriggerProps()} className={clsx('zap-reset-btn', classes.trigger)}>
           <div {...api.getSwatchProps({value: api.value})} className={classes.swatch} />
           <SVG path={chevronDown} svgClassName={classes.svg} />
         </button>
@@ -51,7 +51,7 @@ export function ColorPicker({
               <button
                 key={preset}
                 {...api.getSwatchTriggerProps({value: preset})}
-                className="hybr1d-ui-reset-btn"
+                className="zap-reset-btn"
                 onClick={() => {
                   onChange(preset)
                   api.setValue(colorPicker.parse(preset))
@@ -64,7 +64,7 @@ export function ColorPicker({
           </div>
         </div>
       </div>
-      {errorMsg && <p className={'hybr1d-ui-error-msg '}>{errorMsg}</p>}
+      {errorMsg && <p className={'zap-error-msg '}>{errorMsg}</p>}
     </div>
   )
 }

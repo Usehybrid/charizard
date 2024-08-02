@@ -5,7 +5,7 @@ import classes from './styles.module.css'
 export interface TabProps {
   title: string
   eventKey: string
-  isActive: boolean;
+  isActive: boolean
   customClassName?: string
   customStyles?: React.CSSProperties
   children: React.ReactNode
@@ -21,7 +21,12 @@ export const Tab: React.FC<TabProps> = ({
 }) => {
   return (
     <button
-      className={clsx(classes.tab, isActive ? classes.activeTab : '', 'charizard-subheading-semibold', customClassName)}
+      className={clsx(
+        classes.tab,
+        isActive ? classes.activeTab : '',
+        'zap-content-semibold',
+        customClassName,
+      )}
       style={customStyles}
       onClick={onClick}
     >

@@ -36,7 +36,7 @@ export default function TableEllipses({paginationApi, i}: TableEllipsesProps) {
   return (
     <div {...selectApi.getRootProps()} key={`ellipsis-${i}`}>
       <div {...selectApi.getControlProps()}>
-        <button {...selectApi.getTriggerProps()} className={'hybr1d-ui-reset-btn'}>
+        <button {...selectApi.getTriggerProps()} className={'zap-reset-btn'}>
           <div
             key={`ellipsis-${i}`}
             {...paginationApi.getEllipsisProps({index: i})}

@@ -68,7 +68,7 @@
     "@storybook/react": "^8.2.7",
     "@storybook/react-vite": "^8.2.7",
     "@storybook/test": "^8.2.7",
-    "@types/node": "^22.0.2",
+    "@types/node": "^22.0.3",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",
@@ -83,8 +83,5 @@
   },
   "publishConfig": {
     "access": "public"
-  },
-  "dependencies": {
-    "@hybr1d-tech/groudon": "^0.1.2"
   }
 }
