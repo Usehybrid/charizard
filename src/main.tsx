@@ -577,7 +577,7 @@ const tasks = [
         value: 'To access cloudwatch logs',
       },
     ],
-    status: 'Approved',
+    status: 'Pending 2nd Approver',
   },
 ]
 const taskheaders = ['Task', 'Details', 'Status']
@@ -735,6 +735,12 @@ function App() {
         }}
         tableStyleConfig={{stickyIds: ['software'], maxHeight: '200px'}}
       /> */}
+
+<TaskCards
+        headers={taskheaders}
+        data={tasks}
+        // data={[]}
+      />
 
       {/* <TaskCards
         headers={taskheaders}
