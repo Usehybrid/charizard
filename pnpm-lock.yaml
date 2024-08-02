@@ -20,9 +20,6 @@ importers:
       '@dnd-kit/utilities':
         specifier: ^3.2.2
         version: 3.2.2(react@18.3.1)
-      '@hybr1d-tech/charizard':
-        specifier: ^0.6.36
-        version: 0.6.36(5stq2hupqj4h44r3wkhke72cbu)
       '@hybr1d-tech/groudon':
         specifier: ^0.1.2
         version: 0.1.2
@@ -1032,42 +1029,6 @@ packages:
 
   '@floating-ui/utils@0.2.5':
     resolution: {integrity: sha512-sTcG+QZ6fdEUObICavU+aB3Mp8HY4n14wYHdxK4fXjPmv3PXZZeY5RaguJmGyeH/CJQhX3fqKUtS4qc1LoHwhQ==}
-
-  '@hybr1d-tech/charizard@0.6.36':
-    resolution: {integrity: sha512-tNUcLcNY9Z+rq+wET12peI3a1kIPI/BSAh06roPVP3TV3tlaamNBhiPnaPyyDXtJDe67FIbZsI33k0OTY/iHug==}
-    peerDependencies:
-      '@dnd-kit/core': ^6.1.0
-      '@dnd-kit/modifiers': ^7.0.0
-      '@dnd-kit/sortable': ^8.0.0
-      '@dnd-kit/utilities': ^3.2.2
-      '@popperjs/core': ^2.11.8
-      '@tanstack/react-table': ^8.19.3
-      '@zag-js/checkbox': ^0.64.0
-      '@zag-js/color-picker': ^0.64.0
-      '@zag-js/combobox': ^0.64.0
-      '@zag-js/dialog': ^0.64.0
-      '@zag-js/menu': ^0.64.0
-      '@zag-js/pagination': ^0.64.0
-      '@zag-js/popover': ^0.64.0
-      '@zag-js/popper': ^0.64.0
-      '@zag-js/radio-group': ^0.64.0
-      '@zag-js/react': ^0.64.0
-      '@zag-js/select': ^0.64.0
-      '@zag-js/tabs': ^0.64.0
-      '@zag-js/tooltip': ^0.64.0
-      clsx: ^2.1.0
-      date-fns: ^3.6.0
-      react: ^18.3.1
-      react-country-flag: ^3.1.0
-      react-day-picker: 8.10.1
-      react-dom: ^18.3.1
-      react-infinite-scroll-component: ^6.1.0
-      react-inlinesvg: ^4.1.3
-      react-intersection-observer: ^9.8.0
-      react-select: ^5.8.0
-      react-tooltip: ^5.27.1
-      use-deep-compare-effect: ^1.8.1
-      zustand: ^4.5.4
 
   '@hybr1d-tech/groudon@0.1.2':
     resolution: {integrity: sha512-QWMdJln97ESkCXLY7RgyDCv3vomlT/J4koktkZB0w5tON5mlbShFpXyKrSksDaRMV8kggv5A6musllUWOKhwng==}
@@ -5090,45 +5051,6 @@ snapshots:
       '@floating-ui/utils': 0.2.5
 
   '@floating-ui/utils@0.2.5': {}
-
-  '@hybr1d-tech/charizard@0.6.36(5stq2hupqj4h44r3wkhke72cbu)':
-    dependencies:
-      '@dnd-kit/core': 6.1.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@dnd-kit/modifiers': 7.0.0(@dnd-kit/core@6.1.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
-      '@dnd-kit/sortable': 8.0.0(@dnd-kit/core@6.1.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
-      '@dnd-kit/utilities': 3.2.2(react@18.3.1)
-      '@hybr1d-tech/groudon': 0.1.2
-      '@popperjs/core': 2.11.8
-      '@tanstack/react-table': 8.19.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@zag-js/checkbox': 0.64.0
-      '@zag-js/color-picker': 0.64.0
-      '@zag-js/combobox': 0.64.0
-      '@zag-js/dialog': 0.64.0
-      '@zag-js/menu': 0.64.0
-      '@zag-js/pagination': 0.64.0
-      '@zag-js/popover': 0.64.0
-      '@zag-js/popper': 0.64.0
-      '@zag-js/radio-group': 0.64.0
-      '@zag-js/react': 0.64.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@zag-js/select': 0.64.0
-      '@zag-js/tabs': 0.64.0
-      '@zag-js/tooltip': 0.64.0
-      clsx: 2.1.1
-      date-fns: 3.6.0
-      react: 18.3.1
-      react-country-flag: 3.1.0(react@18.3.1)
-      react-day-picker: 8.10.1(date-fns@3.6.0)(react@18.3.1)
-      react-dom: 18.3.1(react@18.3.1)
-      react-infinite-scroll-component: 6.1.0(react@18.3.1)
-      react-inlinesvg: 4.1.3(react@18.3.1)
-      react-intersection-observer: 9.13.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      react-select: 5.8.0(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      react-tooltip: 5.27.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      use-deep-compare-effect: 1.8.1(react@18.3.1)
-      zustand: 4.5.4(@types/react@18.3.3)(react@18.3.1)
-    transitivePeerDependencies:
-      - jiti
-      - tsx
 
   '@hybr1d-tech/groudon@0.1.2':
     dependencies:
