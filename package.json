@@ -85,6 +85,7 @@
     "access": "public"
   },
   "dependencies": {
+    "@hybr1d-tech/charizard": "^0.6.36",
     "@hybr1d-tech/groudon": "^0.1.2"
   }
 }
