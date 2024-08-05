@@ -74,3 +74,19 @@ export const getColorsFromWord = (word: string) => {
 
   return colors
 }
+
+export const isObject = (value: any): boolean => {
+  if (typeof value === 'object' && value !== null) {
+    if (Array.isArray(value)) {
+      return false
+    } else {
+      return true
+    }
+  }
+
+  return false
+}
+
+export const isString = (value: any): boolean => {
+  return typeof value === 'string'
+}
