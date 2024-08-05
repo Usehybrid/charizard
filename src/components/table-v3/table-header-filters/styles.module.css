@@ -11,16 +11,18 @@
 
 .filter {
   display: flex;
-  padding: 6px 8px 6px 12px;
+  padding: 4px 6px 4px 10px;
   justify-content: center;
   align-items: center;
-  gap: 8px;
-  height: 36px;
+  gap: 4px;
+  height: 28px;
   border-radius: 8px;
-  background: var(--neutral-arch-30);
+  background: var(--fill-selection);
+  border: 1px solid var(--stroke-selection);
 }
 .filter:hover {
   cursor: pointer;
+  background-color: var(--p-p10);
 }
 
 .filter:hover .filterIcon2 > path {
@@ -57,8 +59,8 @@
 }
 
 .filterIcon2 {
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
 }
 .filterIcon2 > path {
   fill: var(--neutral-arch-900);

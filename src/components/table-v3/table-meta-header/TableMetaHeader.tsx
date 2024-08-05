@@ -62,7 +62,7 @@ export default function TableMetaHeader({
   return (
     <div className={classes.box}>
       <div className={classes.texts}>
-        <p className={classes.heading}>
+        <p className={clsx(classes.heading, 'zap-content-semibold')}>
           {isRowSelected ? selectedText : totalText} {isRowSelected ? 'Selected' : ''}
         </p>
         {hasRowActions && (
@@ -82,6 +82,10 @@ export default function TableMetaHeader({
               setSearch={searchConfig.setSearch}
               placeholder={searchConfig.placeholder}
               clearIconClearFn={() => setRowSelection({})}
+              customStyles={{
+                customInputStyles: {borderRadius: '8px', height: '28px'},
+                customIconStyles: {top: '4px'},
+              }}
             />
           </div>
         )}

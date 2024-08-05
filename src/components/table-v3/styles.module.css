@@ -46,7 +46,7 @@
 
 .tableHead {
   background: var(--fill-highlight);
-  height: 24px;
+  height: 40px;
   position: sticky;
   top: 0;
   z-index: 3;

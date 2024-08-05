@@ -143,7 +143,7 @@
 
   /* Text colors */
   --text-primary: #000041;
-  --text-secondary: #66668d;
+  --text-secondary: #696e9c;
   --text-tertiary: #9999b3;
 
   /* Fill colors */
@@ -154,6 +154,7 @@
   --stroke-tabs-sections: #e5e9fb;
   --stroke-buttons-input: #d3dbf8;
   --stroke-border: #e5e9fb;
+  --stroke-selection: #d3dbf8;
 
   /* Link colors */
   --link-rest: #0072fe;

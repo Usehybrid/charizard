@@ -1,12 +1,12 @@
 .box {
-  height: 76px;
+  height: 52px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   border-radius: 8px 8px 0px 0px;
   background: #fff;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-left: 12px;
+  padding-right: 12px;
   position: sticky;
   top: 0;
   z-index: 4;
@@ -20,8 +20,6 @@
 
 .heading {
   color: var(--text-secondary);
-  font-size: 16px;
-  line-height: 24px; /* 150% */
 }
 
 .actions {
