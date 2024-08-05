@@ -3,8 +3,7 @@ import ReactDOM from 'react-dom/client'
 import randomIcon from './components/assets/check.svg'
 import {createColumnHelper} from '@tanstack/react-table'
 import {INV_ACTION_TYPES, useInventoryStore} from './components/table-v2/inventory/inventory.store'
-
-import {TaskCards} from './components'
+import {TableV3} from './components'
 
 import './components/styles/_variables.css'
 import './components/styles/global.css'
@@ -631,7 +630,7 @@ function App() {
 
   return (
     <div style={styles}>
-      {/* <TableV3
+      <TableV3
         data={data}
         loaderConfig={{isFetching: false, isError: false, text: 'Getting employees...'}}
         columns={columns}
@@ -732,24 +731,7 @@ function App() {
           },
         }}
         tableStyleConfig={{stickyIds: ['software'], maxHeight: '200px'}}
-      /> */}
-
-      <TaskCards
-        headers={taskheaders}
-        data={tasks}
-        // data={[]}
       />
-
-      {/* <SelectV2
-        options={options}
-        onChange={(value, meta) => {
-          console.log({value, meta})
-        }}
-        isLoading
-        errorMsg="something went wrong"
-        variant={SELECT_VARIANT.USERS}
-        isMulti
-      /> */}
     </div>
   )
 }
