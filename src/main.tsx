@@ -4,13 +4,13 @@ import randomIcon from './components/assets/check.svg'
 import {createColumnHelper} from '@tanstack/react-table'
 import {INV_ACTION_TYPES, useInventoryStore} from './components/table-v2/inventory/inventory.store'
 import closeIcon from './components/assets/close.svg'
-import {Badge, BADGE_HIGHLIGHT, TableV3, TaskCards, Tabs, Tab} from './components'
+import {Badge, BADGE_HIGHLIGHT, TableV3, TaskCards, ButtonV2, BUTTON_V2_TYPE, BUTTON_V2_SIZE, BUTTON_V2_VARIANT, SVG} from './components'
 import {Pill, PILL_STATUS} from './components'
 import {SELECT_VARIANT, SelectV2} from './components/select-v2'
 import '@hybr1d-tech/groudon/dist/typography.min.css'
 import './components/styles/_variables.css'
 import './components/styles/global.css'
-import chevronDownIcon from './components/assets/chevron-down-16.svg'
+import calender from './components/assets/calender.svg'
 const styles = {
   width: '90%',
   margin: 'auto',
@@ -399,11 +399,12 @@ const menuItems = [
   {
     label: 'Apply leave',
     onClick: (data: any) => {
-      console.log(data)
+      console.log('apply leave', data)
     },
     filterFn: (data: any) => {
       return true
     },
+    iconSrc: calender
   },
 
   {
@@ -413,7 +414,8 @@ const menuItems = [
       // return false
       return true
     },
-    customStyles:{color: 'red'}
+    iconSrc: calender,
+    customStyles: {color: 'red'},
   },
   {
     label: 'Archive',
@@ -634,9 +636,7 @@ function App() {
     {
       eventKey: 'basic-info',
       title: 'Basic Info',
-      component: (
-        <div>Basic info</div>
-      ),
+      component: <div>Basic info</div>,
     },
     {
       eventKey: 'comments',
@@ -645,7 +645,7 @@ function App() {
     },
   ].filter(tab => tab) as any
 
-  const [activeTab, setActiveTab] = React.useState(tabs?.[0].eventKey);
+  const [activeTab, setActiveTab] = React.useState(tabs?.[0].eventKey)
 
   const onTabChange = (key: string) => {
     setActiveTab(key || tabs[0].eventKey)
@@ -780,26 +780,26 @@ function App() {
           })
         }
       </Tabs> */}
-    <Tabs
-      id="tabs"
-      activeKey={activeTab}
-      onSelect={onTabChange}
-      customClassName="border-0 flex-nowrap"
-    >
-      {tabs.map((tab:any, idx:any) => (
-        <Tab
-          key={tab.eventKey}
-          eventKey={tab.eventKey}
-          isActive={activeTab === tab.eventKey}
-          title={tab.title}
-          customClassName={`${idx === 0 ? 'ms-0' : ''}`}
-          onClick={() => onTabChange(tab.eventKey)}
-        >
-          {tab.component}
-        </Tab>
-      ))}
-    </Tabs>
-      {/* <div>
+      {/* <Tabs
+        id="tabs"
+        activeKey={activeTab}
+        onSelect={onTabChange}
+        customClassName="border-0 flex-nowrap"
+      >
+        {tabs.map((tab: any, idx: any) => (
+          <Tab
+            key={tab.eventKey}
+            eventKey={tab.eventKey}
+            isActive={activeTab === tab.eventKey}
+            title={tab.title}
+            customClassName={`${idx === 0 ? 'ms-0' : ''}`}
+            onClick={() => onTabChange(tab.eventKey)}
+          >
+            {tab.component}
+          </Tab>
+        ))}
+      </Tabs> */}
+      <div>
         <div style={{ display: 'flex', gap: 150 }}>
           <div style={{ display: 'flex', gap: 10 }}>
             <ButtonV2 size={BUTTON_V2_SIZE.SMALL}>Button</ButtonV2>
@@ -917,7 +917,25 @@ function App() {
             }>Tertiary</ButtonV2>
           </div>
         </div>
-      </div> */}
+
+        <div style={{ display: 'flex', gap: 150, marginTop: 20 }}>
+          <div style={{ display: 'flex', gap: 10 }}>
+            <ButtonV2.ActionsDropdown size={BUTTON_V2_SIZE.SMALL} menuItems={menuItems} />
+            <ButtonV2.ActionsDropdown size={BUTTON_V2_SIZE.SMALL} variant={BUTTON_V2_VARIANT.SECONDARY} menuItems={menuItems}/>
+            <ButtonV2.ActionsDropdown size={BUTTON_V2_SIZE.SMALL} variant={BUTTON_V2_VARIANT.TERTIARY} menuItems={menuItems}/>
+          </div>
+          <div style={{ display: 'flex', gap: 10 }}>
+            <ButtonV2.ActionsDropdown disabled size={BUTTON_V2_SIZE.SMALL} menuItems={menuItems}/>
+            <ButtonV2.ActionsDropdown disabled size={BUTTON_V2_SIZE.SMALL} variant={BUTTON_V2_VARIANT.SECONDARY} menuItems={menuItems}/>
+            <ButtonV2.ActionsDropdown disabled size={BUTTON_V2_SIZE.SMALL} variant={BUTTON_V2_VARIANT.TERTIARY} menuItems={menuItems}/>
+          </div>
+          <div style={{ display: 'flex', gap: 10 }}>
+            <ButtonV2.ActionsDropdown menuItems={menuItems}/>
+            <ButtonV2.ActionsDropdown variant={BUTTON_V2_VARIANT.SECONDARY} menuItems={menuItems}/>
+            <ButtonV2.ActionsDropdown variant={BUTTON_V2_VARIANT.TERTIARY} menuItems={menuItems}/>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }

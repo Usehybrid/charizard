@@ -195,6 +195,12 @@
   border-left: 1px solid var(--p-p10);
 }
 
+.menuIcon {
+  width: 16px;
+  height: 16px;
+  margin-right: 2px;
+}
+
 /* actions dropdown */
 
 .btnActions {
