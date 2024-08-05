@@ -68,7 +68,7 @@ export default function TableFilter({
   return (
     <div>
       <button
-        className={clsx('hybr1d-ui-reset-btn', classes.filter, api.open && classes.filterActive)}
+        className={clsx('zap-reset-btn', classes.filter, api.open && classes.filterActive)}
         {...api.getTriggerProps()}
       >
         <FilterTooltip
@@ -125,7 +125,7 @@ export default function TableFilter({
                 <div className={classes.selectedFilters}>{selectedFilters} Selected</div>
 
                 <button
-                  className={clsx('hybr1d-ui-reset-btn', classes.resetBtn)}
+                  className={clsx('zap-reset-btn', classes.resetBtn)}
                   onClick={handleResetFilter}
                 >
                   <SVG path={resetIcon} svgClassName={classes.resetIcon} />

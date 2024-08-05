@@ -86,7 +86,7 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
   return (
     <>
       <button
-        className={clsx('hybr1d-ui-reset-btn', classes.actionCommon, classes.filterBtn)}
+        className={clsx('zap-reset-btn', classes.actionCommon, classes.filterBtn)}
         onClick={onOpen}
       >
         <SVG path={filterIcon} width={22} height={22} />

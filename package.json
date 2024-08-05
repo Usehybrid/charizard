@@ -1,6 +1,6 @@
 {
   "name": "@hybr1d-tech/charizard",
-  "version": "0.6.37",
+  "version": "0.6.41",
   "type": "module",
   "files": [
     "dist"
@@ -68,7 +68,7 @@
     "@storybook/react": "^8.2.7",
     "@storybook/react-vite": "^8.2.7",
     "@storybook/test": "^8.2.7",
-    "@types/node": "^22.0.2",
+    "@types/node": "^22.1.0",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",
@@ -78,13 +78,10 @@
     "typescript": "^5.5.4",
     "vite": "^5.3.5",
     "vite-plugin-checker": "^0.7.2",
-    "vite-plugin-dts": "4.0.0-beta.2",
+    "vite-plugin-dts": "^3.9.1",
     "vite-plugin-libcss": "^1.1.1"
   },
   "publishConfig": {
     "access": "public"
-  },
-  "dependencies": {
-    "@hybr1d-tech/groudon": "^0.1.2"
   }
 }

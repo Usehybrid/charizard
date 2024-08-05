@@ -1,14 +1,14 @@
-import React, { ReactElement } from 'react';
-import clsx from 'clsx';
-import classes from './styles.module.css';
+import React, { ReactElement } from 'react'
+import clsx from 'clsx'
+import classes from './styles.module.css'
 
 interface TabsProps {
-  id: string;
-  activeKey: string;
-  onSelect: (key: string) => void;
-  customClassName?: string;
-  customStyles?: React.CSSProperties;
-  children: ReactElement[];
+  id: string
+  activeKey: string
+  onSelect: (key: string) => void
+  customClassName?: string
+  customStyles?: React.CSSProperties
+  children: ReactElement[]
 }
 
 export const Tabs: React.FC<TabsProps> = ({
@@ -20,8 +20,8 @@ export const Tabs: React.FC<TabsProps> = ({
   customStyles = {},
 }) => {
   const handleTabChange = (key: string) => {
-    onSelect(key);
-  };
+    onSelect(key)
+  }
 
   return (
     <div id={id} className={clsx(classes.tabs, customClassName)} style={customStyles}>
@@ -39,5 +39,5 @@ export const Tabs: React.FC<TabsProps> = ({
         )}
       </div>
     </div>
-  );
-};
+  )
+}

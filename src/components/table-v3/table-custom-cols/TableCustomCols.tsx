@@ -113,10 +113,7 @@ export default function TableCustomCols({
 
   return (
     <>
-      <button
-        {...api.getTriggerProps()}
-        className={clsx('hybr1d-ui-reset-btn', classes.actionCommon)}
-      >
+      <button {...api.getTriggerProps()} className={clsx('zap-reset-btn', classes.actionCommon)}>
         <SVG path={viewColIcon} width={22} height={22} />
       </button>
       {api.open && (
@@ -131,11 +128,7 @@ export default function TableCustomCols({
                     {customColumnConfig?.description || `Description here`}
                   </p>
                 </div>
-                <button
-                  {...api.getCloseTriggerProps()}
-                  type="button"
-                  className="hybr1d-ui-reset-btn"
-                >
+                <button {...api.getCloseTriggerProps()} type="button" className="zap-reset-btn">
                   <SVG
                     path={closeIcon}
                     svgClassName={classes.closeIcon}

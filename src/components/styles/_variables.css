@@ -1,5 +1,4 @@
 :root {
-  --base-font-size: 16px !important;
   /* default */
   --black: #000000;
 
@@ -145,7 +144,7 @@
   /* Text colors */
   --text-primary: #000041;
   --text-secondary: #66668d;
-  --text-tertiary: #9999B3;
+  --text-tertiary: #9999b3;
 
   /* Fill colors */
   --fill-highlight: #fbfbfe;

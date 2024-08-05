@@ -75,7 +75,7 @@ h6 {
   Reset Button
 */
 
-.hybr1d-ui-reset-btn {
+.zap-reset-btn {
   border: none;
   margin: 0;
   padding: 0;
@@ -99,7 +99,7 @@ h6 {
   appearance: none;
 }
 
-.hybr1d-ui-error-msg {
+.zap-error-msg {
   font-weight: 400;
   font-size: 1rem;
   line-height: 1.54rem;

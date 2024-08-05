@@ -1,0 +1,179 @@
+:root {
+  font-feature-settings:
+    'clig' off,
+    'liga' off;
+  font-family: 'Instrument Sans';
+  --letter-spacing: 0.2px;
+
+  --line-height-142: 20px;
+  --line-height-145: 16px;
+  --line-height-150: 18px;
+  --line-height-166: 20px;
+  --line-height-171: 24px;
+
+  --link-color: var(--link-l-50, #0f72ee);
+}
+
+/* Hero Styles */
+.zap-hero-medium,
+.zap-hero-semibold,
+.zap-hero-bold {
+  font-size: 20px;
+  font-style: normal;
+  line-height: 28px;
+  letter-spacing: var(--letter-spacing);
+}
+.zap-hero-medium {
+  font-weight: 500;
+}
+.zap-hero-semibold {
+  font-weight: 600;
+}
+.zap-hero-bold {
+  font-weight: 700;
+}
+
+/* Lead Styles */
+.zap-lead-medium,
+.zap-lead-semibold,
+.zap-lead-bold {
+  font-size: 18px;
+  font-style: normal;
+  line-height: 24px;
+  letter-spacing: var(--letter-spacing);
+}
+.zap-lead-medium {
+  font-weight: 500;
+}
+.zap-lead-semibold {
+  font-weight: 600;
+}
+.zap-lead-bold {
+  font-weight: 700;
+}
+
+/* Heading Styles */
+.zap-heading-medium,
+.zap-heading-semibold,
+.zap-heading-bold {
+  font-size: 16px;
+  font-style: normal;
+  line-height: 20px;
+  letter-spacing: var(--letter-spacing);
+}
+.zap-heading-medium {
+  font-weight: 500;
+}
+.zap-heading-semibold {
+  font-weight: 600;
+}
+.zap-heading-bold {
+  font-weight: 700;
+}
+
+/* Content Styles */
+.zap-content-regular,
+.zap-content-medium,
+.zap-content-semibold {
+  font-size: 14px;
+  font-style: normal;
+  line-height: var(--line-height-142);
+  letter-spacing: var(--letter-spacing);
+}
+.zap-content-regular {
+  font-weight: 400;
+}
+.zap-content-medium {
+  font-weight: 500;
+}
+.zap-content-semibold {
+  font-weight: 600;
+}
+
+/* Sub Content Styles */
+.zap-subcontent-regular,
+.zap-subcontent-medium,
+.zap-subcontent-semibold {
+  font-size: 12px;
+  font-style: normal;
+  line-height: var(--line-height-150);
+  letter-spacing: var(--letter-spacing);
+}
+.zap-subcontent-regular {
+  font-weight: 400;
+}
+.zap-subcontent-medium {
+  font-weight: 500;
+}
+.zap-subcontent-semibold {
+  font-weight: 600;
+}
+
+/* Caption Styles */
+.zap-caption-regular,
+.zap-caption-medium,
+.zap-caption-semibold {
+  font-size: 11px;
+  font-style: normal;
+  line-height: var(--line-height-145);
+}
+.zap-caption-regular {
+  font-weight: 400;
+}
+.zap-caption-medium {
+  font-weight: 500;
+}
+.zap-caption-semibold {
+  font-weight: 600;
+}
+
+/* Button Styles */
+.zap-button {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: var(--line-height-171);
+  letter-spacing: var(--letter-spacing);
+}
+.zap-button-small {
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: var(--line-height-166);
+  letter-spacing: var(--letter-spacing);
+}
+
+/* Link Styles */
+.zap-link,
+.zap-link-small {
+  color: var(--link-color);
+  font-style: normal;
+  font-weight: 600;
+  text-decoration-line: underline;
+  letter-spacing: var(--letter-spacing);
+}
+.zap-link {
+  font-size: 14px;
+  line-height: var(--line-height-142);
+}
+.zap-link-small {
+  font-size: 12px;
+  line-height: var(--line-height-150);
+}
+
+/* Internal Link Styles */
+.zap-internallink,
+.zap-internallink-small {
+  color: var(--link-color);
+  font-style: normal;
+  font-weight: 500;
+  letter-spacing: var(--letter-spacing);
+}
+.zap-internallink {
+  font-size: 14px;
+  line-height: var(--line-height-142);
+}
+.zap-internallink-small {
+  font-size: 12px;
+  line-height: var(--line-height-150);
+}

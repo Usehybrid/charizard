@@ -20,7 +20,7 @@ export default function FilterTooltip({filter, tableFilter, selectedFilters}: Fi
       {/* @ts-ignore */}
       <div
         {...tooltipApi.getTriggerProps()}
-        className={clsx('hybr1d-ui-reset-btn', classes.filterTooltipTrigger)}
+        className={clsx('zap-reset-btn', classes.filterTooltipTrigger)}
       >
         <div className={classes.filterCol}>{filter.name}</div>
         {selectedFilters !== 0 && <span className={classes.totalSelected}>{selectedFilters}</span>}

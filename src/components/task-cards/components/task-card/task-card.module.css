@@ -1,6 +1,6 @@
 .card {
   display: grid;
-  grid-template-columns: 3fr 5fr 2fr 2fr;
+  grid-template-columns: 2.5fr 5.5fr 3fr 1fr;
   gap: 16px;
   padding: 24px;
   align-items: center;
@@ -37,24 +37,22 @@
 }
 
 .detail {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   align-items: center;
   gap: 8px;
   align-self: stretch;
 }
 
 .detailKey {
-  min-width: 140px;
   color: var(--text-secondary);
 }
 
 .detailValue {
-  min-width: 308px;
   color: var(--text-primary);
 }
 
 .detailValueNA {
-  min-width: 308px;
   color: var(--text-secondary);
 }
 
@@ -63,5 +61,6 @@
 }
 
 .card:hover .actionSection {
-  display: block;
+  display: flex;
+  justify-content: end;
 }

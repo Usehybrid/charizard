@@ -1,15 +1,15 @@
-import React from 'react';
-import clsx from 'clsx';
-import classes from './styles.module.css';
+import React from 'react'
+import clsx from 'clsx'
+import classes from './styles.module.css'
 
 export interface TabProps {
-  title: string;
-  eventKey: string;
-  isActive: boolean;
-  customClassName?: string;
-  customStyles?: React.CSSProperties;
-  children: React.ReactNode;
-  onClick: () => void; // Added to handle clicks
+  title: string
+  eventKey: string
+  isActive: boolean
+  customClassName?: string
+  customStyles?: React.CSSProperties
+  children: React.ReactNode
+  onClick: () => void
 }
 
 export const Tab: React.FC<TabProps> = ({
@@ -21,11 +21,16 @@ export const Tab: React.FC<TabProps> = ({
 }) => {
   return (
     <button
-      className={clsx(classes.tab, isActive ? classes.activeTab : '', 'charizard-subheading-semibold', customClassName)}
+      className={clsx(
+        classes.tab,
+        isActive ? classes.activeTab : '',
+        'zap-content-semibold',
+        customClassName,
+      )}
       style={customStyles}
       onClick={onClick}
     >
       {title}
     </button>
-  );
-};
+  )
+}

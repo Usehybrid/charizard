@@ -67,7 +67,7 @@ export default function TableHeaderFilter({
   return (
     <>
       <button
-        className={clsx('hybr1d-ui-reset-btn', classes.filter, api.open && classes.filterActive)}
+        className={clsx('zap-reset-btn', classes.filter, api.open && classes.filterActive)}
         {...api.getTriggerProps()}
       >
         <FilterTooltip
@@ -122,7 +122,7 @@ export default function TableHeaderFilter({
             <div className={classes.footerBox}>
               <div className={classes.footer}>
                 <button
-                  className={clsx('hybr1d-ui-reset-btn', classes.resetBtn)}
+                  className={clsx('zap-reset-btn', classes.resetBtn)}
                   onClick={handleResetFilter}
                 >
                   Reset
