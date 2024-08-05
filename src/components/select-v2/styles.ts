@@ -70,6 +70,7 @@ export const styles: StylesConfig<any> = {
       gap: '4px',
       flexWrap: 'nowrap',
       overflowX: 'scroll',
+      scrollbarWidth: 'none',
     }
   },
   multiValue: baseStyles => ({
