@@ -5,12 +5,9 @@ import {UserChip} from '../../../user-chip'
 import {Badge, BADGE_HIGHLIGHT, BADGE_STATUS} from '../../../badge'
 import {BUTTON_V2_SIZE, BUTTON_V2_VARIANT, ButtonV2} from '../../../button-v2'
 import {ITask, ITaskDetails, ITaskObjectValue} from '../../types'
+import {isObject, isString} from '../../../../utils'
 
 export default function TaskCard({data}: {data: ITask}) {
-  function isObject(value: ITaskObjectValue | string | null): value is ITaskObjectValue {
-    return typeof value === 'object' && value !== null && 'first_name' in value
-  }
-
   return (
     <div className={classes.card}>
       <div className={classes.taskSection}>
@@ -29,17 +26,17 @@ export default function TaskCard({data}: {data: ITask}) {
         {data.details.map((detail: ITaskDetails, i: number) => (
           <div key={i} className={classes.detail}>
             <div className={clsx(classes.detailKey, 'zap-subcontent-medium')}>{detail.key}</div>
-            {detail.value && isObject(detail.value) ? (
+            {detail.value && isObject(detail.value) && Object.keys(detail.value).length ? (
               <UserChip
-                username={detail.value.first_name}
-                profileImgUrl={detail.value.profile_img_url}
+                username={(detail.value as ITaskObjectValue).first_name}
+                profileImgUrl={(detail.value as ITaskObjectValue).profile_img_url}
               />
-            ) : detail.value === null ? (
-              <div className={clsx(classes.detailValueNA, 'zap-subcontent-medium')}>N/A</div>
-            ) : (
+            ) : isString(detail.value) ? (
               <div className={clsx(classes.detailValue, 'zap-subcontent-medium')}>
-                {detail.value}
+                {detail.value as string}
               </div>
+            ) : (
+              <div className={clsx(classes.detailValueNA, 'zap-subcontent-medium')}>N/A</div>
             )}
           </div>
         ))}
