@@ -17,10 +17,6 @@ export function TableCheckbox({
 } & React.HTMLProps<HTMLInputElement>) {
   const ref = React.useRef<HTMLInputElement>(null!)
 
-  if (isHeader) {
-    // console.log(indeterminate, {rest})
-  }
-
   React.useEffect(() => {
     if (typeof indeterminate === 'boolean') {
       ref.current.indeterminate = !rest.checked && indeterminate

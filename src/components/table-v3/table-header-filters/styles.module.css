@@ -1,7 +1,7 @@
 .filters {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 12px;
 }
 
 .filtersInfo {
@@ -11,11 +11,11 @@
 
 .filter {
   display: flex;
-  padding: 4px 6px 4px 10px;
   justify-content: center;
   align-items: center;
   gap: 4px;
   height: 28px;
+  padding: 4px 6px 4px 10px;
   border-radius: 8px;
   background: var(--fill-selection);
   border: 1px solid var(--stroke-selection);
@@ -63,7 +63,7 @@
   height: 16px;
 }
 .filterIcon2 > path {
-  fill: var(--neutral-arch-900);
+  fill: var(--p-p90);
 }
 
 .filterCol {
@@ -75,7 +75,7 @@
 
 .totalSelected {
   border-radius: 3px;
-  background: var(--neutral-arch-900);
+  background: var(--p-p90);
   color: var(--neutral-white);
   font-size: 12px;
   font-weight: 500;
@@ -95,11 +95,11 @@
   position: relative;
   overflow-y: scroll;
   padding: 8px;
-
   background: var(--neutral-white);
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-  border-radius: 8px;
-  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.07);
+  border-radius: 4px;
+  box-shadow:
+    0px 4px 16px 0px rgba(18, 18, 18, 0.04),
+    0px 2px 8px 0px rgba(18, 18, 18, 0.08);
 }
 
 .dropdown:focus-visible {
@@ -124,10 +124,8 @@
   border-radius: 6px;
   background: var(--neutral-white);
   color: var(--text-primary);
-  font-size: 14px;
-  line-height: 180%;
   width: 100%;
-  min-height: 36px;
+  min-height: 30px;
   padding: 0 8px;
 
   display: flex;
@@ -136,7 +134,7 @@
 }
 
 .option:hover {
-  background: var(--neutral-arch-40);
+  background: var(--fill-selection);
 }
 
 .dropdownSearch {
@@ -171,13 +169,15 @@
 
 .resetBtn {
   display: flex;
-  height: 26px;
-  padding: 6px 12px;
+  height: 22px;
+  padding: 6px;
   justify-content: center;
   align-items: center;
   gap: 8px;
   border-radius: 4px;
-  background: var(--neutral-arch-30);
+
+  border: 1px solid var(--stroke-selection);
+  background: var(--fill-selection);
 
   color: var(--text-primary);
   font-size: 12px;
@@ -197,12 +197,6 @@
   align-items: center;
   column-gap: 16px;
   text-wrap: pretty;
-
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 180%; /* 25.2px */
-  /* 1.93846rem */
 }
 
 .optionLabel:hover {
@@ -213,7 +207,7 @@
   width: 16px;
   height: 16px;
   border-radius: 4px;
-  border: 2px solid var(--neutral-arch-100);
+  border: 1px solid var(--stroke-selection);
   background-color: white;
   flex-shrink: 0;
 }
@@ -235,9 +229,11 @@
   align-items: flex-start;
   gap: 8px;
 
-  border-radius: 6px;
   background: var(--neutral-white);
-  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+  border-radius: 4px;
+  box-shadow:
+    0px 4px 16px 0px rgba(18, 18, 18, 0.04),
+    0px 2px 8px 0px rgba(18, 18, 18, 0.08);
   min-width: 120px;
   overflow-x: hidden;
   white-space: nowrap;
@@ -255,7 +251,7 @@
   padding: 6px 4px 6px 6px;
   align-items: center;
   border-radius: 4px;
-  background: var(--neutral-arch-50);
+  background: var(--stroke-selection);
 }
 
 .filterTooltipTrigger {

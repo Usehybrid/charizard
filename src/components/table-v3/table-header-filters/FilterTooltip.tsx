@@ -22,7 +22,7 @@ export default function FilterTooltip({filter, tableFilter, selectedFilters}: Fi
         {...tooltipApi.getTriggerProps()}
         className={clsx('zap-reset-btn', classes.filterTooltipTrigger)}
       >
-        <div className={classes.filterCol}>{filter.name}</div>
+        <div className={clsx(classes.filterCol, 'zap-button-small')}>{filter.name}</div>
         {selectedFilters !== 0 && <span className={classes.totalSelected}>{selectedFilters}</span>}
       </div>
       {tooltipApi.open && selectedFilters !== 0 && (

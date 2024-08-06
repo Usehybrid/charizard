@@ -5,6 +5,7 @@ import classes from './table-pagination.module.css'
 import {useMachine, normalizeProps, Portal} from '@zag-js/react'
 import {SVG} from '../../svg'
 import {generateRange} from './utils'
+import clsx from 'clsx'
 
 interface TableEllipsesProps {
   paginationApi: any
@@ -55,7 +56,7 @@ export default function TableEllipses({paginationApi, i}: TableEllipsesProps) {
                 <li
                   key={item.value}
                   {...selectApi.getItemProps({item})}
-                  className={classes.limitItem}
+                  className={clsx(classes.limitItem, 'zap-subcontent-medium')}
                 >
                   <span>{item.label}</span>
                 </li>

@@ -2,7 +2,7 @@ import * as React from 'react'
 import * as dialog from '@zag-js/dialog'
 import clsx from 'clsx'
 import CustomColCheckbox from './CustomColCheckbox'
-import viewColIcon from '../../assets/view-columns.svg'
+import viewColIcon from '../../assets/views/view-table-list.svg'
 import closeIcon from '../../assets/close.svg'
 import classes from './table-custom-cols.module.css'
 import {Table} from '@tanstack/react-table'
@@ -114,7 +114,7 @@ export default function TableCustomCols({
   return (
     <>
       <button {...api.getTriggerProps()} className={clsx('zap-reset-btn', classes.actionCommon)}>
-        <SVG path={viewColIcon} width={22} height={22} />
+        <SVG path={viewColIcon} width={16} height={16} />
       </button>
       {api.open && (
         <Portal>

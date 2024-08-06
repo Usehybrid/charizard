@@ -25,26 +25,26 @@
 .actions {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 12px;
   flex-wrap: wrap;
 }
 
 .actionCommon {
   display: flex;
-  width: 40px;
-  height: 36px;
-  padding: 6px 8px;
   justify-content: center;
   align-items: center;
-  border-radius: 8px;
-  background: var(--neutral-arch-30);
-  cursor: pointer;
   gap: 8px;
+  cursor: pointer;
+
+  height: 28px;
+  padding: 6px;
+  border-radius: 8px;
+  background: var(--fill-selection);
+  border: 1px solid var(--stroke-selection);
 }
 
-.actionCommon svg > g > path,
-.actionCommon svg > path {
-  fill: var(--neutral-arch-900);
+.actionCommon:hover {
+  background-color: var(--p-p10);
 }
 
 .filterBtn {

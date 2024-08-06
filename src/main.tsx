@@ -645,8 +645,8 @@ function App() {
           defaultLimit: '20',
         }}
         rowSelectionConfig={{
-          // isRadio: true,
           entityName: 'Software',
+          // isRadio: true,
           isCheckbox: true,
           rowIdKey: 'id',
           actions: [
@@ -702,6 +702,7 @@ function App() {
           },
         }}
         tableStyleConfig={{stickyIds: ['software'], maxHeight: '200px'}}
+        exportConfig={{}}
       />
     </div>
   )

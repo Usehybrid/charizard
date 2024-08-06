@@ -3,6 +3,7 @@ import ReactCountryFlag from 'react-country-flag'
 import classes from './styles.module.css'
 import {useMachine, normalizeProps} from '@zag-js/react'
 import {TableStore} from '../store'
+import clsx from 'clsx'
 
 export default function FilterCheckbox({
   label,
@@ -44,7 +45,7 @@ export default function FilterCheckbox({
   const api = checkbox.connect(state, send, normalizeProps)
 
   return (
-    <label {...api.getRootProps()} className={classes.optionLabel}>
+    <label {...api.getRootProps()} className={clsx(classes.optionLabel, 'zap-subcontent-medium')}>
       <div {...api.getControlProps()} />
       <span {...api.getLabelProps()}>
         {countryCode && (

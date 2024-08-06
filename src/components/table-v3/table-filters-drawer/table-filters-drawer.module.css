@@ -1,27 +1,21 @@
-.actionCommon {
+.filterBtn {
   display: flex;
-  width: 40px;
-  height: 36px;
-  padding: 6px 8px;
   justify-content: center;
   align-items: center;
-  border-radius: 8px;
-  background: var(--neutral-arch-30);
   cursor: pointer;
   gap: 8px;
-}
-
-.actionCommon svg > g > path,
-.actionCommon svg > path {
-  fill: var(--neutral-arch-900);
-}
-
-.filterBtn {
   color: var(--text-primary);
-  font-size: 14px;
-  padding: 6px 12px 6px 8px;
-  line-height: 24px; /* 171.429% */
   width: auto;
+
+  height: 28px;
+  padding: 4px 10px 4px 6px;
+  border-radius: 8px;
+  background: var(--fill-selection);
+  border: 1px solid var(--stroke-selection);
+}
+
+.filterBtn:hover {
+  background-color: var(--p-p10);
 }
 
 /* drawer */
@@ -104,15 +98,6 @@
   cursor: pointer;
 }
 
-.closeIcon {
-  width: 24px;
-  height: 24px;
-}
-
-.closeIcon > path {
-  fill: var(--neutral-arch-600);
-}
-
 .title span {
   color: var(--text-primary);
   font-size: 24px;
@@ -120,21 +105,8 @@
   line-height: 36px;
 }
 
-.footer {
-  height: 81.11px;
-  width: 100%;
-  margin-top: auto;
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  justify-content: flex-end;
-
-  border-top: 1px solid var(--neutral-arch-200);
-}
-
 .filterBox {
   display: flex;
-
   width: 100%;
   height: 100%;
 }
@@ -156,7 +128,7 @@
 }
 
 .filter.active {
-  background: var(--neutral-arch-30);
+  background: var(--fill-selection);
   position: relative;
   color: var(--theme-blue);
   font-weight: 500;
@@ -199,7 +171,7 @@
   padding: 4px 8px;
 
   &:hover {
-    background: var(--neutral-arch-50);
+    background: var(--fill-selection);
   }
 }
 
@@ -215,10 +187,15 @@
 
 .totalSelected {
   border-radius: 3px;
-  background: var(--neutral-arch-900);
+  background: var(--p-p90);
   color: var(--neutral-white);
   font-size: 12px;
   font-weight: 500;
   line-height: normal;
   padding: 0 3px;
+}
+
+.filterIcon {
+  width: 16px;
+  height: 16px;
 }
