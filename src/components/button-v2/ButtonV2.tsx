@@ -15,6 +15,7 @@ interface BaseButtonProps {
   onClick?: React.MouseEventHandler<HTMLButtonElement>
   size?: BUTTON_V2_SIZE
   customStyles?: React.CSSProperties
+  btnType: 'button' | 'reset' | 'submit' | undefined
 }
 
 interface IconOnlyButtonV2TypeProps extends BaseButtonProps {
@@ -52,6 +53,7 @@ export function ButtonV2({
   size = BUTTON_V2_SIZE.DEFAULT,
   customStyles = {},
   icon,
+  btnType,
 }: ButtonV2Props) {
   return (
     <button
@@ -71,6 +73,7 @@ export function ButtonV2({
       disabled={disabled}
       onClick={onClick}
       style={customStyles}
+      type={btnType}
     >
       {type === BUTTON_V2_TYPE.ICON_LEFT && icon}
       {type === BUTTON_V2_TYPE.ICON_ONLY ? icon : children}

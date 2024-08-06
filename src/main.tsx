@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom/client'
 import randomIcon from './components/assets/check.svg'
 import {createColumnHelper} from '@tanstack/react-table'
 import {INV_ACTION_TYPES, useInventoryStore} from './components/table-v2/inventory/inventory.store'
-import {TableUserCell, TableV3} from './components'
+import {DrawerV2, TableUserCell, TableV3} from './components'
+import {useDisclosure} from './utils/hooks/use-disclosure'
 
 const styles = {
   width: '90%',
@@ -596,12 +597,16 @@ const menuItems = [{label: 'Test 1', onClick: () => {}}]
 function App() {
   const [search, setSearch] = React.useState('')
 
+  const {isOpen, onOpen, onClose} = useDisclosure()
+
+  console.log({isOpen})
+
   const query = useInventoryStore(s => s.query)
   const dispatch = useInventoryStore(s => s.dispatch)
 
   return (
     <div style={styles}>
-      <TableV3
+      {/* <TableV3
         data={data}
         loaderConfig={{isFetching: false, isError: false, text: 'Getting employees...'}}
         columns={columns}
@@ -703,7 +708,12 @@ function App() {
         }}
         tableStyleConfig={{stickyIds: ['software'], maxHeight: '200px'}}
         exportConfig={{}}
-      />
+      /> */}
+
+      <button onClick={onOpen}>Open drawer</button>
+      <DrawerV2 {...{isOpen, onClose}} title="Filters">
+        <div>Test body</div>
+      </DrawerV2>
     </div>
   )
 }
