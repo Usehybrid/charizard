@@ -1,6 +1,6 @@
 import * as React from 'react'
 import clsx from 'clsx'
-import classes from './table-user-cell.module.css'
+import classes from './table-device-cell.module.css'
 import fileMultiple from '../../../assets/files/file-multiple.svg'
 import laptop2 from '../../../assets/devices/laptop-2.svg'
 import monitor from '../../../assets/devices/monitor.svg'
