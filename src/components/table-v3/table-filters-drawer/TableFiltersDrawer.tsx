@@ -1,7 +1,7 @@
 import * as React from 'react'
 import clsx from 'clsx'
 import FilterDrawerCheckbox from '../table-header-filters/FilterDrawerCheckbox'
-import filterIcon from '../../assets/filter-lines.svg'
+import filterIcon from '../../assets/user-interface/filter-2.svg'
 import classes from './table-filters-drawer.module.css'
 import {SVG} from '../../svg'
 import {BUTTON_VARIANT, Button} from '../../button'
@@ -87,11 +87,11 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
   return (
     <>
       <button
-        className={clsx('zap-reset-btn', classes.actionCommon, classes.filterBtn)}
+        className={clsx('zap-reset-btn', classes.filterBtn, 'zap-button-small')}
         onClick={onOpen}
       >
-        <SVG path={filterIcon} width={22} height={22} />
-        Filter
+        <SVG path={filterIcon} svgClassName={classes.filterIcon} />
+        Filters
         {totalSelectedFilters !== 0 && (
           <span className={classes.totalSelected}>{totalSelectedFilters}</span>
         )}

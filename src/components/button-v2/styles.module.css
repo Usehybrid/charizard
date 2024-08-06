@@ -219,6 +219,11 @@
   fill: var(--p-p50);
 }
 
-.moreMenuIconTertiary path {
-  fill: var(--p-p90);
+.btnTable {
+  background-color: transparent;
+  border: none;
+}
+
+.moreMenuIconTable path {
+  fill: var(--text-tertiary);
 }

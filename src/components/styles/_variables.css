@@ -7,8 +7,6 @@
     contrast(93%);
 
   /* * text colors */
-  --text-primary: #000041;
-  --text-secondary: #66668d;
   --text-hint: #a3a3be;
 
   /* * neutral colors */
@@ -143,7 +141,7 @@
 
   /* Text colors */
   --text-primary: #000041;
-  --text-secondary: #66668d;
+  --text-secondary: #696e9c;
   --text-tertiary: #9999b3;
 
   /* Fill colors */
@@ -154,10 +152,11 @@
   --stroke-tabs-sections: #e5e9fb;
   --stroke-buttons-input: #d3dbf8;
   --stroke-border: #e5e9fb;
+  --stroke-selection: #d3dbf8;
 
   /* Link colors */
-  --link-rest: #0072fe;
-  --link-hover: #0074d6;
+  --link-rest: #0f72ee;
+  --link-hover: #074da6;
 
   /* Infographic colors */
   --graph-1: #489cff;

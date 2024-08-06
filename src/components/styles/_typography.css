@@ -136,11 +136,11 @@
   letter-spacing: var(--letter-spacing);
 }
 .zap-button-small {
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: var(--line-height-166);
-  letter-spacing: var(--letter-spacing);
+  font-size: 12px !important;
+  font-style: normal !important;
+  font-weight: 600 !important;
+  line-height: var(--line-height-166) !important;
+  letter-spacing: var(--letter-spacing) !important;
 }
 
 /* Link Styles */

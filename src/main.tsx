@@ -3,16 +3,7 @@ import ReactDOM from 'react-dom/client'
 import randomIcon from './components/assets/check.svg'
 import {createColumnHelper} from '@tanstack/react-table'
 import {INV_ACTION_TYPES, useInventoryStore} from './components/table-v2/inventory/inventory.store'
-import {Badge, BADGE_HIGHLIGHT, TableV3, TaskCards, SelectV2} from './components'
-import {ButtonDemo} from './Demo/ButtonDemo'
-import {Pill, PILL_STATUS} from './components'
-import {SELECT_VARIANT} from './components/select-v2'
-import '@hybr1d-tech/groudon/dist/typography.min.css'
-import './components/styles/_variables.css'
-import './components/styles/global.css'
-
-import './components/styles/_variables.css'
-import './components/styles/global.css'
+import {TableUserCell, TableV3} from './components'
 
 const styles = {
   width: '90%',
@@ -600,34 +591,17 @@ const options = [
   },
 ]
 
+const menuItems = [{label: 'Test 1', onClick: () => {}}]
+
 function App() {
   const [search, setSearch] = React.useState('')
 
   const query = useInventoryStore(s => s.query)
   const dispatch = useInventoryStore(s => s.dispatch)
 
-  const tabs = [
-    {
-      eventKey: 'basic-info',
-      title: 'Basic Info',
-      component: <div>Basic info</div>,
-    },
-    {
-      eventKey: 'comments',
-      title: 'Comments',
-      component: <div>Comments</div>,
-    },
-  ].filter(tab => tab) as any
-
-  const [activeTab, setActiveTab] = React.useState(tabs?.[0].eventKey)
-
-  const onTabChange = (key: string) => {
-    setActiveTab(key || tabs[0].eventKey)
-  }
-
   return (
     <div style={styles}>
-      {/* <TableV3
+      <TableV3
         data={data}
         loaderConfig={{isFetching: false, isError: false, text: 'Getting employees...'}}
         columns={columns}
@@ -671,8 +645,8 @@ function App() {
           defaultLimit: '20',
         }}
         rowSelectionConfig={{
-          // isRadio: true,
           entityName: 'Software',
+          // isRadio: true,
           isCheckbox: true,
           rowIdKey: 'id',
           actions: [
@@ -728,54 +702,8 @@ function App() {
           },
         }}
         tableStyleConfig={{stickyIds: ['software'], maxHeight: '200px'}}
-      /> */}
-
-      {/* <TaskCards
-        headers={taskheaders}
-        data={tasks}
-        // data={[]}
+        exportConfig={{}}
       />
-      {/* <Pill status={PILL_STATUS.WARNING}>420</Pill> */}
-      {/* <SelectV2
-        options={options}
-        onChange={(value, meta) => {
-          console.log({value, meta})
-        }}
-        isLoading
-        errorMsg="something went wrong"
-        variant={SELECT_VARIANT.USERS}
-        isMulti
-      /> */}
-
-      {/* <Tabs id='test-tab' activeKey={activeTab} onSelect={(id) => setActiveTab(id)}>
-        {
-          tabs.map((tab) => {
-            return <Tab isActive={activeTab === tab.title} key={tab.title} title={tab.title}>{tab.content}</Tab>
-          })
-        }
-      </Tabs> */}
-      {/* <Tabs
-        id="tabs"
-        activeKey={activeTab}
-        onSelect={onTabChange}
-        customClassName="border-0 flex-nowrap"
-      >
-        {tabs.map((tab: any, idx: any) => (
-          <Tab
-            key={tab.eventKey}
-            eventKey={tab.eventKey}
-            isActive={activeTab === tab.eventKey}
-            title={tab.title}
-            customClassName={`${idx === 0 ? 'ms-0' : ''}`}
-            onClick={() => onTabChange(tab.eventKey)}
-          >
-            {tab.component}
-          </Tab>
-        ))}
-      </Tabs> */}
-      <ButtonDemo />
-
-      <SelectV2 options={options} onChange={() => {}} />
     </div>
   )
 }

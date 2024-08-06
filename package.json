@@ -1,6 +1,6 @@
 {
   "name": "@hybr1d-tech/charizard",
-  "version": "0.6.43",
+  "version": "0.6.45",
   "type": "module",
   "files": [
     "dist"

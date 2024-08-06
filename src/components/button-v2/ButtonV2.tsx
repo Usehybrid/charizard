@@ -101,6 +101,9 @@ export interface GroupActionProps {
   positionerProps?: PositioningOptions
   isTable?: boolean
   showDownIconBtn?: boolean
+  customStyles?: {
+    customMenuStyles?: React.CSSProperties
+  }
 }
 
 function GroupAction({
@@ -114,6 +117,7 @@ function GroupAction({
   positionerProps,
   isTable = false,
   showDownIconBtn = true,
+  customStyles,
 }: GroupActionProps) {
   const [state, send] = useMachine(
     menu.machine({
@@ -125,6 +129,8 @@ function GroupAction({
   const buttonRef = React.useRef<HTMLButtonElement>(null)
   const menuRef = React.useRef<HTMLDivElement>(null)
   const api = menu.connect(state, send, normalizeProps)
+
+  const customMenuStyles = customStyles?.customMenuStyles
 
   React.useEffect(() => {
     if (!actionsDropdownOptions?.setIsActive) return
@@ -200,7 +206,7 @@ function GroupAction({
     <>
       {menuItems.length > 0 && (
         <div {...api.getPositionerProps()} ref={menuRef}>
-          <div {...api.getContentProps()} className={classes.menus}>
+          <div {...api.getContentProps()} className={classes.menus} style={customMenuStyles}>
             {menuItems
               .filter(menu => {
                 if (!menu.filterFn) return true
@@ -211,7 +217,14 @@ function GroupAction({
                   key={menu.label}
                   className={clsx(classes.menu, {[classes.menuDisabled]: menu.disabled})}
                   {...api.getItemProps({value: menu.label.toLowerCase()})}
-                  onClick={menu.disabled ? undefined : menu.onClick}
+                  onClick={
+                    menu.disabled
+                      ? undefined
+                      : () => {
+                          menu.onClick()
+                          api.setOpen(false)
+                        }
+                  }
                   style={menu.customStyles}
                 >
                   {menu.iconSrc && <SVG path={menu.iconSrc} svgClassName={classes.menuIcon} />}
@@ -237,6 +250,7 @@ function GroupAction({
           size === BUTTON_V2_SIZE.SMALL && classes.btnSmall,
           disabled && classes.disabled,
           isFocused && classes.focusVisible,
+          isTable && classes.btnTable,
         )}
         disabled={disabled}
         {...api.getTriggerProps()}
@@ -294,7 +308,12 @@ export function ActionsDropdown({
       isTable={isTable}
       showDownIconBtn={false}
     >
-      <SVG path={moreMenuIcon} width={16} height={16} />
+      <SVG
+        path={moreMenuIcon}
+        width={16}
+        height={16}
+        svgClassName={isTable ? classes.moreMenuIconTable : undefined}
+      />
     </GroupAction>
   )
 }
