@@ -1,17 +1,35 @@
 import clsx from 'clsx'
 import classes from './styles.module.css'
-import {Button, BUTTON_VARIANT} from '../button'
+import {BUTTON_VARIANT} from '../button'
+import {ButtonV2, BUTTON_V2_VARIANT, BUTTON_V2_SIZE, BUTTON_V2_TYPE} from '../button-v2'
 
 export type FooterButtons = Array<{
-  variant: BUTTON_VARIANT
+  variant?: BUTTON_VARIANT | BUTTON_V2_VARIANT
   onClick: () => void
   btnText: string
-  btnType?: 'button' | 'submit' | 'reset'
-  btnSize?: 'xs' | 'sm' | 'md' | 'adapt'
+  btnType?: BUTTON_V2_TYPE | 'submit'
+  btnSize?: BUTTON_V2_SIZE 
   disabled?: boolean
   isLoading?: boolean
   loadingText?: string
 }>
+
+ // Map BUTTON_VARIANT to BUTTON_V2_VARIANT
+ export const mapVariant = (variant?: BUTTON_VARIANT | BUTTON_V2_VARIANT): BUTTON_V2_VARIANT | undefined => {
+  switch (variant) {
+    case BUTTON_VARIANT.PRIMARY:
+      return BUTTON_V2_VARIANT.PRIMARY;
+    case BUTTON_VARIANT.SECONDARY:
+      return BUTTON_V2_VARIANT.SECONDARY;
+    case BUTTON_VARIANT.DANGER:
+      return BUTTON_V2_VARIANT.PRIMARY;
+    case BUTTON_VARIANT.MINIMAL:
+      return BUTTON_V2_VARIANT.TERTIARY;
+    default:
+      return variant as BUTTON_V2_VARIANT | undefined;
+  }
+};
+
 
 interface ModalFooterProps {
   /**
@@ -44,10 +62,10 @@ export function ModalFooter({children, api, buttons, showBorder = true}: ModalFo
       ) : (
         <div className={classes.btnsContainer}>
           {buttons.map((btn, idx) => (
-            <Button
+            <ButtonV2
               key={idx}
               disabled={btn.disabled}
-              variant={btn.variant}
+              variant={mapVariant(btn.variant)}
               onClick={async () => {
                 await btn.onClick()
                 api?.setOpen(false)
@@ -55,7 +73,7 @@ export function ModalFooter({children, api, buttons, showBorder = true}: ModalFo
               size={btn.btnSize}
             >
               {btn.isLoading ? btn.loadingText : btn.btnText}
-            </Button>
+            </ButtonV2>
           ))}
         </div>
       )}
