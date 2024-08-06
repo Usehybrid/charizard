@@ -18,7 +18,7 @@ export function DatePicker({
   disableDatepicker = false,
   disabled,
   buttonVariant = BUTTON_VARIANT.GHOST,
-  customContainerStyles,
+  customContainerClasses,
   popoverConfig,
   isError,
   ...props
@@ -79,7 +79,7 @@ export function DatePicker({
   }
 
   return (
-    <div className={clsx(classes.datePicker, customContainerStyles)}>
+    <div className={clsx(classes.datePicker, customContainerClasses)}>
       <Popover placement={'bottom'}>
         <PopoverTrigger openOnHover={false}>
           {variant === 'form' ? (

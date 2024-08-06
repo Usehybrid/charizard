@@ -19,7 +19,7 @@ export interface DatePickerProps extends DayPickerSingleProps {
   errorMsg?: string
   isError?: boolean
   buttonVariant?: BUTTON_VARIANT
-  customContainerStyles?: string
+  customContainerClasses?: string
   popoverConfig?: {
     placement?: Placement
   }
