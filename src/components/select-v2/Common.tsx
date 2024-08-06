@@ -12,11 +12,17 @@ import {AsyncImage} from '../AsyncImage'
 
 /**
  * Custom Dropdown Indicator component for react-select.
- * Displays a chevron icon indicating the dropdown menu.
+ * Displays a chevron icon indicating the dropdown menu if isDisabled is false.
  * @param props - The props for the DropdownIndicator component, including any react-select specific props.
  * @returns A custom DropdownIndicator component with a chevron icon.
  */
 export const CustomDropdownIndicator = (props: any) => {
+  const {isDisabled} = props
+
+  if (isDisabled) {
+    return null
+  }
+
   return (
     <components.DropdownIndicator {...props}>
       <SVG path={chevronDownIcon} spanClassName={classes.dropdownIcon} />
@@ -182,7 +188,6 @@ export const CustomMultiValue = (props: any) => {
     </div>
   )
 }
-
 
 /**
  * Custom Multi Value Remove component for react-select.
