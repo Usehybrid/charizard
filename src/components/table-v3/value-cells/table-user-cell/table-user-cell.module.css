@@ -1,0 +1,108 @@
+.box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 100%;
+  cursor: pointer;
+}
+
+.userImage {
+  width: 32px;
+  height: 32px;
+  object-fit: cover;
+  flex-shrink: 0;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.userDetails {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+.usernameContainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.emailBox {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.userEmail {
+  color: var(--text-secondary);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 230px;
+}
+
+/* commented out styles */
+
+.eventBox {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  /* margin-left: 0.615rem; */
+}
+
+.eventBox .badge {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  /* margin-right: 0.5rem; */
+  padding: 0.325rem 0rem;
+  border-radius: 0.325rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  line-height: 1;
+  text-align: center;
+  vertical-align: initial;
+  white-space: nowrap;
+}
+
+.eventBox .badge.primary {
+  color: var(--text-notes);
+  /* background-color: var(--text-notes-5); */
+}
+
+.eventBox .badge.success {
+  /* background-color: var(--status-success); */
+  color: var(--status-success-10);
+}
+
+.eventBox .badge.danger {
+  color: var(--status-error);
+  /* background-color: var(--status-error-10); */
+}
+
+.eventBox .badge.warning {
+  color: var(--status-warning);
+  /* background-color: var(--status-warning-10); */
+}
+
+.eventBox .badge.info {
+  color: var(--status-info);
+  /* background-color: var(--status-info-10); */
+}
+
+.eventBox .badge .emoji {
+  margin-left: 0.5rem;
+  font-size: 1.075rem;
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+}
+
+.icon > path {
+  fill: var(--dark-d50);
+}

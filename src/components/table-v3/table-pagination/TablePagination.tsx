@@ -1,5 +1,6 @@
 import * as React from 'react'
 import * as pagination from '@zag-js/pagination'
+import clsx from 'clsx'
 import TableLimit from './TableLimit'
 import TableEllipses from './TableEllipses'
 import chevronRight from '../../assets/chevron-right.svg'
@@ -8,13 +9,12 @@ import classes from './table-pagination.module.css'
 import {useMachine, normalizeProps, Portal} from '@zag-js/react'
 import {TableV3Props} from '../TableV3'
 import {SVG} from '../../svg'
-import clsx from 'clsx'
 
 interface TablePaginationProps {
   paginationConfig: TableV3Props['paginationConfig']
 }
 
-export default function TablePagination({paginationConfig}: TablePaginationProps) {
+export function TablePagination({paginationConfig}: TablePaginationProps) {
   if (!paginationConfig) return null
   // * table page is non zero indexed whereas the db is zero indexed
   const {setLimit, limit, metaData} = paginationConfig

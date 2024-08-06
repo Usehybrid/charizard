@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import randomIcon from './components/assets/check.svg'
 import {createColumnHelper} from '@tanstack/react-table'
 import {INV_ACTION_TYPES, useInventoryStore} from './components/table-v2/inventory/inventory.store'
-import {TableV3} from './components'
+import {TableUserCell, TableV3} from './components'
 
 const styles = {
   width: '90%',
