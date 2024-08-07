@@ -13,9 +13,9 @@ interface BaseButtonProps {
   variant?: BUTTON_V2_VARIANT
   disabled?: boolean
   onClick?: React.MouseEventHandler<HTMLButtonElement>
-  size?: BUTTON_V2_SIZE | 'xs' | 'sm' | 'md' | 'adapt'  // can be removed in the future when old dependencies are updated('xs' | 'sm' | 'md' | 'adapt')
+  size?: BUTTON_V2_SIZE | 'xs' | 'sm' | 'md' | 'adapt' // can be removed in the future when old dependencies are updated('xs' | 'sm' | 'md' | 'adapt')
   customStyles?: React.CSSProperties
-  btnType: 'button' | 'reset' | 'submit' | undefined
+  btnType?: 'button' | 'reset' | 'submit'
 }
 
 interface IconOnlyButtonV2TypeProps extends BaseButtonProps {
@@ -31,10 +31,10 @@ interface IconButtonV2TypeProps extends BaseButtonProps {
 }
 
 interface OtherButtonV2TypeProps extends BaseButtonProps {
-//   type?: Exclude<
-//   BUTTON_V2_TYPE,
-//   BUTTON_V2_TYPE.ICON_LEFT | BUTTON_V2_TYPE.ICON_RIGHT | BUTTON_V2_TYPE.ICON_ONLY
-// > 
+  //   type?: Exclude<
+  //   BUTTON_V2_TYPE,
+  //   BUTTON_V2_TYPE.ICON_LEFT | BUTTON_V2_TYPE.ICON_RIGHT | BUTTON_V2_TYPE.ICON_ONLY
+  // >
   type?: BUTTON_V2_TYPE.BASIC | BUTTON_V2_TYPE.BUTTON | BUTTON_V2_TYPE.RESET
   icon?: React.ReactNode
   children: React.ReactNode

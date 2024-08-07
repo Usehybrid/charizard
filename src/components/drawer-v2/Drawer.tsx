@@ -8,7 +8,7 @@ import {SVG} from '../svg'
 import {BUTTON_V2_SIZE, BUTTON_V2_TYPE, BUTTON_V2_VARIANT, ButtonV2} from '../button-v2'
 
 export type DrawerFooterButtons = Array<{
-  variant: BUTTON_V2_VARIANT
+  variant?: BUTTON_V2_VARIANT
   onClick: () => void
   btnText: string
   btnType?: 'button' | 'submit' | 'reset'
@@ -155,9 +155,11 @@ export function DrawerV2({
                 customHeader
               ) : (
                 <>
-                  <div className="titleBox">
-                    <h1 className={classes.title}>{title}</h1>
-                    {subTitle && <h2 className={classes.subTitle}>{subTitle}</h2>}
+                  <div>
+                    <h1 className={clsx(classes.title, 'zap-heading-semibold')}>{title}</h1>
+                    {subTitle && (
+                      <h2 className={clsx(classes.subTitle, 'zap-content-regular')}>{subTitle}</h2>
+                    )}
                   </div>
                   <div onClick={onClose}>
                     <SVG path={closeIcon} svgClassName={classes.closeBtnIcon} />

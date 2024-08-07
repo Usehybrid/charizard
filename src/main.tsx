@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import randomIcon from './components/assets/check.svg'
 import {createColumnHelper} from '@tanstack/react-table'
 import {INV_ACTION_TYPES, useInventoryStore} from './components/table-v2/inventory/inventory.store'
-import {DrawerV2, TableUserCell, TableV3} from './components'
+import {BUTTON_V2_VARIANT, DrawerV2, TableUserCell, TableV3} from './components'
 import {useDisclosure} from './utils/hooks/use-disclosure'
 
 const styles = {
@@ -604,6 +604,11 @@ function App() {
   const query = useInventoryStore(s => s.query)
   const dispatch = useInventoryStore(s => s.dispatch)
 
+  const footerBtn = [
+    {onClick: () => {}, btnText: 'Cancel', variant: BUTTON_V2_VARIANT.TERTIARY},
+    {onClick: () => {}, btnText: 'Apply'},
+  ]
+
   return (
     <div style={styles}>
       {/* <TableV3
@@ -711,7 +716,12 @@ function App() {
       /> */}
 
       <button onClick={onOpen}>Open drawer</button>
-      <DrawerV2 {...{isOpen, onClose}} title="Filters">
+      <DrawerV2
+        {...{isOpen, onClose}}
+        title="Filters"
+        subTitle="Wow this is so cool"
+        buttons={footerBtn}
+      >
         <div>Test body</div>
       </DrawerV2>
     </div>
