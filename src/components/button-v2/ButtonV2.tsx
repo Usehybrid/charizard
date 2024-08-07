@@ -108,6 +108,7 @@ export interface GroupActionProps {
   customStyles?: {
     customMenuStyles?: React.CSSProperties
   }
+  onClick?: any
 }
 
 function GroupAction({
@@ -122,6 +123,7 @@ function GroupAction({
   isTable = false,
   showDownIconBtn = true,
   customStyles,
+  onClick,
 }: GroupActionProps) {
   const [state, send] = useMachine(
     menu.machine({
@@ -257,7 +259,7 @@ function GroupAction({
           isTable && classes.btnTable,
         )}
         disabled={disabled}
-        {...api.getTriggerProps()}
+        onClick={onClick}
       >
         <span className={classes.grpTextBtn}>{children}</span>
         {showDownIconBtn && (
@@ -269,6 +271,7 @@ function GroupAction({
               variant === BUTTON_V2_VARIANT.TERTIARY && classes.btnAddonTertiary,
               size === BUTTON_V2_SIZE.SMALL && classes.btnAddonSmall,
             )}
+            {...api.getTriggerProps()}
           >
             <SVG path={chevronDown} width={16} height={16} svgClassName={classes.chevronDown} />
           </span>

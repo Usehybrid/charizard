@@ -30,6 +30,7 @@ export default function TableActions({actionsConfig, data}: TableActionsProps) {
         variant={BUTTON_V2_VARIANT.TERTIARY}
         size={BUTTON_V2_SIZE.SMALL}
         isTable
+        customData={data}
       />
     </div>
   )
