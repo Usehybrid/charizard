@@ -60,7 +60,9 @@ export default function CustomColCheckbox({
       className={clsx(classes.optionLabel, disabled && classes.optionDis)}
     >
       <div {...api.getControlProps()} className={classes.checkbox} />
-      <span {...api.getLabelProps()}>{label}</span>
+      <span {...api.getLabelProps()} className="zap-content-medium">
+        {label}
+      </span>
       <input {...api.getHiddenInputProps()} />
     </label>
   )

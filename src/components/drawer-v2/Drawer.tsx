@@ -1,9 +1,7 @@
 import * as React from 'react'
 import clsx from 'clsx'
-import classes from './drawer.module.css'
 import closeIcon from '../assets/close.svg'
-import {Button} from '../button'
-
+import classes from './drawer.module.css'
 import {SVG} from '../svg'
 import {BUTTON_V2_SIZE, BUTTON_V2_TYPE, BUTTON_V2_VARIANT, ButtonV2} from '../button-v2'
 
@@ -115,24 +113,24 @@ export function DrawerV2({
   const translateXOffset = drawerPosition === 'left' ? '-100%' : '100%'
   const isFullBodyHeight = !showHeader && !showFooter
 
-  React.useEffect(() => {
-    const timeout = setTimeout(() => {
-      if (containerRef.current && descriptionRef && footerRef) {
-        containerRef.current.style.transform = isOpen
-          ? 'translateX(0)'
-          : `translateX(${translateXOffset})`
-        ;(descriptionRef.current as HTMLDivElement).style.maxHeight =
-          `calc(100vh - (1.75rem * 2) - ${footerRef.current?.clientHeight}px)`
-        ;(descriptionRef.current as HTMLDivElement).style.height =
-          `calc(100vh - (1.75rem * 2) - ${footerRef.current?.clientHeight}px)`
-      }
-    }, 0)
+  // React.useEffect(() => {
+  //   const timeout = setTimeout(() => {
+  //     if (containerRef.current && descriptionRef && footerRef) {
+  //       containerRef.current.style.transform = isOpen
+  //         ? 'translateX(0)'
+  //         : `translateX(${translateXOffset})`
+  //       ;(descriptionRef.current as HTMLDivElement).style.maxHeight =
+  //         `calc(100vh - (1.75rem * 2) - ${footerRef.current?.clientHeight}px)`
+  //       ;(descriptionRef.current as HTMLDivElement).style.height =
+  //         `calc(100vh - (1.75rem * 2) - ${footerRef.current?.clientHeight}px)`
+  //     }
+  //   }, 0)
 
-    return () => {
-      clearTimeout(timeout)
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isOpen])
+  //   return () => {
+  //     clearTimeout(timeout)
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [isOpen])
 
   return (
     <>
@@ -170,11 +168,7 @@ export function DrawerV2({
           )}
           {/* description */}
           <div
-            className={clsx(
-              classes.descriptionContainer,
-              {[classes.fullHeight]: isFullBodyHeight},
-              contentClassName,
-            )}
+            className={clsx(classes.descriptionContainer, contentClassName)}
             ref={descriptionRef}
           >
             {/* children are shown here */}

@@ -597,21 +597,12 @@ const menuItems = [{label: 'Test 1', onClick: () => {}}]
 function App() {
   const [search, setSearch] = React.useState('')
 
-  const {isOpen, onOpen, onClose} = useDisclosure()
-
-  console.log({isOpen})
-
   const query = useInventoryStore(s => s.query)
   const dispatch = useInventoryStore(s => s.dispatch)
 
-  const footerBtn = [
-    {onClick: () => {}, btnText: 'Cancel', variant: BUTTON_V2_VARIANT.TERTIARY},
-    {onClick: () => {}, btnText: 'Apply'},
-  ]
-
   return (
     <div style={styles}>
-      {/* <TableV3
+      <TableV3
         data={data}
         loaderConfig={{isFetching: false, isError: false, text: 'Getting employees...'}}
         columns={columns}
@@ -713,17 +704,7 @@ function App() {
         }}
         tableStyleConfig={{stickyIds: ['software'], maxHeight: '200px'}}
         exportConfig={{}}
-      /> */}
-
-      <button onClick={onOpen}>Open drawer</button>
-      <DrawerV2
-        {...{isOpen, onClose}}
-        title="Filters"
-        subTitle="Wow this is so cool"
-        buttons={footerBtn}
-      >
-        <div>Test body</div>
-      </DrawerV2>
+      />
     </div>
   )
 }

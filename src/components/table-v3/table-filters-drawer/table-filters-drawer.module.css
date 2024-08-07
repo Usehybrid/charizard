@@ -17,92 +17,8 @@
 .filterBtn:hover {
   background-color: var(--p-p10);
 }
-
-/* drawer */
-
-.backdrop {
-  position: fixed;
-  width: 100dvw;
-  height: 100dvh;
-  background: var(--black);
-  opacity: 0.2;
-  z-index: 1023;
-  top: 0;
-  left: 0;
-  overflow: hidden;
-  transition: all 0.3s ease-in-out;
-}
-
 .content {
-  background-color: white;
-  color: var(--text-primary);
-  height: 100dvh;
-  padding-top: 1px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  transition: width 0.3s ease-in-out;
-
-  position: fixed;
-  top: 0;
-  right: 0;
-  max-width: 553px;
-  width: 100%;
-  height: 100dvh;
-  /* background-color: transparent; */
-
-  z-index: 1040;
-  overflow: hidden;
-}
-
-.drawerContent {
-  width: 100%;
-  padding: 0;
-  max-height: calc(100vh - 139px + 10px);
-}
-
-.drawerFooter {
-  width: 100%;
-  padding: 0 20px;
-  height: 81.11px;
-  width: 100%;
-  margin-top: auto;
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  justify-content: flex-end;
-
-  border-top: 1px solid var(--neutral-arch-200);
-}
-
-.content [data-state='closed'] {
-  width: 0px;
-}
-
-.content [data-state='open'] {
-  width: 593px;
-}
-
-.title {
-  display: flex;
-  padding: 10px 20px;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-  width: 100%;
-
-  background: var(--neutral-arch-10);
-}
-
-.closeIconSpan {
-  cursor: pointer;
-}
-
-.title span {
-  color: var(--text-primary);
-  font-size: 24px;
-  font-weight: 600;
-  line-height: 36px;
+  padding: 0 !important;
 }
 
 .filterBox {
@@ -112,26 +28,43 @@
 }
 
 .filters {
-  border-right: 1px solid var(--neutral-arch-200);
+  border-right: 1px solid var(--stroke-border);
   background: var(--neutral-white);
   width: 200px;
-  /* height: 100%; */
   flex-shrink: 0;
-  /* height: 780px;
-  overflow-y: scroll; */
+  padding-top: 8px;
+}
+
+.chevronRightSpan {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  display: none;
+}
+
+.chevronRight {
+  width: 16px;
+  height: 16px;
 }
 
 .filter {
-  padding: 10px 20px;
-  font-size: 14px;
-  line-height: 20px;
+  padding: 8px 16px;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .filter.active {
   background: var(--fill-selection);
   position: relative;
-  color: var(--theme-blue);
-  font-weight: 500;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.filter.active .chevronRightSpan {
+  display: inline-block;
 }
 
 .filter:not(.active) {
@@ -144,54 +77,47 @@
   position: absolute;
   left: 0;
   top: 0;
-  background-color: var(--theme-blue);
+  background-color: var(--p-p50);
   width: 4px;
 }
 
 .filterSingle {
   flex-grow: 1;
-  padding: 10px 23px 10px 10px;
-  /* 56px => drawer header, 53px => drawer footer, 10px to make it look better */
-  max-height: calc(100vh - 139px + 10px);
+  padding: 16px 8px 10px 8px;
+  /* 41px => drawer header, 49px => drawer footer, 10px to make it look better */
+  max-height: calc(100vh - 90px);
   overflow-y: scroll;
   /* scroll-behavior: smooth; */
 }
 
 /* filter options */
 
-.options {
-  margin-top: 6px;
-}
-
 .option {
-  border-radius: 6px;
+  border-radius: 8px;
   min-height: 36px;
   display: flex;
   align-items: center;
-  padding: 4px 8px;
+  padding: 8px;
 
   &:hover {
-    background: var(--fill-selection);
+    background: var(--fill-highlight);
   }
 }
 
 /* filter search */
 .dropdownSearch {
   position: sticky;
-  top: -10px;
-  margin-bottom: 6px;
-  padding-top: 10px;
+  top: -16px;
+  margin-bottom: 16px;
+  padding-top: 16px;
   background-color: white;
-  margin-top: -10px;
+  margin-top: -16px;
 }
 
 .totalSelected {
   border-radius: 3px;
   background: var(--p-p90);
   color: var(--neutral-white);
-  font-size: 12px;
-  font-weight: 500;
-  line-height: normal;
   padding: 0 3px;
 }
 

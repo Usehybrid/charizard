@@ -2,16 +2,17 @@ import * as React from 'react'
 import clsx from 'clsx'
 import FilterDrawerCheckbox from '../table-header-filters/FilterDrawerCheckbox'
 import filterIcon from '../../assets/user-interface/filter-2.svg'
+import chevronRight from '../../assets/chevron-right.svg'
 import classes from './table-filters-drawer.module.css'
 import {SVG} from '../../svg'
-import {BUTTON_VARIANT, Button} from '../../button'
 import {FilterConfig} from '../types'
 import {Search} from '../../search'
 import {useTableStore} from '../store'
 import {getDefaultCheckedState, removeUncheckedItems} from './utils'
-import {Drawer} from '../../drawer'
 import {useDisclosure} from '../../../utils/hooks/use-disclosure'
 import {Portal} from '@zag-js/react'
+import {DrawerV2} from '../../drawer-v2'
+import {BUTTON_V2_VARIANT} from '../../button-v2'
 
 interface TableFiltersDrawerProps {
   filterConfig: FilterConfig
@@ -84,6 +85,28 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
       return (acc += curr.values.length)
     }, 0)
 
+  const footerBtn = [
+    {
+      btnText: 'Cancel',
+      onClick: onClose,
+      variant: BUTTON_V2_VARIANT.TERTIARY,
+    },
+    {
+      btnText: 'Reset All',
+      onClick: () => {
+        if (search.length) setSearch('')
+        resetAllFilters(filterConfig.filterReset)
+        setHasChanges(false)
+        onClose()
+      },
+      variant: BUTTON_V2_VARIANT.SECONDARY,
+    },
+    {
+      btnText: 'Apply',
+      onClick: handleApplyFilters,
+    },
+  ]
+
   return (
     <>
       <button
@@ -93,44 +116,21 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
         <SVG path={filterIcon} svgClassName={classes.filterIcon} />
         Filters
         {totalSelectedFilters !== 0 && (
-          <span className={classes.totalSelected}>{totalSelectedFilters}</span>
+          <span className={clsx(classes.totalSelected, 'zap-subcontent-regular')}>
+            {totalSelectedFilters}
+          </span>
         )}
       </button>
 
       <Portal>
         {isOpen && (
-          <Drawer
+          <DrawerV2
             isOpen={isOpen}
-            title="Filter"
-            contentClassName={classes.drawerContent}
-            footerClassName={classes.drawerFooter}
+            title="Filters"
             onClose={onClose}
-            customContainerStyles={{width: '593px'}}
-            customFooter={
-              <>
-                <Button variant={BUTTON_VARIANT.SECONDARY} onClick={onClose}>
-                  Cancel
-                </Button>
-                <Button
-                  variant={BUTTON_VARIANT.GHOST}
-                  onClick={() => {
-                    if (search.length) setSearch('')
-                    resetAllFilters(filterConfig.filterReset)
-                    setHasChanges(false)
-                    onClose()
-                  }}
-                  // disabled={!hasChanges}
-                >
-                  Reset All
-                </Button>
-                <Button
-                  onClick={handleApplyFilters}
-                  //  disabled={!hasChanges}
-                >
-                  Apply
-                </Button>
-              </>
-            }
+            customContainerStyles={{width: '512px'}}
+            buttons={footerBtn}
+            contentClassName={classes.content}
           >
             <div className={classes.filterBox}>
               <div className={classes.filters}>
@@ -139,7 +139,11 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
                   const internalFilter = tableFilters.find(tf => tf.key === filter.key)
                   return (
                     <div
-                      className={clsx(classes.filter, isActive && classes.active)}
+                      className={clsx(
+                        classes.filter,
+                        isActive && classes.active,
+                        'zap-content-medium',
+                      )}
                       onClick={() => {
                         setSearch('')
                         setCurrFilter(filter)
@@ -148,6 +152,11 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
                     >
                       {filter.name}{' '}
                       {`${internalFilter?.values.length ? `(${internalFilter.values.length})` : ''}`}
+                      <SVG
+                        path={chevronRight}
+                        spanClassName={classes.chevronRightSpan}
+                        svgClassName={classes.chevronRight}
+                      />
                     </div>
                   )
                 })}
@@ -161,6 +170,7 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
                       search={search}
                       setSearch={setSearch}
                       placeholder={currFilter.config?.placeholder || 'Search'}
+                      customStyles={{customInputStyles: {borderRadius: '8px'}}}
                     />
                   </div>
                 )}
@@ -168,7 +178,7 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
                 {
                   <div className={classes.options}>
                     {filteredOptions.length === 0 ? (
-                      <div className={classes.optionsEmpty}>No results found</div>
+                      <div className={'zap-content-regular'}>No search results found</div>
                     ) : (
                       <>
                         {/* <div className={classes.option} style={{fontWeight: 700}}>
@@ -219,7 +229,7 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
                 }
               </div>
             </div>
-          </Drawer>
+          </DrawerV2>
         )}
       </Portal>
     </>
