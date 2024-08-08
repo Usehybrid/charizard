@@ -3,7 +3,6 @@
   align-items: center;
   gap: 12px;
   height: 100%;
-  cursor: pointer;
 }
 
 .userImage {
@@ -28,6 +27,7 @@
   width: 100%;
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 
 .emailBox {

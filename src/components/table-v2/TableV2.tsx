@@ -413,7 +413,7 @@ function TableComp({
   return (
     <div
       className={classes.tableScrollContainer}
-      id="hui-table-scroll-container"
+      id="zap-table-scroll-container"
       style={{overflowY: 'scroll', maxHeight: tableStyleConfig?.maxHeight}}
       ref={tableContainerRef}
       onScroll={handleScroll}

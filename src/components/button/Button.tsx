@@ -135,7 +135,7 @@ function MenuButton({
 
   React.useEffect(() => {
     if (isTable) {
-      const scrollContainer = document.getElementById('hui-table-scroll-container')
+      const scrollContainer = document.getElementById('zap-table-scroll-container')
       if (scrollContainer) {
         scrollContainer.addEventListener('scroll', handleScroll, {passive: true})
         return () => scrollContainer.removeEventListener('scroll', handleScroll)

@@ -200,7 +200,7 @@ function GroupAction({
 
   React.useEffect(() => {
     if (isTable) {
-      const scrollContainer = document.getElementById('hui-table-scroll-container')
+      const scrollContainer = document.getElementById('zap-table-scroll-container')
       if (scrollContainer) {
         scrollContainer.addEventListener('scroll', handleScroll, {passive: true})
         return () => scrollContainer.removeEventListener('scroll', handleScroll)
@@ -259,22 +259,24 @@ function GroupAction({
           isTable && classes.btnTable,
         )}
         disabled={disabled}
-        onClick={onClick}
+        onClick={!isTable ? onClick : undefined}
+        {...(isTable && api.getTriggerProps())}
       >
         <span className={classes.grpTextBtn}>{children}</span>
         {showDownIconBtn && (
-          <span
+          <button
             className={clsx(
               classes.grpIconBtn,
               variant === BUTTON_V2_VARIANT.PRIMARY && classes.btnAddonPrimary,
               variant === BUTTON_V2_VARIANT.SECONDARY && classes.btnAddonSecondary,
               variant === BUTTON_V2_VARIANT.TERTIARY && classes.btnAddonTertiary,
               size === BUTTON_V2_SIZE.SMALL && classes.btnAddonSmall,
+              'zap-reset-btn',
             )}
-            {...api.getTriggerProps()}
+            {...(!isTable && api.getTriggerProps())}
           >
             <SVG path={chevronDown} width={16} height={16} svgClassName={classes.chevronDown} />
-          </span>
+          </button>
         )}
       </button>
       {isTable ? <Portal>{dropdown}</Portal> : dropdown}
