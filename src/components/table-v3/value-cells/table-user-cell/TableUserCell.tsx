@@ -1,7 +1,7 @@
 import clsx from 'clsx'
-import classes from './table-user-cell.module.css'
-import fileMultiple from '../../../assets/files/file-multiple.svg'
 import TableBoxEllipses from '../table-box-ellipses'
+import fileMultiple from '../../../assets/files/file-multiple.svg'
+import classes from './table-user-cell.module.css'
 import {SVG} from '../../../svg'
 import {clipboard, getUsername} from '../../../../utils/text'
 
@@ -25,15 +25,17 @@ export function TableUserCell({user, onClick}: TableUserCellProps): JSX.Element 
         <div className={classes.emailBox}>
           <div className={clsx(classes.userEmail, 'zap-subcontent-medium')}>{user.work_email}</div>
 
-          <SVG
-            path={fileMultiple}
-            svgClassName={classes.icon}
-            customSpanStyles={{cursor: 'pointer', flexShrink: 0}}
-            handleClick={e => {
-              e.stopPropagation()
-              clipboard(user.work_email)
-            }}
-          />
+          {user.work_email && (
+            <SVG
+              path={fileMultiple}
+              svgClassName={classes.icon}
+              customSpanStyles={{cursor: 'pointer', flexShrink: 0}}
+              handleClick={e => {
+                e.stopPropagation()
+                clipboard(user.work_email)
+              }}
+            />
+          )}
         </div>
       </div>
     </div>
