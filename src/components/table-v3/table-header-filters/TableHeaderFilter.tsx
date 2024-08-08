@@ -88,6 +88,10 @@ export default function TableHeaderFilter({
                   search={search}
                   setSearch={setSearch}
                   placeholder={filter.config?.placeholder || 'Search'}
+                  customStyles={{
+                    customInputStyles: {borderRadius: '8px', height: '28px'},
+                    customIconStyles: {top: '4px'},
+                  }}
                 />
               </div>
             )}

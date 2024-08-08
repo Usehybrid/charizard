@@ -170,7 +170,11 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
                       search={search}
                       setSearch={setSearch}
                       placeholder={currFilter.config?.placeholder || 'Search'}
-                      customStyles={{customInputStyles: {borderRadius: '8px'}}}
+                      // customStyles={{customInputStyles: {borderRadius: '8px'}}}
+                      customStyles={{
+                        customInputStyles: {borderRadius: '8px', height: '28px'},
+                        customIconStyles: {top: '4px'},
+                      }}
                     />
                   </div>
                 )}

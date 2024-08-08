@@ -1,4 +1,3 @@
-import * as React from 'react'
 import clsx from 'clsx'
 import classes from './table-device-cell.module.css'
 import fileMultiple from '../../../assets/files/file-multiple.svg'
@@ -19,7 +18,7 @@ import printer from '../../../assets/devices/printer.svg'
 import hardDrive2 from '../../../assets/devices/hard-drive-2.svg'
 import TableBoxEllipses from '../table-box-ellipses'
 import {SVG} from '../../../svg'
-import {clipboard, getUsername} from '../../../../utils/text'
+import {clipboard} from '../../../../utils/text'
 
 interface TableDeviceCellProps {
   device: any
@@ -42,15 +41,17 @@ export function TableDeviceCell({device, onClick}: TableDeviceCellProps) {
             {device.serial_number}
           </div>
 
-          <SVG
-            path={fileMultiple}
-            svgClassName={classes.icon}
-            customSpanStyles={{cursor: 'pointer', flexShrink: 0}}
-            handleClick={e => {
-              e.stopPropagation()
-              clipboard(device.serial_number)
-            }}
-          />
+          {device.serial_number && (
+            <SVG
+              path={fileMultiple}
+              svgClassName={classes.icon}
+              customSpanStyles={{cursor: 'pointer', flexShrink: 0}}
+              handleClick={e => {
+                e.stopPropagation()
+                clipboard(device.serial_number)
+              }}
+            />
+          )}
         </div>
       </div>
     </div>

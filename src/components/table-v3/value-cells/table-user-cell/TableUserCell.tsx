@@ -1,4 +1,3 @@
-import * as React from 'react'
 import clsx from 'clsx'
 import classes from './table-user-cell.module.css'
 import fileMultiple from '../../../assets/files/file-multiple.svg'
