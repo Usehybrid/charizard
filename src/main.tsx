@@ -703,7 +703,7 @@ function App() {
           },
         }}
         tableStyleConfig={{stickyIds: ['software'], maxHeight: '200px'}}
-        exportConfig={{}}
+        // exportConfig={{}}
       />
     </div>
   )
