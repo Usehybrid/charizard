@@ -109,6 +109,7 @@ export interface GroupActionProps {
     customMenuStyles?: React.CSSProperties
   }
   onClick?: any
+  isCustomTrigger?: boolean
 }
 
 function GroupAction({
@@ -121,6 +122,7 @@ function GroupAction({
   actionsDropdownOptions,
   positionerProps,
   isTable = false,
+  isCustomTrigger = false,
   showDownIconBtn = true,
   customStyles,
   onClick,
@@ -139,7 +141,7 @@ function GroupAction({
   const customMenuStyles = customStyles?.customMenuStyles
 
   React.useEffect(() => {
-    if (!actionsDropdownOptions?.setIsActive) return
+    if (!isCustomTrigger || !actionsDropdownOptions?.setIsActive) return
     actionsDropdownOptions.setIsActive(api.open)
   }, [api.open])
 
@@ -211,11 +213,12 @@ function GroupAction({
   const dropdown = (
     <>
       {menuItems.length > 0 && (
-        <div {...api.getPositionerProps()} ref={menuRef}>
-          <div {...api.getContentProps()} className={classes.menus} style={customMenuStyles}>
+        <div {...api.getPositionerProps()}>
+          <div {...api.getContentProps()} className={classes.menus}>
             {menuItems
               .filter(menu => {
                 if (!menu.filterFn) return true
+                // used to pass the table row data in the hide callback
                 return menu.filterFn(customData)
               })
               .map(menu => (
@@ -226,12 +229,10 @@ function GroupAction({
                   onClick={
                     menu.disabled
                       ? undefined
-                      : () => {
-                          menu.onClick()
-                          api.setOpen(false)
-                        }
+                      : isCustomTrigger
+                        ? () => menu.onClick(customData)
+                        : menu.onClick
                   }
-                  style={menu.customStyles}
                 >
                   {menu.iconSrc && <SVG path={menu.iconSrc} svgClassName={classes.menuIcon} />}
                   {menu.label}
