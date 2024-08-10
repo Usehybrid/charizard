@@ -41,7 +41,7 @@ export function TablePagination({paginationConfig}: TablePaginationProps) {
     paginationApi.setCount(metaData?.total_items || 0)
   }, [metaData?.total_items])
 
-  const actualPageNo = metaData?.page_no ? metaData.page_no + 1 : 0
+  const actualPageNo = metaData?.page_no ? metaData.page_no + 1 : 1
 
   return (
     <div className={classes.box}>
@@ -52,8 +52,8 @@ export function TablePagination({paginationConfig}: TablePaginationProps) {
         itemsOnPage={metaData?.items_on_page}
       />
       <p className={clsx(classes.meta, 'zap-subcontent-medium')}>
-        {actualPageNo + 1} - {actualPageNo * (metaData?.items_on_page || 0)} out of{' '}
-        {`${metaData?.total_items}`}
+        {actualPageNo * (metaData?.items_on_page || 0)} -{' '}
+        {actualPageNo * (metaData?.items_on_page || 0) + limit} out of {`${metaData?.total_items}`}
       </p>
       {paginationApi.totalPages > 1 && (
         <nav {...paginationApi.getRootProps()}>
