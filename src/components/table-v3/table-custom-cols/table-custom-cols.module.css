@@ -1,19 +1,19 @@
 .actionCommon {
   display: flex;
-  width: 40px;
-  height: 36px;
-  padding: 8px;
   justify-content: center;
   align-items: center;
-  border-radius: 8px;
-  background: var(--neutral-arch-30);
-  cursor: pointer;
   gap: 8px;
+  cursor: pointer;
+
+  height: 28px;
+  padding: 6px;
+  border-radius: 8px;
+  background: var(--fill-selection);
+  border: 1px solid var(--stroke-selection);
 }
 
-.actionCommon svg > g > path,
-.actionCommon svg > path {
-  fill: var(--neutral-arch-900);
+.actionCommon:hover {
+  background-color: var(--p-p10);
 }
 
 .error {
@@ -128,17 +128,6 @@
   background-color: white;
 }
 
-.colBox {
-  width: 100%;
-  padding: 20px;
-  padding-top: 0;
-  /* 56px => drawer header, 53px => drawer footer, 10px to make it look better */
-  /* max-height: calc(100vh - 139px + 10px); */
-  /* overflow-y: scroll; */
-  /* scroll-behavior: smooth; */
-  /* scrollbar-width: none; */
-}
-
 /* filter options */
 
 .options {
@@ -160,8 +149,9 @@
 /* filter search */
 .dropdownSearch {
   position: sticky;
-  top: 76px;
-  padding-top: 20px;
+  top: -16px;
+  padding-top: 16px;
+  margin-top: -16px;
   background-color: white;
   /* margin-top: -10px; */
   margin-bottom: 6px;
@@ -199,13 +189,9 @@
 .optionLabel {
   display: flex;
   align-items: center;
-  column-gap: 12px;
+  column-gap: 8px;
   text-wrap: pretty;
-  font-size: 14px;
   color: var(--text-primary);
-  font-style: normal;
-  font-weight: 400;
-  line-height: 180%;
 }
 
 .optionLabel:hover:not(.optionDis) {

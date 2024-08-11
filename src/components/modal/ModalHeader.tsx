@@ -40,7 +40,7 @@ export function ModalHeader({
           {...api.getCloseTriggerProps()}
           type="button"
           onClick={() => api?.setOpen(false)}
-          className="hybr1d-ui-reset-btn"
+          className="zap-reset-btn"
         >
           <SVG
             path={closeIcon}

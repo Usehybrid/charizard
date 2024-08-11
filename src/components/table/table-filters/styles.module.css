@@ -53,17 +53,15 @@
 }
 
 .filterIcon2 {
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
 }
 .filterIcon2 > path {
-  fill: var(--neutral-arch-600);
+  fill: var(--p-p90);
 }
 
 .filterCol {
   color: var(--text-primary);
-  font-size: 14px;
-  line-height: 20px;
   margin-inline-end: 4px;
 }
 

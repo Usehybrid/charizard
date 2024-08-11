@@ -1,28 +1,27 @@
 import * as React from 'react'
 import * as pagination from '@zag-js/pagination'
-import * as select from '@zag-js/select'
-import chevronLeft from '../../assets/chevron-left.svg'
-import chevronRight from '../../assets/chevron-right.svg'
-import threeDots from '../../assets/three-dots.svg'
+import clsx from 'clsx'
 import TableLimit from './TableLimit'
+import TableEllipses from './TableEllipses'
+import chevronRight from '../../assets/chevron-right.svg'
+import chevronLeft from '../../assets/chevron-left.svg'
 import classes from './table-pagination.module.css'
 import {useMachine, normalizeProps, Portal} from '@zag-js/react'
 import {TableV3Props} from '../TableV3'
 import {SVG} from '../../svg'
-import TableEllipses from './TableEllipses'
 
 interface TablePaginationProps {
   paginationConfig: TableV3Props['paginationConfig']
 }
 
-export default function TablePagination({paginationConfig}: TablePaginationProps) {
+export function TablePagination({paginationConfig}: TablePaginationProps) {
   if (!paginationConfig) return null
   // * table page is non zero indexed whereas the db is zero indexed
   const {setLimit, limit, metaData} = paginationConfig
 
   const [state, send] = useMachine(
     pagination.machine({
-      id: 'hui-charizard-table',
+      id: 'zap-charizard-table-pagination',
       count: metaData?.total_items || 0,
       onPageChange(details) {
         paginationConfig?.setPage(details.page - 1)
@@ -42,6 +41,8 @@ export default function TablePagination({paginationConfig}: TablePaginationProps
     paginationApi.setCount(metaData?.total_items || 0)
   }, [metaData?.total_items])
 
+  const actualPageNo = metaData?.page_no ? metaData.page_no + 1 : 1
+
   return (
     <div className={classes.box}>
       <TableLimit
@@ -50,10 +51,17 @@ export default function TablePagination({paginationConfig}: TablePaginationProps
         totalItems={metaData?.total_items}
         itemsOnPage={metaData?.items_on_page}
       />
+      <p className={clsx(classes.meta, 'zap-subcontent-medium')}>
+        {actualPageNo * (metaData?.items_on_page || 0)} -{' '}
+        {actualPageNo * (metaData?.items_on_page || 0) + limit} out of {`${metaData?.total_items}`}
+      </p>
       {paginationApi.totalPages > 1 && (
         <nav {...paginationApi.getRootProps()}>
           <div className={classes.pageBoxes}>
-            <div {...paginationApi.getPrevTriggerProps()} className={classes.pageBox}>
+            <div
+              {...paginationApi.getPrevTriggerProps()}
+              className={clsx(classes.pageBox, 'zap-button-small')}
+            >
               <SVG path={chevronLeft} svgClassName={classes.arrowIcon} />
             </div>
             {paginationApi.pages.map((page, i) => {
@@ -62,7 +70,7 @@ export default function TablePagination({paginationConfig}: TablePaginationProps
                   <div
                     key={page.value}
                     {...paginationApi.getItemProps(page)}
-                    className={classes.pageBox}
+                    className={clsx(classes.pageBox, 'zap-button-small')}
                   >
                     {page.value}
                   </div>
@@ -74,7 +82,10 @@ export default function TablePagination({paginationConfig}: TablePaginationProps
                   </React.Fragment>
                 )
             })}
-            <div {...paginationApi.getNextTriggerProps()} className={classes.pageBox}>
+            <div
+              {...paginationApi.getNextTriggerProps()}
+              className={clsx(classes.pageBox, 'zap-button-small')}
+            >
               <SVG path={chevronRight} svgClassName={classes.arrowIcon} />
             </div>
           </div>

@@ -1,5 +1,5 @@
 import * as React from 'react'
-import TableFilter from './TableHeaderFilter'
+import TableHeaderFilter from './TableHeaderFilter'
 import classes from './styles.module.css'
 import {useTableStore} from '../store'
 import type {FilterConfig, FilterOptions} from '../types'
@@ -39,7 +39,7 @@ export default function TableHeaderFilters({filterConfig, filters}: TableHeaderF
   return (
     <div className={classes.filters}>
       {filters.map((filter, idx) => (
-        <TableFilter
+        <TableHeaderFilter
           key={filter.id}
           filter={filter}
           tableFilters={tableFilters}

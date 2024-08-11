@@ -1,9 +1,8 @@
-import chevronDown from '../../assets/chevron-down.svg'
 import classes from './table-selected-actions.module.css'
-
 import {SVG} from '../../svg'
 import {Button, BUTTON_VARIANT} from '../../button'
 import {TableV3Props} from '../TableV3'
+import {BUTTON_V2_SIZE, BUTTON_V2_VARIANT, ButtonV2} from '../../button-v2'
 
 interface TableSelectedActionsProps {
   rowSelectionConfig: TableV3Props['rowSelectionConfig']
@@ -31,9 +30,9 @@ export default function TableSelectedActions({
       {isCheckbox && Object.keys(rowSelection).length > 0 && (
         <>
           {showDropdown ? (
-            <Button.MenuButton
-              variant={BUTTON_VARIANT.GHOST}
-              size="sm"
+            <ButtonV2.GroupAction
+              variant={BUTTON_V2_VARIANT.SECONDARY}
+              size={BUTTON_V2_SIZE.SMALL}
               menuItems={
                 actions
                   ?.map(action => ({
@@ -52,19 +51,19 @@ export default function TableSelectedActions({
                 spanClassName={classes.btnIconSpan}
               />
               {firstAction?.text}
-            </Button.MenuButton>
+            </ButtonV2.GroupAction>
           ) : (
             <div className={classes.selectedActions}>
               {actions?.map(action => (
-                <Button
+                <ButtonV2
                   onClick={action.onClick}
-                  variant={BUTTON_VARIANT.GHOST}
-                  size="sm"
+                  variant={BUTTON_V2_VARIANT.SECONDARY}
+                  size={BUTTON_V2_SIZE.SMALL}
                   key={action.text}
                 >
                   <SVG path={action.icon} svgClassName={classes.btnIcon} />
                   {action.text}
-                </Button>
+                </ButtonV2>
               ))}
             </div>
           )}

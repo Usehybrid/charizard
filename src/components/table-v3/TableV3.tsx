@@ -5,13 +5,13 @@ import TableLoader from './table-loader'
 import TableEmpty from './table-empty'
 import TableMetaHeader from './table-meta-header'
 import TableActions from './table-actions'
-import TablePagination from './table-pagination'
 import sortIcon from '../assets/line-height.svg'
 import sortAscIcon from '../assets/sort-asc.svg'
 import sortDescIcon from '../assets/sort-desc.svg'
 import classes from './styles.module.css'
 import {useReactTable, getCoreRowModel, flexRender} from '@tanstack/react-table'
 import {SVG} from '../svg'
+import {TablePagination} from './table-pagination'
 import {TableCheckbox} from './table-columns'
 import {TableRadio} from './table-columns'
 import {CHECKBOX_COL_ID, DROPDOWN_COL_ID, RADIO_COL_ID} from './constants'
@@ -141,7 +141,11 @@ export interface TableV3Props {
   /**
    * export config (csv)
    */
-  exportConfig?: {}
+  exportConfig?: {
+    isPending: boolean
+    isError: boolean
+    handleExport: any
+  }
 }
 
 // todo
@@ -242,7 +246,6 @@ export function TableV3({
       ),
       size: 40,
       enablePinning: false,
-      // enableHiding: false,
     },
     {
       id: RADIO_COL_ID,
@@ -259,7 +262,6 @@ export function TableV3({
         />
       ),
       size: 40,
-      // enableHiding: false,
     },
     ...columns,
     {
@@ -270,7 +272,6 @@ export function TableV3({
       header: 'Actions',
       size: 70,
       enablePinning: true,
-      // enableHiding: true,
     },
   ]
 
@@ -413,7 +414,7 @@ function TableComp({
   return (
     <div
       className={classes.tableScrollContainer}
-      id="hui-table-scroll-container"
+      id="zap-table-scroll-container"
       style={{overflowY: 'scroll', maxHeight: tableStyleConfig?.maxHeight}}
       ref={tableContainerRef}
       onScroll={handleScroll}
@@ -522,6 +523,7 @@ function TableComp({
                       className={clsx(
                         classes.tableData,
                         (isCheckbox || isRadio) && classes.tableDataWithSelection,
+                        'zap-content-regular',
                       )}
                       style={{
                         width:
@@ -571,12 +573,17 @@ const getCommonPinningStyles = (
   const rightShadow = 'drop-shadow(-3px 0px 3px rgba(0, 0, 0, 0.07))'
 
   return {
-    filter:
-      isLastLeftPinnedColumn && showLeftShadow
-        ? leftShadow
-        : isFirstRightPinnedColumn && showRightShadow
-          ? rightShadow
-          : undefined,
+    // filter:
+    //   isLastLeftPinnedColumn && showLeftShadow
+    //     ? leftShadow
+    //     : isFirstRightPinnedColumn && showRightShadow
+    //       ? rightShadow
+    //       : undefined,
+
+    borderLeft:
+      isLastLeftPinnedColumn && showLeftShadow ? '1px solid var(--stroke-border)' : undefined,
+    borderRight:
+      isFirstRightPinnedColumn && showRightShadow ? '1px solid var(--stroke-border)' : undefined,
 
     // filter: isLastLeftPinnedColumn
     //   ? leftShadow

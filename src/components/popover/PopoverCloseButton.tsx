@@ -28,7 +28,7 @@ export function PopoverCloseButton({children, api, styles, className}: PopoverCl
     <button
       {...api?.getCloseTriggerProps()}
       style={styles}
-      className={clsx('hybr1d-ui-reset-btn', className)}
+      className={clsx('zap-reset-btn', className)}
       onClick={() => api?.setOpen(false)}
     >
       {children}

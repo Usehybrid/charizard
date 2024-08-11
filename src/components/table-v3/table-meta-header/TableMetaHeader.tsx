@@ -4,7 +4,7 @@ import {TableV3Props} from '../TableV3'
 import TableSelectedActions from '../table-selected-actions'
 import {Search} from '../../search'
 import TableHeaderFilters from '../table-header-filters'
-import fileDownloadIcon from '../../assets/file-download.svg'
+import noteDownloadIcon from '../../assets/notes/note-download.svg'
 import clsx from 'clsx'
 import {pluralize} from '../../../utils/text'
 import {SVG} from '../../svg'
@@ -62,7 +62,7 @@ export default function TableMetaHeader({
   return (
     <div className={classes.box}>
       <div className={classes.texts}>
-        <p className={classes.heading}>
+        <p className={clsx(classes.heading, 'zap-content-semibold')}>
           {isRowSelected ? selectedText : totalText} {isRowSelected ? 'Selected' : ''}
         </p>
         {hasRowActions && (
@@ -82,6 +82,10 @@ export default function TableMetaHeader({
               setSearch={searchConfig.setSearch}
               placeholder={searchConfig.placeholder}
               clearIconClearFn={() => setRowSelection({})}
+              customStyles={{
+                customInputStyles: {borderRadius: '8px', height: '28px'},
+                customIconStyles: {top: '4px'},
+              }}
             />
           </div>
         )}
@@ -106,8 +110,14 @@ export default function TableMetaHeader({
         )}
 
         {typeof exportConfig === 'object' && (
-          <div className={classes.actionCommon}>
-            <SVG path={fileDownloadIcon} width={22} height={22} />
+          <div
+            className={classes.actionCommon}
+            onClick={() => {
+              if (exportConfig?.isPending) return
+              exportConfig?.handleExport()
+            }}
+          >
+            <SVG path={noteDownloadIcon} width={16} height={16} />
           </div>
         )}
       </div>

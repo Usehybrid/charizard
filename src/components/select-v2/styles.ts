@@ -15,6 +15,7 @@ export const styles: StylesConfig<any> = {
       borderColor: state.isFocused ? '#254DDA' : '#E5E9FB',
       backgroundColor: '#fff',
       gap: '4px',
+      opacity: state.isDisabled ? 0.5 : 1,
     }
   },
   placeholder: baseStyles => {
@@ -70,6 +71,7 @@ export const styles: StylesConfig<any> = {
       gap: '4px',
       flexWrap: 'nowrap',
       overflowX: 'scroll',
+      scrollbarWidth: 'none',
     }
   },
   multiValue: baseStyles => ({

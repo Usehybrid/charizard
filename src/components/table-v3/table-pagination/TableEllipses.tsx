@@ -5,6 +5,7 @@ import classes from './table-pagination.module.css'
 import {useMachine, normalizeProps, Portal} from '@zag-js/react'
 import {SVG} from '../../svg'
 import {generateRange} from './utils'
+import clsx from 'clsx'
 
 interface TableEllipsesProps {
   paginationApi: any
@@ -36,7 +37,7 @@ export default function TableEllipses({paginationApi, i}: TableEllipsesProps) {
   return (
     <div {...selectApi.getRootProps()} key={`ellipsis-${i}`}>
       <div {...selectApi.getControlProps()}>
-        <button {...selectApi.getTriggerProps()} className={'hybr1d-ui-reset-btn'}>
+        <button {...selectApi.getTriggerProps()} className={'zap-reset-btn'}>
           <div
             key={`ellipsis-${i}`}
             {...paginationApi.getEllipsisProps({index: i})}
@@ -55,7 +56,7 @@ export default function TableEllipses({paginationApi, i}: TableEllipsesProps) {
                 <li
                   key={item.value}
                   {...selectApi.getItemProps({item})}
-                  className={classes.limitItem}
+                  className={clsx(classes.limitItem, 'zap-subcontent-medium')}
                 >
                   <span>{item.label}</span>
                 </li>

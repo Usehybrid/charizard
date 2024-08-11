@@ -3,14 +3,9 @@ import ReactDOM from 'react-dom/client'
 import randomIcon from './components/assets/check.svg'
 import {createColumnHelper} from '@tanstack/react-table'
 import {INV_ACTION_TYPES, useInventoryStore} from './components/table-v2/inventory/inventory.store'
-import closeIcon from './components/assets/close.svg'
-import {Badge, BADGE_HIGHLIGHT, TableV3, TaskCards} from './components'
-import {Pill, PILL_STATUS} from './components'
-import {SELECT_VARIANT, SelectV2} from './components/select-v2'
-import '@hybr1d-tech/groudon/dist/typography.min.css'
-import './components/styles/_variables.css'
-import './components/styles/global.css'
-import chevronDownIcon from './components/assets/chevron-down-16.svg'
+import {BUTTON_V2_VARIANT, DrawerV2, TableUserCell, TableV3} from './components'
+import {useDisclosure} from './utils/hooks/use-disclosure'
+
 const styles = {
   width: '90%',
   margin: 'auto',
@@ -395,32 +390,6 @@ const getFullName = (owner: any) => {
   return `${owner.first_name} ${owner.last_name}`
 }
 
-const menuItems = [
-  {
-    label: 'Apply leave',
-    onClick: (data: any) => {
-      console.log(data)
-    },
-    filterFn: (data: any) => {
-      return true
-    },
-  },
-
-  {
-    label: 'Apply Reimbursement',
-    onClick: (data: any) => {},
-    filterFn: (data: any) => {
-      // return false
-      return true
-    },
-  },
-  {
-    label: 'Archive',
-    onClick: (data: any) => {},
-    disabled: true,
-  },
-]
-
 const columns = [
   columnHelper.accessor('software', {
     header: 'Software Name',
@@ -623,17 +592,26 @@ const options = [
   },
 ]
 
+const menuItems = [
+  {
+    label: 'Test 1',
+    onClick: () => {},
+    // filterFn: (data: any) => {
+    //   console.log('test', data)
+    //   return true
+    // },
+  },
+]
+
 function App() {
   const [search, setSearch] = React.useState('')
 
   const query = useInventoryStore(s => s.query)
   const dispatch = useInventoryStore(s => s.dispatch)
 
-  // console.log(query.limit)
-
   return (
     <div style={styles}>
-      {/* <TableV3
+      <TableV3
         data={data}
         loaderConfig={{isFetching: false, isError: false, text: 'Getting employees...'}}
         columns={columns}
@@ -677,8 +655,8 @@ function App() {
           defaultLimit: '20',
         }}
         rowSelectionConfig={{
-          // isRadio: true,
           entityName: 'Software',
+          // isRadio: true,
           isCheckbox: true,
           rowIdKey: 'id',
           actions: [
@@ -734,30 +712,8 @@ function App() {
           },
         }}
         tableStyleConfig={{stickyIds: ['software'], maxHeight: '200px'}}
-      /> */}
-
-<TaskCards
-        headers={taskheaders}
-        data={tasks}
-        // data={[]}
+        // exportConfig={{}}
       />
-
-      {/* <TaskCards
-        headers={taskheaders}
-        data={tasks}
-        // data={[]}
-      />
-      {/* <Pill status={PILL_STATUS.WARNING}>420</Pill> */}
-      {/* <SelectV2
-        options={options}
-        onChange={(value, meta) => {
-          console.log({value, meta})
-        }}
-        isLoading
-        errorMsg="something went wrong"
-        variant={SELECT_VARIANT.USERS}
-        isMulti
-      /> */}
     </div>
   )
 }

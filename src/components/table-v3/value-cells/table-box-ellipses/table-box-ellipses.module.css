@@ -1,0 +1,11 @@
+.box {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 210px;
+  color: var(--link-rest);
+}
+
+.box:hover {
+  color: var(--link-hover);
+}

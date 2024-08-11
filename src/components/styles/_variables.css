@@ -1,5 +1,4 @@
 :root {
-  --base-font-size: 16px !important;
   /* default */
   --black: #000000;
 
@@ -8,8 +7,6 @@
     contrast(93%);
 
   /* * text colors */
-  --text-primary: #000041;
-  --text-secondary: #66668d;
   --text-hint: #a3a3be;
 
   /* * neutral colors */
@@ -75,10 +72,6 @@
   --accent-zest: #f4f5ad;
 
   /* NEW VARIABLES */
-  /* Colors */
-  --p-p25: #a8b8f0; /* --p-p20 new */
-  --p-p65: #1e3eae; /* --p-p60 new */
-  --stroke-border: #e5e9fb;
 
   /* Primary colors */
   --p-p10: #d3dbf8;
@@ -90,6 +83,7 @@
   --p-p70: #162e83;
   --p-p80: #0f1f57;
   --p-p90: #070f2c;
+  --p-p100: #1e3eae;
 
   /* Gray scale */
   --dark-d10: #e1e1e2;
@@ -144,8 +138,8 @@
 
   /* Text colors */
   --text-primary: #000041;
-  --text-secondary: #66668d;
-  --text-tertiary: #9999B3;
+  --text-secondary: #696e9c;
+  --text-tertiary: #9999b3;
 
   /* Fill colors */
   --fill-highlight: #fbfbfe;
@@ -155,10 +149,11 @@
   --stroke-tabs-sections: #e5e9fb;
   --stroke-buttons-input: #d3dbf8;
   --stroke-border: #e5e9fb;
+  --stroke-selection: #d3dbf8;
 
   /* Link colors */
-  --link-rest: #0072fe;
-  --link-hover: #0074d6;
+  --link-rest: #0f72ee;
+  --link-hover: #074da6;
 
   /* Infographic colors */
   --graph-1: #489cff;

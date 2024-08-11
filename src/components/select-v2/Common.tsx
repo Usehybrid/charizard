@@ -8,14 +8,21 @@ import classes from './styles.module.css'
 import {useColorsFromWord} from '../../utils/hooks/use-color-from-word'
 import {SELECT_VARIANT} from './types'
 import {getInitials} from '../../utils/text'
+import {AsyncImage} from '../AsyncImage'
 
 /**
  * Custom Dropdown Indicator component for react-select.
- * Displays a chevron icon indicating the dropdown menu.
+ * Displays a chevron icon indicating the dropdown menu if isDisabled is false.
  * @param props - The props for the DropdownIndicator component, including any react-select specific props.
  * @returns A custom DropdownIndicator component with a chevron icon.
  */
 export const CustomDropdownIndicator = (props: any) => {
+  const {isDisabled} = props
+
+  if (isDisabled) {
+    return null
+  }
+
   return (
     <components.DropdownIndicator {...props}>
       <SVG path={chevronDownIcon} spanClassName={classes.dropdownIcon} />
@@ -82,7 +89,7 @@ export const CustomOption = (props: any) => {
         }
       >
         {profileImgUrl && (
-          <img loading="lazy" src={profileImgUrl} className={classes.profileImg} alt={label} />
+          <AsyncImage src={profileImgUrl} alt={label} className={classes.profileImg} />
         )}
         {variant === SELECT_VARIANT.USERS && !profileImgUrl && (
           <div className={classes.initials}>{getInitials(label)}</div>
@@ -120,7 +127,7 @@ export const CustomSingleValue = (props: any) => {
     <components.SingleValue {...props}>
       <div className={clsx(classes.option, classes.selectedOption)}>
         {profileImgUrl && (
-          <img loading="lazy" src={profileImgUrl} className={classes.profileImg} alt={label} />
+          <AsyncImage src={profileImgUrl} alt={label} className={classes.profileImg} />
         )}
         {icon && <SVG path={icon} spanClassName={classes.icon} />}
         <div className={classes.labelContainer}>
@@ -159,7 +166,7 @@ export const CustomMultiValue = (props: any) => {
     >
       <components.MultiValue {...props}>
         {profileImgUrl && (
-          <img loading="lazy" src={profileImgUrl} className={classes.profileImg} alt={label} />
+          <AsyncImage src={profileImgUrl} alt={label} className={classes.profileImg} />
         )}
         {variant === SELECT_VARIANT.USERS && !profileImgUrl && (
           <div className={classes.initials}>{getInitials(label)}</div>
@@ -181,7 +188,6 @@ export const CustomMultiValue = (props: any) => {
     </div>
   )
 }
-
 
 /**
  * Custom Multi Value Remove component for react-select.

@@ -63,14 +63,13 @@ export default function FilterDrawerCheckbox({
   return (
     <label {...api.getRootProps()} className={classes.optionLabel}>
       <div {...api.getControlProps()} />
-      <span {...api.getLabelProps()}>
+      <span {...api.getLabelProps()} className={'zap-content-medium'}>
         {countryCode && (
           <ReactCountryFlag
-            countryCode={countryCode || 'IN'}
+            countryCode={countryCode}
             style={{
               fontSize: '15px',
               lineHeight: '15px',
-              marginLeft: '-5px',
               marginRight: '7px',
               verticalAlign: 'unset',
             }}
