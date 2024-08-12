@@ -3,11 +3,11 @@ import infoOctagonIcon from '../../../assets/info-octagon.svg'
 import classes from './task-card.module.css'
 import {UserChip} from '../../../user-chip'
 import {Badge, BADGE_HIGHLIGHT, BADGE_STATUS} from '../../../badge'
-import {BUTTON_V2_SIZE, BUTTON_V2_VARIANT, ButtonV2} from '../../../button-v2'
+import {BUTTON_V2_SIZE, BUTTON_V2_VARIANT, ButtonV2, MenuItemV2} from '../../../button-v2'
 import {ITask, ITaskDetails, ITaskObjectValue} from '../../types'
 import {isObject, isString} from '../../../../utils'
 
-export default function TaskCard({data}: {data: ITask}) {
+export default function TaskCard({data, menuItems}: {data: ITask, menuItems: MenuItemV2[]}) {
   return (
     <div className={classes.card}>
       <div className={classes.taskSection}>
@@ -48,7 +48,7 @@ export default function TaskCard({data}: {data: ITask}) {
       </div>
       <div className={classes.actionSection}>
         <ButtonV2.ActionsDropdown
-          menuItems={[{label: 'See Details', onClick: () => {}, iconSrc: infoOctagonIcon}]}
+          menuItems={menuItems}
           variant={BUTTON_V2_VARIANT.TERTIARY}
           size={BUTTON_V2_SIZE.SMALL}
         />

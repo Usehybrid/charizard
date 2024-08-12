@@ -6,6 +6,7 @@ import classes from './task-cards.module.css'
 import {ITask} from './types'
 import {Loader} from '../loader'
 import {SVG} from '../svg'
+import { MenuItemV2 } from '../button-v2'
 
 interface TaskCardsProps {
   headers: string[]
@@ -13,6 +14,7 @@ interface TaskCardsProps {
   isLoading?: boolean
   isError?: boolean
   emptyText?: string
+  menuItems: MenuItemV2[]
 }
 
 export function TaskCards({
@@ -21,6 +23,7 @@ export function TaskCards({
   isLoading = false,
   isError = false,
   emptyText = 'No requests',
+  menuItems=[],
 }: TaskCardsProps) {
   return (
     <div className={classes.taskCardContainer}>
@@ -31,7 +34,7 @@ export function TaskCards({
         ) : isError ? (
           <Error />
         ) : data.length > 0 ? (
-          data.map((data: ITask, idx) => <Card data={data} key={idx} />)
+          data.map((data: ITask, idx) => <Card data={data} key={idx} menuItems={menuItems} />)
         ) : (
           <Empty emptyText={emptyText} />
         )}

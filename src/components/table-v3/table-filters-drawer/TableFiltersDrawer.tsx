@@ -185,20 +185,21 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
                       <div className={'zap-content-regular'}>No search results found</div>
                     ) : (
                       <>
-                        {/* <div className={classes.option} style={{fontWeight: 700}}>
-                              <FilterDrawerCheckbox
-                                label={'All'}
-                                value={'all'}
-                                filterKey={currFilter.key}
-                                checked={
-                                  filterCheckedState[currFilter.key]?.findIndex(
-                                    obj => obj.checked === false,
-                                  ) === -1
-                                }
-                                setFilterCheckedState={setFilterCheckedState}
-                                idx={-1}
-                              />
-                            </div> */}
+                        <div className={classes.option} style={{fontWeight: 700}}>
+                          <FilterDrawerCheckbox
+                            label={'All'}
+                            value={'all'}
+                            filterKey={currFilter.key}
+                            checked={
+                              filterCheckedState[currFilter.key]?.findIndex(
+                                obj => obj.checked === false,
+                              ) === -1
+                            }
+                            setFilterCheckedState={setFilterCheckedState}
+                            idx={-1}
+                            setHasChanges={setHasChanges}
+                          />
+                        </div>
                         {currFilter?.options.map((option, idx) => {
                           return (
                             <div

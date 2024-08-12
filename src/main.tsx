@@ -592,7 +592,16 @@ const options = [
   },
 ]
 
-const menuItems = [{label: 'Test 1', onClick: () => {}}]
+const menuItems = [
+  {
+    label: 'Test 1',
+    onClick: () => {},
+    // filterFn: (data: any) => {
+    //   console.log('test', data)
+    //   return true
+    // },
+  },
+]
 
 function App() {
   const [search, setSearch] = React.useState('')
@@ -703,7 +712,7 @@ function App() {
           },
         }}
         tableStyleConfig={{stickyIds: ['software'], maxHeight: '200px'}}
-        exportConfig={{}}
+        // exportConfig={{}}
       />
     </div>
   )

@@ -110,7 +110,13 @@ export default function TableMetaHeader({
         )}
 
         {typeof exportConfig === 'object' && (
-          <div className={classes.actionCommon}>
+          <div
+            className={classes.actionCommon}
+            onClick={() => {
+              if (exportConfig?.isPending) return
+              exportConfig?.handleExport()
+            }}
+          >
             <SVG path={noteDownloadIcon} width={16} height={16} />
           </div>
         )}

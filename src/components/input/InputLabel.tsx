@@ -39,6 +39,10 @@ interface InputLabelProps {
    * info text tooltip styles
    */
   infoTextTooltipStyles?: React.CSSProperties
+  /**
+   * Disabled state when component inactive
+   */
+  isDisabled?: boolean
 }
 
 export function InputLabel({
@@ -50,12 +54,18 @@ export function InputLabel({
   restprops = {},
   infoText,
   infoTextTooltipStyles = {},
+  isDisabled = false,
 }: InputLabelProps) {
   return (
     <div className={classes.inputLabelContainer}>
       <label
         htmlFor={htmlFor}
-        className={clsx(classes.inputLabel, customClasses, required && classes.required)}
+        className={clsx(
+          classes.inputLabel,
+          customClasses,
+          required && classes.required,
+          isDisabled && classes.disabled,
+        )}
         style={customStyles}
         {...restprops}
       >

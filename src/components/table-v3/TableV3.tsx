@@ -141,7 +141,11 @@ export interface TableV3Props {
   /**
    * export config (csv)
    */
-  exportConfig?: {}
+  exportConfig?: {
+    isPending: boolean
+    isError: boolean
+    handleExport: any
+  }
 }
 
 // todo
