@@ -350,37 +350,41 @@ export function ButtonDemo() {
 
       <div style={{display: 'flex', gap: 150, marginTop: 20}}>
         <div style={{display: 'flex', gap: 10}}>
-          <ButtonV2.ActionsDropdown size={BUTTON_V2_SIZE.SMALL} menuItems={menuItems} />
+          <ButtonV2.ActionsDropdown isTable={true} size={BUTTON_V2_SIZE.SMALL} menuItems={menuItems} />
           <ButtonV2.ActionsDropdown
+            isTable={true}
             size={BUTTON_V2_SIZE.SMALL}
             variant={BUTTON_V2_VARIANT.SECONDARY}
             menuItems={menuItems}
           />
           <ButtonV2.ActionsDropdown
+            isTable={true}
             size={BUTTON_V2_SIZE.SMALL}
             variant={BUTTON_V2_VARIANT.TERTIARY}
             menuItems={menuItems}
           />
         </div>
         <div style={{display: 'flex', gap: 10}}>
-          <ButtonV2.ActionsDropdown disabled size={BUTTON_V2_SIZE.SMALL} menuItems={menuItems} />
+          <ButtonV2.ActionsDropdown isTable={true} disabled size={BUTTON_V2_SIZE.SMALL} menuItems={menuItems} />
           <ButtonV2.ActionsDropdown
             disabled
+            isTable={true}
             size={BUTTON_V2_SIZE.SMALL}
             variant={BUTTON_V2_VARIANT.SECONDARY}
             menuItems={menuItems}
           />
           <ButtonV2.ActionsDropdown
             disabled
+            isTable={true}
             size={BUTTON_V2_SIZE.SMALL}
             variant={BUTTON_V2_VARIANT.TERTIARY}
             menuItems={menuItems}
           />
         </div>
         <div style={{display: 'flex', gap: 10}}>
-          <ButtonV2.ActionsDropdown menuItems={menuItems} />
-          <ButtonV2.ActionsDropdown variant={BUTTON_V2_VARIANT.SECONDARY} menuItems={menuItems} />
-          <ButtonV2.ActionsDropdown variant={BUTTON_V2_VARIANT.TERTIARY} menuItems={menuItems} />
+          <ButtonV2.ActionsDropdown isTable={true} menuItems={menuItems} />
+          <ButtonV2.ActionsDropdown isTable={true} variant={BUTTON_V2_VARIANT.SECONDARY} menuItems={menuItems} />
+          <ButtonV2.ActionsDropdown isTable={true} variant={BUTTON_V2_VARIANT.TERTIARY} menuItems={menuItems} />
         </div>
       </div>
     </div>
