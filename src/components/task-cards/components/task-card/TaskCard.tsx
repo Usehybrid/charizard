@@ -48,6 +48,7 @@ export default function TaskCard({data, menuItems}: {data: ITask, menuItems: Men
       </div>
       <div className={classes.actionSection}>
         <ButtonV2.ActionsDropdown
+          isTable={true}
           menuItems={menuItems}
           variant={BUTTON_V2_VARIANT.TERTIARY}
           size={BUTTON_V2_SIZE.SMALL}
