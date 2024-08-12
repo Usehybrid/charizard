@@ -22,5 +22,5 @@ export interface ITaskObjectValue {
 
 export interface ITaskDetails {
   key: string
-  value: string | ITaskObjectValue | null
+  value: string | ITaskObjectValue | File[] | null
 }
