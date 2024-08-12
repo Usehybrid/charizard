@@ -1,4 +1,4 @@
-import { ButtonV2, BUTTON_V2_SIZE, BUTTON_V2_TYPE, BUTTON_V2_VARIANT, SVG} from '../components'
+import {ButtonV2, BUTTON_V2_SIZE, BUTTON_V2_TYPE, BUTTON_V2_VARIANT, SVG} from '../components'
 import closeIcon from '../components/assets/close.svg'
 import calender from '../components/assets/calender.svg'
 
@@ -11,7 +11,7 @@ export const menuItems = [
     filterFn: (data: any) => {
       return true
     },
-    iconSrc: calender
+    iconSrc: calender,
   },
 
   {
@@ -34,6 +34,18 @@ export const menuItems = [
 export function ButtonDemo() {
   return (
     <div>
+      <div style={{display: 'flex', marginBottom: '25px'}}>
+        <div style={{display: 'flex', gap: 10}}>
+          <ButtonV2 size={BUTTON_V2_SIZE.SMALL} variant={BUTTON_V2_VARIANT.LINK}>
+            Link
+          </ButtonV2>
+          <ButtonV2 disabled size={BUTTON_V2_SIZE.SMALL} variant={BUTTON_V2_VARIANT.LINK}>
+            Link
+          </ButtonV2>
+          <ButtonV2 variant={BUTTON_V2_VARIANT.LINK}>Link</ButtonV2>
+          <ButtonV2 variant={BUTTON_V2_VARIANT.LINK} disabled>Link</ButtonV2>
+        </div>
+      </div>
       <div style={{display: 'flex', gap: 150}}>
         <div style={{display: 'flex', gap: 10}}>
           <ButtonV2 size={BUTTON_V2_SIZE.SMALL}>Button</ButtonV2>
@@ -350,7 +362,11 @@ export function ButtonDemo() {
 
       <div style={{display: 'flex', gap: 150, marginTop: 20}}>
         <div style={{display: 'flex', gap: 10}}>
-          <ButtonV2.ActionsDropdown isTable={true} size={BUTTON_V2_SIZE.SMALL} menuItems={menuItems} />
+          <ButtonV2.ActionsDropdown
+            isTable={true}
+            size={BUTTON_V2_SIZE.SMALL}
+            menuItems={menuItems}
+          />
           <ButtonV2.ActionsDropdown
             isTable={true}
             size={BUTTON_V2_SIZE.SMALL}
@@ -365,7 +381,12 @@ export function ButtonDemo() {
           />
         </div>
         <div style={{display: 'flex', gap: 10}}>
-          <ButtonV2.ActionsDropdown isTable={true} disabled size={BUTTON_V2_SIZE.SMALL} menuItems={menuItems} />
+          <ButtonV2.ActionsDropdown
+            isTable={true}
+            disabled
+            size={BUTTON_V2_SIZE.SMALL}
+            menuItems={menuItems}
+          />
           <ButtonV2.ActionsDropdown
             disabled
             isTable={true}
@@ -383,8 +404,16 @@ export function ButtonDemo() {
         </div>
         <div style={{display: 'flex', gap: 10}}>
           <ButtonV2.ActionsDropdown isTable={true} menuItems={menuItems} />
-          <ButtonV2.ActionsDropdown isTable={true} variant={BUTTON_V2_VARIANT.SECONDARY} menuItems={menuItems} />
-          <ButtonV2.ActionsDropdown isTable={true} variant={BUTTON_V2_VARIANT.TERTIARY} menuItems={menuItems} />
+          <ButtonV2.ActionsDropdown
+            isTable={true}
+            variant={BUTTON_V2_VARIANT.SECONDARY}
+            menuItems={menuItems}
+          />
+          <ButtonV2.ActionsDropdown
+            isTable={true}
+            variant={BUTTON_V2_VARIANT.TERTIARY}
+            menuItems={menuItems}
+          />
         </div>
       </div>
     </div>

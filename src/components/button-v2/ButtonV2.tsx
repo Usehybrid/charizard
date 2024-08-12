@@ -63,6 +63,7 @@ export function ButtonV2({
         variant === BUTTON_V2_VARIANT.PRIMARY && classes.btnPrimary,
         variant === BUTTON_V2_VARIANT.SECONDARY && classes.btnSecondary,
         variant === BUTTON_V2_VARIANT.TERTIARY && classes.btnTertiary,
+        variant === BUTTON_V2_VARIANT.LINK && classes.btnLink,
         size === BUTTON_V2_SIZE.DEFAULT && classes.btnDefault,
         size === BUTTON_V2_SIZE.SMALL && classes.btnSmall,
         type === BUTTON_V2_TYPE.ICON_ONLY &&

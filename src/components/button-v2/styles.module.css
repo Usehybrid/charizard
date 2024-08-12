@@ -93,9 +93,29 @@
   background-color: var(--fill-selection);
   border-color: var(--p-p10);
 }
-/* .btn.focusVisible {
-  background-color: var(--p-p70);
-} */
+
+.btnLink {
+  color: var(--p-p50);
+  background-color: transparent;
+  height: 24px;
+  padding: 0;
+}
+.btnSmall.btnLink {
+  height: 20px;
+}
+.btnLink:hover {
+  background-color: var(--fill-selection);
+  text-decoration: underline;  
+}
+.btnLink:focus {
+  background-color: var(--fill-selection);
+  color: var(--p-p70);
+  text-decoration: underline;
+}
+.btnLink.disabled:hover {
+  background-color: transparent;
+}
+
 .btnSecondary.focusVisible {
   background-color: var(--fill-selection-only);
   border-color: var(--p-p70);
