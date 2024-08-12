@@ -244,6 +244,7 @@ function GroupAction({
     </>
   )
 
+
   return (
     <>
       <button
@@ -317,6 +318,7 @@ export function ActionsDropdown({
       positionerProps={positionerProps}
       isTable={isTable}
       showDownIconBtn={false}
+      isCustomTrigger={true}
     >
       <SVG
         path={moreMenuIcon}
