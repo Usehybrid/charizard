@@ -647,10 +647,15 @@ function App() {
           limit: query.limit,
           setPage: value => dispatch({type: INV_ACTION_TYPES.PAGE, payload: value}),
           setLimit: value => dispatch({type: INV_ACTION_TYPES.LIMIT, payload: value}),
+          // metaData: {
+          //   total_items: 1000,
+          //   page_no: 0,
+          //   items_on_page: 10,
+          // },
           metaData: {
-            total_items: 1000,
-            page_no: 0,
-            items_on_page: 10,
+            total_items: 240,
+            page_no: 1,
+            items_on_page: 20,
           },
           defaultLimit: '20',
         }}
@@ -894,114 +899,6 @@ const filtersV2 = {
         {
           name: 'Routers',
           value: '2d7ab2b4-4d5f-450a-836d-3f562b348e3b',
-        },
-        {
-          name: 'Mouses',
-          value: '3beeb99a-60af-4c12-9e19-4b81b2fb7760',
-        },
-        {
-          name: 'Peripheral devices',
-          value: '5c6516bd-fcc0-4991-ab7f-1aa86b5d5eee',
-        },
-        {
-          name: 'Monitors',
-          value: '7b846171-486b-4c8e-b5df-9cc063a1eb36',
-        },
-        {
-          name: 'Printers',
-          value: '96cfcc5e-5099-4a7b-b36b-0f9e1391f9a9',
-        },
-        {
-          name: 'Trackpads',
-          value: 'b1307d3c-7170-4f4c-960e-b1a36bb7b8a6',
-        },
-        {
-          name: 'Keyboards',
-          value: '5fda988d-9ea4-4db3-931d-2a1b3ac9ebed',
-        },
-        {
-          name: 'Tablets',
-          value: 'd65398b7-efec-4969-82b0-d8984fba5160',
-        },
-        {
-          name: 'Microphones',
-          value: 'ed3484eb-8fc3-4b4b-b41d-5de83cf26821',
-        },
-        {
-          name: 'Webcams',
-          value: 'ef2e6a9e-e3c4-492d-9630-7f2170715a5d',
-        },
-        {
-          name: 'Webcams1',
-          value: 'ef2e6a9e-e3c4-492d-9630-7f2170715a5d1',
-        },
-        {
-          name: 'Webcams2',
-          value: 'ef2e6a9e-e3c4-492d-9630-7f2170715a5d2',
-        },
-        {
-          name: 'Webcams3',
-          value: 'ef2e6a9e-e3c4-492d-9630-7f2170715a5d3',
-        },
-        {
-          name: 'Webcams4',
-          value: 'ef2e6a9e-e3c4-492d-9630-7f2170715a5d4',
-        },
-        {
-          name: 'Webcams5',
-          value: 'ef2e6a9e-e3c4-492d-9630-7f2170715a5d5',
-        },
-        {
-          name: 'Webcams6',
-          value: 'ef2e6a9e-e3c4-492d-9630-7f2170715a5d6',
-        },
-        {
-          name: 'Webcams7',
-          value: 'ef2e6a9e-e3c4-492d-9630-7f2170715a5d7',
-        },
-        {
-          name: 'Webcams8',
-          value: 'ef2e6a9e-e3c4-492d-9630-7f2170715a5d8',
-        },
-        {
-          name: 'Webcams9',
-          value: 'ef2e6a9e-e3c4-492d-9630-7f2170715a5d9',
-        },
-        {
-          name: 'Webcams10',
-          value: 'ef2e6a9e-e3c4-492d-9630-7f2170715a5d10',
-        },
-        {
-          name: 'Webcams11',
-          value: 'ef2e6a9e-e3c4-492d-9630-7f2170715a5d11',
-        },
-        {
-          name: 'Webcams12',
-          value: 'ef2e6a9e-e3c4-492d-9630-7f2170715a5d12',
-        },
-        {
-          name: 'Webcams13',
-          value: 'ef2e6a9e-e3c4-492d-9630-7f2170715a5d13',
-        },
-        {
-          name: 'Webcams14',
-          value: 'ef2e6a9e-e3c4-492d-9630-7f2170715a5d14',
-        },
-        {
-          name: 'Webcams15',
-          value: 'ef2e6a9e-e3c4-492d-9630-7f2170715a5d15',
-        },
-        {
-          name: 'Webcams16',
-          value: 'ef2e6a9e-e3c4-492d-9630-7f2170715a5d16',
-        },
-        {
-          name: 'Webcams17',
-          value: 'ef2e6a9e-e3c4-492d-9630-7f2170715a5d17',
-        },
-        {
-          name: 'Webcams18',
-          value: 'ef2e6a9e-e3c4-492d-9630-7f2170715a5d18',
         },
       ],
       config: {

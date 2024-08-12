@@ -1,6 +1,7 @@
 import * as React from 'react'
 import clsx from 'clsx'
 import FilterDrawerCheckbox from '../table-header-filters/FilterDrawerCheckbox'
+import FilterDrawerAllCheckbox from '../table-header-filters/FilterDrawerAllCheckbox'
 import filterIcon from '../../assets/user-interface/filter-2.svg'
 import chevronRight from '../../assets/chevron-right.svg'
 import classes from './table-filters-drawer.module.css'
@@ -78,6 +79,8 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
     })
     onClose()
   }
+
+  console.log(filterCheckedState?.filter_type)
 
   const totalSelectedFilters = tableFilters
     .filter(tF => !headerFilterKeys.includes(tF.key))
@@ -186,9 +189,7 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
                     ) : (
                       <>
                         <div className={classes.option} style={{fontWeight: 700}}>
-                          <FilterDrawerCheckbox
-                            label={'All'}
-                            value={'all'}
+                          <FilterDrawerAllCheckbox
                             filterKey={currFilter.key}
                             checked={
                               filterCheckedState[currFilter.key]?.findIndex(
@@ -196,7 +197,6 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
                               ) === -1
                             }
                             setFilterCheckedState={setFilterCheckedState}
-                            idx={-1}
                             setHasChanges={setHasChanges}
                           />
                         </div>

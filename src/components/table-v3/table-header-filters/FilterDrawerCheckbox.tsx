@@ -3,7 +3,6 @@ import * as checkbox from '@zag-js/checkbox'
 import ReactCountryFlag from 'react-country-flag'
 import classes from './styles.module.css'
 import {useMachine, normalizeProps} from '@zag-js/react'
-// import {useTableStore} from '../store'
 
 export default function FilterDrawerCheckbox({
   label,
@@ -26,12 +25,11 @@ export default function FilterDrawerCheckbox({
   idx: number
   setHasChanges: React.Dispatch<React.SetStateAction<boolean>>
 }) {
-  // React.useEffect(() => {
-  //   // effect to keep the 'All' checkbox changes in sync with the actual initialState
-  //   if (api.isChecked !== checked) {
-  //     api.setChecked(checked)
-  //   }
-  // }, [checked])
+  React.useEffect(() => {
+    if (api.checked !== checked) {
+      api.setChecked(checked)
+    }
+  }, [checked])
 
   const [state, send] = useMachine(
     checkbox.machine({
@@ -40,20 +38,19 @@ export default function FilterDrawerCheckbox({
       checked,
       onCheckedChange: ({checked}: {checked: any}) => {
         setHasChanges(true)
-        if (value === 'all') {
-          setFilterCheckedState((prevState: Record<string, any[]>) => {
-            return {
-              ...prevState,
-              [filterKey]: prevState[filterKey].map(obj => ({...obj, checked})),
-            }
-          })
-        } else {
-          setFilterCheckedState((s: Record<string, any[]>) => {
-            const n = {...s}
-            n[filterKey][idx] = {label, value, checked}
-            return n
-          })
-        }
+
+        setFilterCheckedState((prevState: Record<string, any[]>) => {
+          const updatedState = {...prevState}
+          updatedState[filterKey][idx] = {label, value, checked}
+
+          // // If a single checkbox is unchecked, ensure "All" is unchecked
+          if (!checked) {
+            updatedState[filterKey] = updatedState[filterKey].map((item, index) =>
+              index === -1 ? {...item, checked: false} : item,
+            )
+          }
+          return updatedState
+        })
       },
     }),
   )

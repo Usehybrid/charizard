@@ -164,4 +164,12 @@
 
   /* border radius */
   --borderfull: 10240px;
+
+  /* toast styles */
+  --toastify-font-family: var(--font-family) !important;
+  --toastify-text-color-light: var(--text-primary) !important;
+  --toastify-color-info: var(--status-info-i70) !important ;
+  --toastify-color-success: var(--status-success-s70) !important;
+  --toastify-color-warning: var(--status-warning-w70) !important;
+  --toastify-color-error: var(--status-error-e70) !important;
 }

@@ -1,46 +1,54 @@
+import * as React from 'react'
 import * as checkbox from '@zag-js/checkbox'
-import ReactCountryFlag from 'react-country-flag'
 import classes from './styles.module.css'
 import {useMachine, normalizeProps} from '@zag-js/react'
-import {useTableStore} from '../store'
 
 export default function FilterDrawerAllCheckbox({
-  value,
   checked,
   filterKey,
   setFilterCheckedState,
-  idx,
+  setHasChanges,
 }: {
-  value: string
   checked: boolean
   filterKey: string
-
   setFilterCheckedState: any
-  idx: number
+  setHasChanges: React.Dispatch<React.SetStateAction<boolean>>
 }) {
-  // console.log(tableFilters)
+  const allRef = React.useRef(false)
+
   const [state, send] = useMachine(
     checkbox.machine({
-      id: value,
-      name: `${filterKey}-All`,
-      checked: checked,
+      id: 'all',
+      checked,
       onCheckedChange: ({checked}: {checked: any}) => {
-        // console.log(checked)
-        setFilterCheckedState((s: Record<string, any[]>) => {
-          const n = {...s}
-          n[filterKey][idx] = {value, checked}
-          return n
+        setHasChanges(true)
+        if (allRef.current) return
+        setFilterCheckedState((prevState: Record<string, any[]>) => {
+          return {
+            ...prevState,
+            [filterKey]: prevState[filterKey].map(obj => ({...obj, checked})),
+          }
         })
+        allRef.current = false
       },
     }),
   )
 
   const api = checkbox.connect(state, send, normalizeProps)
 
+  React.useEffect(() => {
+    if (api.checked !== checked) {
+      allRef.current = true
+      api.setChecked(checked)
+    } else {
+      allRef.current = false
+    }
+  }, [checked, api.checked])
+
   return (
     <label {...api.getRootProps()} className={classes.optionLabel}>
       <div {...api.getControlProps()} />
-      <span {...api.getLabelProps()} style={{fontWeight: 500}}>
+      <span {...api.getLabelProps()} className={'zap-content-semibold'}>
         All
       </span>
       <input {...api.getHiddenInputProps()} />

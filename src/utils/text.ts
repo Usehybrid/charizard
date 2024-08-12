@@ -1,3 +1,5 @@
+import {toastSuccess} from '../components/toasts'
+
 export const pluralize = (count: number, singular: string, plural: string) => {
   return count === 1 || count === 0 || count === undefined || count === null ? singular : plural
 }
@@ -34,13 +36,13 @@ export const clipboard = async (text?: string, showToast = true) => {
   if (!text) return
   await navigator.clipboard.writeText(text).catch(console.error)
 
-  // if (showToast) {
-  //   toastSuccess({
-  //     msg: `Successfully copied ${text}`,
-  //     options: {
-  //       toastId: text,
-  //       autoClose: 3000,
-  //     },
-  //   })
-  // }
+  if (showToast) {
+    toastSuccess({
+      msg: `Successfully copied ${text}`,
+      options: {
+        toastId: text,
+        autoClose: 3000,
+      },
+    })
+  }
 }
