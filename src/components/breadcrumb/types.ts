@@ -1,4 +1,4 @@
 export interface Page {
   label: string
-  to: string
+  to: () => void
 }

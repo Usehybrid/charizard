@@ -48,7 +48,10 @@ export function Breadcrumb({pages}: BreadCrumbProps) {
           ) : (
             <>
               {(Number(i) === pages.length - 1 || Number(i) < 2) && (
-                <span className={clsx(classes.page, `${Number(i) >= 2 && classes.activePage}`)}>
+                <span
+                  onClick={page.to}
+                  className={clsx(classes.page, `${Number(i) >= 2 && classes.activePage}`)}
+                >
                   {page.label}
                 </span>
               )}

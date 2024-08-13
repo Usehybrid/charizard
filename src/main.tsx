@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import randomIcon from './components/assets/check.svg'
 import {createColumnHelper} from '@tanstack/react-table'
 import {INV_ACTION_TYPES, useInventoryStore} from './components/table-v2/inventory/inventory.store'
-import {BUTTON_V2_VARIANT, DrawerV2, TableUserCell, TableV3} from './components'
+import {Breadcrumb, BUTTON_V2_VARIANT, DrawerV2, TableUserCell, TableV3} from './components'
 import {useDisclosure} from './utils/hooks/use-disclosure'
 
 const styles = {
@@ -552,13 +552,13 @@ const tasks = [
 const taskheaders = ['Task', 'Details', 'Status']
 
 const pages = [
-  {label: 'Breadcrumb Item 1', to: '/'},
-  {label: 'Breadcrumb Item 2', to: '/'},
-  {label: 'Breadcrumb Item 3', to: '/'},
-  {label: 'Breadcrumb Item 4', to: '/'},
-  {label: 'Breadcrumb Item 5', to: '/'},
-  {label: 'Breadcrumb Item 6', to: '/'},
-  {label: 'Breadcrumb Item 7', to: '/'},
+  {label: 'Breadcrumb Item 1', to: () => {}},
+  {label: 'Breadcrumb Item 2', to: () => {}},
+  {label: 'Breadcrumb Item 3', to: () => {}},
+  {label: 'Breadcrumb Item 4', to: () => {}},
+  {label: 'Breadcrumb Item 5', to: () => {}},
+  {label: 'Breadcrumb Item 6', to: () => {}},
+  {label: 'Breadcrumb Item 7', to: () => {}},
 ]
 
 const options = [
@@ -611,114 +611,7 @@ function App() {
 
   return (
     <div style={styles}>
-      <TableV3
-        data={data}
-        loaderConfig={{isFetching: false, isError: false, text: 'Getting employees...'}}
-        columns={columns}
-        searchConfig={{
-          search,
-          setSearch,
-          placeholder: 'Search your employees',
-        }}
-        filterConfig={{
-          filters: filtersV2,
-          isLoading: false,
-          isError: false,
-          // filterDispatch: value => dispatch({type: SOFTWARE_ACTION_TYPES.FILTER, payload: value}),
-          // filterReset: value =>
-          //   dispatch({type: SOFTWARE_ACTION_TYPES.RESET_FILTERS, payload: value}),
-          filterDispatch: value => dispatch({type: INV_ACTION_TYPES.FILTER, payload: value}),
-          filterReset: () => dispatch({type: INV_ACTION_TYPES.RESET_FILTERS, payload: null}),
-        }}
-        sortConfig={{
-          sortBy: query.sort_by,
-          sortOrd: query.sort_order,
-          setSortBy: (value: any) => dispatch({type: INV_ACTION_TYPES.SORT_BY, payload: value}),
-          setSortOrd: (value: any) => dispatch({type: INV_ACTION_TYPES.SORT_ORDER, payload: value}),
-          sortMap: {
-            software: 'softwares',
-            software_owners: 'software_owners',
-            software_users: 'software_users',
-            software_license: 'software_license',
-          },
-        }}
-        paginationConfig={{
-          page: query.page,
-          limit: query.limit,
-          setPage: value => dispatch({type: INV_ACTION_TYPES.PAGE, payload: value}),
-          setLimit: value => dispatch({type: INV_ACTION_TYPES.LIMIT, payload: value}),
-          // metaData: {
-          //   total_items: 1000,
-          //   page_no: 0,
-          //   items_on_page: 10,
-          // },
-          metaData: {
-            total_items: 240,
-            page_no: 1,
-            items_on_page: 20,
-          },
-          defaultLimit: '20',
-        }}
-        rowSelectionConfig={{
-          entityName: 'Software',
-          // isRadio: true,
-          isCheckbox: true,
-          rowIdKey: 'id',
-          actions: [
-            {
-              icon: randomIcon,
-              text: 'Action 1',
-              onClick: () => {
-                console.log('action 1 clicked')
-              },
-            },
-
-            {
-              icon: randomIcon,
-              text: 'Action 2',
-              onClick: () => {
-                console.log('action 2 clicked')
-              },
-            },
-
-            {
-              icon: randomIcon,
-              text: 'Action 3',
-              onClick: () => {
-                console.log('action 3 clicked')
-              },
-            },
-          ],
-          // rowIdKey: 'id',
-        }}
-        actionsConfig={{
-          menuItems,
-          isDropdownActions: true,
-        }}
-        totalText={`${4} Softwares`}
-        emptyStateConfig={{
-          icon: './components/assets/check.svg',
-          title: 'Get started by adding your first inventory',
-          desc: '',
-          btnText: 'add inventory',
-          onClick: () => {},
-          columns: 6,
-          emptySearchTitle: 'No inventories found',
-        }}
-        customColumnConfig={{
-          description: 'Configure inventory columns',
-          columns: cols,
-          isPending: false,
-          isError: false,
-          handleSaveColumns: async (columns: any) => {
-            await Promise.resolve(() => {
-              console.log('test')
-            })
-          },
-        }}
-        tableStyleConfig={{stickyIds: ['software'], maxHeight: '200px'}}
-        // exportConfig={{}}
-      />
+      <Breadcrumb pages={pages} />
     </div>
   )
 }
