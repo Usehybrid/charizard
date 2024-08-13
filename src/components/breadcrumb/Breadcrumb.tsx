@@ -12,7 +12,7 @@ interface BreadCrumbProps {
 
 export function Breadcrumb({pages}: BreadCrumbProps) {
   const [showMorePages, setShowMorePages] = React.useState(false)
-  const [clickedItem, setClickedItem] = React.useState<string | null>()
+  const [clickedItem, setClickedItem] = React.useState<string | null>(null)
 
   const menuRef = React.useRef<HTMLDivElement | null>(null)
 
