@@ -57,10 +57,13 @@
 }
 
 .actionSection {
-  display: none;
+  display: flex;
+  justify-content: end;
+  visibility: hidden;
 }
 
 .card:hover .actionSection {
   display: flex;
   justify-content: end;
+  visibility: visible;
 }

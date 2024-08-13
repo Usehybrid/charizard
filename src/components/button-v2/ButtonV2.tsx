@@ -112,8 +112,7 @@ export interface GroupActionProps {
   onClick?: any
   isCustomTrigger?: boolean
 }
-
-function GroupAction({
+const GroupAction = React.forwardRef(function ({
   children,
   variant = BUTTON_V2_VARIANT.PRIMARY,
   disabled = false,
@@ -127,7 +126,7 @@ function GroupAction({
   showDownIconBtn = true,
   customStyles,
   onClick,
-}: GroupActionProps) {
+}: GroupActionProps, ref) {
   const [state, send] = useMachine(
     menu.machine({
       id: React.useId(),
@@ -247,6 +246,14 @@ function GroupAction({
     </>
   )
 
+  React.useImperativeHandle(ref, () => {
+    return {
+     blur(){
+      setIsFocused(false)
+      api.setOpen(false)
+     }
+    };
+  }, [api]);
 
   return (
     <>
@@ -287,7 +294,7 @@ function GroupAction({
       {isTable ? <Portal>{dropdown}</Portal> : dropdown}
     </>
   )
-}
+})
 
 export interface ActionsDropdownProps {
   variant?: BUTTON_V2_VARIANT
@@ -299,7 +306,7 @@ export interface ActionsDropdownProps {
   isTable?: boolean
 }
 
-export function ActionsDropdown({
+export const ActionsDropdown = React.forwardRef(function ({
   variant,
   disabled,
   menuItems,
@@ -307,7 +314,7 @@ export function ActionsDropdown({
   size,
   positionerProps,
   isTable,
-}: ActionsDropdownProps) {
+}: ActionsDropdownProps, ref) {
   const [isActive, setIsActive] = React.useState(false)
 
   return (
@@ -322,6 +329,7 @@ export function ActionsDropdown({
       isTable={isTable}
       showDownIconBtn={false}
       isCustomTrigger={true}
+      ref={ref}
     >
       <SVG
         path={moreMenuIcon}
@@ -331,7 +339,7 @@ export function ActionsDropdown({
       />
     </GroupAction>
   )
-}
+}) 
 
 ButtonV2.GroupAction = GroupAction
 ButtonV2.ActionsDropdown = ActionsDropdown
