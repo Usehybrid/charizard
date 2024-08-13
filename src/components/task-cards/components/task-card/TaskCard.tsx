@@ -1,4 +1,3 @@
-import * as React from 'react'
 import clsx from 'clsx'
 import classes from './task-card.module.css'
 import {UserChip} from '../../../user-chip'
@@ -6,18 +5,10 @@ import {Badge, BADGE_HIGHLIGHT, BADGE_STATUS} from '../../../badge'
 import {BUTTON_V2_SIZE, BUTTON_V2_VARIANT, ButtonV2, MenuItemV2} from '../../../button-v2'
 import {ITask, ITaskDetails, ITaskObjectValue} from '../../types'
 import {isObject, isString} from '../../../../utils'
-interface MyRefType {
-  blur: () => void
-}
+
 export default function TaskCard({data, menuItems}: {data: ITask; menuItems: MenuItemV2[]}) {
-  const dropDownRef = React.useRef<MyRefType>()
   return (
-    <div
-      className={classes.card}
-      onMouseLeave={() => {
-        dropDownRef.current?.blur()
-      }}
-    >
+    <div className={classes.card}>
       <div className={classes.taskSection}>
         <div className={clsx(classes.taskName, 'zap-content-semibold')}>{data.name}</div>
         <div className={clsx(classes.dateAndTime, 'zap-caption-medium')}>{data.date}</div>
@@ -56,11 +47,9 @@ export default function TaskCard({data, menuItems}: {data: ITask; menuItems: Men
       </div>
       <div className={classes.actionSection}>
         <ButtonV2.ActionsDropdown
-          isTable={true}
           menuItems={menuItems}
           variant={BUTTON_V2_VARIANT.TERTIARY}
           size={BUTTON_V2_SIZE.SMALL}
-          // ref={dropDownRef}
         />
       </div>
     </div>
