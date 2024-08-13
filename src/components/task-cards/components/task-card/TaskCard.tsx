@@ -7,7 +7,7 @@ import {BUTTON_V2_SIZE, BUTTON_V2_VARIANT, ButtonV2, MenuItemV2} from '../../../
 import {ITask, ITaskDetails, ITaskObjectValue} from '../../types'
 import {isObject, isString} from '../../../../utils'
 interface MyRefType {
-  blur: () => void;
+  blur: () => void
 }
 export default function TaskCard({data, menuItems}: {data: ITask; menuItems: MenuItemV2[]}) {
   const dropDownRef = React.useRef<MyRefType>()
@@ -60,7 +60,7 @@ export default function TaskCard({data, menuItems}: {data: ITask; menuItems: Men
           menuItems={menuItems}
           variant={BUTTON_V2_VARIANT.TERTIARY}
           size={BUTTON_V2_SIZE.SMALL}
-          ref={dropDownRef}
+          // ref={dropDownRef}
         />
       </div>
     </div>

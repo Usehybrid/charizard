@@ -16,7 +16,9 @@ export const menuItems = [
 
   {
     label: 'Apply Reimbursement',
-    onClick: (data: any) => {},
+    onClick: (data: any) => {
+      console.log('clicked apply rim')
+    },
     filterFn: (data: any) => {
       // return false
       return true
@@ -26,7 +28,9 @@ export const menuItems = [
   },
   {
     label: 'Archive',
-    onClick: (data: any) => {},
+    onClick: (data: any) => {
+      console.log('clicked archive')
+    },
     disabled: true,
   },
 ]
@@ -34,7 +38,7 @@ export const menuItems = [
 export function ButtonDemo() {
   return (
     <div>
-      <div style={{display: 'flex', marginBottom: '25px'}}>
+      {/* <div style={{display: 'flex', marginBottom: '25px'}}>
         <div style={{display: 'flex', gap: 10}}>
           <ButtonV2 size={BUTTON_V2_SIZE.SMALL} variant={BUTTON_V2_VARIANT.LINK}>
             Link
@@ -43,10 +47,12 @@ export function ButtonDemo() {
             Link
           </ButtonV2>
           <ButtonV2 variant={BUTTON_V2_VARIANT.LINK}>Link</ButtonV2>
-          <ButtonV2 variant={BUTTON_V2_VARIANT.LINK} disabled>Link</ButtonV2>
+          <ButtonV2 variant={BUTTON_V2_VARIANT.LINK} disabled>
+            Link
+          </ButtonV2>
         </div>
       </div>
-      <div style={{display: 'flex', gap: 150}}>
+      <div style={{display: 'flex', gap: 150, flexWrap: 'wrap'}}>
         <div style={{display: 'flex', gap: 10}}>
           <ButtonV2 size={BUTTON_V2_SIZE.SMALL}>Button</ButtonV2>
           <ButtonV2 size={BUTTON_V2_SIZE.SMALL} variant={BUTTON_V2_VARIANT.SECONDARY}>
@@ -228,7 +234,7 @@ export function ButtonDemo() {
             Tertiary
           </ButtonV2>
         </div>
-      </div>
+      </div> */}
 
       <div style={{display: 'flex', gap: 150, marginTop: 20}}>
         <div style={{display: 'flex', gap: 10}}>
@@ -282,7 +288,7 @@ export function ButtonDemo() {
         </div>
       </div>
 
-      <div style={{display: 'flex', gap: 150, marginTop: 20}}>
+      {/* <div style={{display: 'flex', gap: 150, marginTop: 20}}>
         <div style={{display: 'flex', gap: 10}}>
           <ButtonV2
             size={BUTTON_V2_SIZE.SMALL}
@@ -358,7 +364,7 @@ export function ButtonDemo() {
             Tertiary
           </ButtonV2>
         </div>
-      </div>
+      </div> */}
 
       <div style={{display: 'flex', gap: 150, marginTop: 20}}>
         <div style={{display: 'flex', gap: 10}}>
