@@ -1,3 +1,5 @@
+/* table pagination and ellipses*/
+
 .box {
   display: flex;
   justify-content: space-between;
@@ -49,6 +51,8 @@
   align-items: center;
 }
 
+/* ellipses only */
+
 .limitContent {
   border-radius: 8px;
   background: var(--neutral-white);
@@ -76,38 +80,6 @@
   cursor: pointer;
 }
 
-.limitTrigger {
-  min-width: 54px;
-  max-width: fit-content;
-  height: 36px;
-
-  border-radius: 3px;
-  border: 1px solid var(--neutral-arch-100);
-  background: var(--neutral-white);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 3px;
-  padding: 1px 2px 1px 6px;
-  color: var(--text-secondary);
-}
-
-.chevdownIcon {
-  width: 20px;
-  height: 20px;
-}
-
-.chevdownIcon > path {
-  fill: var(--neutral-arch-600);
-}
-
-.pos {
-  --z-index: 10 !important;
-  box-shadow: #00000029 0 1px 4px;
-  border-radius: 8px;
-  background-color: white;
-}
-
 .paginationMenu {
   border-radius: 4px;
   border: 1px solid var(--stroke-border);
@@ -127,4 +99,5 @@
 
 .meta {
   color: var(--text-secondary);
+  margin: auto;
 }

@@ -48,17 +48,17 @@ export default function TableDemo({}: tableProps) {
         limit: query.limit,
         setPage: value => dispatch({type: INV_ACTION_TYPES.PAGE, payload: value}),
         setLimit: value => dispatch({type: INV_ACTION_TYPES.LIMIT, payload: value}),
-        // metaData: {
-        //   total_items: 1000,
-        //   page_no: 0,
-        //   items_on_page: 10,
-        // },
         metaData: {
-          total_items: 240,
-          page_no: 1,
-          items_on_page: 20,
+          total_items: 1000,
+          page_no: 0,
+          items_on_page: 25,
         },
-        defaultLimit: '20',
+        // metaData: {
+        //   total_items: 6,
+        //   page_no: 0,
+        //   items_on_page: 6,
+        // },
+        defaultLimit: '25',
       }}
       rowSelectionConfig={{
         entityName: 'Software',

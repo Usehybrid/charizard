@@ -569,19 +569,20 @@ const getCommonPinningStyles = (
   const isLastLeftPinnedColumn = isPinned === 'left' && column.getIsLastColumn('left')
   const isFirstRightPinnedColumn = isPinned === 'right' && column.getIsFirstColumn('right')
 
-  // const leftShadow = 'drop-shadow(3px 0px 3px rgba(0, 0, 0, 0.07))'
-  // const rightShadow = 'drop-shadow(-3px 0px 3px rgba(0, 0, 0, 0.07))'
+  const leftShadow = 'drop-shadow(2px 0px 2px rgba(0, 0, 0, 0.07))'
+  const rightShadow = 'drop-shadow(-2px 0px 2px rgba(0, 0, 0, 0.07))'
 
   return {
-    borderRight:
-      isLastLeftPinnedColumn && showLeftShadow ? '1px solid var(--stroke-border)' : undefined,
-    borderLeft:
-      isFirstRightPinnedColumn && showRightShadow ? '1px solid var(--stroke-border)' : undefined,
-    // filter: isLastLeftPinnedColumn
-    //   ? leftShadow
-    //   : isFirstRightPinnedColumn
-    //     ? rightShadow
-    //     : undefined,
+    // borderRight:
+    //   isLastLeftPinnedColumn && showLeftShadow ? '1px solid var(--stroke-border)' : undefined,
+    // borderLeft:
+    //   isFirstRightPinnedColumn && showRightShadow ? '1px solid var(--stroke-border)' : undefined,
+    filter:
+      isLastLeftPinnedColumn && showLeftShadow
+        ? leftShadow
+        : isFirstRightPinnedColumn && showRightShadow
+          ? rightShadow
+          : undefined,
     left: isPinned === 'left' ? `${column.getStart('left')}px` : undefined,
     right: isPinned === 'right' ? `${column.getAfter('right')}px` : undefined,
     position: isPinned ? 'sticky' : undefined,

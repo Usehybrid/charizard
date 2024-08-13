@@ -215,7 +215,7 @@ function GroupAction({
     <>
       {menuItems.length > 0 && (
         <div {...api.getPositionerProps()}>
-          <div {...api.getContentProps()} className={classes.menus}>
+          <div {...api.getContentProps()} className={classes.menus} style={customMenuStyles}>
             {menuItems
               .filter(menu => {
                 if (!menu.filterFn) return true
