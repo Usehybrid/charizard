@@ -8,7 +8,7 @@ export default function MorePages({pages}: {pages: Array<Page>}) {
     <div className={classes.menu}>
       {pages.map((page: Page, index: React.Key) => (
         <div className={clsx(classes.menuItem)} key={index}>
-          <div className={classes.page}>{page.label}</div>
+          <div className={classes.page} onClick={page.to}>{page.label}</div>
         </div>
       ))}
     </div>

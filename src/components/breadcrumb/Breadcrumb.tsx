@@ -12,6 +12,7 @@ interface BreadCrumbProps {
 
 export function Breadcrumb({pages}: BreadCrumbProps) {
   const [showMorePages, setShowMorePages] = React.useState(false)
+  const [clickedItem, setClickedItem] = React.useState<string | null>()
 
   const menuRef = React.useRef<HTMLDivElement | null>(null)
 
@@ -36,8 +37,14 @@ export function Breadcrumb({pages}: BreadCrumbProps) {
           {Number(i) === 2 && pages.length !== 3 ? (
             <>
               <span
-                className={clsx(classes.dots, `${showMorePages && classes.dotsActive}`)}
-                onClick={() => setShowMorePages(e => !e)}
+                className={clsx(
+                  classes.dots,
+                  `${showMorePages && clickedItem === 'dots' ? classes.focused : null}`,
+                )}
+                onClick={() => {
+                  setShowMorePages(e => !e)
+                  setClickedItem('dots')
+                }}
               >
                 ...
               </span>
@@ -49,8 +56,14 @@ export function Breadcrumb({pages}: BreadCrumbProps) {
             <>
               {(Number(i) === pages.length - 1 || Number(i) < 2) && (
                 <span
-                  onClick={page.to}
-                  className={clsx(classes.page, `${Number(i) >= 2 && classes.activePage}`)}
+                  onClick={() => {
+                    page.to()
+                    setClickedItem(page.label)
+                  }}
+                  className={clsx(
+                    classes.page,
+                    `${Number(i) >= 2 && classes.activePage} ${clickedItem === page.label && classes.focused}`,
+                  )}
                 >
                   {page.label}
                 </span>

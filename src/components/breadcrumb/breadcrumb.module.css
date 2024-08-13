@@ -19,15 +19,12 @@
 
 .page:hover {
   border-radius: 2px;
-  background: var(--fill-selection-only);
+  background: var(--fill-selection);
   color: var(--link-hover);
 }
 
 .activePage {
-  color: var(--text-primary);
-  border: 1px solid var(--p-p50);
-  border-radius: 2px;
-  background: var(--fill-selection-only);
+  color: var(--dark-d90);
 }
 
 .dots {
@@ -37,7 +34,7 @@
   border: 1px solid transparent;
 }
 
-.dotsActive {
+.focused {
   border: 1px solid var(--p-p50);
   border-radius: 2px;
 }

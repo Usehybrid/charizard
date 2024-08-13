@@ -25,7 +25,7 @@
 }
 
 .menuItem:hover {
-  background-color: var(--fill-selection-only);
+  background-color: var(--fill-selection);
   cursor: default;
 }
 
