@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client'
 import {ButtonDemo} from './demo/button-demo'
 import TableDemo from './demo/table-demo'
 import TaskCardDemo from './demo/task-card-demo'
+import {CheckboxDemo} from './demo/checkbox/checkbox-demo'
 
 const styles = {
   width: '90%',
@@ -66,7 +67,7 @@ const options = [
 function App() {
   return (
     <div style={styles}>
-      <TaskCardDemo />
+      <TableDemo />
     </div>
   )
 }
