@@ -67,3 +67,29 @@
   justify-content: end;
   visibility: visible;
 }
+
+.detailValueAttachments {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.detailValueAttachment{
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.attachmentName {
+  color: var(--link-rest);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 18px;
+  letter-spacing: 0.2px;
+  text-decoration: none;
+}
+
+.attachmentName:hover {
+  text-decoration: none;
+}

@@ -124,6 +124,13 @@
   gap: 8px;
 }
 
+.buttonLabel{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
 @media screen and (max-width: 400px) {
   .contentWrapper {
     width: 100% !important;

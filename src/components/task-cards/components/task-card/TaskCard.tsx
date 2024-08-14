@@ -6,8 +6,9 @@ import {Badge, BADGE_HIGHLIGHT, BADGE_STATUS} from '../../../badge'
 import {BUTTON_V2_SIZE, BUTTON_V2_VARIANT, ButtonV2, MenuItemV2} from '../../../button-v2'
 import {ITask, ITaskDetails, ITaskObjectValue} from '../../types'
 import {isObject, isString} from '../../../../utils'
+import {SVG} from '../../../svg'
 interface MyRefType {
-  blur: () => void;
+  blur: () => void
 }
 export default function TaskCard({data, menuItems}: {data: ITask; menuItems: MenuItemV2[]}) {
   const dropDownRef = React.useRef<MyRefType>()
@@ -34,7 +35,28 @@ export default function TaskCard({data, menuItems}: {data: ITask; menuItems: Men
         {data.details.map((detail: ITaskDetails, i: number) => (
           <div key={i} className={classes.detail}>
             <div className={clsx(classes.detailKey, 'zap-subcontent-medium')}>{detail.key}</div>
-            {detail.value && isObject(detail.value) && Object.keys(detail.value).length ? (
+            {Array.isArray(detail.value) && detail.value.length > 0 ? (
+              <div className={classes.detailValueAttachments}>
+                {detail.value.map(value => (
+                  <div className={classes.detailValueAttachment}>
+                    <div>
+                      {/* <SVG
+                        path={btn.icon as string}
+                        customSvgStyles={{
+                          width: '12px',
+                          height: '12px',
+                        }}
+                      /> */}
+                    </div>
+                    <div>
+                      <a href={value.doc_link} target="_blank" className={classes.attachmentName}>
+                        {value.file_name}
+                      </a>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : detail.value && isObject(detail.value) && Object.keys(detail.value).length ? (
               <UserChip
                 username={(detail.value as ITaskObjectValue).first_name}
                 profileImgUrl={(detail.value as ITaskObjectValue).profile_img_url}
@@ -69,7 +91,7 @@ export default function TaskCard({data, menuItems}: {data: ITask; menuItems: Men
 
 const moduleStatusMap: {[key: string]: BADGE_STATUS} = {
   profile: BADGE_STATUS.DEFAULT,
-  leave: BADGE_STATUS.POSITIVE,
+  leave: BADGE_STATUS.DEFAULT,
   it_request: BADGE_STATUS.NEGATIVE,
   attendance: BADGE_STATUS.HIGHLIGHT,
   reimbursement: BADGE_STATUS.DEFAULT,

@@ -22,5 +22,16 @@ export interface ITaskObjectValue {
 
 export interface ITaskDetails {
   key: string
-  value: string | ITaskObjectValue | File[] | null
+  value: string | ITaskObjectValue | FileType[] | null
+}
+
+interface FileType {
+  details: {
+    ext: string
+    key: string
+    type: string
+    file_name: string
+  }
+  doc_link: string
+  file_name: string
 }
