@@ -41,6 +41,7 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
     if (!filters?.length || isLoading) return
     const mapFn = (filter: any) => ({key: filter.key, values: []})
     setDefaultFilters(
+      // @ts-ignore
       [...(filterConfig.filters?.header?.map(mapFn) || []), ...filters?.map(mapFn)] || [],
     )
   }, [filters?.length, isLoading])

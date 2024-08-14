@@ -8,7 +8,7 @@ interface InventoryStore {
 
 const invInitialQueries = {
   page: 0,
-  limit: 20,
+  limit: 25,
   search: '',
   sort_by: '',
   sort_order: '' as '' | 'asc' | 'desc',

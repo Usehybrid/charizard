@@ -1,0 +1,64 @@
+.checkboxContainer {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.hiddenCheckbox {
+  display: none;
+}
+
+.customCheckbox {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  border-radius: 4px;
+  border: 1px solid #d3dbf8;
+  background-color: white;
+  position: relative;
+  margin-right: 8px;
+}
+
+.customCheckbox[data-checked='true'] {
+  border-color: var(--theme-blue);
+  background-color: var(--theme-blue);
+}
+
+.customCheckbox[data-checked='true']::after {
+  content: url('../assets/checkbox/checked.svg');
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+}
+
+.customCheckbox[data-checked='false']::after {
+  content: url('../assets/checkbox/unchecked.svg');
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+}
+
+.customCheckbox[data-checked='indeterminate'] {
+  background-color: var(--theme-blue);
+}
+
+.customCheckbox[data-checked='indeterminate']::after {
+  content: url('../assets/checkbox/indeterminate.svg');
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+}
+
+.checkboxLabel {
+  color: var(--text-primary);
+  font-size: 14px;
+}

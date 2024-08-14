@@ -105,7 +105,7 @@
 }
 .btnLink:hover {
   background-color: var(--fill-selection);
-  text-decoration: underline;  
+  text-decoration: underline;
 }
 .btnLink:focus {
   background-color: var(--fill-selection);
@@ -248,4 +248,51 @@
 
 .moreMenuIconTable path {
   fill: var(--text-tertiary);
+}
+
+/* group actions styles */
+
+.btnGrp {
+  display: flex;
+  align-items: center;
+}
+
+.btnGrpLeft {
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+.btnGrpLeft.btnPrimary {
+  border-right: 1px solid white;
+}
+
+.btnGrpLeft.btnSecondary {
+  border-right: none;
+}
+
+.btnGrpLeft.btnTertiary {
+  border-right: none;
+}
+
+.btnGrpRight {
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+
+.chevronDownSpan {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+}
+
+.chevronDown {
+  width: 16px;
+  height: 16px;
+}
+
+.groupActionTable {
+  background-color: transparent;
+  border: none;
 }

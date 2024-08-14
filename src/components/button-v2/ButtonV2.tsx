@@ -105,14 +105,15 @@ export interface GroupActionProps {
   }
   positionerProps?: PositioningOptions
   isTable?: boolean
-  showDownIconBtn?: boolean
   customStyles?: {
     customMenuStyles?: React.CSSProperties
   }
   onClick?: any
   isCustomTrigger?: boolean
+  isSingleBtnTrigger?: boolean
 }
-const GroupAction = React.forwardRef(function ({
+
+function GroupAction({
   children,
   variant = BUTTON_V2_VARIANT.PRIMARY,
   disabled = false,
@@ -123,10 +124,10 @@ const GroupAction = React.forwardRef(function ({
   positionerProps,
   isTable = false,
   isCustomTrigger = false,
-  showDownIconBtn = true,
   customStyles,
   onClick,
-}: GroupActionProps, ref) {
+  isSingleBtnTrigger = false,
+}: GroupActionProps) {
   const [state, send] = useMachine(
     menu.machine({
       id: React.useId(),
@@ -146,8 +147,6 @@ const GroupAction = React.forwardRef(function ({
   }, [api.open])
 
   const isOpenRef = React.useRef(api.open)
-
-  // console.log({customData})
 
   React.useEffect(() => {
     isOpenRef.current = api.open
@@ -216,7 +215,7 @@ const GroupAction = React.forwardRef(function ({
     <>
       {menuItems.length > 0 && (
         <div {...api.getPositionerProps()}>
-          <div {...api.getContentProps()} className={classes.menus}>
+          <div {...api.getContentProps()} className={classes.menus} style={customMenuStyles}>
             {menuItems
               .filter(menu => {
                 if (!menu.filterFn) return true
@@ -246,55 +245,142 @@ const GroupAction = React.forwardRef(function ({
     </>
   )
 
-  React.useImperativeHandle(ref, () => {
-    return {
-     blur(){
-      setIsFocused(false)
-      api.setOpen(false)
-     }
-    };
-  }, [api]);
-
   return (
     <>
-      <button
-        ref={buttonRef}
-        className={clsx(
-          classes.btn,
-          classes.btnGrp,
-          variant === BUTTON_V2_VARIANT.PRIMARY && classes.btnPrimary,
-          variant === BUTTON_V2_VARIANT.SECONDARY && classes.btnSecondary,
-          variant === BUTTON_V2_VARIANT.TERTIARY && classes.btnTertiary,
-          size === BUTTON_V2_SIZE.SMALL && classes.btnSmall,
-          disabled && classes.disabled,
-          isFocused && classes.focusVisible,
-          isTable && classes.btnTable,
-        )}
-        disabled={disabled}
-        onClick={!isTable ? onClick : undefined}
-        {...(isTable && api.getTriggerProps())}
-      >
-        <span className={classes.grpTextBtn}>{children}</span>
-        {showDownIconBtn && (
+      {isSingleBtnTrigger ? (
+        <button
+          className={clsx(
+            classes.btn,
+            variant === BUTTON_V2_VARIANT.PRIMARY && classes.btnPrimary,
+            variant === BUTTON_V2_VARIANT.SECONDARY && classes.btnSecondary,
+            variant === BUTTON_V2_VARIANT.TERTIARY && classes.btnTertiary,
+            variant === BUTTON_V2_VARIANT.LINK && classes.btnLink,
+            size === BUTTON_V2_SIZE.DEFAULT && classes.btnDefault,
+            size === BUTTON_V2_SIZE.SMALL && classes.btnSmall,
+            disabled && classes.disabled,
+            // type === BUTTON_V2_TYPE.ICON_ONLY &&
+            //   size === BUTTON_V2_SIZE.DEFAULT &&
+            //   classes.iconOnlyDefault,
+            // type === BUTTON_V2_TYPE.ICON_ONLY &&
+            //   size === BUTTON_V2_SIZE.SMALL &&
+            //   classes.iconOnlySmall,
+          )}
+          disabled={disabled}
+          {...api.getTriggerProps()}
+        >
+          {children}
+          <SVG
+            path={chevronDown}
+            svgClassName={classes.chevronDown}
+            spanClassName={classes.chevronDownSpan}
+          />
+        </button>
+      ) : isCustomTrigger ? (
+        <button
+          className={clsx(
+            classes.btn,
+            variant === BUTTON_V2_VARIANT.PRIMARY && classes.btnPrimary,
+            variant === BUTTON_V2_VARIANT.SECONDARY && classes.btnSecondary,
+            variant === BUTTON_V2_VARIANT.TERTIARY && classes.btnTertiary,
+            variant === BUTTON_V2_VARIANT.LINK && classes.btnLink,
+            size === BUTTON_V2_SIZE.DEFAULT && classes.btnDefault,
+            size === BUTTON_V2_SIZE.SMALL && classes.btnSmall,
+            disabled && classes.disabled,
+            size === BUTTON_V2_SIZE.DEFAULT && classes.iconOnlyDefault,
+            size === BUTTON_V2_SIZE.SMALL && classes.iconOnlySmall,
+            isTable && classes.groupActionTable,
+          )}
+          {...api.getTriggerProps()}
+        >
+          {children}
+        </button>
+      ) : (
+        <div className={classes.btnGrp}>
           <button
             className={clsx(
-              classes.grpIconBtn,
-              variant === BUTTON_V2_VARIANT.PRIMARY && classes.btnAddonPrimary,
-              variant === BUTTON_V2_VARIANT.SECONDARY && classes.btnAddonSecondary,
-              variant === BUTTON_V2_VARIANT.TERTIARY && classes.btnAddonTertiary,
-              size === BUTTON_V2_SIZE.SMALL && classes.btnAddonSmall,
-              'zap-reset-btn',
+              classes.btn,
+              variant === BUTTON_V2_VARIANT.PRIMARY && classes.btnPrimary,
+              variant === BUTTON_V2_VARIANT.SECONDARY && classes.btnSecondary,
+              variant === BUTTON_V2_VARIANT.TERTIARY && classes.btnTertiary,
+              variant === BUTTON_V2_VARIANT.LINK && classes.btnLink,
+              size === BUTTON_V2_SIZE.DEFAULT && classes.btnDefault,
+              size === BUTTON_V2_SIZE.SMALL && classes.btnSmall,
+              disabled && classes.disabled,
+              classes.btnGrpLeft,
             )}
-            {...(!isTable && api.getTriggerProps())}
+            disabled={disabled}
+            onClick={onClick}
           >
-            <SVG path={chevronDown} width={16} height={16} svgClassName={classes.chevronDown} />
+            {children}
           </button>
-        )}
-      </button>
+
+          <button
+            className={clsx(
+              classes.btn,
+              variant === BUTTON_V2_VARIANT.PRIMARY && classes.btnPrimary,
+              variant === BUTTON_V2_VARIANT.SECONDARY && classes.btnSecondary,
+              variant === BUTTON_V2_VARIANT.TERTIARY && classes.btnTertiary,
+              variant === BUTTON_V2_VARIANT.LINK && classes.btnLink,
+              size === BUTTON_V2_SIZE.DEFAULT && classes.btnDefault,
+              size === BUTTON_V2_SIZE.SMALL && classes.btnSmall,
+              disabled && classes.disabled,
+              classes.btnGrpRight,
+            )}
+            disabled={disabled}
+            {...api.getTriggerProps()}
+          >
+            <SVG
+              path={chevronDown}
+              svgClassName={classes.chevronDown}
+              spanClassName={classes.chevronDownSpan}
+            />
+          </button>
+        </div>
+      )}
       {isTable ? <Portal>{dropdown}</Portal> : dropdown}
     </>
   )
-})
+
+  // return (
+  //   <>
+  //     <button
+  //       ref={buttonRef}
+  //       className={clsx(
+  //         classes.btn,
+  //         classes.btnGrp,
+  //         variant === BUTTON_V2_VARIANT.PRIMARY && classes.btnPrimary,
+  //         variant === BUTTON_V2_VARIANT.SECONDARY && classes.btnSecondary,
+  //         variant === BUTTON_V2_VARIANT.TERTIARY && classes.btnTertiary,
+  //         size === BUTTON_V2_SIZE.SMALL && classes.btnSmall,
+  //         disabled && classes.disabled,
+  //         isFocused && classes.focusVisible,
+  //         isTable && classes.btnTable,
+  //       )}
+  //       disabled={disabled}
+  //       onClick={!isTable ? onClick : undefined}
+  //       {...(isTable && api.getTriggerProps())}
+  //     >
+  //       <span className={classes.grpTextBtn}>{children}</span>
+  //       {showDownIconBtn && (
+  //         <button
+  //           className={clsx(
+  //             classes.grpIconBtn,
+  //             variant === BUTTON_V2_VARIANT.PRIMARY && classes.btnAddonPrimary,
+  //             variant === BUTTON_V2_VARIANT.SECONDARY && classes.btnAddonSecondary,
+  //             variant === BUTTON_V2_VARIANT.TERTIARY && classes.btnAddonTertiary,
+  //             size === BUTTON_V2_SIZE.SMALL && classes.btnAddonSmall,
+  //             'zap-reset-btn',
+  //           )}
+  //           {...(!isTable && api.getTriggerProps())}
+  //         >
+  //           <SVG path={chevronDown} width={16} height={16} svgClassName={classes.chevronDown} />
+  //         </button>
+  //       )}
+  //     </button>
+  //     {isTable ? <Portal>{dropdown}</Portal> : dropdown}
+  //   </>
+  // )
+}
 
 export interface ActionsDropdownProps {
   variant?: BUTTON_V2_VARIANT
@@ -304,9 +390,10 @@ export interface ActionsDropdownProps {
   size?: BUTTON_V2_SIZE
   positionerProps?: PositioningOptions
   isTable?: boolean
+  children?: React.ReactNode
 }
 
-export const ActionsDropdown = React.forwardRef(function ({
+export function ActionsDropdown({
   variant,
   disabled,
   menuItems,
@@ -314,7 +401,7 @@ export const ActionsDropdown = React.forwardRef(function ({
   size,
   positionerProps,
   isTable,
-}: ActionsDropdownProps, ref) {
+}: ActionsDropdownProps) {
   const [isActive, setIsActive] = React.useState(false)
 
   return (
@@ -327,9 +414,7 @@ export const ActionsDropdown = React.forwardRef(function ({
       actionsDropdownOptions={{setIsActive}}
       positionerProps={positionerProps}
       isTable={isTable}
-      showDownIconBtn={false}
       isCustomTrigger={true}
-      ref={ref}
     >
       <SVG
         path={moreMenuIcon}
@@ -339,7 +424,7 @@ export const ActionsDropdown = React.forwardRef(function ({
       />
     </GroupAction>
   )
-}) 
+}
 
 ButtonV2.GroupAction = GroupAction
 ButtonV2.ActionsDropdown = ActionsDropdown
