@@ -1,3 +1,4 @@
+import * as React from 'react'
 import clsx from 'clsx'
 import classes from './task-card.module.css'
 import {UserChip} from '../../../user-chip'
@@ -5,6 +6,7 @@ import {Badge, BADGE_HIGHLIGHT, BADGE_STATUS} from '../../../badge'
 import {BUTTON_V2_SIZE, BUTTON_V2_VARIANT, ButtonV2, MenuItemV2} from '../../../button-v2'
 import {ITask, ITaskDetails, ITaskObjectValue} from '../../types'
 import {isObject, isString} from '../../../../utils'
+
 export default function TaskCard({data, menuItems}: {data: ITask; menuItems: MenuItemV2[]}) {
   return (
     <div className={classes.card}>
@@ -26,8 +28,8 @@ export default function TaskCard({data, menuItems}: {data: ITask; menuItems: Men
             <div className={clsx(classes.detailKey, 'zap-subcontent-medium')}>{detail.key}</div>
             {Array.isArray(detail.value) && detail.value.length > 0 ? (
               <div className={classes.detailValueAttachments}>
-                {detail.value.map(value => (
-                  <div className={classes.detailValueAttachment}>
+                {detail.value.map((value, index: React.Key) => (
+                  <div key={index} className={classes.detailValueAttachment}>
                     <div>
                       {/* <SVG
                         path={btn.icon as string}
