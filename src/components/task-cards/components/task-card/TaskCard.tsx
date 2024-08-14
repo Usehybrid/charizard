@@ -1,3 +1,4 @@
+import * as React from 'react'
 import clsx from 'clsx'
 import classes from './task-card.module.css'
 import {UserChip} from '../../../user-chip'
@@ -25,7 +26,28 @@ export default function TaskCard({data, menuItems}: {data: ITask; menuItems: Men
         {data.details.map((detail: ITaskDetails, i: number) => (
           <div key={i} className={classes.detail}>
             <div className={clsx(classes.detailKey, 'zap-subcontent-medium')}>{detail.key}</div>
-            {detail.value && isObject(detail.value) && Object.keys(detail.value).length ? (
+            {Array.isArray(detail.value) && detail.value.length > 0 ? (
+              <div className={classes.detailValueAttachments}>
+                {detail.value.map((value, index: React.Key) => (
+                  <div key={index} className={classes.detailValueAttachment}>
+                    <div>
+                      {/* <SVG
+                        path={btn.icon as string}
+                        customSvgStyles={{
+                          width: '12px',
+                          height: '12px',
+                        }}
+                      /> */}
+                    </div>
+                    <div>
+                      <a href={value.doc_link} target="_blank" className={classes.attachmentName}>
+                        {value.file_name}
+                      </a>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : detail.value && isObject(detail.value) && Object.keys(detail.value).length ? (
               <UserChip
                 username={(detail.value as ITaskObjectValue).first_name}
                 profileImgUrl={(detail.value as ITaskObjectValue).profile_img_url}
@@ -58,7 +80,7 @@ export default function TaskCard({data, menuItems}: {data: ITask; menuItems: Men
 
 const moduleStatusMap: {[key: string]: BADGE_STATUS} = {
   profile: BADGE_STATUS.DEFAULT,
-  leave: BADGE_STATUS.POSITIVE,
+  leave: BADGE_STATUS.DEFAULT,
   it_request: BADGE_STATUS.NEGATIVE,
   attendance: BADGE_STATUS.HIGHLIGHT,
   reimbursement: BADGE_STATUS.DEFAULT,
