@@ -6,7 +6,7 @@ import classes from './task-cards.module.css'
 import {ITask} from './types'
 import {Loader} from '../loader'
 import {SVG} from '../svg'
-import { MenuItemV2 } from '../button-v2'
+import {MenuItemV2} from '../button-v2'
 
 interface TaskCardsProps {
   headers: string[]
@@ -23,7 +23,7 @@ export function TaskCards({
   isLoading = false,
   isError = false,
   emptyText = 'No requests',
-  menuItems=[],
+  menuItems = [],
 }: TaskCardsProps) {
   return (
     <div className={classes.taskCardContainer}>
