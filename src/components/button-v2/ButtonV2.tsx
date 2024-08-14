@@ -234,6 +234,7 @@ function GroupAction({
                         ? () => menu.onClick(customData)
                         : menu.onClick
                   }
+                  style={menu.customStyles}
                 >
                   {menu.iconSrc && <SVG path={menu.iconSrc} svgClassName={classes.menuIcon} />}
                   {menu.label}

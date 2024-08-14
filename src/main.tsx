@@ -67,7 +67,7 @@ const options = [
 function App() {
   return (
     <div style={styles}>
-      <TableDemo />
+      <TaskCardDemo />
     </div>
   )
 }
