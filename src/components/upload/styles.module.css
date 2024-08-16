@@ -1,0 +1,232 @@
+.uploadBtn {
+  cursor: pointer;
+  text-align: center;
+  border-radius: 4px;
+  border: 1px dashed var(--p-p10);
+  background: var(--fill-highlight, #fbfbfe);
+  padding: 16px 0.8rem;
+  color: var(--text-secondary);
+}
+.uploadBtn:hover {
+  border: 1px dashed var(--theme-blue-dark);
+}
+.uploadBtn span {
+  color: #979797;
+}
+.dFlex {
+  display: flex;
+  align-items: center;
+}
+.singleDoc {
+  border-radius: 4px;
+  border: 1px solid var(--neutral-arch-200);
+  background: transparent;
+  padding: 12px;
+  position: relative;
+  margin-top: 20px;
+}
+.contentContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.detailsContainer {
+  width: fit-content;
+  margin-left: 5px;
+}
+.fileName {
+  width: 250px;
+  display: block;
+  color: var(--text-primary);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+  /* letter-spacing: 0.2px; */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* 150% */
+}
+.fileName:hover {
+  text-decoration: underline !important;
+}
+.subTitle2 {
+  display: flex;
+  align-items: center;
+  color: var(--text-secondary);
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 16px;
+  /* max-width: 100px; */
+  /* white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; */
+}
+.fileType {
+  max-width: 100px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+}
+.smallCircle {
+  width: 1.2px;
+  height: 10px;
+  /* border-radius: 50%; */
+  background-color: var(--text-secondary);
+  opacity: 0.5;
+  margin: 0 3px;
+  margin: 0 4px;
+}
+.removeBtn {
+  font-weight: 500;
+  font-size: 14px;
+  text-align: center;
+  cursor: pointer;
+  color: var(--status-error);
+}
+.editIcon {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  bottom: 10px;
+  right: 10px;
+  cursor: pointer;
+  background-color: rgba(245, 245, 245, 0.268);
+}
+.uploadedImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 3px solid #ffffff;
+  filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.1));
+}
+.emptyLogo {
+  align-items: center;
+  background: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-sizing: content-box;
+  color: #222;
+  display: flex;
+  font-weight: 800;
+  justify-content: center;
+  overflow: hidden;
+  font-size: 6vw;
+  border-radius: 5px;
+  width: 100%;
+  height: 100%;
+}
+.iconBox {
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 12px;
+  background-color: var(--theme-blue-30);
+  border-radius: 4px;
+}
+.title {
+  color: var(--p-p50);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: 0.2px;
+}
+.subTitle {
+  color: var(--text-hint);
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+}
+.progressBar {
+  position: absolute;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: #dcd9fd60;
+  transition: all 200ms;
+}
+.deleteIcon {
+  cursor: pointer;
+}
+.viewStateDoc {
+  max-width: 244px;
+  min-width: 244px;
+}
+.fileUploadLimit {
+  margin-bottom: 10px;
+  color: var(--status-info);
+}
+.fileUploadLimitError,
+.errorMsg {
+  margin-bottom: 10px;
+  color: var(--status-danger);
+}
+.fileContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-bottom: 15px;
+}
+.addDocsIcons {
+  height: 34px;
+  width: 34px;
+  margin-right: 15px;
+}
+.addDocsIcons > path,
+.addDocsIcons > g > path {
+  fill: var(--theme-blue);
+}
+.parentContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  /* gap: 5px; */
+}
+
+.subTitle b {
+  color: var(--text-primary);
+}
+.uploadContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.disabledUploadBtn {
+  border-radius: 4px;
+  border: 1px dashed var(--neutral-arch-300);
+  background: var(--disabled-50);
+  cursor: not-allowed;
+}
+.disabledUploadBtn:hover {
+  border-radius: 4px;
+  border: 1px dashed var(--neutral-arch-300);
+  background: var(--disabled-50);
+  cursor: not-allowed;
+}
+.disabledIcon > path,
+.disabledIcon > g > path {
+  fill: var(--text-secondary);
+}
+.disabledTitle,
+.disabledSubTitle {
+  color: var(--text-secondary);
+}
+
+.actionBtn {
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 8px;
+  border: 1px solid var(--stroke-selection);
+  background: var(--fill-selection);
+}
+.uploadingImg {
+  height: 30px;
+  width: 25px;
+}
