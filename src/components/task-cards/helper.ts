@@ -11,6 +11,7 @@ export default function getStatus(status: string) {
     case 'Approved':
       return 'approved'
     default:
-      return 'pending'
+      console.warn(`Unknown status: ${status}`)
+      return 'unknown'
   }
 }
