@@ -31,13 +31,7 @@ export default function TaskCard({data, menuItems}: {data: ITask; menuItems: Men
                 {detail.value.map((value, index: React.Key) => (
                   <div key={index} className={classes.detailValueAttachment}>
                     <div>
-                      {/* <SVG
-                        path={btn.icon as string}
-                        customSvgStyles={{
-                          width: '12px',
-                          height: '12px',
-                        }}
-                      /> */}
+                      <img src={value.details.icon} width={20} alt={`${value.details.type}`} />
                     </div>
                     <div>
                       <a href={value.doc_link} target="_blank" className={classes.attachmentName}>
