@@ -4,11 +4,12 @@ import calender from '../assets/calender.svg'
 import chevronLeft from '../assets/chevron-left.svg'
 import chevronRight from '../assets/chevron-right.svg'
 import {format, isDate, parseISO} from 'date-fns'
-import {DayPicker, DayPickerSingleProps, SelectSingleEventHandler} from 'react-day-picker'
+import {DayPicker, Matcher, PropsSingle} from 'react-day-picker'
 import {Placement} from '@popperjs/core'
 import {Button, BUTTON_VARIANT, SVG, Popover, PopoverTrigger, PopoverContent} from '../index'
+import clsx from 'clsx'
 
-interface DatePickerProps extends DayPickerSingleProps {
+interface DatePickerProps extends PropsSingle {
   value?: Date | string
   onChange: (value?: Date | string) => void
   mode: 'single'
@@ -29,6 +30,8 @@ interface DatePickerProps extends DayPickerSingleProps {
   popoverConfig?: {
     placement?: Placement
   }
+  showOutsideDays?: boolean
+  disabled?: Matcher | Matcher[]
 }
 
 export function DatePicker({
@@ -44,6 +47,7 @@ export function DatePicker({
   customContainerStyles,
   popoverConfig,
   isError,
+  showOutsideDays = true,
   ...props
 }: DatePickerProps) {
   const date = React.useMemo(() => {
@@ -64,7 +68,7 @@ export function DatePicker({
 
   const btnRef = React.useRef<HTMLDivElement>(null)
 
-  const handleDateSelect: SelectSingleEventHandler = selectedDate => {
+  const handleDateSelect: any = (selectedDate: any) => {
     if (!selectedDate) {
       onChange('')
       return
@@ -76,7 +80,7 @@ export function DatePicker({
   }
 
   return (
-    <div className={classes.datePicker} style={customContainerStyles}>
+    <div className={clsx(classes.huiDatePicker)} style={customContainerStyles}>
       <Popover placement={'bottom'}>
         <PopoverTrigger openOnHover={false}>
           {variant === 'form' ? (
@@ -85,23 +89,14 @@ export function DatePicker({
               disabled={disableDatepicker}
               variant={BUTTON_VARIANT.MINIMAL}
               customStyles={{
-                padding: '6px 12px',
+                padding: '0 12px',
                 cursor: disableDatepicker ? 'not-allowed' : 'pointer',
                 caretColor: isError || errorMsg ? 'var(--status-danger)' : undefined,
-                borderColor: isError || errorMsg ? 'var(--status-danger)' : 'var(--stroke-buttons-input)',
-                borderRadius: '4px'
+                borderColor: isError || errorMsg ? 'var(--status-danger)' : undefined,
               }}
             >
               <div className={classes.formButton} ref={btnRef}>
-                <span
-                  style={{
-                    color: !date ? 'var(--text-tertiary)' : undefined,
-                    fontSize: '14px',
-                    fontWeight: 500,
-                    lineHeight: '20px',
-                    letterSpacing: '0.2px'
-                  }}
-                >
+                <span style={{color: !date ? 'var(--text-secondary)' : undefined}}>
                   {displayDate}
                 </span>
                 <SVG path={calender} width={20} />
@@ -135,41 +130,41 @@ export function DatePicker({
           positionerStyles={{zIndex: 20}}
         >
           <DayPicker
-            showOutsideDays
+            showOutsideDays={showOutsideDays}
             captionLayout="dropdown"
-            fromYear={1950}
-            toYear={2050}
+            startMonth={new Date(2022, 0)}
+            endMonth={new Date(2050, 0)}
+            hidden={[{before: new Date(2022, 0), after: new Date(2050, 0)}]}
             classNames={{
-              months: classes.months,
               month: classes.month,
-              caption: classes.caption,
+              month_caption: classes.caption,
               caption_label: classes.captionLabel,
               dropdown: classes.dropdown,
-              caption_dropdowns: classes.captionDropdowns,
-              vhidden: classes.vHidden,
-              nav: classes.nav,
-              nav_button_previous: classes.navButtonPrevious,
-              nav_button_next: classes.navButtonNext,
-              table: classes.table,
-              head_row: classes.headRow,
-              head_cell: classes.headCell,
-              row: classes.row,
-              cell: classes.cell,
-              day_selected: classes.daySelected,
-              day_today: classes.dayToday,
-              day_outside: classes.dayOutside,
-              day_disabled: classes.dayDisabled,
-              day_hidden: classes.dayHidden,
-              nav_button: classes.navButton,
-              day: classes.day,
+              dropdowns: classes.captionDropdowns,
+              button_previous: classes.navButtonPrevious,
+              button_next: classes.navButtonNext,
+              month_grid: classes.table,
+              weekdays: classes.headRow,
+              weekday: classes.headCell,
+              week: classes.row,
+              day: classes.cell,
+              selected: classes.daySelected,
+              today: classes.dayToday,
+              outside: classes.dayOutside,
+              disabled: classes.dayDisabled,
+              hidden: classes.dayHidden,
+              day_button: classes.dayButton,
               dropdown_icon: classes.dropdownIcon,
             }}
             components={{
-              IconLeft: () => <SVG path={chevronLeft} width={20} height={20} />,
-              IconRight: () => <SVG path={chevronRight} width={20} height={20} />,
+              Chevron(props) {
+                if (props.orientation === 'left') {
+                  return <SVG path={chevronLeft} width={20} height={20} />
+                }
+                return <SVG path={chevronRight} width={20} height={20} />
+              },
             }}
             mode={mode}
-            initialFocus
             defaultMonth={date}
             selected={date}
             onSelect={handleDateSelect}
