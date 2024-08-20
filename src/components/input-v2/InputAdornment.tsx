@@ -38,7 +38,7 @@ import {SearchV2} from '../search-v2'
 export function InputLeftAdornment({
   children,
   isLoading = false,
-  disabled,
+  disabled = false,
   isDropdown,
   options,
   hideSearch = false,
@@ -144,15 +144,15 @@ export function InputLeftAdornment({
  * @param {DropdownOption[]} [props.options] - Options to display in the dropdown.
  * @param {boolean} [props.hideSearch=false] - Whether to hide the search input in the dropdown.
  * @param {(value: string) => void} [props.onOptionSelect] - Callback for when an option is selected.
- * 
+ *
  * @returns {JSX.Element} The right adornment for an input field.
- * 
+ *
  * @example
  *  <InputGroupV2>
  *   <InputV2 />
  *   <InputRightAdornment>...</InputRightAdornment>
  * </InputGroupV2>
- * 
+ *
  * @example
  *  <InputGroupV2>
  *   <InputRightAdornment isDropdown options={options} onOptionSelect={handleSelect}>...</InputRightAdornment>
@@ -162,7 +162,7 @@ export function InputLeftAdornment({
 export function InputRightAdornment({
   children,
   isLoading = false,
-  disabled,
+  disabled = false,
   isDropdown,
   options,
   hideSearch = false,

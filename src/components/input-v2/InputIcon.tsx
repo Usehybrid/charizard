@@ -27,7 +27,7 @@ export function InputLeftIcon({
   onClick,
   iconStyles,
   disabled = false,
-  className,
+  className = '',
 }: InputIconProps) {
   if (onClick) {
     return (
@@ -88,7 +88,7 @@ export function InputRightIcon({
   onClick,
   iconStyles,
   disabled = false,
-  className,
+  className = '',
 }: InputIconProps) {
   if (onClick) {
     return (

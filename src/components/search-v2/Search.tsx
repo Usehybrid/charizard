@@ -48,7 +48,7 @@ export function SearchV2({search = '', setSearch, ...props}: SearchV2Props) {
     <InputGroupV2>
       <InputLeftIcon icon={searchIcon} />
       <InputV2 {...props} value={searchTerm} onChange={searchHandler} />
-      {!!searchTerm.length && <InputRightIcon onClick={clearSearchHandler} icon={closeIcon} />}
+      {searchTerm && <InputRightIcon onClick={clearSearchHandler} icon={closeIcon} />}
     </InputGroupV2>
   )
 }

@@ -44,12 +44,12 @@ export const TextareaV2 = React.forwardRef<HTMLTextAreaElement, TextareaV2Props>
             'zap-content-medium',
             classes.input,
             classes.textarea,
-            !!errorMsg && classes.invalid,
+            errorMsg && classes.invalid,
             className,
           )}
           style={inputStyles}
         />
-        {!!errorMsg && (
+        {errorMsg && (
           <span className={clsx('zap-subcontent-medium ', classes.error)}>{errorMsg}</span>
         )}
       </div>
