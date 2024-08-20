@@ -46,3 +46,14 @@ export const clipboard = async (text?: string, showToast = true) => {
     })
   }
 }
+
+export const numberInputAllowedKeys = [
+  'Backspace',
+  'Tab',
+  'ArrowLeft',
+  'ArrowRight',
+  'Delete',
+  'Enter',
+  'Control',
+  'Meta',
+]

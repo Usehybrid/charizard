@@ -1,7 +1,5 @@
 .mainContainer {
-  min-width: 240px;
-  width: 100%;
-  max-width: 340px;
+  width: 240px;
   color: var(--text-primary);
 }
 
