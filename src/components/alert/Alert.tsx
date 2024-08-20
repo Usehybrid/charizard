@@ -1,7 +1,12 @@
 import * as React from 'react'
-import {AlertPropTypes} from './types'
 import classes from './styles.module.css'
 import clsx from 'clsx'
+import {SVG} from '../svg'
+import info from '../assets/info.svg'
+import success from '../assets/success.svg'
+import close from '../assets/close.svg'
+import down from '../assets/chevron-down.svg'
+import up from '../assets/chevron-up.svg'
 
 export enum ALERT_TYPES {
   DEFAULT = 'default',
@@ -13,12 +18,11 @@ export enum ALERT_ACTION_TYPES {
   SHOW_MORE = 'show-more',
 }
 
-const Images = {
-  Info: new URL('../assets/info.svg', import.meta.url).href,
-  Success: new URL('../assets/success.svg', import.meta.url).href,
-  Close: new URL('../assets/close.svg', import.meta.url).href,
-  Down: new URL('../assets/chevron-down.svg', import.meta.url).href,
-  Up: new URL('../assets/chevron-up.svg', import.meta.url).href,
+interface AlertPropTypes {
+  alertType: string
+  actionType: string
+  header: React.ReactNode
+  body?: React.ReactNode
 }
 
 export function Alert({alertType, actionType, header, body}: AlertPropTypes) {
@@ -38,37 +42,32 @@ export function Alert({alertType, actionType, header, body}: AlertPropTypes) {
     >
       <div className={classes.alertHeader}>
         <div className={classes.icons}>
-          <img
-            style={{
-              fill: alertTypeMap[alertType].color,
+          <SVG
+            path={alertTypeMap[alertType].icon}
+            customSvgStyles={{
               width: '16px',
               height: '16px',
             }}
-            src={alertTypeMap[alertType].icon}
           />
         </div>
         <div style={{color: alertTypeMap[alertType].color}}>{header}</div>
-        <div className={classes.icons}>
-          <img
-            style={{
+        <div
+          className={classes.icons}
+          onClick={() => {
+            if (actionType === ALERT_ACTION_TYPES.CLOSE) setHideAlert(true)
+            else setShowDropdown(e => !e)
+          }}
+        >
+          <SVG
+            customSvgStyles={{
               width: '16px',
               height: '16px',
             }}
-            onClick={() => {
-              if (actionType === ALERT_ACTION_TYPES.CLOSE) setHideAlert(true)
-              else setShowDropdown(e => !e)
-            }}
-            src={
-              actionType === ALERT_ACTION_TYPES.CLOSE
-                ? Images.Close
-                : showDropdown
-                  ? Images.Up
-                  : Images.Down
-            }
+            path={actionType === ALERT_ACTION_TYPES.CLOSE ? close : showDropdown ? up : down}
           />
         </div>
       </div>
-      {actionType === ALERT_ACTION_TYPES.SHOW_MORE && (
+      {actionType === ALERT_ACTION_TYPES.SHOW_MORE && body && (
         <div className={clsx(classes.dividerSection, {[classes.open]: showDropdown})}>
           <div className={classes.divider}></div>
         </div>
@@ -79,7 +78,7 @@ export function Alert({alertType, actionType, header, body}: AlertPropTypes) {
           <div>{body}</div>
           <div></div>
         </div>
-      ) : (
+      ) : body && (
         <div className={classes.alertBody}>
           <div></div>
           <div>{body}</div>
@@ -93,10 +92,10 @@ export function Alert({alertType, actionType, header, body}: AlertPropTypes) {
 export const alertTypeMap: {
   [key: string]: {bg: string; color: string; icon: string}
 } = {
-  [ALERT_TYPES.DEFAULT]: {bg: 'var(--p-p10)', color: 'var(--p-p50)', icon: Images.Info},
+  [ALERT_TYPES.DEFAULT]: {bg: 'var(--p-p10)', color: 'var(--p-p50)', icon: info},
   [ALERT_TYPES.POSITIVE]: {
     bg: 'var(--status-success-s10)',
     color: 'var(--status-success-s70)',
-    icon: Images.Success,
+    icon: success,
   },
 }
