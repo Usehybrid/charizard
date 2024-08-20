@@ -2,7 +2,7 @@ import {TooltipV2Props} from '../tooltip-v2/TooltipV2'
 
 /**
  * Enum representing the different components within the input system.
- * This can be used to identify and manage the different subcomponents 
+ * This can be used to identify and manage the different subcomponents
  * of a more complex and nested input structure.
  */
 export enum INPUT_COMPONENTS {
@@ -21,12 +21,12 @@ export enum INPUT_COMPONENTS {
 }
 
 /**
- * Props for the InputV2 component, which extends the standard HTML input element 
+ * Props for the InputV2 component, which extends the standard HTML input element
  * with additional styling and error handling.
  *
  * @interface InputV2Props
  * @extends {React.InputHTMLAttributes<HTMLInputElement>}
- * 
+ *
  * @property {string} [errorMsg] - Error message to display below the input if there is a validation error.
  * @property {string} [containerClassName] - Additional class name(s) for the input container div.
  * @property {never} [inputStyles] - Used for internal styling when grouping it with multiple components. use className for styling input.
@@ -37,7 +37,7 @@ export enum INPUT_COMPONENTS {
  *   placeholder="Enter"
  *   errorMsg="This field is required"
  * />
- * @example 
+ * @example
  * with formik
  * <InputV2
  *   {...formik.getFieldProps(key)}
@@ -53,13 +53,13 @@ export interface InputV2Props extends React.InputHTMLAttributes<HTMLInputElement
 }
 
 /**
- * Props for the TextareaV2 component, which extends the standard HTML textarea element 
+ * Props for the TextareaV2 component, which extends the standard HTML textarea element
  * with additional styling and error handling.
  *
  * @interface InputV2Props
  * @extends {React.TextareaHTMLAttributes<HTMLTextAreaElement>}
- * 
- * 
+ *
+ *
  * @property {string} [errorMsg] - Error message to display below the textarea if there is a validation error.
  * @property {string} [containerClassName] - Additional class name(s) for the textarea container div.
  * @property {never} [inputStyles] - Used for internal styling when grouping it with multiple components. use className for styling textarea.
@@ -70,7 +70,7 @@ export interface InputV2Props extends React.InputHTMLAttributes<HTMLInputElement
  *   placeholder="Enter"
  *   errorMsg="This field is required"
  * />
- * @example 
+ * @example
  * with formik
  * <TextareaV2
  *   {...formik.getFieldProps(key)}
@@ -85,13 +85,12 @@ export interface TextareaV2Props extends React.TextareaHTMLAttributes<HTMLTextAr
   containerStyles?: never
 }
 
-
 /**
  * Props for the InputControl component, used as a wrapper to group multiple input-related components.
  *
  * @interface InputControlPropsV2
  * @extends {React.HTMLAttributes<HTMLDivElement>}
- * 
+ *
  * @property {React.ReactNode} children - The elements that will be rendered inside the control.
  *
  * @example
@@ -112,7 +111,7 @@ export interface InputControlPropsV2 extends React.HTMLAttributes<HTMLDivElement
  *
  * @interface LabelPropsV2
  * @extends {React.LabelHTMLAttributes<HTMLLabelElement>}
- * 
+ *
  * @property {React.ReactNode} children - The text or elements inside the label.
  * @property {string} [info] - Additional info to display, such as help text in tooltip.
  * @property {boolean} [disabled] - Whether the associated input is disabled.
@@ -130,13 +129,12 @@ export interface LabelPropsV2 extends React.LabelHTMLAttributes<HTMLLabelElement
   tooltipProps?: Partial<TooltipV2Props>
 }
 
-
 /**
  * Props for the InputGroup component, which groups input icons and adornments elements together.
  *
  * @interface InputGroupPropsV2
  * @extends {React.HTMLAttributes<HTMLDivElement>}
- * 
+ *
  * @property {React.ReactNode} children - The elements to be grouped together.
  *
  * @example
@@ -164,7 +162,7 @@ export interface InputGroupPropsV2 extends React.HTMLAttributes<HTMLDivElement> 
  * Props for the InputIcon component, which is used to display an icon within an input field. It can be left, right or both.
  *
  * @interface InputIconProps
- * 
+ *
  * @property {string} icon - The icon to display.
  * @property {() => void} [onClick] - Optional click handler for the icon.
  * @property {never} [iconStyles] - Used for internal styling when grouping it with multiple components. use className for styling icon if clickable.
@@ -190,7 +188,7 @@ export interface InputIconProps {
  * Represents an option in a dropdown menu for adornment.
  *
  * @interface DropdownOption
- * 
+ *
  * @property {string} value - The value associated with the dropdown option.
  * @property {string} label - The label displayed for the dropdown option.
  *
@@ -205,12 +203,11 @@ export interface DropdownOption {
   label: string
 }
 
-
 /**
  * Base props for input adornment components. It can be dropdown or non actionable
  *
  * @interface BaseInputAdornmentProps
- * 
+ *
  * @property {React.ReactNode} children - The elements or text inside the adornment.
  * @property {boolean} [disabled] - Whether the adornment is disabled.
  */
@@ -224,7 +221,7 @@ export interface BaseInputAdornmentProps {
  *
  * @interface DropdownProps
  * @extends {BaseInputAdornmentProps}
- * 
+ *
  * @property {true} isDropdown - Indicates this adornment is a dropdown.
  * @property {DropdownOption[]} options - List of options available in the dropdown.
  * @property {(value: string) => void} onOptionSelect - Callback function when an option is selected.
@@ -250,7 +247,7 @@ export interface DropdownProps extends BaseInputAdornmentProps {
  *
  * @interface NonDropdownProps
  * @extends {BaseInputAdornmentProps}
- * 
+ *
  * @property {false} [isDropdown] - Indicates this adornment is not a dropdown.
  * @property {never} [options] - Options are not applicable to non-dropdown adornments.
  * @property {never} [hideSearch] - Search hiding is not applicable to non-dropdown adornments.
@@ -282,7 +279,7 @@ export type InputAdornmentProps = DropdownProps | NonDropdownProps
  *
  * @interface InputCountProps
  * @extends {InputV2Props}
- * 
+ *
  * @property {(value: number) => void} onCountChange - Callback when the count changes.
  * @property {never} [onChange] - `onChange` is disabled for this component; use `onCountChange`.
  * @property {number} [min] - Minimum allowable value for the count (by default Infinity).
@@ -302,13 +299,12 @@ export interface InputCountProps extends InputV2Props {
   countContainerClassName?: string
 }
 
-
 /**
  * Props for an input field designed to accept numeric values.
  *
  * @interface InputNumberProps
  * @extends {InputV2Props}
- * 
+ *
  * @property {(value: number) => void} onCountChange - Callback when the numeric value changes.
  * @property {never} [onChange] - `onChange` is disabled for this component; use `onCountChange`.
  * @property {number} [min] - Minimum allowable value for the input (by default Infinity)
@@ -332,7 +328,7 @@ export interface InputNumberProps extends InputV2Props {
  * Props for a number increment/decrement adornment in an InputNumber field.
  *
  * @interface NumberAdornmentProps
- * 
+ *
  * @property {() => void} onIncrement - Callback when the increment button is clicked.
  * @property {() => void} onDecrement - Callback when the decrement button is clicked.
  * @property {boolean} [disabled] - Whether the increment/decrement buttons are disabled.

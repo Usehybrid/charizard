@@ -32,6 +32,24 @@ import clsx from 'clsx'
  *   <InputRightAdornment>...</InputRightAdornment>
  * </InputGroupV2>
  */
+
+const styleMap: Record<string, React.CSSProperties> = {
+  [INPUT_COMPONENTS.LEFT_ICON]: {paddingLeft: '40px'},
+  [INPUT_COMPONENTS.RIGHT_ICON]: {paddingRight: '40px'},
+  [INPUT_COMPONENTS.LEFT_ADORNMENT]: {
+    borderTopLeftRadius: 0,
+    borderBottomLeftRadius: 0,
+  },
+  [INPUT_COMPONENTS.RIGHT_ADORNMENT]: {
+    borderTopRightRadius: 0,
+    borderBottomRightRadius: 0,
+  },
+  [INPUT_COMPONENTS.NUMBER_ADORNMENT]: {
+    borderTopRightRadius: 0,
+    borderBottomRightRadius: 0,
+  },
+}
+
 export function InputGroupV2({className = '', children, ...props}: InputGroupPropsV2) {
   const styles: React.CSSProperties = {}
   let iconStyles: React.CSSProperties = {}
@@ -43,32 +61,15 @@ export function InputGroupV2({className = '', children, ...props}: InputGroupPro
 
     const displayName = (type as React.ComponentType).displayName
 
-    if (typeof displayName === 'string') {
-      const styleMap: Record<string, React.CSSProperties> = {
-        [INPUT_COMPONENTS.LEFT_ICON]: {paddingLeft: '40px'},
-        [INPUT_COMPONENTS.RIGHT_ICON]: {paddingRight: '40px'},
-        [INPUT_COMPONENTS.LEFT_ADORNMENT]: {
-          borderTopLeftRadius: 0,
-          borderBottomLeftRadius: 0,
-        },
-        [INPUT_COMPONENTS.RIGHT_ADORNMENT]: {
-          borderTopRightRadius: 0,
-          borderBottomRightRadius: 0,
-        },
-        [INPUT_COMPONENTS.NUMBER_ADORNMENT]: {
-          borderTopRightRadius: 0,
-          borderBottomRightRadius: 0,
-        },
-      }
+    if (typeof displayName === 'string' && styleMap[displayName]) {
+      Object.assign(styles, styleMap[displayName])
+    }
 
-      Object.assign(styles, styleMap[displayName] || {})
-
-      if (displayName === INPUT_COMPONENTS.INPUT) {
-        const inputProps = child.props
-        const {errorMsg} = inputProps
-        if (errorMsg) {
-          iconStyles = {top: 'calc(50% - 9px)'}
-        }
+    if (displayName === INPUT_COMPONENTS.INPUT) {
+      const inputProps = child.props
+      const {errorMsg} = inputProps
+      if (errorMsg) {
+        iconStyles = {top: 'calc(50% - 9px)'}
       }
     }
   })
@@ -79,21 +80,20 @@ export function InputGroupV2({className = '', children, ...props}: InputGroupPro
     }
 
     const displayName = (child.type as React.ComponentType).displayName
-
-    if (displayName === INPUT_COMPONENTS.INPUT) {
+    if (typeof displayName === 'string') {
+      const cloneProps: any = {
+        [INPUT_COMPONENTS.INPUT]: {
+          inputStyles: {...styles, ...child.props.inputStyles},
+          containerStyles: {width: '100%', ...child.props.inputStyles},
+        },
+        [INPUT_COMPONENTS.LEFT_ICON]: {iconStyles: {...child.props.iconStyles, ...iconStyles}},
+        [INPUT_COMPONENTS.RIGHT_ICON]: {iconStyles: {...child.props.iconStyles, ...iconStyles}},
+      }
       return React.cloneElement(child, {
         ...child.props,
-        inputStyles: {...styles, ...child.props.inputStyles},
-        containerStyles: {width: '100%', ...child.props.inputStyles},
+        ...(cloneProps[displayName] || {}),
       })
     }
-    if (displayName === INPUT_COMPONENTS.LEFT_ICON || displayName === INPUT_COMPONENTS.RIGHT_ICON) {
-      return React.cloneElement(child, {
-        ...child.props,
-        iconStyles: {...child.props.iconStyles, ...iconStyles},
-      })
-    }
-
     return child
   })
 

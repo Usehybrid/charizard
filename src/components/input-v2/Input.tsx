@@ -41,12 +41,12 @@ export const InputV2 = React.forwardRef<HTMLInputElement, InputV2Props>(
           className={clsx(
             'zap-content-medium',
             classes.input,
-            !!errorMsg && classes.invalid,
+            errorMsg && classes.invalid,
             className,
           )}
           style={inputStyles}
         />
-        {!!errorMsg && (
+        {errorMsg && (
           <span className={clsx('zap-subcontent-medium ', classes.error)}>{errorMsg}</span>
         )}
       </div>

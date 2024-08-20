@@ -31,14 +31,14 @@ export function InputNumber({
   min = -Infinity,
   max = Infinity,
   count = 0,
-  countContainerClassName,
+  countContainerClassName = '',
   disabled = false,
   ...props
 }: InputNumberProps) {
   const countHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = +e.target.value
 
-    if (!isNaN(value)) {
+    if (!Number.isNaN(value)) {
       onCountChange?.(value)
     } else {
       onCountChange(0)
