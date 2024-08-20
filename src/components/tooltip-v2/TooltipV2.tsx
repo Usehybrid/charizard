@@ -4,7 +4,7 @@ import {createPortal} from 'react-dom'
 import {Tooltip} from 'react-tooltip'
 import {truncate} from '../../utils/text'
 
-interface TooltipV2Props {
+export interface TooltipV2Props {
   id: string
   placement?:
     | 'top'

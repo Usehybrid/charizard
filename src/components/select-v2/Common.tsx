@@ -8,7 +8,7 @@ import classes from './styles.module.css'
 import {useColorsFromWord} from '../../utils/hooks/use-color-from-word'
 import {SELECT_VARIANT} from './types'
 import {getInitials} from '../../utils/text'
-import {AsyncImage} from '../AsyncImage'
+import {AsyncImage} from '../asyncImage'
 
 /**
  * Custom Dropdown Indicator component for react-select.
