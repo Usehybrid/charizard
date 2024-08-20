@@ -27,6 +27,7 @@
 .menuItem:hover {
   background-color: var(--fill-selection);
   cursor: default;
+  cursor: pointer;
 }
 
 .page {
@@ -36,4 +37,8 @@
   letter-spacing: 0.20000000298023224px;
   text-align: left;
   color: var(--text-primary);
+}
+
+.page:hover {
+  color: var(--link-hover);
 }

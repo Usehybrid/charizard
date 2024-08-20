@@ -6,6 +6,7 @@ import {Badge, BADGE_HIGHLIGHT, BADGE_STATUS} from '../../../badge'
 import {BUTTON_V2_SIZE, BUTTON_V2_VARIANT, ButtonV2, MenuItemV2} from '../../../button-v2'
 import {ITask, ITaskDetails, ITaskObjectValue} from '../../types'
 import {isObject, isString} from '../../../../utils'
+import getStatus from '../../helper'
 
 export default function TaskCard({data, menuItems}: {data: ITask; menuItems: MenuItemV2[]}) {
   return (
@@ -31,13 +32,7 @@ export default function TaskCard({data, menuItems}: {data: ITask; menuItems: Men
                 {detail.value.map((value, index: React.Key) => (
                   <div key={index} className={classes.detailValueAttachment}>
                     <div>
-                      {/* <SVG
-                        path={btn.icon as string}
-                        customSvgStyles={{
-                          width: '12px',
-                          height: '12px',
-                        }}
-                      /> */}
+                      <img src={value.details.icon} width={20} alt={`${value.details.type}`} />
                     </div>
                     <div>
                       <a href={value.doc_link} target="_blank" className={classes.attachmentName}>
@@ -63,7 +58,7 @@ export default function TaskCard({data, menuItems}: {data: ITask; menuItems: Men
         ))}
       </div>
       <div className={classes.statusSection}>
-        <Badge highlight={BADGE_HIGHLIGHT.DOT} status={statusMap[data.status]}>
+        <Badge highlight={BADGE_HIGHLIGHT.DOT} status={statusMap[getStatus(data.status)]}>
           {data.status}
         </Badge>
       </div>

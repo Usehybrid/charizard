@@ -31,6 +31,7 @@ interface FileType {
     key: string
     type: string
     file_name: string
+    icon?: string
   }
   doc_link: string
   file_name: string

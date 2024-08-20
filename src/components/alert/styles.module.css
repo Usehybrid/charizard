@@ -1,0 +1,63 @@
+.alert {
+  flex-direction: column;
+  padding: 8px 12px;
+  width: 100%;
+  border: 1px solid;
+  border-radius: 8px;
+}
+
+.alertHeader {
+  display: grid;
+  grid-template-columns: 0.4fr 11.2fr 0.4fr;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.alertBody {
+  display: grid;
+  grid-template-columns: 0.4fr 11.2fr 0.4fr;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.alertDropDownBody {
+  display: grid;
+  grid-template-columns: 0.4fr 11.2fr 0.4fr;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-in-out;
+}
+
+.alertDropDownBody.open {
+  max-height: 500px;
+}
+
+.dividerSection {
+  display: flex;
+  align-items: center;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-in-out;
+}
+
+.dividerSection.open {
+  max-height: 500px;
+}
+
+.divider {
+  display: inline-block;
+  height: 1px;
+  width: 100%;
+  background-color: var(--status-success-s50);
+}
+
+.icons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

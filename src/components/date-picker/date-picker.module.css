@@ -1,7 +1,6 @@
-.datePicker {
+.huiDatePicker {
   display: grid;
   gap: 0.5rem;
-  min-width: 240px;
 }
 .formButton {
   width: 100%;
@@ -37,10 +36,7 @@
 .buttonContent .calendarIconSpan {
   flex-shrink: 0;
 }
-.months {
-  display: flex;
-  gap: 1rem;
-}
+
 .month {
   gap: 1rem;
 }
@@ -57,12 +53,13 @@
   margin: auto;
   gap: 4px;
 }
-.nav {
+/* .nav {
   display: flex;
   gap: 1rem;
   align-items: center;
-}
-.navButton {
+} */
+.navButtonNext,
+.navButtonPrevious {
   height: 1.75rem;
   width: 1.75rem;
   background-color: transparent;
@@ -72,16 +69,20 @@
   border: 1px solid var(--theme-blue);
   border-radius: 4px;
 }
-.navButton:hover {
+.navButtonNext:hover,
+.navButtonPrevious:hover {
   opacity: 1;
-}
-.navButton svg > path,
-.navButton svg > g > path {
-  fill: var(--theme-blue);
-}
-.navButton:hover {
   background-color: var(--neutral-arch-20);
 }
+.navButtonNext svg > path,
+.navButtonNext svg > g > path,
+.navButtonPrevious svg > path,
+.navButtonPrevious svg > g > path {
+  fill: var(--theme-blue);
+}
+/* .navButton:hover {
+  background-color: var(--neutral-arch-20);
+} */
 .navButtonPrevious {
   left: 1rem;
 }
@@ -133,7 +134,7 @@
   position: relative;
   z-index: 20;
 }
-.day {
+.dayButton {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -146,7 +147,7 @@
   line-height: 20px;
   font-size: 14px;
 }
-.day:hover {
+.dayButton:hover {
   background-color: var(--neutral-arch-20);
   color: var(--text-primary);
 }
@@ -156,6 +157,11 @@
 }
 .daySelected {
   background-color: var(--theme-blue-dark);
+  color: var(--white);
+  border-radius: 8px;
+}
+
+.daySelected button {
   color: var(--white);
 }
 .daySelected:hover {

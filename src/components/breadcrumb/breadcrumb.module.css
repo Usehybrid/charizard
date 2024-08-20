@@ -10,11 +10,12 @@
 .page {
   display: inline-flex;
   padding: 0px 4px;
-  align-items: flex-start;
+  align-items: center;
   gap: 8px;
   color: var(--text-secondary);
   cursor: default;
   font-size: 14px;
+  cursor: pointer;
 }
 
 .page:hover {
@@ -32,6 +33,7 @@
   cursor: default;
   font-size: 14px;
   border: 1px solid transparent;
+  cursor: pointer;
 }
 
 .focused {
