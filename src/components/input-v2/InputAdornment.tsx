@@ -8,6 +8,33 @@ import {useMachine, normalizeProps} from '@zag-js/react'
 import chevronDownIcon from '../assets/chevron-down-16.svg'
 import {SearchV2} from '../search-v2'
 
+/**
+ * Component for rendering an adornment on the left side of an input.
+ * It can either display static content or function as a dropdown trigger.
+ *
+ * @param {InputAdornmentProps} props - The properties for the InputLeftAdornment component.
+ * @param {React.ReactNode} props.children - The content to display inside the adornment.
+ * @param {boolean} [props.isLoading=false] - Indicates if the dropdown is in a loading state.
+ * @param {boolean} [props.disabled] - Whether the adornment is disabled.
+ * @param {boolean} [props.isDropdown] - Whether the adornment is a dropdown trigger.
+ * @param {DropdownOption[]} [props.options] - Options to display in the dropdown.
+ * @param {boolean} [props.hideSearch=false] - Whether to hide the search input in the dropdown.
+ * @param {(value: string) => void} [props.onOptionSelect] - Callback for when an option is selected.
+ * 
+ * @returns {JSX.Element} The left adornment for an input field.
+ * 
+ * @example
+ *  <InputGroupV2>
+ *   <InputV2 />
+ *   <InputLeftAdornment>...</InputLeftAdornment>
+ * </InputGroupV2>
+ * 
+ * @example
+ *  <InputGroupV2>
+ *   <InputLeftAdornment isDropdown options={options} onOptionSelect={handleSelect}>...</InputLeftAdornment>
+ *   <InputV2 />
+ * </InputGroupV2>
+ */
 export function InputLeftAdornment({
   children,
   isLoading = false,
@@ -105,6 +132,33 @@ export function InputLeftAdornment({
   )
 }
 
+/**
+ * Component for rendering an adornment on the right side of an input.
+ * It can either display static content or function as a dropdown trigger.
+ *
+ * @param {InputAdornmentProps} props - The properties for the InputRightAdornment component.
+ * @param {React.ReactNode} props.children - The content to display inside the adornment.
+ * @param {boolean} [props.isLoading=false] - Indicates if the dropdown is in a loading state.
+ * @param {boolean} [props.disabled] - Whether the adornment is disabled.
+ * @param {boolean} [props.isDropdown] - Whether the adornment is a dropdown trigger.
+ * @param {DropdownOption[]} [props.options] - Options to display in the dropdown.
+ * @param {boolean} [props.hideSearch=false] - Whether to hide the search input in the dropdown.
+ * @param {(value: string) => void} [props.onOptionSelect] - Callback for when an option is selected.
+ * 
+ * @returns {JSX.Element} The right adornment for an input field.
+ * 
+ * @example
+ *  <InputGroupV2>
+ *   <InputV2 />
+ *   <InputRightAdornment>...</InputRightAdornment>
+ * </InputGroupV2>
+ * 
+ * @example
+ *  <InputGroupV2>
+ *   <InputRightAdornment isDropdown options={options} onOptionSelect={handleSelect}>...</InputRightAdornment>
+ *   <InputV2 />
+ * </InputGroupV2>
+ */
 export function InputRightAdornment({
   children,
   isLoading = false,

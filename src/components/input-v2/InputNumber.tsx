@@ -8,6 +8,24 @@ import {numberInputAllowedKeys} from '../../utils/text'
 import clsx from 'clsx'
 import NumberAdornment from './NumberAdornment'
 
+/**
+ * InputNumber is a numeric input component with increment and decrement controls.
+ * It ensures that the value stays within the specified min and max bounds.
+ *
+ * @param {InputNumberProps} props - The properties for the InputNumber component.
+ * @param {(value: number) => void} props.onCountChange - Callback function that is called when the numeric value changes.
+ * @param {number} [props.min=-Infinity] - The minimum value allowed.
+ * @param {number} [props.max=Infinity] - The maximum value allowed.
+ * @param {number} [props.count=0] - The initial value of the input.
+ * @param {string} [props.countContainerClassName] - Additional class names for the container of the numeric input.
+ * @param {boolean} [props.disabled=false] - Whether the input and controls are disabled.
+ * @param {React.InputHTMLAttributes<HTMLInputElement>} props - Additional props are passed to the underlying input component.
+ *
+ * @returns {JSX.Element} The rendered InputNumber component.
+ *
+ * @example
+ * <InputNumber onCountChange={(value) => ...)} count={5} min={0} max={10} />
+ */
 export function InputNumber({
   onCountChange,
   min = -Infinity,

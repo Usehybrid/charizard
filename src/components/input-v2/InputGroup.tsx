@@ -3,6 +3,35 @@ import classes from './styles.module.css'
 import {InputGroupPropsV2, INPUT_COMPONENTS} from './types'
 import clsx from 'clsx'
 
+/**
+ * InputGroupV2 is a wrapper component that groups related input adornment and icons together,
+ * applying appropriate styles based on the child components it contains. It handles
+ * padding and border-radius adjustments for elements like icons and adornments.
+ *
+ * @param {InputGroupPropsV2} props - The properties for the InputGroupV2 component.
+ * @param {string} [props.className=''] - Additional class names to apply to the group container.
+ * @param {React.ReactNode} props.children - The child components to be grouped, such as inputs, icons, or adornments.
+ * @param {React.HTMLAttributes<HTMLDivElement>} [props] - Additional HTML div attributes.
+ *
+ * @returns {JSX.Element} The rendered InputGroupV2 component.
+ *
+ * @example
+ *  <InputGroupV2>
+ *   <InputLeftIcon icon={...} />
+ *   <InputV2 />
+ *   <InputRightIcon icon={...} />
+ * </InputGroupV2>
+ * @example
+ *  <InputGroupV2>
+ *   <InputLeftAdornment isDropdown options={options} onOptionSelect={handleSelect}>...</InputLeftAdornment>
+ *   <InputV2 />
+ * </InputGroupV2>
+ * @example
+ *  <InputGroupV2>
+ *   <InputV2 />
+ *   <InputRightAdornment>...</InputRightAdornment>
+ * </InputGroupV2>
+ */
 export function InputGroupV2({className = '', children, ...props}: InputGroupPropsV2) {
   const styles: React.CSSProperties = {}
   let iconStyles: React.CSSProperties = {}

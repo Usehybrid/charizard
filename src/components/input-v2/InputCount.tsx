@@ -10,6 +10,32 @@ import {countRegex} from '../../utils/regex'
 import {numberInputAllowedKeys} from '../../utils/text'
 import clsx from 'clsx'
 
+/**
+ * InputCount is a specialized input component that allows users to increment
+ * or decrement a numeric value within a specified range. It includes buttons
+ * for incrementing and decrementing the value, and supports keyboard input for
+ * adjusting the count.
+ *
+ * @param {InputCountProps} props - The properties for the InputCount component.
+ * @param {(value: number) => void} props.onCountChange - Callback function called when the count value changes.
+ * @param {number} [props.min=-Infinity] - The minimum value that the count can be set to.
+ * @param {number} [props.max=Infinity] - The maximum value that the count can be set to.
+ * @param {number} [props.count=0] - The current count value.
+ * @param {string} [props.countContainerClassName] - Additional class names to apply to the container.
+ * @param {boolean} [props.disabled] - Whether the input is disabled.
+ * @param {React.InputHTMLAttributes<HTMLInputElement>} [props] - Additional HTML input attributes.
+ *
+ * @returns {JSX.Element} The rendered InputCount component.
+ *
+ * @example
+ * <InputCount
+ *   onCountChange={(value) => console.log(value)}
+ *   min={0}
+ *   max={10}
+ *   count={5}
+ *   disabled={false}
+ * />
+ */
 export function InputCount({
   onCountChange,
   min = -Infinity,
