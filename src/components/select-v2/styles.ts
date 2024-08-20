@@ -54,6 +54,7 @@ export const styles: StylesConfig<any> = {
       },
       display: 'flex',
       alignItems: 'center',
+      cursor: 'pointer',
     }
   },
   noOptionsMessage: baseStyles => {
