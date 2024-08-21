@@ -14,7 +14,7 @@ interface TaskCardsProps {
   isLoading?: boolean
   isError?: boolean
   emptyText?: string
-  menuItems: MenuItemV2[]
+  menuItems: MenuItemV2[][]
 }
 
 export function TaskCards({
@@ -23,7 +23,7 @@ export function TaskCards({
   isLoading = false,
   isError = false,
   emptyText = 'No requests',
-  menuItems = [],
+  menuItems = [[]],
 }: TaskCardsProps) {
   return (
     <div className={classes.taskCardContainer}>
@@ -34,7 +34,7 @@ export function TaskCards({
         ) : isError ? (
           <Error />
         ) : data.length > 0 ? (
-          data.map((data: ITask, idx) => <Card data={data} key={idx} menuItems={menuItems} />)
+          data.map((data: ITask, idx) => <Card data={data} key={idx} menuItems={menuItems[idx]} />)
         ) : (
           <Empty emptyText={emptyText} />
         )}
