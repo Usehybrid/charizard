@@ -60,7 +60,7 @@
   padding-top: 8px;
   padding-bottom: 8px;
   min-width: fit-content;
-  border: 1px solid var(--stroke-border);
+  border-bottom: 1px solid var(--stroke-border);
 }
 
 .tableDataWithSelection:first-child {
@@ -109,4 +109,5 @@
   width: 100%;
   overflow-x: scroll;
   border: 1px solid var(--stroke-border);
+  border-bottom: none;
 }
