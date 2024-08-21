@@ -40,8 +40,9 @@
 .table {
   table-layout: fixed;
   width: 100%;
-  border-collapse: collapse;
   height: 100%;
+  border-collapse: separate;
+  border-spacing: unset;
 }
 
 .tableHead {
@@ -59,6 +60,7 @@
   padding-top: 8px;
   padding-bottom: 8px;
   min-width: fit-content;
+  border: 1px solid var(--stroke-border);
 }
 
 .tableDataWithSelection:first-child {
@@ -79,6 +81,7 @@
 
 .tableHeader {
   color: var(--text-primary);
+  border-bottom: 1px solid var(--stroke-border);
 }
 
 .tableHeaderSort:hover {
@@ -105,4 +108,5 @@
 .tableScrollContainer {
   width: 100%;
   overflow-x: scroll;
+  border: 1px solid var(--stroke-border);
 }

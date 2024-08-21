@@ -33,7 +33,7 @@
 .emailBox {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 5px;
   width: 100%;
 }
 
@@ -43,6 +43,20 @@
   text-overflow: ellipsis;
   overflow: hidden;
   max-width: 230px;
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+  display: none;
+}
+
+.icon > path {
+  fill: var(--dark-d50);
+}
+
+.userDetails:hover .icon {
+  display: inline;
 }
 
 /* commented out styles */
@@ -97,13 +111,4 @@
 .eventBox .badge .emoji {
   margin-left: 0.5rem;
   font-size: 1.075rem;
-}
-
-.icon {
-  width: 16px;
-  height: 16px;
-}
-
-.icon > path {
-  fill: var(--dark-d50);
 }
