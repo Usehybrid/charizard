@@ -92,7 +92,7 @@ export function Alert({alertType, actionType, header, body}: AlertPropTypes) {
 export const alertTypeMap: {
   [key: string]: {bg: string; color: string; icon: string}
 } = {
-  [ALERT_TYPES.DEFAULT]: {bg: 'var(--p-p10)', color: 'var(--p-p50)', icon: info},
+  [ALERT_TYPES.DEFAULT]: {bg: 'var(--fill-selection)', color: 'var(--p-p50)', icon: info},
   [ALERT_TYPES.POSITIVE]: {
     bg: 'var(--status-success-s10)',
     color: 'var(--status-success-s70)',
