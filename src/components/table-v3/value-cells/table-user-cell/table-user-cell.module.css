@@ -56,7 +56,7 @@
 }
 
 .userDetails:hover .icon {
-  display: inline;
+  display: block;
 }
 
 /* commented out styles */
