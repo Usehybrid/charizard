@@ -39,7 +39,7 @@ export function TablePagination({paginationConfig}: TablePaginationProps) {
   React.useEffect(() => {
     // used to rerender the component after searching and filtering in the table
     paginationApi.setCount(metaData?.total_items || 0)
-  }, [metaData?.total_items])
+  }, [metaData?.total_items, limit])
 
   const actualPageNo = metaData?.page_no ? metaData.page_no : 0
   const startItem = actualPageNo * (metaData?.items_on_page || 0) + 1

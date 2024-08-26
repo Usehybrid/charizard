@@ -13,6 +13,7 @@
   align-items: center;
   gap: 10px;
   padding-left: 40px;
+  padding-right: 40px;
 
   color: var(--text-primary);
 }
