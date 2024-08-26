@@ -8,9 +8,10 @@ import {clipboard, getUsername} from '../../../../utils/text'
 interface TableUserCellProps {
   user: any
   onClick: any
+  showCopy?: boolean
 }
 
-export function TableUserCell({user, onClick}: TableUserCellProps): JSX.Element | null {
+export function TableUserCell({user, onClick, showCopy = true}: TableUserCellProps): JSX.Element | null {
   return (
     <div className={classes.box}>
       <img src={user.profile_img_url} alt="User Profile" className={classes.userImage} />
@@ -25,7 +26,7 @@ export function TableUserCell({user, onClick}: TableUserCellProps): JSX.Element 
         <div className={classes.emailBox}>
           <div className={clsx(classes.userEmail, 'zap-subcontent-medium')}>{user.work_email}</div>
 
-          {user.work_email && (
+          {user.work_email && showCopy &&  (
             <SVG
               path={fileMultiple}
               svgClassName={classes.icon}
