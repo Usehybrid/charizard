@@ -1,5 +1,5 @@
 import {MultiValue} from 'react-select'
-import type {SingleValue, ActionMeta} from 'react-select'
+import type {SingleValue, ActionMeta, StylesConfig} from 'react-select'
 import {Props as ReactSelectProps} from 'react-select'
 
 export type OptionBase = {
@@ -32,4 +32,5 @@ export interface SelectV2Props extends ReactSelectProps<any, boolean> {
   mainContainerClassName?: string
   variant?: SELECT_VARIANT
   errorMsg?: string
+  customStyles?: StylesConfig<any>
 }
