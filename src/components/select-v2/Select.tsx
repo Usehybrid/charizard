@@ -29,6 +29,7 @@ import {
  *   - `variant` (SELECT_VARIANT, optional): Defines the variant of the select component (e.g., 'default', 'users', 'checkbox', 'tags') to control the styling and behavior.
  *   - `errorMsg` (string, optional): An error message to display below the select component for validation purposes.
  *   - `onChange` (function): A callback function that is triggered when the selected value(s) change. It receives the selected value(s) and action meta information.
+ *   - `customStyles` (StylesConfig<any>): custom styles for react select. it will override default styles
  * @returns The SelectV2 component.
  */
 export function SelectV2(props: SelectV2Props) {
@@ -38,6 +39,7 @@ export function SelectV2(props: SelectV2Props) {
     variant = SELECT_VARIANT.DEFAULT,
     errorMsg,
     onChange,
+    customStyles = {},
     ...restProps
   } = props
 
@@ -63,7 +65,7 @@ export function SelectV2(props: SelectV2Props) {
         classNamePrefix="react-select"
         options={options}
         unstyled
-        styles={styles}
+        styles={{...styles, ...customStyles}}
         isClearable
         isSearchable
         hideSelectedOptions={false}
