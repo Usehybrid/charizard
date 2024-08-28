@@ -41,6 +41,11 @@ export function TablePagination({paginationConfig}: TablePaginationProps) {
     paginationApi.setCount(metaData?.total_items || 0)
   }, [metaData?.total_items, limit])
 
+  React.useEffect(() => {
+    // used to rerender the component after searching and filtering in the table
+    paginationApi.setPageSize(paginationConfig.limit)
+  }, [limit])
+
   const actualPageNo = metaData?.page_no ? metaData.page_no : 0
   const startItem = actualPageNo * (metaData?.items_on_page || 0) + 1
   const endItem = Math.min(

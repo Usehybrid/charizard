@@ -1,6 +1,7 @@
 import clsx from 'clsx'
 import classes from './table-device-cell.module.css'
 import fileMultiple from '../../../assets/files/file-multiple.svg'
+import remote from '../../../assets/devices/remote.svg'
 import laptop2 from '../../../assets/devices/laptop-2.svg'
 import monitor from '../../../assets/devices/monitor.svg'
 import smartphone from '../../../assets/devices/smartphone.svg'
@@ -19,6 +20,7 @@ import hardDrive2 from '../../../assets/devices/hard-drive-2.svg'
 import TableBoxEllipses from '../table-box-ellipses'
 import {SVG} from '../../../svg'
 import {clipboard} from '../../../../utils/text'
+import {TooltipV2} from '../../../tooltip-v2'
 
 interface TableDeviceCellProps {
   device: any
@@ -37,10 +39,25 @@ export function TableDeviceCell({device, onClick}: TableDeviceCellProps) {
           <TableBoxEllipses data={device.name || device.model} customStyle={{maxWidth: '190px'}} />
         </div>
         <div className={classes.subTitleBox}>
-          <div className={clsx(classes.subTitle, 'zap-subcontent-medium')}>
-            {device.serial_number}
-          </div>
-
+          {device.serial_number && (
+            <div className={clsx(classes.subTitle, 'zap-subcontent-medium')}>
+              {device.serial_number}
+            </div>
+          )}
+          {device.isMdmConnected && (
+            <TooltipV2
+              id={'id'}
+              trigger={
+                <SVG
+                  path={remote}
+                  spanClassName={classes.mdmStatus}
+                  svgClassName={classes.mdmStatusIcon}
+                />
+              }
+              content="This device is also connected with MDM"
+              portalId="root"
+            />
+          )}
           {device.serial_number && (
             <SVG
               path={fileMultiple}
