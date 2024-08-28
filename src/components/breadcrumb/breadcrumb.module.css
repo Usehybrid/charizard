@@ -18,6 +18,11 @@
   cursor: pointer;
 }
 
+.divider {
+  display: inline-flex;
+  align-items: center;
+}
+
 .page:hover {
   border-radius: 2px;
   background: var(--fill-selection);

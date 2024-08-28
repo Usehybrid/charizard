@@ -88,4 +88,5 @@ const statusMap: {[key: string]: BADGE_STATUS} = {
   pending_second_approver: BADGE_STATUS.WARNING,
   cancelled: BADGE_STATUS.NEUTRAL,
   approved: BADGE_STATUS.POSITIVE,
+  pending_cancellation: BADGE_STATUS.WARNING,
 }
