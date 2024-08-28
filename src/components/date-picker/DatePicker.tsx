@@ -3,11 +3,11 @@ import classes from './date-picker.module.css'
 import calender from '../assets/calender.svg'
 import chevronLeft from '../assets/chevron-left.svg'
 import chevronRight from '../assets/chevron-right.svg'
+import clsx from 'clsx'
 import {format, isDate, parseISO} from 'date-fns'
 import {DayPicker, Matcher, PropsSingle} from 'react-day-picker'
 import {Placement} from '@popperjs/core'
 import {Button, BUTTON_VARIANT, SVG, Popover, PopoverTrigger, PopoverContent} from '../index'
-import clsx from 'clsx'
 
 interface DatePickerProps extends PropsSingle {
   value?: Date | string
@@ -99,7 +99,7 @@ export function DatePicker({
                 <span style={{color: !date ? 'var(--text-secondary)' : undefined}}>
                   {displayDate}
                 </span>
-                <SVG path={calender} width={20} />
+                <SVG path={calender} width={20} height={20} />
               </div>
             </Button>
           ) : (
