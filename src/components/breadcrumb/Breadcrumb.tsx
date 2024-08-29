@@ -48,8 +48,8 @@ export function Breadcrumb({pages}: BreadCrumbProps) {
               >
                 ...
               </span>
-              <span>
-                <SVG path={slash} width={12} height={24} />
+              <span className={classes.divider}>
+                <SVG path={slash} width={12} height={20} />
               </span>
             </>
           ) : (
@@ -62,7 +62,7 @@ export function Breadcrumb({pages}: BreadCrumbProps) {
                   }}
                   className={clsx(
                     classes.page,
-                    `${Number(i) >= 2 && classes.activePage} ${clickedItem === page.label && classes.focused}`,
+                    `${(Number(i) >= 2 || Number(i) === pages.length - 1) && classes.activePage} ${clickedItem === page.label && classes.focused}`,
                     'zap-content-medium',
                   )}
                 >
@@ -70,8 +70,8 @@ export function Breadcrumb({pages}: BreadCrumbProps) {
                 </span>
               )}
               {i !== pages.length - 1 && Number(i) < 2 && (
-                <span>
-                  <SVG path={slash} width={12} height={24} />
+                <span className={classes.divider}>
+                  <SVG path={slash} width={12} height={20} />
                 </span>
               )}
             </>
