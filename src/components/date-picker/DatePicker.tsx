@@ -93,6 +93,7 @@ export function DatePicker({
                 cursor: disableDatepicker ? 'not-allowed' : 'pointer',
                 caretColor: isError || errorMsg ? 'var(--status-danger)' : undefined,
                 borderColor: isError || errorMsg ? 'var(--status-danger)' : undefined,
+                height: '32px',
               }}
             >
               <div className={classes.formButton} ref={btnRef}>
@@ -107,7 +108,7 @@ export function DatePicker({
               variant={buttonVariant}
               size="adapt"
               disabled={disableDatepicker}
-              customStyles={{cursor: disableDatepicker ? 'not-allowed' : 'pointer'}}
+              customStyles={{cursor: disableDatepicker ? 'not-allowed' : 'pointer', height: '32px'}}
             >
               <div className={classes.buttonContent} ref={btnRef}>
                 <SVG
