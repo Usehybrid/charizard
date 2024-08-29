@@ -38,7 +38,7 @@
 
 .detail {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 3fr 9fr;
   align-items: center;
   gap: 8px;
   align-self: stretch;
@@ -50,6 +50,7 @@
 
 .detailValue {
   color: var(--text-primary);
+  word-wrap: break-word;
 }
 
 .detailValueNA {
