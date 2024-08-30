@@ -7,6 +7,7 @@ import {BUTTON_V2_SIZE, BUTTON_V2_VARIANT, ButtonV2, MenuItemV2} from '../../../
 import {ITask, ITaskDetails, ITaskObjectValue} from '../../types'
 import {isObject, isString} from '../../../../utils'
 import getStatus from '../../helper'
+import { getUsername } from '../../../../utils/text'
 
 export default function TaskCard({data, menuItems}: {data: ITask; menuItems: MenuItemV2[]}) {
   return (
@@ -44,7 +45,7 @@ export default function TaskCard({data, menuItems}: {data: ITask; menuItems: Men
               </div>
             ) : detail.value && isObject(detail.value) && Object.keys(detail.value).length ? (
               <UserChip
-                username={(detail.value as ITaskObjectValue).first_name}
+                username={getUsername(detail.value)}
                 profileImgUrl={(detail.value as ITaskObjectValue).profile_img_url}
               />
             ) : isString(detail.value) ? (

@@ -66,7 +66,8 @@ const tasks = [
       },
       {
         key: 'Note',
-        value: 'Lunch Break',
+        value:
+          'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente iure eaque, aliquid quod labore illum officia quia nostrum. Amet expedita quaerat magnam, consequuntur quo omnis atque? Enim rerum magnam quam sapiente tenetur voluptatem reiciendis fuga error libero doloremque. Unde, cum.',
       },
       {
         key: 'Cycle',
