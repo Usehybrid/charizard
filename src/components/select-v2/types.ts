@@ -34,3 +34,7 @@ export interface SelectV2Props extends ReactSelectProps<any, boolean> {
   errorMsg?: string
   customStyles?: StylesConfig<any>
 }
+
+export interface CreatableSelectV2Props extends SelectV2Props {
+  onCreateOption: (value: string) => void
+}
