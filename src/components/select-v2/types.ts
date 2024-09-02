@@ -36,5 +36,5 @@ export interface SelectV2Props extends ReactSelectProps<any, boolean> {
 }
 
 export interface CreatableSelectV2Props extends SelectV2Props {
-  onCreateOption: (value: string) => void
+  onCreateOption: (value: string) => Promise<void> | void
 }
