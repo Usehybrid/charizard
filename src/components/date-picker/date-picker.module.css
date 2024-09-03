@@ -121,6 +121,7 @@
   padding: 0;
   position: relative;
   width: 36px;
+  border-radius: 8px;
 }
 .cell:first-child:has([aria-selected]) {
   border-top-left-radius: 8px;
@@ -146,8 +147,9 @@
   height: 36px;
   line-height: 20px;
   font-size: 14px;
+  cursor: pointer;
 }
-.dayButton:hover {
+.cell:not(.daySelected) .dayButton:hover {
   background-color: var(--neutral-arch-20);
   color: var(--text-primary);
 }
@@ -157,16 +159,15 @@
 }
 .daySelected {
   background-color: var(--theme-blue-dark);
-  color: var(--white);
-  border-radius: 8px;
+  color: var(--neutral-white);
 }
 
 .daySelected button {
-  color: var(--white);
+  color: var(--neutral-white);
 }
 .daySelected:hover {
   background-color: var(--theme-blue-dark);
-  color: var(--white);
+  color: var(--neutral-white);
 }
 .daySelected.dayDisabled {
   color: var(--white);
