@@ -8,6 +8,7 @@ import {SVG} from '../svg'
 import close from '../assets/close.svg'
 import fileUpload from '../assets/file-upload.svg'
 import deleteOutline from '../assets/delete-bin-outline.svg'
+import {pluralize} from '../../utils/text'
 export type UploadFileType = {
   id?: string
   ext: string
@@ -108,7 +109,7 @@ export function Upload({
   const isInputDisabled = fileUploadLimit && files.length >= fileUploadLimit ? true : false
 
   React.useEffect(() => {
-    if (preLoadedFiles.length > 0) {
+    if (preLoadedFiles.length > 0 && !files.length) {
       const newFiles = preLoadedFiles.map(file => ({...file, isUploaded: true}))
       setFiles(newFiles)
     }
@@ -120,7 +121,9 @@ export function Upload({
     setUploadLimitError('')
     let allFiles: any = []
     if (fileUploadLimit && uploadedFiles.length + files.length > fileUploadLimit) {
-      setFileUploadLimitError(`Error: You can only upload ${fileUploadLimit} files`)
+      setFileUploadLimitError(
+        `You are only allowed to upload ${fileUploadLimit} ${pluralize(fileUploadLimit, 'file', 'files')}`,
+      )
       return
     }
     let flag = false
@@ -238,9 +241,6 @@ export function Upload({
             Note: You can upload maximum of {fileUploadLimit} file(s)
           </p>
         )} */}
-        {(fileUploadLimitError || !!uploadLimitError) && (
-          <p className={classes.fileUploadLimitError}>{fileUploadLimitError || uploadLimitError}</p>
-        )}
         <div
           onClick={() => {
             beforeUploadHandler && beforeUploadHandler()
@@ -293,16 +293,12 @@ export function Upload({
                     Choose file or drag and drop here
                   </div> */}
                 <div className={clsx(classes.subTitle, disabled ? classes.disabledSubTitle : '')}>
-                  File Type:{' '}
-                  <b>
-                    {' '}
-                    {addDocumentSubtitle ||
-                      `PDF, Doc, Docx, PNG, WEBP,Xls, Xlsx and JPEG. Max ${fileUploadLimit} ${fileUploadLimit <= 1 ? 'file' : 'files'} can be
-                    attached.`}
-                  </b>
-                </div>
-                <div className={clsx(classes.subTitle, disabled ? classes.disabledSubTitle : '')}>
-                  Max size: <b>5 MB</b>
+                  <span>File Type: </span>
+                  <b> {addDocumentSubtitle || `PDF, Doc, Docx, PNG, WEBP,Xls, Xlsx and JPEG.`}</b>
+                  <div className={classes.smallCircle}></div>
+                  Max size: <b>{` 5 MB`}</b>
+                  <div className={classes.smallCircle}></div>
+                  Upload allowed: <b>{fileUploadLimit}</b>
                 </div>
                 {extraSubtitleText && (
                   <div className={clsx(classes.subTitle, disabled ? classes.disabledSubTitle : '')}>
@@ -314,6 +310,10 @@ export function Upload({
             </>
           )}
         </div>
+        {(fileUploadLimitError || !!uploadLimitError) && (
+          <p className={classes.fileUploadLimitError}>{fileUploadLimitError || uploadLimitError}</p>
+        )}
+        {error && <p className={classes.errorMsg}>{error}</p>}
         {additionalNode}
         {showFileList && (
           <div className={clsx(classes.fileContainer, fileContainerClassName)}>
@@ -324,7 +324,11 @@ export function Upload({
                     <></>
                   ) : file.isUploaded ? (
                     <div
-                      className={clsx(classes.singleDoc, singleFileClassName)}
+                      className={clsx(
+                        classes.singleDoc,
+                        singleFileClassName,
+                        disabled ? classes.uploadedFileDisabled : '',
+                      )}
                       key={file.fileName ?? index}
                     >
                       <div className={classes.contentContainer}>
@@ -416,7 +420,6 @@ export function Upload({
               ))}
           </div>
         )}
-        {error && <p className={classes.errorMsg}>{error}</p>}
       </div>
     </>
   )
