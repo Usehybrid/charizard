@@ -68,7 +68,9 @@ export const CustomMenu = (props: any) => {
  * @returns The custom Option component with profile image, icon, and styled label.
  */
 export const CustomOption = (props: any) => {
-  const {data, isSelected, isMulti, variant} = props
+  const {data, isSelected, isMulti, selectProps} = props
+  const variant = selectProps['data-variant']
+
   const {label, subLabel, profileImgUrl, icon} = data
 
   const {darkerColor, lighterColor} = useColorsFromWord(label)
@@ -145,9 +147,10 @@ export const CustomSingleValue = (props: any) => {
  * @returns The custom MultiValue component with profile image, icon, and styled label.
  */
 export const CustomMultiValue = (props: any) => {
-  const {data, selectProps, variant} = props
+  const {data, selectProps} = props
   const {label, profileImgUrl, icon} = data
   const {isMulti} = selectProps
+  const variant = selectProps['data-variant']
 
   const {darkerColor, lighterColor} = useColorsFromWord(label)
   return (

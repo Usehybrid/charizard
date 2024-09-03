@@ -72,17 +72,18 @@ export function CreatableSelectV2(props: CreatableSelectV2Props) {
         isSearchable
         hideSelectedOptions={false}
         components={{
-          Option: props => <CustomOption {...props} variant={variant} />,
-          MultiValue: props => <CustomMultiValue {...props} variant={variant} />,
-          MultiValueRemove: props => <CustomMultiValueRemove {...props} variant={variant} />,
-          DropdownIndicator: props => <CustomDropdownIndicator {...props} variant={variant} />,
-          ClearIndicator: props => <CustomClearIndicator {...props} variant={variant} />,
-          SingleValue: props => <CustomSingleValue {...props} variant={variant} />,
-          Menu: props => <CustomMenu {...props} variant={variant} />,
-          IndicatorsContainer: props => <CustomIndicatorsContainer {...props} variant={variant} />,
+          Option: CustomOption,
+          MultiValue: CustomMultiValue,
+          MultiValueRemove: CustomMultiValueRemove,
+          DropdownIndicator: CustomDropdownIndicator,
+          ClearIndicator: CustomClearIndicator,
+          SingleValue: CustomSingleValue,
+          Menu: CustomMenu,
+          IndicatorsContainer: CustomIndicatorsContainer,
         }}
         onChange={selectOptionHandler}
         onCreateOption={onCreateOption}
+        data-variant={variant}
         {...restProps}
       />
       {errorMsg && (
