@@ -136,6 +136,14 @@
   letter-spacing: 0.2px;
 }
 .subTitle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  -ms-word-break: break-word;
+  word-break: break-word;
+  gap: 0 4px;
+
   color: var(--text-hint);
   font-size: 13px;
   font-style: normal;
@@ -203,6 +211,7 @@
   border: 1px dashed var(--neutral-arch-300);
   background: var(--disabled-50);
   cursor: not-allowed;
+  opacity: 0.5;
 }
 .disabledUploadBtn:hover {
   border-radius: 4px;
@@ -226,7 +235,17 @@
   border: 1px solid var(--stroke-selection);
   background: var(--fill-selection);
 }
+.actionBtn:hover {
+  border: 1px solid var(--p-p10);
+  background: var(--p-p10);
+}
 .uploadingImg {
   height: 30px;
   width: 25px;
+}
+
+.uploadedFileDisabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
 }
