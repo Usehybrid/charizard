@@ -5,9 +5,22 @@ import chevronLeft from '../assets/chevron-left.svg'
 import chevronRight from '../assets/chevron-right.svg'
 import clsx from 'clsx'
 import {format, isDate, parseISO} from 'date-fns'
-import {DayPicker, Matcher, PropsSingle} from 'react-day-picker'
+import {DayPicker, DropdownOption, Matcher, PropsSingle, useDayPicker} from 'react-day-picker'
 import {Placement} from '@popperjs/core'
-import {Button, BUTTON_VARIANT, SVG, Popover, PopoverTrigger, PopoverContent} from '../index'
+import {
+  Button,
+  BUTTON_VARIANT,
+  SVG,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  SelectV2,
+  ButtonV2,
+  BUTTON_V2_TYPE,
+  BUTTON_V2_SIZE,
+  BUTTON_V2_VARIANT,
+} from '../index'
+import {StylesConfig} from 'react-select'
 
 interface DatePickerProps extends PropsSingle {
   value?: Date | string
@@ -50,6 +63,20 @@ export function DatePicker({
   showOutsideDays = true,
   ...props
 }: DatePickerProps) {
+  const [monthYear, setMonthYear] = React.useState({
+    month: new Date().getMonth(),
+    year: new Date().getFullYear(),
+  })
+
+  React.useEffect(() => {
+    if (value && !isNaN(new Date(value).getTime())) {
+      setMonthYear({
+        month: new Date(value).getMonth(),
+        year: new Date(value).getFullYear(),
+      })
+    }
+  }, [value])
+
   const date = React.useMemo(() => {
     if (value) {
       const parsedDate = isDate(value) ? value : parseISO(value)
@@ -133,9 +160,7 @@ export function DatePicker({
           <DayPicker
             showOutsideDays={showOutsideDays}
             captionLayout="dropdown"
-            startMonth={new Date(2022, 0)}
             endMonth={new Date(2050, 0)}
-            hidden={[{before: new Date(2022, 0), after: new Date(2050, 0)}]}
             classNames={{
               month: classes.month,
               month_caption: classes.caption,
@@ -158,11 +183,78 @@ export function DatePicker({
               dropdown_icon: classes.dropdownIcon,
             }}
             components={{
-              Chevron(props) {
-                if (props.orientation === 'left') {
-                  return <SVG path={chevronLeft} width={20} height={20} />
+              Dropdown: props => {
+                //TODO: @abhishek improve logic
+                const isYearDropdown = props['aria-label'] === 'Choose the Year'
+                let selectedOption: DropdownOption | undefined = undefined
+                if (isYearDropdown) {
+                  selectedOption = props.options?.find(option => {
+                    return option.value === monthYear.year
+                  })
+                } else {
+                  selectedOption = props.options?.find(option => {
+                    return option.value === monthYear.month
+                  })
                 }
-                return <SVG path={chevronRight} width={20} height={20} />
+                const monthYearHandler = (value: any) => {
+                  setMonthYear(prevState => {
+                    return {
+                      month: !isYearDropdown ? value || 0 : prevState.month,
+                      year: isYearDropdown ? value : prevState.year,
+                    }
+                  })
+                }
+                return (
+                  <SelectV2
+                    options={props.options as any}
+                    onChange={monthYearHandler}
+                    isClearable={false}
+                    value={selectedOption}
+                    mainContainerClassName={
+                      isYearDropdown ? classes.yearDropdown : classes.monthDropdown
+                    }
+                    customStyles={dropdownStyles}
+                  />
+                )
+              },
+              Nav: () => {
+                const {nextMonth, previousMonth} = useDayPicker()
+                return (
+                  <div className={classes.navContainer}>
+                    <ButtonV2
+                      disabled={!previousMonth}
+                      type={BUTTON_V2_TYPE.ICON_ONLY}
+                      size={BUTTON_V2_SIZE.SMALL}
+                      variant={BUTTON_V2_VARIANT.SECONDARY}
+                      onClick={e => {
+                        e.preventDefault()
+                        setMonthYear(prevState => {
+                          return {
+                            year: prevState.month === 0 ? prevState.year - 1 : prevState.year,
+                            month: prevState.month === 0 ? 11 : prevState.month - 1,
+                          }
+                        })
+                      }}
+                      icon={<SVG path={chevronLeft} width={20} height={20} />}
+                    ></ButtonV2>
+                    <ButtonV2
+                      disabled={!nextMonth}
+                      type={BUTTON_V2_TYPE.ICON_ONLY}
+                      size={BUTTON_V2_SIZE.SMALL}
+                      variant={BUTTON_V2_VARIANT.SECONDARY}
+                      onClick={e => {
+                        e.preventDefault()
+                        setMonthYear(prevState => {
+                          return {
+                            year: prevState.month === 11 ? prevState.year + 1 : prevState.year,
+                            month: prevState.month === 11 ? 0 : prevState.month + 1,
+                          }
+                        })
+                      }}
+                      icon={<SVG path={chevronRight} width={20} height={20} />}
+                    ></ButtonV2>
+                  </div>
+                )
               },
             }}
             mode={mode}
@@ -171,10 +263,31 @@ export function DatePicker({
             onSelect={handleDateSelect}
             numberOfMonths={1}
             disabled={disableDatepicker ? true : disabled}
+            month={new Date(monthYear.year, monthYear.month)}
             {...props}
           />
         </PopoverContent>
       </Popover>
     </div>
   )
+}
+
+const dropdownStyles: StylesConfig<any> = {
+  control: (baseStyles, state) => {
+    return {
+      ...baseStyles,
+      borderWidth: '1px',
+      borderStyle: 'solid',
+      borderRadius: '4px',
+      minHeight: '32px',
+      padding: '4px',
+      ':hover': {
+        borderColor: '#254DDA',
+      },
+      borderColor: state.isFocused ? '#254DDA' : '#E5E9FB',
+      backgroundColor: '#fff',
+      gap: '4px',
+      opacity: state.isDisabled ? 0.5 : 1,
+    }
+  },
 }

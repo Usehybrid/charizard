@@ -213,3 +213,19 @@
 .dropdown:focus-visible {
   outline: none;
 }
+
+.monthDropdown {
+  width: 105.5px;
+}
+
+.yearDropdown {
+  width: 75.5px;
+}
+
+.navContainer {
+  position: absolute;
+  display: flex;
+  width: calc(100% - 24px);
+  justify-content: space-between;
+  top: 10px;
+}
