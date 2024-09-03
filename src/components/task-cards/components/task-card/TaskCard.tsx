@@ -64,11 +64,13 @@ export default function TaskCard({data, menuItems}: {data: ITask; menuItems: Men
         </Badge>
       </div>
       <div className={classes.actionSection}>
-        <ButtonV2.ActionsDropdown
-          menuItems={menuItems}
-          variant={BUTTON_V2_VARIANT.TERTIARY}
-          size={BUTTON_V2_SIZE.SMALL}
-        />
+        {!!menuItems?.length && (
+          <ButtonV2.ActionsDropdown
+            menuItems={menuItems}
+            variant={BUTTON_V2_VARIANT.TERTIARY}
+            size={BUTTON_V2_SIZE.SMALL}
+          />
+        )}
       </div>
     </div>
   )
