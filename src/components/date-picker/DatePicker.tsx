@@ -21,6 +21,25 @@ import {
   BUTTON_V2_VARIANT,
 } from '../index'
 import {StylesConfig} from 'react-select'
+import {create} from 'zustand'
+
+type MonthYear = {
+  month: number
+  year: number
+}
+
+type DateStore = {
+  monthYear: MonthYear
+  setMonthYear: (value: MonthYear) => void
+}
+
+const useDateStore = create<DateStore>()(set => ({
+  monthYear: {
+    month: new Date().getMonth(),
+    year: new Date().getFullYear(),
+  },
+  setMonthYear: (value: MonthYear) => set({monthYear: value}),
+}))
 
 interface DatePickerProps extends PropsSingle {
   value?: Date | string
@@ -63,10 +82,7 @@ export function DatePicker({
   showOutsideDays = true,
   ...props
 }: DatePickerProps) {
-  const [monthYear, setMonthYear] = React.useState({
-    month: new Date().getMonth(),
-    year: new Date().getFullYear(),
-  })
+  const {monthYear, setMonthYear} = useDateStore()
 
   React.useEffect(() => {
     if (value && !isNaN(new Date(value).getTime())) {
@@ -183,79 +199,8 @@ export function DatePicker({
               dropdown_icon: classes.dropdownIcon,
             }}
             components={{
-              Dropdown: props => {
-                //TODO: @abhishek improve logic
-                const isYearDropdown = props['aria-label'] === 'Choose the Year'
-                let selectedOption: DropdownOption | undefined = undefined
-                if (isYearDropdown) {
-                  selectedOption = props.options?.find(option => {
-                    return option.value === monthYear.year
-                  })
-                } else {
-                  selectedOption = props.options?.find(option => {
-                    return option.value === monthYear.month
-                  })
-                }
-                const monthYearHandler = (value: any) => {
-                  setMonthYear(prevState => {
-                    return {
-                      month: !isYearDropdown ? value || 0 : prevState.month,
-                      year: isYearDropdown ? value : prevState.year,
-                    }
-                  })
-                }
-                return (
-                  <SelectV2
-                    options={props.options as any}
-                    onChange={monthYearHandler}
-                    isClearable={false}
-                    value={selectedOption}
-                    mainContainerClassName={
-                      isYearDropdown ? classes.yearDropdown : classes.monthDropdown
-                    }
-                    customStyles={dropdownStyles}
-                  />
-                )
-              },
-              Nav: () => {
-                const {nextMonth, previousMonth} = useDayPicker()
-                return (
-                  <div className={classes.navContainer}>
-                    <ButtonV2
-                      disabled={!previousMonth}
-                      type={BUTTON_V2_TYPE.ICON_ONLY}
-                      size={BUTTON_V2_SIZE.SMALL}
-                      variant={BUTTON_V2_VARIANT.SECONDARY}
-                      onClick={e => {
-                        e.preventDefault()
-                        setMonthYear(prevState => {
-                          return {
-                            year: prevState.month === 0 ? prevState.year - 1 : prevState.year,
-                            month: prevState.month === 0 ? 11 : prevState.month - 1,
-                          }
-                        })
-                      }}
-                      icon={<SVG path={chevronLeft} width={20} height={20} />}
-                    ></ButtonV2>
-                    <ButtonV2
-                      disabled={!nextMonth}
-                      type={BUTTON_V2_TYPE.ICON_ONLY}
-                      size={BUTTON_V2_SIZE.SMALL}
-                      variant={BUTTON_V2_VARIANT.SECONDARY}
-                      onClick={e => {
-                        e.preventDefault()
-                        setMonthYear(prevState => {
-                          return {
-                            year: prevState.month === 11 ? prevState.year + 1 : prevState.year,
-                            month: prevState.month === 11 ? 0 : prevState.month + 1,
-                          }
-                        })
-                      }}
-                      icon={<SVG path={chevronRight} width={20} height={20} />}
-                    ></ButtonV2>
-                  </div>
-                )
-              },
+              Dropdown,
+              Nav,
             }}
             mode={mode}
             defaultMonth={date}
@@ -290,4 +235,73 @@ const dropdownStyles: StylesConfig<any> = {
       opacity: state.isDisabled ? 0.5 : 1,
     }
   },
+}
+
+function Dropdown(props: any) {
+  const {monthYear, setMonthYear} = useDateStore()
+  //TODO: @abhishek improve logic
+  const isYearDropdown = props['aria-label'] === 'Choose the Year'
+  let selectedOption: DropdownOption | undefined = undefined
+  if (isYearDropdown) {
+    selectedOption = props.options?.find((option: any) => {
+      return option.value === monthYear.year
+    })
+  } else {
+    selectedOption = props.options?.find((option: any) => {
+      return option.value === monthYear.month
+    })
+  }
+  const monthYearHandler = (value: any) => {
+    setMonthYear({
+      month: !isYearDropdown ? value || 0 : monthYear.month,
+      year: isYearDropdown ? value : monthYear.year,
+    })
+  }
+  return (
+    <SelectV2
+      options={props.options as any}
+      onChange={monthYearHandler}
+      isClearable={false}
+      value={selectedOption}
+      mainContainerClassName={isYearDropdown ? classes.yearDropdown : classes.monthDropdown}
+      customStyles={dropdownStyles}
+    />
+  )
+}
+
+function Nav() {
+  const {monthYear, setMonthYear} = useDateStore()
+  const {nextMonth, previousMonth} = useDayPicker()
+  return (
+    <div className={classes.navContainer}>
+      <ButtonV2
+        disabled={!previousMonth}
+        type={BUTTON_V2_TYPE.ICON_ONLY}
+        size={BUTTON_V2_SIZE.SMALL}
+        variant={BUTTON_V2_VARIANT.SECONDARY}
+        onClick={e => {
+          e.preventDefault()
+          setMonthYear({
+            year: monthYear.month === 0 ? monthYear.year - 1 : monthYear.year,
+            month: monthYear.month === 0 ? 11 : monthYear.month - 1,
+          })
+        }}
+        icon={<SVG path={chevronLeft} width={20} height={20} />}
+      ></ButtonV2>
+      <ButtonV2
+        disabled={!nextMonth}
+        type={BUTTON_V2_TYPE.ICON_ONLY}
+        size={BUTTON_V2_SIZE.SMALL}
+        variant={BUTTON_V2_VARIANT.SECONDARY}
+        onClick={e => {
+          e.preventDefault()
+          setMonthYear({
+            year: monthYear.month === 11 ? monthYear.year + 1 : monthYear.year,
+            month: monthYear.month === 11 ? 0 : monthYear.month + 1,
+          })
+        }}
+        icon={<SVG path={chevronRight} width={20} height={20} />}
+      ></ButtonV2>
+    </div>
+  )
 }
