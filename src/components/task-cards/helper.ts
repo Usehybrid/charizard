@@ -6,7 +6,7 @@ export default function getStatus(status: string) {
       return 'cancelled'
     case 'Declined':
       return 'declined'
-    case 'Pending 2nd Approver':
+    case 'Pending second approval':
       return 'pending_second_approver'
     case 'Approved':
       return 'approved'
