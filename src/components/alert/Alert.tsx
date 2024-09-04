@@ -30,62 +30,65 @@ export function Alert({alertType, actionType, header, body}: AlertPropTypes) {
   const [showDropdown, setShowDropdown] = React.useState(false)
 
   return (
-    <div
-      className={classes.alert}
-      style={{
-        backgroundColor: alertTypeMap[alertType].bg,
-        borderColor: alertTypeMap[alertType].color,
-        gap: actionType === ALERT_ACTION_TYPES.SHOW_MORE && !showDropdown ? 0 : '16px',
-        display: hideAlert ? 'none' : 'flex',
-        opacity: actionType === ALERT_ACTION_TYPES.SHOW_MORE && !showDropdown ? '0.5' : '1',
-      }}
-    >
-      <div className={classes.alertHeader}>
-        <div className={classes.icons}>
-          <SVG
-            path={alertTypeMap[alertType].icon}
-            customSvgStyles={{
-              width: '16px',
-              height: '16px',
+    !hideAlert && (
+      <div
+        className={classes.alert}
+        style={{
+          backgroundColor: alertTypeMap[alertType].bg,
+          borderColor: alertTypeMap[alertType].color,
+          gap: actionType === ALERT_ACTION_TYPES.SHOW_MORE && !showDropdown ? 0 : '16px',
+          opacity: actionType === ALERT_ACTION_TYPES.SHOW_MORE && !showDropdown ? '0.5' : '1',
+        }}
+      >
+        <div className={classes.alertHeader}>
+          <div className={classes.icons}>
+            <SVG
+              path={alertTypeMap[alertType].icon}
+              customSvgStyles={{
+                width: '16px',
+                height: '16px',
+              }}
+            />
+          </div>
+          <div style={{color: alertTypeMap[alertType].color}}>{header}</div>
+          <div
+            className={classes.icons}
+            onClick={() => {
+              if (actionType === ALERT_ACTION_TYPES.CLOSE) setHideAlert(true)
+              else setShowDropdown(e => !e)
             }}
-          />
+          >
+            <SVG
+              customSvgStyles={{
+                width: '16px',
+                height: '16px',
+              }}
+              path={actionType === ALERT_ACTION_TYPES.CLOSE ? close : showDropdown ? up : down}
+            />
+          </div>
         </div>
-        <div style={{color: alertTypeMap[alertType].color}}>{header}</div>
-        <div
-          className={classes.icons}
-          onClick={() => {
-            if (actionType === ALERT_ACTION_TYPES.CLOSE) setHideAlert(true)
-            else setShowDropdown(e => !e)
-          }}
-        >
-          <SVG
-            customSvgStyles={{
-              width: '16px',
-              height: '16px',
-            }}
-            path={actionType === ALERT_ACTION_TYPES.CLOSE ? close : showDropdown ? up : down}
-          />
-        </div>
+        {actionType === ALERT_ACTION_TYPES.SHOW_MORE && body && (
+          <div className={clsx(classes.dividerSection, {[classes.open]: showDropdown})}>
+            <div className={classes.divider}></div>
+          </div>
+        )}
+        {actionType === ALERT_ACTION_TYPES.SHOW_MORE ? (
+          <div className={clsx(classes.alertDropDownBody, {[classes.open]: showDropdown})}>
+            <div></div>
+            <div>{body}</div>
+            <div></div>
+          </div>
+        ) : (
+          body && (
+            <div className={classes.alertBody}>
+              <div></div>
+              <div>{body}</div>
+              <div></div>
+            </div>
+          )
+        )}
       </div>
-      {actionType === ALERT_ACTION_TYPES.SHOW_MORE && body && (
-        <div className={clsx(classes.dividerSection, {[classes.open]: showDropdown})}>
-          <div className={classes.divider}></div>
-        </div>
-      )}
-      {actionType === ALERT_ACTION_TYPES.SHOW_MORE ? (
-        <div className={clsx(classes.alertDropDownBody, {[classes.open]: showDropdown})}>
-          <div></div>
-          <div>{body}</div>
-          <div></div>
-        </div>
-      ) : body && (
-        <div className={classes.alertBody}>
-          <div></div>
-          <div>{body}</div>
-          <div></div>
-        </div>
-      )}
-    </div>
+    )
   )
 }
 
