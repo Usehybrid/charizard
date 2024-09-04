@@ -152,7 +152,7 @@ const tasks = [
         value: 'To access cloudwatch logs',
       },
     ],
-    status: 'Pending 2nd Approver',
+    status: 'Pending second approval',
   },
 ]
 const headers = ['Task', 'Details', 'Status']
