@@ -54,6 +54,7 @@
 .detailValue {
   color: var(--text-primary);
   word-wrap: break-word;
+  word-break: break-all;
   max-width: 85%;
 }
 
