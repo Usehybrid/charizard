@@ -71,25 +71,24 @@ export function Alert({alertType, actionType, header, body}: AlertPropTypes) {
             />
           </div>
         </div>
-        {actionType === ALERT_ACTION_TYPES.SHOW_MORE && body && (
-          <div className={clsx(classes.dividerSection, {[classes.open]: showDropdown})}>
-            <div className={classes.divider}></div>
-          </div>
-        )}
-        {actionType === ALERT_ACTION_TYPES.SHOW_MORE ? (
-          <div className={clsx(classes.alertDropDownBody, {[classes.open]: showDropdown})}>
-            <div></div>
-            <div>{body}</div>
-            <div></div>
-          </div>
-        ) : (
-          body && (
-            <div className={classes.alertBody}>
+        {actionType === ALERT_ACTION_TYPES.SHOW_MORE && showDropdown && (
+          <>
+            <div className={clsx(classes.dividerSection, {[classes.open]: showDropdown})}>
+              <div className={classes.divider}></div>
+            </div>
+            <div className={clsx(classes.alertDropDownBody, {[classes.open]: showDropdown})}>
               <div></div>
               <div>{body}</div>
               <div></div>
             </div>
-          )
+          </>
+        )}
+        {actionType === ALERT_ACTION_TYPES.CLOSE && body && (
+          <div className={classes.alertBody}>
+            <div></div>
+            <div>{body}</div>
+            <div></div>
+          </div>
         )}
       </div>
     )
