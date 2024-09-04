@@ -29,6 +29,10 @@ export function Alert({alertType, actionType, header, body}: AlertPropTypes) {
   const [hideAlert, setHideAlert] = React.useState(false)
   const [showDropdown, setShowDropdown] = React.useState(false)
 
+  React.useEffect(() => {
+    setHideAlert(false)
+  }, [header])
+
   return (
     !hideAlert && (
       <div
