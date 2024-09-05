@@ -52,7 +52,7 @@ export function TaskCards({
           ) : isError ? (
             <Error />
           ) : (
-            data.map((data: ITask, idx) => (
+            data?.map((data: ITask, idx) => (
               <TaskCard data={data} key={idx} menuItems={menuItems[idx]} />
             ))
           )}
