@@ -1,7 +1,30 @@
+import * as React from 'react'
 import {TaskCards} from '../components'
 
 export default function TaskCardDemo() {
-  return <TaskCards headers={headers} data={tasks} menuItems={menuItems} />
+  const [page, setPage] = React.useState(0)
+  const [limit, setLimit] = React.useState(25)
+
+  console.log({page, limit})
+
+  return (
+    <TaskCards
+      headers={headers}
+      data={tasks}
+      menuItems={menuItems}
+      paginationConfig={{
+        page,
+        limit,
+        setPage,
+        setLimit,
+        metaData: {
+          total_items: 1000,
+          page_no: 0,
+          items_on_page: 25,
+        },
+      }}
+    />
+  )
 }
 
 const menuItems = [

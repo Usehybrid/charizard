@@ -58,7 +58,6 @@ export default function TableDemo({}: tableProps) {
         //   page_no: 0,
         //   items_on_page: 6,
         // },
-        defaultLimit: '25',
       }}
       rowSelectionConfig={{
         entityName: 'Software',

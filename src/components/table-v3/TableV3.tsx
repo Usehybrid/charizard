@@ -107,7 +107,7 @@ export interface TableV3Props {
     setPage: (page: number) => void
     limit: number
     setLimit: (limit: number) => void
-    defaultLimit: string
+    // defaultLimit: string
   }
   emptyStateConfig?: {
     icon: string

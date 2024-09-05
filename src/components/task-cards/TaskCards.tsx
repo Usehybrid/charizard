@@ -1,12 +1,13 @@
 import clsx from 'clsx'
-import Card from './components/task-card/TaskCard'
+import TaskCard from './components/task-card/TaskCard'
 import TaskCardHeader from './components/task-card-header/TaskCardHeader'
 import tabletsCanIcon from '../assets/medical/tablets-can.svg'
 import classes from './task-cards.module.css'
-import {ITask} from './types'
 import {Loader} from '../loader'
 import {SVG} from '../svg'
 import {MenuItemV2} from '../button-v2'
+import {ITask} from './types'
+import {TablePagination} from '../table-v3'
 
 interface TaskCardsProps {
   headers: string[]
@@ -15,6 +16,18 @@ interface TaskCardsProps {
   isError?: boolean
   emptyText?: string
   menuItems: MenuItemV2[][]
+  paginationConfig?: {
+    metaData?: {
+      total_items: number
+      items_on_page: number
+      page_no: number
+    }
+    page: number
+    setPage: (page: number) => void
+    limit: number
+    setLimit: (limit: number) => void
+    // defaultLimit: string
+  }
 }
 
 export function TaskCards({
@@ -24,19 +37,28 @@ export function TaskCards({
   isError = false,
   emptyText = 'No requests',
   menuItems = [[]],
+  paginationConfig,
 }: TaskCardsProps) {
+  const isPaginated = !!paginationConfig
   return (
     <div className={classes.taskCardContainer}>
-      <div className={classes.taskCard}>
+      <div className={clsx(classes.taskCard, isPaginated && classes.taskCardPaginated)}>
         <TaskCardHeader headers={headers} />
         {isLoading ? (
           <Loader containerStyle={{height: '164px'}} />
         ) : isError ? (
           <Error />
         ) : data.length > 0 ? (
-          data.map((data: ITask, idx) => <Card data={data} key={idx} menuItems={menuItems[idx]} />)
+          data.map((data: ITask, idx) => (
+            <TaskCard data={data} key={idx} menuItems={menuItems[idx]} />
+          ))
         ) : (
           <Empty emptyText={emptyText} />
+        )}
+        {isPaginated && (
+          <div className={classes.pagination}>
+            <TablePagination {...{paginationConfig}} />
+          </div>
         )}
       </div>
     </div>

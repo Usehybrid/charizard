@@ -6,7 +6,7 @@ import TableEllipses from './TableEllipses'
 import chevronRight from '../../assets/chevron-right.svg'
 import chevronLeft from '../../assets/chevron-left.svg'
 import classes from './table-pagination.module.css'
-import {useMachine, normalizeProps, Portal} from '@zag-js/react'
+import {useMachine, normalizeProps} from '@zag-js/react'
 import {TableV3Props} from '../TableV3'
 import {SVG} from '../../svg'
 

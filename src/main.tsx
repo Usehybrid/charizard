@@ -23,16 +23,6 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   </React.StrictMode>,
 )
 
-const pages = [
-  {label: 'Breadcrumb Item 1', to: () => {}},
-  {label: 'Breadcrumb Item 2', to: () => {}},
-  {label: 'Breadcrumb Item 3', to: () => {}},
-  {label: 'Breadcrumb Item 4', to: () => {}},
-  {label: 'Breadcrumb Item 5', to: () => {}},
-  {label: 'Breadcrumb Item 6', to: () => {}},
-  {label: 'Breadcrumb Item 7', to: () => {}},
-]
-
 const options = [
   {
     value: '1',

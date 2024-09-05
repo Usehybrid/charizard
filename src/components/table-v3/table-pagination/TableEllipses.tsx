@@ -1,11 +1,11 @@
 import * as React from 'react'
 import * as select from '@zag-js/select'
+import clsx from 'clsx'
 import threeDots from '../../assets/three-dots.svg'
 import classes from './table-pagination.module.css'
 import {useMachine, normalizeProps, Portal} from '@zag-js/react'
 import {SVG} from '../../svg'
 import {generateRange} from './utils'
-import clsx from 'clsx'
 
 interface TableEllipsesProps {
   paginationApi: any
