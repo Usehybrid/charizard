@@ -7,7 +7,7 @@ import {BUTTON_V2_SIZE, BUTTON_V2_VARIANT, ButtonV2, MenuItemV2} from '../../../
 import {ITask, ITaskDetails, ITaskObjectValue} from '../../types'
 import {isObject, isString} from '../../../../utils'
 import getStatus from '../../helper'
-import { getUsername } from '../../../../utils/text'
+import {getUsername} from '../../../../utils/text'
 
 export default function TaskCard({data, menuItems}: {data: ITask; menuItems: MenuItemV2[]}) {
   return (
@@ -25,12 +25,12 @@ export default function TaskCard({data, menuItems}: {data: ITask; menuItems: Men
         </Badge>
       </div>
       <div className={classes.detailsSection}>
-        {data.details.map((detail: ITaskDetails, i: number) => (
+        {data.details?.map((detail: ITaskDetails, i: number) => (
           <div key={i} className={classes.detail}>
             <div className={clsx(classes.detailKey, 'zap-subcontent-medium')}>{detail.key}</div>
             {Array.isArray(detail.value) && detail.value.length > 0 ? (
               <div className={classes.detailValueAttachments}>
-                {detail.value.map((value, index: React.Key) => (
+                {detail.value?.map((value, index: React.Key) => (
                   <div key={index} className={classes.detailValueAttachment}>
                     <div>
                       <img src={value.details.icon} width={20} alt={`${value.details.type}`} />
