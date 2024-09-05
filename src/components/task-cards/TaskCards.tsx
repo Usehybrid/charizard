@@ -39,7 +39,7 @@ export function TaskCards({
   paginationConfig,
 }: TaskCardsProps) {
   const isPaginated = !!paginationConfig
-  const isEmpty = !isLoading && !isError && data.length === 0
+  const isEmpty = !isLoading && !isError && (!data || data?.length === 0)
   return (
     <div className={classes.taskCardContainer}>
       {isEmpty ? (
