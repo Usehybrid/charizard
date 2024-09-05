@@ -1,13 +1,13 @@
 import clsx from 'clsx'
 import TaskCard from './components/task-card/TaskCard'
 import TaskCardHeader from './components/task-card-header/TaskCardHeader'
-import tabletsCanIcon from '../assets/medical/tablets-can.svg'
+import emptySvg from './assets/empty-task-cards.svg'
 import classes from './task-cards.module.css'
 import {Loader} from '../loader'
 import {SVG} from '../svg'
 import {MenuItemV2} from '../button-v2'
-import {ITask} from './types'
 import {TablePagination} from '../table-v3'
+import {ITask} from './types'
 
 interface TaskCardsProps {
   headers: string[]
@@ -26,7 +26,6 @@ interface TaskCardsProps {
     setPage: (page: number) => void
     limit: number
     setLimit: (limit: number) => void
-    // defaultLimit: string
   }
 }
 
@@ -40,27 +39,30 @@ export function TaskCards({
   paginationConfig,
 }: TaskCardsProps) {
   const isPaginated = !!paginationConfig
+  const isEmpty = !isLoading && !isError && data.length === 0
   return (
     <div className={classes.taskCardContainer}>
-      <div className={clsx(classes.taskCard, isPaginated && classes.taskCardPaginated)}>
-        <TaskCardHeader headers={headers} />
-        {isLoading ? (
-          <Loader containerStyle={{height: '164px'}} />
-        ) : isError ? (
-          <Error />
-        ) : data.length > 0 ? (
-          data.map((data: ITask, idx) => (
-            <TaskCard data={data} key={idx} menuItems={menuItems[idx]} />
-          ))
-        ) : (
-          <Empty emptyText={emptyText} />
-        )}
-        {isPaginated && (
-          <div className={classes.pagination}>
-            <TablePagination {...{paginationConfig}} />
-          </div>
-        )}
-      </div>
+      {isEmpty ? (
+        <Empty emptyText={emptyText} />
+      ) : (
+        <div className={clsx(classes.taskCard, isPaginated && classes.taskCardPaginated)}>
+          <TaskCardHeader headers={headers} />
+          {isLoading ? (
+            <Loader containerStyle={{height: '164px'}} />
+          ) : isError ? (
+            <Error />
+          ) : (
+            data.map((data: ITask, idx) => (
+              <TaskCard data={data} key={idx} menuItems={menuItems[idx]} />
+            ))
+          )}
+          {isPaginated && (
+            <div className={classes.pagination}>
+              <TablePagination {...{paginationConfig}} />
+            </div>
+          )}
+        </div>
+      )}
     </div>
   )
 }
@@ -74,11 +76,11 @@ function Error() {
   )
 }
 
-function Empty({emptyText}: {emptyText?: TaskCardsProps['emptyText']}) {
+function Empty({emptyText = 'No pending tasks'}: {emptyText?: TaskCardsProps['emptyText']}) {
   return (
     <div className={classes.emptyBox}>
       <div>
-        <SVG path={tabletsCanIcon} width={24} height={24} svgClassName={classes.emptyIcon} />
+        <SVG path={emptySvg} width={24} height={24} svgClassName={classes.emptyIcon} />
       </div>
       <p className={clsx(classes.emptyTxt, 'zap-content-medium')}>{emptyText}</p>
     </div>

@@ -18,15 +18,20 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  gap: 12px;
-  height: 164px;
+  width: 100%;
+  min-width: 1064px;
+  gap: 8;
+  height: 144px;
+  border-radius: 8px;
+  background: var(--fill-highlight);
 }
 .emptyTxt {
-  color: var(--text-primary);
+  color: var(--text-secondary);
 }
 
-.emptyIcon path {
-  fill: var(--p-p50);
+.emptyIcon {
+  width: 48px;
+  height: 48px;
 }
 
 /* pagination */

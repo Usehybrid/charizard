@@ -10,6 +10,8 @@ export default function TaskCardDemo() {
   return (
     <TaskCards
       headers={headers}
+      // isLoading={true}
+      // isError={true}
       data={tasks}
       menuItems={menuItems}
       paginationConfig={{
