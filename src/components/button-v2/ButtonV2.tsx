@@ -402,6 +402,7 @@ export function ActionsDropdown({
   size,
   positionerProps,
   isTable,
+  children,
 }: ActionsDropdownProps) {
   const [isActive, setIsActive] = React.useState(false)
 
@@ -417,12 +418,16 @@ export function ActionsDropdown({
       isTable={isTable}
       isCustomTrigger={true}
     >
-      <SVG
-        path={moreMenuIcon}
-        width={16}
-        height={16}
-        svgClassName={isTable ? classes.moreMenuIconTable : undefined}
-      />
+      {children ? (
+        children
+      ) : (
+        <SVG
+          path={moreMenuIcon}
+          width={16}
+          height={16}
+          svgClassName={isTable ? classes.moreMenuIconTable : undefined}
+        />
+      )}
     </GroupAction>
   )
 }
