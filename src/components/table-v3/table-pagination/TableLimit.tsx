@@ -9,6 +9,7 @@ interface TableLimitProps {
 
 export default function TableLimit({setLimit, limit, itemsOnPage}: TableLimitProps) {
   let selectData = [
+    {label: '10', value: '10', onClick: () => setLimit(10)},
     {label: '25', value: '25', onClick: () => setLimit(25)},
     {label: '50', value: '50', onClick: () => setLimit(50)},
     {label: '75', value: '75', onClick: () => setLimit(75)},
