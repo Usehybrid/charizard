@@ -31,10 +31,6 @@ interface IconButtonV2TypeProps extends BaseButtonProps {
 }
 
 interface OtherButtonV2TypeProps extends BaseButtonProps {
-  //   type?: Exclude<
-  //   BUTTON_V2_TYPE,
-  //   BUTTON_V2_TYPE.ICON_LEFT | BUTTON_V2_TYPE.ICON_RIGHT | BUTTON_V2_TYPE.ICON_ONLY
-  // >
   type?: BUTTON_V2_TYPE.BASIC | BUTTON_V2_TYPE.BUTTON | BUTTON_V2_TYPE.RESET
   icon?: React.ReactNode
   children: React.ReactNode
@@ -91,6 +87,7 @@ export type MenuItemV2 = {
   filterFn?: any
   disabled?: boolean
   customStyles?: React.CSSProperties
+  customSvgClassName?: React.CSSProperties
 }
 
 export interface GroupActionProps {
@@ -107,6 +104,7 @@ export interface GroupActionProps {
   isTable?: boolean
   customStyles?: {
     customMenuStyles?: React.CSSProperties
+    customButtonStyles?: React.CSSProperties
   }
   onClick?: any
   isCustomTrigger?: boolean
@@ -140,6 +138,7 @@ function GroupAction({
   const api = menu.connect(state, send, normalizeProps)
 
   const customMenuStyles = customStyles?.customMenuStyles
+  const customButtonStyles = customStyles?.customButtonStyles
 
   React.useEffect(() => {
     if (!isCustomTrigger || !actionsDropdownOptions?.setIsActive) return
@@ -236,7 +235,12 @@ function GroupAction({
                   }
                   style={menu.customStyles}
                 >
-                  {menu.iconSrc && <SVG path={menu.iconSrc} svgClassName={classes.menuIcon} />}
+                  {menu.iconSrc && (
+                    <SVG
+                      path={menu.iconSrc}
+                      svgClassName={clsx(classes.menuIcon, menu.customSvgClassName)}
+                    />
+                  )}
                   {menu.label}
                 </div>
               ))}
@@ -291,6 +295,7 @@ function GroupAction({
             size === BUTTON_V2_SIZE.SMALL && classes.iconOnlySmall,
             isTable && classes.groupActionTable,
           )}
+          style={customButtonStyles}
           {...api.getTriggerProps()}
         >
           {children}
@@ -341,46 +346,6 @@ function GroupAction({
       {isTable ? <Portal>{dropdown}</Portal> : dropdown}
     </>
   )
-
-  // return (
-  //   <>
-  //     <button
-  //       ref={buttonRef}
-  //       className={clsx(
-  //         classes.btn,
-  //         classes.btnGrp,
-  //         variant === BUTTON_V2_VARIANT.PRIMARY && classes.btnPrimary,
-  //         variant === BUTTON_V2_VARIANT.SECONDARY && classes.btnSecondary,
-  //         variant === BUTTON_V2_VARIANT.TERTIARY && classes.btnTertiary,
-  //         size === BUTTON_V2_SIZE.SMALL && classes.btnSmall,
-  //         disabled && classes.disabled,
-  //         isFocused && classes.focusVisible,
-  //         isTable && classes.btnTable,
-  //       )}
-  //       disabled={disabled}
-  //       onClick={!isTable ? onClick : undefined}
-  //       {...(isTable && api.getTriggerProps())}
-  //     >
-  //       <span className={classes.grpTextBtn}>{children}</span>
-  //       {showDownIconBtn && (
-  //         <button
-  //           className={clsx(
-  //             classes.grpIconBtn,
-  //             variant === BUTTON_V2_VARIANT.PRIMARY && classes.btnAddonPrimary,
-  //             variant === BUTTON_V2_VARIANT.SECONDARY && classes.btnAddonSecondary,
-  //             variant === BUTTON_V2_VARIANT.TERTIARY && classes.btnAddonTertiary,
-  //             size === BUTTON_V2_SIZE.SMALL && classes.btnAddonSmall,
-  //             'zap-reset-btn',
-  //           )}
-  //           {...(!isTable && api.getTriggerProps())}
-  //         >
-  //           <SVG path={chevronDown} width={16} height={16} svgClassName={classes.chevronDown} />
-  //         </button>
-  //       )}
-  //     </button>
-  //     {isTable ? <Portal>{dropdown}</Portal> : dropdown}
-  //   </>
-  // )
 }
 
 export interface ActionsDropdownProps {
