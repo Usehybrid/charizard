@@ -69,6 +69,7 @@ export default function TaskCard({data, menuItems}: {data: ITask; menuItems: Men
             menuItems={menuItems}
             variant={BUTTON_V2_VARIANT.TERTIARY}
             size={BUTTON_V2_SIZE.SMALL}
+            customData={data}
           />
         )}
       </div>
