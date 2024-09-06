@@ -357,6 +357,10 @@ export interface ActionsDropdownProps {
   positionerProps?: PositioningOptions
   isTable?: boolean
   children?: React.ReactNode
+  customStyles?: {
+    customMenuStyles?: React.CSSProperties
+    customButtonStyles?: React.CSSProperties
+  }
 }
 
 export function ActionsDropdown({
@@ -368,6 +372,7 @@ export function ActionsDropdown({
   positionerProps,
   isTable,
   children,
+  customStyles,
 }: ActionsDropdownProps) {
   const [isActive, setIsActive] = React.useState(false)
 
@@ -382,6 +387,7 @@ export function ActionsDropdown({
       positionerProps={positionerProps}
       isTable={isTable}
       isCustomTrigger={true}
+      customStyles={customStyles}
     >
       {children ? (
         children
