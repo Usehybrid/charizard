@@ -243,13 +243,17 @@ export function Upload({
         )} */}
         <div
           onClick={() => {
-            beforeUploadHandler && beforeUploadHandler()
-            fileInputRef.current.click()
+            if (!isInputDisabled) {
+              beforeUploadHandler && beforeUploadHandler()
+              fileInputRef.current.click()
+            }
           }}
           onDrop={e => {
-            e.preventDefault()
-            e.persist()
-            handleFileChange({target: {files: e.dataTransfer.files}})
+            if (!isInputDisabled) {
+              e.preventDefault()
+              e.persist()
+              handleFileChange({target: {files: e.dataTransfer.files}})
+            }
           }}
           className={
             customComponent
