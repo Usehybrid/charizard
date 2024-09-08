@@ -4,6 +4,7 @@ import {CheckboxV2} from '../../components'
 
 export function CheckboxDemo() {
   const [checked, setChecked] = React.useState(false)
+  console.log(setChecked)
   const [indeterminate, setIndeterminate] = React.useState(false)
   const [hoverChecked, setHoverChecked] = React.useState(false)
 

@@ -3,24 +3,25 @@ import dts from 'vite-plugin-dts'
 import libCss from 'vite-plugin-libcss'
 import checker from 'vite-plugin-checker'
 import pkg from './package.json'
-import {defineConfig} from 'vite'
 import {resolve} from 'node:path'
+import {defineConfig} from 'vite'
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     react(),
     dts({
-      rollupTypes: true,
-      insertTypesEntry: true,
-      include: ['src/components/'],
-      tsconfigPath: './tsconfig.app.json',
+      rollupTypes: true, // Merge all types into one file
+      insertTypesEntry: true, // Insert type entry file in the package
+      tsconfigPath: './tsconfig.app.json', // Points to your tsconfig
     }),
-    libCss({}),
-    checker({
-      typescript: true,
-    }),
+    libCss(),
+    checker({typescript: true}),
   ],
+  resolve: {
+    alias: {
+      '@hybr1d-tech/charizard': resolve(__dirname, 'src/index.ts'), // Alias for source imports
+    },
+  },
   build: {
     lib: {
       entry: resolve(__dirname, 'src/components/index.ts'),

@@ -1,5 +1,4 @@
-import {ButtonV2, BUTTON_V2_SIZE, BUTTON_V2_TYPE, BUTTON_V2_VARIANT, SVG} from '../components'
-import closeIcon from '../components/assets/close.svg'
+import {ButtonV2, BUTTON_V2_SIZE, BUTTON_V2_VARIANT} from '../components'
 import calender from '../components/assets/calender.svg'
 
 export const menuItems = [
@@ -8,7 +7,7 @@ export const menuItems = [
     onClick: (data: any) => {
       console.log('apply leave', data)
     },
-    filterFn: (data: any) => {
+    filterFn: () => {
       return true
     },
     iconSrc: calender,
@@ -16,10 +15,10 @@ export const menuItems = [
 
   {
     label: 'Apply Reimbursement',
-    onClick: (data: any) => {
+    onClick: () => {
       console.log('clicked apply rim')
     },
-    filterFn: (data: any) => {
+    filterFn: () => {
       // return false
       return true
     },
@@ -28,7 +27,7 @@ export const menuItems = [
   },
   {
     label: 'Archive',
-    onClick: (data: any) => {
+    onClick: () => {
       console.log('clicked archive')
     },
     disabled: true,
