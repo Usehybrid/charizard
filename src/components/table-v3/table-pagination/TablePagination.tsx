@@ -57,10 +57,13 @@ export function TablePagination({paginationConfig}: TablePaginationProps) {
   }, [metaData?.total_items, limit])
 
   React.useEffect(() => {
-    // Reset the page number when the limit changes
-    paginationApi.setPage(1) // Reset to the first page
+    // Reset the page number when the limit changes, only if the current page is invalid
+    const maxPage = Math.ceil((metaData?.total_items || 0) / paginationConfig.limit)
+    if (paginationConfig.page + 1 > maxPage) {
+      paginationApi.setPage(1) // Reset to first page if current page exceeds total pages
+    }
     paginationApi.setPageSize(paginationConfig.limit)
-  }, [limit])
+  }, [limit, metaData?.total_items])
 
   const actualPageNo = metaData?.page_no ? metaData.page_no : 0
   const startItem = actualPageNo * (metaData?.items_on_page || 0) + 1
