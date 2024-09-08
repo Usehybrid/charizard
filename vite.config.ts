@@ -17,11 +17,6 @@ export default defineConfig({
     libCss(),
     checker({typescript: true}),
   ],
-  resolve: {
-    alias: {
-      '@hybr1d-tech/charizard': resolve(__dirname, 'src/index.ts'), // Alias for source imports
-    },
-  },
   build: {
     lib: {
       entry: resolve(__dirname, 'src/components/index.ts'),

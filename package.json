@@ -11,7 +11,8 @@
   "exports": {
     ".": {
       "import": "./dist/hybr1d-ui.js",
-      "require": "./dist/hybr1d-ui.umd.js"
+      "require": "./dist/hybr1d-ui.umd.js",
+      "types": "./dist/index.d.ts"
     }
   },
   "repository": {
