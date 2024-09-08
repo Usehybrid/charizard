@@ -1,14 +1,12 @@
-
-import slash from '../assets/slash.svg'
- import  jpg from  '../assets/upload/jpg.svg'
- import  jpeg from  '../assets/upload/jpeg.svg'
- import  png from  '../assets/upload/png.svg'
- import  webp from  '../assets/upload/webp.svg'
- import  doc from  '../assets/upload/doc.svg'
- import  csv from  '../assets/upload/csv.svg'
- import  xls from  '../assets/upload/xls.svg'
- import  pdf from  '../assets/upload/pdf.svg'
- import  fileVertical from  '../assets/file-vertical.svg'
+import jpg from '../assets/upload/jpg.svg'
+import jpeg from '../assets/upload/jpeg.svg'
+import png from '../assets/upload/png.svg'
+import webp from '../assets/upload/webp.svg'
+import doc from '../assets/upload/doc.svg'
+import csv from '../assets/upload/csv.svg'
+import xls from '../assets/upload/xls.svg'
+import pdf from '../assets/upload/pdf.svg'
+import fileVertical from '../assets/file-vertical.svg'
 export function formatBytes(bytes: any) {
   var marker = 1024 // Change to 1000 if required
   var decimal = 3 // Change as required
@@ -26,7 +24,7 @@ export function formatBytes(bytes: any) {
   else return (bytes / gigaBytes).toFixed(decimal) + ' GB'
 }
 
-export function getFileTypeIcon(type:any) {
+export function getFileTypeIcon(type: any) {
   if (!type) return fileVertical
   if (type.includes('jpg')) {
     return jpg

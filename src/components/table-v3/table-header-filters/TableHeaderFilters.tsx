@@ -10,18 +10,17 @@ interface TableHeaderFiltersProps {
 }
 
 export default function TableHeaderFilters({filterConfig, filters}: TableHeaderFiltersProps) {
-  const {isLoading, isError, filterDispatch, filterReset} = filterConfig
+  const {isLoading, isError, filterDispatch} = filterConfig
 
   const tableFilters = useTableStore(s => s.filters)
 
-  const {setDefaultFilters, addFilters, removeFilters, resetFilters, resetAllFilters} =
-    useTableStore(s => ({
-      setDefaultFilters: s.setDefaultFilters,
-      addFilters: s.addFilters,
-      removeFilters: s.removeFilters,
-      resetFilters: s.resetFilters,
-      resetAllFilters: s.resetAllFilters,
-    }))
+  const {setDefaultFilters, addFilters, removeFilters, resetFilters} = useTableStore(s => ({
+    setDefaultFilters: s.setDefaultFilters,
+    addFilters: s.addFilters,
+    removeFilters: s.removeFilters,
+    resetFilters: s.resetFilters,
+    resetAllFilters: s.resetAllFilters,
+  }))
 
   React.useEffect(() => {
     if (!filters?.length || isLoading) return

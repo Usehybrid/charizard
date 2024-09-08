@@ -12,7 +12,7 @@ import {
   MultiValueRemove,
   SingleValue,
 } from './Common'
-import {SelectActionMeta, SelectMultiValue, SelectSingleValue, SelectValue} from './types'
+import {SelectActionMeta} from './types'
 
 interface CreatableSelectProps {
   /**

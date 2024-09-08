@@ -2,7 +2,7 @@ import * as React from 'react'
 import clsx from 'clsx'
 import classes from './styles.module.css'
 import closeIcon from '../assets/close.svg'
-import {BUTTON_V2_TYPE, BUTTON_V2_VARIANT, ButtonV2} from '../button-v2'
+import {BUTTON_V2_TYPE, ButtonV2} from '../button-v2'
 import {FooterButtons, mapVariant} from '../modal/ModalFooter'
 import {SVG} from '../svg'
 
@@ -191,9 +191,10 @@ export function Drawer({
                             variant={mapVariant(btn?.variant)}
                             onClick={btn.onClick ? btn.onClick : undefined}
                             type={
-                              btn.btnType === BUTTON_V2_TYPE.ICON_LEFT || btn.btnType === BUTTON_V2_TYPE.ICON_RIGHT
+                              btn.btnType === BUTTON_V2_TYPE.ICON_LEFT ||
+                              btn.btnType === BUTTON_V2_TYPE.ICON_RIGHT
                                 ? BUTTON_V2_TYPE.BASIC // Assigning a default compatible type
-                                : btn?.btnType as BUTTON_V2_TYPE.BUTTON | BUTTON_V2_TYPE.RESET 
+                                : (btn?.btnType as BUTTON_V2_TYPE.BUTTON | BUTTON_V2_TYPE.RESET)
                             }
                           >
                             {btn.btnText}

@@ -1,4 +1,3 @@
-import * as React from 'react'
 import clsx from 'clsx'
 import multiplyIcon from '../assets/multiply.svg'
 import classes from './user-chip.module.css'

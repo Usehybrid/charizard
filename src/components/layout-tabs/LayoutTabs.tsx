@@ -20,8 +20,6 @@ interface LayoutTabsProps {
   onValueChange?: (value: string) => void
 }
 
-const SEARCH_PARAM_KEY = 'active-tab'
-
 export function LayoutTabs({tabs, defaultValue, tabClassName, onValueChange}: LayoutTabsProps) {
   // const url = React.useMemo(() => new URL(window.location.href), [])
   // const value = url.searchParams.get(SEARCH_PARAM_KEY) ?? defaultValue

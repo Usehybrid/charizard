@@ -107,7 +107,6 @@ export interface TableV3Props {
     setPage: (page: number) => void
     limit: number
     setLimit: (limit: number) => void
-    // defaultLimit: string
   }
   emptyStateConfig?: {
     icon: string
@@ -122,7 +121,6 @@ export interface TableV3Props {
     columns: number
     emptySearchTitle?: string
   }
-  headerText?: string
   tableStyleConfig?: {
     maxHeight?: string
     stickyIds?: string[]
@@ -179,7 +177,7 @@ export function TableV3({
   totalText,
   paginationConfig,
   emptyStateConfig,
-  headerText,
+
   tableStyleConfig,
   customColumnConfig,
   exportConfig,

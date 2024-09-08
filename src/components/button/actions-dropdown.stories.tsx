@@ -1,5 +1,5 @@
 import type {Meta, StoryObj} from '@storybook/react'
-import {Button, BUTTON_VARIANT} from './Button'
+import {Button} from './Button'
 import icon from '../assets/check.svg'
 
 const meta: Meta<typeof Button.ActionsDropdown> = {

@@ -110,8 +110,6 @@ export function DrawerV2({
   const containerRef = React.useRef<HTMLDivElement>(null)
   const descriptionRef = React.useRef<HTMLDivElement>(null)
   const footerRef = React.useRef<HTMLDivElement>(null)
-  const translateXOffset = drawerPosition === 'left' ? '-100%' : '100%'
-  const isFullBodyHeight = !showHeader && !showFooter
 
   // React.useEffect(() => {
   //   const timeout = setTimeout(() => {

@@ -1,7 +1,6 @@
 import * as React from 'react'
 import classes from './styles.module.css'
 import clsx from 'clsx'
-import {RADIO_COL_ID} from '../constants'
 import type {Row} from '@tanstack/react-table'
 
 export function TableRadio({

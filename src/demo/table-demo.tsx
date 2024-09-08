@@ -4,13 +4,12 @@ import {TableV3} from '../components'
 import {INV_ACTION_TYPES, useInventoryStore} from '../components/table-v3/inventory/inventory.store'
 import {createColumnHelper} from '@tanstack/react-table'
 
-interface tableProps {}
-
-export default function TableDemo({}: tableProps) {
+export default function TableDemo() {
   const [search, setSearch] = React.useState('')
 
   const query = useInventoryStore(s => s.query)
   const dispatch = useInventoryStore(s => s.dispatch)
+
   return (
     <TableV3
       data={data}
@@ -25,9 +24,6 @@ export default function TableDemo({}: tableProps) {
         filters: filtersV2,
         isLoading: false,
         isError: false,
-        // filterDispatch: value => dispatch({type: SOFTWARE_ACTION_TYPES.FILTER, payload: value}),
-        // filterReset: value =>
-        //   dispatch({type: SOFTWARE_ACTION_TYPES.RESET_FILTERS, payload: value}),
         filterDispatch: value => dispatch({type: INV_ACTION_TYPES.FILTER, payload: value}),
         filterReset: () => dispatch({type: INV_ACTION_TYPES.RESET_FILTERS, payload: null}),
       }}
@@ -110,7 +106,7 @@ export default function TableDemo({}: tableProps) {
         columns: cols,
         isPending: false,
         isError: false,
-        handleSaveColumns: async (columns: any) => {
+        handleSaveColumns: async () => {
           await Promise.resolve(() => {
             console.log('test')
           })

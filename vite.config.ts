@@ -11,8 +11,10 @@ export default defineConfig({
   plugins: [
     react(),
     dts({
+      rollupTypes: true,
       insertTypesEntry: true,
       include: ['src/components/'],
+      tsconfigPath: './tsconfig.app.json',
     }),
     libCss({}),
     checker({

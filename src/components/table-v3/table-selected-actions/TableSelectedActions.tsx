@@ -1,6 +1,5 @@
 import classes from './table-selected-actions.module.css'
 import {SVG} from '../../svg'
-import {Button, BUTTON_VARIANT} from '../../button'
 import {TableV3Props} from '../TableV3'
 import {BUTTON_V2_SIZE, BUTTON_V2_VARIANT, ButtonV2} from '../../button-v2'
 
@@ -20,7 +19,7 @@ export default function TableSelectedActions({
   )
     return null
 
-  const {isCheckbox, actions, iconSrc} = rowSelectionConfig
+  const {isCheckbox, actions} = rowSelectionConfig
 
   const showDropdown = actions?.length && actions.length > 2
   const firstAction = actions?.length ? actions[0] : null
