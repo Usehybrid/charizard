@@ -132,8 +132,10 @@ function GroupAction({
       positioning: {placement: positionerProps?.placement || 'bottom-end'},
     }),
   )
+
   const [isFocused, setIsFocused] = React.useState(false)
-  console.log(isFocused)
+  console.warn(isFocused)
+
   const buttonRef = React.useRef<HTMLButtonElement>(null)
   const menuRef = React.useRef<HTMLDivElement>(null)
   const api = menu.connect(state, send, normalizeProps)

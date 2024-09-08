@@ -18,13 +18,10 @@ export default function FilterDrawerAllCheckbox({
 
   const [state, send] = useMachine(
     checkbox.machine({
-      // id: `all-${filterKey}`,
       id: `all`,
       checked,
       onCheckedChange: ({checked}: {checked: any}) => {
         setHasChanges(true)
-        console.log('1')
-        console.log('hits', allRef.current)
         if (allRef.current) return
         setFilterCheckedState((prevState: Record<string, any[]>) => {
           return {
@@ -40,20 +37,7 @@ export default function FilterDrawerAllCheckbox({
 
   const api = checkbox.connect(state, send, normalizeProps)
 
-  // Initialize the machine state based on the external `checked` prop
-  // if (api.checked !== checked) {
-  //   send({type: 'SET_CHECKED', checked})
-  // }
-
-  // console.log('HITS', allRef.current)
-
-  // Ensure that `checked` state is controlled directly without side effects
-  // api.setChecked(checked)
-
   React.useEffect(() => {
-    console.log('2')
-    console.log(api.checked, checked)
-
     if (api.checked !== checked) {
       allRef.current = true
       api.setChecked(checked)
@@ -61,8 +45,6 @@ export default function FilterDrawerAllCheckbox({
       allRef.current = false
     }
   }, [checked, api.checked])
-
-  // console.log({c: checked, machineC: api.checked, machineSC: api.checkedState})
 
   return (
     <label {...api.getRootProps()} className={classes.optionLabel}>
