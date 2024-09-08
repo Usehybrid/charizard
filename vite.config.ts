@@ -1,4 +1,4 @@
-import react from '@vitejs/plugin-react'
+import react from '@vitejs/plugin-react-swc'
 import dts from 'vite-plugin-dts'
 import libCss from 'vite-plugin-libcss'
 import checker from 'vite-plugin-checker'

@@ -87,7 +87,7 @@ export type MenuItemV2 = {
   filterFn?: any
   disabled?: boolean
   customStyles?: React.CSSProperties
-  customSvgClassName?: React.CSSProperties
+  customSvgClassName?: string
 }
 
 export interface GroupActionProps {

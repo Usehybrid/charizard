@@ -9,9 +9,9 @@ import {MenuItemV2} from '../button-v2'
 import {TablePagination} from '../table-v3'
 import {ITask} from './types'
 
-interface TaskCardsProps {
+export interface TaskCardsProps {
   headers: string[]
-  data: ITask[]
+  data?: ITask[]
   isLoading?: boolean
   isError?: boolean
   emptyText?: string

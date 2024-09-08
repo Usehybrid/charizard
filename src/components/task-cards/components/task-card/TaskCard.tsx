@@ -1,12 +1,12 @@
 import * as React from 'react'
 import clsx from 'clsx'
 import classes from './task-card.module.css'
+import getStatus from '../../helper'
 import {UserChip} from '../../../user-chip'
 import {Badge, BADGE_HIGHLIGHT, BADGE_STATUS} from '../../../badge'
 import {BUTTON_V2_SIZE, BUTTON_V2_VARIANT, ButtonV2, MenuItemV2} from '../../../button-v2'
 import {ITask, ITaskDetails, ITaskObjectValue} from '../../types'
 import {isObject, isString} from '../../../../utils'
-import getStatus from '../../helper'
 import {getUsername} from '../../../../utils/text'
 
 export default function TaskCard({data, menuItems}: {data: ITask; menuItems: MenuItemV2[]}) {
@@ -89,7 +89,7 @@ const moduleStatusMap: {[key: string]: BADGE_STATUS} = {
 const statusMap: {[key: string]: BADGE_STATUS} = {
   pending: BADGE_STATUS.WARNING,
   declined: BADGE_STATUS.NEGATIVE,
-  pending_second_approver: BADGE_STATUS.WARNING,
+  pending_second_approval: BADGE_STATUS.WARNING,
   cancelled: BADGE_STATUS.NEUTRAL,
   approved: BADGE_STATUS.POSITIVE,
   pending_cancellation: BADGE_STATUS.WARNING,
