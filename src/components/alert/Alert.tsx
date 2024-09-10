@@ -4,13 +4,19 @@ import clsx from 'clsx'
 import {SVG} from '../svg'
 import info from '../assets/info.svg'
 import success from '../assets/success.svg'
+import error from '../assets/toasts/error.svg'
+import warning from '../assets/toasts/warning.svg'
 import close from '../assets/close.svg'
 import down from '../assets/chevron-down.svg'
 import up from '../assets/chevron-up.svg'
 
 export enum ALERT_TYPES {
   DEFAULT = 'default',
+  NEUTRAL = 'neutral',
   POSITIVE = 'positive',
+  WARNING = 'warning',
+  NEGATIVE = 'negative',
+  HIGHLIGHT = 'highlight',
 }
 
 export enum ALERT_ACTION_TYPES {
@@ -98,10 +104,26 @@ export function Alert({alertType, actionType, header, body}: AlertPropTypes) {
 export const alertTypeMap: {
   [key: string]: {bg: string; color: string; icon: string}
 } = {
-  [ALERT_TYPES.DEFAULT]: {bg: 'var(--fill-selection)', color: 'var(--p-p50)', icon: info},
+  [ALERT_TYPES.NEUTRAL]: {bg: 'var(--dark-d10)', color: 'var(--dark-d70)', icon: info},
+  [ALERT_TYPES.DEFAULT]: {bg: 'var(--p-p10)', color: 'var(--p-p70)', icon: info},
   [ALERT_TYPES.POSITIVE]: {
     bg: 'var(--status-success-s10)',
     color: 'var(--status-success-s70)',
     icon: success,
+  },
+  [ALERT_TYPES.WARNING]: {
+    bg: 'var(--status-warning-w10)',
+    color: 'var(--status-warning-w70)',
+    icon: warning,
+  },
+  [ALERT_TYPES.NEGATIVE]: {
+    bg: 'var(--status-error-e10)',
+    color: 'var(--status-error-e70)',
+    icon: error,
+  },
+  [ALERT_TYPES.HIGHLIGHT]: {
+    bg: 'var(--status-info-i10)',
+    color: 'var(--status-info-i70)',
+    icon: info,
   },
 }
