@@ -25,7 +25,7 @@ export interface ITaskDetails {
   value: string | ITaskObjectValue | FileType[] | null
 }
 
-interface FileType {
+export interface FileType {
   details: {
     ext: string
     key: string

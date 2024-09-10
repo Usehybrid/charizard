@@ -6,7 +6,7 @@ import {UserChip} from '../../../user-chip'
 import {Badge, BADGE_HIGHLIGHT, BADGE_STATUS} from '../../../badge'
 import {BUTTON_V2_SIZE, BUTTON_V2_VARIANT, ButtonV2, MenuItemV2} from '../../../button-v2'
 import {ITask, ITaskDetails, ITaskObjectValue} from '../../types'
-import {isObject, isString} from '../../../../utils'
+import {isArrayOfString, isObject, isString} from '../../../../utils'
 import {getUsername} from '../../../../utils/text'
 
 export default function TaskCard({data, menuItems}: {data: ITask; menuItems: MenuItemV2[]}) {
@@ -29,20 +29,32 @@ export default function TaskCard({data, menuItems}: {data: ITask; menuItems: Men
           <div key={i} className={classes.detail}>
             <div className={clsx(classes.detailKey, 'zap-subcontent-medium')}>{detail.key}</div>
             {Array.isArray(detail.value) && detail.value.length > 0 ? (
-              <div className={classes.detailValueAttachments}>
-                {detail.value?.map((value, index: React.Key) => (
-                  <div key={index} className={classes.detailValueAttachment}>
-                    <div>
-                      <img src={value.details.icon} width={20} alt={`${value.details.type}`} />
-                    </div>
-                    <div>
-                      <a href={value.doc_link} target="_blank" className={classes.attachmentName}>
-                        {value.file_name}
-                      </a>
-                    </div>
-                  </div>
-                ))}
-              </div>
+              isArrayOfString(detail.value) ? (
+                <div className={clsx(classes.detailValue, 'zap-subcontent-medium')}>
+                  {(detail.value as string[]).join(', ')}
+                </div>
+              ) : (
+                <div className={classes.detailValueAttachments}>
+                  {detail.value?.map((value, index: React.Key) => {
+                    return (
+                      <div key={index} className={classes.detailValueAttachment}>
+                        <div>
+                          <img src={value.details.icon} width={20} alt={`${value.details.type}`} />
+                        </div>
+                        <div>
+                          <a
+                            href={value.doc_link}
+                            target="_blank"
+                            className={classes.attachmentName}
+                          >
+                            {value.file_name}
+                          </a>
+                        </div>
+                      </div>
+                    )
+                  })}
+                </div>
+              )
             ) : detail.value && isObject(detail.value) && Object.keys(detail.value).length ? (
               <UserChip
                 username={getUsername(detail.value)}
