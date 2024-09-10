@@ -90,3 +90,7 @@ export const isObject = (value: any): boolean => {
 export const isString = (value: any): boolean => {
   return typeof value === 'string'
 }
+
+export const isArrayOfString = (arr: unknown): arr is string[] => {
+  return Array.isArray(arr) && arr.every(item => typeof item === 'string')
+}

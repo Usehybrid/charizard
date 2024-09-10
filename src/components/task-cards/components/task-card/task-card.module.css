@@ -49,6 +49,7 @@
 
 .detailKey {
   color: var(--text-secondary);
+  min-width: 140px;
 }
 
 .detailValue {

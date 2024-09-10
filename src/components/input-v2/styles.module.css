@@ -38,7 +38,8 @@
   border-color: var(--status-error-e50);
 }
 
-.input:disabled {
+.input:disabled,
+.textarea:disabled {
   opacity: 0.5;
   cursor: not-allowed;
   background-color: var(--neutral-white);
@@ -316,12 +317,12 @@
 
 .numberAdornmentContainer .incrementBtn {
   border-top-right-radius: 4px;
-  border-bottom-width: .5px;
+  border-bottom-width: 0.5px;
 }
 
 .numberAdornmentContainer .decrementBtn {
   border-bottom-right-radius: 4px;
-  border-top-width: .5px;
+  border-top-width: 0.5px;
 }
 
 .incrementBtn .incrementIconContainer,
