@@ -9,10 +9,6 @@
   min-width: 1064px;
 }
 
-/* .taskCardPaginated {
-  border-radius: 10px 10px 0 0;
-} */
-
 .emptyBox {
   display: flex;
   align-items: center;

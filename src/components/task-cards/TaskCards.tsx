@@ -38,14 +38,13 @@ export function TaskCards({
   menuItems = [[]],
   paginationConfig,
 }: TaskCardsProps) {
-  const isPaginated = !!paginationConfig
   const isEmpty = !isLoading && !isError && (!data || data?.length === 0)
   return (
     <div className={classes.taskCardContainer}>
       {isEmpty ? (
         <Empty emptyText={emptyText} />
       ) : (
-        <div className={clsx(classes.taskCard, isPaginated && classes.taskCardPaginated)}>
+        <div className={clsx(classes.taskCard)}>
           <TaskCardHeader headers={headers} />
           {isLoading ? (
             <Loader containerStyle={{height: '164px'}} />
@@ -56,7 +55,7 @@ export function TaskCards({
               <TaskCard data={data} key={idx} menuItems={menuItems[idx]} />
             ))
           )}
-          {isPaginated && (
+          {typeof paginationConfig === 'object' && !!paginationConfig.metaData && (
             <div className={classes.pagination}>
               <TablePagination {...{paginationConfig}} />
             </div>
