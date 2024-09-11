@@ -5,7 +5,6 @@
   z-index: 1040;
   width: 100vw;
   height: 100vh;
-
   visibility: hidden;
 }
 
@@ -100,7 +99,6 @@
   max-height: calc(100vh - 90px);
   height: calc(100vh - 90px);
   overflow: scroll;
-  scrollbar-width: none;
 }
 .descriptionContainer.fullHeight {
   height: 100%;
