@@ -6,7 +6,13 @@ import {UserChip} from '../../../user-chip'
 import {Badge, BADGE_HIGHLIGHT, BADGE_STATUS} from '../../../badge'
 import {BUTTON_V2_SIZE, BUTTON_V2_VARIANT, ButtonV2, MenuItemV2} from '../../../button-v2'
 import {ITask, ITaskDetails, ITaskObjectValue} from '../../types'
-import {isArrayOfString, isObject, isString} from '../../../../utils'
+import {
+  getDefaultFormattedDateTime,
+  isArrayOfString,
+  isExactISODateFormat,
+  isObject,
+  isString,
+} from '../../../../utils'
 import {getUsername} from '../../../../utils/text'
 
 export default function TaskCard({data, menuItems}: {data: ITask; menuItems: MenuItemV2[]}) {
@@ -14,7 +20,9 @@ export default function TaskCard({data, menuItems}: {data: ITask; menuItems: Men
     <div className={classes.card}>
       <div className={classes.taskSection}>
         <div className={clsx(classes.taskName, 'zap-content-semibold')}>{data.name}</div>
-        <div className={clsx(classes.dateAndTime, 'zap-caption-medium')}>{data.date}</div>
+        <div className={clsx(classes.dateAndTime, 'zap-caption-medium')}>
+          {isExactISODateFormat(data.date) ? getDefaultFormattedDateTime(data.date) : data.date}
+        </div>
         <Badge
           highlight={BADGE_HIGHLIGHT.ICON}
           icon={data.icon_url}
