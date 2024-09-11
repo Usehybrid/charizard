@@ -4,6 +4,7 @@ import closeIcon from '../assets/close.svg'
 import classes from './drawer.module.css'
 import {SVG} from '../svg'
 import {BUTTON_V2_SIZE, BUTTON_V2_TYPE, BUTTON_V2_VARIANT, ButtonV2} from '../button-v2'
+import {useLockBodyScroll} from '../../utils/hooks/use-lock-body-scroll'
 
 export type DrawerFooterButtons = Array<{
   variant?: BUTTON_V2_VARIANT
@@ -110,6 +111,7 @@ export function DrawerV2({
   const containerRef = React.useRef<HTMLDivElement>(null)
   const descriptionRef = React.useRef<HTMLDivElement>(null)
   const footerRef = React.useRef<HTMLDivElement>(null)
+  useLockBodyScroll(isOpen)
 
   // React.useEffect(() => {
   //   const timeout = setTimeout(() => {
