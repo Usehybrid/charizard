@@ -79,8 +79,8 @@ export default function TaskCard({data, menuItems}: {data: ITask; menuItems: Men
         ))}
       </div>
       <div className={classes.statusSection}>
-        <Badge highlight={BADGE_HIGHLIGHT.DOT} status={statusMap[getStatus(data.status)]}>
-          {data.status}
+        <Badge highlight={BADGE_HIGHLIGHT.DOT} status={statusMap[data.status]}>
+          {getStatus(data.status)}
         </Badge>
       </div>
       <div className={classes.actionSection}>
