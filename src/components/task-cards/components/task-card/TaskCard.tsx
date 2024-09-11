@@ -13,6 +13,7 @@ import {
   isString,
 } from '../../../../utils'
 import {getUsername} from '../../../../utils/text'
+import getStatus from '../../helper'
 
 export default function TaskCard({data, menuItems}: {data: ITask; menuItems: MenuItemV2[]}) {
   return (
@@ -79,7 +80,7 @@ export default function TaskCard({data, menuItems}: {data: ITask; menuItems: Men
       </div>
       <div className={classes.statusSection}>
         <Badge highlight={BADGE_HIGHLIGHT.DOT} status={statusMap[data.status]}>
-          {data.status}
+          {getStatus(data.status)}
         </Badge>
       </div>
       <div className={classes.actionSection}>
@@ -112,4 +113,5 @@ const statusMap: {[key: string]: BADGE_STATUS} = {
   cancelled: BADGE_STATUS.NEUTRAL,
   approved: BADGE_STATUS.POSITIVE,
   pending_cancellation: BADGE_STATUS.WARNING,
+  rejected: BADGE_STATUS.NEGATIVE,
 }
