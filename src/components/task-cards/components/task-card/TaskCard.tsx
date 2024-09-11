@@ -1,7 +1,6 @@
 import * as React from 'react'
 import clsx from 'clsx'
 import classes from './task-card.module.css'
-import getStatus from '../../helper'
 import {UserChip} from '../../../user-chip'
 import {Badge, BADGE_HIGHLIGHT, BADGE_STATUS} from '../../../badge'
 import {BUTTON_V2_SIZE, BUTTON_V2_VARIANT, ButtonV2, MenuItemV2} from '../../../button-v2'
@@ -79,7 +78,7 @@ export default function TaskCard({data, menuItems}: {data: ITask; menuItems: Men
         ))}
       </div>
       <div className={classes.statusSection}>
-        <Badge highlight={BADGE_HIGHLIGHT.DOT} status={statusMap[getStatus(data.status)]}>
+        <Badge highlight={BADGE_HIGHLIGHT.DOT} status={statusMap[data.status]}>
           {data.status}
         </Badge>
       </div>
