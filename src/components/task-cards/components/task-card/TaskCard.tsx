@@ -18,17 +18,30 @@ import {
 import {getUsername} from '../../../../utils/text'
 import getStatus, {TASK_STATUS} from '../../helper'
 
-export default function TaskCard({data}: {data: ITask}) {
+export default function TaskCard({
+  data,
+  onClicks,
+  idx,
+}: {
+  data: ITask
+  onClicks?: any
+  idx: number
+}) {
   const navigate = useNavigate()
 
   console.log('charizard', data)
   const menuItems = [
     {
       label: 'See details',
-      onClick: (data: ITask) =>
+      onClick: (data: ITask) => {
+        if (typeof onClicks[idx] !== 'undefined') {
+          onClicks[idx](data)
+          return
+        }
         navigate(`/${data.module_reference}/${data.task_details_id}`, {
           state: {source: location.pathname},
-        }),
+        })
+      },
       iconSrc: infoOctagon,
       filterFn: (data: ITask) => {
         return data.module_reference === 'profile' ? false : true
@@ -36,10 +49,15 @@ export default function TaskCard({data}: {data: ITask}) {
     },
     {
       label: 'Cancel request',
-      onClick: (data: ITask) =>
+      onClick: (data: ITask) => {
+        if (typeof onClicks[idx] !== 'undefined') {
+          onClicks[idx](data)
+          return
+        }
         navigate(`/${data.module_reference}/${data.task_details_id}?cancel=${true}`, {
           state: {source: location.pathname},
-        }),
+        })
+      },
       iconSrc: deleteBin,
       customStyles: {color: 'var(--status-error-e50)'},
       customSvgClassName: classes.logoutIcon,
