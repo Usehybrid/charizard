@@ -377,7 +377,6 @@ export function ActionsDropdown({
   customStyles,
 }: ActionsDropdownProps) {
   const [isActive, setIsActive] = React.useState(false)
-  console.log(isActive)
 
   return (
     <GroupAction

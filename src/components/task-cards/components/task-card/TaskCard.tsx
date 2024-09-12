@@ -16,10 +16,12 @@ import {
   isString,
 } from '../../../../utils'
 import {getUsername} from '../../../../utils/text'
-import getStatus, { TASK_STATUS } from '../../helper'
+import getStatus, {TASK_STATUS} from '../../helper'
 
 export default function TaskCard({data}: {data: ITask}) {
   const navigate = useNavigate()
+
+  console.log('charizard', data)
   const menuItems = [
     {
       label: 'See details',
