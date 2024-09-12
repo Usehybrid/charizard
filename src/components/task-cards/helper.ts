@@ -14,13 +14,13 @@ export default function getStatus(status: string) {
     case TASK_STATUS_OPEN.CANCELLED:
       return 'Cancelled'
     case TASK_STATUS_OPEN.DECLINED:
-      return 'declined'
+      return 'Declined'
     case TASK_STATUS_OPEN.PENDING_SECOND_APPROVER:
       return 'Pending second approval'
     case TASK_STATUS_OPEN.APPROVED:
       return 'Approved'
     default:
       console.warn(`Unknown status: ${status}`)
-      return 'unknown'
+      return 'Unknown'
   }
 }
