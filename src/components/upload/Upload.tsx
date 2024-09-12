@@ -7,7 +7,7 @@ import {DOCS_TYPE} from './types'
 import {SVG} from '../svg'
 import close from '../assets/close.svg'
 import fileUpload from '../assets/file-upload.svg'
-import deleteOutline from '../assets/delete-bin-outline.svg'
+import deleteOutline from '../assets/delete-bin.svg'
 import {pluralize} from '../../utils/text'
 export type UploadFileType = {
   id?: string
