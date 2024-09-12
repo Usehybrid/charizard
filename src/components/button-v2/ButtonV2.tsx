@@ -134,7 +134,6 @@ function GroupAction({
   )
 
   const [isFocused, setIsFocused] = React.useState(false)
-  console.warn(isFocused)
 
   const buttonRef = React.useRef<HTMLButtonElement>(null)
   const menuRef = React.useRef<HTMLDivElement>(null)

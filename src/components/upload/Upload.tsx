@@ -171,7 +171,7 @@ export function Upload({
   }
 
   function handleFileRemove(key: any) {
-    const newFiles = files.filter((items, idx) => items.key !== key)
+    const newFiles = files.filter(items => items.key !== key)
     setFiles(newFiles)
     getUploadDoc(newFiles)
   }

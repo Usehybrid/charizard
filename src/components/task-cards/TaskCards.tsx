@@ -5,7 +5,6 @@ import emptySvg from './assets/empty-task-cards.svg'
 import classes from './task-cards.module.css'
 import {Loader} from '../loader'
 import {SVG} from '../svg'
-import {MenuItemV2} from '../button-v2'
 import {TablePagination} from '../table-v3'
 import {ITask} from './types'
 
@@ -15,7 +14,6 @@ export interface TaskCardsProps {
   isLoading?: boolean
   isError?: boolean
   emptyText?: string
-  menuItems: MenuItemV2[][]
   paginationConfig?: {
     metaData?: {
       total_items: number
@@ -35,7 +33,6 @@ export function TaskCards({
   isLoading = false,
   isError = false,
   emptyText = 'No requests',
-
   paginationConfig,
 }: TaskCardsProps) {
   const isEmpty = !isLoading && !isError && (!data || data?.length === 0)
