@@ -113,5 +113,4 @@ const statusMap: {[key: string]: BADGE_STATUS} = {
   cancelled: BADGE_STATUS.NEUTRAL,
   approved: BADGE_STATUS.POSITIVE,
   pending_cancellation: BADGE_STATUS.WARNING,
-  rejected: BADGE_STATUS.NEGATIVE,
 }
