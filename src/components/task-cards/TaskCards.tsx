@@ -25,6 +25,7 @@ export interface TaskCardsProps {
     limit: number
     setLimit: (limit: number) => void
   }
+  onClicks?: any[]
 }
 
 export function TaskCards({
@@ -34,6 +35,7 @@ export function TaskCards({
   isError = false,
   emptyText = 'No requests',
   paginationConfig,
+  onClicks,
 }: TaskCardsProps) {
   const isEmpty = !isLoading && !isError && (!data || data?.length === 0)
   return (
@@ -48,7 +50,9 @@ export function TaskCards({
           ) : isError ? (
             <Error />
           ) : (
-            data?.map((data: ITask, idx) => <TaskCard data={data} key={idx} />)
+            data?.map((data: ITask, idx) => (
+              <TaskCard data={data} key={idx} onClicks={onClicks} idx={idx} />
+            ))
           )}
           {typeof paginationConfig === 'object' && !!paginationConfig.metaData && (
             <div className={classes.pagination}>
