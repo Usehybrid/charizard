@@ -367,11 +367,7 @@ export function ButtonDemo() {
 
       <div style={{display: 'flex', gap: 150, marginTop: 20}}>
         <div style={{display: 'flex', gap: 10}}>
-          <ButtonV2.ActionsDropdown
-            isTable={true}
-            size={BUTTON_V2_SIZE.SMALL}
-            menuItems={menuItems}
-          />
+          <ButtonV2.ActionsDropdown isTable={true} size={BUTTON_V2_SIZE.SMALL} menuItems={[]} />
           <ButtonV2.ActionsDropdown
             isTable={true}
             size={BUTTON_V2_SIZE.SMALL}

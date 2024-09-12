@@ -81,7 +81,7 @@
   gap: 4px;
 }
 
-.detailValueAttachment{
+.detailValueAttachment {
   display: flex;
   gap: 4px;
   align-items: center;
@@ -99,4 +99,8 @@
 
 .attachmentName:hover {
   text-decoration: none;
+}
+
+.logoutIcon path {
+  fill: var(--status-error-e50);
 }
