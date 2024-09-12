@@ -35,7 +35,7 @@ export function TaskCards({
   isLoading = false,
   isError = false,
   emptyText = 'No requests',
-  menuItems = [[]],
+
   paginationConfig,
 }: TaskCardsProps) {
   const isEmpty = !isLoading && !isError && (!data || data?.length === 0)
@@ -51,9 +51,7 @@ export function TaskCards({
           ) : isError ? (
             <Error />
           ) : (
-            data?.map((data: ITask, idx) => (
-              <TaskCard data={data} key={idx} menuItems={menuItems[idx]} />
-            ))
+            data?.map((data: ITask, idx) => <TaskCard data={data} key={idx} />)
           )}
           {typeof paginationConfig === 'object' && !!paginationConfig.metaData && (
             <div className={classes.pagination}>

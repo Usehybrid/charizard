@@ -1,9 +1,12 @@
 import * as React from 'react'
 import clsx from 'clsx'
+import infoOctagon from '../../../assets/info-octagon.svg'
+import deleteBin from '../../../assets/delete-bin.svg'
 import classes from './task-card.module.css'
+import {useNavigate} from 'react-router-dom'
 import {UserChip} from '../../../user-chip'
 import {Badge, BADGE_HIGHLIGHT, BADGE_STATUS} from '../../../badge'
-import {BUTTON_V2_SIZE, BUTTON_V2_VARIANT, ButtonV2, MenuItemV2} from '../../../button-v2'
+import {BUTTON_V2_SIZE, BUTTON_V2_VARIANT, ButtonV2} from '../../../button-v2'
 import {ITask, ITaskDetails, ITaskObjectValue} from '../../types'
 import {
   getDefaultFormattedDateTime,
@@ -14,7 +17,34 @@ import {
 } from '../../../../utils'
 import {getUsername} from '../../../../utils/text'
 
-export default function TaskCard({data, menuItems}: {data: ITask; menuItems: MenuItemV2[]}) {
+export default function TaskCard({data}: {data: ITask}) {
+  const navigate = useNavigate()
+  const menuItems = [
+    {
+      label: 'See details',
+      onClick: (data: ITask) =>
+        navigate(`/${data.module_reference}/${data.task_details_id}`, {
+          state: {source: location.pathname},
+        }),
+      iconSrc: infoOctagon,
+      filterFn: (data: ITask) => {
+        return data.module_reference === 'profile' ? false : true
+      },
+    },
+    {
+      label: 'Cancel request',
+      onClick: (data: ITask) =>
+        navigate(`/${data.module_reference}/${data.task_details_id}?cancel=${true}`, {
+          state: {source: location.pathname},
+        }),
+      iconSrc: deleteBin,
+      customStyles: {color: 'var(--status-error-e50)'},
+      customSvgClassName: classes.logoutIcon,
+      filterFn: (data: ITask) => {
+        return data.module_reference === 'profile' ? false : true
+      },
+    },
+  ]
   return (
     <div className={classes.card}>
       <div className={classes.taskSection}>
