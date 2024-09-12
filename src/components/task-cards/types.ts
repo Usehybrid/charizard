@@ -1,15 +1,20 @@
 export interface ITask {
   module_id: string
-  module_reference: string
   module_name: string
-  form_link: string | null
-  external_link: string | null
-  static_module: boolean
+  module_reference: string
   icon_url: string
+  static_module: boolean
+  external_link: any
+  form_link: string | null
   name: string
   date: string
-  details: ITaskDetails[]
+  details: Array<{
+    key: string
+    value: any
+  }>
   status: string
+  type: string
+  task_details_id: string | null
 }
 
 export interface ITaskObjectValue {
