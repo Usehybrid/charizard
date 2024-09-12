@@ -13,7 +13,7 @@ import {
   isString,
 } from '../../../../utils'
 import {getUsername} from '../../../../utils/text'
-import getStatus from '../../helper'
+import getStatus, { TASK_STATUS } from '../../helper'
 
 export default function TaskCard({data, menuItems}: {data: ITask; menuItems: MenuItemV2[]}) {
   return (
@@ -107,10 +107,10 @@ const moduleStatusMap: {[key: string]: BADGE_STATUS} = {
 }
 
 const statusMap: {[key: string]: BADGE_STATUS} = {
-  pending: BADGE_STATUS.WARNING,
-  declined: BADGE_STATUS.NEGATIVE,
-  pending_second_approval: BADGE_STATUS.WARNING,
-  cancelled: BADGE_STATUS.NEUTRAL,
-  approved: BADGE_STATUS.POSITIVE,
-  pending_cancellation: BADGE_STATUS.WARNING,
+  [TASK_STATUS.PENDING]: BADGE_STATUS.WARNING,
+  [TASK_STATUS.DECLINED]: BADGE_STATUS.NEGATIVE,
+  [TASK_STATUS.PENDING_SECOND_APPROVER]: BADGE_STATUS.WARNING,
+  [TASK_STATUS.CANCELLED]: BADGE_STATUS.NEGATIVE,
+  [TASK_STATUS.APPROVED]: BADGE_STATUS.POSITIVE,
+  [TASK_STATUS.PENDING_CANCELLATION]: BADGE_STATUS.WARNING,
 }

@@ -1,23 +1,28 @@
-export enum TASK_STATUS_OPEN {
-  APPROVED = 'approved',
-  DECLINED = 'declined',
+export enum TASK_STATUS {
   PENDING = 'pending',
-  CANCELLED = 'cancelled',
-  PENDING_SECOND_APPROVER = 'pending_second_approved',
+  PENDING_SECOND_APPROVER = 'pending_second_approver',
   PENDING_CANCELLATION = 'pending_cancellation',
+  APPROVED = 'approved',
+  CLOSED = 'closed',
+  DECLINED = 'declined',
+  CANCELLED = 'cancelled',
 }
 
 export default function getStatus(status: string) {
   switch (status) {
-    case TASK_STATUS_OPEN.PENDING:
+    case TASK_STATUS.PENDING:
       return 'Pending'
-    case TASK_STATUS_OPEN.CANCELLED:
+    case TASK_STATUS.PENDING_SECOND_APPROVER:
+      return 'Pending second approver'
+    case TASK_STATUS.PENDING_CANCELLATION:
+      return 'Pending Cancellation'
+    case TASK_STATUS.CLOSED:
+      return 'Closed'
+    case TASK_STATUS.CANCELLED:
       return 'Cancelled'
-    case TASK_STATUS_OPEN.DECLINED:
+    case TASK_STATUS.DECLINED:
       return 'Declined'
-    case TASK_STATUS_OPEN.PENDING_SECOND_APPROVER:
-      return 'Pending second approval'
-    case TASK_STATUS_OPEN.APPROVED:
+    case TASK_STATUS.APPROVED:
       return 'Approved'
     default:
       console.warn(`Unknown status: ${status}`)
