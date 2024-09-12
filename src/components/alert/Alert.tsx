@@ -29,25 +29,31 @@ interface AlertPropTypes {
   actionType: string
   header: React.ReactNode
   body?: React.ReactNode
+  hide?: boolean
+  setHide?: React.Dispatch<React.SetStateAction<boolean>>
+  showMore?: boolean
+  setShowMore?: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export function Alert({alertType, actionType, header, body}: AlertPropTypes) {
-  const [hideAlert, setHideAlert] = React.useState(false)
-  const [showDropdown, setShowDropdown] = React.useState(false)
-
-  React.useEffect(() => {
-    setHideAlert(false)
-  }, [header])
-
+export function Alert({
+  alertType,
+  actionType,
+  header,
+  body,
+  hide,
+  setHide,
+  showMore,
+  setShowMore,
+}: AlertPropTypes) {
   return (
-    !hideAlert && (
+    !hide && (
       <div
         className={classes.alert}
         style={{
           backgroundColor: alertTypeMap[alertType].bg,
           borderColor: alertTypeMap[alertType].color,
-          gap: actionType === ALERT_ACTION_TYPES.SHOW_MORE && !showDropdown ? 0 : '16px',
-          opacity: actionType === ALERT_ACTION_TYPES.SHOW_MORE && !showDropdown ? '0.5' : '1',
+          gap: actionType === ALERT_ACTION_TYPES.SHOW_MORE && !showMore ? 0 : '16px',
+          opacity: actionType === ALERT_ACTION_TYPES.SHOW_MORE && !showMore ? '0.5' : '1',
         }}
       >
         <div className={classes.alertHeader}>
@@ -64,8 +70,8 @@ export function Alert({alertType, actionType, header, body}: AlertPropTypes) {
           <div
             className={classes.icons}
             onClick={() => {
-              if (actionType === ALERT_ACTION_TYPES.CLOSE) setHideAlert(true)
-              else setShowDropdown(e => !e)
+              if (actionType === ALERT_ACTION_TYPES.CLOSE && setHide) setHide(true)
+              else if (setShowMore) setShowMore(e => !e)
             }}
           >
             <SVG
@@ -73,16 +79,16 @@ export function Alert({alertType, actionType, header, body}: AlertPropTypes) {
                 width: '16px',
                 height: '16px',
               }}
-              path={actionType === ALERT_ACTION_TYPES.CLOSE ? close : showDropdown ? up : down}
+              path={actionType === ALERT_ACTION_TYPES.CLOSE ? close : showMore ? up : down}
             />
           </div>
         </div>
-        {actionType === ALERT_ACTION_TYPES.SHOW_MORE && showDropdown && (
+        {actionType === ALERT_ACTION_TYPES.SHOW_MORE && showMore && (
           <>
-            <div className={clsx(classes.dividerSection, {[classes.open]: showDropdown})}>
+            <div className={clsx(classes.dividerSection, {[classes.open]: showMore})}>
               <div className={classes.divider}></div>
             </div>
-            <div className={clsx(classes.alertDropDownBody, {[classes.open]: showDropdown})}>
+            <div className={clsx(classes.alertDropDownBody, {[classes.open]: showMore})}>
               <div></div>
               <div>{body}</div>
               <div></div>
