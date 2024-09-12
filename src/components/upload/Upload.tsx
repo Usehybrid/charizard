@@ -241,79 +241,86 @@ export function Upload({
             Note: You can upload maximum of {fileUploadLimit} file(s)
           </p>
         )} */}
-        <div
-          onClick={() => {
-            if (!isInputDisabled) {
-              beforeUploadHandler && beforeUploadHandler()
-              fileInputRef.current.click()
+        {!(fileUploadLimit === 1 && files.length === 1) && (
+          <div
+            onClick={() => {
+              if (!isInputDisabled) {
+                beforeUploadHandler && beforeUploadHandler()
+                fileInputRef.current.click()
+              }
+            }}
+            onDrop={e => {
+              if (!isInputDisabled) {
+                e.preventDefault()
+                e.persist()
+                handleFileChange({target: {files: e.dataTransfer.files}})
+              }
+            }}
+            className={
+              customComponent
+                ? ''
+                : clsx(
+                    classes.uploadBtn,
+                    uploadBtnClassName,
+                    disabled || isInputDisabled ? classes.disabledUploadBtn : '',
+                  )
             }
-          }}
-          onDrop={e => {
-            if (!isInputDisabled) {
+            onDragOver={e => {
               e.preventDefault()
-              e.persist()
-              handleFileChange({target: {files: e.dataTransfer.files}})
-            }
-          }}
-          className={
-            customComponent
-              ? ''
-              : clsx(
-                  classes.uploadBtn,
-                  uploadBtnClassName,
-                  disabled || isInputDisabled ? classes.disabledUploadBtn : '',
-                )
-          }
-          onDragOver={e => {
-            e.preventDefault()
-          }}
-          onDragLeave={e => {
-            e.preventDefault()
-          }}
-          style={{
-            background: isInputDisabled ? '#F4F4F4' : '',
-            cursor: disabled || isInputDisabled ? 'not-allowed' : 'pointer',
-          }}
-        >
-          {customComponent ? (
-            customComponent
-          ) : (
-            <>
-              <div className={clsx(classes.parentContainer)} style={{justifyContent: alignContent}}>
-                {showUploadIcon && (
-                  <SVG
-                    path={fileUpload}
-                    // variant={disabled ? 'secondary' : 'primary'}
-                    height={28}
-                    width={28}
-                    // customSpanStyles={{marginBottom: '10px'}}
-                  />
-                )}
-                {/* <div className={clsx(classes.uploadContainer)} style={{alignItems: alignContent}}> */}
-                <div className={clsx(classes.title, disabled ? classes.disabledTitle : '')}>
-                  {addDocumentText}
-                </div>
-                {/* <div className={clsx(classes.subTitle, disabled ? classes.disabledSubTitle : '')}>
+            }}
+            onDragLeave={e => {
+              e.preventDefault()
+            }}
+            style={{
+              background: isInputDisabled ? '#F4F4F4' : '',
+              cursor: disabled || isInputDisabled ? 'not-allowed' : 'pointer',
+            }}
+          >
+            {customComponent ? (
+              customComponent
+            ) : (
+              <>
+                <div
+                  className={clsx(classes.parentContainer)}
+                  style={{justifyContent: alignContent}}
+                >
+                  {showUploadIcon && (
+                    <SVG
+                      path={fileUpload}
+                      // variant={disabled ? 'secondary' : 'primary'}
+                      height={28}
+                      width={28}
+                      // customSpanStyles={{marginBottom: '10px'}}
+                    />
+                  )}
+                  {/* <div className={clsx(classes.uploadContainer)} style={{alignItems: alignContent}}> */}
+                  <div className={clsx(classes.title, disabled ? classes.disabledTitle : '')}>
+                    {addDocumentText}
+                  </div>
+                  {/* <div className={clsx(classes.subTitle, disabled ? classes.disabledSubTitle : '')}>
                     Choose file or drag and drop here
                   </div> */}
-                <div className={clsx(classes.subTitle, disabled ? classes.disabledSubTitle : '')}>
-                  <span>File Type: </span>
-                  <b> {addDocumentSubtitle || `PDF, Doc, Docx, PNG, WEBP,Xls, Xlsx and JPEG.`}</b>
-                  <div className={classes.smallCircle}></div>
-                  Max size: <b>{` 5 MB`}</b>
-                  <div className={classes.smallCircle}></div>
-                  Upload allowed: <b>{fileUploadLimit}</b>
-                </div>
-                {extraSubtitleText && (
                   <div className={clsx(classes.subTitle, disabled ? classes.disabledSubTitle : '')}>
-                    {extraSubtitleText}
+                    <span>File Type: </span>
+                    <b> {addDocumentSubtitle || `PDF, Doc, Docx, PNG, WEBP,Xls, Xlsx and JPEG.`}</b>
+                    <div className={classes.smallCircle}></div>
+                    Max size: <b>{` 5 MB`}</b>
+                    <div className={classes.smallCircle}></div>
+                    Upload allowed: <b>{fileUploadLimit}</b>
                   </div>
-                )}
-                {/* </div> */}
-              </div>
-            </>
-          )}
-        </div>
+                  {extraSubtitleText && (
+                    <div
+                      className={clsx(classes.subTitle, disabled ? classes.disabledSubTitle : '')}
+                    >
+                      {extraSubtitleText}
+                    </div>
+                  )}
+                  {/* </div> */}
+                </div>
+              </>
+            )}
+          </div>
+        )}
         {(fileUploadLimitError || !!uploadLimitError) && (
           <p className={classes.fileUploadLimitError}>{fileUploadLimitError || uploadLimitError}</p>
         )}
