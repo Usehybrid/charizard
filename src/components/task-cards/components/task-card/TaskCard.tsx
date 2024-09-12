@@ -16,6 +16,7 @@ import {
   isString,
 } from '../../../../utils'
 import {getUsername} from '../../../../utils/text'
+import getStatus, { TASK_STATUS } from '../../helper'
 
 export default function TaskCard({data}: {data: ITask}) {
   const navigate = useNavigate()
@@ -109,7 +110,7 @@ export default function TaskCard({data}: {data: ITask}) {
       </div>
       <div className={classes.statusSection}>
         <Badge highlight={BADGE_HIGHLIGHT.DOT} status={statusMap[data.status]}>
-          {data.status}
+          {getStatus(data.status)}
         </Badge>
       </div>
       <div className={classes.actionSection}>
@@ -136,10 +137,10 @@ const moduleStatusMap: {[key: string]: BADGE_STATUS} = {
 }
 
 const statusMap: {[key: string]: BADGE_STATUS} = {
-  pending: BADGE_STATUS.WARNING,
-  declined: BADGE_STATUS.NEGATIVE,
-  pending_second_approval: BADGE_STATUS.WARNING,
-  cancelled: BADGE_STATUS.NEUTRAL,
-  approved: BADGE_STATUS.POSITIVE,
-  pending_cancellation: BADGE_STATUS.WARNING,
+  [TASK_STATUS.PENDING]: BADGE_STATUS.WARNING,
+  [TASK_STATUS.DECLINED]: BADGE_STATUS.NEGATIVE,
+  [TASK_STATUS.PENDING_SECOND_APPROVER]: BADGE_STATUS.WARNING,
+  [TASK_STATUS.CANCELLED]: BADGE_STATUS.NEGATIVE,
+  [TASK_STATUS.APPROVED]: BADGE_STATUS.POSITIVE,
+  [TASK_STATUS.PENDING_CANCELLATION]: BADGE_STATUS.WARNING,
 }
