@@ -365,7 +365,10 @@ export function Upload({
                                 </div>
                               )}
                               {file.size && <div className={classes.smallCircle}></div>}
-                              <div> {file.size}</div>
+                              <div>
+                              {Number(file.size.split(' ')[0]).toFixed(2) +
+                              ' ' +
+                              file.size.split(' ')[1]}
                             </div>
                           </div>
                         </div>
