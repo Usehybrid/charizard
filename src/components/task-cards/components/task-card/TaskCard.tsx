@@ -17,6 +17,10 @@ import {
 } from '../../../../utils'
 import {getUsername} from '../../../../utils/text'
 import getStatus, {TASK_STATUS} from '../../helper'
+import {isDatePassedOrSame} from '../../../../utils/date'
+
+const HIDE_DETAILS = ['profile']
+const HIDE_CANCEL_REQUEST = ['profile', 'attendance', 'it-request']
 
 export default function TaskCard({
   data,
@@ -29,35 +33,31 @@ export default function TaskCard({
 }) {
   const navigate = useNavigate()
 
-  // console.log('charizard', data)
   const menuItems = [
     {
       label: 'See details',
       onClick: (data: ITask) => {
+        if (typeof onClicks[idx] !== 'undefined') {
+          onClicks[idx](data)
+          return
+        }
         if (data.module_reference === 'attendance') {
           // @ts-ignore
           navigate(`/attendance/approve/${data.task_details_id}`)
           return
         }
-        if (typeof onClicks[idx] !== 'undefined') {
-          onClicks[idx](data)
-          return
-        }
-
         navigate(`/${data.module_reference}/${data.task_details_id}`, {
           state: {source: location.pathname},
         })
       },
       iconSrc: infoOctagon,
-      filterFn: (data: ITask) => {
-        return data.module_reference === 'profile' ? false : true
-      },
+      hidden: HIDE_DETAILS.includes(data.module_reference),
     },
     {
       label: 'Cancel request',
       onClick: (data: ITask) => {
-        if (typeof onClicks[idx + 1] !== 'undefined') {
-          onClicks[idx + 1](data)
+        if (typeof onClicks[idx] !== 'undefined') {
+          onClicks[idx](data)
           return
         }
         navigate(`/${data.module_reference}/${data.task_details_id}?cancel=${true}`, {
@@ -67,13 +67,15 @@ export default function TaskCard({
       iconSrc: deleteBin,
       customStyles: {color: 'var(--status-error-e50)'},
       customSvgClassName: classes.logoutIcon,
-      filterFn: (data: ITask) => {
-        return data.module_reference === 'profile' || data.module_reference === 'attendance'
-          ? false
-          : true
-      },
+      hidden:
+        HIDE_CANCEL_REQUEST.includes(data.module_reference) ||
+        data.status === TASK_STATUS.CANCELLED ||
+        data.status === TASK_STATUS.DECLINED ||
+        data.status === TASK_STATUS.PENDING_CANCELLATION ||
+        (data.module_reference === 'leave' && isDatePassedOrSame(data?.leaveFrom)),
     },
-  ]
+  ].filter(action => !action.hidden)
+
   return (
     <div className={classes.card}>
       <div className={classes.taskSection}>
