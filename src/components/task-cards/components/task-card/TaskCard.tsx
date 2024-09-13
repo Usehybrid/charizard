@@ -37,16 +37,15 @@ export default function TaskCard({
     {
       label: 'See details',
       onClick: (data: ITask) => {
+        if (typeof onClicks[idx] !== 'undefined') {
+          onClicks[idx](data)
+          return
+        }
         if (data.module_reference === 'attendance') {
           // @ts-ignore
           navigate(`/attendance/approve/${data.task_details_id}`)
           return
         }
-        if (typeof onClicks[idx] !== 'undefined') {
-          onClicks[idx](data)
-          return
-        }
-
         navigate(`/${data.module_reference}/${data.task_details_id}`, {
           state: {source: location.pathname},
         })
@@ -70,13 +69,10 @@ export default function TaskCard({
       customSvgClassName: classes.logoutIcon,
       hidden:
         HIDE_CANCEL_REQUEST.includes(data.module_reference) ||
-        (data.module_reference === 'leave' &&
-          (data.status === TASK_STATUS.CANCELLED ||
-            data.status === TASK_STATUS.DECLINED ||
-            data.status === TASK_STATUS.PENDING_CANCELLATION)) ||
-        (data.status === TASK_STATUS.APPROVED &&
-          data.module_reference === 'leave' &&
-          isDatePassedOrSame(data?.leaveFrom)),
+        data.status === TASK_STATUS.CANCELLED ||
+        data.status === TASK_STATUS.DECLINED ||
+        data.status === TASK_STATUS.PENDING_CANCELLATION ||
+        (data.module_reference === 'leave' && isDatePassedOrSame(data?.leaveFrom)),
     },
   ].filter(action => !action.hidden)
 
