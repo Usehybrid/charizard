@@ -134,6 +134,7 @@ function GroupAction({
   )
 
   const [isFocused, setIsFocused] = React.useState(false)
+  console.warn(isFocused)
 
   const buttonRef = React.useRef<HTMLButtonElement>(null)
   const menuRef = React.useRef<HTMLDivElement>(null)
@@ -377,6 +378,7 @@ export function ActionsDropdown({
   customStyles,
 }: ActionsDropdownProps) {
   const [isActive, setIsActive] = React.useState(false)
+  console.log(isActive)
 
   return (
     <GroupAction
