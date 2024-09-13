@@ -57,8 +57,8 @@ export default function TaskCard({
     {
       label: 'Cancel request',
       onClick: (data: ITask) => {
-        if (typeof onClicks[idx + 1] !== 'undefined') {
-          onClicks[idx + 1](data)
+        if (typeof onClicks[idx] !== 'undefined') {
+          onClicks[idx](data)
           return
         }
         navigate(`/${data.module_reference}/${data.task_details_id}?cancel=${true}`, {
