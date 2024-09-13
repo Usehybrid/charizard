@@ -17,7 +17,7 @@ import {
 } from '../../../../utils'
 import {getUsername} from '../../../../utils/text'
 import getStatus, {TASK_STATUS} from '../../helper'
-import {isDatePassedOrSame} from '../../../../utils/date'
+import {isDatePassed} from '../../../../utils/date'
 
 const HIDE_DETAILS = ['profile']
 const HIDE_CANCEL_REQUEST = ['profile', 'attendance', 'it-request']
@@ -25,11 +25,9 @@ const HIDE_CANCEL_REQUEST = ['profile', 'attendance', 'it-request']
 export default function TaskCard({
   data,
   onClicks,
-  idx,
 }: {
   data: ITask
-  onClicks?: any
-  idx: number
+  onClicks?: ((data: ITask) => void)[]
 }) {
   const navigate = useNavigate()
 
@@ -37,8 +35,8 @@ export default function TaskCard({
     {
       label: 'See details',
       onClick: (data: ITask) => {
-        if (typeof onClicks[idx] !== 'undefined') {
-          onClicks[idx](data)
+        if (typeof onClicks?.[0] !== 'undefined') {
+          onClicks[0](data)
           return
         }
         if (data.module_reference === 'attendance') {
@@ -56,8 +54,8 @@ export default function TaskCard({
     {
       label: 'Cancel request',
       onClick: (data: ITask) => {
-        if (typeof onClicks[idx] !== 'undefined') {
-          onClicks[idx](data)
+        if (typeof onClicks?.[1] !== 'undefined') {
+          onClicks[1](data)
           return
         }
         navigate(`/${data.module_reference}/${data.task_details_id}?cancel=${true}`, {
@@ -72,7 +70,12 @@ export default function TaskCard({
         data.status === TASK_STATUS.CANCELLED ||
         data.status === TASK_STATUS.DECLINED ||
         data.status === TASK_STATUS.PENDING_CANCELLATION ||
-        (data.module_reference === 'leave' && isDatePassedOrSame(data?.leaveFrom)),
+        (data.module_reference === 'leave' &&
+          isDatePassed(data?.leaveFrom) &&
+          !(
+            data.status === TASK_STATUS.PENDING ||
+            data.status === TASK_STATUS.PENDING_SECOND_APPROVER
+          )),
     },
   ].filter(action => !action.hidden)
 
@@ -170,7 +173,8 @@ const statusMap: {[key: string]: BADGE_STATUS} = {
   [TASK_STATUS.PENDING]: BADGE_STATUS.WARNING,
   [TASK_STATUS.DECLINED]: BADGE_STATUS.NEGATIVE,
   [TASK_STATUS.PENDING_SECOND_APPROVER]: BADGE_STATUS.WARNING,
-  [TASK_STATUS.CANCELLED]: BADGE_STATUS.NEGATIVE,
-  [TASK_STATUS.APPROVED]: BADGE_STATUS.POSITIVE,
   [TASK_STATUS.PENDING_CANCELLATION]: BADGE_STATUS.WARNING,
+  [TASK_STATUS.APPROVED]: BADGE_STATUS.POSITIVE,
+  [TASK_STATUS.CANCELLED]: BADGE_STATUS.NEGATIVE,
+  [TASK_STATUS.CLOSED]: BADGE_STATUS.NEUTRAL,
 }

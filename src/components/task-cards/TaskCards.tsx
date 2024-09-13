@@ -25,7 +25,7 @@ export interface TaskCardsProps {
     limit: number
     setLimit: (limit: number) => void
   }
-  onClicks?: any[]
+  onClicks?: ((data: ITask) => void)[][]
 }
 
 export function TaskCards({
@@ -51,7 +51,7 @@ export function TaskCards({
             <Error />
           ) : (
             data?.map((data: ITask, idx) => (
-              <TaskCard data={data} key={idx} onClicks={onClicks} idx={idx} />
+              <TaskCard data={data} key={idx} onClicks={onClicks?.[idx]} />
             ))
           )}
           {typeof paginationConfig === 'object' && !!paginationConfig.metaData && (
