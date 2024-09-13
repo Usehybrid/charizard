@@ -17,6 +17,10 @@ import {
 } from '../../../../utils'
 import {getUsername} from '../../../../utils/text'
 import getStatus, {TASK_STATUS} from '../../helper'
+import {isDatePassedOrSame} from '../../../../utils/date'
+
+const HIDE_DETAILS = ['profile']
+const HIDE_CANCEL_REQUEST = ['profile', 'attendance', 'it-request']
 
 export default function TaskCard({
   data,
@@ -29,7 +33,6 @@ export default function TaskCard({
 }) {
   const navigate = useNavigate()
 
-  // console.log('charizard', data)
   const menuItems = [
     {
       label: 'See details',
@@ -49,9 +52,7 @@ export default function TaskCard({
         })
       },
       iconSrc: infoOctagon,
-      filterFn: (data: ITask) => {
-        return data.module_reference === 'profile' ? false : true
-      },
+      hidden: HIDE_DETAILS.includes(data.module_reference),
     },
     {
       label: 'Cancel request',
@@ -67,13 +68,18 @@ export default function TaskCard({
       iconSrc: deleteBin,
       customStyles: {color: 'var(--status-error-e50)'},
       customSvgClassName: classes.logoutIcon,
-      filterFn: (data: ITask) => {
-        return data.module_reference === 'profile' || data.module_reference === 'attendance'
-          ? false
-          : true
-      },
+      hidden:
+        HIDE_CANCEL_REQUEST.includes(data.module_reference) ||
+        (data.module_reference === 'leave' &&
+          (data.status === TASK_STATUS.CANCELLED ||
+            data.status === TASK_STATUS.DECLINED ||
+            data.status === TASK_STATUS.PENDING_CANCELLATION)) ||
+        (data.status === TASK_STATUS.APPROVED &&
+          data.module_reference === 'leave' &&
+          isDatePassedOrSame(data?.leaveFrom)),
     },
-  ]
+  ].filter(action => !action.hidden)
+
   return (
     <div className={classes.card}>
       <div className={classes.taskSection}>

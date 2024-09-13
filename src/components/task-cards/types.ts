@@ -15,6 +15,7 @@ export interface ITask {
   status: string
   type: string
   task_details_id: string | null
+  leaveFrom?: string
 }
 
 export interface ITaskObjectValue {
