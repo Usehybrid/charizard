@@ -111,21 +111,24 @@ export interface GroupActionProps {
   isSingleBtnTrigger?: boolean
 }
 
-function GroupAction({
-  children,
-  variant = BUTTON_V2_VARIANT.PRIMARY,
-  disabled = false,
-  menuItems,
-  customData,
-  size = BUTTON_V2_SIZE.DEFAULT,
-  actionsDropdownOptions,
-  positionerProps,
-  isTable = false,
-  isCustomTrigger = false,
-  customStyles,
-  onClick,
-  isSingleBtnTrigger = false,
-}: GroupActionProps) {
+const GroupAction = React.forwardRef(function (
+  {
+    children,
+    variant = BUTTON_V2_VARIANT.PRIMARY,
+    disabled = false,
+    menuItems,
+    customData,
+    size = BUTTON_V2_SIZE.DEFAULT,
+    actionsDropdownOptions,
+    positionerProps,
+    isTable = false,
+    isCustomTrigger = false,
+    customStyles,
+    onClick,
+    isSingleBtnTrigger = false,
+  }: GroupActionProps,
+  ref,
+) {
   const [state, send] = useMachine(
     menu.machine({
       id: React.useId(),
@@ -165,6 +168,15 @@ function GroupAction({
       api.setOpen(false)
     }
   }
+
+  React.useImperativeHandle(ref, () => {
+    return {
+      blur() {
+        setIsFocused(false)
+        api.setOpen(false)
+      },
+    }
+  }, [api])
 
   React.useEffect(() => {
     const handleFocus = () => setIsFocused(true)
@@ -349,7 +361,7 @@ function GroupAction({
       {isTable ? <Portal>{dropdown}</Portal> : dropdown}
     </>
   )
-}
+})
 
 export interface ActionsDropdownProps {
   variant?: BUTTON_V2_VARIANT
@@ -366,17 +378,20 @@ export interface ActionsDropdownProps {
   }
 }
 
-export function ActionsDropdown({
-  variant,
-  disabled,
-  menuItems,
-  customData,
-  size,
-  positionerProps,
-  isTable,
-  children,
-  customStyles,
-}: ActionsDropdownProps) {
+export const ActionsDropdown = React.forwardRef(function (
+  {
+    variant,
+    disabled,
+    menuItems,
+    customData,
+    size,
+    positionerProps,
+    isTable,
+    children,
+    customStyles,
+  }: ActionsDropdownProps,
+  ref,
+) {
   const [isActive, setIsActive] = React.useState(false)
   console.log(isActive)
 
@@ -392,6 +407,7 @@ export function ActionsDropdown({
       isTable={isTable}
       isCustomTrigger={true}
       customStyles={customStyles}
+      ref={ref}
     >
       {children ? (
         children
@@ -405,7 +421,7 @@ export function ActionsDropdown({
       )}
     </GroupAction>
   )
-}
+})
 
 ButtonV2.GroupAction = GroupAction
 ButtonV2.ActionsDropdown = ActionsDropdown

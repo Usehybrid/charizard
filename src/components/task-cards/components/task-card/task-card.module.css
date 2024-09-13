@@ -104,3 +104,7 @@
 .logoutIcon path {
   fill: var(--status-error-e50);
 }
+
+.fileIcon {
+  width: 20px;
+}
