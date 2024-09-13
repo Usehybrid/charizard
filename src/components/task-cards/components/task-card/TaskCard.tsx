@@ -62,7 +62,9 @@ export default function TaskCard({
       customStyles: {color: 'var(--status-error-e50)'},
       customSvgClassName: classes.logoutIcon,
       filterFn: (data: ITask) => {
-        return data.module_reference === 'profile' ? false : true
+        return data.module_reference === 'profile' || data.module_reference === 'attendance'
+          ? false
+          : true
       },
     },
   ]
