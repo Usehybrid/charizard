@@ -40,7 +40,7 @@ export default function TaskCard({
         }
         if (data.module_reference === 'attendance') {
           // @ts-ignore
-          navigate(`/attendance/approve/${data.request_id!}`)
+          navigate(`/attendance/approve/${data.task_details_id}`)
           return
         }
         navigate(`/${data.module_reference}/${data.task_details_id}`, {
