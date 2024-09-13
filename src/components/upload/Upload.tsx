@@ -365,11 +365,13 @@ export function Upload({
                                 </div>
                               )}
                               {file.size && <div className={classes.smallCircle}></div>}
-                              <div>
-                                {Number(file.size.split(' ')[0]).toFixed(2) +
-                                  ' ' +
-                                  file.size.split(' ')[1]}
-                              </div>
+                              {file.size && (
+                                <div>
+                                  {Number(file.size?.split(' ')[0]).toFixed(2) +
+                                    ' ' +
+                                    file.size?.split(' ')[1]}
+                                </div>
+                              )}
                             </div>
                           </div>
                         </div>
@@ -406,11 +408,11 @@ export function Upload({
                               </div>
                               <div className={classes.smallCircle}></div>
                               <div>
-                                {file.size.split(' ')[0] &&
+                                {file.size?.split(' ')[0] &&
                                 getFileUploadProgress(file.key)?.toFixed(0) &&
-                                typeof Number(file.size.split(' ')[0]) === 'number'
+                                typeof Number(file.size?.split(' ')[0]) === 'number'
                                   ? (
-                                      +file.size.split(' ')[0] *
+                                      +file.size?.split(' ')[0] *
                                       ((Number(getFileUploadProgress(file.key)?.toFixed(0)) || 1) /
                                         100)
                                     ).toFixed(2)
