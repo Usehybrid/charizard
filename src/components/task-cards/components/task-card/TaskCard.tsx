@@ -18,6 +18,8 @@ import {
 import {getUsername} from '../../../../utils/text'
 import getStatus, {TASK_STATUS} from '../../helper'
 import {isDatePassed} from '../../../../utils/date'
+import {AsyncImage} from '../../../asyncImage'
+import {getFileTypeIcon} from '../../../upload/helper'
 
 const HIDE_DETAILS = ['profile']
 const HIDE_CANCEL_REQUEST = ['profile', 'attendance', 'it-request']
@@ -29,6 +31,7 @@ export default function TaskCard({
   data: ITask
   onClicks?: ((data: ITask) => void)[]
 }) {
+  const dropDownRef = React.useRef<{blur: () => void}>()
   const navigate = useNavigate()
 
   const menuItems = [
@@ -79,8 +82,12 @@ export default function TaskCard({
     },
   ].filter(action => !action.hidden)
 
+  const hideActionHandler = () => {
+    dropDownRef.current?.blur()
+  }
+
   return (
-    <div className={classes.card}>
+    <div className={classes.card} onMouseLeave={hideActionHandler}>
       <div className={classes.taskSection}>
         <div className={clsx(classes.taskName, 'zap-content-semibold')}>{data.name}</div>
         <div className={clsx(classes.dateAndTime, 'zap-caption-medium')}>
@@ -110,7 +117,11 @@ export default function TaskCard({
                     return (
                       <div key={index} className={classes.detailValueAttachment}>
                         <div>
-                          <img src={value.details.icon} width={20} alt={`${value.details.type}`} />
+                          <AsyncImage
+                            src={getFileTypeIcon(value.details.type || value.details.ext)}
+                            alt={value.file_name}
+                            className={classes.fileIcon}
+                          />
                         </div>
                         <div>
                           <a
@@ -153,6 +164,7 @@ export default function TaskCard({
             variant={BUTTON_V2_VARIANT.TERTIARY}
             size={BUTTON_V2_SIZE.SMALL}
             customData={data}
+            ref={dropDownRef}
           />
         )}
       </div>

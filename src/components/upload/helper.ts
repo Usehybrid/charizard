@@ -6,6 +6,7 @@ import doc from '../assets/upload/doc.svg'
 import csv from '../assets/upload/csv.svg'
 import xls from '../assets/upload/xls.svg'
 import pdf from '../assets/upload/pdf.svg'
+import ppt from '../assets/upload/ppt.svg'
 import fileVertical from '../assets/file-vertical.svg'
 export function formatBytes(bytes: any) {
   var marker = 1024 // Change to 1000 if required
@@ -44,6 +45,12 @@ export function getFileTypeIcon(type: any) {
     return csv
   } else if (type.includes('pdf')) {
     return pdf
+  } else if (
+    type.includes('application/vnd.openxmlformats-officedocument.presentationml.presentation')
+  ) {
+    return ppt
+  } else if (type.includes('application/vnd.ms-powerpoint')) {
+    return ppt
   }
 
   return fileVertical
