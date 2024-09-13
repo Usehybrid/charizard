@@ -29,13 +29,18 @@ export default function TaskCard({
 }) {
   const navigate = useNavigate()
 
-  console.log('charizard', data)
+  // console.log('charizard', data)
   const menuItems = [
     {
       label: 'See details',
       onClick: (data: ITask) => {
         if (typeof onClicks[idx] !== 'undefined') {
           onClicks[idx](data)
+          return
+        }
+        if (data.module_reference === 'attendance') {
+          // @ts-ignore
+          navigate(`/attendance/approve/${data.request_id!}`)
           return
         }
         navigate(`/${data.module_reference}/${data.task_details_id}`, {
@@ -50,8 +55,8 @@ export default function TaskCard({
     {
       label: 'Cancel request',
       onClick: (data: ITask) => {
-        if (typeof onClicks[idx+1] !== 'undefined') {
-          onClicks[idx+1](data)
+        if (typeof onClicks[idx + 1] !== 'undefined') {
+          onClicks[idx + 1](data)
           return
         }
         navigate(`/${data.module_reference}/${data.task_details_id}?cancel=${true}`, {
