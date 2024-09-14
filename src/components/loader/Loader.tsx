@@ -4,6 +4,7 @@ import classes from './styles.module.css'
 export type LoaderProps = {
   containerStyle?: React.CSSProperties
   loaderStyle?: React.CSSProperties
+  size?: number
   variant?: LOADER_VARIANT
 }
 
@@ -18,11 +19,16 @@ export enum LOADER_VARIANT {
   GRID = 'grid',
 }
 
-export function Loader({containerStyle, loaderStyle, variant = LOADER_VARIANT.RING}: LoaderProps) {
+export function Loader({
+  containerStyle,
+  loaderStyle,
+  variant = LOADER_VARIANT.RING,
+  size,
+}: LoaderProps) {
   const getSpinnerVariants = (variant: LOADER_VARIANT) => {
     switch (variant) {
       case LOADER_VARIANT.RING:
-        return <Ring loaderStyle={loaderStyle} />
+        return <Ring loaderStyle={loaderStyle} size={size} />
       case LOADER_VARIANT.DUAL_RING:
         return <DualRing loaderStyle={loaderStyle} />
       case LOADER_VARIANT.RIPPLE:
@@ -49,13 +55,23 @@ export function Loader({containerStyle, loaderStyle, variant = LOADER_VARIANT.RI
   )
 }
 
-function Ring({loaderStyle}: {loaderStyle: LoaderProps['loaderStyle']}) {
+function Ring({loaderStyle, size = 29}: {loaderStyle: LoaderProps['loaderStyle']; size?: number}) {
+  const containerSizeStyle = {
+    width: `${size + size / 3}px`,
+    height: `${size + size / 3}px`,
+  }
+  const sizeStyle = {
+    width: `${size}px`,
+    height: `${size}px`,
+    margin: `${size / 6}px`,
+    borderWidth: `${size / 10}px`,
+  }
   return (
-    <div className={classes.ldsRing} style={loaderStyle}>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
+    <div className={classes.ldsRing} style={{...containerSizeStyle, ...loaderStyle}}>
+      <div style={sizeStyle}></div>
+      <div style={sizeStyle}></div>
+      <div style={sizeStyle}></div>
+      <div style={sizeStyle}></div>
     </div>
   )
 }

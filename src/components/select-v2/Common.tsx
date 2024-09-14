@@ -9,6 +9,7 @@ import {useColorsFromWord} from '../../utils/hooks/use-color-from-word'
 import {SELECT_VARIANT} from './types'
 import {getInitials} from '../../utils/text'
 import {AsyncImage} from '../asyncImage'
+import {Loader} from '../loader'
 
 /**
  * Custom Dropdown Indicator component for react-select.
@@ -17,9 +18,9 @@ import {AsyncImage} from '../asyncImage'
  * @returns A custom DropdownIndicator component with a chevron icon.
  */
 export const CustomDropdownIndicator = (props: any) => {
-  const {isDisabled} = props
+  const {isDisabled, selectProps} = props
 
-  if (isDisabled) {
+  if (isDisabled || selectProps.isLoading) {
     return null
   }
 
@@ -31,15 +32,21 @@ export const CustomDropdownIndicator = (props: any) => {
 }
 
 /**
+ * Custom Loading Indicators component for react-select.
+ * @param props - The props for the LoadingIndicator component, including any react-select specific props.
+ * @returns The LoadingIndicator component if the select is loading.
+ */
+export const CustomLoadingIndicator = (props: any) => {
+  return <Loader size={14} {...props} />
+}
+
+/**
  * Custom Indicators Container component for react-select.
  * Conditionally hides the indicators container if the select is in a loading state.
  * @param props - The props for the IndicatorsContainer component, including any react-select specific props.
  * @returns The IndicatorsContainer component or null if the select is loading.
  */
 export const CustomIndicatorsContainer = (props: any) => {
-  if (props.selectProps.isLoading) {
-    return null
-  }
   return <components.IndicatorsContainer {...props} />
 }
 

@@ -16,7 +16,6 @@ export const styles: StylesConfig<any> = {
       backgroundColor: '#fff',
       gap: '4px',
       opacity: state.isDisabled ? 0.5 : 1,
-      cursor: state.isDisabled ? 'not-allowed' : 'default',
     }
   },
   placeholder: baseStyles => {
