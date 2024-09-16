@@ -10,20 +10,15 @@
 .ldsRing {
   display: inline-block;
   position: relative;
-  width: 45px;
-  height: 45px;
 }
 .ldsRing div {
   box-sizing: border-box;
   display: block;
   position: absolute;
-  width: 29px;
-  height: 29px;
-  margin: 8px;
-  border: 3px solid var(--theme-blue-dark);
   border-radius: 50%;
   animation: ldsRing 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
   border-color: var(--theme-blue-dark) transparent transparent transparent;
+  border-style: solid;
 }
 .ldsRing div:nth-child(1) {
   animation-delay: -0.45s;

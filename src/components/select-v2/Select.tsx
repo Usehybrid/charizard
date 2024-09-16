@@ -11,6 +11,7 @@ import {
   CustomMultiValue,
   CustomClearIndicator,
   CustomMultiValueRemove,
+  CustomLoadingIndicator,
 } from './Common'
 import {
   SELECT_VARIANT,
@@ -60,7 +61,14 @@ export function SelectV2(props: SelectV2Props) {
     onChange((value as SelectSingleValue)?.value || '', meta)
   }
   return (
-    <div className={clsx(classes.mainContainer, 'zap-content-medium', mainContainerClassName)}>
+    <div
+      className={clsx(
+        classes.mainContainer,
+        props.isDisabled && classes.disabled,
+        'zap-content-medium',
+        mainContainerClassName,
+      )}
+    >
       <ReactSelect
         classNamePrefix="react-select"
         options={options}
@@ -78,6 +86,7 @@ export function SelectV2(props: SelectV2Props) {
           SingleValue: CustomSingleValue,
           Menu: CustomMenu,
           IndicatorsContainer: CustomIndicatorsContainer,
+          LoadingIndicator: CustomLoadingIndicator,
         }}
         onChange={selectOptionHandler}
         data-variant={variant}

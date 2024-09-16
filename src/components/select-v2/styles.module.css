@@ -3,6 +3,10 @@
   color: var(--text-primary);
 }
 
+.mainContainer.disabled {
+  cursor: not-allowed;
+}
+
 .dropdownIcon {
   width: 20px;
   height: 20px;
