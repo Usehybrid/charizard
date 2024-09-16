@@ -118,7 +118,7 @@ export default function TaskCard({
                       <div key={index} className={classes.detailValueAttachment}>
                         <div>
                           <AsyncImage
-                            src={getFileTypeIcon(value.details.type || value.details.ext)}
+                            src={getFileTypeIcon(value.details?.type || value.details?.ext)}
                             alt={value.file_name}
                             className={classes.fileIcon}
                           />
