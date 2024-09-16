@@ -14,6 +14,8 @@ export const RadioGroupDefault: Story = {
     radioHeading: 'RadioGroup',
     disabled: false,
     showSkeleton: false,
+    handleClickManually: true,
+    defaultValue: 'label 1',
     items: [
       {
         label: {heading: 'label 1'},
