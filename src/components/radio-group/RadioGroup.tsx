@@ -48,6 +48,7 @@ interface RadioGroupProps {
   optionsContainerStyles?: React.CSSProperties
   disabled?: boolean
   showSkeleton?: boolean
+  handleClickManually?: boolean
 }
 
 export function RadioGroup({
@@ -60,6 +61,7 @@ export function RadioGroup({
   optionsContainerStyles,
   disabled = false,
   showSkeleton = false,
+  handleClickManually = false,
 }: RadioGroupProps) {
   const [state, send] = useMachine(
     radio.machine({
@@ -68,7 +70,7 @@ export function RadioGroup({
       onValueChange: ({value}) => {
         onChange(value)
       },
-      disabled,
+      disabled: disabled || handleClickManually,
     }),
   )
 
