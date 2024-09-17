@@ -12,7 +12,7 @@
   border-radius: 8px;
 }
 .quickRangePicker label {
-  align-items: center;
+  align-self: center;
 }
 
 .quickRangePicker .quickSelector {
