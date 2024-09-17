@@ -1,4 +1,4 @@
-import {USER_CHIP_STATUS, UserChip} from '../components'
+import {UserChip} from '../components'
 
 export function UserChipMulti() {
   const users = [
@@ -30,5 +30,5 @@ export function UserChipMulti() {
       id: '6c32e9a5-9d2e-4fc8-a231-fe90ff0a990f',
     },
   ]
-  return <UserChip status={USER_CHIP_STATUS.WHITE} isMulti users={users} />
+  return <UserChip isMulti users={users} />
 }
