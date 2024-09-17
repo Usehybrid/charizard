@@ -1,7 +1,3 @@
-/**
- * @author Soham Sarkar <soham@hybr1d.io>
- */
-
 import * as React from 'react'
 import classes from './styles.module.css'
 import clsx from 'clsx'

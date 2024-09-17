@@ -1,5 +1,4 @@
-import clsx from 'clsx'
-import classes from './table-loader.module.css'
+import classes from './styles.module.css'
 
 export default function TableLoader({
   text = 'Getting data...',
@@ -10,7 +9,7 @@ export default function TableLoader({
 }) {
   return (
     <tbody className={classes.box}>
-      <tr className={clsx(classes.loader, 'zap-content-regular')}>{!isError && <td>{text}</td>}</tr>
+      <tr className={classes.loader}>{!isError && <td>{text}</td>}</tr>
     </tbody>
   )
 }

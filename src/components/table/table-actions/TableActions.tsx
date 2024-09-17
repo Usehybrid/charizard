@@ -1,15 +1,15 @@
 import classes from './styles.module.css'
-import {Button} from '../../button'
 import {TableProps} from '../Table'
+import {BUTTON_V2_SIZE, BUTTON_V2_VARIANT, ButtonV2} from '../../button-v2'
 
-type TableActionsProps = {
+interface TableActionsProps {
   actionsConfig: TableProps['actionsConfig']
   data: any
 }
 
 export default function TableActions({actionsConfig, data}: TableActionsProps) {
   if (!actionsConfig) return null
-  const {menuItems = [], isDropdownActions, key, customComp} = actionsConfig
+  const {menuItems = [], isDropdownActions} = actionsConfig
   if (!isDropdownActions) return null
 
   const filteredMenuItems = actionsConfig.menuItems?.filter(item => {
@@ -23,21 +23,15 @@ export default function TableActions({actionsConfig, data}: TableActionsProps) {
     disabled: typeof item.disabled === 'function' ? item.disabled(data) : false,
   }))
 
-  if (!key && !customComp)
-    return (
-      <div className={classes.box}>
-        <Button.ActionsDropdown menuItems={items} data={data} />
-      </div>
-    )
-
   return (
     <div className={classes.box}>
-      <Button.ActionsDropdown menuItems={items} data={data} variant="small" />
-      {customComp ? (
-        customComp(data)
-      ) : key && data[key] ? (
-        <div className={classes.label}>{data[key]}</div>
-      ) : null}
+      <ButtonV2.ActionsDropdown
+        menuItems={items}
+        variant={BUTTON_V2_VARIANT.TERTIARY}
+        size={BUTTON_V2_SIZE.SMALL}
+        isTable
+        customData={data}
+      />
     </div>
   )
 }

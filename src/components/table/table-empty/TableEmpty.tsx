@@ -1,6 +1,7 @@
 import classes from './styles.module.css'
-import {TableProps} from '../Table'
+
 import {EmptyState} from '../../empty-state'
+import {TableProps} from '../Table'
 
 export default function TableEmpty({
   emptyStateConfig,

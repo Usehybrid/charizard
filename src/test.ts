@@ -1,6 +1,6 @@
 // @ts-nocheck
 import {create} from 'zustand'
-import {InternalTableFilters} from './components/table/types'
+import {InternalTableFilters} from './components/table-legacy/types'
 
 // * software list store
 

@@ -1,13 +1,12 @@
 import classes from './styles.module.css'
-
+import {TableLegacyProps} from '../TableLegacy'
 import {EmptyState} from '../../empty-state'
-import {TableV3Props} from '../TableV3'
 
 export default function TableEmpty({
   emptyStateConfig,
   search,
 }: {
-  emptyStateConfig: TableV3Props['emptyStateConfig']
+  emptyStateConfig: TableLegacyProps['emptyStateConfig']
   search?: string
 }) {
   if (!emptyStateConfig) return null

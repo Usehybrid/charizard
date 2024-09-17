@@ -12,6 +12,7 @@ export type FilterOptions = {
   config?: {
     hideSearch?: boolean
     placeholder?: string
+    type?: string
   }
 }
 
@@ -22,15 +23,17 @@ export type FilterOptions = {
  * @param filterDispatch must be of @type (value) => dispatch({type,payload})
  * this is used to sync the internal table filter state with the external zustand store of the consumer
  * @param filterReset same type as above but is used to reset all the filters
+ * @param headerFilterIds this is used for the filters which should be in the table header itself, and not inside the filters drawer
  *
  *
  */
 export type FilterConfig = {
-  filters: FilterOptions[]
+  filters?: TableFilters
   isLoading: boolean
   isError: boolean
   filterDispatch: (value: any) => void
   filterReset: (value: any) => void
+  headerFilterIds?: string[]
   // todo future apis
   // defaultSelected, same type as InternalTableFilters
 }
@@ -38,4 +41,15 @@ export type FilterConfig = {
 export type InternalTableFilters = {
   key: string
   values: string[]
+}
+
+export type TableFilters = {
+  header?: FilterOptions[]
+  drawer?: FilterOptions[]
+}
+
+export type TableCustomColumns = {
+  checked_state: Array<{id: string; label: string; checked: boolean}>
+  is_default: boolean
+  table_name: string
 }

@@ -1,17 +1,17 @@
 import * as React from 'react'
 import randomIcon from '../components/assets/check.svg'
-import {TableV3} from '../components'
-import {INV_ACTION_TYPES, useInventoryStore} from '../components/table-v3/inventory/inventory.store'
+import {Table} from '../components'
+import {INV_ACTION_TYPES, useInventoryStore} from '../components/table/inventory/inventory.store'
 import {createColumnHelper} from '@tanstack/react-table'
 
-export default function TableDemo() {
+export function TableDemo() {
   const [search, setSearch] = React.useState('')
 
   const query = useInventoryStore(s => s.query)
   const dispatch = useInventoryStore(s => s.dispatch)
 
   return (
-    <TableV3
+    <Table
       data={data}
       loaderConfig={{isFetching: false, isError: false, text: 'Getting employees...'}}
       columns={columns}
@@ -113,7 +113,11 @@ export default function TableDemo() {
         },
       }}
       tableStyleConfig={{stickyIds: ['software'], maxHeight: '200px'}}
-      // exportConfig={{}}
+      exportConfig={{
+        isPending: false,
+        isError: false,
+        handleExport: () => {},
+      }}
     />
   )
 }

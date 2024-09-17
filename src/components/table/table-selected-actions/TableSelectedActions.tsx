@@ -1,8 +1,7 @@
-import chevronDown from '../../assets/chevron-down.svg'
 import classes from './table-selected-actions.module.css'
-import {TableProps} from '../Table'
 import {SVG} from '../../svg'
-import {Button, BUTTON_VARIANT} from '../../button'
+import {TableProps} from '../Table'
+import {BUTTON_V2_SIZE, BUTTON_V2_VARIANT, ButtonV2} from '../../button-v2'
 
 interface TableSelectedActionsProps {
   rowSelectionConfig: TableProps['rowSelectionConfig']
@@ -20,42 +19,54 @@ export default function TableSelectedActions({
   )
     return null
 
-  const {isCheckbox, actions, iconSrc} = rowSelectionConfig
+  const {isCheckbox, actions} = rowSelectionConfig
+
+  const showDropdown = actions?.length && actions.length > 2
+  const firstAction = actions?.length ? actions[0] : null
+
   return (
     <>
       {isCheckbox && Object.keys(rowSelection).length > 0 && (
-        <div className={classes.selectedActions}>
-          <div className={classes.selectedInfo}>{Object.keys(rowSelection).length}</div>
-          <div className={classes.selectedAction}>
-            {iconSrc && (
-              <div>
-                <SVG path={iconSrc || ''} svgClassName={classes.selectedIcon} />
-              </div>
-            )}
-            <Button.MenuButton
-              variant={BUTTON_VARIANT.SECONDARY}
-              size="sm"
-              isCustomTrigger
+        <>
+          {showDropdown ? (
+            <ButtonV2.GroupAction
+              variant={BUTTON_V2_VARIANT.SECONDARY}
+              size={BUTTON_V2_SIZE.SMALL}
               menuItems={
-                actions?.map(action => ({
-                  label: action.text,
-                  onClick: action.onClick,
-                  iconSrc: action.icon,
-                })) || []
+                actions
+                  ?.map(action => ({
+                    label: action.text,
+                    onClick: action.onClick,
+                    iconSrc: action.icon,
+                  }))
+                  .slice(1) || []
               }
-              positionerProps={{placement: 'bottom-start'}}
+              positionerProps={{placement: 'bottom-end'}}
+              onClick={firstAction?.onClick}
             >
-              <Button variant={BUTTON_VARIANT.SECONDARY} size="sm">
-                Actions
-                <SVG
-                  svgClassName={classes.actionsBtnIcon}
-                  path={chevronDown}
-                  spanClassName={classes.actionsBtnIconSpan}
-                />
-              </Button>
-            </Button.MenuButton>
-          </div>
-        </div>
+              <SVG
+                svgClassName={classes.btnIcon}
+                path={firstAction?.icon || ''}
+                spanClassName={classes.btnIconSpan}
+              />
+              {firstAction?.text}
+            </ButtonV2.GroupAction>
+          ) : (
+            <div className={classes.selectedActions}>
+              {actions?.map(action => (
+                <ButtonV2
+                  onClick={action.onClick}
+                  variant={BUTTON_V2_VARIANT.SECONDARY}
+                  size={BUTTON_V2_SIZE.SMALL}
+                  key={action.text}
+                >
+                  <SVG path={action.icon} svgClassName={classes.btnIcon} />
+                  {action.text}
+                </ButtonV2>
+              ))}
+            </div>
+          )}
+        </>
       )}
     </>
   )

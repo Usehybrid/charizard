@@ -1,25 +1,24 @@
 import * as React from 'react'
 import classes from './table-meta-header.module.css'
-import {TableV3Props} from '../TableV3'
+import {TableProps} from '../Table'
 import TableSelectedActions from '../table-selected-actions'
 import {Search} from '../../search'
 import TableHeaderFilters from '../table-header-filters'
-import noteDownloadIcon from '../../assets/notes/note-download.svg'
 import clsx from 'clsx'
 import {pluralize} from '../../../utils/text'
-import {SVG} from '../../svg'
 import TableFiltersDrawer from '../table-filters-drawer/TableFiltersDrawer'
 import TableCustomCols from '../table-custom-cols'
 import {Table} from '@tanstack/react-table'
 import {useTableStore} from '../store'
+import TableExport from '../table-export/TableExport'
 
 interface TableMetaHeaderProps {
-  rowSelectionConfig: TableV3Props['rowSelectionConfig']
-  totalText: TableV3Props['totalText']
-  searchConfig: TableV3Props['searchConfig']
-  filterConfig: TableV3Props['filterConfig']
-  customColumnConfig: TableV3Props['customColumnConfig']
-  exportConfig: TableV3Props['exportConfig']
+  rowSelectionConfig: TableProps['rowSelectionConfig']
+  totalText: TableProps['totalText']
+  searchConfig: TableProps['searchConfig']
+  filterConfig: TableProps['filterConfig']
+  customColumnConfig: TableProps['customColumnConfig']
+  exportConfig: TableProps['exportConfig']
   rowSelection: {}
   setRowSelection: React.Dispatch<React.SetStateAction<{}>>
   table: Table<any>
@@ -109,17 +108,7 @@ export default function TableMetaHeader({
           />
         )}
 
-        {typeof exportConfig === 'object' && (
-          <div
-            className={classes.actionCommon}
-            onClick={() => {
-              if (exportConfig?.isPending) return
-              exportConfig?.handleExport()
-            }}
-          >
-            <SVG path={noteDownloadIcon} width={16} height={16} />
-          </div>
-        )}
+        {typeof exportConfig === 'object' && <TableExport exportConfig={exportConfig} />}
       </div>
     </div>
   )

@@ -1,31 +1,28 @@
 import * as React from 'react'
+import InfiniteScroll from 'react-infinite-scroll-component'
 import useDeepCompareEffect from 'use-deep-compare-effect'
 import clsx from 'clsx'
+import TableFilters from './table-filters'
 import TableLoader from './table-loader'
 import TableEmpty from './table-empty'
-import TableMetaHeader from './table-meta-header'
 import TableActions from './table-actions'
-import sortIcon from '../assets/line-height.svg'
+import TableSelectedActions from './table-selected-actions'
+import sortIcon from '../assets/swap-2.svg'
 import sortAscIcon from '../assets/sort-asc.svg'
 import sortDescIcon from '../assets/sort-desc.svg'
 import classes from './styles.module.css'
+import {useInView} from 'react-intersection-observer'
 import {useReactTable, getCoreRowModel, flexRender} from '@tanstack/react-table'
+import {Search} from '../search'
+import {Selectors} from '../selectors'
 import {SVG} from '../svg'
-import {TablePagination} from './table-pagination'
 import {TableCheckbox} from './table-columns'
 import {TableRadio} from './table-columns'
 import {CHECKBOX_COL_ID, DROPDOWN_COL_ID, RADIO_COL_ID} from './constants'
-import type {
-  Column,
-  ColumnOrderState,
-  ColumnPinningState,
-  SortingState,
-  Table,
-  VisibilityState,
-} from '@tanstack/react-table'
-import type {FilterConfig, TableCustomColumns} from './types'
+import type {SortingState, Table, VisibilityState} from '@tanstack/react-table'
+import type {FilterConfig} from './types'
 
-export interface TableV3Props {
+export interface TableLegacyProps {
   // the table data
   data: any
   // table column definition with column api from tanstack
@@ -43,6 +40,8 @@ export interface TableV3Props {
       filterFn?: any
       disabled?: boolean | ((data: any) => boolean)
     }[]
+    key?: string
+    customComp?: (data: any) => React.ReactNode | JSX.Element
   }
   // api loading/refetching states
   loaderConfig: {
@@ -79,12 +78,10 @@ export interface TableV3Props {
    * Row checkbox or radio selection config
    *
    * @param rowIdKey: needed to keep the selected rows when search is being used server side https://tanstack.com/table/v8/docs/guide/row-selection#useful-row-ids
-   * @param entityName: singular format of entity name
    */
   rowSelectionConfig?: {
     isCheckbox?: boolean
     isRadio?: boolean
-    entityName: string
     actions?: {
       icon: string
       text: string
@@ -93,20 +90,34 @@ export interface TableV3Props {
     setSelectedRows?: React.Dispatch<React.SetStateAction<any>>
     iconSrc?: string
     clearOnSearch?: boolean
-    rowIdKey: string
+    rowIdKey?: string
     rowSelection?: {}
     setRowSelection?: React.Dispatch<React.SetStateAction<{}>>
   }
+  selectorConfig?: {
+    selectors: {name: string; onClick: any}[]
+  }
+  /**
+   * @deprecated use infiniteScrollConfig
+   */
   paginationConfig?: {
-    metaData?: {
+    metaData: {
       total_items: number
       items_on_page: number
       page_no: number
     }
-    page: number
-    setPage: (page: number) => void
-    limit: number
-    setLimit: (limit: number) => void
+    loader: React.ReactNode
+    fetchNextPage: () => void
+    height?: string
+    scrollThreshold?: string | number
+    scrollableTarget?: string
+  }
+  /**
+   * Used for infinite scroll, all the properties comes from useInfiniteQuery
+   */
+  infiniteScrollConfig?: {
+    fetchNextPage: () => void
+    isFetchingNextPage: boolean
   }
   emptyStateConfig?: {
     icon: string
@@ -121,29 +132,7 @@ export interface TableV3Props {
     columns: number
     emptySearchTitle?: string
   }
-  tableStyleConfig?: {
-    maxHeight?: string
-    stickyIds?: string[]
-    // idxNextToLeftStickyID:
-  }
-  /**
-   * custom columns
-   */
-  customColumnConfig?: {
-    description?: string
-    columns?: TableCustomColumns
-    isPending: boolean
-    isError: boolean
-    handleSaveColumns: (columns: any) => Promise<void>
-  }
-  /**
-   * export config (csv)
-   */
-  exportConfig?: {
-    isPending: boolean
-    isError: boolean
-    handleExport: any
-  }
+  headerText?: string
 }
 
 // todo
@@ -156,8 +145,9 @@ export interface TableV3Props {
 // * empty state center aligned
 // ?p1: DATE FILTER https://www.figma.com/file/gVfOsoM56qfu6BmwQ9XEaR/SaaS-V1.1?node-id=60%3A6727&mode=dev
 //? Single filter https://www.figma.com/file/gVfOsoM56qfu6BmwQ9XEaR/SaaS-V1.1?node-id=60%3A6383&mode=dev
+//?table when results are under 10 height issue, it keeps loading
 
-export function TableV3({
+export function TableLegacy({
   data,
   loaderConfig,
   columns,
@@ -167,32 +157,25 @@ export function TableV3({
     isCheckbox: false,
     isRadio: false,
     clearOnSearch: true,
-    entityName: '',
-    rowIdKey: 'id',
   },
   actionsConfig = {
     isDropdownActions: false,
+    key: '',
   },
   searchConfig,
   totalText,
+  selectorConfig,
   paginationConfig,
   emptyStateConfig,
-
-  tableStyleConfig,
-  customColumnConfig,
-  exportConfig,
-}: TableV3Props) {
+  headerText,
+  infiniteScrollConfig,
+}: TableLegacyProps) {
   const [sorting, setSorting] = React.useState<SortingState>([])
   // used for checkbox visibility
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
-  const [columnOrder, setColumnOrder] = React.useState<ColumnOrderState>([])
-  const [columnPinning, setColumnPinning] = React.useState<ColumnPinningState>({
-    left: tableStyleConfig?.stickyIds
-      ? [RADIO_COL_ID, CHECKBOX_COL_ID, ...tableStyleConfig?.stickyIds]
-      : [RADIO_COL_ID, CHECKBOX_COL_ID],
-    right: [DROPDOWN_COL_ID],
-  })
   const [rowSelection, setRowSelection] = React.useState({})
+  // used with infiniteScrollConfig
+  const {ref, inView} = useInView()
 
   // account for search state here itself
   const isEmpty = !loaderConfig.isFetching && !loaderConfig.isError && !data.length
@@ -200,13 +183,8 @@ export function TableV3({
   const {isCheckbox, isRadio, setSelectedRows} = rowSelectionConfig
 
   useDeepCompareEffect(() => {
-    if (!sortConfig) return
+    if (!sortConfig || !sorting.length) return
     const {setSortOrd, setSortBy, sortMap} = sortConfig
-    if (!sorting.length) {
-      setSortBy('')
-      setSortOrd('')
-      return
-    }
     setSortBy(sortMap[sorting[0].id])
     setSortOrd(sorting[0].desc ? 'desc' : 'asc')
   }, [sorting])
@@ -215,7 +193,14 @@ export function TableV3({
     if (!rowSelectionConfig || !setSelectedRows) return
     const rows = table.getSelectedRowModel().rows.map(row => row.original)
     setSelectedRows([...rows])
-  }, [rowSelectionConfig?.rowSelection, rowSelection])
+  }, [rowSelection])
+
+  React.useEffect(() => {
+    if (!infiniteScrollConfig) return
+    if (inView) {
+      infiniteScrollConfig.fetchNextPage()
+    }
+  }, [infiniteScrollConfig?.fetchNextPage, inView])
 
   const _columns = [
     {
@@ -242,8 +227,7 @@ export function TableV3({
           }}
         />
       ),
-      size: 40,
-      enablePinning: false,
+      size: 55,
     },
     {
       id: RADIO_COL_ID,
@@ -259,17 +243,17 @@ export function TableV3({
           }}
         />
       ),
-      size: 40,
+      size: 55,
     },
     ...columns,
     {
       id: DROPDOWN_COL_ID,
+
       cell: (props: any) => (
         <TableActions actionsConfig={actionsConfig} data={props.row.original} />
       ),
       header: 'Actions',
-      size: 70,
-      enablePinning: true,
+      maxSize: 150,
     },
   ]
 
@@ -279,27 +263,22 @@ export function TableV3({
     state: {
       sorting,
       columnVisibility,
-      columnOrder,
       rowSelection: rowSelectionConfig?.rowSelection || rowSelection,
-      columnPinning,
     },
     manualSorting: true,
     onSortingChange: setSorting,
     onColumnVisibilityChange: setColumnVisibility,
-    onColumnOrderChange: setColumnOrder,
-    onColumnPinningChange: setColumnPinning,
-    onRowSelectionChange: rowSelectionConfig?.setRowSelection || setRowSelection,
     enableRowSelection: true,
+    // enableRowSelection: row => row.original.age > 18, // or enable row selection conditionally per row
+    onRowSelectionChange: rowSelectionConfig?.setRowSelection || setRowSelection,
     enableMultiRowSelection: isRadio ? false : true,
     manualPagination: true,
     manualFiltering: true,
     getCoreRowModel: getCoreRowModel(),
     defaultColumn: {
-      // minSize: 0,
+      minSize: 0,
       size: Number.MAX_SAFE_INTEGER,
-      enablePinning: false,
-      enableSorting: false,
-      // maxSize: Number.MAX_SAFE_INTEGER,
+      maxSize: Number.MAX_SAFE_INTEGER,
     },
     getRowId: rowSelectionConfig?.rowIdKey
       ? (row: any) => row[rowSelectionConfig?.rowIdKey as string]
@@ -337,29 +316,63 @@ export function TableV3({
   }, [searchConfig?.search])
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '15px',
-      }}
-    >
-      <div className={classes.box}>
-        {!loaderConfig.isError && (
-          <TableMetaHeader
-            rowSelectionConfig={rowSelectionConfig}
-            searchConfig={searchConfig}
-            totalText={totalText}
-            rowSelection={rowSelectionConfig?.rowSelection || rowSelection}
-            setRowSelection={rowSelectionConfig?.setRowSelection || setRowSelection}
-            filterConfig={filterConfig}
-            customColumnConfig={customColumnConfig}
-            exportConfig={exportConfig}
+    <div className={classes.box}>
+      {!loaderConfig.isError && totalText && (
+        <div className={classes.header}>
+          {!headerText && (
+            <div className={classes.meta}>
+              <div className={classes.total}>{totalText}</div>
+              {typeof filterConfig === 'object' && <TableFilters filterConfig={filterConfig} />}
+            </div>
+          )}
+
+          {headerText && <div className={classes.headerTxt}>{headerText}</div>}
+
+          <div className={classes.selectorGrp}>
+            {typeof selectorConfig === 'object' && (
+              <Selectors selectors={selectorConfig?.selectors} />
+            )}
+            {typeof searchConfig === 'object' && (
+              <div className={classes.search}>
+                <Search
+                  id="table-search"
+                  search={searchConfig.search}
+                  setSearch={searchConfig.setSearch}
+                  placeholder={searchConfig.placeholder}
+                  clearIconClearFn={() => setRowSelection({})}
+                />
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* multi selected actions */}
+      {rowSelectionConfig?.actions && rowSelectionConfig.actions.length > 0 && (
+        <TableSelectedActions rowSelectionConfig={rowSelectionConfig} rowSelection={rowSelection} />
+      )}
+
+      {paginationConfig ? (
+        <InfiniteScroll
+          dataLength={data.length}
+          next={paginationConfig.fetchNextPage}
+          hasMore={data?.length < paginationConfig.metaData?.total_items}
+          loader={paginationConfig.loader}
+          height={paginationConfig.height}
+          scrollThreshold={paginationConfig.scrollThreshold}
+          scrollableTarget={paginationConfig.scrollableTarget}
+        >
+          <TableComp
             table={table}
             isCheckbox={isCheckbox}
-            isDropdownActions={actionsConfig.isDropdownActions}
+            isRadio={isRadio}
+            loaderConfig={loaderConfig}
+            isEmpty={isEmpty}
+            emptyStateConfig={emptyStateConfig}
+            search={searchConfig?.search}
           />
-        )}
+        </InfiniteScroll>
+      ) : (
         <TableComp
           table={table}
           isCheckbox={isCheckbox}
@@ -368,11 +381,12 @@ export function TableV3({
           isEmpty={isEmpty}
           emptyStateConfig={emptyStateConfig}
           search={searchConfig?.search}
-          tableStyleConfig={tableStyleConfig}
         />
-      </div>
-      {typeof paginationConfig === 'object' && !!paginationConfig.metaData && (
-        <TablePagination paginationConfig={paginationConfig} />
+      )}
+      {infiniteScrollConfig && (
+        <div>
+          <div ref={ref} />
+        </div>
       )}
     </div>
   )
@@ -384,90 +398,53 @@ function TableComp({
   isRadio,
   loaderConfig,
   emptyStateConfig,
-  tableStyleConfig,
   isEmpty,
   search,
 }: {
   table: Table<any>
   isCheckbox?: boolean
   isRadio?: boolean
-  loaderConfig: TableV3Props['loaderConfig']
-  emptyStateConfig: TableV3Props['emptyStateConfig']
-  tableStyleConfig: TableV3Props['tableStyleConfig']
+  loaderConfig: TableLegacyProps['loaderConfig']
+  emptyStateConfig: TableLegacyProps['emptyStateConfig']
   search?: string
   isEmpty: boolean
 }) {
-  const [showLeftShadow, setShowLeftShadow] = React.useState(false)
-  const [showRightShadow, setShowRightShadow] = React.useState(false)
-  const tableContainerRef = React.useRef(null)
-
-  const handleScroll = () => {
-    if (tableContainerRef.current) {
-      const {scrollLeft, scrollWidth, clientWidth} = tableContainerRef.current
-      setShowLeftShadow(scrollLeft > 0)
-      setShowRightShadow(scrollWidth > clientWidth && scrollLeft < scrollWidth - clientWidth)
-    }
-  }
-
   return (
-    <div
-      className={classes.tableScrollContainer}
-      id="zap-table-scroll-container"
-      style={{overflowY: 'scroll', maxHeight: tableStyleConfig?.maxHeight}}
-      ref={tableContainerRef}
-      onScroll={handleScroll}
-    >
+    <div className={classes.tableScrollContainer}>
       <table className={classes.table}>
         <thead className={classes.tableHead}>
           {table.getHeaderGroups().map(headerGroup => (
             <tr key={headerGroup.id} className={classes.tableRow}>
-              {headerGroup.headers.map((header, idx, _headers) => {
-                let isNextToPinnedCol = false
-                if (tableStyleConfig?.stickyIds?.length) {
-                  if (tableStyleConfig.stickyIds.includes(_headers[idx - 1]?.id))
-                    isNextToPinnedCol = true
-                }
+              {headerGroup.headers.map(header => {
                 return (
                   <th
                     key={header.id}
-                    colSpan={header.colSpan}
                     className={clsx(
                       classes.tableHeader,
                       header.column.getCanSort() && classes.tableHeaderSort,
-                      'zap-content-medium',
                     )}
                     style={{
                       width:
                         header.getSize() === Number.MAX_SAFE_INTEGER ? 'auto' : header.getSize(),
-                      paddingRight: header.id === DROPDOWN_COL_ID ? '10px' : undefined,
+                      paddingRight: header.id === DROPDOWN_COL_ID ? '20px' : undefined,
                       paddingLeft:
                         header.index === 0 &&
                         header.id !== CHECKBOX_COL_ID &&
                         header.id !== RADIO_COL_ID
-                          ? '10px'
-                          : isNextToPinnedCol
-                            ? '15px'
-                            : undefined,
-
-                      ...getCommonPinningStyles(
-                        header.column,
-                        showLeftShadow,
-                        showRightShadow,
-                        true,
-                      ),
+                          ? '20px'
+                          : undefined,
+                      // minWidth: header.getSize === Number.MAX_SAFE_INTEGER ? 'auto' : header.getSize(),
+                      // maxWidth: header.getSize() === Number.MAX_SAFE_INTEGER ? 'auto' : header.getSize(),
                     }}
                   >
                     {header.isPlaceholder ? null : (
                       <div
                         {...{
-                          onClick: loaderConfig?.isFetching
-                            ? undefined
-                            : header.column.getToggleSortingHandler(),
+                          onClick: header.column.getToggleSortingHandler(),
                           style: {
                             display: 'flex',
                             alignItems: 'center',
-                            justifyContent: header.id === DROPDOWN_COL_ID ? 'center' : undefined,
-                            cursor: loaderConfig?.isFetching ? 'not-allowed' : undefined,
+                            justifyContent: header.id === DROPDOWN_COL_ID ? 'flex-end' : undefined,
                           },
                         }}
                       >
@@ -502,36 +479,26 @@ function TableComp({
           <TableEmpty emptyStateConfig={emptyStateConfig} search={search} />
         ) : (
           <tbody className={classes.tableBody}>
-            {table.getRowModel().rows.map((row, idx, _rows) => (
+            {table.getRowModel().rows.map((row, idx) => (
               <tr key={row.id} className={classes.tableRow}>
-                {row.getVisibleCells().map((cell, idx2, cells) => {
+                {row.getVisibleCells().map(cell => {
                   const isSelectionCell =
                     (isCheckbox || isRadio) &&
                     (cell.id === `${idx}_${RADIO_COL_ID}` ||
                       cell.id === `${idx}_${CHECKBOX_COL_ID}`)
-
-                  let isPrevPinned = false
-                  if (tableStyleConfig?.stickyIds?.length) {
-                    isPrevPinned = cells[idx2 - 1]?.column.getCanPin()
-                  }
-
                   return (
                     <td
                       key={cell.id}
                       className={clsx(
                         classes.tableData,
                         (isCheckbox || isRadio) && classes.tableDataWithSelection,
-                        'zap-content-regular',
                       )}
                       style={{
                         width:
                           cell.column.getSize() === Number.MAX_SAFE_INTEGER
                             ? 'auto'
                             : cell.column.getSize(),
-                        backgroundColor: 'white',
                         verticalAlign: isSelectionCell ? 'middle' : undefined,
-                        paddingLeft: isPrevPinned ? '15px' : undefined,
-                        ...getCommonPinningStyles(cell.column, showLeftShadow, showRightShadow),
                       }}
                     >
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -552,41 +519,21 @@ function TableComp({
             </tr>
           </tbody>
         )}
+
+        <tfoot className={classes.tableFoot}>
+          {table.getFooterGroups().map(footerGroup => (
+            <tr key={footerGroup.id} className={classes.tableRow}>
+              {footerGroup.headers.map(header => (
+                <th key={header.id}>
+                  {header.isPlaceholder
+                    ? null
+                    : flexRender(header.column.columnDef.footer, header.getContext())}
+                </th>
+              ))}
+            </tr>
+          ))}
+        </tfoot>
       </table>
     </div>
   )
-}
-
-const getCommonPinningStyles = (
-  column: Column<any>,
-  showLeftShadow: boolean,
-  showRightShadow: boolean,
-  isHeader?: boolean,
-): React.CSSProperties => {
-  const isPinned = column.getIsPinned()
-  const isLastLeftPinnedColumn = isPinned === 'left' && column.getIsLastColumn('left')
-  const isFirstRightPinnedColumn = isPinned === 'right' && column.getIsFirstColumn('right')
-
-  const leftShadow = 'drop-shadow(2px 0px 2px rgba(0, 0, 0, 0.07))'
-  const rightShadow = 'drop-shadow(-2px 0px 2px rgba(0, 0, 0, 0.07))'
-
-  return {
-    // borderRight:
-    //   isLastLeftPinnedColumn && showLeftShadow ? '1px solid var(--stroke-border)' : undefined,
-    // borderLeft:
-    //   isFirstRightPinnedColumn && showRightShadow ? '1px solid var(--stroke-border)' : undefined,
-    filter:
-      isLastLeftPinnedColumn && showLeftShadow
-        ? leftShadow
-        : isFirstRightPinnedColumn && showRightShadow
-          ? rightShadow
-          : undefined,
-    left: isPinned === 'left' ? `${column.getStart('left')}px` : undefined,
-    right: isPinned === 'right' ? `${column.getAfter('right')}px` : undefined,
-    position: isPinned ? 'sticky' : undefined,
-    // zIndex: isPinned ? (column.id === DROPDOWN_COL_ID ? 4 : 2) : 0,
-    zIndex: isPinned ? 2 : 0,
-    backgroundColor: isHeader ? `var(--fill-highlight)` : '#ffffff',
-    marginRight: isLastLeftPinnedColumn ? '20px' : undefined,
-  }
 }

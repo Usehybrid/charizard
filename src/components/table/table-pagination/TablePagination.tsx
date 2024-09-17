@@ -7,11 +7,11 @@ import chevronRight from '../../assets/chevron-right.svg'
 import chevronLeft from '../../assets/chevron-left.svg'
 import classes from './table-pagination.module.css'
 import {useMachine, normalizeProps} from '@zag-js/react'
-import {TableV3Props} from '../TableV3'
+import {TableProps} from '../Table'
 import {SVG} from '../../svg'
 
 interface TablePaginationProps {
-  paginationConfig: TableV3Props['paginationConfig']
+  paginationConfig: TableProps['paginationConfig']
 }
 
 export function TablePagination({paginationConfig}: TablePaginationProps) {

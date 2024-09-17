@@ -35,7 +35,7 @@ interface UploadProps {
   disabled?: boolean
   getUploadDoc: (arg: any) => void
   setIsUploading?: (arg: any) => void
-  customComponent?: React.ReactChild
+  customComponent?: React.ReactNode
   fileUploadLimit?: number
   isMultiple?: boolean
   singleFileClassName?: string

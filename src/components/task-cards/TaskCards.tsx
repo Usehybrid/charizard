@@ -5,7 +5,7 @@ import emptySvg from './assets/empty-task-cards.svg'
 import classes from './task-cards.module.css'
 import {Loader} from '../loader'
 import {SVG} from '../svg'
-import {TablePagination} from '../table-v3'
+import {TablePagination} from '../table'
 import {ITask} from './types'
 
 export interface TaskCardsProps {

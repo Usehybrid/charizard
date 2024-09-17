@@ -1,7 +1,3 @@
-/**
- * @author Pratik Awaik <pratik@hybr1d.io>
- */
-
 import * as React from 'react'
 import clsx from 'clsx'
 import classes from './styles.module.css'
@@ -32,6 +28,7 @@ interface PopoverContentProps {
    * The styles to apply to Popover positioner
    */
   positionerStyles?: React.CSSProperties
+  showArrow?: boolean
 }
 
 export function PopoverContent({
@@ -41,6 +38,7 @@ export function PopoverContent({
   styles,
   className,
   positionerStyles,
+  showArrow = true,
 }: PopoverContentProps) {
   const Wrapper = api?.portalled ? Portal : React.Fragment
 
@@ -70,9 +68,11 @@ export function PopoverContent({
         className={classes.positioner}
         style={{...api?.getPositionerProps()?.style, ...positionerStyles}}
       >
-        <div {...arrowProps} className={clsx(classes.arrow, {[classes[bg]]: !isCustomBg})}>
-          <div {...api?.getArrowTipProps()} />
-        </div>
+        {showArrow && (
+          <div {...arrowProps} className={clsx(classes.arrow, {[classes[bg]]: !isCustomBg})}>
+            <div {...api?.getArrowTipProps()} />
+          </div>
+        )}
         <div
           {...api?.getContentProps()}
           className={clsx(classes.content, classes[bg], className)}

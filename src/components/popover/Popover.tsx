@@ -3,7 +3,7 @@ import * as popover from '@zag-js/popover'
 import type {Placement} from '@zag-js/popper'
 import {normalizeProps, useMachine} from '@zag-js/react'
 
-type PopoverProps = {
+export interface PopoverProps {
   /**
    * Content of the trigger
    */
