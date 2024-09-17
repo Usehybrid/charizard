@@ -52,3 +52,36 @@
   width: 16px;
   height: 16px;
 }
+
+.userChipContainer {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  padding-right: 8px;
+  border-radius: var(--borderfull);
+  background: var(--dark-d10);
+}
+
+.userChipImageContainer {
+  position: relative;
+  display: flex;
+}
+
+.profileImage {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+}
+
+.firstImage{
+  z-index: 10;
+}
+
+.secondImage {
+  position: absolute;
+  left: 10px;
+}
+
+.userCount {
+  color: var(--dark-d70);
+}

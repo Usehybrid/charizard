@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import {TableDemo} from './demo/table-demo'
+import {UserChipMulti} from './demo/UserChipMulti'
+// import {TableDemo} from './demo/table-demo'
 // import {ButtonDemo} from './demo/button-demo'
 
 const styles = {
@@ -24,8 +25,9 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 function App() {
   return (
     <div style={styles}>
-      <TableDemo />
+      {/* <TableDemo /> */}
       {/* <ButtonDemo /> */}
+      <UserChipMulti />
     </div>
   )
 }

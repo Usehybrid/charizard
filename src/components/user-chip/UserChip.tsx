@@ -2,6 +2,7 @@ import clsx from 'clsx'
 import multiplyIcon from '../assets/multiply.svg'
 import classes from './user-chip.module.css'
 import {SVG} from '../svg'
+import {User} from './types'
 
 export enum USER_CHIP_STATUS {
   DEFAULT = 'default',
@@ -16,8 +17,10 @@ export enum USER_CHIP_STATUS {
 interface UserChipProps {
   status?: USER_CHIP_STATUS
   selected?: boolean
-  username: string
-  profileImgUrl: string
+  username?: string
+  profileImgUrl?: string
+  isMulti?: boolean
+  users?: User[]
 }
 
 export function UserChip({
@@ -25,8 +28,26 @@ export function UserChip({
   selected = false,
   username,
   profileImgUrl,
+  isMulti = false,
+  users,
 }: UserChipProps) {
-  return (
+  return isMulti && !!users?.length ? (
+    <div className={classes.userChipContainer}>
+      <div className={classes.userChipImageContainer}>
+        <img
+          src={users[0].profile_img_url ? users[0].profile_img_url : ''}
+          className={clsx(classes.profileImage, classes.firstImage)}
+        />
+        {users?.length > 1 && (
+          <img
+            src={users[1].profile_img_url ? users[1].profile_img_url : ''}
+            className={clsx(classes.profileImage, classes.secondImage)}
+          />
+        )}
+      </div>
+      <div className={clsx(classes.userCount, 'zap-caption-semibold')}>{users.length}</div>
+    </div>
+  ) : (
     <div className={clsx(classes.box, classes[status], {[classes.selected]: selected})}>
       <img src={profileImgUrl} alt={username} className={classes.avatar} />
       <span className="zap-caption-semibold">{username}</span>
