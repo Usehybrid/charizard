@@ -1,9 +1,10 @@
 import * as React from 'react'
 import {Outlet, useNavigate} from 'react-router-dom'
 import classes from './styles.module.css'
-import {AsyncImage, BUTTON_V2_SIZE, BUTTON_V2_VARIANT, ButtonV2} from '@hybr1d-tech/charizard'
 import logoImage from '../assets/logo-full.svg'
 import errorImage from '../assets/illustrations/sleeping-user.svg'
+import {BUTTON_V2_SIZE, BUTTON_V2_VARIANT, ButtonV2} from '../button-v2'
+import {AsyncImage} from '../asyncImage'
 
 export function ErrorsLayout({
   children,

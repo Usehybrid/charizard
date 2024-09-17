@@ -47,7 +47,7 @@ export const InputV2 = React.forwardRef<HTMLInputElement, InputV2Props>(
           style={inputStyles}
         />
         {errorMsg && (
-          <span className={clsx('zap-subcontent-medium ', classes.error)}>{errorMsg}</span>
+          <span className={clsx('zap-subcontent-medium', classes.error)}>{errorMsg}</span>
         )}
       </div>
     )
