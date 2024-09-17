@@ -15,6 +15,7 @@ import chevronLeft from '../assets/chevron-left.svg'
 import chevronRight from '../assets/chevron-right.svg'
 import {DateRangePickerProps, DateStore, MonthYear} from './type'
 import {create} from 'zustand'
+import {InputControlV2, LabelV2} from '../input-v2'
 
 const useDateStore = create<DateStore>()(set => ({
   monthYear: {
@@ -75,6 +76,13 @@ export function DateRangePicker({
   }, [date])
 
   React.useEffect(() => {
+    setMonthYear({
+      month: new Date().getMonth(),
+      year: new Date().getFullYear(),
+    })
+  }, [])
+
+  React.useEffect(() => {
     if (date?.from && !isNaN(new Date(date.from).getTime())) {
       setMonthYear({
         month: new Date(date.from).getMonth(),
@@ -83,17 +91,10 @@ export function DateRangePicker({
     }
   }, [date])
 
-  React.useEffect(() => {
-    setMonthYear({
-      month: new Date().getMonth(),
-      year: new Date().getFullYear(),
-    })
-  }, [])
-
   const onDropdownClick = (value: any) => {
     const today = new Date()
 
-    const selected = RANGE_OPTIONS.find(option => option.value === value) ?? selectedRange
+    const selected = RANGE_OPTIONS.find(option => option.value === value) ?? RANGE_OPTIONS[0]
     setSelectedRange(selected)
     switch (value) {
       case 'today':
@@ -154,7 +155,12 @@ export function DateRangePicker({
             disabled={disableDatepicker}
           >
             <div className={classes.formButton}>
-              <span style={{color: !date ? 'var(--text-secondary)' : undefined}}>
+              <span
+                style={{
+                  color: !date ? 'var(--text-secondary)' : undefined,
+                  ...customInputContentStyles,
+                }}
+              >
                 {showQuickSelect && selectedRange.value !== RANGE_OPTIONS[0].value
                   ? selectedRange.label
                   : displayDate}
@@ -176,15 +182,17 @@ export function DateRangePicker({
           positionerStyles={{zIndex: 20}}
         >
           {showQuickSelect && (
-            <div className={classes.quickRangePicker}>
-              <p>Select a date range</p>
+            <InputControlV2 className={classes.quickRangePicker}>
+              <LabelV2 htmlFor="range-selector">Select a date range</LabelV2>
               <SelectV2
+                id="range-selector"
                 options={RANGE_OPTIONS}
                 defaultValue={selectedRange as any}
                 onChange={onDropdownClick}
                 value={selectedRange}
+                mainContainerClassName={classes.quickSelector}
               />
-            </div>
+            </InputControlV2>
           )}
           <DayPicker
             showOutsideDays={showOutsideDays}

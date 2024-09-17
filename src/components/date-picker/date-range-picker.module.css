@@ -11,9 +11,13 @@
   border: 1px solid var(--theme-blue);
   border-radius: 8px;
 }
-.quickRangePicker p {
-  color: var(--text-primary);
-  margin-bottom: 6px;
+.quickRangePicker label {
+  align-items: center;
+}
+
+.quickRangePicker .quickSelector {
+  margin: auto;
+  width: 70%;
 }
 .buttonContent {
   display: flex;
