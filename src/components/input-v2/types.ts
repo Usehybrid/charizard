@@ -340,4 +340,6 @@ export interface NumberAdornmentProps {
   onIncrement: () => void
   onDecrement: () => void
   disabled?: boolean
+  incrementBtnStyles?: never
+  decrementBtnStyles?: never
 }

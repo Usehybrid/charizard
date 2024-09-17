@@ -86,6 +86,10 @@ export function InputGroupV2({className = '', children, ...props}: InputGroupPro
           inputStyles: {...styles, ...child.props.inputStyles},
           containerStyles: {width: '100%', ...child.props.inputStyles},
         },
+        [INPUT_COMPONENTS.NUMBER_ADORNMENT]: {
+          incrementBtnStyles: {...styles, ...child.props.incrementBtnStyles},
+          decrementBtnStyles: {...styles, ...child.props.decrementBtnStyles},
+        },
         [INPUT_COMPONENTS.LEFT_ICON]: {iconStyles: {...child.props.iconStyles, ...iconStyles}},
         [INPUT_COMPONENTS.RIGHT_ICON]: {iconStyles: {...child.props.iconStyles, ...iconStyles}},
       }

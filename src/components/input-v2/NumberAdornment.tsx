@@ -25,17 +25,29 @@ export default function NumberAdornment({
   onDecrement,
   onIncrement,
   disabled = false,
+  incrementBtnStyles,
+  decrementBtnStyles,
 }: NumberAdornmentProps) {
   return (
     <div className={classes.numberAdornmentContainer}>
-      <button onClick={onIncrement} className={classes.incrementBtn} disabled={disabled}>
+      <button
+        onClick={onIncrement}
+        className={classes.incrementBtn}
+        style={incrementBtnStyles}
+        disabled={disabled}
+      >
         <SVG
           path={chevronUpIcon}
           spanClassName={classes.incrementIconContainer}
           svgClassName={classes.incrementIcon}
         />
       </button>
-      <button onClick={onDecrement} className={classes.decrementBtn} disabled={disabled}>
+      <button
+        onClick={onDecrement}
+        className={classes.decrementBtn}
+        style={decrementBtnStyles}
+        disabled={disabled}
+      >
         <SVG
           path={chevronDownIcon}
           spanClassName={classes.decrementIconContainer}
