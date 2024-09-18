@@ -1,48 +1,48 @@
+.columnCenter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .errorSection {
-    min-height: 100dvh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1064px;
-    margin: auto;
-    color: var(--black);
-    padding: 116px 0 40px;
-  }
-  
-  .errorContainer {
-      display: flex;
-      flex-direction: column;
-      gap: 40px;
-      align-items: center;
-  }
-  
-  .errorContainer .logo {
-      height: 48px;
-  }
-  
-  .errorContainer .errorImage {
-      height: 182px;
-  }
-  
-  .errorContainer .content {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      align-items: center;
-  }
-  
-  .errorContainer .action {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      align-items: center;
-  }
-  
-  .errorContainer .content .info {
-      text-align: center;
-  }
-  
-  .errorContainer .error {
-      color: var(--status-error-e50);
-  }
+  @apply .columnCenter;
+  min-height: 100dvh;
+  justify-content: space-between;
+  max-width: 1064px;
+  margin: auto;
+  color: var(--black);
+  padding: 116px 0 40px;
+}
+
+.errorContainer {
+  @apply .columnCenter;
+  gap: 40px;
+}
+
+.errorContainer .logo {
+  height: 48px;
+}
+
+.errorContainer .errorImage {
+  height: 182px;
+}
+
+.errorContainer .content {
+  @apply .columnCenter;
+  gap: 12px;
+}
+
+.errorContainer .action {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  align-items: center;
+}
+
+.errorContainer .content .info {
+  text-align: center;
+}
+
+.errorContainer .error {
+  color: var(--status-error-e50);
+}

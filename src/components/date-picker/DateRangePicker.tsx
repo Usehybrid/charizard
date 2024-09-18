@@ -29,7 +29,7 @@ export function DateRangePicker({
   value,
   onChange,
   mode = 'range',
-  datePickerClassNames = {},
+  datePickerClassNames,
   showQuickSelect = false,
   disabled,
   customDisable,
@@ -65,7 +65,7 @@ export function DateRangePicker({
     }
 
     const start = values?.from ?? undefined
-    const end = values?.to ? values?.to : values?.from ? values?.from : undefined
+    const end = values?.to ?? values?.from
     onChange({from: start, to: end})
   }
 
@@ -74,13 +74,6 @@ export function DateRangePicker({
       setHoverRange({from: date.from, to: date.to})
     }
   }, [date])
-
-  React.useEffect(() => {
-    setMonthYear({
-      month: new Date().getMonth(),
-      year: new Date().getFullYear(),
-    })
-  }, [])
 
   React.useEffect(() => {
     if (date?.from && !isNaN(new Date(date.from).getTime())) {
@@ -219,7 +212,7 @@ export function DateRangePicker({
               range_middle: classes.dayRangeMiddle,
               hidden: classes.dayHidden,
               day_button: classes.day,
-              ...datePickerClassNames,
+              ...(datePickerClassNames ? datePickerClassNames : {}),
             }}
             components={{
               Nav,

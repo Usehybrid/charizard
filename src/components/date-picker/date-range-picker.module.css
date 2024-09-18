@@ -34,7 +34,9 @@
   gap: 1rem;
 }
 .month {
-  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 .caption {
   display: flex;
@@ -85,7 +87,6 @@
   width: 100%;
   border-collapse: collapse;
   border-spacing: 0;
-  margin-top: 16px;
 }
 .headRow {
   display: flex;
@@ -94,7 +95,6 @@
   font-size: 1rem;
   color: var(--text-hint);
   border-radius: 8px;
-  width: 2.25rem;
   font-weight: 400;
   width: 36px;
   display: flex;

@@ -1,5 +1,5 @@
 import * as React from 'react'
-import {DateRange, Matcher, PropsRange} from 'react-day-picker'
+import {ClassNames, DateRange, Matcher, PropsRange} from 'react-day-picker'
 import {Placement} from '@zag-js/popper'
 
 export interface DateRangePickerProps extends PropsRange {
@@ -10,7 +10,7 @@ export interface DateRangePickerProps extends PropsRange {
   disabled?: Matcher | Matcher[] | undefined
   customDisable?: Matcher | Matcher[]
   disableWeekends?: boolean
-  datePickerClassNames?: Record<string, string>
+  datePickerClassNames?: ClassNames
   disableDatepicker?: boolean
   errorMsg?: string
   placement?: Placement

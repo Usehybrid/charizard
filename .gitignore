@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# vite logs
+vite.config.ts.timestamp-*.mjs

@@ -85,12 +85,7 @@ export function DatePicker({
     }
   }, [value])
 
-  React.useEffect(() => {
-    setMonthYear({
-      month: new Date().getMonth(),
-      year: new Date().getFullYear(),
-    })
-  }, [])
+
 
   const date = React.useMemo(() => {
     if (value) {

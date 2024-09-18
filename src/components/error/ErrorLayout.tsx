@@ -5,18 +5,21 @@ import logoImage from '../assets/logo-full.svg'
 import errorImage from '../assets/illustrations/sleeping-user.svg'
 import {BUTTON_V2_SIZE, BUTTON_V2_VARIANT, ButtonV2} from '../button-v2'
 import {AsyncImage} from '../asyncImage'
+import {ZENADMIN_CONTACT, ZENADMIN_URL} from '../../utils/constants'
+
+interface ErrorsLayoutProps {
+  children?: React.ReactNode
+  showReload?: boolean
+  onErrorReset?: () => void
+  homeRoute?: string
+}
 
 export function ErrorsLayout({
   children,
   showReload = false,
   onErrorReset,
   homeRoute = '/',
-}: {
-  children?: React.ReactNode
-  showReload?: boolean
-  onErrorReset?: () => void
-  homeRoute?: string
-}) {
+}: ErrorsLayoutProps) {
   const navigate = useNavigate()
 
   const reloadPageHandler = () => {
@@ -29,7 +32,7 @@ export function ErrorsLayout({
   return (
     <section className={classes.errorSection}>
       <div className={classes.errorContainer}>
-        <a href="https://www.zenadmin.ai">
+        <a href={ZENADMIN_URL}>
           <AsyncImage className={classes.logo} alt="Logo" src={logoImage} />
         </a>
         <AsyncImage className={classes.errorImage} alt="error" src={errorImage} />
@@ -52,12 +55,7 @@ export function ErrorsLayout({
       <div>
         <p className="zap-content-regular">
           For urgent situations please{' '}
-          <a
-            target="_blank"
-            rel="noreferrer"
-            href="https://www.zenadmin.ai/contact-us"
-            className="zap-link zap-link-small"
-          >
+          <a href={ZENADMIN_CONTACT} className="zap-link zap-link-small">
             Contact us
           </a>
         </p>

@@ -1,17 +1,19 @@
 import classes from './styles.module.css'
 import {ErrorsLayout} from './ErrorLayout'
 
+interface ErrorBoundaryFallbackProps {
+  error: Error
+  resetError: () => void
+  isDev: boolean
+  homeRoute?: string
+}
+
 export function ErrorBoundaryFallback({
   error,
   resetError,
   isDev,
   homeRoute = '/',
-}: {
-  error: Error
-  resetError: () => void
-  isDev: boolean
-  homeRoute?: string
-}) {
+}: ErrorBoundaryFallbackProps) {
   return (
     <ErrorsLayout showReload={true} onErrorReset={resetError} homeRoute={homeRoute}>
       <h1 className="zap-hero-bold">{isDev ? error.message : 'Aaaah! Something went wrong'}</h1>

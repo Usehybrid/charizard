@@ -332,6 +332,8 @@ export interface InputNumberProps extends InputV2Props {
  * @property {() => void} onIncrement - Callback when the increment button is clicked.
  * @property {() => void} onDecrement - Callback when the decrement button is clicked.
  * @property {boolean} [disabled] - Whether the increment/decrement buttons are disabled.
+ * @property {never} [incrementBtnStyles] - Used for internal styling when grouping it with multiple components.
+ * @property {never} [decrementBtnStyles] - Used for internal styling when grouping it with multiple components.
  *
  * @example
  * <NumberAdornment onIncrement={() => increment()} onDecrement={() => decrement()} />
