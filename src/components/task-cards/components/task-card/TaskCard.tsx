@@ -105,7 +105,9 @@ export default function TaskCard({
       <div className={classes.detailsSection}>
         {data.details?.map((detail: ITaskDetails, i: number) => (
           <div key={i} className={classes.detail}>
-            <div className={clsx(classes.detailKey, 'zap-subcontent-medium')}>{detail.key}</div>
+            <div className={clsx(classes.detailKey, 'zap-subcontent-medium')}>
+              {detail.key + ': '}
+            </div>
             {Array.isArray(detail.value) && detail.value.length > 0 ? (
               isArrayOfString(detail.value) ? (
                 <div className={clsx(classes.detailValue, 'zap-subcontent-medium')}>
@@ -142,7 +144,7 @@ export default function TaskCard({
                 username={getUsername(detail.value)}
                 profileImgUrl={(detail.value as ITaskObjectValue).profile_img_url}
               />
-            ) : isString(detail.value) ? (
+            ) : typeof detail.value === 'string' && !!detail.value?.length ? (
               <div className={clsx(classes.detailValue, 'zap-subcontent-medium')}>
                 {detail.value as string}
               </div>
