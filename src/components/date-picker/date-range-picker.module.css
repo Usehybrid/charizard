@@ -215,6 +215,7 @@
 .errorMsg {
   color: var(--status-error-e50);
   display: block;
+  text-align: left;
 }
 
 .formButton {

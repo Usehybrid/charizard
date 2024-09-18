@@ -173,6 +173,7 @@
 .errorMsg {
   margin-bottom: 10px;
   color: var(--status-danger);
+  text-align: left;
 }
 .fileContainer {
   display: flex;
