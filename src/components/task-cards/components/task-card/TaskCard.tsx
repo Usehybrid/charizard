@@ -115,28 +115,32 @@ export default function TaskCard({
                 </div>
               ) : (
                 <div className={classes.detailValueAttachments}>
-                  {detail.value?.map((value, index: React.Key) => {
-                    return (
-                      <div key={index} className={classes.detailValueAttachment}>
-                        <div>
-                          <AsyncImage
-                            src={getFileTypeIcon(value.details?.type || value.details?.ext)}
-                            alt={value.file_name}
-                            className={classes.fileIcon}
-                          />
+                  {detail.value[0].file_name ? (
+                    detail.value?.map((value, index: React.Key) => {
+                      return (
+                        <div key={index} className={classes.detailValueAttachment}>
+                          <div>
+                            <AsyncImage
+                              src={getFileTypeIcon(value.details?.type || value.details?.ext)}
+                              alt={value.file_name}
+                              className={classes.fileIcon}
+                            />
+                          </div>
+                          <div>
+                            <a
+                              href={value.doc_link}
+                              target="_blank"
+                              className={classes.attachmentName}
+                            >
+                              {value.file_name}
+                            </a>
+                          </div>
                         </div>
-                        <div>
-                          <a
-                            href={value.doc_link}
-                            target="_blank"
-                            className={classes.attachmentName}
-                          >
-                            {value.file_name}
-                          </a>
-                        </div>
-                      </div>
-                    )
-                  })}
+                      )
+                    })
+                  ) : (
+                    <div className={clsx(classes.detailValueNA, 'zap-subcontent-medium')}>N/A</div>
+                  )}
                 </div>
               )
             ) : detail.value && isObject(detail.value) && Object.keys(detail.value).length ? (
