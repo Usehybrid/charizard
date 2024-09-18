@@ -138,4 +138,5 @@
 .mainContainer .errorMsg {
   color: var(--status-error);
   display: block;
+  text-align: left;
 }

@@ -13,7 +13,6 @@ import {
   isArrayOfString,
   isExactISODateFormat,
   isObject,
-  isString,
 } from '../../../../utils'
 import {getUsername} from '../../../../utils/text'
 import getStatus, {TASK_STATUS} from '../../helper'
@@ -105,7 +104,9 @@ export default function TaskCard({
       <div className={classes.detailsSection}>
         {data.details?.map((detail: ITaskDetails, i: number) => (
           <div key={i} className={classes.detail}>
-            <div className={clsx(classes.detailKey, 'zap-subcontent-medium')}>{detail.key}</div>
+            <div className={clsx(classes.detailKey, 'zap-subcontent-medium')}>
+              {`${detail.key}: `}
+            </div>
             {Array.isArray(detail.value) && detail.value.length > 0 ? (
               isArrayOfString(detail.value) ? (
                 <div className={clsx(classes.detailValue, 'zap-subcontent-medium')}>
@@ -113,28 +114,33 @@ export default function TaskCard({
                 </div>
               ) : (
                 <div className={classes.detailValueAttachments}>
-                  {detail.value?.map((value, index: React.Key) => {
-                    return (
-                      <div key={index} className={classes.detailValueAttachment}>
-                        <div>
-                          <AsyncImage
-                            src={getFileTypeIcon(value.details?.type || value.details?.ext)}
-                            alt={value.file_name}
-                            className={classes.fileIcon}
-                          />
+                  {detail.value[0].file_name ? (
+                    detail.value?.map((value, index: React.Key) => {
+                      return (
+                        <div key={index} className={classes.detailValueAttachment}>
+                          <div>
+                            <AsyncImage
+                              src={getFileTypeIcon(value.details?.type || value.details?.ext)}
+                              alt={value.file_name}
+                              className={classes.fileIcon}
+                            />
+                          </div>
+                          <div>
+                            <a
+                              href={value.doc_link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className={classes.attachmentName}
+                            >
+                              {value.file_name}
+                            </a>
+                          </div>
                         </div>
-                        <div>
-                          <a
-                            href={value.doc_link}
-                            target="_blank"
-                            className={classes.attachmentName}
-                          >
-                            {value.file_name}
-                          </a>
-                        </div>
-                      </div>
-                    )
-                  })}
+                      )
+                    })
+                  ) : (
+                    <div className={clsx(classes.detailValueNA, 'zap-subcontent-medium')}>N/A</div>
+                  )}
                 </div>
               )
             ) : detail.value && isObject(detail.value) && Object.keys(detail.value).length ? (
@@ -142,7 +148,7 @@ export default function TaskCard({
                 username={getUsername(detail.value)}
                 profileImgUrl={(detail.value as ITaskObjectValue).profile_img_url}
               />
-            ) : isString(detail.value) ? (
+            ) : typeof detail.value === 'string' && !!detail.value?.length ? (
               <div className={clsx(classes.detailValue, 'zap-subcontent-medium')}>
                 {detail.value as string}
               </div>
