@@ -78,6 +78,7 @@ export function Alert({
               customSvgStyles={{
                 width: '16px',
                 height: '16px',
+                cursor: 'pointer'
               }}
               path={actionType === ALERT_ACTION_TYPES.CLOSE ? close : showMore ? up : down}
             />
