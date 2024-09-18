@@ -21,6 +21,7 @@ import chevronDownIcon from '../assets/chevron-down.svg'
  *   disabled={false}
  * />
  */
+
 export default function NumberAdornment({
   onDecrement,
   onIncrement,

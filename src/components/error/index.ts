@@ -1,5 +1,5 @@
 export * from './Error404'
 export * from './Error500'
 export * from './ErrorBoundaryFallback'
-export * from './ErrorLayout'
+export * from './ErrorsLayout'
 export * from './ErrorPage'

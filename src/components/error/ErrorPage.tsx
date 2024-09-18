@@ -1,7 +1,7 @@
 import {Route, Routes} from 'react-router-dom'
 import {Error500} from './Error500'
 import {Error404} from './Error404'
-import {ErrorsLayout} from './ErrorLayout'
+import {ErrorsLayout} from './ErrorsLayout'
 
 interface ErrorsPageProps {
   isOnly500?: boolean

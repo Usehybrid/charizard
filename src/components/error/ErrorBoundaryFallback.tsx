@@ -1,5 +1,5 @@
 import classes from './styles.module.css'
-import {ErrorsLayout} from './ErrorLayout'
+import {ErrorsLayout} from './ErrorsLayout'
 
 interface ErrorBoundaryFallbackProps {
   error: Error
