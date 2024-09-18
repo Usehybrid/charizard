@@ -13,7 +13,6 @@ import {
   isArrayOfString,
   isExactISODateFormat,
   isObject,
-  isString,
 } from '../../../../utils'
 import {getUsername} from '../../../../utils/text'
 import getStatus, {TASK_STATUS} from '../../helper'
@@ -106,7 +105,7 @@ export default function TaskCard({
         {data.details?.map((detail: ITaskDetails, i: number) => (
           <div key={i} className={classes.detail}>
             <div className={clsx(classes.detailKey, 'zap-subcontent-medium')}>
-              {detail.key + ': '}
+              {`${detail.key}: `}
             </div>
             {Array.isArray(detail.value) && detail.value.length > 0 ? (
               isArrayOfString(detail.value) ? (
@@ -130,6 +129,7 @@ export default function TaskCard({
                             <a
                               href={value.doc_link}
                               target="_blank"
+                              rel="noopener noreferrer"
                               className={classes.attachmentName}
                             >
                               {value.file_name}
