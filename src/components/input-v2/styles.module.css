@@ -178,7 +178,6 @@
   align-items: center;
   gap: 4px;
   border: 1px solid var(--p-p10);
-
   color: var(--text-primary);
   transition: border 0.3s ease-in-out;
   cursor: pointer;

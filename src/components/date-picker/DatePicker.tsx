@@ -22,16 +22,8 @@ import {
 } from '../index'
 import {StylesConfig} from 'react-select'
 import {create} from 'zustand'
+import {DateStore, MonthYear} from './type'
 
-type MonthYear = {
-  month: number
-  year: number
-}
-
-type DateStore = {
-  monthYear: MonthYear
-  setMonthYear: (value: MonthYear) => void
-}
 
 const useDateStore = create<DateStore>()(set => ({
   monthYear: {
@@ -93,12 +85,7 @@ export function DatePicker({
     }
   }, [value])
 
-  React.useEffect(() => {
-    setMonthYear({
-      month: new Date().getMonth(),
-      year: new Date().getFullYear(),
-    }); 
-  }, []); 
+
 
   const date = React.useMemo(() => {
     if (value) {
@@ -130,7 +117,7 @@ export function DatePicker({
   }
 
   return (
-    <div className={clsx(classes.huiDatePicker)} style={customContainerStyles}>
+    <div className={clsx(classes.datePicker)} style={customContainerStyles}>
       <Popover placement={'bottom'}>
         <PopoverTrigger openOnHover={false}>
           {variant === 'form' ? (
@@ -173,7 +160,9 @@ export function DatePicker({
               </div>
             </Button>
           )}
-          {errorMsg && <p className={classes.errorMsg}>{errorMsg}</p>}
+          {errorMsg && (
+            <p className={clsx('zap-subcontent-medium', classes.errorMsg)}>{errorMsg}</p>
+          )}
         </PopoverTrigger>
         <PopoverContent
           bg="var(--neutral-white)"

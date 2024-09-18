@@ -1,0 +1,48 @@
+.errorSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100dvh;
+  justify-content: space-between;
+  max-width: 1064px;
+  margin: auto;
+  color: var(--black);
+  padding: 116px 0 40px;
+}
+
+.errorContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+.errorContainer .logo {
+  height: 48px;
+}
+
+.errorContainer .errorImage {
+  height: 182px;
+}
+
+.errorContainer .content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.errorContainer .action {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  align-items: center;
+}
+
+.errorContainer .content .info {
+  text-align: center;
+}
+
+.errorContainer .error {
+  color: var(--status-error-e50);
+}

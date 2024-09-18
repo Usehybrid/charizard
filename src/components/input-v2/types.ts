@@ -29,8 +29,8 @@ export enum INPUT_COMPONENTS {
  *
  * @property {string} [errorMsg] - Error message to display below the input if there is a validation error.
  * @property {string} [containerClassName] - Additional class name(s) for the input container div.
- * @property {never} [inputStyles] - Used for internal styling when grouping it with multiple components. use className for styling input.
- * @property {never} [containerStyles] - Used for internal styling when grouping it with multiple components. use containerClassName for styling input container.
+ * @property {React.CSSProperties} [inputStyles] - Used for internal styling when grouping it with multiple components. use className for styling input.
+ * @property {React.CSSProperties} [containerStyles] - Used for internal styling when grouping it with multiple components. use containerClassName for styling input container.
  *
  * @example
  * <InputV2
@@ -48,8 +48,10 @@ export enum INPUT_COMPONENTS {
 export interface InputV2Props extends React.InputHTMLAttributes<HTMLInputElement> {
   errorMsg?: string
   containerClassName?: string
-  inputStyles?: never
-  containerStyles?: never
+  /** @internal */
+  inputStyles?: React.CSSProperties
+  /** @internal */
+  containerStyles?: React.CSSProperties
 }
 
 /**
@@ -62,8 +64,8 @@ export interface InputV2Props extends React.InputHTMLAttributes<HTMLInputElement
  *
  * @property {string} [errorMsg] - Error message to display below the textarea if there is a validation error.
  * @property {string} [containerClassName] - Additional class name(s) for the textarea container div.
- * @property {never} [inputStyles] - Used for internal styling when grouping it with multiple components. use className for styling textarea.
- * @property {never} [containerStyles] - Used for internal styling when grouping it with multiple components. use containerClassName for styling textarea container.
+ * @property {React.CSSProperties} [inputStyles] - Used for internal styling when grouping it with multiple components. use className for styling textarea.
+ * @property {React.CSSProperties} [containerStyles] - Used for internal styling when grouping it with multiple components. use containerClassName for styling textarea container.
  *
  * @example
  * <TextareaV2
@@ -81,8 +83,10 @@ export interface InputV2Props extends React.InputHTMLAttributes<HTMLInputElement
 export interface TextareaV2Props extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   errorMsg?: string
   containerClassName?: string
-  inputStyles?: never
-  containerStyles?: never
+  /** @internal */
+  inputStyles?: React.CSSProperties
+  /** @internal */
+  containerStyles?: React.CSSProperties
 }
 
 /**
@@ -165,7 +169,7 @@ export interface InputGroupPropsV2 extends React.HTMLAttributes<HTMLDivElement> 
  *
  * @property {string} icon - The icon to display.
  * @property {() => void} [onClick] - Optional click handler for the icon.
- * @property {never} [iconStyles] - Used for internal styling when grouping it with multiple components. use className for styling icon if clickable.
+ * @property {React.CSSProperties} [iconStyles] - Used for internal styling when grouping it with multiple components. use className for styling icon if clickable.
  * @property {boolean} [disabled] - Whether the icon should be disabled with input.
  * @property {string} [className] - Additional classNames for the icon if it is clickable.
  *
@@ -179,7 +183,8 @@ export interface InputGroupPropsV2 extends React.HTMLAttributes<HTMLDivElement> 
 export interface InputIconProps {
   icon: string
   onClick?: () => void
-  iconStyles?: never
+  /** @internal */
+  iconStyles?: React.CSSProperties
   disabled?: boolean
   className?: string
 }
@@ -332,6 +337,8 @@ export interface InputNumberProps extends InputV2Props {
  * @property {() => void} onIncrement - Callback when the increment button is clicked.
  * @property {() => void} onDecrement - Callback when the decrement button is clicked.
  * @property {boolean} [disabled] - Whether the increment/decrement buttons are disabled.
+ * @property {React.CSSProperties} [incrementBtnStyles] - Used for internal styling when grouping it with multiple components.
+ * @property {React.CSSProperties} [decrementBtnStyles] - Used for internal styling when grouping it with multiple components.
  *
  * @example
  * <NumberAdornment onIncrement={() => increment()} onDecrement={() => decrement()} />
@@ -340,4 +347,8 @@ export interface NumberAdornmentProps {
   onIncrement: () => void
   onDecrement: () => void
   disabled?: boolean
+  /** @internal */
+  incrementBtnStyles?: React.CSSProperties
+  /** @internal */
+  decrementBtnStyles?: React.CSSProperties
 }

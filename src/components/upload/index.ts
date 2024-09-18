@@ -1,1 +1,1 @@
-export {Upload} from './Upload'
+export * from './Upload'
