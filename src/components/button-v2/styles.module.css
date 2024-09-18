@@ -163,6 +163,9 @@
   font-size: 12px;
   line-height: 18px;
   font-weight: 500;
+}
+
+.divider:not(:last-of-type) {
   border-bottom: 1px solid var(--stroke-border);
 }
 

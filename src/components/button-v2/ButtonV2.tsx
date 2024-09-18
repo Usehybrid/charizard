@@ -109,6 +109,7 @@ export interface GroupActionProps {
   onClick?: any
   isCustomTrigger?: boolean
   isSingleBtnTrigger?: boolean
+  hideDivider?: boolean
 }
 
 const GroupAction = React.forwardRef(function (
@@ -126,6 +127,7 @@ const GroupAction = React.forwardRef(function (
     customStyles,
     onClick,
     isSingleBtnTrigger = false,
+    hideDivider = false,
   }: GroupActionProps,
   ref,
 ) {
@@ -169,14 +171,18 @@ const GroupAction = React.forwardRef(function (
     }
   }
 
-  React.useImperativeHandle(ref, () => {
-    return {
-      blur() {
-        setIsFocused(false)
-        api.setOpen(false)
-      },
-    }
-  }, [api])
+  React.useImperativeHandle(
+    ref,
+    () => {
+      return {
+        blur() {
+          setIsFocused(false)
+          api.setOpen(false)
+        },
+      }
+    },
+    [api],
+  )
 
   React.useEffect(() => {
     const handleFocus = () => setIsFocused(true)
@@ -239,14 +245,16 @@ const GroupAction = React.forwardRef(function (
               .map(menu => (
                 <div
                   key={menu.label}
-                  className={clsx(classes.menu, {[classes.menuDisabled]: menu.disabled})}
+                  className={clsx(classes.menu, !hideDivider && classes.divider, {
+                    [classes.menuDisabled]: menu.disabled,
+                  })}
                   {...api.getItemProps({value: menu.label.toLowerCase()})}
                   onClick={
                     menu.disabled
                       ? undefined
                       : isCustomTrigger
-                        ? () => menu.onClick(customData)
-                        : menu.onClick
+                      ? () => menu.onClick(customData)
+                      : menu.onClick
                   }
                   style={menu.customStyles}
                 >
@@ -372,6 +380,7 @@ export interface ActionsDropdownProps {
   positionerProps?: PositioningOptions
   isTable?: boolean
   children?: React.ReactNode
+  hideDivider?: boolean
   customStyles?: {
     customMenuStyles?: React.CSSProperties
     customButtonStyles?: React.CSSProperties
@@ -388,6 +397,7 @@ export const ActionsDropdown = React.forwardRef(function (
     positionerProps,
     isTable,
     children,
+    hideDivider,
     customStyles,
   }: ActionsDropdownProps,
   ref,
@@ -406,6 +416,7 @@ export const ActionsDropdown = React.forwardRef(function (
       positionerProps={positionerProps}
       isTable={isTable}
       isCustomTrigger={true}
+      hideDivider={hideDivider}
       customStyles={customStyles}
       ref={ref}
     >
