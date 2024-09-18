@@ -14,6 +14,10 @@ interface ErrorsLayoutProps {
   homeRoute?: string
 }
 
+const reloadPageHandler = () => {
+  window.location.reload()
+}
+
 export function ErrorsLayout({
   children,
   showReload = false,
@@ -22,9 +26,6 @@ export function ErrorsLayout({
 }: ErrorsLayoutProps) {
   const navigate = useNavigate()
 
-  const reloadPageHandler = () => {
-    window.location.reload()
-  }
   const navigateToHomeHandler = () => {
     onErrorReset ? onErrorReset() : navigate(homeRoute, {replace: true})
   }
