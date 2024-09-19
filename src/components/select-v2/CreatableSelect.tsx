@@ -11,6 +11,7 @@ import {
   CustomMultiValue,
   CustomClearIndicator,
   CustomMultiValueRemove,
+  CustomLoadingIndicator,
 } from './Common'
 import {
   CreatableSelectV2Props,
@@ -80,6 +81,7 @@ export function CreatableSelectV2(props: CreatableSelectV2Props) {
           SingleValue: CustomSingleValue,
           Menu: CustomMenu,
           IndicatorsContainer: CustomIndicatorsContainer,
+          LoadingIndicator: CustomLoadingIndicator,
         }}
         onChange={selectOptionHandler}
         onCreateOption={onCreateOption}
