@@ -87,7 +87,7 @@ export function CreatableSelectV2(props: CreatableSelectV2Props) {
         {...restProps}
       />
       {errorMsg && (
-        <span className={clsx(classes.errorMsg, 'zap-subcontent-regular')}>{errorMsg}</span>
+        <span className={clsx('zap-subcontent-medium', classes.errorMsg)}>{errorMsg}</span>
       )}
     </div>
   )

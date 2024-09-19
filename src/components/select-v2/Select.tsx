@@ -93,7 +93,7 @@ export function SelectV2(props: SelectV2Props) {
         {...restProps}
       />
       {errorMsg && (
-        <span className={clsx(classes.errorMsg, 'zap-subcontent-regular')}>{errorMsg}</span>
+        <span className={clsx('zap-subcontent-medium', classes.errorMsg)}>{errorMsg}</span>
       )}
     </div>
   )
