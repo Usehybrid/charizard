@@ -77,13 +77,17 @@ export const CustomMenu = (props: any) => {
 export const CustomOption = (props: any) => {
   const {data, isSelected, isMulti, selectProps} = props
   const variant = selectProps['data-variant']
+  const showDivider = selectProps['data-divider']
 
   const {label, subLabel, profileImgUrl, icon} = data
 
   const {darkerColor, lighterColor} = useColorsFromWord(label)
 
   return (
-    <components.Option {...props}>
+    <components.Option
+      {...props}
+      className={clsx(classes.optionContainer, showDivider && classes.divider)}
+    >
       <div
         className={clsx(
           classes.option,

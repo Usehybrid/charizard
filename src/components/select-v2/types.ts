@@ -31,6 +31,7 @@ export interface SelectV2Props extends ReactSelectProps<any, boolean> {
   onChange: (value: string | string[], actionMeta: SelectActionMeta) => void
   mainContainerClassName?: string
   variant?: SELECT_VARIANT
+  showDivider?: boolean
   errorMsg?: string
   customStyles?: StylesConfig<any>
 }

@@ -31,6 +31,14 @@
   color: #9999b3;
 }
 
+.optionContainer:not(:last-of-type) {
+  border-bottom: 1px solid var(--neutral-white);
+}
+
+.optionContainer:not(:last-of-type).divider {
+  border-bottom: 1px solid var(--stroke-border);
+}
+
 .option {
   display: flex;
   gap: 4px;
