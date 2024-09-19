@@ -126,7 +126,11 @@ export default function TaskCard({
                   {detail.value[0].file_name ? (
                     detail.value?.map((value, index: React.Key) => {
                       return (
-                        <div key={index} className={classes.detailValueAttachment}>
+                        <div
+                          key={index}
+                          className={classes.detailValueAttachment}
+                          onClick={e => e.stopPropagation()}
+                        >
                           <div>
                             <AsyncImage
                               src={getFileTypeIcon(value.details?.type || value.details?.ext)}
@@ -172,7 +176,7 @@ export default function TaskCard({
           {getStatus(data.status)}
         </Badge>
       </div>
-      <div className={classes.actionSection}>
+      <div className={classes.actionSection} onClick={e => e.stopPropagation()}>
         {!!menuItems?.length && (
           <ButtonV2.ActionsDropdown
             menuItems={menuItems}
