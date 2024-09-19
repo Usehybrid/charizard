@@ -65,6 +65,7 @@ interface UploadProps {
     inventoryId?: string | null,
     softwareId?: string | null,
   ) => Promise<UploadFileType[]>
+  variant?: string
 }
 
 interface progressBarType {
@@ -99,6 +100,7 @@ export function Upload({
   error,
   addDocumentSubtitle,
   handleImageUpload,
+  variant = 'normal',
 }: UploadProps) {
   const [cancelledKey, setCancelledKey] = React.useState<string[]>([])
   const [files, setFiles] = React.useState<UploadFileType[] | []>([])
@@ -122,7 +124,11 @@ export function Upload({
     let allFiles: any = []
     if (fileUploadLimit && uploadedFiles.length + files.length > fileUploadLimit) {
       setFileUploadLimitError(
-        `You are only allowed to upload ${fileUploadLimit} ${pluralize(fileUploadLimit, 'file', 'files')}`,
+        `You are only allowed to upload ${fileUploadLimit} ${pluralize(
+          fileUploadLimit,
+          'file',
+          'files',
+        )}`,
       )
       return
     }
@@ -156,7 +162,9 @@ export function Upload({
     }
     if (uploadedFiles.length > allFiles.length) {
       setUploadLimitError(
-        `Few files were not uploaded as they are bigger than maximum size allowed ${uploadFileLimit || 5}MB.`,
+        `Few files were not uploaded as they are bigger than maximum size allowed ${
+          uploadFileLimit || 5
+        }MB.`,
       )
       // return
     }

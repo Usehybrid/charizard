@@ -165,6 +165,7 @@ export default function TaskCard({
             size={BUTTON_V2_SIZE.SMALL}
             customData={data}
             ref={dropDownRef}
+            hideDivider
           />
         )}
       </div>
