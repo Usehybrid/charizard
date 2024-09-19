@@ -42,7 +42,6 @@ export default function TaskCard({
           return
         }
         if (data.module_reference === 'attendance') {
-          // @ts-ignore
           navigate(`/attendance/approve/${data.task_details_id}`)
           return
         }
@@ -86,7 +85,17 @@ export default function TaskCard({
   }
 
   return (
-    <div className={classes.card} onMouseLeave={hideActionHandler}>
+    <div
+      className={clsx(classes.card, data.task_details_id ? classes.pointerCard : null)}
+      onMouseLeave={hideActionHandler}
+      onClick={() => {
+        if (data.task_details_id) {
+          navigate(`/${data.module_reference}/${data.task_details_id}`, {
+            state: {source: location.pathname},
+          })
+        }
+      }}
+    >
       <div className={classes.taskSection}>
         <div className={clsx(classes.taskName, 'zap-content-semibold')}>{data.name}</div>
         <div className={clsx(classes.dateAndTime, 'zap-caption-medium')}>
