@@ -25,8 +25,8 @@ export enum ALERT_ACTION_TYPES {
 }
 
 interface AlertPropTypes {
-  alertType: string
-  actionType: string
+  alertType: ALERT_TYPES
+  actionType?: ALERT_ACTION_TYPES
   header: React.ReactNode
   body?: React.ReactNode
   hide?: boolean
@@ -67,27 +67,34 @@ export function Alert({
             />
           </div>
           <div style={{color: alertTypeMap[alertType].color}}>{header}</div>
-          <div
-            className={classes.icons}
-            onClick={() => {
-              if (actionType === ALERT_ACTION_TYPES.CLOSE && setHide) setHide(true)
-              else if (setShowMore) setShowMore(e => !e)
-            }}
-          >
-            <SVG
-              customSvgStyles={{
-                width: '16px',
-                height: '16px',
-                cursor: 'pointer'
+          {actionType && (
+            <div
+              className={classes.icons}
+              onClick={() => {
+                if (actionType === ALERT_ACTION_TYPES.CLOSE && setHide) setHide(true)
+                else if (setShowMore) setShowMore(e => !e)
               }}
-              path={actionType === ALERT_ACTION_TYPES.CLOSE ? close : showMore ? up : down}
-            />
-          </div>
+            >
+              <SVG
+                customSvgStyles={{
+                  width: '16px',
+                  height: '16px',
+                  cursor: 'pointer',
+                }}
+                path={actionType === ALERT_ACTION_TYPES.CLOSE ? close : showMore ? up : down}
+              />
+            </div>
+          )}
         </div>
         {actionType === ALERT_ACTION_TYPES.SHOW_MORE && showMore && (
           <>
             <div className={clsx(classes.dividerSection, {[classes.open]: showMore})}>
-              <div className={classes.divider}></div>
+              <div
+                className={classes.divider}
+                style={{
+                  backgroundColor: alertTypeMap[alertType].color,
+                }}
+              ></div>
             </div>
             <div className={clsx(classes.alertDropDownBody, {[classes.open]: showMore})}>
               <div></div>
@@ -96,13 +103,21 @@ export function Alert({
             </div>
           </>
         )}
-        {actionType === ALERT_ACTION_TYPES.CLOSE && body && (
-          <div className={classes.alertBody}>
-            <div></div>
-            <div>{body}</div>
-            <div></div>
-          </div>
-        )}
+        {actionType === ALERT_ACTION_TYPES.CLOSE
+          ? body && (
+              <div className={classes.alertBody}>
+                <div></div>
+                <div>{body}</div>
+                <div></div>
+              </div>
+            )
+          : !actionType && (
+              <div className={classes.alertBody}>
+                <div></div>
+                <div>{body}</div>
+                <div></div>
+              </div>
+            )}
       </div>
     )
   )

@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import {UserChipMulti} from './demo/UserChipMulti'
+import { AlertDemo } from './demo/alert-demo'
+// import {UserChipMultiDemo} from './demo/user-chip-multi'
 // import {TableDemo} from './demo/table-demo'
 // import {ButtonDemo} from './demo/button-demo'
 
@@ -27,7 +28,8 @@ function App() {
     <div style={styles}>
       {/* <TableDemo /> */}
       {/* <ButtonDemo /> */}
-      <UserChipMulti />
+      {/* <UserChipMultiDemo /> */}
+      <AlertDemo />
     </div>
   )
 }

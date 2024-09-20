@@ -249,7 +249,7 @@ export function Upload({
             Note: You can upload maximum of {fileUploadLimit} file(s)
           </p>
         )} */}
-        {!(fileUploadLimit === 1 && files.length === 1) && (
+        {!(files.length === fileUploadLimit) && (
           <div
             onClick={() => {
               if (!isInputDisabled) {

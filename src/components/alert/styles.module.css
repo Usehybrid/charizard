@@ -54,7 +54,6 @@
   display: inline-block;
   height: 1px;
   width: 100%;
-  background-color: var(--status-success-s50);
 }
 
 .icons {
