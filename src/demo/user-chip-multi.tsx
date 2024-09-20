@@ -1,6 +1,6 @@
 import {UserChip} from '../components'
 
-export function UserChipMulti() {
+export function UserChipMultiDemo() {
   const users = [
     {
       first_name: 'Olaf',
