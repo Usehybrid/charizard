@@ -108,3 +108,7 @@
 .fileIcon {
   width: 20px;
 }
+
+.pointerCard {
+  cursor: pointer;
+}

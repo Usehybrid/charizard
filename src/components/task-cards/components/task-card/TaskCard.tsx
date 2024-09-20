@@ -42,7 +42,6 @@ export default function TaskCard({
           return
         }
         if (data.module_reference === 'attendance') {
-          // @ts-ignore
           navigate(`/attendance/approve/${data.task_details_id}`)
           return
         }
@@ -86,7 +85,17 @@ export default function TaskCard({
   }
 
   return (
-    <div className={classes.card} onMouseLeave={hideActionHandler}>
+    <div
+      className={clsx(classes.card, data.task_details_id ? classes.pointerCard : null)}
+      onMouseLeave={hideActionHandler}
+      onClick={() => {
+        if (data.task_details_id) {
+          navigate(`/${data.module_reference}/${data.task_details_id}`, {
+            state: {source: location.pathname},
+          })
+        }
+      }}
+    >
       <div className={classes.taskSection}>
         <div className={clsx(classes.taskName, 'zap-content-semibold')}>{data.name}</div>
         <div className={clsx(classes.dateAndTime, 'zap-caption-medium')}>
@@ -117,7 +126,11 @@ export default function TaskCard({
                   {detail.value[0].file_name ? (
                     detail.value?.map((value, index: React.Key) => {
                       return (
-                        <div key={index} className={classes.detailValueAttachment}>
+                        <div
+                          key={index}
+                          className={classes.detailValueAttachment}
+                          onClick={e => e.stopPropagation()}
+                        >
                           <div>
                             <AsyncImage
                               src={getFileTypeIcon(value.details?.type || value.details?.ext)}
@@ -163,7 +176,7 @@ export default function TaskCard({
           {getStatus(data.status)}
         </Badge>
       </div>
-      <div className={classes.actionSection}>
+      <div className={classes.actionSection} onClick={e => e.stopPropagation()}>
         {!!menuItems?.length && (
           <ButtonV2.ActionsDropdown
             menuItems={menuItems}
