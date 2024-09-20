@@ -10,6 +10,7 @@ import {SELECT_VARIANT} from './types'
 import {getInitials} from '../../utils/text'
 import {AsyncImage} from '../asyncImage'
 import {Loader} from '../loader'
+import {lightenHexColor} from '../../utils'
 
 /**
  * Custom Dropdown Indicator component for react-select.
@@ -79,7 +80,7 @@ export const CustomOption = (props: any) => {
   const variant = selectProps['data-variant']
   const showDivider = selectProps['data-divider']
 
-  const {label, subLabel, profileImgUrl, icon} = data
+  const {label, subLabel, profileImgUrl, icon, color} = data
 
   const {darkerColor, lighterColor} = useColorsFromWord(label)
 
@@ -97,7 +98,7 @@ export const CustomOption = (props: any) => {
         )}
         style={
           isMulti && (variant === SELECT_VARIANT.TAGS || variant === SELECT_VARIANT.USERS)
-            ? {backgroundColor: lighterColor}
+            ? {backgroundColor: color ? lightenHexColor(color) : lighterColor}
             : {}
         }
       >
@@ -113,7 +114,7 @@ export const CustomOption = (props: any) => {
             className={clsx(classes.label, isSelected && classes.selectedLabel)}
             style={
               isMulti && (variant === SELECT_VARIANT.TAGS || variant === SELECT_VARIANT.USERS)
-                ? {color: darkerColor}
+                ? {color: color || darkerColor}
                 : {}
             }
           >
@@ -159,7 +160,7 @@ export const CustomSingleValue = (props: any) => {
  */
 export const CustomMultiValue = (props: any) => {
   const {data, selectProps} = props
-  const {label, profileImgUrl, icon} = data
+  const {label, profileImgUrl, icon, color} = data
   const {isMulti} = selectProps
   const variant = selectProps['data-variant']
 
@@ -174,7 +175,7 @@ export const CustomMultiValue = (props: any) => {
       )}
       style={
         isMulti && (variant === SELECT_VARIANT.TAGS || variant === SELECT_VARIANT.USERS)
-          ? {backgroundColor: lighterColor}
+          ? {backgroundColor: color ? lightenHexColor(color) : lighterColor}
           : {}
       }
     >
@@ -191,7 +192,7 @@ export const CustomMultiValue = (props: any) => {
             className={classes.label}
             style={
               isMulti && (variant === SELECT_VARIANT.TAGS || variant === SELECT_VARIANT.USERS)
-                ? {color: darkerColor}
+                ? {color: color || darkerColor}
                 : {}
             }
           >

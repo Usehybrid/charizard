@@ -2,10 +2,13 @@ import {MultiValue} from 'react-select'
 import type {SingleValue, ActionMeta, StylesConfig} from 'react-select'
 import {Props as ReactSelectProps} from 'react-select'
 
+export type HexColor = `#${string}`
+
 export type OptionBase = {
   label: string
   value: string
   subLabel?: string
+  color?: HexColor
 }
 export type OptionWithProfileImg = OptionBase & {
   profileImgUrl?: string
