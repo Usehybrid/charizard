@@ -86,15 +86,16 @@ export default function TaskCard({
 
   return (
     <div
-      className={clsx(classes.card, data.task_details_id ? classes.pointerCard : null)}
+      // className={clsx(classes.card, data.task_details_id ? classes.pointerCard : null)}
+      className={classes.card}
       onMouseLeave={hideActionHandler}
-      onClick={() => {
-        if (data.task_details_id) {
-          navigate(`/${data.module_reference}/${data.task_details_id}`, {
-            state: {source: location.pathname},
-          })
-        }
-      }}
+      // onClick={() => {
+      //   if (data.task_details_id) {
+      //     navigate(`/${data.module_reference}/${data.task_details_id}`, {
+      //       state: {source: location.pathname},
+      //     })
+      //   }
+      // }}
     >
       <div className={classes.taskSection}>
         <div className={clsx(classes.taskName, 'zap-content-semibold')}>{data.name}</div>
