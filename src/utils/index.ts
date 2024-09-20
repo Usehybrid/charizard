@@ -75,6 +75,19 @@ export const getColorsFromWord = (word: string) => {
   return colors
 }
 
+export const lightenHexColor = (hex: string, percent: number = 75): string => {
+  const num = parseInt(hex.slice(1), 16)
+  const red = (num >> 16) & 255
+  const green = (num >> 8) & 255
+  const blue = num & 255
+
+  const lighten = (channel: number) => Math.round(channel + (255 - channel) * (percent / 100))
+
+  return `#${[lighten(red), lighten(green), lighten(blue)]
+    .map(channel => channel.toString(16).padStart(2, '0'))
+    .join('')}`
+}
+
 export const isObject = (value: any): boolean => {
   if (typeof value === 'object' && value !== null) {
     if (Array.isArray(value)) {

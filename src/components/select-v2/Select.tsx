@@ -28,6 +28,7 @@ import {
  *   - `options` (Array<Option>): An array of options to be displayed in the dropdown. Each option can include a label, value, and optional profile image or icon.
  *   - `mainContainerClassName` (string, optional): A custom CSS class name to apply to the main container for additional styling.
  *   - `variant` (SELECT_VARIANT, optional): Defines the variant of the select component (e.g., 'default', 'users', 'checkbox', 'tags') to control the styling and behavior.
+ *   - `showDivider` (boolean, optional): Defines whether to add divider between option list.
  *   - `errorMsg` (string, optional): An error message to display below the select component for validation purposes.
  *   - `onChange` (function): A callback function that is triggered when the selected value(s) change. It receives the selected value(s) and action meta information.
  *   - `customStyles` (StylesConfig<any>): custom styles for react select. it will override default styles
@@ -40,6 +41,7 @@ export function SelectV2(props: SelectV2Props) {
     variant = SELECT_VARIANT.DEFAULT,
     errorMsg,
     onChange,
+    showDivider = false,
     customStyles = {},
     ...restProps
   } = props
@@ -90,6 +92,7 @@ export function SelectV2(props: SelectV2Props) {
         }}
         onChange={selectOptionHandler}
         data-variant={variant}
+        data-divider={showDivider}
         {...restProps}
       />
       {errorMsg && (

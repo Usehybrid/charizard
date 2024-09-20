@@ -39,7 +39,6 @@ export const styles: StylesConfig<any> = {
       ...baseStyles,
       display: 'flex',
       flexDirection: 'column',
-      gap: '2px',
       borderRadius: '4px',
       maxHeight: '273px',
     }
