@@ -229,6 +229,7 @@
 
 .navContainer {
   position: absolute;
+  z-index: 1;
   display: flex;
   width: calc(100% - 24px);
   justify-content: space-between;
