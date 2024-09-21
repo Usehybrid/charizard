@@ -1,24 +1,24 @@
-import * as React from 'react'
 import clsx from 'clsx'
-import infoOctagon from '../../../assets/info-octagon.svg'
-import deleteBin from '../../../assets/delete-bin.svg'
-import classes from './task-card.module.css'
-import {useNavigate} from 'react-router-dom'
-import {UserChip} from '../../../user-chip'
-import {Badge, BADGE_HIGHLIGHT, BADGE_STATUS} from '../../../badge'
-import {BUTTON_V2_SIZE, BUTTON_V2_VARIANT, ButtonV2} from '../../../button-v2'
-import {ITask, ITaskDetails, ITaskObjectValue} from '../../types'
+import * as React from 'react'
+import {useLocation, useNavigate} from 'react-router-dom'
 import {
   getDefaultFormattedDateTime,
   isArrayOfString,
   isExactISODateFormat,
   isObject,
 } from '../../../../utils'
-import {getUsername} from '../../../../utils/text'
-import getStatus, {TASK_STATUS} from '../../helper'
 import {isDatePassed} from '../../../../utils/date'
+import {getUsername} from '../../../../utils/text'
+import deleteBin from '../../../assets/delete-bin.svg'
+import infoOctagon from '../../../assets/info-octagon.svg'
 import {AsyncImage} from '../../../asyncImage'
+import {Badge, BADGE_HIGHLIGHT, BADGE_STATUS} from '../../../badge'
+import {BUTTON_V2_SIZE, BUTTON_V2_VARIANT, ButtonV2} from '../../../button-v2'
 import {getFileTypeIcon} from '../../../upload/helper'
+import {UserChip} from '../../../user-chip'
+import getStatus, {TASK_STATUS} from '../../helper'
+import {ITask, ITaskDetails, ITaskObjectValue} from '../../types'
+import classes from './task-card.module.css'
 
 const HIDE_DETAILS = ['profile']
 const HIDE_CANCEL_REQUEST = ['profile', 'attendance', 'it-request']
@@ -32,53 +32,9 @@ export default function TaskCard({
 }) {
   const dropDownRef = React.useRef<{blur: () => void}>()
   const navigate = useNavigate()
+  const location = useLocation()
 
-  const menuItems = [
-    {
-      label: 'See details',
-      onClick: (data: ITask) => {
-        if (typeof onClicks?.[0] !== 'undefined') {
-          onClicks[0](data)
-          return
-        }
-        if (data.module_reference === 'attendance') {
-          navigate(`/attendance/approve/${data.task_details_id}`)
-          return
-        }
-        navigate(`/${data.module_reference}/${data.task_details_id}`, {
-          state: {source: location.pathname},
-        })
-      },
-      iconSrc: infoOctagon,
-      hidden: HIDE_DETAILS.includes(data.module_reference),
-    },
-    {
-      label: 'Cancel request',
-      onClick: (data: ITask) => {
-        if (typeof onClicks?.[1] !== 'undefined') {
-          onClicks[1](data)
-          return
-        }
-        navigate(`/${data.module_reference}/${data.task_details_id}?cancel=${true}`, {
-          state: {source: location.pathname},
-        })
-      },
-      iconSrc: deleteBin,
-      customStyles: {color: 'var(--status-error-e50)'},
-      customSvgClassName: classes.logoutIcon,
-      hidden:
-        HIDE_CANCEL_REQUEST.includes(data.module_reference) ||
-        data.status === TASK_STATUS.CANCELLED ||
-        data.status === TASK_STATUS.DECLINED ||
-        data.status === TASK_STATUS.PENDING_CANCELLATION ||
-        (data.module_reference === 'leave' &&
-          isDatePassed(data?.leaveFrom) &&
-          !(
-            data.status === TASK_STATUS.PENDING ||
-            data.status === TASK_STATUS.PENDING_SECOND_APPROVER
-          )),
-    },
-  ].filter(action => !action.hidden)
+  const menuItems = getTaskMenuItems(data, onClicks, navigate, location)
 
   const hideActionHandler = () => {
     dropDownRef.current?.blur()
@@ -86,14 +42,10 @@ export default function TaskCard({
 
   return (
     <div
-      className={clsx(classes.card, data.task_details_id ? classes.pointerCard : null)}
+      className={clsx(classes.card, !!menuItems?.length && classes.pointerCard)}
       onMouseLeave={hideActionHandler}
       onClick={() => {
-        if (data.task_details_id) {
-          navigate(`/${data.module_reference}/${data.task_details_id}`, {
-            state: {source: location.pathname},
-          })
-        }
+        menuItems?.[0]?.onClick(data)
       }}
     >
       <div className={classes.taskSection}>
@@ -209,4 +161,58 @@ const statusMap: {[key: string]: BADGE_STATUS} = {
   [TASK_STATUS.APPROVED]: BADGE_STATUS.POSITIVE,
   [TASK_STATUS.CANCELLED]: BADGE_STATUS.NEGATIVE,
   [TASK_STATUS.CLOSED]: BADGE_STATUS.NEUTRAL,
+}
+
+export function getTaskMenuItems(
+  data: ITask,
+  onClicks: ((data: ITask) => void)[] | undefined,
+  navigate: ReturnType<typeof useNavigate>,
+  location: ReturnType<typeof useLocation>,
+) {
+  return [
+    {
+      label: 'See details',
+      onClick: (data: ITask) => {
+        if (onClicks?.[0]) {
+          onClicks[0](data)
+          return
+        }
+        if (data.module_reference === 'attendance') {
+          navigate(`/attendance/approve/${data.task_details_id}`)
+          return
+        }
+        navigate(`/${data.module_reference}/${data.task_details_id}`, {
+          state: {source: location.pathname},
+        })
+      },
+      iconSrc: infoOctagon,
+      hidden: HIDE_DETAILS.includes(data.module_reference),
+    },
+    {
+      label: 'Cancel request',
+      onClick: (data: ITask) => {
+        if (onClicks?.[1]) {
+          onClicks[1](data)
+          return
+        }
+        navigate(`/${data.module_reference}/${data.task_details_id}?cancel=true`, {
+          state: {source: location.pathname},
+        })
+      },
+      iconSrc: deleteBin,
+      customStyles: {color: 'var(--status-error-e50)'},
+      customSvgClassName: classes.logoutIcon,
+      hidden:
+        HIDE_CANCEL_REQUEST.includes(data.module_reference) ||
+        data.status === TASK_STATUS.CANCELLED ||
+        data.status === TASK_STATUS.DECLINED ||
+        data.status === TASK_STATUS.PENDING_CANCELLATION ||
+        (data.module_reference === 'leave' &&
+          isDatePassed(data?.leaveFrom) &&
+          !(
+            data.status === TASK_STATUS.PENDING ||
+            data.status === TASK_STATUS.PENDING_SECOND_APPROVER
+          )),
+    },
+  ].filter(action => !action.hidden)
 }
