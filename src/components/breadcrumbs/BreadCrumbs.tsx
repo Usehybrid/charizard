@@ -62,9 +62,16 @@ export function Breadcrumbs() {
         </li>
 
         <li className={clsx(classes.item, classes.active)}>
-          <Link to={lastBreadcrumb.href || ''} className={clsx('zap-content-medium', classes.link)}>
-            {lastBreadcrumb.label}
-          </Link>
+          {lastBreadcrumb.active ? (
+            <div className={'zap-content-medium'}>lastBreadcrumb.label</div>
+          ) : (
+            <Link
+              to={lastBreadcrumb.href || ''}
+              className={clsx('zap-content-medium', classes.link)}
+            >
+              {lastBreadcrumb.label}
+            </Link>
+          )}
         </li>
       </ol>
     </nav>
