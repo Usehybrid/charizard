@@ -36,6 +36,7 @@ export default function NumberAdornment({
         className={classes.incrementBtn}
         style={incrementBtnStyles}
         disabled={disabled}
+        type="button"
       >
         <SVG
           path={chevronUpIcon}
@@ -48,6 +49,7 @@ export default function NumberAdornment({
         className={classes.decrementBtn}
         style={decrementBtnStyles}
         disabled={disabled}
+        type="button"
       >
         <SVG
           path={chevronDownIcon}
