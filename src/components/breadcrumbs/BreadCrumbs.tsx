@@ -16,9 +16,17 @@ export function Breadcrumbs() {
               aria-current={breadcrumb.active}
               className={clsx(classes.item, breadcrumb.active && classes.active)}
             >
-              <Link to={breadcrumb.href || ''} className={clsx('zap-content-medium', classes.link)}>
-                {breadcrumb.label}
-              </Link>
+              {breadcrumb.active ? (
+                <div className={'zap-content-medium'}>{breadcrumb.label}</div>
+              ) : (
+                <Link
+                  to={breadcrumb.href || ''}
+                  className={clsx('zap-content-medium', classes.link)}
+                >
+                  {breadcrumb.label}
+                </Link>
+              )}
+
               {index < breadcrumbs.length - 1 ? <span className={classes.separator}>/</span> : null}
             </li>
           ))}
