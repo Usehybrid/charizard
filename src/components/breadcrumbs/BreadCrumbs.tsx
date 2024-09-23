@@ -35,12 +35,16 @@ export function Breadcrumbs() {
     <nav aria-label="Breadcrumb">
       <ol className={classes.box}>
         <li className={clsx(classes.item)}>
-          <Link
-            to={firstBreadcrumb.href || ''}
-            className={clsx('zap-content-medium', classes.link)}
-          >
-            {firstBreadcrumb.label}
-          </Link>
+          {firstBreadcrumb.active ? (
+            <div className={'zap-content-medium'}>{firstBreadcrumb.label}</div>
+          ) : (
+            <Link
+              to={firstBreadcrumb.href || ''}
+              className={clsx('zap-content-medium', classes.link)}
+            >
+              {firstBreadcrumb.label}
+            </Link>
+          )}
           <span className={classes.separator}>/</span>
         </li>
 
@@ -63,7 +67,7 @@ export function Breadcrumbs() {
 
         <li className={clsx(classes.item, classes.active)}>
           {lastBreadcrumb.active ? (
-            <div className={'zap-content-medium'}>lastBreadcrumb.label</div>
+            <div className={'zap-content-medium'}>{lastBreadcrumb.label}</div>
           ) : (
             <Link
               to={lastBreadcrumb.href || ''}
