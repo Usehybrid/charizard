@@ -312,7 +312,7 @@ export function Upload({
                     <span>File Type: </span>
                     <b> {addDocumentSubtitle || `PDF, Doc, Docx, PNG, WEBP,Xls, Xlsx and JPEG.`}</b>
                     <div className={classes.smallCircle}></div>
-                    Max size: <b>{` 5 MB`}</b>
+                    Max size: <b>{`${uploadFileLimit || 5} MB`}</b>
                     <div className={classes.smallCircle}></div>
                     Upload allowed: <b>{fileUploadLimit}</b>
                   </div>
