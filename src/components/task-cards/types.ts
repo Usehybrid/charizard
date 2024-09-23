@@ -42,3 +42,13 @@ export interface FileType {
   doc_link: string
   file_name: string
 }
+
+
+export enum MODULES {
+  PROFILE = 'profile',
+  LEAVE = 'leave',
+  ATTENDANCE = 'attendance',
+  HOLIDAY_CALENDAR = 'holiday-calendar',
+  IT_REQUEST = 'it-request',
+  WORKFLOW = 'workflow',
+}

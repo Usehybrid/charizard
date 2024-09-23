@@ -17,11 +17,16 @@ import {BUTTON_V2_SIZE, BUTTON_V2_VARIANT, ButtonV2} from '../../../button-v2'
 import {getFileTypeIcon} from '../../../upload/helper'
 import {UserChip} from '../../../user-chip'
 import getStatus, {TASK_STATUS} from '../../helper'
-import {ITask, ITaskDetails, ITaskObjectValue} from '../../types'
+import {ITask, ITaskDetails, ITaskObjectValue, MODULES} from '../../types'
 import classes from './task-card.module.css'
 
-const HIDE_DETAILS = ['profile']
-const HIDE_CANCEL_REQUEST = ['profile', 'attendance', 'it-request']
+const HIDE_DETAILS = [MODULES.PROFILE]
+const HIDE_CANCEL_REQUEST = [
+  MODULES.PROFILE,
+  MODULES.ATTENDANCE,
+  MODULES.IT_REQUEST,
+  MODULES.WORKFLOW,
+]
 
 export default function TaskCard({
   data,
@@ -186,7 +191,7 @@ export function getTaskMenuItems(
         })
       },
       iconSrc: infoOctagon,
-      hidden: HIDE_DETAILS.includes(data.module_reference),
+      hidden: HIDE_DETAILS.includes(data.module_reference as MODULES),
     },
     {
       label: 'Cancel request',
@@ -203,7 +208,7 @@ export function getTaskMenuItems(
       customStyles: {color: 'var(--status-error-e50)'},
       customSvgClassName: classes.logoutIcon,
       hidden:
-        HIDE_CANCEL_REQUEST.includes(data.module_reference) ||
+        HIDE_CANCEL_REQUEST.includes(data.module_reference as MODULES) ||
         data.status === TASK_STATUS.CANCELLED ||
         data.status === TASK_STATUS.DECLINED ||
         data.status === TASK_STATUS.PENDING_CANCELLATION ||
