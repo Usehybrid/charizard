@@ -37,6 +37,10 @@
   gap: 4px;
 }
 
+.toastMessage {
+  color: inherit;
+}
+
 .toastInfo {
   color: var(--text-secondary);
 }
