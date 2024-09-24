@@ -1,6 +1,7 @@
 import './styles/_typography.css'
 import './styles/_variables.css'
 import './styles/global.css'
+import './toasts/styles/main.css'
 
 export * from './button'
 export * from './empty-state'

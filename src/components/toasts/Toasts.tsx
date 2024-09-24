@@ -1,4 +1,3 @@
-import './styles/main.css'
 import * as React from 'react'
 import clsx from 'clsx'
 import classes from './toasts.module.css'

@@ -1,12 +1,9 @@
-import * as React from 'react';
-import {Alert, ALERT_ACTION_TYPES, ALERT_TYPES} from '../components'
+import {Alert, ALERT_TYPES} from '../components'
 
 export function AlertDemo() {
-  const [showMore, setShowMore] = React.useState(false)
   return (
     <Alert
       alertType={ALERT_TYPES.DEFAULT}
-    //   actionType={ALERT_ACTION_TYPES.CLOSE}
       header={<div>Alert Header</div>}
       body={
         <p>
@@ -16,8 +13,8 @@ export function AlertDemo() {
           fugiat nisi, impedit, provident consequuntur id amet neque molestias sunt.
         </p>
       }
-    //   showMore={showMore}
-    //   setShowMore={setShowMore}
+      //   showMore={showMore}
+      //   setShowMore={setShowMore}
     />
   )
 }
