@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+/* Imports from other CSS files */
+@import 'variables.css';
+@import 'toastContainer.css';
+@import 'toast.css';
+@import 'theme.css';
+@import 'closeButton.css';
+@import 'progressBar.css';
+@import 'icons.css';
+
+/* entrance and exit animations */
+@import 'animations/bounce.css';
+@import 'animations/zoom.css';
+@import 'animations/flip.css';
+@import 'animations/slide.css';
+@import 'animations/spin.css';

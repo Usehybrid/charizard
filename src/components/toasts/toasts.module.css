@@ -27,4 +27,16 @@
 
 .closeToastBtn {
   all: unset;
+  display: flex;
+  margin-top: 2px;
+}
+
+.toastMessageBox {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.toastInfo {
+  color: var(--text-secondary);
 }
