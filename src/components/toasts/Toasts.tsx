@@ -17,7 +17,7 @@ type ToastType = ({msg, info, options}: ToastTypeArgs) => Id
 
 const commonOptions = {
   position: 'top-right' as const,
-  autoClose: 180000,
+  autoClose: 1800,
   hideProgressBar: true,
 }
 
