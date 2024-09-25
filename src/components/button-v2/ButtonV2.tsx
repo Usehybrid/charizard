@@ -97,16 +97,12 @@ export interface GroupActionProps {
   menuItems: MenuItemV2[]
   customData?: any
   size?: BUTTON_V2_SIZE
-  actionsDropdownOptions?: {
-    setIsActive: React.Dispatch<React.SetStateAction<boolean>>
-  }
   positionerProps?: PositioningOptions
   isTable?: boolean
   customStyles?: {
     customMenuStyles?: React.CSSProperties
     customButtonStyles?: React.CSSProperties
   }
-  onClick?: any
   isCustomTrigger?: boolean
   isSingleBtnTrigger?: boolean
   hideDivider?: boolean
@@ -120,12 +116,10 @@ const GroupAction = React.forwardRef(function (
     menuItems,
     customData,
     size = BUTTON_V2_SIZE.DEFAULT,
-    actionsDropdownOptions,
     positionerProps,
     isTable = false,
     isCustomTrigger = false,
     customStyles,
-    onClick,
     isSingleBtnTrigger = false,
     hideDivider = false,
   }: GroupActionProps,
@@ -138,37 +132,13 @@ const GroupAction = React.forwardRef(function (
     }),
   )
 
-  const [isFocused, setIsFocused] = React.useState(false)
-  console.warn(isFocused)
-
-  const buttonRef = React.useRef<HTMLButtonElement>(null)
-  const menuRef = React.useRef<HTMLDivElement>(null)
   const api = menu.connect(state, send, normalizeProps)
 
   const customMenuStyles = customStyles?.customMenuStyles
   const customButtonStyles = customStyles?.customButtonStyles
 
-  React.useEffect(() => {
-    if (!isCustomTrigger || !actionsDropdownOptions?.setIsActive) return
-    actionsDropdownOptions.setIsActive(api.open)
-  }, [api.open])
-
-  const isOpenRef = React.useRef(api.open)
-
-  React.useEffect(() => {
-    isOpenRef.current = api.open
-    if (api.open) {
-      setIsFocused(true)
-    } else {
-      setIsFocused(false)
-      buttonRef.current?.blur()
-    }
-  }, [api.open])
-
   const handleScroll = () => {
-    if (isOpenRef.current) {
-      api.setOpen(false)
-    }
+    api.setOpen(false)
   }
 
   React.useImperativeHandle(
@@ -176,50 +146,12 @@ const GroupAction = React.forwardRef(function (
     () => {
       return {
         blur() {
-          setIsFocused(false)
           api.setOpen(false)
         },
       }
     },
     [api],
   )
-
-  React.useEffect(() => {
-    const handleFocus = () => setIsFocused(true)
-    const handleBlur = () => setIsFocused(false)
-
-    const button = buttonRef.current
-    if (button) {
-      button.addEventListener('focus', handleFocus)
-      button.addEventListener('blur', handleBlur)
-    }
-
-    return () => {
-      if (button) {
-        button.removeEventListener('focus', handleFocus)
-        button.removeEventListener('blur', handleBlur)
-      }
-    }
-  }, [])
-
-  const handleClickOutside = (event: MouseEvent) => {
-    if (
-      buttonRef.current &&
-      !buttonRef.current.contains(event.target as Node) &&
-      menuRef.current &&
-      !menuRef.current.contains(event.target as Node)
-    ) {
-      setIsFocused(false)
-      api.setOpen(false)
-    }
-  }
-
-  React.useEffect(() => {
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside)
-    }
-  }, [])
 
   React.useEffect(() => {
     if (isTable) {
@@ -286,12 +218,6 @@ const GroupAction = React.forwardRef(function (
             size === BUTTON_V2_SIZE.DEFAULT && classes.btnDefault,
             size === BUTTON_V2_SIZE.SMALL && classes.btnSmall,
             disabled && classes.disabled,
-            // type === BUTTON_V2_TYPE.ICON_ONLY &&
-            //   size === BUTTON_V2_SIZE.DEFAULT &&
-            //   classes.iconOnlyDefault,
-            // type === BUTTON_V2_TYPE.ICON_ONLY &&
-            //   size === BUTTON_V2_SIZE.SMALL &&
-            //   classes.iconOnlySmall,
           )}
           disabled={disabled}
           {...api.getTriggerProps()}
@@ -338,7 +264,6 @@ const GroupAction = React.forwardRef(function (
               classes.btnGrpLeft,
             )}
             disabled={disabled}
-            onClick={onClick}
           >
             {children}
           </button>
@@ -402,9 +327,6 @@ export const ActionsDropdown = React.forwardRef(function (
   }: ActionsDropdownProps,
   ref,
 ) {
-  const [isActive, setIsActive] = React.useState(false)
-  console.log(isActive)
-
   return (
     <GroupAction
       variant={variant}
@@ -412,7 +334,6 @@ export const ActionsDropdown = React.forwardRef(function (
       menuItems={menuItems}
       customData={customData}
       size={size}
-      actionsDropdownOptions={{setIsActive}}
       positionerProps={positionerProps}
       isTable={isTable}
       isCustomTrigger={true}

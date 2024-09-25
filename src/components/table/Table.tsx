@@ -87,7 +87,7 @@ export interface TableProps {
     entityName: string
     actions?: {
       icon: string
-      text: string
+      label: string
       onClick: any
     }[]
     setSelectedRows?: React.Dispatch<React.SetStateAction<any>>

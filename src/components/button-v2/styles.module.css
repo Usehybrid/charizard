@@ -41,7 +41,7 @@
   padding: 4px 10px;
 }
 
-.btn:hover {
+.btn:hover:not(.btnGrpLeft) {
   cursor: pointer;
 }
 
@@ -49,10 +49,10 @@
   background-color: var(--theme-blue);
   color: var(--neutral-white);
 }
-.btnPrimary:hover {
+.btnPrimary:hover:not(.btnGrpLeft) {
   background-color: var(--p-p100);
 }
-.btnPrimary:focus {
+.btnPrimary:focus:not(.btnGrpLeft) {
   background-color: var(--p-p70);
 }
 .btnPrimary:disabled {
@@ -64,11 +64,11 @@
   border: 1px solid var(--p-p50);
   color: var(--p-p50);
 }
-.btnSecondary:hover {
+.btnSecondary:hover:not(.btnGrpLeft) {
   background-color: var(--fill-selection);
   border-color: var(--p-p100);
 }
-.btnSecondary:focus {
+.btnSecondary:focus:not(.btnGrpLeft) {
   background-color: var(--fill-selection);
   border-color: var(--p-p70);
 }
@@ -81,12 +81,12 @@
   color: var(--text-primary);
   border: 1px solid var(--p-p10);
 }
-.btnTertiary:hover {
+.btnTertiary:hover:not(.btnGrpLeft) {
   border-color: var(--p-p10);
   background-color: var(--p-p10);
 }
-.btnTertiary:focus {
-  background-color: var(--p-p25);
+.btnTertiary:focus:not(.btnGrpLeft) {
+  background-color: var(--p-p20);
   border-color: var(--p-p10);
 }
 .btnTertiary:disabled {
@@ -117,11 +117,11 @@
 }
 
 .btnSecondary.focusVisible {
-  background-color: var(--fill-selection-only);
+  background-color: var(--fill-selection);
   border-color: var(--p-p70);
 }
 .btnTertiary.focusVisible {
-  background-color: var(--p-p25);
+  background-color: var(--p-p20);
   border-color: var(--p-p10);
 }
 .btnPrimary.focusVisible {
@@ -263,6 +263,7 @@
 .btnGrpLeft {
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;
+  cursor: unset;
 }
 
 .btnGrpLeft.btnPrimary {

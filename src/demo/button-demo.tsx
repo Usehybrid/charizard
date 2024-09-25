@@ -1,5 +1,6 @@
-import {ButtonV2, BUTTON_V2_SIZE, BUTTON_V2_VARIANT} from '../components'
+import {ButtonV2, BUTTON_V2_SIZE, BUTTON_V2_VARIANT, BUTTON_V2_TYPE, SVG} from '../components'
 import calender from '../components/assets/calender.svg'
+import closeIcon from '../components/assets/close.svg'
 
 export const menuItems = [
   {
@@ -37,7 +38,7 @@ export const menuItems = [
 export function ButtonDemo() {
   return (
     <div>
-      {/* <div style={{display: 'flex', marginBottom: '25px'}}>
+      <div style={{display: 'flex', marginBottom: '25px'}}>
         <div style={{display: 'flex', gap: 10}}>
           <ButtonV2 size={BUTTON_V2_SIZE.SMALL} variant={BUTTON_V2_VARIANT.LINK}>
             Link
@@ -233,7 +234,7 @@ export function ButtonDemo() {
             Tertiary
           </ButtonV2>
         </div>
-      </div> */}
+      </div>
 
       <div style={{display: 'flex', gap: 150, marginTop: 20}}>
         <div style={{display: 'flex', gap: 10}}>
@@ -287,7 +288,7 @@ export function ButtonDemo() {
         </div>
       </div>
 
-      {/* <div style={{display: 'flex', gap: 150, marginTop: 20}}>
+      <div style={{display: 'flex', gap: 150, marginTop: 20}}>
         <div style={{display: 'flex', gap: 10}}>
           <ButtonV2
             size={BUTTON_V2_SIZE.SMALL}
@@ -363,7 +364,7 @@ export function ButtonDemo() {
             Tertiary
           </ButtonV2>
         </div>
-      </div> */}
+      </div>
 
       <div style={{display: 'flex', gap: 150, marginTop: 20}}>
         <div style={{display: 'flex', gap: 10}}>

@@ -20,9 +20,7 @@ export default function TableSelectedActions({
     return null
 
   const {isCheckbox, actions} = rowSelectionConfig
-
   const showDropdown = actions?.length && actions.length > 2
-  const firstAction = actions?.length ? actions[0] : null
 
   return (
     <>
@@ -32,24 +30,10 @@ export default function TableSelectedActions({
             <ButtonV2.GroupAction
               variant={BUTTON_V2_VARIANT.SECONDARY}
               size={BUTTON_V2_SIZE.SMALL}
-              menuItems={
-                actions
-                  ?.map(action => ({
-                    label: action.text,
-                    onClick: action.onClick,
-                    iconSrc: action.icon,
-                  }))
-                  .slice(1) || []
-              }
+              menuItems={actions}
               positionerProps={{placement: 'bottom-end'}}
-              onClick={firstAction?.onClick}
             >
-              <SVG
-                svgClassName={classes.btnIcon}
-                path={firstAction?.icon || ''}
-                spanClassName={classes.btnIconSpan}
-              />
-              {firstAction?.text}
+              Actions
             </ButtonV2.GroupAction>
           ) : (
             <div className={classes.selectedActions}>
@@ -58,10 +42,10 @@ export default function TableSelectedActions({
                   onClick={action.onClick}
                   variant={BUTTON_V2_VARIANT.SECONDARY}
                   size={BUTTON_V2_SIZE.SMALL}
-                  key={action.text}
+                  key={action.label}
                 >
                   <SVG path={action.icon} svgClassName={classes.btnIcon} />
-                  {action.text}
+                  {action.label}
                 </ButtonV2>
               ))}
             </div>
