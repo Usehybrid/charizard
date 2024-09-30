@@ -230,6 +230,8 @@
 }
 
 .actionBtn {
+  position: relative;
+  z-index: 1;
   cursor: pointer;
   padding: 6px;
   border-radius: 8px;
