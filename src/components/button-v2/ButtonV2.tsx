@@ -6,8 +6,9 @@ import moreMenuIcon from '../assets/more-menu-2.svg'
 import classes from './styles.module.css'
 import {useMachine, normalizeProps, Portal} from '@zag-js/react'
 import {SVG} from '../svg'
-import {PositioningOptions} from '@zag-js/popper'
+import {handleScrollTable} from './utils'
 import {BUTTON_V2_SIZE, BUTTON_V2_TYPE, BUTTON_V2_VARIANT} from './types'
+import type {PositioningOptions} from '@zag-js/popper'
 
 interface BaseButtonProps {
   variant?: BUTTON_V2_VARIANT
@@ -137,10 +138,6 @@ const GroupAction = React.forwardRef(function (
   const customMenuStyles = customStyles?.customMenuStyles
   const customButtonStyles = customStyles?.customButtonStyles
 
-  const handleScroll = () => {
-    api.setOpen(false)
-  }
-
   React.useImperativeHandle(
     ref,
     () => {
@@ -157,11 +154,11 @@ const GroupAction = React.forwardRef(function (
     if (isTable) {
       const scrollContainer = document.getElementById('zap-table-scroll-container')
       if (scrollContainer) {
-        scrollContainer.addEventListener('scroll', handleScroll, {passive: true})
-        return () => scrollContainer.removeEventListener('scroll', handleScroll)
+        scrollContainer.addEventListener('scroll', () => handleScrollTable(api), {passive: true})
+        return () => scrollContainer.removeEventListener('scroll', () => handleScrollTable(api))
       }
     }
-  }, [])
+  }, [api])
 
   const dropdown = (
     <>
