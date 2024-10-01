@@ -1,4 +1,3 @@
-import * as React from 'react'
 import clsx from 'clsx'
 import standardIllustration from './standard.svg'
 import classes from './styles.module.css'
@@ -7,12 +6,11 @@ import {BUTTON_V2_TYPE, BUTTON_V2_VARIANT, ButtonV2} from '../../button-v2'
 import {SVG} from '../../svg'
 
 interface TableEmptyProps {
-  customStyle?: React.CSSProperties
   emptyStateConfig: TableProps['emptyStateConfig']
   visibleCols: number
 }
 
-export default function TableEmpty({customStyle, emptyStateConfig, visibleCols}: TableEmptyProps) {
+export default function TableEmpty({emptyStateConfig, visibleCols}: TableEmptyProps) {
   const heading = emptyStateConfig?.title || 'Uh oh! Nothing found'
   const info =
     emptyStateConfig?.desc || 'Try applying a different set of filters and check the results.'
@@ -24,7 +22,7 @@ export default function TableEmpty({customStyle, emptyStateConfig, visibleCols}:
   return (
     <tbody>
       <tr>
-        <td style={customStyle} colSpan={visibleCols}>
+        <td style={emptyStateConfig?.customStyle} colSpan={visibleCols}>
           <div className={classes.box}>
             <img
               className={classes.illustration}

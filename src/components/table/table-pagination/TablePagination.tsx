@@ -75,9 +75,11 @@ export function TablePagination({paginationConfig}: TablePaginationProps) {
   return (
     <div className={classes.box}>
       <TableLimit setLimit={setLimit} limit={limit} itemsOnPage={metaData?.items_on_page} />
-      <p className={clsx(classes.meta, 'zap-subcontent-medium')}>
-        {startItem} - {endItem} out of {metaData?.total_items}
-      </p>
+      {metaData?.total_items && (
+        <p className={clsx(classes.meta, 'zap-subcontent-medium')}>
+          {startItem} - {endItem} out of {metaData?.total_items}
+        </p>
+      )}
       {paginationApi.totalPages > 1 && (
         <nav {...paginationApi.getRootProps()}>
           <div className={classes.pageBoxes}>

@@ -109,15 +109,12 @@ export interface TableProps {
     setLimit: (limit: number) => void
   }
   emptyStateConfig?: {
-    icon?: string
-    isCustom?: {
-      value: boolean
-      component: React.ReactNode
-    }
     title?: string
     desc?: string
     btnText?: string
     onClick?: any
+    icon?: string
+    customStyle?: React.CSSProperties
   }
   tableStyleConfig?: {
     maxHeight?: string
