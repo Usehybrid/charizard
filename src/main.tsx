@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import {TableDemo} from './demo/table-demo'
-import {ButtonDemo} from './demo/button-demo'
+// import {ButtonDemo} from './demo/button-demo'
 
 const styles = {
   width: '90%',

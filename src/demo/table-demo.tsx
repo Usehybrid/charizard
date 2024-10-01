@@ -6,7 +6,6 @@ import {createColumnHelper} from '@tanstack/react-table'
 
 export function TableDemo() {
   const [search, setSearch] = React.useState('')
-
   const query = useInventoryStore(s => s.query)
   const dispatch = useInventoryStore(s => s.dispatch)
 
@@ -93,16 +92,10 @@ export function TableDemo() {
       }}
       totalText={`${4} Softwares`}
       emptyStateConfig={{
-        icon: './components/assets/check.svg',
-        title: 'Get started by adding your first inventory',
-        desc: '',
         btnText: 'add inventory',
         onClick: () => {},
-        columns: 6,
-        emptySearchTitle: 'No inventories found',
       }}
       customColumnConfig={{
-        description: 'Configure inventory columns',
         columns: cols,
         isPending: false,
         isError: false,

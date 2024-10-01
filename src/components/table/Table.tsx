@@ -109,22 +109,19 @@ export interface TableProps {
     setLimit: (limit: number) => void
   }
   emptyStateConfig?: {
-    icon: string
+    icon?: string
     isCustom?: {
       value: boolean
       component: React.ReactNode
     }
-    title: string
-    desc: string
-    btnText: string
-    onClick: any
-    columns: number
-    emptySearchTitle?: string
+    title?: string
+    desc?: string
+    btnText?: string
+    onClick?: any
   }
   tableStyleConfig?: {
     maxHeight?: string
     stickyIds?: string[]
-    // idxNextToLeftStickyID:
   }
   /**
    * custom columns
@@ -306,10 +303,12 @@ export function Table({
       : undefined,
   })
 
+  const visibleCols = table.getVisibleFlatColumns().length || 2
+
   React.useLayoutEffect(() => {
     if (isCheckbox && isRadio)
       throw new Error(
-        'Hybrid UI<Table>: Can not use both checkbox and radio columns, please use only one',
+        'Charizard<Table>: Can not use both checkbox and radio columns, please use only one',
       )
   }, [])
 
@@ -367,8 +366,8 @@ export function Table({
           loaderConfig={loaderConfig}
           isEmpty={isEmpty}
           emptyStateConfig={emptyStateConfig}
-          search={searchConfig?.search}
           tableStyleConfig={tableStyleConfig}
+          visibleCols={visibleCols}
         />
       </div>
       {typeof paginationConfig === 'object' && !!paginationConfig.metaData && (
@@ -386,7 +385,7 @@ function TableComp({
   emptyStateConfig,
   tableStyleConfig,
   isEmpty,
-  search,
+  visibleCols,
 }: {
   table: Table<any>
   isCheckbox?: boolean
@@ -394,8 +393,8 @@ function TableComp({
   loaderConfig: TableProps['loaderConfig']
   emptyStateConfig: TableProps['emptyStateConfig']
   tableStyleConfig: TableProps['tableStyleConfig']
-  search?: string
   isEmpty: boolean
+  visibleCols: number
 }) {
   const [showLeftShadow, setShowLeftShadow] = React.useState(false)
   const [showRightShadow, setShowRightShadow] = React.useState(false)
@@ -499,7 +498,7 @@ function TableComp({
         {loaderConfig.isFetching ? (
           <TableLoader text={loaderConfig.text} isError={loaderConfig.isError} />
         ) : isEmpty ? (
-          <TableEmpty emptyStateConfig={emptyStateConfig} search={search} />
+          <TableEmpty emptyStateConfig={emptyStateConfig} visibleCols={visibleCols} />
         ) : (
           <tbody className={classes.tableBody}>
             {table.getRowModel().rows.map((row, idx, _rows) => (
@@ -546,7 +545,7 @@ function TableComp({
         {loaderConfig.isError && (
           <tbody style={{height: '200px'}}>
             <tr>
-              <td colSpan={emptyStateConfig?.columns} style={{textAlign: 'center'}}>
+              <td colSpan={visibleCols} style={{textAlign: 'center'}}>
                 {loaderConfig.errMsg || 'Error getting data, please try again later.'}
               </td>
             </tr>

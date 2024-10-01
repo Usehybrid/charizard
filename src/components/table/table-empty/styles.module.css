@@ -1,14 +1,18 @@
 .box {
-  background-color: white;
-  border-radius: 4px;
-
-  min-height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 25px;
+  height: calc(100vh - 200px);
 }
 
-.empty {
-  text-align: center;
-  width: 100%;
+.infoBox {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
 
-  padding-top: 80px;
-  padding-bottom: 73px;
+.info {
+  white-space: pre-line;
+  word-wrap: break-word;
 }

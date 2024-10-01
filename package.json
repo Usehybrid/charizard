@@ -82,7 +82,7 @@
     "typescript": "^5.6.2",
     "vite": "^5.4.8",
     "vite-plugin-checker": "^0.8.0",
-    "vite-plugin-dts": "4.2.2",
+    "vite-plugin-dts": "4.2.3",
     "vite-plugin-libcss": "^1.1.1"
   },
   "publishConfig": {
