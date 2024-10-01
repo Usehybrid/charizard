@@ -28,6 +28,12 @@ export function SearchV2({search = '', setSearch, ...props}: SearchV2Props) {
   const isControlled = typeof setSearch === 'function'
 
   React.useEffect(() => {
+    if (search !== searchTerm) {
+      setSearchTerm(search)
+    }
+  }, [search])
+
+  React.useEffect(() => {
     if (isControlled) {
       setSearch(debouncedSearchTerm)
     }
