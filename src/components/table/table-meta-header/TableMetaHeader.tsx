@@ -11,6 +11,9 @@ import TableCustomCols from '../table-custom-cols'
 import {Table} from '@tanstack/react-table'
 import {useTableStore} from '../store'
 import TableExport from '../table-export/TableExport'
+import {DateRangePicker} from '../../date-picker'
+import {DateRangePickerProps} from '../../date-picker/type'
+import {BUTTON_V2_SIZE} from '../../button-v2'
 
 interface TableMetaHeaderProps {
   rowSelectionConfig: TableProps['rowSelectionConfig']
@@ -19,6 +22,7 @@ interface TableMetaHeaderProps {
   filterConfig: TableProps['filterConfig']
   customColumnConfig: TableProps['customColumnConfig']
   exportConfig: TableProps['exportConfig']
+  dateRangeConfig: TableProps['dateRangeConfig']
   rowSelection: {}
   setRowSelection: React.Dispatch<React.SetStateAction<{}>>
   table: Table<any>
@@ -33,6 +37,7 @@ export default function TableMetaHeader({
   filterConfig,
   customColumnConfig,
   exportConfig,
+  dateRangeConfig,
   rowSelection,
   setRowSelection,
   table,
@@ -87,6 +92,18 @@ export default function TableMetaHeader({
               }}
             />
           </div>
+        )}
+
+        {typeof dateRangeConfig === 'object' && (
+          <DateRangePicker
+            {...(dateRangeConfig as DateRangePickerProps)}
+            customClasses={{
+              contentContainer: classes.dateContentContainer,
+              content: 'zap-button-small',
+              dateIcon: classes.dateIcon,
+            }}
+            size={BUTTON_V2_SIZE.SMALL}
+          />
         )}
 
         {typeof filterConfig === 'object' && !!headerFilter && (

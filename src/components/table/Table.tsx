@@ -24,6 +24,7 @@ import type {
   VisibilityState,
 } from '@tanstack/react-table'
 import type {FilterConfig, TableCustomColumns} from './types'
+import {DateRangePickerProps} from '../date-picker/type'
 
 export interface TableProps {
   // the table data
@@ -138,6 +139,12 @@ export interface TableProps {
     isError: boolean
     handleExport: any
   }
+  /**
+   * date range picker
+   */
+  dateRangeConfig?: Omit<DateRangePickerProps, 'mode'> & {
+    mode?: 'range'
+  }
 }
 
 // todo
@@ -175,6 +182,7 @@ export function Table({
   tableStyleConfig,
   customColumnConfig,
   exportConfig,
+  dateRangeConfig,
 }: TableProps) {
   const [sorting, setSorting] = React.useState<SortingState>([])
   // used for checkbox visibility
@@ -351,6 +359,7 @@ export function Table({
             filterConfig={filterConfig}
             customColumnConfig={customColumnConfig}
             exportConfig={exportConfig}
+            dateRangeConfig={dateRangeConfig}
             table={table}
             isCheckbox={isCheckbox}
             isDropdownActions={actionsConfig.isDropdownActions}

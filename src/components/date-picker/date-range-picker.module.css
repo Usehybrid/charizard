@@ -18,6 +18,8 @@
 .quickRangePicker .quickSelector {
   margin: auto;
   width: 70%;
+  position: relative;
+  z-index: 2;
 }
 .buttonContent {
   display: flex;

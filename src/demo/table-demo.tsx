@@ -3,6 +3,7 @@ import randomIcon from '../components/assets/check.svg'
 import {Table} from '../components'
 import {INV_ACTION_TYPES, useInventoryStore} from '../components/table/inventory/inventory.store'
 import {createColumnHelper} from '@tanstack/react-table'
+import {DateRange} from 'react-day-picker'
 
 export function TableDemo() {
   const [search, setSearch] = React.useState('')
@@ -110,6 +111,16 @@ export function TableDemo() {
         isPending: false,
         isError: false,
         handleExport: () => {},
+      }}
+      dateRangeConfig={{
+        onChange: (value: DateRange) => {
+          console.log({testing: value})
+        },
+        value: {
+          from: new Date(),
+          to: new Date(),
+        },
+        disabled: (date: any) => date > new Date(),
       }}
     />
   )

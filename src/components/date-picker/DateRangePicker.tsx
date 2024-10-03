@@ -38,6 +38,8 @@ export function DateRangePicker({
   showOutsideDays = false,
   errorMsg = '',
   customInputContentStyles,
+  customClasses = {},
+  size = BUTTON_V2_SIZE.DEFAULT,
   ...props
 }: DateRangePickerProps) {
   const date = value
@@ -146,22 +148,29 @@ export function DateRangePicker({
             variant={BUTTON_V2_VARIANT.GHOST}
             customStyles={{width: '100%'}}
             disabled={disableDatepicker}
+            size={size}
           >
-            <div className={classes.formButton}>
+            <div className={clsx(classes.formButton, customClasses.contentContainer)}>
               <span
                 style={{
                   color: !date ? 'var(--text-secondary)' : undefined,
                   ...customInputContentStyles,
                 }}
+                className={customClasses.content}
               >
                 {showQuickSelect && selectedRange.value !== RANGE_OPTIONS[0].value
                   ? selectedRange.label
                   : displayDate}
               </span>
               {showQuickSelect ? (
-                <SVG path={chevronDown} width={20} height={20} />
+                <SVG
+                  path={chevronDown}
+                  width={20}
+                  height={20}
+                  svgClassName={customClasses.dateIcon}
+                />
               ) : (
-                <SVG path={calender} width={20} height={20} />
+                <SVG path={calender} width={20} height={20} svgClassName={customClasses.dateIcon} />
               )}
             </div>
           </ButtonV2>
