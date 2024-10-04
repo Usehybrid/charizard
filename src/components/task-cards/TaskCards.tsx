@@ -51,7 +51,7 @@ export function TaskCards({
             <Error />
           ) : (
             data?.map((data: ITask, idx) => (
-              <TaskCard data={data} key={idx} onClicks={onClicks?.[idx]} />
+              <TaskCard data={data} key={idx} onClicks={onClicks?.[idx]} hideMenuItems={true} />
             ))
           )}
           {typeof paginationConfig === 'object' && !!paginationConfig.metaData && (
