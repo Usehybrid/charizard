@@ -26,6 +26,7 @@ export interface TaskCardsProps {
     setLimit: (limit: number) => void
   }
   onClicks?: ((data: ITask) => void)[][]
+  hideMenuItems: boolean
 }
 
 export function TaskCards({
@@ -36,6 +37,7 @@ export function TaskCards({
   emptyText = 'No requests',
   paginationConfig,
   onClicks,
+  hideMenuItems = false,
 }: TaskCardsProps) {
   const isEmpty = !isLoading && !isError && (!data || data?.length === 0)
   return (
@@ -51,7 +53,12 @@ export function TaskCards({
             <Error />
           ) : (
             data?.map((data: ITask, idx) => (
-              <TaskCard data={data} key={idx} onClicks={onClicks?.[idx]} hideMenuItems={true} />
+              <TaskCard
+                data={data}
+                key={idx}
+                onClicks={onClicks?.[idx]}
+                hideMenuItems={hideMenuItems}
+              />
             ))
           )}
           {typeof paginationConfig === 'object' && !!paginationConfig.metaData && (
