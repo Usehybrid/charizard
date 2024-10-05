@@ -36,6 +36,7 @@ export default function TaskCardDemo() {
                 //     items_on_page: 25,
                 //   },
                 // }}
+                hideMenuItems={true}
               />
             }
           ></Route>,
