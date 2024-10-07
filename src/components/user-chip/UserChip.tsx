@@ -2,7 +2,6 @@ import clsx from 'clsx'
 import multiplyIcon from '../assets/multiply.svg'
 import classes from './user-chip.module.css'
 import {SVG} from '../svg'
-import {User} from './types'
 
 export enum USER_CHIP_STATUS {
   DEFAULT = 'default',
@@ -20,7 +19,7 @@ interface UserChipProps {
   username?: string
   profileImgUrl?: string
   isMulti?: boolean
-  users?: User[]
+  users?: Array<{profile_img_url: string}>
 }
 
 export function UserChip({

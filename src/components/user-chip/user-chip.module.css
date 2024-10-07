@@ -60,6 +60,7 @@
   padding-right: 10px;
   border-radius: var(--borderfull);
   background: var(--dark-d10);
+  width: fit-content;
 }
 
 .userChipImageContainer {
@@ -73,7 +74,7 @@
   border-radius: 50%;
 }
 
-.firstImage{
+.firstImage {
   z-index: 10;
 }
 
