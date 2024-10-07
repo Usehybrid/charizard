@@ -31,17 +31,15 @@ const HIDE_CANCEL_REQUEST = [
 export default function TaskCard({
   data,
   onClicks,
-  hideMenuItems = false,
 }: {
   data: ITask
   onClicks?: ((data: ITask) => void)[]
-  hideMenuItems?: boolean
 }) {
   const dropDownRef = React.useRef<{blur: () => void}>()
   const navigate = useNavigate()
   const location = useLocation()
 
-  const menuItems = getTaskMenuItems(data, onClicks, navigate, location, hideMenuItems)
+  const menuItems = getTaskMenuItems(data, onClicks, navigate, location)
 
   const hideActionHandler = () => {
     dropDownRef.current?.blur()
@@ -175,7 +173,6 @@ export function getTaskMenuItems(
   onClicks: ((data: ITask) => void)[] | undefined,
   navigate: ReturnType<typeof useNavigate>,
   location: ReturnType<typeof useLocation>,
-  hideMenuItems: boolean,
 ) {
   return [
     {
@@ -194,7 +191,9 @@ export function getTaskMenuItems(
         })
       },
       iconSrc: infoOctagon,
-      hidden: hideMenuItems || HIDE_DETAILS.includes(data.module_reference as MODULES),
+      hidden:
+        (data.module_reference === MODULES.LEAVE && !data.task_details_id) ||
+        HIDE_DETAILS.includes(data.module_reference as MODULES),
     },
     {
       label: 'Cancel request',
@@ -211,7 +210,7 @@ export function getTaskMenuItems(
       customStyles: {color: 'var(--status-error-e50)'},
       customSvgClassName: classes.logoutIcon,
       hidden:
-        hideMenuItems ||
+        (data.module_reference === MODULES.LEAVE && !data.task_details_id) ||
         HIDE_CANCEL_REQUEST.includes(data.module_reference as MODULES) ||
         data.status === TASK_STATUS.CANCELLED ||
         data.status === TASK_STATUS.DECLINED ||
