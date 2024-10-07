@@ -6,7 +6,7 @@ import {SVG} from '../svg'
 import {BUTTON_V2_SIZE, BUTTON_V2_TYPE, BUTTON_V2_VARIANT, ButtonV2} from '../button-v2'
 import {useLockBodyScroll} from '../../utils/hooks/use-lock-body-scroll'
 
-export type DrawerFooterButtons = Array<{
+export type DialogFooterButtons = Array<{
   variant?: BUTTON_V2_VARIANT
   onClick: () => void
   btnText: string
@@ -78,7 +78,7 @@ interface DrawerProps {
   /**
    * footer buttons to show
    */
-  buttons?: DrawerFooterButtons
+  buttons?: DialogFooterButtons
   footerAddon?: React.ReactNode
 
   /**
