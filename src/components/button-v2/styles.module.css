@@ -41,7 +41,7 @@
   padding: 4px 10px;
 }
 
-.btn:hover:not(.btnGrpLeft) {
+.btn:hover {
   cursor: pointer;
 }
 
@@ -49,10 +49,10 @@
   background-color: var(--theme-blue);
   color: var(--neutral-white);
 }
-.btnPrimary:hover:not(.btnGrpLeft) {
+.btnPrimary:hover {
   background-color: var(--p-p100);
 }
-.btnPrimary:focus:not(.btnGrpLeft) {
+.btnPrimary:focus {
   background-color: var(--p-p70);
 }
 .btnPrimary:disabled {
@@ -64,11 +64,11 @@
   border: 1px solid var(--p-p50);
   color: var(--p-p50);
 }
-.btnSecondary:hover:not(.btnGrpLeft) {
+.btnSecondary:hover {
   background-color: var(--fill-selection);
   border-color: var(--p-p100);
 }
-.btnSecondary:focus:not(.btnGrpLeft) {
+.btnSecondary:focus {
   background-color: var(--fill-selection);
   border-color: var(--p-p70);
 }
@@ -81,11 +81,11 @@
   color: var(--text-primary);
   border: 1px solid var(--p-p10);
 }
-.btnTertiary:hover:not(.btnGrpLeft) {
+.btnTertiary:hover {
   border-color: var(--p-p10);
   background-color: var(--p-p10);
 }
-.btnTertiary:focus:not(.btnGrpLeft) {
+.btnTertiary:focus {
   background-color: var(--p-p20);
   border-color: var(--p-p10);
 }
@@ -263,7 +263,6 @@
 .btnGrpLeft {
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;
-  cursor: unset;
 }
 
 .btnGrpLeft.btnPrimary {

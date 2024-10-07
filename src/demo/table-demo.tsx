@@ -61,7 +61,7 @@ export function TableDemo() {
         rowIdKey: 'id',
         actions: [
           {
-            icon: randomIcon,
+            iconSrc: randomIcon,
             label: 'Action 1',
             onClick: () => {
               console.log('action 1 clicked')
@@ -69,7 +69,7 @@ export function TableDemo() {
           },
 
           {
-            icon: randomIcon,
+            iconSrc: randomIcon,
             label: 'Action 2',
             onClick: () => {
               console.log('action 2 clicked')
@@ -77,7 +77,7 @@ export function TableDemo() {
           },
 
           {
-            icon: randomIcon,
+            iconSrc: randomIcon,
             label: 'Action 3',
             onClick: () => {
               console.log('action 3 clicked')
