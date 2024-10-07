@@ -86,7 +86,7 @@ export interface TableProps {
     isRadio?: boolean
     entityName: string
     actions?: {
-      icon: string
+      iconSrc: string
       label: string
       onClick: any
     }[]

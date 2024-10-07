@@ -107,6 +107,7 @@ export interface GroupActionProps {
   isCustomTrigger?: boolean
   isSingleBtnTrigger?: boolean
   hideDivider?: boolean
+  onClick?: any
 }
 
 const GroupAction = React.forwardRef(function (
@@ -123,6 +124,7 @@ const GroupAction = React.forwardRef(function (
     customStyles,
     isSingleBtnTrigger = false,
     hideDivider = false,
+    onClick,
   }: GroupActionProps,
   ref,
 ) {
@@ -261,6 +263,7 @@ const GroupAction = React.forwardRef(function (
               classes.btnGrpLeft,
             )}
             disabled={disabled}
+            onClick={onClick}
           >
             {children}
           </button>

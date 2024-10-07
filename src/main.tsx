@@ -1,8 +1,7 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-// import {TableDemo} from './demo/table-demo'
-import TaskCardDemo from './demo/task-card-demo'
-// import {ButtonDemo} from './demo/button-demo'
+import {StrictMode} from 'react'
+import {createRoot} from 'react-dom/client'
+import {TableDemo} from './demo/table-demo'
+import {ModalDemo} from './demo/modal-demo'
 
 const styles = {
   width: '90%',
@@ -15,18 +14,16 @@ const styles = {
   flexDir: 'column',
 }
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
+createRoot(document.getElementById('root') as HTMLElement).render(
+  <StrictMode>
     <App />
-  </React.StrictMode>,
+  </StrictMode>,
 )
 
 function App() {
   return (
     <div style={styles}>
-      <TaskCardDemo />
-      {/* <TableDemo /> */}
-      {/* <ButtonDemo /> */}
+      <ModalDemo />
     </div>
   )
 }
