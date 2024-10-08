@@ -1,8 +1,6 @@
 import {StrictMode} from 'react'
 import {createRoot} from 'react-dom/client'
-import {TableDemo} from './demo/table-demo'
-import {ModalDemo} from './demo/modal-demo'
-import { UploadDemo } from './demo/upload-demo'
+import {UploadDemo} from './demo/upload-demo'
 
 const styles = {
   width: '90%',
