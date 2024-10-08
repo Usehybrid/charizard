@@ -1,15 +1,15 @@
-import * as React from 'react'
 import * as menu from '@zag-js/menu'
+import {normalizeProps, useMachine} from '@zag-js/react'
 import clsx from 'clsx'
-import FilterCheckbox from './FilterCheckbox'
-import FilterTooltip from './FilterTooltip'
+import * as React from 'react'
 import chevronDown from '../../assets/chevron-down.svg'
-import classes from './styles.module.css'
-import {useMachine, normalizeProps} from '@zag-js/react'
-import {SVG} from '../../svg'
 import {Search} from '../../search'
+import {SVG} from '../../svg'
 import {TableStore} from '../store'
 import type {FilterOptions, InternalTableFilters} from '../types'
+import FilterCheckbox from './FilterCheckbox'
+import FilterTooltip from './FilterTooltip'
+import classes from './styles.module.css'
 
 interface TableHeaderFilterProps {
   filter: FilterOptions
@@ -54,12 +54,13 @@ export default function TableHeaderFilter({
   const getIsChecked = (value: string) => {
     let isChecked = false
     tableFilters.forEach(filter => {
-      filter.values.forEach(obj => {
-        if (obj === value) {
-          isChecked = true
-          return
-        }
-      })
+      filter.values.length &&
+        (filter.values as string[]).forEach(obj => {
+          if (obj === value) {
+            isChecked = true
+            return
+          }
+        })
     })
     return isChecked
   }

@@ -1,8 +1,9 @@
 import * as React from 'react'
+import {useTableStore} from '../store'
+import {FILTER_TYPE, type FilterConfig, type FilterOptions} from '../types'
+import TableHeaderDateRangeFilter from './TableHeaderDateRangeFilter'
 import TableHeaderFilter from './TableHeaderFilter'
 import classes from './styles.module.css'
-import {useTableStore} from '../store'
-import type {FilterConfig, FilterOptions} from '../types'
 
 interface TableHeaderFiltersProps {
   filterConfig: FilterConfig
@@ -24,7 +25,15 @@ export default function TableHeaderFilters({filterConfig, filters}: TableHeaderF
 
   React.useEffect(() => {
     if (!filters?.length || isLoading) return
-    setDefaultFilters(filters?.map(filter => ({key: filter.key, values: []})) || [])
+    setDefaultFilters(
+      filters?.map(filter => {
+        return {
+          key: filter.key,
+          values: filter.type === FILTER_TYPE.DATE_RANGE ? '' : [],
+          type: filter.type,
+        }
+      }) || [],
+    )
   }, [filters?.length, isLoading])
 
   if (!filters || !filters.length) return null
@@ -37,18 +46,34 @@ export default function TableHeaderFilters({filterConfig, filters}: TableHeaderF
 
   return (
     <div className={classes.filters}>
-      {filters.map((filter, idx) => (
-        <TableHeaderFilter
-          key={filter.id}
-          filter={filter}
-          tableFilters={tableFilters}
-          tableFilter={tableFilters[idx]}
-          addFilters={addFilters}
-          removeFilters={removeFilters}
-          resetFilters={resetFilters}
-          filterDispatch={filterDispatch}
-        />
-      ))}
+      {filters.map((filter, idx) => {
+        if (filter.type === FILTER_TYPE.DATE_RANGE) {
+          return (
+            <TableHeaderDateRangeFilter
+              key={filter.id}
+              filter={filter}
+              tableFilters={tableFilters}
+              tableFilter={tableFilters[idx]}
+              addFilters={addFilters}
+              removeFilters={removeFilters}
+              resetFilters={resetFilters}
+              filterDispatch={filterDispatch}
+            />
+          )
+        }
+        return (
+          <TableHeaderFilter
+            key={filter.id}
+            filter={filter}
+            tableFilters={tableFilters}
+            tableFilter={tableFilters[idx]}
+            addFilters={addFilters}
+            removeFilters={removeFilters}
+            resetFilters={resetFilters}
+            filterDispatch={filterDispatch}
+          />
+        )
+      })}
     </div>
   )
 }

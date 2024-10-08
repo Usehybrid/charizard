@@ -97,9 +97,7 @@
   padding: 8px;
   background: var(--neutral-white);
   border-radius: 4px;
-  box-shadow:
-    0px 4px 16px 0px rgba(18, 18, 18, 0.04),
-    0px 2px 8px 0px rgba(18, 18, 18, 0.08);
+  box-shadow: 0px 4px 16px 0px rgba(18, 18, 18, 0.04), 0px 2px 8px 0px rgba(18, 18, 18, 0.08);
 }
 
 .dropdown:focus-visible {
@@ -231,9 +229,7 @@
 
   background: var(--neutral-white);
   border-radius: 4px;
-  box-shadow:
-    0px 4px 16px 0px rgba(18, 18, 18, 0.04),
-    0px 2px 8px 0px rgba(18, 18, 18, 0.08);
+  box-shadow: 0px 4px 16px 0px rgba(18, 18, 18, 0.04), 0px 2px 8px 0px rgba(18, 18, 18, 0.08);
   min-width: 120px;
   overflow-x: hidden;
   white-space: nowrap;
@@ -258,4 +254,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.dateIcon {
+  width: 16px;
+  height: 16px;
+}
+
+.dateContentContainer {
+  gap: 8px;
 }

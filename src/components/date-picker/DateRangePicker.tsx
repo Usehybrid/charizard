@@ -1,21 +1,21 @@
-import * as React from 'react'
 import clsx from 'clsx'
-import classes from './date-range-picker.module.css'
-import {isSameDay, isBefore, addDays, addMonths, addYears} from 'date-fns'
+import {addDays, addMonths, addYears, isBefore, isSameDay} from 'date-fns'
+import * as React from 'react'
 import {DateRange, DayPicker, useDayPicker} from 'react-day-picker'
-import {Popover, PopoverContent, PopoverTrigger} from '../popover'
-import {BUTTON_V2_SIZE, BUTTON_V2_TYPE, BUTTON_V2_VARIANT, ButtonV2} from '../button-v2'
-import {SVG} from '../svg'
-import {SelectV2} from '../select-v2'
-import {dateFormatter, RANGE_OPTIONS} from './constants'
+import {create} from 'zustand'
 import {useMediaQuery} from '../../utils/hooks/use-media-query'
 import calender from '../assets/calender.svg'
 import chevronDown from '../assets/chevron-down.svg'
 import chevronLeft from '../assets/chevron-left.svg'
 import chevronRight from '../assets/chevron-right.svg'
-import {DateRangePickerProps, DateStore, MonthYear} from './type'
-import {create} from 'zustand'
+import {BUTTON_V2_SIZE, BUTTON_V2_TYPE, BUTTON_V2_VARIANT, ButtonV2} from '../button-v2'
 import {InputControlV2, LabelV2} from '../input-v2'
+import {Popover, PopoverContent, PopoverTrigger} from '../popover'
+import {SelectV2} from '../select-v2'
+import {SVG} from '../svg'
+import {dateFormatter, RANGE_OPTIONS} from './constants'
+import classes from './date-range-picker.module.css'
+import {DateRangePickerProps, DateStore, MonthYear} from './type'
 
 const useDateStore = create<DateStore>()(set => ({
   monthYear: {
@@ -38,6 +38,9 @@ export function DateRangePicker({
   showOutsideDays = false,
   errorMsg = '',
   customInputContentStyles,
+  customClasses = {},
+  size = BUTTON_V2_SIZE.DEFAULT,
+  onReset,
   ...props
 }: DateRangePickerProps) {
   const date = value
@@ -146,22 +149,29 @@ export function DateRangePicker({
             variant={BUTTON_V2_VARIANT.GHOST}
             customStyles={{width: '100%'}}
             disabled={disableDatepicker}
+            size={size}
           >
-            <div className={classes.formButton}>
+            <div className={clsx(classes.formButton, customClasses.contentContainer)}>
               <span
                 style={{
                   color: !date ? 'var(--text-secondary)' : undefined,
                   ...customInputContentStyles,
                 }}
+                className={customClasses.content}
               >
                 {showQuickSelect && selectedRange.value !== RANGE_OPTIONS[0].value
                   ? selectedRange.label
                   : displayDate}
               </span>
               {showQuickSelect ? (
-                <SVG path={chevronDown} width={20} height={20} />
+                <SVG
+                  path={chevronDown}
+                  width={20}
+                  height={20}
+                  svgClassName={customClasses.dateIcon}
+                />
               ) : (
-                <SVG path={calender} width={20} height={20} />
+                <SVG path={calender} width={20} height={20} svgClassName={customClasses.dateIcon} />
               )}
             </div>
           </ButtonV2>
@@ -256,6 +266,11 @@ export function DateRangePicker({
             month={new Date(monthYear.year, monthYear.month)}
             {...props}
           />
+          {onReset && (
+            <button className={clsx('zap-reset-btn', classes.resetBtn)} onClick={onReset}>
+              Reset
+            </button>
+          )}
         </PopoverContent>
       </Popover>
     </div>
