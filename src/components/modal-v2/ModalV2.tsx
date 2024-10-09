@@ -64,10 +64,10 @@ export function ModalV2({
               </div>
 
               <div className={classes.footer}>
-                {footerButtons?.map(({btnText, ...btnProps}, idx) => {
+                {footerButtons?.map(({btnText, isLoading, loadingText, ...btnProps}, idx) => {
                   return (
                     <ButtonV2 key={idx} {...(btnProps as ButtonV2Props)}>
-                      {btnText}
+                      {isLoading ? loadingText : btnText}
                     </ButtonV2>
                   )
                 })}
