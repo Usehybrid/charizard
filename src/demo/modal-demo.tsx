@@ -1,10 +1,12 @@
-import {BUTTON_V2_VARIANT} from '../components'
+import {BUTTON_V2_TYPE, BUTTON_V2_VARIANT, SVG} from '../components'
 import {ModalV2} from '../components/modal-v2/ModalV2'
+import {DialogFooterButtons} from '../types/common'
 import {useDisclosure} from '../utils/hooks/use-disclosure'
+import icon from '../components/assets/calender.svg'
 
 export function ModalDemo() {
   const {isOpen, onOpen, onClose} = useDisclosure()
-  const buttons = [
+  const buttons: DialogFooterButtons = [
     {
       variant: BUTTON_V2_VARIANT.SECONDARY,
       btnText: 'Cancel',
@@ -14,6 +16,8 @@ export function ModalDemo() {
       variant: BUTTON_V2_VARIANT.PRIMARY,
       btnText: `Confirm`,
       onClick: onClose,
+      icon: <SVG path={icon} customSvgStyles={{width: '20px', height: '20px'}} />,
+      type: BUTTON_V2_TYPE.ICON_LEFT,
     },
   ]
 
