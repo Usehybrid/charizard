@@ -46,33 +46,24 @@ export default function TableHeaderFilters({filterConfig, filters}: TableHeaderF
 
   return (
     <div className={classes.filters}>
-      {filters.map((filter, idx) => {
-        if (filter.type === FILTER_TYPE.DATE_RANGE) {
-          return (
-            <TableHeaderDateRangeFilter
-              key={filter.id}
-              filter={filter}
-              tableFilters={tableFilters}
-              tableFilter={tableFilters[idx]}
-              addFilters={addFilters}
-              removeFilters={removeFilters}
-              resetFilters={resetFilters}
-              filterDispatch={filterDispatch}
-            />
-          )
+      {filters.map(filter => {
+        const tableFilter = tableFilters.find(tf => tf.key === filter.key)!
+
+        const filterProps = {
+          key: filter.id,
+          filter: filter,
+          tableFilters: tableFilters,
+          tableFilter: tableFilter,
+          addFilters: addFilters,
+          removeFilters: removeFilters,
+          resetFilters: resetFilters,
+          filterDispatch: filterDispatch,
         }
-        return (
-          <TableHeaderFilter
-            key={filter.id}
-            filter={filter}
-            tableFilters={tableFilters}
-            tableFilter={tableFilters[idx]}
-            addFilters={addFilters}
-            removeFilters={removeFilters}
-            resetFilters={resetFilters}
-            filterDispatch={filterDispatch}
-          />
-        )
+
+        if (filter.type === FILTER_TYPE.DATE_RANGE) {
+          return <TableHeaderDateRangeFilter {...filterProps} />
+        }
+        return <TableHeaderFilter {...filterProps} />
       })}
     </div>
   )

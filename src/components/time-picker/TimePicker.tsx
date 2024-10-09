@@ -6,7 +6,7 @@ import {InputV2} from '../input-v2'
 import {Popover, PopoverContent, PopoverTrigger} from '../popover'
 import {SVG} from '../svg'
 import classes from './styles.module.css'
-import {TIME_PICKER_FORMAT} from './types'
+import {PERIOD, TIME_PICKER_FORMAT} from './types'
 import {DEFAULT_SELECTED_TIME} from './utils/data'
 import {amPm, getFormattedTime, hours, minutes, seconds} from './utils/time'
 
@@ -47,13 +47,13 @@ export function TimePicker({
       const m = date.getMinutes()
       const s = date.getSeconds()
 
-      const period = format === TIME_PICKER_FORMAT.STANDARD ? (h >= 12 ? 'PM' : 'AM') : ''
+      const period = format === TIME_PICKER_FORMAT.STANDARD ? (h >= 12 ? PERIOD.PM : PERIOD.AM) : ''
 
       setSelected({
         hour: getFormattedTime(h, format, true),
         minute: getFormattedTime(m, format),
         second: getFormattedTime(s, format),
-        period,
+        period: period as PERIOD,
       })
     } else {
       setSelected(DEFAULT_SELECTED_TIME)
@@ -76,8 +76,8 @@ export function TimePicker({
 
     let hour = parseInt(currentSelected.hour || getFormattedTime(now.getHours(), format, true), 10)
     if (format === TIME_PICKER_FORMAT.STANDARD) {
-      if (currentSelected.period === 'PM' && hour < 12) hour += 12
-      if (currentSelected.period === 'AM' && hour === 12) hour = 0
+      if (currentSelected.period === PERIOD.PM && hour < 12) hour += 12
+      if (currentSelected.period === PERIOD.AM && hour === 12) hour = 0
     }
 
     const minute = parseInt(

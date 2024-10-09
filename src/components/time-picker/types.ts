@@ -8,3 +8,15 @@ export enum TIME_PICKER_TYPE {
   MINUTE = 'minute',
   SECOND = 'second',
 }
+
+export enum PERIOD {
+  AM = 'AM',
+  PM = 'PM',
+}
+
+export interface SelectedTime {
+  hour: string
+  minute: string
+  second: string
+  period: PERIOD
+}

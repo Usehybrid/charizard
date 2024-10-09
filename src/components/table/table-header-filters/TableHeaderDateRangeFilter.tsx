@@ -24,8 +24,8 @@ export default function TableHeaderDateRangeFilter({
   filterDispatch,
   resetFilters,
 }: TableHeaderFilterProps) {
-  const [initialLoaded, setInitialLoaded] = React.useState(false)
   const defaultValue = tableFilter?.values ? (tableFilter?.values as string)?.split(',') : undefined
+  const [initialLoaded, setInitialLoaded] = React.useState(!!defaultValue)
   const {period, from, to, handleDateChange} = useDateRangePicker(
     0,
     defaultValue?.[0],
@@ -38,12 +38,6 @@ export default function TableHeaderDateRangeFilter({
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [from, to, initialLoaded])
-
-  React.useEffect(() => {
-    if (defaultValue) {
-      setInitialLoaded(true)
-    }
-  }, [defaultValue])
 
   return (
     <DateRangePicker

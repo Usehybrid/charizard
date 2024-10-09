@@ -90,7 +90,7 @@ export const useTableStore = create<TableStore>()(
           if (typeof filterReset === 'function') {
             filterReset()
           }
-          return {...obj, values: []}
+          return {...obj, values: obj.type === FILTER_TYPE.DATE_RANGE ? '' : []}
         }),
       })),
   })),

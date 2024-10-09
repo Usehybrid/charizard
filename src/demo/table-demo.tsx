@@ -305,8 +305,8 @@ const filtersV2 = {
     },
     {
       id: 'inventory-status2',
-      name: 'Status',
-      key: 'filter_status',
+      name: 'Status 2',
+      key: 'filter_status_2',
       options: [
         {
           value: 'assigned',

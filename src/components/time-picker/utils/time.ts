@@ -1,4 +1,4 @@
-import {TIME_PICKER_FORMAT} from '../types'
+import {PERIOD, TIME_PICKER_FORMAT} from '../types'
 
 /**
  * Converts a time string (e.g., "12:30 PM") to a timestamp
@@ -15,7 +15,7 @@ export const convertToTimestamp = (timeString: string): number => {
 
   let adjustedHour = hours
 
-  if (period === 'PM') {
+  if (period === PERIOD.PM) {
     if (adjustedHour < 12) {
       adjustedHour += 12
     }
@@ -48,7 +48,7 @@ export const seconds = Array.from({length: 60}, (_, i) => String(i).padStart(2, 
  * Array representing AM/PM values
  * @type {string[]}
  */
-export const amPm = ['AM', 'PM']
+export const amPm = [PERIOD.AM, PERIOD.PM]
 
 /**
  * Formats a given value (hours, minutes, seconds) based on the time format (12-hour or 24-hour)
