@@ -111,6 +111,18 @@ export function Upload({
   const isInputDisabled = fileUploadLimit && files.length >= fileUploadLimit ? true : false
 
   React.useEffect(() => {
+    console.log(uploadLimitError);
+    
+    const timer = setTimeout(() => {
+      if (!!uploadLimitError.length) {
+        setUploadLimitError('')
+      }
+    }, 5000)
+
+    return () => clearTimeout(timer);
+  }, [uploadLimitError])
+
+  React.useEffect(() => {
     if (preLoadedFiles.length > 0 && !files.length) {
       const newFiles = preLoadedFiles.map(file => ({...file, isUploaded: true}))
       setFiles(newFiles)
@@ -146,7 +158,7 @@ export function Upload({
           size: formatBytes(uploadedFiles[key]?.size),
         })
       }
-      if ((uploadFileLimit || 5) < Number((uploadedFiles[key]?.size / (1024 * 1024)).toFixed(2))) {
+      if (uploadedFiles[key]?.size && (uploadFileLimit || 5) < Number((uploadedFiles[key]?.size / (1024 * 1024)).toFixed(2))) {
         flag = true
       }
     }

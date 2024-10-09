@@ -2,6 +2,7 @@ import {StrictMode} from 'react'
 import {createRoot} from 'react-dom/client'
 import {TableDemo} from './demo/table-demo'
 import {ModalDemo} from './demo/modal-demo'
+import { UploadDemo } from './demo/upload-demo'
 
 const styles = {
   width: '90%',
@@ -23,7 +24,8 @@ createRoot(document.getElementById('root') as HTMLElement).render(
 function App() {
   return (
     <div style={styles}>
-      <ModalDemo />
+      {/* <ModalDemo /> */}
+      <UploadDemo />
     </div>
   )
 }
