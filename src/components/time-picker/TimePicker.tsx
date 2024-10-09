@@ -102,6 +102,18 @@ export function TimePicker({
     setOpen(false)
   }
 
+  let formattedValue = [selected.hour, selected.minute, ...(enableSeconds ? [selected.second] : [])]
+    .filter(Boolean)
+    .join(':')
+
+  formattedValue = `${formattedValue} ${
+    format === TIME_PICKER_FORMAT.STANDARD ? selected.period : ''
+  }`.trim()
+
+  let placeholder = ['HH', 'MM', ...(enableSeconds ? ['SS'] : [])].filter(Boolean).join(':').trim()
+
+  placeholder = `${placeholder} ${format === TIME_PICKER_FORMAT.STANDARD ? 'AM/PM' : ''}`.trim()
+
   return (
     <Popover
       popoverProps={{
@@ -114,10 +126,8 @@ export function TimePicker({
     >
       <PopoverTrigger className={classes.trigger} openOnHover={false}>
         <InputV2
-          value={`${selected.hour}:${selected.minute}${
-            enableSeconds ? `:${selected.second}` : ''
-          } ${format === TIME_PICKER_FORMAT.STANDARD ? selected.period : ''}`.trim()}
-          placeholder="time"
+          value={formattedValue}
+          placeholder={placeholder}
           readOnly
           containerClassName={classes.timeInput}
         />
