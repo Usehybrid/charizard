@@ -47,7 +47,7 @@ export const styles: StylesConfig<any> = {
     return {
       ...baseStyles,
       padding: '6px 12px',
-      backgroundColor: state.isSelected ? '#F6F8FE' : '#fff',
+      backgroundColor: state.isSelected || state.isFocused ? '#F6F8FE' : '#fff',
       ':hover': {
         backgroundColor: '#F6F8FE',
       },
