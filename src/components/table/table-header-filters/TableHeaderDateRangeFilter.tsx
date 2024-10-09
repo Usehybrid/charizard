@@ -24,6 +24,7 @@ export default function TableHeaderDateRangeFilter({
   filterDispatch,
   resetFilters,
 }: TableHeaderFilterProps) {
+  const [initialLoaded, setInitialLoaded] = React.useState(false)
   const defaultValue = tableFilter?.values ? (tableFilter?.values as string)?.split(',') : undefined
   const {period, from, to, handleDateChange} = useDateRangePicker(
     0,
@@ -32,21 +33,31 @@ export default function TableHeaderDateRangeFilter({
   )
 
   React.useEffect(() => {
-    addFilters(filter.key, `${from},${to}`, filterDispatch)
+    if (initialLoaded) {
+      addFilters(filter.key, [from, to].filter(Boolean).join(','), filterDispatch)
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [from, to])
+  }, [from, to, initialLoaded])
 
-  console.log({defaultValue})
+  React.useEffect(() => {
+    if (defaultValue) {
+      setInitialLoaded(true)
+    }
+  }, [defaultValue])
 
   return (
     <DateRangePicker
       {...(filter.config as DateRangePickerProps)}
-      onChange={handleDateChange}
+      onChange={value => {
+        setInitialLoaded(true)
+        handleDateChange(value)
+      }}
       value={{
-        from: defaultValue ? period.from : undefined,
-        to: defaultValue ? period.to : undefined,
+        from: initialLoaded ? period.from : undefined,
+        to: initialLoaded ? period.to : undefined,
       }}
       onReset={() => {
+        setInitialLoaded(false)
         resetFilters(tableFilter?.key, filterDispatch)
       }}
       customClasses={{

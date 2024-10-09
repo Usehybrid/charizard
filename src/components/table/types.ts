@@ -12,14 +12,16 @@ export type FilterOptions = {
     // custom jsx from api
     customName?: string
   }[]
-  config?:
-    | {
-        hideSearch?: boolean
-        placeholder?: string
-        type?: string
-      }
-    | Partial<DateRangePickerProps>
+  config?: MenuConfig | DateConfig
 }
+
+export type MenuConfig = {
+  hideSearch?: boolean
+  placeholder?: string
+  type?: string
+}
+
+export type DateConfig = Partial<DateRangePickerProps>
 
 export enum FILTER_TYPE {
   DATE_RANGE = 'date_range',

@@ -10,7 +10,7 @@ import {Search} from '../../search'
 import {SVG} from '../../svg'
 import {useTableStore} from '../store'
 import FilterDrawerCheckboxNew from '../table-header-filters/FilterDrawerCheckboxNew'
-import {FILTER_TYPE, FilterConfig} from '../types'
+import {FILTER_TYPE, FilterConfig, MenuConfig} from '../types'
 import classes from './table-filters-drawer.module.css'
 import {getDefaultCheckedState, removeUncheckedItems} from './utils'
 
@@ -196,13 +196,13 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
               </div>
 
               <div className={classes.filterSingle}>
-                {!currFilter?.config?.hideSearch && (
+                {!(currFilter?.config as MenuConfig)?.hideSearch && (
                   <div className={classes.dropdownSearch}>
                     <Search
                       id="filter-search"
                       search={search}
                       setSearch={setSearch}
-                      placeholder={currFilter.config?.placeholder || 'Search'}
+                      placeholder={(currFilter.config as MenuConfig)?.placeholder || 'Search'}
                       customStyles={{
                         customInputStyles: {borderRadius: '8px', height: '28px'},
                         customIconStyles: {top: '4px'},

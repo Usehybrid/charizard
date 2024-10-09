@@ -164,6 +164,7 @@
   color: var(--neutral-white);
 }
 .dayToday {
+  border-radius: 0.5rem;
   background-color: var(--neutral-arch-40);
   color: var(--text-primary);
 }

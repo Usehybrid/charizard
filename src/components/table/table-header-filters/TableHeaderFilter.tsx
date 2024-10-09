@@ -6,7 +6,7 @@ import chevronDown from '../../assets/chevron-down.svg'
 import {Search} from '../../search'
 import {SVG} from '../../svg'
 import {TableStore} from '../store'
-import type {FilterOptions, InternalTableFilters} from '../types'
+import type {FilterOptions, InternalTableFilters, MenuConfig} from '../types'
 import FilterCheckbox from './FilterCheckbox'
 import FilterTooltip from './FilterTooltip'
 import classes from './styles.module.css'
@@ -82,13 +82,13 @@ export default function TableHeaderFilter({
       <div {...api.getPositionerProps()} className={classes.positioner}>
         {api.open && (
           <div {...api.getContentProps()} className={classes.dropdown} onKeyDown={() => {}}>
-            {!filter.config?.hideSearch && (
+            {!(filter.config as MenuConfig)?.hideSearch && (
               <div className={classes.dropdownSearch}>
                 <Search
                   id="filter-search"
                   search={search}
                   setSearch={setSearch}
-                  placeholder={filter.config?.placeholder || 'Search'}
+                  placeholder={(filter.config as MenuConfig)?.placeholder || 'Search'}
                   customStyles={{
                     customInputStyles: {borderRadius: '8px', height: '28px'},
                     customIconStyles: {top: '4px'},
