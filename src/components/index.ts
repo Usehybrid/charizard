@@ -3,6 +3,8 @@ import './styles/_variables.css'
 import './styles/global.css'
 import './toasts/styles/main.css'
 
+export * from '../types'
+
 export * from './button'
 export * from './empty-state'
 export * from './table-legacy'
@@ -47,3 +49,4 @@ export * from './input-v2'
 export * from './search-v2'
 export * from './breadcrumbs'
 export * from './error'
+export * from './time-picker'

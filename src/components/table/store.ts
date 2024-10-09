@@ -1,6 +1,6 @@
 import {create} from 'zustand'
-import {InternalTableFilters} from './types'
 import {devtools} from 'zustand/middleware'
+import {FILTER_TYPE, InternalTableFilters} from './types'
 
 export interface TableStore {
   filters: InternalTableFilters[]
@@ -20,12 +20,19 @@ export const useTableStore = create<TableStore>()(
       set(state => {
         const filters = state.filters.map(obj => {
           if (obj.key === filterKey) {
-            const values = [...obj.values, value]
+            if (obj.type !== FILTER_TYPE.DATE_RANGE) {
+              const values = [...obj.values, value]
 
-            if (typeof filterDispatch === 'function') {
-              filterDispatch({filterType: filterKey, value: values.join(',')})
+              if (typeof filterDispatch === 'function') {
+                filterDispatch({filterType: filterKey, value: values.join(',')})
+              }
+              return {...obj, values}
+            } else {
+              if (typeof filterDispatch === 'function') {
+                filterDispatch({filterType: filterKey, value})
+              }
+              return {...obj, values: value}
             }
-            return {...obj, values}
           }
           return obj
         })
@@ -51,12 +58,14 @@ export const useTableStore = create<TableStore>()(
       set(state => {
         const filters = state.filters.map(obj => {
           if (obj.key === filterKey) {
-            const values = obj.values.filter(objValue => objValue !== value)
+            if (obj.type !== FILTER_TYPE.DATE_RANGE) {
+              const values = (obj.values as string[]).filter(objValue => objValue !== value)
 
-            if (typeof filterDispatch === 'function') {
-              filterDispatch({filterType: filterKey, value: values.join(',')})
+              if (typeof filterDispatch === 'function') {
+                filterDispatch({filterType: filterKey, value: values.join(',')})
+              }
+              return {...obj, values}
             }
-            return {...obj, values}
           }
           return obj
         })
@@ -69,7 +78,7 @@ export const useTableStore = create<TableStore>()(
             if (typeof filterDispatch === 'function') {
               filterDispatch({filterType: filterKey, value: ''})
             }
-            return {...obj, values: []}
+            return {...obj, values: obj.type === FILTER_TYPE.DATE_RANGE ? '' : []}
           }
           return obj
         })
@@ -81,7 +90,7 @@ export const useTableStore = create<TableStore>()(
           if (typeof filterReset === 'function') {
             filterReset()
           }
-          return {...obj, values: []}
+          return {...obj, values: obj.type === FILTER_TYPE.DATE_RANGE ? '' : []}
         }),
       })),
   })),

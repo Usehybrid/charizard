@@ -1,18 +1,18 @@
-import * as React from 'react'
-import clsx from 'clsx'
-import FilterDrawerCheckboxNew from '../table-header-filters/FilterDrawerCheckboxNew'
-import filterIcon from '../../assets/user-interface/filter-2.svg'
-import chevronRight from '../../assets/chevron-right.svg'
-import classes from './table-filters-drawer.module.css'
-import {SVG} from '../../svg'
-import {FilterConfig} from '../types'
-import {Search} from '../../search'
-import {useTableStore} from '../store'
-import {getDefaultCheckedState, removeUncheckedItems} from './utils'
-import {useDisclosure} from '../../../utils/hooks/use-disclosure'
 import {Portal} from '@zag-js/react'
-import {DrawerV2} from '../../drawer-v2'
+import clsx from 'clsx'
+import * as React from 'react'
+import {useDisclosure} from '../../../utils/hooks/use-disclosure'
+import chevronRight from '../../assets/chevron-right.svg'
+import filterIcon from '../../assets/user-interface/filter-2.svg'
 import {BUTTON_V2_VARIANT} from '../../button-v2'
+import {DrawerV2} from '../../drawer-v2'
+import {Search} from '../../search'
+import {SVG} from '../../svg'
+import {useTableStore} from '../store'
+import FilterDrawerCheckboxNew from '../table-header-filters/FilterDrawerCheckboxNew'
+import {FILTER_TYPE, FilterConfig, MenuConfig} from '../types'
+import classes from './table-filters-drawer.module.css'
+import {getDefaultCheckedState, removeUncheckedItems} from './utils'
 
 interface TableFiltersDrawerProps {
   filterConfig: FilterConfig
@@ -47,7 +47,11 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
 
   React.useEffect(() => {
     if (!filters?.length || isLoading) return
-    const mapFn = (filter: any) => ({key: filter.key, values: []})
+    const mapFn = (filter: any) => ({
+      key: filter.key,
+      values: filter.type === FILTER_TYPE.DATE_RANGE ? '' : [],
+      type: filter.type,
+    })
     setDefaultFilters(
       // @ts-ignore
       [...(filterConfig.filters?.header?.map(mapFn) || []), ...filters?.map(mapFn)] || [],
@@ -192,13 +196,13 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
               </div>
 
               <div className={classes.filterSingle}>
-                {!currFilter?.config?.hideSearch && (
+                {!(currFilter?.config as MenuConfig)?.hideSearch && (
                   <div className={classes.dropdownSearch}>
                     <Search
                       id="filter-search"
                       search={search}
                       setSearch={setSearch}
-                      placeholder={currFilter.config?.placeholder || 'Search'}
+                      placeholder={(currFilter.config as MenuConfig)?.placeholder || 'Search'}
                       customStyles={{
                         customInputStyles: {borderRadius: '8px', height: '28px'},
                         customIconStyles: {top: '4px'},

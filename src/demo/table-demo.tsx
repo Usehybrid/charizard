@@ -1,8 +1,9 @@
-import * as React from 'react'
-import randomIcon from '../components/assets/check.svg'
-import {Table} from '../components'
-import {INV_ACTION_TYPES, useInventoryStore} from '../components/table/inventory/inventory.store'
 import {createColumnHelper} from '@tanstack/react-table'
+import * as React from 'react'
+import {Table} from '../components'
+import randomIcon from '../components/assets/check.svg'
+import {INV_ACTION_TYPES, useInventoryStore} from '../components/table/inventory/inventory.store'
+import {FILTER_TYPE} from '../components/table/types'
 
 export function TableDemo() {
   const [search, setSearch] = React.useState('')
@@ -304,8 +305,8 @@ const filtersV2 = {
     },
     {
       id: 'inventory-status2',
-      name: 'Status',
-      key: 'filter_status',
+      name: 'Status 2',
+      key: 'filter_status_2',
       options: [
         {
           value: 'assigned',
@@ -327,6 +328,22 @@ const filtersV2 = {
       config: {
         hideSearch: true,
         placeholder: 'Search status',
+      },
+    },
+    {
+      id: 'joining-date',
+      name: 'Joining Date',
+      key: 'joining_date',
+      type: FILTER_TYPE.DATE_RANGE,
+      options: [],
+      config: {
+        mode: 'range',
+        showQuickSelect: false,
+        disabled: undefined,
+        customDisable: undefined,
+        disableWeekends: false,
+        disableDatepicker: false,
+        showOutsideDays: false,
       },
     },
   ],

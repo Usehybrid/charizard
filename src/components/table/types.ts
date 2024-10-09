@@ -1,7 +1,10 @@
+import {DateRangePickerProps} from '../date-picker/type'
+
 export type FilterOptions = {
   id: string
   name: string
   key: string
+  type?: FILTER_TYPE
   options: {
     name: string
     value: string
@@ -9,11 +12,20 @@ export type FilterOptions = {
     // custom jsx from api
     customName?: string
   }[]
-  config?: {
-    hideSearch?: boolean
-    placeholder?: string
-    type?: string
-  }
+  config?: MenuConfig | DateConfig
+}
+
+export type MenuConfig = {
+  hideSearch?: boolean
+  placeholder?: string
+  type?: string
+}
+
+export type DateConfig = Partial<DateRangePickerProps>
+
+export enum FILTER_TYPE {
+  DATE_RANGE = 'date_range',
+  MENU = 'menu',
 }
 
 /**
@@ -40,7 +52,8 @@ export type FilterConfig = {
 
 export type InternalTableFilters = {
   key: string
-  values: string[]
+  values: string[] | string
+  type?: FILTER_TYPE
 }
 
 export type TableFilters = {

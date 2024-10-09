@@ -1,6 +1,7 @@
+import {Placement} from '@zag-js/popper'
 import * as React from 'react'
 import {ClassNames, DateRange, Matcher, PropsRange} from 'react-day-picker'
-import {Placement} from '@zag-js/popper'
+import {BUTTON_V2_SIZE} from '../button-v2'
 
 export interface DateRangePickerProps extends PropsRange {
   value: DateRange
@@ -16,6 +17,13 @@ export interface DateRangePickerProps extends PropsRange {
   placement?: Placement
   customInputContentStyles?: React.CSSProperties
   showOutsideDays?: boolean
+  onReset?: () => void
+  customClasses?: {
+    contentContainer?: string
+    content?: string
+    dateIcon?: string
+  }
+  size?: BUTTON_V2_SIZE
 }
 
 export type MonthYear = {

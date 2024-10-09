@@ -3,20 +3,9 @@ import clsx from 'clsx'
 import closeIcon from '../assets/close.svg'
 import classes from './drawer.module.css'
 import {SVG} from '../svg'
-import {BUTTON_V2_SIZE, BUTTON_V2_TYPE, BUTTON_V2_VARIANT, ButtonV2} from '../button-v2'
+import {ButtonV2, ButtonV2Props} from '../button-v2'
 import {useLockBodyScroll} from '../../utils/hooks/use-lock-body-scroll'
-
-export type DialogFooterButtons = Array<{
-  variant?: BUTTON_V2_VARIANT
-  onClick: () => void
-  btnText: string
-  btnType?: 'button' | 'submit' | 'reset'
-  btnSize?: BUTTON_V2_SIZE
-  disabled?: boolean
-  isLoading?: boolean
-  loadingText?: string
-  type?: BUTTON_V2_TYPE
-}>
+import {DialogFooterButtons} from '../../types/common'
 
 interface DrawerProps {
   /**
@@ -182,16 +171,9 @@ export function DrawerV2({
                 : buttons && (
                     <div className={classes.footerBtnContainer}>
                       <div className={classes.footerBtn}>
-                        {buttons.map((btn, idx) => (
-                          <ButtonV2
-                            key={idx}
-                            disabled={btn.disabled}
-                            variant={btn.variant}
-                            onClick={btn.onClick ? btn.onClick : undefined}
-                            btnType={btn.btnType}
-                            type={btn.type as any}
-                          >
-                            {btn.btnText}
+                        {buttons.map(({btnText, ...btnProps}, idx) => (
+                          <ButtonV2 key={idx} {...(btnProps as ButtonV2Props)}>
+                            {btnText}
                           </ButtonV2>
                         ))}
                       </div>

@@ -18,6 +18,8 @@
 .quickRangePicker .quickSelector {
   margin: auto;
   width: 70%;
+  position: relative;
+  z-index: 2;
 }
 .buttonContent {
   display: flex;
@@ -162,6 +164,7 @@
   color: var(--neutral-white);
 }
 .dayToday {
+  border-radius: 0.5rem;
   background-color: var(--neutral-arch-40);
   color: var(--text-primary);
 }
@@ -234,4 +237,29 @@
   width: calc(100% - 24px);
   justify-content: space-between;
   top: 20px;
+}
+
+.resetBtn {
+  display: flex;
+  height: 22px;
+  padding: 6px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border-radius: 4px;
+
+  border: 1px solid var(--stroke-selection);
+  background: var(--fill-selection);
+
+  color: var(--text-primary);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  margin-left: auto;
+  margin-top: 14px;
+}
+
+.resetBtn:hover {
+  cursor: pointer;
 }

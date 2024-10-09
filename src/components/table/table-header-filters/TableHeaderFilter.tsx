@@ -1,15 +1,15 @@
-import * as React from 'react'
 import * as menu from '@zag-js/menu'
+import {normalizeProps, useMachine} from '@zag-js/react'
 import clsx from 'clsx'
+import * as React from 'react'
+import chevronDown from '../../assets/chevron-down.svg'
+import {Search} from '../../search'
+import {SVG} from '../../svg'
+import {TableStore} from '../store'
+import type {FilterOptions, InternalTableFilters, MenuConfig} from '../types'
 import FilterCheckbox from './FilterCheckbox'
 import FilterTooltip from './FilterTooltip'
-import chevronDown from '../../assets/chevron-down.svg'
 import classes from './styles.module.css'
-import {useMachine, normalizeProps} from '@zag-js/react'
-import {SVG} from '../../svg'
-import {Search} from '../../search'
-import {TableStore} from '../store'
-import type {FilterOptions, InternalTableFilters} from '../types'
 
 interface TableHeaderFilterProps {
   filter: FilterOptions
@@ -54,12 +54,13 @@ export default function TableHeaderFilter({
   const getIsChecked = (value: string) => {
     let isChecked = false
     tableFilters.forEach(filter => {
-      filter.values.forEach(obj => {
-        if (obj === value) {
-          isChecked = true
-          return
-        }
-      })
+      filter.values.length &&
+        (filter.values as string[]).forEach(obj => {
+          if (obj === value) {
+            isChecked = true
+            return
+          }
+        })
     })
     return isChecked
   }
@@ -81,13 +82,13 @@ export default function TableHeaderFilter({
       <div {...api.getPositionerProps()} className={classes.positioner}>
         {api.open && (
           <div {...api.getContentProps()} className={classes.dropdown} onKeyDown={() => {}}>
-            {!filter.config?.hideSearch && (
+            {!(filter.config as MenuConfig)?.hideSearch && (
               <div className={classes.dropdownSearch}>
                 <Search
                   id="filter-search"
                   search={search}
                   setSearch={setSearch}
-                  placeholder={filter.config?.placeholder || 'Search'}
+                  placeholder={(filter.config as MenuConfig)?.placeholder || 'Search'}
                   customStyles={{
                     customInputStyles: {borderRadius: '8px', height: '28px'},
                     customIconStyles: {top: '4px'},
