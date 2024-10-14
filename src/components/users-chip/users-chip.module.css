@@ -5,12 +5,12 @@
   width: fit-content;
 }
 
-.nonZeroState{
+.nonZeroState {
   gap: 16px;
   padding-right: 10px;
 }
 
-.zeroState{
+.zeroState {
   justify-content: center;
   padding: 2px 6px;
 }
@@ -68,8 +68,4 @@
 .secondImage {
   position: absolute;
   left: 10px;
-}
-
-.userCount {
-  color: var(--dark-d70);
 }
