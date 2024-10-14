@@ -21,6 +21,7 @@ export function TableDemo() {
         placeholder: 'Search your employees',
       }}
       filterConfig={{
+        initialFilters: query.filters,
         filters: filtersV2,
         isLoading: false,
         isError: false,

@@ -8,7 +8,7 @@ import {BUTTON_V2_VARIANT} from '../../button-v2'
 import {DrawerV2} from '../../drawer-v2'
 import {Search} from '../../search'
 import {SVG} from '../../svg'
-import {SINGLE_VALUE_FILTER_TYPES, useTableStore} from '../store'
+import {useTableStore} from '../store'
 import FilterDrawerCheckboxNew from '../table-header-filters/FilterDrawerCheckboxNew'
 import {FilterConfig, MenuConfig} from '../types'
 import classes from './table-filters-drawer.module.css'
@@ -23,13 +23,13 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
   const [filterCheckedState, setFilterCheckedState] = React.useState<Record<string, any[]>>({})
   const [allCheckedState, setAllCheckedState] = React.useState<Record<string, boolean>>({})
   const [search, setSearch] = React.useState('')
-  const {setDefaultFilters, resetAllFilters, changeFiltersDrawer} = useTableStore(s => ({
+  const {resetAllFilters, changeFiltersDrawer} = useTableStore(s => ({
     setDefaultFilters: s.setDefaultFilters,
     resetAllFilters: s.resetAllFilters,
     changeFiltersDrawer: s.changeFiltersDrawer,
   }))
   const tableFilters = useTableStore(s => s.filters)
-  const {isLoading, filterDispatch} = filterConfig
+  const {filterDispatch} = filterConfig
 
   const filters = filterConfig.filters?.drawer ? filterConfig.filters.drawer : []
   const headerFilterKeys = filterConfig.filters?.header
@@ -44,19 +44,6 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
       return option.name.toLowerCase().includes(search.toLowerCase())
     })
     .map(op => op.value)
-
-  React.useEffect(() => {
-    if (!filters?.length || isLoading) return
-    const mapFn = (filter: any) => ({
-      key: filter.key,
-      values: SINGLE_VALUE_FILTER_TYPES.includes(filter.type) ? '' : [],
-      type: filter.type,
-    })
-    setDefaultFilters(
-      // @ts-ignore
-      [...(filterConfig.filters?.header?.map(mapFn) || []), ...filters?.map(mapFn)] || [],
-    )
-  }, [filters?.length, isLoading])
 
   React.useEffect(() => {
     if (!filters.length) return

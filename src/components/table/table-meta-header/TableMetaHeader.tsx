@@ -9,7 +9,7 @@ import {pluralize} from '../../../utils/text'
 import TableFiltersDrawer from '../table-filters-drawer/TableFiltersDrawer'
 import TableCustomCols from '../table-custom-cols'
 import {Table} from '@tanstack/react-table'
-import {useTableStore} from '../store'
+import {SINGLE_VALUE_FILTER_TYPES, useTableStore} from '../store'
 import TableExport from '../table-export/TableExport'
 
 interface TableMetaHeaderProps {
@@ -48,15 +48,41 @@ export default function TableMetaHeader({
     `${rowSelectionConfig?.entityName}s`,
   )}`
 
-  const headerFilter = filterConfig?.filters?.header ? filterConfig?.filters.header : null
+  const filters = [
+    ...(filterConfig?.filters?.header ? filterConfig.filters.header : []),
+    ...(filterConfig?.filters?.drawer ? filterConfig.filters.drawer : []),
+  ]
 
   const resetAll = useTableStore(s => s.resetAllFilters)
+  const setDefaultFilters = useTableStore(s => s.setDefaultFilters)
 
   React.useEffect(() => {
     return () => {
       resetAll()
     }
   }, [])
+
+  React.useEffect(() => {
+    if (filterConfig) {
+      if (filterConfig?.isLoading) return
+
+      const mapFn = (filter: any) => {
+        const isMulti = !SINGLE_VALUE_FILTER_TYPES.includes(filter.type)
+        let defaultValues = isMulti ? ([] as string[]) : ''
+        const filterDefaultValue = filterConfig.initialFilters?.[filter.key] as string
+        if (filterDefaultValue) {
+          defaultValues = isMulti ? filterDefaultValue.split(',') : filterDefaultValue
+        }
+        return {
+          key: filter.key,
+          values: defaultValues,
+          type: filter.type,
+        }
+      }
+
+      setDefaultFilters([...filters?.map(mapFn)])
+    }
+  }, [filters?.length, filterConfig])
 
   return (
     <div className={classes.box}>
@@ -89,9 +115,11 @@ export default function TableMetaHeader({
           </div>
         )}
 
-        {typeof filterConfig === 'object' && !!headerFilter && (
-          <TableHeaderFilters filterConfig={filterConfig} filters={headerFilter} />
-        )}
+        {typeof filterConfig === 'object' &&
+          !filterConfig.isLoading &&
+          !!filterConfig.filters?.header?.length && (
+            <TableHeaderFilters filterConfig={filterConfig} />
+          )}
 
         {typeof filterConfig === 'object' &&
           !filterConfig.isLoading &&

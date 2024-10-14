@@ -41,6 +41,9 @@ export enum FILTER_TYPE {
  *
  */
 export type FilterConfig = {
+  initialFilters?: {
+    [key: string]: string | string[]
+  }
   filters?: TableFilters
   isLoading: boolean
   isError: boolean

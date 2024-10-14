@@ -16,7 +16,10 @@ const invInitialQueries = {
     filter_type: '',
     filter_brand: '',
     filter_country: '',
-    filter_status: '',
+    filter_status: 'under_maintenance',
+    joining_date: '',
+    table_type: 'folders',
+    filter_status_2: 'unassigned',
   },
 }
 
