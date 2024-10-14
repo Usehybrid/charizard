@@ -26,6 +26,7 @@ export type DateConfig = Partial<DateRangePickerProps>
 export enum FILTER_TYPE {
   DATE_RANGE = 'date_range',
   MENU = 'menu',
+  TAB = 'tab',
 }
 
 /**

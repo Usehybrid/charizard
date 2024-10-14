@@ -1,6 +1,8 @@
-import {create} from 'zustand'
+import {createWithEqualityFn as create} from 'zustand/traditional'
 import {devtools} from 'zustand/middleware'
 import {FILTER_TYPE, InternalTableFilters} from './types'
+
+export const SINGLE_VALUE_FILTER_TYPES = [FILTER_TYPE.DATE_RANGE, FILTER_TYPE.TAB]
 
 export interface TableStore {
   filters: InternalTableFilters[]
@@ -20,18 +22,28 @@ export const useTableStore = create<TableStore>()(
       set(state => {
         const filters = state.filters.map(obj => {
           if (obj.key === filterKey) {
-            if (obj.type !== FILTER_TYPE.DATE_RANGE) {
-              const values = [...obj.values, value]
+            switch (obj.type) {
+              case FILTER_TYPE.DATE_RANGE: {
+                if (typeof filterDispatch === 'function') {
+                  filterDispatch({filterType: filterKey, value})
+                }
+                return {...obj, values: value}
+              }
+              case FILTER_TYPE.TAB: {
+                if (typeof filterDispatch === 'function') {
+                  filterDispatch({filterType: filterKey, value})
+                }
+                return {...obj, values: value}
+              }
 
-              if (typeof filterDispatch === 'function') {
-                filterDispatch({filterType: filterKey, value: values.join(',')})
+              default: {
+                const values = [...obj.values, value]
+
+                if (typeof filterDispatch === 'function') {
+                  filterDispatch({filterType: filterKey, value: values.join(',')})
+                }
+                return {...obj, values}
               }
-              return {...obj, values}
-            } else {
-              if (typeof filterDispatch === 'function') {
-                filterDispatch({filterType: filterKey, value})
-              }
-              return {...obj, values: value}
             }
           }
           return obj
@@ -58,13 +70,20 @@ export const useTableStore = create<TableStore>()(
       set(state => {
         const filters = state.filters.map(obj => {
           if (obj.key === filterKey) {
-            if (obj.type !== FILTER_TYPE.DATE_RANGE) {
-              const values = (obj.values as string[]).filter(objValue => objValue !== value)
-
-              if (typeof filterDispatch === 'function') {
-                filterDispatch({filterType: filterKey, value: values.join(',')})
+            switch (obj.type) {
+              case FILTER_TYPE.DATE_RANGE: {
               }
-              return {...obj, values}
+              case FILTER_TYPE.TAB: {
+              }
+
+              default: {
+                const values = (obj.values as string[]).filter(objValue => objValue !== value)
+
+                if (typeof filterDispatch === 'function') {
+                  filterDispatch({filterType: filterKey, value: values.join(',')})
+                }
+                return {...obj, values}
+              }
             }
           }
           return obj
@@ -78,7 +97,10 @@ export const useTableStore = create<TableStore>()(
             if (typeof filterDispatch === 'function') {
               filterDispatch({filterType: filterKey, value: ''})
             }
-            return {...obj, values: obj.type === FILTER_TYPE.DATE_RANGE ? '' : []}
+            return {
+              ...obj,
+              values: obj.type && SINGLE_VALUE_FILTER_TYPES.includes(obj.type) ? '' : [],
+            }
           }
           return obj
         })
@@ -90,7 +112,10 @@ export const useTableStore = create<TableStore>()(
           if (typeof filterReset === 'function') {
             filterReset()
           }
-          return {...obj, values: obj.type === FILTER_TYPE.DATE_RANGE ? '' : []}
+          return {
+            ...obj,
+            values: obj.type && SINGLE_VALUE_FILTER_TYPES.includes(obj.type) ? '' : [],
+          }
         }),
       })),
   })),

@@ -346,6 +346,27 @@ const filtersV2 = {
         showOutsideDays: false,
       },
     },
+    {
+      id: 'table-type',
+      name: 'Table Type',
+      key: 'table_type',
+      type: FILTER_TYPE.TAB,
+      options: [
+        {
+          value: 'folders',
+          name: 'Folder',
+        },
+        {
+          value: 'reports',
+          name: 'Reports',
+        },
+        {
+          value: 'files',
+          name: 'Files',
+        },
+      ],
+      config: {},
+    },
   ],
   drawer: [
     {

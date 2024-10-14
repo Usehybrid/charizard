@@ -8,9 +8,9 @@ import {BUTTON_V2_VARIANT} from '../../button-v2'
 import {DrawerV2} from '../../drawer-v2'
 import {Search} from '../../search'
 import {SVG} from '../../svg'
-import {useTableStore} from '../store'
+import {SINGLE_VALUE_FILTER_TYPES, useTableStore} from '../store'
 import FilterDrawerCheckboxNew from '../table-header-filters/FilterDrawerCheckboxNew'
-import {FILTER_TYPE, FilterConfig, MenuConfig} from '../types'
+import {FilterConfig, MenuConfig} from '../types'
 import classes from './table-filters-drawer.module.css'
 import {getDefaultCheckedState, removeUncheckedItems} from './utils'
 
@@ -49,7 +49,7 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
     if (!filters?.length || isLoading) return
     const mapFn = (filter: any) => ({
       key: filter.key,
-      values: filter.type === FILTER_TYPE.DATE_RANGE ? '' : [],
+      values: SINGLE_VALUE_FILTER_TYPES.includes(filter.type) ? '' : [],
       type: filter.type,
     })
     setDefaultFilters(

@@ -1,9 +1,10 @@
 import * as React from 'react'
-import {useTableStore} from '../store'
+import {SINGLE_VALUE_FILTER_TYPES, useTableStore} from '../store'
 import {FILTER_TYPE, type FilterConfig, type FilterOptions} from '../types'
 import TableHeaderDateRangeFilter from './TableHeaderDateRangeFilter'
 import TableHeaderFilter from './TableHeaderFilter'
 import classes from './styles.module.css'
+import TableHeaderSelectors from './TableHeaderSelectors'
 
 interface TableHeaderFiltersProps {
   filterConfig: FilterConfig
@@ -29,7 +30,7 @@ export default function TableHeaderFilters({filterConfig, filters}: TableHeaderF
       filters?.map(filter => {
         return {
           key: filter.key,
-          values: filter.type === FILTER_TYPE.DATE_RANGE ? '' : [],
+          values: filter.type && SINGLE_VALUE_FILTER_TYPES.includes(filter.type) ? '' : [],
           type: filter.type,
         }
       }) || [],
@@ -62,6 +63,9 @@ export default function TableHeaderFilters({filterConfig, filters}: TableHeaderF
 
         if (filter.type === FILTER_TYPE.DATE_RANGE) {
           return <TableHeaderDateRangeFilter {...filterProps} />
+        }
+        if (filter.type === FILTER_TYPE.TAB) {
+          return <TableHeaderSelectors {...filterProps} />
         }
         return <TableHeaderFilter {...filterProps} />
       })}
