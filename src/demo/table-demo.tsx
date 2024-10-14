@@ -21,6 +21,7 @@ export function TableDemo() {
         placeholder: 'Search your employees',
       }}
       filterConfig={{
+        initialFilters: query.filters,
         filters: filtersV2,
         isLoading: false,
         isError: false,
@@ -345,6 +346,27 @@ const filtersV2 = {
         disableDatepicker: false,
         showOutsideDays: false,
       },
+    },
+    {
+      id: 'table-type',
+      name: 'Table Type',
+      key: 'table_type',
+      type: FILTER_TYPE.TAB,
+      options: [
+        {
+          value: 'folders',
+          name: 'Folder',
+        },
+        {
+          value: 'reports',
+          name: 'Reports',
+        },
+        {
+          value: 'files',
+          name: 'Files',
+        },
+      ],
+      config: {},
     },
   ],
   drawer: [

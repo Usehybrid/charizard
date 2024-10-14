@@ -10,7 +10,7 @@ import {Search} from '../../search'
 import {SVG} from '../../svg'
 import {useTableStore} from '../store'
 import FilterDrawerCheckboxNew from '../table-header-filters/FilterDrawerCheckboxNew'
-import {FILTER_TYPE, FilterConfig, MenuConfig} from '../types'
+import {FilterConfig, MenuConfig} from '../types'
 import classes from './table-filters-drawer.module.css'
 import {getDefaultCheckedState, removeUncheckedItems} from './utils'
 
@@ -23,13 +23,13 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
   const [filterCheckedState, setFilterCheckedState] = React.useState<Record<string, any[]>>({})
   const [allCheckedState, setAllCheckedState] = React.useState<Record<string, boolean>>({})
   const [search, setSearch] = React.useState('')
-  const {setDefaultFilters, resetAllFilters, changeFiltersDrawer} = useTableStore(s => ({
+  const {resetAllFilters, changeFiltersDrawer} = useTableStore(s => ({
     setDefaultFilters: s.setDefaultFilters,
     resetAllFilters: s.resetAllFilters,
     changeFiltersDrawer: s.changeFiltersDrawer,
   }))
   const tableFilters = useTableStore(s => s.filters)
-  const {isLoading, filterDispatch} = filterConfig
+  const {filterDispatch} = filterConfig
 
   const filters = filterConfig.filters?.drawer ? filterConfig.filters.drawer : []
   const headerFilterKeys = filterConfig.filters?.header
@@ -44,19 +44,6 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
       return option.name.toLowerCase().includes(search.toLowerCase())
     })
     .map(op => op.value)
-
-  React.useEffect(() => {
-    if (!filters?.length || isLoading) return
-    const mapFn = (filter: any) => ({
-      key: filter.key,
-      values: filter.type === FILTER_TYPE.DATE_RANGE ? '' : [],
-      type: filter.type,
-    })
-    setDefaultFilters(
-      // @ts-ignore
-      [...(filterConfig.filters?.header?.map(mapFn) || []), ...filters?.map(mapFn)] || [],
-    )
-  }, [filters?.length, isLoading])
 
   React.useEffect(() => {
     if (!filters.length) return

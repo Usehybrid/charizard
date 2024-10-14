@@ -55,6 +55,7 @@ export default function TableHeaderFilter({
     let isChecked = false
     tableFilters.forEach(filter => {
       filter.values.length &&
+        Array.isArray(filter.values) &&
         (filter.values as string[]).forEach(obj => {
           if (obj === value) {
             isChecked = true

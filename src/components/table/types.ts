@@ -26,6 +26,7 @@ export type DateConfig = Partial<DateRangePickerProps>
 export enum FILTER_TYPE {
   DATE_RANGE = 'date_range',
   MENU = 'menu',
+  TAB = 'tab',
 }
 
 /**
@@ -40,6 +41,9 @@ export enum FILTER_TYPE {
  *
  */
 export type FilterConfig = {
+  initialFilters?: {
+    [key: string]: string | string[]
+  }
   filters?: TableFilters
   isLoading: boolean
   isError: boolean

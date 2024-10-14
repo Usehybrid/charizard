@@ -60,6 +60,7 @@ export default function TableHeaderDateRangeFilter({
         dateIcon: classes.dateIcon,
       }}
       size={BUTTON_V2_SIZE.SMALL}
+      placeholder={filter.name}
     />
   )
 }

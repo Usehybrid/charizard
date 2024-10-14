@@ -176,6 +176,7 @@ export function Table({
   customColumnConfig,
   exportConfig,
 }: TableProps) {
+  const initialRenderRef = React.useRef(true)
   const [sorting, setSorting] = React.useState<SortingState>([])
   // used for checkbox visibility
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
@@ -195,6 +196,7 @@ export function Table({
 
   useDeepCompareEffect(() => {
     if (!sortConfig) return
+
     const {setSortOrd, setSortBy, sortMap} = sortConfig
     if (!sorting.length) {
       setSortBy('')
@@ -204,6 +206,21 @@ export function Table({
     setSortBy(sortMap[sorting[0].id])
     setSortOrd(sorting[0].desc ? 'desc' : 'asc')
   }, [sorting])
+
+  React.useEffect(() => {
+    if (!sortConfig || !initialRenderRef.current) {
+      return
+    }
+
+    const {sortBy, sortOrd} = sortConfig
+    setSorting([
+      {
+        id: sortBy,
+        desc: sortOrd === 'desc',
+      },
+    ])
+    initialRenderRef.current = false
+  }, [sortConfig])
 
   useDeepCompareEffect(() => {
     if (!rowSelectionConfig || !setSelectedRows) return
