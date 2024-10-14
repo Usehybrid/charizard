@@ -32,9 +32,5 @@ export default function TableHeaderSelectors({
       return option.key === filter.key
     })?.values as string) || ''
 
-  return (
-    <>
-      <SelectorsV2 options={filterOptions} value={selectedValue} onChange={selectorHandler} />
-    </>
-  )
+  return <SelectorsV2 options={filterOptions} value={selectedValue} onChange={selectorHandler} />
 }

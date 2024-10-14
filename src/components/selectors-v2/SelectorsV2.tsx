@@ -16,12 +16,12 @@ export function SelectorsV2({options, onChange, value}: SelectorsV2Props) {
           onClick={() => {
             onChange(option.value)
           }}
-          className={clsx(classes.selector, option.value === value && classes.active)}
-          style={{
-            borderRadius:
-              idx === 0 ? '8px 0px 0px 8px' : idx === options.length - 1 ? '0px 8px 8px 0px' : 0,
-            boxShadow: idx === 0 ? 'none' : '',
-          }}
+          className={clsx(
+            classes.selector,
+            option.value === value && classes.active,
+            idx === 0 && classes.firstSelector,
+            idx === options.length - 1 && classes.lastSelector,
+          )}
         >
           {option.label}
         </div>

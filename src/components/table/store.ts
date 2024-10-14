@@ -72,8 +72,10 @@ export const useTableStore = create<TableStore>()(
           if (obj.key === filterKey) {
             switch (obj.type) {
               case FILTER_TYPE.DATE_RANGE: {
+                return obj
               }
               case FILTER_TYPE.TAB: {
+                return obj
               }
 
               default: {

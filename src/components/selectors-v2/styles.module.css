@@ -1,6 +1,5 @@
 .box {
   display: flex;
-  height: 26px;
   align-items: center;
   gap: 1px;
   height: 28px;
@@ -30,4 +29,14 @@
   background-color: var(--neutral-arch-30);
   color: var(--theme-blue);
   font-weight: 600;
+}
+
+
+.firstSelector {
+  border-radius: 8px 0px 0px 8px;
+  box-shadow: none;
+}
+
+.lastSelector {
+  border-radius: 0px 8px 8px 0px;
 }
