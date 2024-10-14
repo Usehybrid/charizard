@@ -2,18 +2,19 @@ import clsx from 'clsx'
 import classes from './users-chip.module.css'
 import {USER_CHIP_STATUS} from '../user-chip'
 
-export interface User {
+export interface UsersChipUser {
   first_name: string
   last_name: string
   work_email: string
   profile_img_url: string
   id: string
   middle_name?: string | null
+  user_position?: string | null
 }
 
 interface UsersChipProps {
   status?: USER_CHIP_STATUS
-  users: Array<User>
+  users: Array<Partial<UsersChipUser>>
 }
 
 export function UsersChip({status = USER_CHIP_STATUS.DEFAULT, users}: UsersChipProps) {
