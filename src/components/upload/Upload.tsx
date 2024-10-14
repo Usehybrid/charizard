@@ -1,5 +1,4 @@
 import * as React from 'react'
-import useDeepCompareEffect from 'use-deep-compare-effect'
 import classes from './styles.module.css'
 import clsx from 'clsx'
 import {formatBytes, getFileTypeIcon} from './helper'
@@ -100,10 +99,11 @@ export function Upload({
   error,
   addDocumentSubtitle,
   handleImageUpload,
-  variant = 'normal',
+  // variant = 'normal',
 }: UploadProps) {
   const [cancelledKey, setCancelledKey] = React.useState<string[]>([])
   const [files, setFiles] = React.useState<UploadFileType[] | []>([])
+  const [callUpload, setCallUpload] = React.useState(false)
   const [uploadedFiles, setUploadedFiles] = React.useState<UploadFileType[] | []>([])
   const [fileUploadProgress, setFileUploadProgress] = React.useState<progressBarType[]>([])
   const [fileUploadLimitError, setFileUploadLimitError] = React.useState<string | null>(null)
@@ -193,7 +193,7 @@ export function Upload({
       )
       // return
     }
-
+    setCallUpload(true)
     if (!isMultiple) {
       setFiles([...allFiles])
       fileInputRef.current.value = ''
@@ -203,12 +203,13 @@ export function Upload({
     fileInputRef.current.value = ''
   }
 
-  function handleFileRemove(key: string) {
-    const newFiles = files.filter(items => items.key !== key)
-    setFiles(newFiles)
+  function handleFileDelete(key:string) {
+    const newFiles = uploadedFiles.filter(items => items.key !== key)
+    setFiles(newFiles => newFiles.filter(items => items.key !== key))
     setUploadedFiles(files => files.filter(items => items.key !== key))
     getUploadDoc(newFiles)
   }
+
   const getDiffFile = () => {
     return (
       files
@@ -243,9 +244,9 @@ export function Upload({
   const getFileUploadProgress = (name: string) => {
     return fileUploadProgress.findLast(progress => progress.name === name)?.progress
   }
-  useDeepCompareEffect(() => {
+  React.useEffect(() => {
     const uploadFile = async () => {
-      const newFiles = structuredClone(files).filter(file => !cancelledKey?.includes(file.key))
+      const newFiles = structuredClone(files)
       setIsUploading && setIsUploading(true)
       const uploadedFiles = await handleImageUpload(
         newFiles,
@@ -259,10 +260,11 @@ export function Upload({
       setUploadedFiles(uploadedFiles)
       getUploadDoc(uploadedFiles)
       setIsUploading && setIsUploading(false)
+      setCallUpload(false)
     }
-    if (files.length) uploadFile()
+    if (files.length && callUpload) uploadFile()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [files])
+  }, [files?.length])
 
   return (
     <>
@@ -418,7 +420,7 @@ export function Upload({
                         </div>
                         <div
                           className={classes.actionBtn}
-                          onClick={() => handleFileRemove(file.key)}
+                          onClick={() => handleFileDelete(file.key)}
                         >
                           <img className={classes.deleteIcon} src={deleteOutline} alt="delete" />
                         </div>
