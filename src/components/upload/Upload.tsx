@@ -104,22 +104,28 @@ export function Upload({
 }: UploadProps) {
   const [cancelledKey, setCancelledKey] = React.useState<string[]>([])
   const [files, setFiles] = React.useState<UploadFileType[] | []>([])
+  const [uploadedFiles, setUploadedFiles] = React.useState<UploadFileType[] | []>([])
   const [fileUploadProgress, setFileUploadProgress] = React.useState<progressBarType[]>([])
   const [fileUploadLimitError, setFileUploadLimitError] = React.useState<string | null>(null)
   const [uploadLimitError, setUploadLimitError] = React.useState('')
   const fileInputRef = React.useRef<any>()
-  const isInputDisabled = fileUploadLimit && files.length >= fileUploadLimit ? true : false
+  const isInputDisabled =
+    (fileUploadLimit &&
+      files.filter(file => !cancelledKey.includes(file.key))?.length >= fileUploadLimit) ||
+    disabled
+      ? true
+      : false
 
   React.useEffect(() => {
-    console.log(uploadLimitError);
-    
+    console.log(uploadLimitError)
+
     const timer = setTimeout(() => {
       if (!!uploadLimitError.length) {
         setUploadLimitError('')
       }
     }, 5000)
 
-    return () => clearTimeout(timer);
+    return () => clearTimeout(timer)
   }, [uploadLimitError])
 
   React.useEffect(() => {
@@ -134,7 +140,11 @@ export function Upload({
     setFileUploadLimitError(null)
     setUploadLimitError('')
     let allFiles: any = []
-    if (fileUploadLimit && uploadedFiles.length + files.length > fileUploadLimit) {
+    if (
+      fileUploadLimit &&
+      uploadedFiles.length + files.filter(file => !cancelledKey.includes(file.key))?.length >
+        fileUploadLimit
+    ) {
       setFileUploadLimitError(
         `You are only allowed to upload ${fileUploadLimit} ${pluralize(
           fileUploadLimit,
@@ -158,7 +168,10 @@ export function Upload({
           size: formatBytes(uploadedFiles[key]?.size),
         })
       }
-      if (uploadedFiles[key]?.size && (uploadFileLimit || 5) < Number((uploadedFiles[key]?.size / (1024 * 1024)).toFixed(2))) {
+      if (
+        uploadedFiles[key]?.size &&
+        (uploadFileLimit || 5) < Number((uploadedFiles[key]?.size / (1024 * 1024)).toFixed(2))
+      ) {
         flag = true
       }
     }
@@ -190,10 +203,18 @@ export function Upload({
     fileInputRef.current.value = ''
   }
 
-  function handleFileRemove(key: any) {
+  function handleFileRemove(key: string) {
     const newFiles = files.filter(items => items.key !== key)
     setFiles(newFiles)
+    setUploadedFiles(files => files.filter(items => items.key !== key))
     getUploadDoc(newFiles)
+  }
+  const getDiffFile = () => {
+    return (
+      files
+        ?.filter(file => !cancelledKey?.includes(file.key))
+        ?.filter(file => !uploadedFiles?.find(uploadedFile => uploadedFile.key === file.key)) || []
+    )
   }
 
   const addProgressToImageUpload = (name: string) => {
@@ -235,7 +256,7 @@ export function Upload({
         inventoryId,
         softwareId,
       )
-      setFiles(uploadedFiles)
+      setUploadedFiles(uploadedFiles)
       getUploadDoc(uploadedFiles)
       setIsUploading && setIsUploading(false)
     }
@@ -349,7 +370,7 @@ export function Upload({
         {showFileList && (
           <div className={clsx(classes.fileContainer, fileContainerClassName)}>
             {!!files.length &&
-              files.map((file: UploadFileType, index) => (
+              [...uploadedFiles, ...getDiffFile()].map((file: UploadFileType, index) => (
                 <div key={file.key + file.fileName}>
                   {cancelledKey.indexOf(file.key || '') !== -1 ? (
                     <></>
@@ -428,16 +449,16 @@ export function Upload({
                               </div>
                               <div className={classes.smallCircle}></div>
                               <div>
-                                {file.size?.split(' ')[0] &&
+                                {file?.size?.split(' ')[0] &&
                                 getFileUploadProgress(file.key)?.toFixed(0) &&
-                                typeof Number(file.size?.split(' ')[0]) === 'number'
+                                typeof Number(file?.size?.split(' ')[0]) === 'number'
                                   ? (
-                                      +file.size?.split(' ')[0] *
+                                      +file?.size?.split(' ')[0] *
                                       ((Number(getFileUploadProgress(file.key)?.toFixed(0)) || 1) /
                                         100)
                                     ).toFixed(2)
                                   : ''}{' '}
-                                of {file.size}
+                                of {file?.size}
                               </div>
                             </div>
                           </div>
