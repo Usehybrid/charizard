@@ -1,6 +1,7 @@
 import {StrictMode} from 'react'
 import {createRoot} from 'react-dom/client'
-import {UploadDemo} from './demo/upload-demo'
+// import {UploadDemo} from './demo/upload-demo'
+import { UserChipMultiDemo } from './demo/user-chip-multi'
 
 const styles = {
   width: '90%',
@@ -23,7 +24,8 @@ function App() {
   return (
     <div style={styles}>
       {/* <ModalDemo /> */}
-      <UploadDemo />
+      {/* <UploadDemo /> */}
+      <UserChipMultiDemo />
     </div>
   )
 }

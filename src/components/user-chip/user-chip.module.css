@@ -86,3 +86,13 @@
 .userCount {
   color: var(--dark-d70);
 }
+
+.userChipContainerEmpty{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: var(--borderfull);
+  background: var(--dark-d10);
+  width: fit-content;
+  padding: 2px 6px;
+}
