@@ -1,7 +1,7 @@
-import {UserChip} from '../components'
+import {User, USER_CHIP_STATUS, UsersChip} from '../components'
 
 export function UserChipMultiDemo() {
-  const users = [
+  const users: User[] | undefined = [
     {
       first_name: 'Olaf',
       middle_name: null,
@@ -30,5 +30,15 @@ export function UserChipMultiDemo() {
       id: '6c32e9a5-9d2e-4fc8-a231-fe90ff0a990f',
     },
   ]
-  return <UserChip isMulti users={users} />
+  return (
+    <div style={{display: 'flex', gap: '24px'}}>
+      <UsersChip status={USER_CHIP_STATUS.WHITE} users={users} />
+      <UsersChip status={USER_CHIP_STATUS.NEUTRAL} users={users} />
+      <UsersChip status={USER_CHIP_STATUS.POSITIVE} users={users} />
+      <UsersChip status={USER_CHIP_STATUS.ERROR} users={users} />
+      <UsersChip status={USER_CHIP_STATUS.WARNING} users={users} />
+      <UsersChip status={USER_CHIP_STATUS.HIGHLIGHT} users={users} />
+      <UsersChip status={USER_CHIP_STATUS.DEFAULT} users={users} />
+    </div>
+  )
 }

@@ -1,54 +1,71 @@
-.box {
+.userChipContainer {
   display: flex;
   align-items: center;
-  padding-right: 6px;
-  gap: 4px;
   border-radius: var(--borderfull);
-  max-width: fit-content;
+  width: fit-content;
 }
 
-.box.neutral {
+.nonZeroState {
+  gap: 16px;
+  padding-right: 10px;
+}
+
+.zeroState {
+  justify-content: center;
+  padding: 2px 6px;
+}
+
+.userChipContainer.neutral {
   background-color: var(--dark-d10);
   color: var(--dark-d70);
 }
 
-.box.default {
+.userChipContainer.default {
   background-color: var(--p-p10);
   color: var(--p-p70);
 }
 
-.box.positive {
+.userChipContainer.positive {
   background-color: var(--status-success-s10);
   color: var(--status-success-s70);
 }
 
-.box.warning {
+.userChipContainer.warning {
   background-color: var(--status-warning-w10);
   color: var(--status-warning-w70);
 }
 
-.box.error {
+.userChipContainer.error {
   background-color: var(--status-error-e10);
   color: var(--status-error-e70);
 }
 
-.box.highlight {
+.userChipContainer.highlight {
   background-color: var(--status-info-i10);
   color: var(--status-info-i70);
 }
 
-.box.white {
+.userChipContainer.white {
   background-color: var(--neutral-white);
   color: var(--text-primary);
 }
 
-.avatar {
-  width: 20px;
-  height: 20px;
-  border-radius: 100%;
+.userChipImageContainer {
+  position: relative;
+  display: flex;
 }
 
-.icon {
-  width: 16px;
-  height: 16px;
+.profileImage {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+}
+
+.firstImage {
+  z-index: 10;
+}
+
+.secondImage {
+  position: absolute;
+  left: 10px;
 }
