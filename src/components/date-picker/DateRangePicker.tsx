@@ -41,6 +41,7 @@ export function DateRangePicker({
   customClasses = {},
   size = BUTTON_V2_SIZE.DEFAULT,
   onReset,
+  placeholder,
   ...props
 }: DateRangePickerProps) {
   const date = value
@@ -49,7 +50,7 @@ export function DateRangePicker({
   const [hoverRange, setHoverRange] = React.useState<DateRange | undefined>(undefined)
 
   const displayDate = React.useMemo(() => {
-    if (!date?.from) return 'Pick a date'
+    if (!date?.from) return placeholder || 'Pick a date'
     if (date.to) {
       if (isSameDay(date.from, date.to)) {
         return dateFormatter.format(date.from)
@@ -60,7 +61,7 @@ export function DateRangePicker({
       return dateFormatter.format(date.from)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [date])
+  }, [date, placeholder])
 
   const onSelect = (values?: DateRange) => {
     if (showQuickSelect && selectedRange.value !== RANGE_OPTIONS[0].value) {
