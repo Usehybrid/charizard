@@ -220,7 +220,7 @@ export function Table({
       },
     ])
     initialRenderRef.current = false
-  }, [sortConfig, initialRenderRef])
+  }, [sortConfig])
 
   useDeepCompareEffect(() => {
     if (!rowSelectionConfig || !setSelectedRows) return

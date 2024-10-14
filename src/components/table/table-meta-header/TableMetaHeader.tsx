@@ -49,8 +49,8 @@ export default function TableMetaHeader({
   )}`
 
   const filters = [
-    ...(filterConfig?.filters?.header ? filterConfig.filters.header : []),
-    ...(filterConfig?.filters?.drawer ? filterConfig.filters.drawer : []),
+    ...(filterConfig?.filters?.header || []),
+    ...(filterConfig?.filters?.drawer || []),
   ]
 
   const resetAll = useTableStore(s => s.resetAllFilters)
