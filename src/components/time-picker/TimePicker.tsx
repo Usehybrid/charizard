@@ -35,6 +35,7 @@ export function TimePicker({
   onTimeChange,
   format = TIME_PICKER_FORMAT.STANDARD,
   enableSeconds = false,
+  className,
   containerClassName,
   ...props
 }: TimePickerProps) {
@@ -127,7 +128,7 @@ export function TimePicker({
       key={String(open)}
     >
       <PopoverTrigger className={classes.trigger} openOnHover={false}>
-        <InputGroupV2>
+        <InputGroupV2 className={className}>
           <InputV2
             value={formattedValue}
             placeholder={placeholder}
