@@ -29,10 +29,19 @@ export const InputV2 = React.forwardRef<HTMLInputElement, InputV2Props>(
       className = '',
       inputStyles = {},
       containerStyles = {},
+      onErrorHeightChange,
       ...props
     },
     ref,
   ) => {
+    const errorRef = React.useRef<HTMLSpanElement>(null)
+
+    React.useEffect(() => {
+      if (errorRef.current && onErrorHeightChange) {
+        onErrorHeightChange(errorRef.current.offsetHeight)
+      }
+    }, [errorMsg, onErrorHeightChange])
+
     return (
       <div className={clsx(classes.inputContainer, containerClassName)} style={containerStyles}>
         <input
@@ -47,7 +56,9 @@ export const InputV2 = React.forwardRef<HTMLInputElement, InputV2Props>(
           style={inputStyles}
         />
         {errorMsg && (
-          <span className={clsx('zap-subcontent-medium', classes.error)}>{errorMsg}</span>
+          <span ref={errorRef} className={clsx('zap-subcontent-medium', classes.error)}>
+            {errorMsg}
+          </span>
         )}
       </div>
     )

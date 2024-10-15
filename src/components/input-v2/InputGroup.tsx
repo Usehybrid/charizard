@@ -51,8 +51,13 @@ const styleMap: Record<string, React.CSSProperties> = {
 }
 
 export function InputGroupV2({className = '', children, ...props}: InputGroupPropsV2) {
+  const [errorHeight, setErrorHeight] = React.useState<number | null>(null)
   const styles: React.CSSProperties = {}
   let iconStyles: React.CSSProperties = {}
+
+  const handleErrorHeightChange = (height: number) => {
+    setErrorHeight(height)
+  }
 
   React.Children.forEach(children, child => {
     if (!React.isValidElement(child)) return
@@ -69,7 +74,7 @@ export function InputGroupV2({className = '', children, ...props}: InputGroupPro
       const inputProps = child.props
       const {errorMsg} = inputProps
       if (errorMsg) {
-        iconStyles = {top: 'calc(50% - 9px)'}
+        iconStyles = {top: `calc(50% - ${(errorHeight || 9) / 2}px)`}
       }
     }
   })
@@ -85,6 +90,7 @@ export function InputGroupV2({className = '', children, ...props}: InputGroupPro
         [INPUT_COMPONENTS.INPUT]: {
           inputStyles: {...styles, ...child.props.inputStyles},
           containerStyles: {width: '100%', ...child.props.inputStyles},
+          onErrorHeightChange: handleErrorHeightChange,
         },
         [INPUT_COMPONENTS.NUMBER_ADORNMENT]: {
           incrementBtnStyles: {...styles, ...child.props.incrementBtnStyles},
