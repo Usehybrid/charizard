@@ -28,6 +28,8 @@ export function InputLeftIcon({
   iconStyles,
   disabled = false,
   className = '',
+  svgClassName = '',
+  spanClassName = '',
 }: InputIconProps) {
   if (onClick) {
     return (
@@ -45,8 +47,8 @@ export function InputLeftIcon({
       >
         <SVG
           path={icon}
-          spanClassName={classes.inputIconWrapper}
-          svgClassName={classes.inputIcon}
+          spanClassName={clsx(classes.inputIconWrapper, spanClassName)}
+          svgClassName={clsx(classes.inputIcon, svgClassName)}
         />
       </button>
     )
@@ -57,9 +59,11 @@ export function InputLeftIcon({
       spanClassName={clsx(
         classes.inputIconContainer,
         classes.leftIcon,
+        spanClassName,
         disabled && classes.disabled,
       )}
-      svgClassName={classes.inputIcon}
+      svgClassName={clsx(classes.inputIcon, svgClassName)}
+      customSpanStyles={iconStyles}
     />
   )
 }
@@ -89,6 +93,8 @@ export function InputRightIcon({
   iconStyles,
   disabled = false,
   className = '',
+  svgClassName = '',
+  spanClassName = '',
 }: InputIconProps) {
   if (onClick) {
     return (
@@ -106,8 +112,8 @@ export function InputRightIcon({
       >
         <SVG
           path={icon}
-          spanClassName={classes.inputIconWrapper}
-          svgClassName={classes.inputIcon}
+          spanClassName={clsx(classes.inputIconWrapper, spanClassName)}
+          svgClassName={clsx(classes.inputIcon, svgClassName)}
         />
       </button>
     )
@@ -118,9 +124,11 @@ export function InputRightIcon({
       spanClassName={clsx(
         classes.inputIconContainer,
         classes.rightIcon,
+        spanClassName,
         disabled && classes.disabled,
       )}
-      svgClassName={classes.inputIcon}
+      svgClassName={clsx(classes.inputIcon, svgClassName)}
+      customSpanStyles={iconStyles}
     />
   )
 }

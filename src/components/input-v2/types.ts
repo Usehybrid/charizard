@@ -1,3 +1,4 @@
+import {SVGProps} from '../svg'
 import {TooltipV2Props} from '../tooltip-v2/TooltipV2'
 
 /**
@@ -52,6 +53,8 @@ export interface InputV2Props extends React.InputHTMLAttributes<HTMLInputElement
   inputStyles?: React.CSSProperties
   /** @internal */
   containerStyles?: React.CSSProperties
+  /** @internal */
+  onErrorHeightChange?: (height: number) => void
 }
 
 /**
@@ -180,7 +183,7 @@ export interface InputGroupPropsV2 extends React.HTMLAttributes<HTMLDivElement> 
  *   <InputRightIcon icon={...} />
  * </InputGroupV2>
  */
-export interface InputIconProps {
+export interface InputIconProps extends Omit<SVGProps, 'path'> {
   icon: string
   onClick?: () => void
   /** @internal */
