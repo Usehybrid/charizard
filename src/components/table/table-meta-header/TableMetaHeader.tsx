@@ -63,26 +63,24 @@ export default function TableMetaHeader({
   }, [])
 
   React.useEffect(() => {
-    if (filterConfig) {
-      if (filterConfig?.isLoading) return
+    if (filterConfig?.isLoading) return
 
-      const mapFn = (filter: any) => {
-        const isMulti = !SINGLE_VALUE_FILTER_TYPES.includes(filter.type)
-        let defaultValues = isMulti ? ([] as string[]) : ''
-        const filterDefaultValue = filterConfig.initialFilters?.[filter.key] as string
-        if (filterDefaultValue) {
-          defaultValues = isMulti ? filterDefaultValue.split(',') : filterDefaultValue
-        }
-        return {
-          key: filter.key,
-          values: defaultValues,
-          type: filter.type,
-        }
+    const mapFn = (filter: any) => {
+      const isMulti = !SINGLE_VALUE_FILTER_TYPES.includes(filter.type)
+      let defaultValues = isMulti ? ([] as string[]) : ''
+      const filterDefaultValue = filterConfig?.initialFilters?.[filter.key] as string
+      if (filterDefaultValue) {
+        defaultValues = isMulti ? filterDefaultValue.split(',') : filterDefaultValue
       }
-
-      setDefaultFilters([...filters?.map(mapFn)])
+      return {
+        key: filter.key,
+        values: defaultValues,
+        type: filter.type,
+      }
     }
-  }, [filters?.length, filterConfig])
+
+    setDefaultFilters([...filters?.map(mapFn)])
+  }, [filters?.length, filterConfig?.initialFilters])
 
   return (
     <div className={classes.box}>
