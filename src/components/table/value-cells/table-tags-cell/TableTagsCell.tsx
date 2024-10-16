@@ -35,7 +35,7 @@ interface TableTagsCellProps {
  * @param {TableTagsCellProps} props - The component props.
  * @returns {React.ReactElement} The rendered component.
  */
-export default function TableTagsCell({
+export function TableTagsCell({
   items,
   maxVisible = 3,
   renderBadge = item => <Badge key={item.name}>{item.name}</Badge>,
