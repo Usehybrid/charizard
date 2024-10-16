@@ -97,6 +97,11 @@ export default function TableMetaHeader({
       </div>
 
       <div className={classes.actions}>
+        {typeof filterConfig === 'object' &&
+          !filterConfig.isLoading &&
+          !!filterConfig.filters?.header?.length && (
+            <TableHeaderFilters filterConfig={filterConfig} showTabs />
+          )}
         {typeof searchConfig === 'object' && (
           <div className={classes.search}>
             <Search

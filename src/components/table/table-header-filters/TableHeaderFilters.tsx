@@ -7,9 +7,13 @@ import TableHeaderSelectors from './TableHeaderSelectors'
 
 interface TableHeaderFiltersProps {
   filterConfig: FilterConfig
+  showTabs?: boolean
 }
 
-export default function TableHeaderFilters({filterConfig}: TableHeaderFiltersProps) {
+export default function TableHeaderFilters({
+  filterConfig,
+  showTabs = false,
+}: TableHeaderFiltersProps) {
   const {isLoading, isError, filterDispatch} = filterConfig
 
   const filters = filterConfig.filters?.header ? filterConfig.filters.header : []
@@ -43,13 +47,13 @@ export default function TableHeaderFilters({filterConfig}: TableHeaderFiltersPro
           filterDispatch: filterDispatch,
         }
 
-        if (filter.type === FILTER_TYPE.DATE_RANGE) {
+        if (filter.type === FILTER_TYPE.DATE_RANGE && !showTabs) {
           return <TableHeaderDateRangeFilter key={filter.id} {...filterProps} />
         }
-        if (filter.type === FILTER_TYPE.TAB) {
+        if (showTabs && filter.type === FILTER_TYPE.TAB) {
           return <TableHeaderSelectors key={filter.id} {...filterProps} />
         }
-        return <TableHeaderFilter key={filter.id} {...filterProps} />
+        return !showTabs && <TableHeaderFilter key={filter.id} {...filterProps} />
       })}
     </div>
   )
