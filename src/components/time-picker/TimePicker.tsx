@@ -136,7 +136,11 @@ export function TimePicker({
             containerClassName={clsx(classes.timeInput, containerClassName)}
             {...props}
           />
-          <InputRightIcon icon={clockIcon} svgClassName={classes.triggerIcon} />
+          <InputRightIcon
+            disabled={props.disabled}
+            icon={clockIcon}
+            svgClassName={classes.triggerIcon}
+          />
         </InputGroupV2>
       </PopoverTrigger>
       <PopoverContent
