@@ -64,6 +64,7 @@ export default function TableHeaderFilters({
             }
             break
         }
+        return null
       })}
     </div>
   )
