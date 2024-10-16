@@ -99,8 +99,8 @@ export function Upload({
   error,
   addDocumentSubtitle,
   handleImageUpload,
-  // variant = 'normal',
-}: UploadProps) {
+}: // variant = 'normal',
+UploadProps) {
   const [cancelledKey, setCancelledKey] = React.useState<string[]>([])
   const [files, setFiles] = React.useState<UploadFileType[] | []>([])
   const [callUpload, setCallUpload] = React.useState(false)
@@ -203,7 +203,7 @@ export function Upload({
     fileInputRef.current.value = ''
   }
 
-  function handleFileDelete(key:string) {
+  function handleFileDelete(key: string) {
     const newFiles = uploadedFiles.filter(items => items.key !== key)
     setFiles(newFiles => newFiles.filter(items => items.key !== key))
     setUploadedFiles(files => files.filter(items => items.key !== key))
@@ -347,7 +347,7 @@ export function Upload({
                     <span>File Type: </span>
                     <b> {addDocumentSubtitle || `PDF, Doc, Docx, PNG, WEBP,Xls, Xlsx and JPEG.`}</b>
                     <div className={classes.smallCircle}></div>
-                    Max size: <b>{`${uploadFileLimit || 5} MB`}</b>
+                    Max size per file: <b>{`${uploadFileLimit || 5} MB`}</b>
                     <div className={classes.smallCircle}></div>
                     Upload allowed: <b>{fileUploadLimit}</b>
                   </div>
