@@ -1,4 +1,6 @@
 export * from './Table'
+export * from './value-cells/table-box-ellipses/TableBoxEllipses'
 export * from './value-cells/table-user-cell/TableUserCell'
 export * from './value-cells/table-device-cell/TableDeviceCell'
+export * from './value-cells/table-tags-cell/TableTagsCell'
 export * from './table-pagination/TablePagination'
