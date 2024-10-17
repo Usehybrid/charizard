@@ -66,7 +66,7 @@ export type TableFilters = {
 }
 
 export type TableCustomColumns = {
-  checked_state: Array<{id: string; label: string; checked: boolean}>
+  checked_state: Array<{id: string; label: string; checked: boolean; group?: string}>
   is_default: boolean
   table_name: string
 }

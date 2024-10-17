@@ -233,3 +233,7 @@
 .optionDisabled:hover {
   background: var(--neutral-arch-50);
 }
+
+.grouped {
+  border-bottom: 1px solid var(--text-secondary);
+}
