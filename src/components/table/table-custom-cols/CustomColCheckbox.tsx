@@ -1,9 +1,9 @@
 import * as React from 'react'
 import * as checkbox from '@zag-js/checkbox'
+import clsx from 'clsx'
 import classes from './table-custom-cols.module.css'
 import {useMachine, normalizeProps} from '@zag-js/react'
 import {OptionsProp} from './TableCustomCols'
-import clsx from 'clsx'
 
 type CustomColCheckboxProps = Pick<OptionsProp, 'setCheckedState'> & {
   id: string
