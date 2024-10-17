@@ -1,7 +1,7 @@
-import {createColumnHelper} from '@tanstack/react-table'
 import * as React from 'react'
-import {Table} from '../components'
 import randomIcon from '../components/assets/check.svg'
+import {createColumnHelper} from '@tanstack/react-table'
+import {Table} from '../components'
 import {INV_ACTION_TYPES, useInventoryStore} from '../components/table/inventory/inventory.store'
 import {FILTER_TYPE} from '../components/table/types'
 
@@ -179,36 +179,43 @@ const cols = {
       id: 'location',
       label: 'Location',
       checked: true,
+      group: 'Group 1',
     },
     {
       id: 'compliant',
       label: 'Compliant',
       checked: true,
+      group: 'Group 1',
     },
     {
       id: 'encrypted',
       label: 'Encrypted',
       checked: true,
+      group: 'Group 1',
     },
     {
       id: 'operating_system',
       label: 'Operating System',
       checked: true,
+      group: 'Group 1',
     },
     {
       id: 'manufacturer',
       label: 'Manufacturer',
       checked: true,
+      group: 'Group 2',
     },
     {
       id: 'allocated_to',
       label: 'Allocated to',
       checked: true,
+      group: 'Group 2',
     },
     {
       id: 'imei_1',
       label: 'IMEI 1',
       checked: true,
+      group: 'Group 2',
     },
     {
       id: 'last_checked_at',

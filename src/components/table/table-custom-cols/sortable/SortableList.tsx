@@ -16,36 +16,44 @@ import {CheckedState} from '../TableCustomCols'
 
 interface BaseItem {
   id: UniqueIdentifier
+  group?: string
+  checked: boolean
+  label: string
 }
 
 interface Props<T extends BaseItem> {
   items: T[]
   onChange: React.Dispatch<React.SetStateAction<CheckedState[]>>
-  renderItem(item: T): React.ReactNode
-  search: string
+  renderItem: (item: T) => React.ReactNode
 }
 
-export function SortableList<T extends BaseItem>({
-  items: _items,
-  onChange,
-  renderItem,
-  search,
-}: Props<T>) {
-  // const [items, setItems] = React.useState()
+export function SortableList<T extends BaseItem>({items: _items, onChange, renderItem}: Props<T>) {
+  const groupedItems = React.useMemo(() => {
+    const groups: {[key: string]: T[]} = {}
+    const ungroupedItems: T[] = []
 
-  // const items = _items.filter((i: any) => i.checked)
-  const items = _items.filter((i: any) => {
-    return i.checked
-    // if (search.length) {
-    //   condition = i.label.toLowerCase().includes(search.toLowerCase())
-    // }
-  })
+    _items.forEach(item => {
+      if (item.checked) {
+        if (item.group) {
+          if (!groups[item.group]) {
+            groups[item.group] = []
+          }
+          groups[item.group].push(item)
+        } else {
+          ungroupedItems.push(item)
+        }
+      }
+    })
+
+    return {groups, ungroupedItems}
+  }, [_items])
 
   const [active, setActive] = React.useState<Active | null>(null)
   const activeItem = React.useMemo(
-    () => items.find(item => item.id === active?.id),
-    [active, items],
+    () => _items.find(item => item.id === active?.id),
+    [active, _items],
   )
+
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(MouseSensor, {}),
@@ -62,40 +70,49 @@ export function SortableList<T extends BaseItem>({
       }}
       onDragEnd={({active, over}) => {
         if (over && active.id !== over?.id) {
-          const activeIndex = items.findIndex(({id}) => id === active.id)
-          const overIndex = items.findIndex(({id}) => id === over.id)
+          onChange(prevItems => {
+            const activeIndex = prevItems.findIndex(({id}) => id === active.id)
+            const overIndex = prevItems.findIndex(({id}) => id === over.id)
 
-          // onChange(arrayMove(items, activeIndex, overIndex) as unknown as CheckedState[])
-          onChange(s => {
-            const newState = [
-              ...(arrayMove(items, activeIndex, overIndex) as unknown as CheckedState[]),
-              ...s.filter((i: any) => !i.checked),
-            ]
+            // Ensure items are in the same group (or both ungrouped)
+            const activeItem = prevItems[activeIndex]
+            const overItem = prevItems[overIndex]
+            if (activeItem.group !== overItem.group) {
+              return prevItems // Do not move if groups are different
+            }
 
-            return newState
+            return arrayMove(prevItems, activeIndex, overIndex)
           })
         }
         setActive(null)
-
-        // if (active && over && active.id !== over.id) {
-        //   setColumnOrder(columnOrder => {
-        //     const oldIndex = columnOrder.indexOf(active.id as string)
-        //     const newIndex = columnOrder.indexOf(over.id as string)
-        //     return arrayMove(columnOrder, oldIndex, newIndex) //this is just a splice util
-        //   })
-        // }
       }}
       onDragCancel={() => {
         setActive(null)
       }}
     >
-      <SortableContext items={items}>
-        <ul className={classes.sortList} role="application">
-          {items.map(item => (
-            <React.Fragment key={item.id}>{renderItem(item)}</React.Fragment>
-          ))}
-        </ul>
-      </SortableContext>
+      {Object.entries(groupedItems.groups).map(([group, items]) => (
+        <div key={group} className={classes.grouped}>
+          <p className={classes.info}>{group}</p>
+          <SortableContext items={items}>
+            <ul role="application" className={classes.sortList}>
+              {items.map(item => (
+                <React.Fragment key={item.id}>{renderItem(item)}</React.Fragment>
+              ))}
+            </ul>
+          </SortableContext>
+        </div>
+      ))}
+      {groupedItems.ungroupedItems.length > 0 && (
+        <div>
+          <SortableContext items={groupedItems.ungroupedItems}>
+            <ul role="application" className={classes.sortList}>
+              {groupedItems.ungroupedItems.map(item => (
+                <React.Fragment key={item.id}>{renderItem(item)}</React.Fragment>
+              ))}
+            </ul>
+          </SortableContext>
+        </div>
+      )}
       <SortableOverlay>{activeItem ? renderItem(activeItem) : null}</SortableOverlay>
     </DndContext>
   )
@@ -103,3 +120,88 @@ export function SortableList<T extends BaseItem>({
 
 SortableList.Item = SortableItem
 SortableList.DragHandle = DragHandle
+
+// import * as React from 'react'
+// import classes from './sortable.module.css'
+// import {
+//   DndContext,
+//   KeyboardSensor,
+//   MouseSensor,
+//   PointerSensor,
+//   useSensor,
+//   useSensors,
+// } from '@dnd-kit/core'
+// import {SortableContext, arrayMove, sortableKeyboardCoordinates} from '@dnd-kit/sortable'
+// import {DragHandle, SortableItem} from './SortableItem'
+// import {SortableOverlay} from './SortableOverlay'
+// import type {Active, UniqueIdentifier} from '@dnd-kit/core'
+// import {CheckedState} from '../TableCustomCols'
+
+// interface BaseItem {
+//   id: UniqueIdentifier
+// }
+
+// interface Props<T extends BaseItem> {
+//   items: T[]
+//   onChange: React.Dispatch<React.SetStateAction<CheckedState[]>>
+//   renderItem(item: T): React.ReactNode
+// }
+
+// export function SortableList<T extends BaseItem>({items: _items, onChange, renderItem}: Props<T>) {
+//   const items = _items.filter((i: any) => {
+//     return i.checked
+//   })
+
+//   const [active, setActive] = React.useState<Active | null>(null)
+//   const activeItem = React.useMemo(
+//     () => items.find(item => item.id === active?.id),
+//     [active, items],
+//   )
+//   const sensors = useSensors(
+//     useSensor(PointerSensor),
+//     useSensor(MouseSensor, {}),
+//     useSensor(KeyboardSensor, {
+//       coordinateGetter: sortableKeyboardCoordinates,
+//     }),
+//   )
+
+//   return (
+//     <DndContext
+//       sensors={sensors}
+//       onDragStart={({active}) => {
+//         setActive(active)
+//       }}
+//       onDragEnd={({active, over}) => {
+//         if (over && active.id !== over?.id) {
+//           const activeIndex = items.findIndex(({id}) => id === active.id)
+//           const overIndex = items.findIndex(({id}) => id === over.id)
+
+//           onChange(s => {
+//             const newState = [
+//               ...(arrayMove(items, activeIndex, overIndex) as unknown as CheckedState[]),
+//               ...s.filter((i: any) => !i.checked),
+//             ]
+
+//             return newState
+//           })
+//         }
+//         setActive(null)
+//       }}
+//       onDragCancel={() => {
+//         setActive(null)
+//       }}
+//     >
+//       <SortableContext items={items}>
+//         <ul className={classes.sortList} role="application">
+//           {items.map(item => (
+//             <React.Fragment key={item.id}>{renderItem(item)}</React.Fragment>
+//           ))}
+//         </ul>
+//       </SortableContext>
+//       <SortableOverlay>{activeItem ? renderItem(activeItem) : null}</SortableOverlay>
+//     </DndContext>
+//   )
+// }
+
+// SortableList.Item = SortableItem
+// SortableList.DragHandle = DragHandle

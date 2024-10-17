@@ -2,14 +2,9 @@ import * as React from 'react'
 import clsx from 'clsx'
 import CustomColCheckbox from './CustomColCheckbox'
 import viewColIcon from '../../assets/views/view-table-list.svg'
-// import * as dialog from '@zag-js/dialog'
-// import closeIcon from '../../assets/close.svg'
 import classes from './table-custom-cols.module.css'
 import {Table} from '@tanstack/react-table'
-import {
-  // useMachine, normalizeProps,
-  Portal,
-} from '@zag-js/react'
+import {Portal} from '@zag-js/react'
 import {SVG} from '../../svg'
 import {Search} from '../../search'
 import {SortableList} from './sortable/SortableList'
@@ -37,6 +32,7 @@ export type CheckedState = {
   id: string
   label: string
   checked: boolean
+  group?: string
 }
 
 export default function TableCustomCols({
@@ -49,22 +45,6 @@ export default function TableCustomCols({
   const {columns, isPending, isError, handleSaveColumns} = customColumnConfig
   const [checkedState, setCheckedState] = React.useState<TableCustomColumns['checked_state']>([])
   const [search, setSearch] = React.useState('')
-
-  // const [state, send] = useMachine(
-  //   dialog.machine({
-  //     id: React.useId(),
-  //     onOpenChange(details) {
-  //       if (!details.open) {
-  //         setSearch('')
-  //       }
-  //     },
-  //     // todo debug the root cause in zag source code
-  //     closeOnInteractOutside: false,
-  //     preventScroll: false,
-  //   }),
-  // )
-
-  // const api = dialog.connect(state, send, normalizeProps)
 
   const disabledCols = table
     .getAllLeafColumns()
@@ -110,7 +90,6 @@ export default function TableCustomCols({
   const handleSave = () => {
     configureTable(checkedState)
     handleSaveColumns(checkedState)
-    // api.setOpen(false)
     onClose()
   }
 
@@ -132,10 +111,6 @@ export default function TableCustomCols({
 
   return (
     <>
-      {/* <button {...api.getTriggerProps()} className={clsx('zap-reset-btn', classes.actionCommon)}>
-        <SVG path={viewColIcon} width={16} height={16} />
-      </button> */}
-
       <button onClick={onOpen} className={clsx('zap-reset-btn', classes.actionCommon)}>
         <SVG path={viewColIcon} width={16} height={16} />
       </button>
@@ -184,7 +159,6 @@ export default function TableCustomCols({
                   <SortableList
                     items={checkedState}
                     onChange={setCheckedState}
-                    search={search}
                     renderItem={column => (
                       <SortableList.Item
                         id={column.id}
@@ -222,120 +196,6 @@ export default function TableCustomCols({
       </Portal>
     </>
   )
-
-  // return (
-  //   <>
-  //     <button {...api.getTriggerProps()} className={clsx('zap-reset-btn', classes.actionCommon)}>
-  //       <SVG path={viewColIcon} width={16} height={16} />
-  //     </button>
-  //     {api.open && (
-  //       <Portal>
-  //         <div {...api.getBackdropProps()} className={classes.backdrop} />
-  //         <div {...api.getPositionerProps()} style={{...api.getPositionerProps().style}}>
-  //           <div {...api.getContentProps()} className={classes.content}>
-  //             <h2 {...api.getTitleProps()} className={classes.title}>
-  //               <div>
-  //                 <span>Columns</span>
-  //                 <p {...api.getDescriptionProps()} className={classes.desc}>
-  //                   {customColumnConfig?.description || `Description here`}
-  //                 </p>
-  //               </div>
-  //               <button {...api.getCloseTriggerProps()} type="button" className="zap-reset-btn">
-  //                 <SVG
-  //                   path={closeIcon}
-  //                   svgClassName={classes.closeIcon}
-  //                   spanClassName={classes.closeIconSpan}
-  //                 />
-  //               </button>
-  //             </h2>
-
-  //             {isError ? (
-  //               <div className={classes.error}>Something went wrong, please try again later.</div>
-  //             ) : isPending ? (
-  //               <Loader />
-  //             ) : (
-  //               <div className={classes.colBox}>
-  //                 <div className={classes.dropdownSearch}>
-  //                   <Search
-  //                     id="table-custom-column-search"
-  //                     search={search}
-  //                     setSearch={setSearch}
-  //                     placeholder={'Search columns'}
-  //                   />
-  //                 </div>
-
-  //                 <div className={classes.option}>
-  //                   <CustomColCheckbox
-  //                     label={'All'}
-  //                     id={'all'}
-  //                     checked={nonDraggableCols.length === 0}
-  //                     setCheckedState={setCheckedState}
-  //                   />
-  //                 </div>
-
-  //                 {disabledCols.map(column => (
-  //                   <div key={column.id} className={clsx(classes.option, classes.optionDisabled)}>
-  //                     <CustomColCheckbox
-  //                       label={column.columnDef.header as string}
-  //                       id={column.id}
-  //                       checked={true}
-  //                       disabled
-  //                       setCheckedState={setCheckedState}
-  //                     />
-  //                   </div>
-  //                 ))}
-
-  //                 <>
-  //                   {draggableCols.length > 0 && <p className={classes.info}>Selected</p>}
-  //                   <SortableList
-  //                     items={checkedState}
-  //                     onChange={setCheckedState}
-  //                     search={search}
-  //                     renderItem={column => (
-  //                       <SortableList.Item
-  //                         id={column.id}
-  //                         isHidden={
-  //                           !!search.length &&
-  //                           !column.label.toLowerCase().includes(search.toLowerCase())
-  //                         }
-  //                       >
-  //                         <CustomColCheckbox
-  //                           label={column.label}
-  //                           id={column.id}
-  //                           checked={
-  //                             checkedState[checkedState.findIndex(obj => obj.id === column.id)]
-  //                               .checked
-  //                           }
-  //                           setCheckedState={setCheckedState}
-  //                         />
-  //                         <SortableList.DragHandle />
-  //                       </SortableList.Item>
-  //                     )}
-  //                   />
-  //                 </>
-
-  //                 <Options
-  //                   cols={filteredNonDragCols}
-  //                   text="Not Selected"
-  //                   textCn={classes.info2}
-  //                   checkedState={checkedState}
-  //                   setCheckedState={setCheckedState}
-  //                 />
-  //               </div>
-  //             )}
-
-  //             <div className={classes.footer}>
-  //               <Button {...api.getCloseTriggerProps()} variant={BUTTON_VARIANT.SECONDARY}>
-  //                 Cancel
-  //               </Button>
-  //               <Button onClick={handleSave}>Save</Button>
-  //             </div>
-  //           </div>
-  //         </div>
-  //       </Portal>
-  //     )}
-  //   </>
-  // )
 }
 
 export interface OptionsProp {
