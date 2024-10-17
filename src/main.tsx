@@ -1,6 +1,5 @@
 import {StrictMode} from 'react'
 import {createRoot} from 'react-dom/client'
-// import {UploadDemo} from './demo/upload-demo'
 import { UserChipMultiDemo } from './demo/user-chip-multi'
 
 const styles = {
@@ -23,8 +22,6 @@ createRoot(document.getElementById('root') as HTMLElement).render(
 function App() {
   return (
     <div style={styles}>
-      {/* <ModalDemo /> */}
-      {/* <UploadDemo /> */}
       <UserChipMultiDemo />
     </div>
   )

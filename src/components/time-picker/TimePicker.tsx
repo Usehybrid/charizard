@@ -2,13 +2,13 @@ import clsx from 'clsx'
 import * as React from 'react'
 import clockIcon from '../assets/time/clock.svg'
 import {BUTTON_V2_SIZE, BUTTON_V2_VARIANT, ButtonV2} from '../button-v2'
-import {InputV2} from '../input-v2'
+import {InputGroupV2, InputRightIcon, InputV2} from '../input-v2'
 import {Popover, PopoverContent, PopoverTrigger} from '../popover'
-import {SVG} from '../svg'
 import classes from './styles.module.css'
 import {PERIOD, TIME_PICKER_FORMAT} from './types'
 import {DEFAULT_SELECTED_TIME} from './utils/data'
 import {amPm, getFormattedTime, hours, minutes, seconds} from './utils/time'
+import {InputV2Props} from '../input-v2/types'
 
 /**
  * TimePicker component props interface
@@ -18,7 +18,7 @@ import {amPm, getFormattedTime, hours, minutes, seconds} from './utils/time'
  * @property {TIME_PICKER_FORMAT} [format] - The time format, either 12-hour or 24-hour
  * @property {boolean} [enableSeconds=false] - Whether to enable seconds selection
  */
-interface TimePickerProps {
+interface TimePickerProps extends InputV2Props {
   onTimeChange: (timestamp: number) => void
   timestamp?: number
   format?: TIME_PICKER_FORMAT
@@ -35,6 +35,9 @@ export function TimePicker({
   onTimeChange,
   format = TIME_PICKER_FORMAT.STANDARD,
   enableSeconds = false,
+  className,
+  containerClassName,
+  ...props
 }: TimePickerProps) {
   const [selected, setSelected] = React.useState(DEFAULT_SELECTED_TIME)
   const [currentSelected, setCurrentSelected] = React.useState(DEFAULT_SELECTED_TIME)
@@ -125,19 +128,21 @@ export function TimePicker({
       key={String(open)}
     >
       <PopoverTrigger className={classes.trigger} openOnHover={false}>
-        <InputV2
-          value={formattedValue}
-          placeholder={placeholder}
-          readOnly
-          containerClassName={classes.timeInput}
-        />
-        <SVG
-          path={clockIcon}
-          spanClassName={classes.triggerIconContainer}
-          svgClassName={classes.triggerIcon}
-        />
+        <InputGroupV2 className={className}>
+          <InputV2
+            value={formattedValue}
+            placeholder={placeholder}
+            readOnly
+            containerClassName={clsx(classes.timeInput, containerClassName)}
+            {...props}
+          />
+          <InputRightIcon
+            disabled={props.disabled}
+            icon={clockIcon}
+            svgClassName={classes.triggerIcon}
+          />
+        </InputGroupV2>
       </PopoverTrigger>
-
       <PopoverContent
         bg="var(--neutral-white)"
         className={classes.timePopover}

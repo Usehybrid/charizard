@@ -1,0 +1,42 @@
+.box {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+  height: 28px;
+}
+
+.selector {
+  display: flex;
+  height: 26px;
+  padding: 4px 12px;
+  justify-content: center;
+  align-items: center;
+
+  background-color: var(--neutral-arch-20);
+  box-shadow: -1px 0px 0px 0px rgba(0, 0, 0, 0.1);
+
+  color: var(--text-hint);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px; /* 142.857% */
+}
+
+.selector:hover {
+  cursor: pointer;
+}
+
+.active {
+  background-color: var(--neutral-arch-30);
+  color: var(--theme-blue);
+  font-weight: 600;
+}
+
+
+.firstSelector {
+  border-radius: 8px 0px 0px 8px;
+  box-shadow: none;
+}
+
+.lastSelector {
+  border-radius: 0px 8px 8px 0px;
+}

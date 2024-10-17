@@ -7,15 +7,34 @@ import {SVG} from '../svg'
 import closeIcon from '../assets/close.svg'
 import {DialogFooterButtons} from '../../types/common'
 
+/**
+ * Props for the ModalV2 component.
+ */
 interface ModalV2Props {
+  /** Indicates if the modal is open. */
   isOpen?: boolean
+  /** Callback function to close the modal. */
+  onClose?: () => void
+  /** Title of the modal. */
   title: string
+  /** Optional subtitle of the modal. */
   subTitle?: string
-  trigger: React.ReactNode
+  /** Optional trigger element to open the modal. */
+  trigger?: React.ReactNode
+  /** Content to be displayed inside the modal. */
   children: React.ReactNode
+  /** Array of footer buttons for the modal. */
   footerButtons: DialogFooterButtons
+  /** Indicates whether to show a backdrop behind the modal. */
   showBackdrop?: boolean
 }
+
+/**
+ * ModalV2 component displays a modal dialog with a title, content, and footer buttons.
+ *
+ * @param {ModalV2Props} props - The props for the ModalV2 component.
+ * @returns {JSX.Element} The rendered modal component.
+ */
 
 export function ModalV2({
   isOpen,
@@ -25,25 +44,28 @@ export function ModalV2({
   children,
   footerButtons,
   showBackdrop = false,
+  onClose,
 }: ModalV2Props) {
   const [state, send] = useMachine(dialog.machine({id: React.useId(), open: isOpen}))
   const api = dialog.connect(state, send, normalizeProps)
 
-  console.log('open:', api.open)
+  React.useEffect(() => {
+    api.setOpen(!!isOpen)
+  }, [isOpen])
 
   React.useEffect(() => {
-    if (isOpen) {
-      api.setOpen(true)
-    } else {
-      api.setOpen(false)
+    if (!api.open) {
+      onClose?.()
     }
-  }, [isOpen])
+  }, [api.open])
 
   return (
     <>
-      <button {...api.getTriggerProps()} className={'zap-reset-btn'}>
-        {trigger}
-      </button>
+      {trigger && (
+        <button {...api.getTriggerProps()} className="zap-reset-btn">
+          {trigger}
+        </button>
+      )}
       {api.open && (
         <Portal>
           {showBackdrop && <div {...api.getBackdropProps()} className={classes.backdrop} />}
@@ -51,10 +73,10 @@ export function ModalV2({
             <div {...api.getContentProps()} className={classes.modal}>
               <div {...api.getTitleProps()} className={classes.header}>
                 <div>
-                  <h2 className={'zap-heading-semibold'}>{title}</h2>
-                  {subTitle && <p className={'zap-subcontent-regular'}>{subTitle}</p>}
+                  <h2 className="zap-heading-semibold">{title}</h2>
+                  {subTitle && <p className="zap-subcontent-regular">{subTitle}</p>}
                 </div>
-                <button {...api.getCloseTriggerProps()} className={'zap-reset-btn'}>
+                <button {...api.getCloseTriggerProps()} className="zap-reset-btn">
                   <SVG path={closeIcon} svgClassName={classes.icon} />
                 </button>
               </div>

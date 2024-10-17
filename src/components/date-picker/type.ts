@@ -24,6 +24,7 @@ export interface DateRangePickerProps extends PropsRange {
     dateIcon?: string
   }
   size?: BUTTON_V2_SIZE
+  placeholder?: string
 }
 
 export type MonthYear = {

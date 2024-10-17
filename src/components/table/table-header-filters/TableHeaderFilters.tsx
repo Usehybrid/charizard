@@ -1,42 +1,30 @@
-import * as React from 'react'
 import {useTableStore} from '../store'
-import {FILTER_TYPE, type FilterConfig, type FilterOptions} from '../types'
+import {FILTER_TYPE, type FilterConfig} from '../types'
 import TableHeaderDateRangeFilter from './TableHeaderDateRangeFilter'
 import TableHeaderFilter from './TableHeaderFilter'
 import classes from './styles.module.css'
+import TableHeaderSelectors from './TableHeaderSelectors'
 
 interface TableHeaderFiltersProps {
   filterConfig: FilterConfig
-  filters: FilterOptions[]
+  showTabs?: boolean
 }
 
-export default function TableHeaderFilters({filterConfig, filters}: TableHeaderFiltersProps) {
+export default function TableHeaderFilters({
+  filterConfig,
+  showTabs = false,
+}: TableHeaderFiltersProps) {
   const {isLoading, isError, filterDispatch} = filterConfig
+
+  const filters = filterConfig.filters?.header ? filterConfig.filters.header : []
 
   const tableFilters = useTableStore(s => s.filters)
 
-  const {setDefaultFilters, addFilters, removeFilters, resetFilters} = useTableStore(s => ({
-    setDefaultFilters: s.setDefaultFilters,
+  const {addFilters, removeFilters, resetFilters} = useTableStore(s => ({
     addFilters: s.addFilters,
     removeFilters: s.removeFilters,
     resetFilters: s.resetFilters,
-    resetAllFilters: s.resetAllFilters,
   }))
-
-  React.useEffect(() => {
-    if (!filters?.length || isLoading) return
-    setDefaultFilters(
-      filters?.map(filter => {
-        return {
-          key: filter.key,
-          values: filter.type === FILTER_TYPE.DATE_RANGE ? '' : [],
-          type: filter.type,
-        }
-      }) || [],
-    )
-  }, [filters?.length, isLoading])
-
-  if (!filters || !filters.length) return null
 
   if (isError) return <div className={classes.filtersInfo}>Error getting filters</div>
 
@@ -50,7 +38,6 @@ export default function TableHeaderFilters({filterConfig, filters}: TableHeaderF
         const tableFilter = tableFilters.find(tf => tf.key === filter.key)!
 
         const filterProps = {
-          key: filter.id,
           filter: filter,
           tableFilters: tableFilters,
           tableFilter: tableFilter,
@@ -60,10 +47,13 @@ export default function TableHeaderFilters({filterConfig, filters}: TableHeaderF
           filterDispatch: filterDispatch,
         }
 
-        if (filter.type === FILTER_TYPE.DATE_RANGE) {
-          return <TableHeaderDateRangeFilter {...filterProps} />
+        if (filter.type === FILTER_TYPE.DATE_RANGE && !showTabs) {
+          return <TableHeaderDateRangeFilter key={filter.id} {...filterProps} />
         }
-        return <TableHeaderFilter {...filterProps} />
+        if (showTabs && filter.type === FILTER_TYPE.TAB) {
+          return <TableHeaderSelectors key={filter.id} {...filterProps} />
+        }
+        return !showTabs && <TableHeaderFilter key={filter.id} {...filterProps} />
       })}
     </div>
   )

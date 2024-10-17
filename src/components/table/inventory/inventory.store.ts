@@ -10,13 +10,16 @@ const invInitialQueries = {
   page: 0,
   limit: 25,
   search: '',
-  sort_by: '',
-  sort_order: '' as '' | 'asc' | 'desc',
+  sort_by: 'software_owners',
+  sort_order: 'desc' as '' | 'asc' | 'desc',
   filters: {
     filter_type: '',
     filter_brand: '',
     filter_country: '',
-    filter_status: '',
+    filter_status: 'under_maintenance',
+    joining_date: '',
+    table_type: 'folders',
+    filter_status_2: 'unassigned',
   },
 }
 
