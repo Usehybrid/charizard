@@ -19,7 +19,13 @@ interface UsersChipProps {
 
 export function UsersChip({status = USER_CHIP_STATUS.DEFAULT, users}: UsersChipProps) {
   return users?.length > 0 ? (
-    <div className={clsx(classes.userChipContainer, classes.nonZeroState, classes[status])}>
+    <div
+      className={clsx(
+        classes.userChipContainer,
+        users?.length === 1 ? classes.oneState : classes.nonZeroState,
+        classes[status],
+      )}
+    >
       <div className={classes.userChipImageContainer}>
         <img
           src={users[0].profile_img_url ? users[0].profile_img_url : ''}

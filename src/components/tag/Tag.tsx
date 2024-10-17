@@ -20,7 +20,7 @@ const statusMap = {
   [STATUS_MAP.SUCCESS]: {
     name: 'Assigned',
     bgColor: 'var(--status-success-10)',
-    color: 'var(--status-success)',
+    color: 'var(--status-success-s70)',
   },
   [STATUS_MAP.WARNING]: {
     name: 'Unassigned',
@@ -34,13 +34,13 @@ const statusMap = {
   },
   [STATUS_MAP.DEFAULT]: {
     name: 'Archived',
-    bgColor: 'var(--neutral-arch-50)',
-    color: 'var(--neutral-arch-900)',
+    bgColor: 'var(--dark-d10)',
+    color: 'var(--dark-d70)',
   },
   [STATUS_MAP.ERROR]: {
     name: 'Under maintenance',
     bgColor: 'var(--status-error-10)',
-    color: 'var(--status-error)',
+    color: 'var(--status-error-e70)',
   },
 }
 

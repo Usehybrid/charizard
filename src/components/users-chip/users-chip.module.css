@@ -5,6 +5,11 @@
   width: fit-content;
 }
 
+.oneState{
+  gap: 8px;
+  padding-right: 10px;
+}
+
 .nonZeroState {
   gap: 16px;
   padding-right: 10px;
