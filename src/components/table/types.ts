@@ -65,8 +65,15 @@ export type TableFilters = {
   drawer?: FilterOptions[]
 }
 
+export type CustomColCheckedState = {
+  id: string
+  label: string
+  checked: boolean
+  group?: string
+}
+
 export type TableCustomColumns = {
-  checked_state: Array<{id: string; label: string; checked: boolean}>
+  checked_state: Array<CustomColCheckedState>
   is_default: boolean
   table_name: string
 }

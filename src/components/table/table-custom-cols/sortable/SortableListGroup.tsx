@@ -7,7 +7,6 @@ import {
   PointerSensor,
   useSensor,
   useSensors,
-  DragEndEvent,
 } from '@dnd-kit/core'
 import {SortableContext, arrayMove, sortableKeyboardCoordinates} from '@dnd-kit/sortable'
 import {DragHandle, SortableItem} from './SortableItem'
@@ -57,40 +56,39 @@ export function SortableList<T extends BaseItem>({items: _items, onChange, rende
 
   const sensors = useSensors(
     useSensor(PointerSensor),
-    useSensor(MouseSensor),
+    useSensor(MouseSensor, {}),
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
     }),
   )
 
-  const handleDragEnd = React.useCallback(
-    ({active, over}: DragEndEvent) => {
-      if (over && active.id !== over.id) {
-        onChange(prevItems => {
-          const activeIndex = prevItems.findIndex(item => item.id === active.id)
-          const overIndex = prevItems.findIndex(item => item.id === over.id)
-
-          // Ensure items are in the same group (or both ungrouped)
-          const activeItem = prevItems[activeIndex]
-          const overItem = prevItems[overIndex]
-          if (activeItem.group !== overItem.group) {
-            return prevItems // Do not move if groups are different
-          }
-
-          return arrayMove(prevItems, activeIndex, overIndex)
-        })
-      }
-      setActive(null)
-    },
-    [onChange],
-  )
-
   return (
     <DndContext
       sensors={sensors}
-      onDragStart={({active}) => setActive(active)}
-      onDragEnd={handleDragEnd}
-      onDragCancel={() => setActive(null)}
+      onDragStart={({active}) => {
+        setActive(active)
+      }}
+      onDragEnd={({active, over}) => {
+        if (over && active.id !== over?.id) {
+          onChange(prevItems => {
+            const activeIndex = prevItems.findIndex(({id}) => id === active.id)
+            const overIndex = prevItems.findIndex(({id}) => id === over.id)
+
+            // Ensure items are in the same group (or both ungrouped)
+            const activeItem = prevItems[activeIndex]
+            const overItem = prevItems[overIndex]
+            if (activeItem.group !== overItem.group) {
+              return prevItems // Do not move if groups are different
+            }
+
+            return arrayMove(prevItems, activeIndex, overIndex)
+          })
+        }
+        setActive(null)
+      }}
+      onDragCancel={() => {
+        setActive(null)
+      }}
     >
       {Object.entries(groupedItems.groups).map(([group, items]) => (
         <div key={group} className={classes.grouped}>

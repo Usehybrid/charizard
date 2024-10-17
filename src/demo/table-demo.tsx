@@ -1,7 +1,7 @@
-import {createColumnHelper} from '@tanstack/react-table'
 import * as React from 'react'
-import {Table} from '../components'
 import randomIcon from '../components/assets/check.svg'
+import {createColumnHelper} from '@tanstack/react-table'
+import {Table} from '../components'
 import {INV_ACTION_TYPES, useInventoryStore} from '../components/table/inventory/inventory.store'
 import {FILTER_TYPE} from '../components/table/types'
 
@@ -106,6 +106,7 @@ export function TableDemo() {
             console.log('test')
           })
         },
+        variant: 'selection',
       }}
       tableStyleConfig={{stickyIds: ['software'], maxHeight: '200px'}}
       exportConfig={{
@@ -179,16 +180,19 @@ const cols = {
       id: 'location',
       label: 'Location',
       checked: true,
+      group: 'Banking',
     },
     {
       id: 'compliant',
       label: 'Compliant',
       checked: true,
+      group: 'Banking',
     },
     {
       id: 'encrypted',
       label: 'Encrypted',
       checked: true,
+      group: 'Banking',
     },
     {
       id: 'operating_system',
@@ -199,16 +203,19 @@ const cols = {
       id: 'manufacturer',
       label: 'Manufacturer',
       checked: true,
+      group: 'Profile',
     },
     {
       id: 'allocated_to',
       label: 'Allocated to',
       checked: true,
+      group: 'Profile',
     },
     {
       id: 'imei_1',
       label: 'IMEI 1',
       checked: true,
+      group: 'Profile',
     },
     {
       id: 'last_checked_at',

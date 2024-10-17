@@ -140,6 +140,7 @@ export function TimePicker({
             disabled={props.disabled}
             icon={clockIcon}
             svgClassName={classes.triggerIcon}
+            spanClassName={clsx(props.disabled && classes.disabledIconContainer)}
           />
         </InputGroupV2>
       </PopoverTrigger>
