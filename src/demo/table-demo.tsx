@@ -106,6 +106,7 @@ export function TableDemo() {
             console.log('test')
           })
         },
+        variant: 'selection',
       }}
       tableStyleConfig={{stickyIds: ['software'], maxHeight: '200px'}}
       exportConfig={{
@@ -179,43 +180,42 @@ const cols = {
       id: 'location',
       label: 'Location',
       checked: true,
-      group: 'Group 1',
+      group: 'Banking',
     },
     {
       id: 'compliant',
       label: 'Compliant',
       checked: true,
-      group: 'Group 1',
+      group: 'Banking',
     },
     {
       id: 'encrypted',
       label: 'Encrypted',
       checked: true,
-      group: 'Group 1',
+      group: 'Banking',
     },
     {
       id: 'operating_system',
       label: 'Operating System',
       checked: true,
-      group: 'Group 1',
     },
     {
       id: 'manufacturer',
       label: 'Manufacturer',
       checked: true,
-      group: 'Group 2',
+      group: 'Profile',
     },
     {
       id: 'allocated_to',
       label: 'Allocated to',
       checked: true,
-      group: 'Group 2',
+      group: 'Profile',
     },
     {
       id: 'imei_1',
       label: 'IMEI 1',
       checked: true,
-      group: 'Group 2',
+      group: 'Profile',
     },
     {
       id: 'last_checked_at',

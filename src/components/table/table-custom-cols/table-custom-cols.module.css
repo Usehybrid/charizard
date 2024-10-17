@@ -237,3 +237,26 @@
 .grouped {
   border-bottom: 1px solid var(--text-secondary);
 }
+
+/* grouped selection */
+.groupTitle {
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 180%;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 0 6px;
+}
+
+.groupTitle::after {
+  content: '';
+  position: absolute;
+  right: 3px;
+  top: 50%;
+  width: 270px;
+  height: 1px;
+  background-color: var(--neutral-arch-100);
+}

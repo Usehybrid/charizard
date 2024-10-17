@@ -9,11 +9,12 @@ import {SVG} from '../../svg'
 import {Search} from '../../search'
 import {SortableList} from './sortable/SortableList'
 import {CHECKBOX_COL_ID, DROPDOWN_COL_ID, RADIO_COL_ID} from '../constants'
-import {TableCustomColumns} from '../types'
 import {Loader} from '../../loader'
 import {DrawerV2} from '../../drawer-v2'
 import {useDisclosure} from '../../../utils/hooks/use-disclosure'
 import {BUTTON_V2_VARIANT} from '../../button-v2'
+import type {CustomColCheckedState, TableCustomColumns} from '../types'
+import {GroupedSelection} from './GroupedSelection'
 
 interface TableCustomColsProps {
   customColumnConfig: {
@@ -22,18 +23,13 @@ interface TableCustomColsProps {
     isPending: boolean
     isError: boolean
     handleSaveColumns: (columns: any) => Promise<void>
+    variant?: TableCustomColsVariant
   }
   table: Table<any>
   isCheckbox?: boolean
   isDropdownActions?: boolean
 }
-
-export type CheckedState = {
-  id: string
-  label: string
-  checked: boolean
-  group?: string
-}
+export type TableCustomColsVariant = 'default' | 'selection'
 
 export default function TableCustomCols({
   customColumnConfig,
@@ -132,63 +128,72 @@ export default function TableCustomCols({
                     customStyles={{customInputStyles: {borderRadius: '8px'}}}
                   />
                 </div>
-
-                <div className={classes.option}>
-                  <CustomColCheckbox
-                    label={'All'}
-                    id={'all'}
-                    checked={nonDraggableCols.length === 0}
+                {customColumnConfig?.variant === 'selection' ? (
+                  <GroupedSelection
+                    checkedState={checkedState}
                     setCheckedState={setCheckedState}
+                    search={search}
                   />
-                </div>
+                ) : (
+                  <>
+                    <div className={classes.option}>
+                      <CustomColCheckbox
+                        label={'All'}
+                        id={'all'}
+                        checked={nonDraggableCols.length === 0}
+                        setCheckedState={setCheckedState}
+                      />
+                    </div>
 
-                {disabledCols.map(column => (
-                  <div key={column.id} className={clsx(classes.option, classes.optionDisabled)}>
-                    <CustomColCheckbox
-                      label={column.columnDef.header as string}
-                      id={column.id}
-                      checked={true}
-                      disabled
-                      setCheckedState={setCheckedState}
-                    />
-                  </div>
-                ))}
-
-                <>
-                  {draggableCols.length > 0 && <p className={classes.info}>Selected</p>}
-                  <SortableList
-                    items={checkedState}
-                    onChange={setCheckedState}
-                    renderItem={column => (
-                      <SortableList.Item
-                        id={column.id}
-                        isHidden={
-                          !!search.length &&
-                          !column.label.toLowerCase().includes(search.toLowerCase())
-                        }
-                      >
+                    {disabledCols.map(column => (
+                      <div key={column.id} className={clsx(classes.option, classes.optionDisabled)}>
                         <CustomColCheckbox
-                          label={column.label}
+                          label={column.columnDef.header as string}
                           id={column.id}
-                          checked={
-                            checkedState[checkedState.findIndex(obj => obj.id === column.id)]
-                              .checked
-                          }
+                          checked={true}
+                          disabled
                           setCheckedState={setCheckedState}
                         />
-                        <SortableList.DragHandle />
-                      </SortableList.Item>
-                    )}
-                  />
-                </>
+                      </div>
+                    ))}
 
-                <Options
-                  cols={filteredNonDragCols}
-                  text="Not Selected"
-                  textCn={classes.info2}
-                  checkedState={checkedState}
-                  setCheckedState={setCheckedState}
-                />
+                    <>
+                      {draggableCols.length > 0 && <p className={classes.info}>Selected</p>}
+                      <SortableList
+                        items={checkedState}
+                        onChange={setCheckedState}
+                        renderItem={column => (
+                          <SortableList.Item
+                            id={column.id}
+                            isHidden={
+                              !!search.length &&
+                              !column.label.toLowerCase().includes(search.toLowerCase())
+                            }
+                          >
+                            <CustomColCheckbox
+                              label={column.label}
+                              id={column.id}
+                              checked={
+                                checkedState[checkedState.findIndex(obj => obj.id === column.id)]
+                                  .checked
+                              }
+                              setCheckedState={setCheckedState}
+                            />
+                            <SortableList.DragHandle />
+                          </SortableList.Item>
+                        )}
+                      />
+                    </>
+
+                    <Options
+                      cols={filteredNonDragCols}
+                      text="Not Selected"
+                      textCn={classes.info2}
+                      checkedState={checkedState}
+                      setCheckedState={setCheckedState}
+                    />
+                  </>
+                )}
               </div>
             )}
           </DrawerV2>
@@ -199,11 +204,11 @@ export default function TableCustomCols({
 }
 
 export interface OptionsProp {
-  cols: CheckedState[]
+  cols: CustomColCheckedState[]
   text: string
   textCn: string
-  checkedState: CheckedState[]
-  setCheckedState: React.Dispatch<React.SetStateAction<CheckedState[]>>
+  checkedState: CustomColCheckedState[]
+  setCheckedState: React.Dispatch<React.SetStateAction<CustomColCheckedState[]>>
   isDraggable?: boolean
 }
 
@@ -211,7 +216,7 @@ function Options({cols, text, textCn, checkedState, setCheckedState}: OptionsPro
   return (
     <>
       {cols.length > 0 && <p className={textCn}>{text}</p>}
-      {cols.map((column: CheckedState) => {
+      {cols.map((column: CustomColCheckedState) => {
         return (
           <div key={column.id} className={classes.option}>
             <CustomColCheckbox

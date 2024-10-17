@@ -24,6 +24,7 @@ import type {
   VisibilityState,
 } from '@tanstack/react-table'
 import type {FilterConfig, TableCustomColumns} from './types'
+import {TableCustomColsVariant} from './table-custom-cols/TableCustomCols'
 
 export interface TableProps {
   // the table data
@@ -129,6 +130,7 @@ export interface TableProps {
     isPending: boolean
     isError: boolean
     handleSaveColumns: (columns: any) => Promise<void>
+    variant?: TableCustomColsVariant
   }
   /**
    * export config (csv)
