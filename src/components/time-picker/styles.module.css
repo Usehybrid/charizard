@@ -80,3 +80,7 @@
   background-color: var(--theme-blue);
   color: var(--neutral-white);
 }
+
+.disabledIconContainer {
+  pointer-events: none;
+}
