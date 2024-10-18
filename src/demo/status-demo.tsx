@@ -28,6 +28,16 @@ export function StatusDemo() {
           No Data
         </div>
       </Status>
+      <Status status={STATUS_STATUS.CANCEL}>
+        <div className="zap-caption-medium" style={{color: 'var(--text-primary)'}}>
+          Cancel
+        </div>
+      </Status>
+      <Status status={STATUS_STATUS.DONE}>
+        <div className="zap-caption-medium" style={{color: 'var(--text-primary)'}}>
+          Done
+        </div>
+      </Status>
     </div>
   )
 }
