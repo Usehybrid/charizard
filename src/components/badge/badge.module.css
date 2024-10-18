@@ -1,6 +1,6 @@
 .box {
   display: inline-flex;
-  padding: 0px 6px;
+  padding: 2px 6px;
   align-items: center;
   gap: 8px;
   border-radius: 4px;
