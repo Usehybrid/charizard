@@ -1,5 +1,4 @@
-import { Badge } from '../components'
-import {Status, STATUS_STATUS} from '../components/status/Status'
+import {Status, STATUS_STATUS} from '../components'
 
 export function StatusDemo() {
   return (
@@ -29,7 +28,6 @@ export function StatusDemo() {
           No Data
         </div>
       </Status>
-      <Badge>Badge</Badge>
     </div>
   )
 }
