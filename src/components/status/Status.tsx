@@ -20,8 +20,8 @@ const statusMap = {
   [STATUS_STATUS.INFO]: {bg: 'var(--p-p50)', icon: ''},
   [STATUS_STATUS.WARNING]: {bg: 'var(--status-warning-w50)', icon: ''},
   [STATUS_STATUS.NODATA]: {bg: 'var(--status-error-e50)', icon: ''},
-  [STATUS_STATUS.CANCEL]: {bg: '', icon: Cross},
-  [STATUS_STATUS.DONE]: {bg: '', icon: Tick},
+  [STATUS_STATUS.CANCEL]: {bg: 'var(--p-p70)', icon: Cross},
+  [STATUS_STATUS.DONE]: {bg: 'var(--p-p70)', icon: Tick},
 }
 
 interface StatusProps {
