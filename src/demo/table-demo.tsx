@@ -112,7 +112,10 @@ export function TableDemo() {
       exportConfig={{
         isPending: false,
         isError: false,
-        handleExport: () => {},
+        handleExport: (...args: any[]) => {
+          console.log(args)
+          console.log('export works')
+        },
       }}
     />
   )

@@ -40,7 +40,10 @@ export default function TableExport({exportConfig}: TableExportProps) {
 
   return (
     <div className={classes.tableExportBox}>
-      <button className={clsx(classes.actionCommon, 'zap-reset-btn', api.open && classes.active)}>
+      <button
+        {...api.getTriggerProps()}
+        className={clsx(classes.actionCommon, 'zap-reset-btn', api.open && classes.active)}
+      >
         <SVG path={noteDownloadIcon} width={16} height={16} />
       </button>
 
