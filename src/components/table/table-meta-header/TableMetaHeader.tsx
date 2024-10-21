@@ -11,6 +11,7 @@ import TableCustomCols from '../table-custom-cols'
 import {Table} from '@tanstack/react-table'
 import {SINGLE_VALUE_FILTER_TYPES, useTableStore} from '../store'
 import TableExport from '../table-export/TableExport'
+import TableExportLegacy from '../table-export-legacy/TableExport'
 
 interface TableMetaHeaderProps {
   rowSelectionConfig: TableProps['rowSelectionConfig']
@@ -139,7 +140,11 @@ export default function TableMetaHeader({
           />
         )}
 
-        {typeof exportConfig === 'object' && <TableExport exportConfig={exportConfig} />}
+        {typeof exportConfig === 'object' && exportConfig?.isLegacy ? (
+          <TableExportLegacy exportConfig={exportConfig} />
+        ) : (
+          <TableExport exportConfig={exportConfig as any} />
+        )}
       </div>
     </div>
   )

@@ -139,6 +139,7 @@ export interface TableProps {
     isPending: boolean
     isError: boolean
     handleExport: any
+    isLegacy?: boolean
   }
 }
 
