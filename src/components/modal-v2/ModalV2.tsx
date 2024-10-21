@@ -85,15 +85,17 @@ export function ModalV2({
                 {children}
               </div>
 
-              <div className={classes.footer}>
-                {footerButtons?.map(({btnText, isLoading, loadingText, ...btnProps}, idx) => {
-                  return (
-                    <ButtonV2 key={idx} {...(btnProps as ButtonV2Props)}>
-                      {isLoading ? loadingText : btnText}
-                    </ButtonV2>
-                  )
-                })}
-              </div>
+              {!!footerButtons.length && (
+                <div className={classes.footer}>
+                  {footerButtons?.map(({btnText, isLoading, loadingText, ...btnProps}, idx) => {
+                    return (
+                      <ButtonV2 key={idx} {...(btnProps as ButtonV2Props)}>
+                        {isLoading ? loadingText : btnText}
+                      </ButtonV2>
+                    )
+                  })}
+                </div>
+              )}
             </div>
           </div>
         </Portal>
