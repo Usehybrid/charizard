@@ -23,6 +23,9 @@
   width: 100%;
   max-width: 528px;
   background-color: var(--neutral-white);
+  max-height: 90dvh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
 }
 
 .header {
@@ -51,6 +54,7 @@
 
 .content {
   padding: 20px 16px;
+  overflow-y: scroll;
 }
 
 .footer {
