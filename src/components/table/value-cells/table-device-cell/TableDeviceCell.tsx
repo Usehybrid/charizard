@@ -25,9 +25,10 @@ import {TooltipV2} from '../../../tooltip-v2'
 interface TableDeviceCellProps {
   device: any
   onClick: any
+  customStyle?: React.CSSProperties
 }
 
-export function TableDeviceCell({device, onClick}: TableDeviceCellProps) {
+export function TableDeviceCell({device, onClick, customStyle}: TableDeviceCellProps) {
   return (
     <div className={classes.box}>
       <div className={classes.device}>
@@ -36,7 +37,10 @@ export function TableDeviceCell({device, onClick}: TableDeviceCellProps) {
 
       <div className={classes.details}>
         <div className={classes.titleContainer} onClick={onClick}>
-          <TableBoxEllipses data={device.name || device.model} customStyle={{maxWidth: '190px'}} />
+          <TableBoxEllipses
+            data={device.name || device.model}
+            customStyle={{maxWidth: '190px', ...customStyle}}
+          />
         </div>
         <div className={classes.subTitleBox}>
           {device.serial_number && (
