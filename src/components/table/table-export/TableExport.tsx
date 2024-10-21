@@ -12,6 +12,7 @@ interface TableExportProps {
     isPending: boolean
     isError: boolean
     handleExport: any
+    isLegacy?: boolean
   }
 }
 
@@ -27,12 +28,19 @@ export default function TableExport({exportConfig}: TableExportProps) {
     api.setOpen(false)
   }
 
+  if (exportConfig?.isLegacy)
+    return (
+      <button
+        onClick={() => handleExportInternal('csv')}
+        className={clsx(classes.actionCommon, 'zap-reset-btn')}
+      >
+        <SVG path={noteDownloadIcon} width={16} height={16} />
+      </button>
+    )
+
   return (
     <div className={classes.tableExportBox}>
-      <button
-        {...api.getTriggerProps()}
-        className={clsx(classes.actionCommon, 'zap-reset-btn', api.open && classes.active)}
-      >
+      <button className={clsx(classes.actionCommon, 'zap-reset-btn', api.open && classes.active)}>
         <SVG path={noteDownloadIcon} width={16} height={16} />
       </button>
 

@@ -1,17 +1,16 @@
 import * as React from 'react'
+import clsx from 'clsx'
+import TableExport from '../table-export/TableExport'
+import TableFiltersDrawer from '../table-filters-drawer/TableFiltersDrawer'
+import TableHeaderFilters from '../table-header-filters'
+import TableCustomCols from '../table-custom-cols'
+import TableSelectedActions from '../table-selected-actions'
 import classes from './table-meta-header.module.css'
 import {TableProps} from '../Table'
-import TableSelectedActions from '../table-selected-actions'
 import {Search} from '../../search'
-import TableHeaderFilters from '../table-header-filters'
-import clsx from 'clsx'
 import {pluralize} from '../../../utils/text'
-import TableFiltersDrawer from '../table-filters-drawer/TableFiltersDrawer'
-import TableCustomCols from '../table-custom-cols'
-import {Table} from '@tanstack/react-table'
 import {SINGLE_VALUE_FILTER_TYPES, useTableStore} from '../store'
-import TableExport from '../table-export/TableExport'
-import TableExportLegacy from '../table-export-legacy/TableExport'
+import type {Table} from '@tanstack/react-table'
 
 interface TableMetaHeaderProps {
   rowSelectionConfig: TableProps['rowSelectionConfig']
@@ -140,11 +139,7 @@ export default function TableMetaHeader({
           />
         )}
 
-        {typeof exportConfig === 'object' && exportConfig?.isLegacy ? (
-          <TableExportLegacy exportConfig={exportConfig} />
-        ) : (
-          <TableExport exportConfig={exportConfig as any} />
-        )}
+        {typeof exportConfig === 'object' && <TableExport exportConfig={exportConfig} />}
       </div>
     </div>
   )
