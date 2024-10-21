@@ -258,13 +258,17 @@ UploadProps) {
         softwareId,
       )
       setUploadedFiles(uploadedFiles)
-      getUploadDoc(uploadedFiles)
       setIsUploading && setIsUploading(false)
       setCallUpload(false)
     }
     if (files.length && callUpload) uploadFile()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [files?.length])
+
+  React.useEffect(() => {
+    getUploadDoc(uploadedFiles?.filter(file => !cancelledKey?.includes(file.key)))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [uploadedFiles.length])
 
   return (
     <>
