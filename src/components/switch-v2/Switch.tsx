@@ -42,9 +42,9 @@ export function SwitchV2({children, ...props}: SwitchV2Props) {
         <span className={classes.slider} {...api.getThumbProps()} />
       </span>
       {children && (
-        <span className={clsx(classes.label, 'zap-content-medium')} {...api.getLabelProps()}>
+        <div className={clsx(classes.label, 'zap-content-medium')} {...api.getLabelProps()}>
           {children}
-        </span>
+        </div>
       )}
     </label>
   )
