@@ -77,3 +77,9 @@
   user-select: none;
   color: var(--text-primary);
 }
+
+.error {
+  color: var(--status-error-e50);
+  display: block;
+  text-align: left;
+}

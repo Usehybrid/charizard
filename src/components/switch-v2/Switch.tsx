@@ -7,11 +7,13 @@ import clsx from 'clsx'
 /**
  * Props for the SwitchV2 component.
  * Extends the zagSwitch context, excluding the 'id' property,
- * and includes an optional children node for labeling.
+ * includes an optional children node for labeling
+ * and error message.
  */
 interface SwitchV2Props extends Omit<zagSwitch.Context, 'id'> {
   /** Optional label content displayed next to the switch */
   children?: React.ReactNode
+  errorMsg?: string
 }
 
 /**
@@ -20,11 +22,11 @@ interface SwitchV2Props extends Omit<zagSwitch.Context, 'id'> {
  * A switch component that leverages @zag-js for accessibility and state management.
  * The component includes a hidden input, a slider, and optional label content.
  *
- * @param {SwitchV2Props} props - The props include the context for @zag-js switch and optional children.
+ * @param {SwitchV2Props} props - The props include the context for @zag-js switch, optional children and error message.
  * @returns {JSX.Element} The rendered switch component with a label if provided.
  */
 
-export function SwitchV2({children, ...props}: SwitchV2Props) {
+export function SwitchV2({children, errorMsg, ...props}: SwitchV2Props) {
   const [state, send] = useMachine(zagSwitch.machine({...props, id: React.useId()}))
 
   const api = zagSwitch.connect(state, send, normalizeProps)
@@ -36,16 +38,19 @@ export function SwitchV2({children, ...props}: SwitchV2Props) {
   }, [props.checked])
 
   return (
-    <label className={classes.container} {...api.getRootProps()}>
-      <input {...api.getHiddenInputProps()} />
-      <span className={classes.sliderContainer} {...api.getControlProps()}>
-        <span className={classes.slider} {...api.getThumbProps()} />
-      </span>
-      {children && (
-        <div className={clsx(classes.label, 'zap-content-medium')} {...api.getLabelProps()}>
-          {children}
-        </div>
-      )}
-    </label>
+    <div>
+      <label className={classes.container} {...api.getRootProps()}>
+        <input {...api.getHiddenInputProps()} />
+        <span className={classes.sliderContainer} {...api.getControlProps()}>
+          <span className={classes.slider} {...api.getThumbProps()} />
+        </span>
+        {children && (
+          <div className={clsx(classes.label, 'zap-content-medium')} {...api.getLabelProps()}>
+            {children}
+          </div>
+        )}
+      </label>
+      {errorMsg && <span className={clsx('zap-subcontent-medium', classes.error)}>{errorMsg}</span>}
+    </div>
   )
 }
