@@ -26,7 +26,7 @@ export default function TableBoxEllipses({data, customStyle}: TableBoxEllipsesPr
     <TooltipV2
       placement="right"
       opacity={1}
-      portalClass="react-flow__renderer"
+      portalId="root"
       id={`charizard-table-cell-${data}`}
       contentMaxLength={100}
       trigger={
