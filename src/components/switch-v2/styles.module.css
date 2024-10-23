@@ -1,6 +1,12 @@
 .container {
   display: flex;
   align-items: center;
+  gap: 5px;
+}
+
+.labelContainer {
+  display: flex;
+  align-items: center;
   gap: 8px;
   position: relative;
   --switch-track-diff: calc(var(--switch-track-width) - var(--switch-track-height));

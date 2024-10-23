@@ -10,33 +10,36 @@ import infoCircleIcon from '../assets/info-circle.svg'
 interface SwitchV2Props extends Omit<zagSwitch.Context, 'id'> {
   children?: React.ReactNode
   errorMsg?: string
+  info?: string
   tooltipProps?: Partial<TooltipV2Props>
 }
 
 /**
- * Props for the SwitchV2 component.
- *
- * @typedef {Object} SwitchV2Props
- * @extends {Omit<zagSwitch.Context, 'id'>}
- * @property {React.ReactNode} [children] - Optional label content displayed next to the switch.
- * @property {string} [errorMsg] - Optional error message displayed below the switch.
- * @property {Partial<TooltipV2Props>} [tooltipProps] - Optional props for the tooltip component, which appears when hovering over the info icon.
- * @property {SVGProps} [infoIcon] - Optional props for the info icon SVG used as the trigger for the tooltip.
- * @property {string} [info] - Optional info message displayed in the tooltip when hovering the info icon.
- */
-
-/**
  * SwitchV2 Component
  *
- * A switch component that leverages @zag-js for accessibility and state management.
- * The component includes a hidden input, a slider, optional label content, an error message,
- * and a tooltip-triggered info icon.
+ * A custom switch component that utilizes `@zag-js/switch` for accessibility and state management.
+ * It includes an optional label, error message, and an info tooltip triggered by an info icon.
  *
- * @param {SwitchV2Props} props - The props include the context for @zag-js switch, optional children, error message, and tooltip properties.
+ * The switch can be controlled via the `checked` prop and supports accessibility features like
+ * hidden inputs and keyboard navigation.
+ *
+ * @param {SwitchV2Props} props - The props for configuring the switch.
+ * @param {React.ReactNode} [props.children] - Optional label content displayed next to the switch.
+ * @param {string} [props.errorMsg] - Optional error message displayed below the switch.
+ * @param {string} [props.info] - Optional informational text that will be shown inside a tooltip.
+ * @param {Partial<TooltipV2Props>} [props.tooltipProps] - Optional tooltip configuration for the info icon.
+ * @param {boolean} [props.checked] - The checked state of the switch. Controls the on/off state if provided.
+ *
  * @returns {JSX.Element} The rendered switch component with optional label, error message, and info tooltip.
  */
 
-export function SwitchV2({children, errorMsg, tooltipProps = {}, ...props}: SwitchV2Props) {
+export function SwitchV2({
+  children,
+  errorMsg,
+  info = '',
+  tooltipProps = {},
+  ...props
+}: SwitchV2Props) {
   const id = React.useId()
   const [state, send] = useMachine(zagSwitch.machine({...props, id: React.useId()}))
 
@@ -50,18 +53,22 @@ export function SwitchV2({children, errorMsg, tooltipProps = {}, ...props}: Swit
 
   return (
     <div>
-      <label className={classes.container} {...api.getRootProps()}>
-        <input {...api.getHiddenInputProps()} />
-        <span className={classes.sliderContainer} {...api.getControlProps()}>
-          <span className={classes.slider} {...api.getThumbProps()} />
-        </span>
-        {children && (
-          <div className={clsx(classes.label, 'zap-content-medium')} {...api.getLabelProps()}>
-            {children}
-          </div>
-        )}
-        {!!tooltipProps.content && (
+      <div className={classes.container}>
+        <label className={classes.labelContainer} {...api.getRootProps()}>
+          <input {...api.getHiddenInputProps()} />
+          <span className={classes.sliderContainer} {...api.getControlProps()}>
+            <span className={classes.slider} {...api.getThumbProps()} />
+          </span>
+          {children && (
+            <div className={clsx(classes.label, 'zap-content-medium')} {...api.getLabelProps()}>
+              {children}
+            </div>
+          )}
+        </label>
+        {!!info && (
           <TooltipV2
+            {...tooltipProps}
+            id={id}
             trigger={
               <SVG
                 path={infoCircleIcon}
@@ -69,12 +76,10 @@ export function SwitchV2({children, errorMsg, tooltipProps = {}, ...props}: Swit
                 svgClassName={classes.infoIcon}
               />
             }
-            content={tooltipProps.content}
-            {...tooltipProps}
-            id={id}
+            content={info}
           />
         )}
-      </label>
+      </div>
       {errorMsg && <span className={clsx('zap-subcontent-medium', classes.error)}>{errorMsg}</span>}
     </div>
   )
