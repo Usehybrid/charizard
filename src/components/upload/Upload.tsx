@@ -132,6 +132,7 @@ UploadProps) {
     if (preLoadedFiles.length > 0 && !files.length) {
       const newFiles = preLoadedFiles.map(file => ({...file, isUploaded: true}))
       setFiles(newFiles)
+      setUploadedFiles(newFiles)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [preLoadedFiles])
