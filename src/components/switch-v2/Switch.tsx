@@ -67,6 +67,12 @@ export function SwitchV2({
         </label>
         {!!info && (
           <TooltipV2
+            opacity={1}
+            customStyle={{
+              maxWidth: '260px',
+              display: 'block',
+            }}
+            contentMaxLength={250}
             {...tooltipProps}
             id={id}
             trigger={
