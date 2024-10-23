@@ -1,0 +1,102 @@
+.container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.labelContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  --switch-track-diff: calc(var(--switch-track-width) - var(--switch-track-height));
+  --switch-thumb-x: var(--switch-track-diff);
+  --switch-track-width: 24px;
+  --switch-track-height: 12px;
+}
+
+.sliderContainer {
+  display: inline-flex;
+  flex-shrink: 0;
+  justify-content: flex-start;
+  box-sizing: content-box;
+  border-radius: 9999px;
+  padding: 2px;
+  width: var(--switch-track-width);
+  height: var(--switch-track-height);
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow,
+    transform;
+  transition-duration: 0.25s;
+  background-color: var(--p-p20);
+  -webkit-box-pack: start;
+  cursor: pointer;
+}
+
+.sliderContainer:hover {
+  background-color: var(--p-p30);
+}
+
+.sliderContainer[data-state='checked'] {
+  background-color: var(--p-p50);
+}
+
+.sliderContainer[data-state='checked']:hover {
+  background-color: var(--p-p100);
+}
+
+.sliderContainer[data-disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.slider {
+  background-color: var(--neutral-white);
+  transition-property: transform;
+  transition-duration: 0.25s;
+  border-radius: inherit;
+  width: var(--switch-track-height);
+  height: var(--switch-track-height);
+  position: relative;
+}
+
+.slider::before {
+  -webkit-transition: background-color 0.2s ease-in-out;
+  transition: background-color 0.2s ease-in-out;
+  position: absolute;
+  --thumb-size: calc(var(--switch-track-height) + 4px);
+  height: var(--thumb-size);
+  width: var(--thumb-size);
+  background-color: transparent;
+  content: '';
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: inherit;
+}
+
+.slider[data-state='checked'] {
+  transform: translateX(var(--switch-thumb-x));
+}
+
+.label {
+  user-select: none;
+  color: var(--text-primary);
+}
+
+.error {
+  color: var(--status-error-e50);
+  display: block;
+  text-align: left;
+}
+
+.infoIconContainer {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+
+.infoIconContainer .infoIcon {
+  width: 100%;
+  height: 100%;
+}

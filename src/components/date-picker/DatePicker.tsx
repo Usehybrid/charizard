@@ -56,6 +56,7 @@ interface DatePickerProps extends PropsSingle {
   }
   showOutsideDays?: boolean
   disabled?: Matcher | Matcher[]
+  trigger?: React.ReactNode
 }
 
 export function DatePicker({
@@ -72,6 +73,7 @@ export function DatePicker({
   popoverConfig,
   isError,
   showOutsideDays = true,
+  trigger,
   ...props
 }: DatePickerProps) {
   const {monthYear, setMonthYear} = useDateStore()
@@ -84,8 +86,6 @@ export function DatePicker({
       })
     }
   }, [value])
-
-
 
   const date = React.useMemo(() => {
     if (value) {
@@ -120,7 +120,9 @@ export function DatePicker({
     <div className={clsx(classes.datePicker)} style={customContainerStyles}>
       <Popover placement={'bottom'}>
         <PopoverTrigger openOnHover={false}>
-          {variant === 'form' ? (
+          {trigger ? (
+            trigger
+          ) : variant === 'form' ? (
             <Button
               size="adapt"
               disabled={disableDatepicker}

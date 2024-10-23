@@ -49,6 +49,12 @@ export function LabelV2({
       {required && <span className={clsx('zap-content-medium ', classes.required)}>*</span>}
       {!!info && (
         <TooltipV2
+          opacity={1}
+          customStyle={{
+            maxWidth: '260px',
+            display: 'block',
+          }}
+          contentMaxLength={250}
           {...tooltipProps}
           id={id}
           trigger={
