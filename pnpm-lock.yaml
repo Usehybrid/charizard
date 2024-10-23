@@ -59,6 +59,9 @@ importers:
       '@zag-js/select':
         specifier: ^0.75.0
         version: 0.75.0
+      '@zag-js/switch':
+        specifier: ^0.75.0
+        version: 0.75.0
       '@zag-js/tabs':
         specifier: ^0.75.0
         version: 0.75.0
@@ -1376,6 +1379,9 @@ packages:
 
   '@zag-js/store@0.75.0':
     resolution: {integrity: sha512-kAzqLKfCLRIYfnsLuQdHOdrIwBdO4nqJ6kjCYlWvhSe81oDWCrC5MY2fv7mIYFjW+ZPpH3xmgGvj5ugqfAsqoA==}
+
+  '@zag-js/switch@0.75.0':
+    resolution: {integrity: sha512-A1TCQa43HYtIl5iNJ96FG7taW9isN39AhDd33CEoqyr4VH2iMNtkzRhkf9VxLQHWuOsommoVD1faUWlHObeBlw==}
 
   '@zag-js/tabs@0.75.0':
     resolution: {integrity: sha512-F7OYMWeayWWkG3KRsM0n6hdnRq7b4pY/cEJ9OAG0Fz4PFq2dD6cLDsC/hBhiR5TUmKK9G0+orTXxijB2Uqc1cQ==}
@@ -4358,6 +4364,17 @@ snapshots:
   '@zag-js/store@0.75.0':
     dependencies:
       proxy-compare: 3.0.0
+
+  '@zag-js/switch@0.75.0':
+    dependencies:
+      '@zag-js/anatomy': 0.75.0
+      '@zag-js/core': 0.75.0
+      '@zag-js/dom-event': 0.75.0
+      '@zag-js/dom-query': 0.75.0
+      '@zag-js/focus-visible': 0.75.0
+      '@zag-js/form-utils': 0.75.0
+      '@zag-js/types': 0.75.0
+      '@zag-js/utils': 0.75.0
 
   '@zag-js/tabs@0.75.0':
     dependencies:
