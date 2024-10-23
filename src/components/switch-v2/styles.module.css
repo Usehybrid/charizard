@@ -83,3 +83,14 @@
   display: block;
   text-align: left;
 }
+
+.infoIconContainer {
+  width: 10px;
+  height: 10px;
+  display: block;
+}
+
+.infoIconContainer .infoIcon {
+  width: 100%;
+  height: 100%;
+}
