@@ -21,6 +21,7 @@ import TableBoxEllipses from '../table-box-ellipses'
 import {SVG} from '../../../svg'
 import {clipboard} from '../../../../utils/text'
 import {TooltipV2} from '../../../tooltip-v2'
+import {TOOLTIP_DEFAULTS} from '../../../../utils/constants'
 
 interface TableDeviceCellProps {
   device: any
@@ -59,7 +60,7 @@ export function TableDeviceCell({device, onClick, customStyle}: TableDeviceCellP
                 />
               }
               content="This device is also connected with MDM"
-              portalId="root"
+              portalId={TOOLTIP_DEFAULTS.portalId}
             />
           )}
           {device.serial_number && (

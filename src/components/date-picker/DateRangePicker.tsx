@@ -42,6 +42,7 @@ export function DateRangePicker({
   size = BUTTON_V2_SIZE.DEFAULT,
   onReset,
   placeholder,
+  trigger,
   ...props
 }: DateRangePickerProps) {
   const date = value
@@ -146,36 +147,45 @@ export function DateRangePicker({
     <div className={clsx(classes.dateRangePicker)}>
       <Popover placement={props.placement ? props.placement : 'bottom'}>
         <PopoverTrigger openOnHover={false}>
-          <ButtonV2
-            variant={BUTTON_V2_VARIANT.GHOST}
-            customStyles={{width: '100%'}}
-            disabled={disableDatepicker}
-            size={size}
-          >
-            <div className={clsx(classes.formButton, customClasses.contentContainer)}>
-              <span
-                style={{
-                  color: !date ? 'var(--text-secondary)' : undefined,
-                  ...customInputContentStyles,
-                }}
-                className={customClasses.content}
-              >
-                {showQuickSelect && selectedRange.value !== RANGE_OPTIONS[0].value
-                  ? selectedRange.label
-                  : displayDate}
-              </span>
-              {showQuickSelect ? (
-                <SVG
-                  path={chevronDown}
-                  width={20}
-                  height={20}
-                  svgClassName={customClasses.dateIcon}
-                />
-              ) : (
-                <SVG path={calender} width={20} height={20} svgClassName={customClasses.dateIcon} />
-              )}
-            </div>
-          </ButtonV2>
+          {trigger ? (
+            trigger
+          ) : (
+            <ButtonV2
+              variant={BUTTON_V2_VARIANT.GHOST}
+              customStyles={{width: '100%'}}
+              disabled={disableDatepicker}
+              size={size}
+            >
+              <div className={clsx(classes.formButton, customClasses.contentContainer)}>
+                <span
+                  style={{
+                    color: !date ? 'var(--text-secondary)' : undefined,
+                    ...customInputContentStyles,
+                  }}
+                  className={customClasses.content}
+                >
+                  {showQuickSelect && selectedRange.value !== RANGE_OPTIONS[0].value
+                    ? selectedRange.label
+                    : displayDate}
+                </span>
+                {showQuickSelect ? (
+                  <SVG
+                    path={chevronDown}
+                    width={20}
+                    height={20}
+                    svgClassName={customClasses.dateIcon}
+                  />
+                ) : (
+                  <SVG
+                    path={calender}
+                    width={20}
+                    height={20}
+                    svgClassName={customClasses.dateIcon}
+                  />
+                )}
+              </div>
+            </ButtonV2>
+          )}
           {errorMsg && (
             <p className={clsx('zap-subcontent-medium', classes.errorMsg)}>{errorMsg}</p>
           )}
