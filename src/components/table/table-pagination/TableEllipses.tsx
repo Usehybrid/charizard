@@ -7,6 +7,7 @@ import {useMachine, normalizeProps, Portal} from '@zag-js/react'
 import {SVG} from '../../svg'
 import {generateRange} from './utils'
 
+
 interface TableEllipsesProps {
   paginationApi: any
   i: number

@@ -4,8 +4,8 @@ import closeIcon from '../assets/close.svg'
 import classes from './drawer.module.css'
 import {SVG} from '../svg'
 import {ButtonV2, ButtonV2Props} from '../button-v2'
-import {useLockBodyScroll} from '../../utils/hooks/use-lock-body-scroll'
 import {DialogFooterButtons} from '../../types/common'
+import {useLockBodyScroll} from '../../hooks'
 
 interface DrawerProps {
   /**

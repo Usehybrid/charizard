@@ -1,11 +1,9 @@
-import * as React from 'react'
 import clsx from 'clsx'
 import classes from './styles.module.css'
 import {LabelPropsV2, INPUT_COMPONENTS} from './types'
 import {TooltipV2} from '../tooltip-v2'
 import {SVG} from '../svg'
 import infoCircleIcon from '../assets/info-circle.svg'
-import {TOOLTIP_DEFAULTS} from '../../utils/constants'
 
 /**
  * LabelV2 is a label component that can display additional information via a tooltip,
@@ -34,8 +32,6 @@ export function LabelV2({
   children,
   ...props
 }: LabelPropsV2) {
-  const id = React.useId()
-
   return (
     <label
       {...props}
@@ -50,14 +46,7 @@ export function LabelV2({
       {required && <span className={clsx('zap-content-medium ', classes.required)}>*</span>}
       {!!info && (
         <TooltipV2
-          opacity={TOOLTIP_DEFAULTS.opacity}
-          customStyle={{
-            maxWidth: TOOLTIP_DEFAULTS.maxWidth,
-            display: 'block',
-          }}
-          contentMaxLength={TOOLTIP_DEFAULTS.contentMaxLength}
           {...tooltipProps}
-          id={id}
           trigger={
             <SVG
               path={infoCircleIcon}

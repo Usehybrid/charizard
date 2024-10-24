@@ -6,7 +6,6 @@ import clsx from 'clsx'
 import {TooltipV2, TooltipV2Props} from '../tooltip-v2/TooltipV2'
 import {SVG} from '../svg'
 import infoCircleIcon from '../assets/info-circle.svg'
-import {TOOLTIP_DEFAULTS} from '../../utils/constants'
 
 interface SwitchV2Props extends Omit<zagSwitch.Context, 'id'> {
   children?: React.ReactNode
@@ -41,7 +40,6 @@ export function SwitchV2({
   tooltipProps = {},
   ...props
 }: SwitchV2Props) {
-  const id = React.useId()
   const [state, send] = useMachine(zagSwitch.machine({...props, id: React.useId()}))
 
   const api = zagSwitch.connect(state, send, normalizeProps)
@@ -68,14 +66,7 @@ export function SwitchV2({
         </label>
         {!!info && (
           <TooltipV2
-            opacity={TOOLTIP_DEFAULTS.opacity}
-            customStyle={{
-              maxWidth: TOOLTIP_DEFAULTS.maxWidth,
-              display: 'block',
-            }}
-            contentMaxLength={TOOLTIP_DEFAULTS.contentMaxLength}
             {...tooltipProps}
-            id={id}
             trigger={
               <SVG
                 path={infoCircleIcon}
