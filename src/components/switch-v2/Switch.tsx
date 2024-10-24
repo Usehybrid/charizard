@@ -6,6 +6,7 @@ import clsx from 'clsx'
 import {TooltipV2, TooltipV2Props} from '../tooltip-v2/TooltipV2'
 import {SVG} from '../svg'
 import infoCircleIcon from '../assets/info-circle.svg'
+import {TOOLTIP_DEFAULTS} from '../../utils/constants'
 
 interface SwitchV2Props extends Omit<zagSwitch.Context, 'id'> {
   children?: React.ReactNode
@@ -67,12 +68,12 @@ export function SwitchV2({
         </label>
         {!!info && (
           <TooltipV2
-            opacity={1}
+            opacity={TOOLTIP_DEFAULTS.opacity}
             customStyle={{
-              maxWidth: '260px',
+              maxWidth: TOOLTIP_DEFAULTS.maxWidth,
               display: 'block',
             }}
-            contentMaxLength={250}
+            contentMaxLength={TOOLTIP_DEFAULTS.contentMaxLength}
             {...tooltipProps}
             id={id}
             trigger={

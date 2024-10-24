@@ -121,7 +121,7 @@ export function DatePicker({
       <Popover placement={'bottom'}>
         <PopoverTrigger openOnHover={false}>
           {trigger ? (
-            trigger
+            <div ref={btnRef}>{trigger}</div>
           ) : variant === 'form' ? (
             <Button
               size="adapt"
