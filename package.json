@@ -1,6 +1,6 @@
 {
   "name": "@hybr1d-tech/charizard",
-  "version": "0.7.129",
+  "version": "0.7.130",
   "type": "module",
   "files": [
     "dist"
@@ -34,6 +34,7 @@
     "@dnd-kit/utilities": "^3.2.2",
     "@popperjs/core": "^2.11.8",
     "@tanstack/react-table": "^8.20.5",
+    "@zag-js/accordion": "^0.75.0",
     "@zag-js/checkbox": "^0.75.0",
     "@zag-js/color-picker": "^0.75.0",
     "@zag-js/combobox": "^0.75.0",

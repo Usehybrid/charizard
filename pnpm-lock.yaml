@@ -26,6 +26,9 @@ importers:
       '@tanstack/react-table':
         specifier: ^8.20.5
         version: 8.20.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@zag-js/accordion':
+        specifier: ^0.75.0
+        version: 0.75.0
       '@zag-js/checkbox':
         specifier: ^0.75.0
         version: 0.75.0
@@ -1292,6 +1295,9 @@ packages:
 
   '@vue/shared@3.5.12':
     resolution: {integrity: sha512-L2RPSAwUFbgZH20etwrXyVyCBu9OxRSi8T/38QsvnkJyvq2LufW2lDCOzm7t/U9C1mkhJGWYfCuFBCmIuNivrg==}
+
+  '@zag-js/accordion@0.75.0':
+    resolution: {integrity: sha512-ZqwI4/EO6lA8fRSce7MvATDVniea6TruA3XsBeb/KyDVea360laIJYKeo5giZJR5MEsNqOmmDIK2Uzkcq1uUnA==}
 
   '@zag-js/anatomy@0.75.0':
     resolution: {integrity: sha512-YtVz2387Xy3cXeL86/jWtZ+NT9wojFsXZbOnRoXG5P5QaiD7tKeWYWJZBzxNBPYfWhSy1N93cAxhL65xJah1Qw==}
@@ -4175,6 +4181,15 @@ snapshots:
       typescript: 5.6.3
 
   '@vue/shared@3.5.12': {}
+
+  '@zag-js/accordion@0.75.0':
+    dependencies:
+      '@zag-js/anatomy': 0.75.0
+      '@zag-js/core': 0.75.0
+      '@zag-js/dom-event': 0.75.0
+      '@zag-js/dom-query': 0.75.0
+      '@zag-js/types': 0.75.0
+      '@zag-js/utils': 0.75.0
 
   '@zag-js/anatomy@0.75.0': {}
 
