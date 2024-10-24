@@ -89,23 +89,20 @@ export const lightenHexColor = (hex: string, percent: number = 75): string => {
 }
 
 export const isObject = (value: any): boolean => {
-  if (typeof value === 'object' && value !== null) {
-    if (Array.isArray(value)) {
-      return false
-    } else {
-      return true
-    }
-  }
-
-  return false
+  if (value === null) return false
+  if (typeof value !== 'object') return false
+  if (Array.isArray(value)) return false
+  if (value instanceof Date) return false
+  if (value instanceof RegExp) return false
+  return true
 }
 
 export const isString = (value: any): boolean => {
-  return typeof value === 'string'
+  return typeof value === 'string' || value instanceof String
 }
 
 export const isArrayOfString = (arr: unknown): arr is string[] => {
-  return Array.isArray(arr) && arr.every(item => typeof item === 'string')
+  return Array.isArray(arr) && arr.every(item => isString(item))
 }
 
 export const formatDate = (value: string) => {
