@@ -4,6 +4,8 @@ import './styles/global.css'
 import './toasts/styles/main.css'
 
 export * from '../types'
+export * from '../hooks'
+export * from '../utils'
 
 export * from './button'
 export * from './empty-state'

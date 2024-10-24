@@ -1,7 +1,6 @@
 import {Portal} from '@zag-js/react'
 import clsx from 'clsx'
 import * as React from 'react'
-import {useDisclosure} from '../../../utils/hooks/use-disclosure'
 import chevronRight from '../../assets/chevron-right.svg'
 import filterIcon from '../../assets/user-interface/filter-2.svg'
 import {BUTTON_V2_VARIANT} from '../../button-v2'
@@ -12,6 +11,7 @@ import {useTableStore} from '../store'
 import FilterDrawerCheckboxNew from '../table-header-filters/FilterDrawerCheckboxNew'
 import {FilterConfig, MenuConfig} from '../types'
 import classes from './table-filters-drawer.module.css'
+import {useDisclosure} from '../../../hooks'
 import {getDefaultCheckedState, removeUncheckedItems} from './utils'
 
 interface TableFiltersDrawerProps {

@@ -3,7 +3,8 @@ import TableBoxEllipses from '../table-box-ellipses'
 import fileMultiple from '../../../assets/files/file-multiple.svg'
 import classes from './table-user-cell.module.css'
 import {SVG} from '../../../svg'
-import {clipboard, getUsername} from '../../../../utils/text'
+import {clipboard, getUsername} from '../../../../utils'
+
 
 interface TableUserCellProps {
   user: any

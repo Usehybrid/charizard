@@ -1,7 +1,6 @@
-import {BUTTON_V2_TYPE, BUTTON_V2_VARIANT, SVG} from '../components'
+import {BUTTON_V2_TYPE, BUTTON_V2_VARIANT, SVG, useDisclosure} from '../components'
 import {ModalV2} from '../components/modal-v2/ModalV2'
 import {DialogFooterButtons} from '../types/common'
-import {useDisclosure} from '../utils/hooks/use-disclosure'
 import icon from '../components/assets/calender.svg'
 
 export function ModalDemo() {
