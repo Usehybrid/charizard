@@ -5,7 +5,7 @@ import { AccordionContextValue, AccordionProps, CollapseProps, HeaderProps, Item
 
 const AccordionContext = React.createContext<AccordionContextValue | null>(null)
 
-export const Accordion = ({children, defaultActiveKey}: AccordionProps) => {
+export const Accordion = ({children, defaultActiveKey, customClasses, customStyle}: AccordionProps) => {
   const [state, send] = useMachine(
     accordion.machine({
       id: defaultActiveKey as string,
@@ -18,7 +18,7 @@ export const Accordion = ({children, defaultActiveKey}: AccordionProps) => {
 
   return (
     <AccordionContext.Provider value={{api, state, send}}>
-      <div {...api.getRootProps()}>{children}</div>
+      <div {...api.getRootProps()} className={customClasses} style={customStyle}>{children}</div>
     </AccordionContext.Provider>
   )
 }
@@ -35,7 +35,7 @@ Accordion.Item = ({eventKey, children}: ItemProps) => {
   return <div {...api.getItemProps({value: eventKey})}>{children}</div>
 }
 
-Accordion.Header = ({eventKey, children, customStyle}: HeaderProps) => {
+Accordion.Header = ({eventKey, children, customClasses, customStyle}: HeaderProps) => {
   const context = React.useContext(AccordionContext)
 
   if (!context) {
@@ -45,7 +45,7 @@ Accordion.Header = ({eventKey, children, customStyle}: HeaderProps) => {
   const {api} = context
 
   return (
-    <div style={customStyle}>
+    <div style={customStyle} className={customClasses}>
       <button
         style={{
           background: 'none',
@@ -65,7 +65,7 @@ Accordion.Header = ({eventKey, children, customStyle}: HeaderProps) => {
   )
 }
 
-Accordion.Collapse = ({eventKey, children, customStyle}: CollapseProps) => {
+Accordion.Collapse = ({eventKey, children, customClasses, customStyle}: CollapseProps) => {
   const context = React.useContext(AccordionContext)
 
   if (!context) {
@@ -75,7 +75,7 @@ Accordion.Collapse = ({eventKey, children, customStyle}: CollapseProps) => {
   const {api} = context
 
   return (
-    <div style={customStyle} {...api.getItemContentProps({value: eventKey})}>
+    <div style={customStyle} className={customClasses} {...api.getItemContentProps({value: eventKey})}>
       {children}
     </div>
   )

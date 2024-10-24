@@ -9,17 +9,21 @@ export interface AccordionContextValue {
 export interface AccordionProps {
   children: React.ReactNode
   defaultActiveKey?: string
+  customClasses?: string
+  customStyle?: React.CSSProperties
 }
 
 export interface HeaderProps {
   eventKey: string
   children: React.ReactNode
+  customClasses?: string
   customStyle?: React.CSSProperties
 }
 
 export interface CollapseProps {
   eventKey: string
   children: React.ReactNode
+  customClasses?: string
   customStyle?: React.CSSProperties
 }
 
