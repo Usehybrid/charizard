@@ -1,6 +1,57 @@
 import {PERIOD, TIME_PICKER_FORMAT} from '../types'
 
 /**
+ * Converts a timestamp to a formatted time string.
+ *
+ * @param {number} timestamp - The timestamp to convert (in milliseconds).
+ * @param {TIME_PICKER_FORMAT} [timeFormat=TIME_PICKER_FORMAT.STANDARD] - The desired time format (12-hour or 24-hour).
+ * @param {boolean} [enableSeconds=false] - Whether to include seconds in the formatted time string.
+ * @returns {string} - The formatted time string.
+ *
+ * @example
+ * // Returns "02:30 PM"
+ * convertFromTimestamp(1620000000000, TIME_PICKER_FORMAT.STANDARD);
+ *
+ * @example
+ * // Returns "14:30:45"
+ * convertFromTimestamp(1620000000000, TIME_PICKER_FORMAT.MILITARY, true);
+ */
+export const convertFromTimestamp = (
+  timestamp: number,
+  timeFormat: TIME_PICKER_FORMAT = TIME_PICKER_FORMAT.STANDARD,
+  enableSeconds: boolean = false,
+): string => {
+  const date = new Date(timestamp)
+
+  let hours = date.getHours()
+  const minutes = date.getMinutes()
+  const seconds = date.getSeconds()
+
+  let period = ''
+
+  if (timeFormat === TIME_PICKER_FORMAT.STANDARD) {
+    period = hours >= 12 ? 'PM' : 'AM'
+    hours = hours % 12 || 12
+  }
+
+  const formattedHours = hours.toString().padStart(2, '0')
+  const formattedMinutes = minutes.toString().padStart(2, '0')
+  const formattedSeconds = seconds.toString().padStart(2, '0')
+
+  let timeString = `${formattedHours}:${formattedMinutes}`
+
+  if (enableSeconds) {
+    timeString += `:${formattedSeconds}`
+  }
+
+  if (timeFormat === TIME_PICKER_FORMAT.STANDARD) {
+    timeString += ` ${period}`
+  }
+
+  return timeString
+}
+
+/**
  * Converts a time string (e.g., "12:30 PM") to a timestamp
  * @param {string} timeString - The time string to convert
  * @returns {number} - The timestamp in milliseconds

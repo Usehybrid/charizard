@@ -6,9 +6,8 @@ import minusIcon from '../assets/minus-2.svg'
 import plusIcon from '../assets/plus.svg'
 import {INPUT_COMPONENTS, InputCountProps} from './types'
 import classes from './styles.module.css'
-import {countRegex} from '../../utils/regex'
-import {numberInputAllowedKeys} from '../../utils/text'
 import clsx from 'clsx'
+import {countRegex, numberInputAllowedKeys} from '../../utils'
 
 /**
  * InputCount is a specialized input component that allows users to increment

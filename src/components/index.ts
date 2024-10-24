@@ -4,6 +4,8 @@ import './styles/global.css'
 import './toasts/styles/main.css'
 
 export * from '../types'
+export * from '../hooks'
+export * from '../utils'
 
 export * from './button'
 export * from './empty-state'
@@ -54,3 +56,4 @@ export * from './users-chip'
 export * from './selectors-v2'
 export * from './status'
 export * from './accordion'
+export * from './switch-v2'

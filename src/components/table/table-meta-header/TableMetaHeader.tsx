@@ -8,9 +8,9 @@ import TableSelectedActions from '../table-selected-actions'
 import classes from './table-meta-header.module.css'
 import {TableProps} from '../Table'
 import {Search} from '../../search'
-import {pluralize} from '../../../utils/text'
 import {SINGLE_VALUE_FILTER_TYPES, useTableStore} from '../store'
 import type {Table} from '@tanstack/react-table'
+import {pluralize} from '../../../utils'
 
 interface TableMetaHeaderProps {
   rowSelectionConfig: TableProps['rowSelectionConfig']

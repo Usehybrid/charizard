@@ -2,6 +2,7 @@ import * as React from 'react'
 import clsx from 'clsx'
 import classes from './table-box-ellipses.module.css'
 import {TooltipV2} from '../../../tooltip-v2'
+import {TOOLTIP_DEFAULTS} from '../../../../utils/constants'
 
 interface TableBoxEllipsesProps {
   data: string | undefined
@@ -25,9 +26,7 @@ export default function TableBoxEllipses({data, customStyle}: TableBoxEllipsesPr
   return isEllipsesActive ? (
     <TooltipV2
       placement="right"
-      opacity={1}
-      portalClass="react-flow__renderer"
-      id={`charizard-table-cell-${data}`}
+      portalId={TOOLTIP_DEFAULTS.portalId}
       contentMaxLength={100}
       trigger={
         <div

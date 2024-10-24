@@ -3,7 +3,7 @@ import {InputGroupV2, InputLeftIcon, InputRightIcon, InputV2} from '../input-v2'
 import {SearchV2Props} from './types'
 import searchIcon from '../assets/search.svg'
 import closeIcon from '../assets/close.svg'
-import {useDebounce} from '../../utils/hooks/use-debounce'
+import {useDebounce} from '../../hooks'
 
 /**
  * SearchV2 is a customizable search input component that integrates with the `InputV2` component.

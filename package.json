@@ -46,6 +46,7 @@
     "@zag-js/radio-group": "^0.75.0",
     "@zag-js/react": "^0.75.0",
     "@zag-js/select": "^0.75.0",
+    "@zag-js/switch": "^0.75.0",
     "@zag-js/tabs": "^0.75.0",
     "@zag-js/tooltip": "^0.75.0",
     "clsx": "^2.1.1",

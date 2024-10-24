@@ -19,8 +19,8 @@ import printer from '../../../assets/devices/printer.svg'
 import hardDrive2 from '../../../assets/devices/hard-drive-2.svg'
 import TableBoxEllipses from '../table-box-ellipses'
 import {SVG} from '../../../svg'
-import {clipboard} from '../../../../utils/text'
 import {TooltipV2} from '../../../tooltip-v2'
+import {clipboard, TOOLTIP_DEFAULTS} from '../../../../utils'
 
 interface TableDeviceCellProps {
   device: any
@@ -50,7 +50,6 @@ export function TableDeviceCell({device, onClick, customStyle}: TableDeviceCellP
           )}
           {device.isMdmConnected && (
             <TooltipV2
-              id={'id'}
               trigger={
                 <SVG
                   path={remote}
@@ -59,7 +58,7 @@ export function TableDeviceCell({device, onClick, customStyle}: TableDeviceCellP
                 />
               }
               content="This device is also connected with MDM"
-              portalId="root"
+              portalId={TOOLTIP_DEFAULTS.portalId}
             />
           )}
           {device.serial_number && (

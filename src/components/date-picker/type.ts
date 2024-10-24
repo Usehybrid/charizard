@@ -25,6 +25,7 @@ export interface DateRangePickerProps extends PropsRange {
   }
   size?: BUTTON_V2_SIZE
   placeholder?: string
+  trigger?: React.ReactNode
 }
 
 export type MonthYear = {

@@ -7,7 +7,7 @@ import {SVG} from '../svg'
 import close from '../assets/close.svg'
 import fileUpload from '../assets/file-upload.svg'
 import deleteOutline from '../assets/delete-bin.svg'
-import {pluralize} from '../../utils/text'
+import {pluralize} from '../../utils'
 export type UploadFileType = {
   id?: string
   ext: string

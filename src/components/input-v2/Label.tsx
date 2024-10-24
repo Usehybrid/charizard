@@ -1,4 +1,3 @@
-import * as React from 'react'
 import clsx from 'clsx'
 import classes from './styles.module.css'
 import {LabelPropsV2, INPUT_COMPONENTS} from './types'
@@ -33,8 +32,6 @@ export function LabelV2({
   children,
   ...props
 }: LabelPropsV2) {
-  const id = React.useId()
-
   return (
     <label
       {...props}
@@ -50,7 +47,6 @@ export function LabelV2({
       {!!info && (
         <TooltipV2
           {...tooltipProps}
-          id={id}
           trigger={
             <SVG
               path={infoCircleIcon}
