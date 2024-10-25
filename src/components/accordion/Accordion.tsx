@@ -1,8 +1,16 @@
 import * as React from 'react'
 import * as accordion from '@zag-js/accordion'
 import {useMachine, normalizeProps} from '@zag-js/react'
-import {AccordionProps, CollapseProps, HeaderProps, ItemProps} from './types'
-import {useAccordionStore} from './store'
+import {AccordionContextValue, AccordionProps, CollapseProps, HeaderProps, ItemProps} from './types'
+import {create} from 'zustand'
+
+export const useAccordionStore = create<AccordionContextValue>(set => ({
+  api: null as any,
+  state: null,
+  send: () => {},
+  activeEventKey: null,
+  setActiveEventKey: key => set({activeEventKey: key}),
+}))
 
 export const Accordion = ({
   children,

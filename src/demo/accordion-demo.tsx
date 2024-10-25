@@ -1,5 +1,4 @@
-import {Accordion} from '../components/accordion'
-import {useAccordionStore} from '../components/accordion/store'
+import {Accordion, useAccordionStore} from '../components/accordion'
 
 export function AccordionDemo() {
   const activeEventKey = useAccordionStore(state => state.activeEventKey)
