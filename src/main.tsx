@@ -1,6 +1,8 @@
 import {StrictMode} from 'react'
 import {createRoot} from 'react-dom/client'
-import { AccordionDemo } from './demo/accordion-demo'
+// import {StatusDemo} from './demo/status-demo'
+// import {TableDemo} from './demo/table-demo'
+import TaskCardDemo from './demo/task-card-demo'
 
 const styles = {
   width: '90%',
@@ -22,7 +24,7 @@ createRoot(document.getElementById('root') as HTMLElement).render(
 function App() {
   return (
     <div style={styles}>
-      <AccordionDemo />
+      <TaskCardDemo />
     </div>
   )
 }

@@ -73,8 +73,8 @@
     "@storybook/react": "^8.3.6",
     "@storybook/react-vite": "^8.3.6",
     "@storybook/test": "^8.3.6",
-    "@types/node": "^22.7.7",
-    "@types/react": "^18.3.11",
+    "@types/node": "^22.7.9",
+    "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "@vitejs/plugin-react-swc": "^3.7.1",
     "axios": "^1.7.7",
@@ -83,9 +83,9 @@
     "storybook": "^8.3.6",
     "storybook-css-modules-preset": "^1.1.1",
     "typescript": "5.6.3",
-    "vite": "^5.4.9",
+    "vite": "^5.4.10",
     "vite-plugin-checker": "^0.8.0",
-    "vite-plugin-dts": "4.2.4",
+    "vite-plugin-dts": "4.3.0",
     "vite-plugin-libcss": "^1.1.1"
   },
   "publishConfig": {
