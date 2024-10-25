@@ -110,9 +110,9 @@ export function DrawerV2({
   //         ? 'translateX(0)'
   //         : `translateX(${translateXOffset})`
   //       ;(descriptionRef.current as HTMLDivElement).style.maxHeight =
-  //         `calc(100vh - (1.75rem * 2) - ${footerRef.current?.clientHeight}px)`
+  //         `calc(100dvh - (1.75rem * 2) - ${footerRef.current?.clientHeight}px)`
   //       ;(descriptionRef.current as HTMLDivElement).style.height =
-  //         `calc(100vh - (1.75rem * 2) - ${footerRef.current?.clientHeight}px)`
+  //         `calc(100dvh - (1.75rem * 2) - ${footerRef.current?.clientHeight}px)`
   //     }
   //   }, 0)
 

@@ -108,14 +108,13 @@ export function Drawer({
 
   React.useEffect(() => {
     const timeout = setTimeout(() => {
-      if (containerRef.current && descriptionRef && footerRef) {
-        containerRef.current.style.transform = isOpen
-          ? 'translateX(0)'
-          : `translateX(${translateXOffset})`
-        ;(descriptionRef.current as HTMLDivElement).style.maxHeight =
-          `calc(100vh - (1.75rem * 2) - ${footerRef.current?.clientHeight}px)`
-        ;(descriptionRef.current as HTMLDivElement).style.height =
-          `calc(100vh - (1.75rem * 2) - ${footerRef.current?.clientHeight}px)`
+      if (containerRef.current && descriptionRef.current && footerRef.current) {
+        const translateXValue = isOpen ? 'translateX(0)' : `translateX(${translateXOffset})`
+        const descriptionHeight = `calc(100dvh - (1.75rem * 2) - ${footerRef.current.clientHeight}px)`
+
+        containerRef.current.style.transform = translateXValue
+        descriptionRef.current.style.maxHeight = descriptionHeight
+        descriptionRef.current.style.height = descriptionHeight
       }
     }, 0)
 

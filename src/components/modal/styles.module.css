@@ -30,7 +30,7 @@
 .contentWrapper {
   width: 100%;
   /* took a random number of 1.75, might have to change it later according to preferences */
-  /* max-height: calc(100vh - (1.75rem * 2)); */
+  /* max-height: calc(100dvh - (1.75rem * 2)); */
   background-color: var(--neutral-white);
   /* overflow-x: hidden; */
   border-radius: 8px;

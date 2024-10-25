@@ -98,8 +98,8 @@
 .descriptionContainer {
   padding: 16px;
   /* subtract the header and footer heights */
-  /* max-height: calc(100vh - 90px); */
-  /* height: calc(100vh - 90px); */
+  /* max-height: calc(100dvh - 90px); */
+  /* height: calc(100dvh - 90px); */
   overflow-y: scroll;
   flex-grow: 1;
 }
