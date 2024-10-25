@@ -4,8 +4,8 @@ export interface AccordionContextValue {
   api: accordion.Api<any>
   state: any
   send: (event: any) => void
-  activeEventKey: string | null
-  setActiveEventKey: (key: string | null) => void
+  activeEventKey: string[]
+  setActiveEventKey: (key: string[]) => void
 }
 
 export interface AccordionProps {
@@ -13,6 +13,7 @@ export interface AccordionProps {
   defaultActiveKey?: string
   customClasses?: string
   customStyle?: React.CSSProperties
+  isMulti?: boolean
 }
 
 export interface HeaderProps {
