@@ -26,9 +26,7 @@ export default function TableBoxEllipses({data, customStyle}: TableBoxEllipsesPr
   return isEllipsesActive ? (
     <TooltipV2
       placement="right"
-      opacity={TOOLTIP_DEFAULTS.opacity}
       portalId={TOOLTIP_DEFAULTS.portalId}
-      id={`charizard-table-cell-${data}`}
       contentMaxLength={100}
       trigger={
         <div

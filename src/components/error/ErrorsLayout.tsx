@@ -5,7 +5,7 @@ import logoImage from '../assets/logo-full.svg'
 import errorImage from '../assets/illustrations/sleeping-user.svg'
 import {BUTTON_V2_SIZE, BUTTON_V2_VARIANT, ButtonV2} from '../button-v2'
 import {AsyncImage} from '../asyncImage'
-import {ZENADMIN_CONTACT, ZENADMIN_URL} from '../../utils/constants'
+import {ZENADMIN_CONTACT, ZENADMIN_URL} from '../../utils'
 
 interface ErrorsLayoutProps {
   children?: React.ReactNode

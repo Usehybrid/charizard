@@ -11,10 +11,10 @@ import {SortableList} from './sortable/SortableList'
 import {CHECKBOX_COL_ID, DROPDOWN_COL_ID, RADIO_COL_ID} from '../constants'
 import {Loader} from '../../loader'
 import {DrawerV2} from '../../drawer-v2'
-import {useDisclosure} from '../../../utils/hooks/use-disclosure'
 import {BUTTON_V2_VARIANT} from '../../button-v2'
 import type {CustomColCheckedState, TableCustomColumns} from '../types'
 import {GroupedSelection} from './GroupedSelection'
+import {useDisclosure} from '../../../hooks'
 
 interface TableCustomColsProps {
   customColumnConfig: {

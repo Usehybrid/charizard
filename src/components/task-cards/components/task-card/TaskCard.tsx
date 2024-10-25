@@ -1,14 +1,6 @@
 import clsx from 'clsx'
 import * as React from 'react'
 import {useLocation, useNavigate} from 'react-router-dom'
-import {
-  getDefaultFormattedDateTime,
-  isArrayOfString,
-  isExactISODateFormat,
-  isObject,
-} from '../../../../utils'
-import {isDatePassed} from '../../../../utils/date'
-import {getUsername} from '../../../../utils/text'
 import deleteBin from '../../../assets/delete-bin.svg'
 import infoOctagon from '../../../assets/info-octagon.svg'
 import {AsyncImage} from '../../../asyncImage'
@@ -19,6 +11,14 @@ import {UserChip} from '../../../user-chip'
 import getStatus, {TASK_STATUS} from '../../helper'
 import {ITask, ITaskDetails, ITaskObjectValue, MODULES} from '../../types'
 import classes from './task-card.module.css'
+import {
+  getDefaultFormattedDateTime,
+  getUsername,
+  isArrayOfString,
+  isDatePassed,
+  isExactISODateFormat,
+  isObject,
+} from '../../../../utils'
 
 const HIDE_DETAILS = [MODULES.PROFILE]
 const HIDE_CANCEL_REQUEST = [

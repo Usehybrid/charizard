@@ -3,7 +3,6 @@ import {addDays, addMonths, addYears, isBefore, isSameDay} from 'date-fns'
 import * as React from 'react'
 import {DateRange, DayPicker, useDayPicker} from 'react-day-picker'
 import {create} from 'zustand'
-import {useMediaQuery} from '../../utils/hooks/use-media-query'
 import calender from '../assets/calender.svg'
 import chevronDown from '../assets/chevron-down.svg'
 import chevronLeft from '../assets/chevron-left.svg'
@@ -16,6 +15,7 @@ import {SVG} from '../svg'
 import {dateFormatter, RANGE_OPTIONS} from './constants'
 import classes from './date-range-picker.module.css'
 import {DateRangePickerProps, DateStore, MonthYear} from './type'
+import {useMediaQuery} from '../../hooks'
 
 const useDateStore = create<DateStore>()(set => ({
   monthYear: {

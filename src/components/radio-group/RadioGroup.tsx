@@ -134,7 +134,6 @@ export function RadioGroup({
               </label>
               {!!opt.tooltip && (
                 <TooltipV2
-                  id={'radio-group-tooltip'}
                   placement={opt.tooltip.placement as Placement}
                   trigger={
                     opt.tooltip.trigger ? (

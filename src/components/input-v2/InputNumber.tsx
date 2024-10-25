@@ -3,10 +3,9 @@ import {InputV2} from './Input'
 import {InputGroupV2} from './InputGroup'
 import {INPUT_COMPONENTS, InputNumberProps} from './types'
 import classes from './styles.module.css'
-import {countRegex} from '../../utils/regex'
-import {numberInputAllowedKeys} from '../../utils/text'
 import clsx from 'clsx'
 import NumberAdornment from './NumberAdornment'
+import {countRegex, numberInputAllowedKeys} from '../../utils'
 
 /**
  * InputNumber is a numeric input component with increment and decrement controls.

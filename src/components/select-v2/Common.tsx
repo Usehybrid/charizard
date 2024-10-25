@@ -5,12 +5,11 @@ import {components} from 'react-select'
 import {SVG} from '../svg'
 import clsx from 'clsx'
 import classes from './styles.module.css'
-import {useColorsFromWord} from '../../utils/hooks/use-color-from-word'
 import {SELECT_VARIANT} from './types'
-import {getInitials} from '../../utils/text'
 import {AsyncImage} from '../asyncImage'
 import {Loader} from '../loader'
-import {lightenHexColor} from '../../utils'
+import {useColorsFromWord} from '../../hooks'
+import {getInitials, lightenHexColor} from '../../utils'
 
 /**
  * Custom Dropdown Indicator component for react-select.

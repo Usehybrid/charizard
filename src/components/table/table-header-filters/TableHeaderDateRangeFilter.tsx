@@ -1,11 +1,11 @@
 import * as React from 'react'
-import {useDateRangePicker} from '../../../utils/hooks/use-date-range-picker'
 import {BUTTON_V2_SIZE} from '../../button-v2'
 import {DateRangePicker} from '../../date-picker'
 import {DateRangePickerProps} from '../../date-picker/type'
 import {TableStore} from '../store'
 import type {FilterOptions, InternalTableFilters} from '../types'
 import classes from './styles.module.css'
+import {useDateRangePicker} from '../../../hooks'
 
 interface TableHeaderFilterProps {
   filter: FilterOptions
