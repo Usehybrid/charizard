@@ -10,7 +10,7 @@
   align-items: center;
   justify-content: center;
   height: 100dvh;
-  width: 100vw;
+  width: 100dvw;
   position: fixed;
   z-index: 1400;
   inset: 0;

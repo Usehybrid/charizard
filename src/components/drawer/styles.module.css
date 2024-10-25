@@ -3,7 +3,7 @@
   top: 0;
   left: 0;
   z-index: 1040;
-  width: 100vw;
+  width: 100dvw;
   height: 100dvh;
 
   visibility: hidden;
@@ -162,6 +162,6 @@
 
 @media screen and (max-width: 600px) {
   .container {
-    width: 100vw !important;
+    width: 100dvw !important;
   }
 }
