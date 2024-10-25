@@ -1,7 +1,7 @@
 .backdrop {
   position: fixed;
   width: 100vw;
-  height: 100vh;
+  height: 100dvh;
   background-color: var(--black);
   opacity: 0.3;
   z-index: 1400;
@@ -18,7 +18,7 @@
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
+  height: 100dvh;
   background-color: transparent;
   display: flex;
   align-items: center;
@@ -45,8 +45,8 @@
 }
 
 .contentWrapper.fullScreen {
-  width: 100vh;
-  height: 100vh;
+  width: 100dvw;
+  height: 100dvh;
 }
 .contentWrapper .content {
   position: relative;
@@ -96,7 +96,7 @@
   background-color: transparent;
   overflow-y: scroll;
   padding-block: 0;
-  max-height: 70vh;
+  max-height: 70dvh;
   color: var(--text-primary);
 }
 
