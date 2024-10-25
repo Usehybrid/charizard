@@ -6,6 +6,7 @@ import {SVG} from '../svg'
 import {ButtonV2, ButtonV2Props} from '../button-v2'
 import {DialogFooterButtons} from '../../types/common'
 import {useLockBodyScroll} from '../../hooks'
+import {Portal} from '@zag-js/react'
 
 interface DrawerProps {
   /**
@@ -109,9 +110,9 @@ export function DrawerV2({
   //         ? 'translateX(0)'
   //         : `translateX(${translateXOffset})`
   //       ;(descriptionRef.current as HTMLDivElement).style.maxHeight =
-  //         `calc(100vh - (1.75rem * 2) - ${footerRef.current?.clientHeight}px)`
+  //         `calc(100dvh - (1.75rem * 2) - ${footerRef.current?.clientHeight}px)`
   //       ;(descriptionRef.current as HTMLDivElement).style.height =
-  //         `calc(100vh - (1.75rem * 2) - ${footerRef.current?.clientHeight}px)`
+  //         `calc(100dvh - (1.75rem * 2) - ${footerRef.current?.clientHeight}px)`
   //     }
   //   }, 0)
 
@@ -122,69 +123,75 @@ export function DrawerV2({
   // }, [isOpen])
 
   return (
-    <>
-      {/* backdrop */}
-      <div className={clsx(classes.backdropLayer, isOpen && classes.show)} onClick={onClose}>
-        {showBackdrop && <div className={clsx(classes.backdrop, isOpen && classes.showBackdrop)} />}
-      </div>
-      {/* container */}
-      <div
-        className={clsx(classes.container, classes[size], classes[`${drawerPosition}Align`])}
-        ref={containerRef}
-        style={customContainerStyles}
-      >
-        {/* content */}
-        <div className={classes.content}>
-          {/* header */}
-          {showHeader && (
-            <div className={clsx(classes.headerContainer, headerClassName)}>
-              {customHeader ? (
-                customHeader
-              ) : (
-                <>
-                  <div>
-                    <h1 className={clsx(classes.title, 'zap-heading-semibold')}>{title}</h1>
-                    {subTitle && (
-                      <h2 className={clsx(classes.subTitle, 'zap-content-regular')}>{subTitle}</h2>
-                    )}
-                  </div>
-                  <div onClick={onClose}>
-                    <SVG path={closeIcon} svgClassName={classes.closeBtnIcon} />
-                  </div>
-                </>
-              )}
-            </div>
-          )}
-          {/* description */}
-          <div
-            className={clsx(classes.descriptionContainer, contentClassName)}
-            ref={descriptionRef}
-          >
-            {/* children are shown here */}
-            {children}
-          </div>
-          {/* footer */}
-          {showFooter && (
-            <div className={clsx(classes.footer, footerClassName)} ref={footerRef}>
-              {customFooter
-                ? customFooter
-                : buttons && (
-                    <div className={classes.footerBtnContainer}>
-                      <div className={classes.footerBtn}>
-                        {buttons.map(({btnText, ...btnProps}, idx) => (
-                          <ButtonV2 key={idx} {...(btnProps as ButtonV2Props)}>
-                            {btnText}
-                          </ButtonV2>
-                        ))}
-                      </div>
-
-                      {footerAddon && <div>{footerAddon}</div>}
-                    </div>
-                  )}
-            </div>
+    isOpen && (
+      <Portal>
+        {/* backdrop */}
+        <div className={clsx(classes.backdropLayer, isOpen && classes.show)} onClick={onClose}>
+          {showBackdrop && (
+            <div className={clsx(classes.backdrop, isOpen && classes.showBackdrop)} />
           )}
         </div>
-      </div>
-    </>
+        {/* container */}
+        <div
+          className={clsx(classes.container, classes[size], classes[`${drawerPosition}Align`])}
+          ref={containerRef}
+          style={customContainerStyles}
+        >
+          {/* content */}
+          <div className={classes.content}>
+            {/* header */}
+            {showHeader && (
+              <div className={clsx(classes.headerContainer, headerClassName)}>
+                {customHeader ? (
+                  customHeader
+                ) : (
+                  <>
+                    <div>
+                      <h1 className={clsx(classes.title, 'zap-heading-semibold')}>{title}</h1>
+                      {subTitle && (
+                        <h2 className={clsx(classes.subTitle, 'zap-content-regular')}>
+                          {subTitle}
+                        </h2>
+                      )}
+                    </div>
+                    <div onClick={onClose}>
+                      <SVG path={closeIcon} svgClassName={classes.closeBtnIcon} />
+                    </div>
+                  </>
+                )}
+              </div>
+            )}
+            {/* description */}
+            <div
+              className={clsx(classes.descriptionContainer, contentClassName)}
+              ref={descriptionRef}
+            >
+              {/* children are shown here */}
+              {children}
+            </div>
+            {/* footer */}
+            {showFooter && (
+              <div className={clsx(classes.footer, footerClassName)} ref={footerRef}>
+                {customFooter
+                  ? customFooter
+                  : buttons && (
+                      <div className={classes.footerBtnContainer}>
+                        <div className={classes.footerBtn}>
+                          {buttons.map(({btnText, ...btnProps}, idx) => (
+                            <ButtonV2 key={idx} {...(btnProps as ButtonV2Props)}>
+                              {btnText}
+                            </ButtonV2>
+                          ))}
+                        </div>
+
+                        {footerAddon && <div>{footerAddon}</div>}
+                      </div>
+                    )}
+              </div>
+            )}
+          </div>
+        </div>
+      </Portal>
+    )
   )
 }
