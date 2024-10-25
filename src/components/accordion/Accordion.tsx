@@ -1,11 +1,15 @@
 import * as React from 'react'
 import * as accordion from '@zag-js/accordion'
 import {useMachine, normalizeProps} from '@zag-js/react'
-import { AccordionContextValue, AccordionProps, CollapseProps, HeaderProps, ItemProps } from './types'
+import {AccordionProps, CollapseProps, HeaderProps, ItemProps} from './types'
+import {useAccordionStore} from './store'
 
-const AccordionContext = React.createContext<AccordionContextValue | null>(null)
-
-export const Accordion = ({children, defaultActiveKey, customClasses, customStyle}: AccordionProps) => {
+export const Accordion = ({
+  children,
+  defaultActiveKey,
+  customClasses,
+  customStyle,
+}: AccordionProps) => {
   const [state, send] = useMachine(
     accordion.machine({
       id: defaultActiveKey as string,
@@ -16,37 +20,41 @@ export const Accordion = ({children, defaultActiveKey, customClasses, customStyl
 
   const api = accordion.connect(state, send, normalizeProps)
 
+  useAccordionStore.setState({api, state, send})
+
+  React.useEffect(() => {
+    const activeKey = state.context.value[0] || null
+    useAccordionStore.setState({activeEventKey: activeKey})
+  }, [state])
+
   return (
-    <AccordionContext.Provider value={{api, state, send}}>
-      <div {...api.getRootProps()} className={customClasses} style={customStyle}>{children}</div>
-    </AccordionContext.Provider>
+    <div {...api.getRootProps()} className={customClasses} style={customStyle}>
+      {children}
+    </div>
   )
 }
 
 Accordion.Item = ({eventKey, children}: ItemProps) => {
-  const context = React.useContext(AccordionContext)
-
-  if (!context) {
-    throw new Error('Accordion.Item must be used within an Accordion')
-  }
-
-  const {api} = context
+  const {api} = useAccordionStore()
 
   return <div {...api.getItemProps({value: eventKey})}>{children}</div>
 }
 
 Accordion.Header = ({eventKey, children, customClasses, customStyle}: HeaderProps) => {
-  const context = React.useContext(AccordionContext)
+  const {api, setActiveEventKey} = useAccordionStore()
 
-  if (!context) {
-    throw new Error('Accordion.Header must be used within an Accordion')
+  const {onClick, ...triggerProps} = api.getItemTriggerProps({value: eventKey})
+
+  const handleClick = (e: React.MouseEvent) => {
+    onClick(e)
+    setActiveEventKey(eventKey)
   }
-
-  const {api} = context
 
   return (
     <div style={customStyle} className={customClasses}>
       <button
+        {...triggerProps}
+        onClick={handleClick}
         style={{
           background: 'none',
           border: 'none',
@@ -57,7 +65,6 @@ Accordion.Header = ({eventKey, children, customClasses, customStyle}: HeaderProp
           width: '100%',
           height: '100%',
         }}
-        {...api.getItemTriggerProps({value: eventKey})}
       >
         {children}
       </button>
@@ -66,16 +73,14 @@ Accordion.Header = ({eventKey, children, customClasses, customStyle}: HeaderProp
 }
 
 Accordion.Collapse = ({eventKey, children, customClasses, customStyle}: CollapseProps) => {
-  const context = React.useContext(AccordionContext)
-
-  if (!context) {
-    throw new Error('Accordion.Collapse must be used within an Accordion')
-  }
-
-  const {api} = context
+  const {api} = useAccordionStore()
 
   return (
-    <div style={customStyle} className={customClasses} {...api.getItemContentProps({value: eventKey})}>
+    <div
+      style={customStyle}
+      className={customClasses}
+      {...api.getItemContentProps({value: eventKey})}
+    >
       {children}
     </div>
   )

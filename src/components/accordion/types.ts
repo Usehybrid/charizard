@@ -4,6 +4,8 @@ export interface AccordionContextValue {
   api: accordion.Api<any>
   state: any
   send: (event: any) => void
+  activeEventKey: string | null
+  setActiveEventKey: (key: string | null) => void
 }
 
 export interface AccordionProps {
