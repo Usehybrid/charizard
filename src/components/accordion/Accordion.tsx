@@ -52,20 +52,7 @@ Accordion.Header = ({eventKey, children, customClasses, customStyle}: HeaderProp
 
   return (
     <div style={customStyle} className={customClasses}>
-      <button
-        {...triggerProps}
-        onClick={handleClick}
-        style={{
-          background: 'none',
-          border: 'none',
-          padding: 0,
-          margin: 0,
-          font: 'inherit',
-          color: 'inherit',
-          width: '100%',
-          height: '100%',
-        }}
-      >
+      <button {...triggerProps} onClick={handleClick} className={'zap-reset-btn'}>
         {children}
       </button>
     </div>
