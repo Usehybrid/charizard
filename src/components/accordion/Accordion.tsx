@@ -1,5 +1,7 @@
 import * as React from 'react'
 import * as accordion from '@zag-js/accordion'
+import clsx from 'clsx'
+import classes from './style.module.css'
 import {useMachine, normalizeProps} from '@zag-js/react'
 import {AccordionContextValue, AccordionProps, CollapseProps, HeaderProps, ItemProps} from './types'
 import {create} from 'zustand'
@@ -60,7 +62,7 @@ Accordion.Header = ({eventKey, children, customClasses, customStyle}: HeaderProp
 
   return (
     <div style={customStyle} className={customClasses}>
-      <button {...triggerProps} onClick={handleClick} className={'zap-reset-btn'}>
+      <button {...triggerProps} onClick={handleClick} className={clsx('zap-reset-btn', classes.headerClass)}>
         {children}
       </button>
     </div>
