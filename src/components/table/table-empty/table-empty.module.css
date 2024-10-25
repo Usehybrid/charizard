@@ -3,7 +3,7 @@
   align-items: center;
   justify-content: center;
   gap: 25px;
-  height: calc(100vh - 400px);
+  height: calc(100dvh - 400px);
   padding: 20px;
 }
 

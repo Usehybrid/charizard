@@ -3,8 +3,8 @@
   top: 0;
   left: 0;
   z-index: 1040;
-  width: 100vw;
-  height: 100vh;
+  width: 100dvw;
+  height: 100dvh;
   visibility: hidden;
 }
 
@@ -25,7 +25,7 @@
 }
 
 .container {
-  height: 100vh;
+  height: 100dvh;
   /* overflow: hidden; */
   position: fixed;
   top: 0;
@@ -98,8 +98,8 @@
 .descriptionContainer {
   padding: 16px;
   /* subtract the header and footer heights */
-  /* max-height: calc(100vh - 90px); */
-  /* height: calc(100vh - 90px); */
+  /* max-height: calc(100dvh - 90px); */
+  /* height: calc(100dvh - 90px); */
   overflow-y: scroll;
   flex-grow: 1;
 }
@@ -134,6 +134,6 @@
 
 @media screen and (max-width: 600px) {
   .container {
-    width: 100vw !important;
+    width: 100dvw !important;
   }
 }
