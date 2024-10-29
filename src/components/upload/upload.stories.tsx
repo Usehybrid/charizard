@@ -1,6 +1,7 @@
 import type {Meta, StoryObj} from '@storybook/react'
 import {Upload} from './Upload'
-import {DOCS_TYPE} from './types'
+import {DOCS_TYPE} from '../../types'
+
 
 const meta: Meta<typeof Upload> = {
   component: Upload,
