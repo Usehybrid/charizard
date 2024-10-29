@@ -2,12 +2,12 @@ import * as React from 'react'
 import classes from './styles.module.css'
 import clsx from 'clsx'
 import {formatBytes, getFileTypeIcon} from './helper'
-import {DOCS_TYPE} from './types'
 import {SVG} from '../svg'
 import close from '../assets/close.svg'
 import fileUpload from '../assets/file-upload.svg'
 import deleteOutline from '../assets/delete-bin.svg'
 import {pluralize} from '../../utils'
+import {DOCS_TYPE} from '../../types'
 export type UploadFileType = {
   id?: string
   ext: string
