@@ -85,7 +85,7 @@
   flex-grow: 1;
   padding: 16px 8px 10px 8px;
   /* 41px => drawer header, 49px => drawer footer, 10px to make it look better */
-  max-height: calc(100vh - 90px);
+  max-height: calc(100dvh - 90px);
   overflow-y: scroll;
   /* scroll-behavior: smooth; */
 }

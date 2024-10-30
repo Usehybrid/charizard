@@ -39,7 +39,7 @@
 
 @media only screen and (max-width: 480px) {
   .Toastify__toast-container {
-    width: 100vw;
+    width: 100dvw;
     padding: 0;
     left: env(safe-area-inset-left);
     margin: 0;

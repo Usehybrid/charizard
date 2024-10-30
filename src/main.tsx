@@ -1,14 +1,12 @@
 import {StrictMode} from 'react'
 import {createRoot} from 'react-dom/client'
-// import {StatusDemo} from './demo/status-demo'
-// import {TableDemo} from './demo/table-demo'
-import TaskCardDemo from './demo/task-card-demo'
+import {TableDemo} from './demo/table-demo'
 
 const styles = {
   width: '90%',
   margin: 'auto',
   padding: '0 20px',
-  height: '100vh',
+  height: '100dvh',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
@@ -24,7 +22,7 @@ createRoot(document.getElementById('root') as HTMLElement).render(
 function App() {
   return (
     <div style={styles}>
-      <TaskCardDemo />
+      <TableDemo />
     </div>
   )
 }
