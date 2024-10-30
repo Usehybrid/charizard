@@ -1,77 +1,101 @@
 import * as React from 'react'
 import * as accordion from '@zag-js/accordion'
-import {useMachine, normalizeProps} from '@zag-js/react'
+import clsx from 'clsx'
+import classes from './style.module.css'
+import { useMachine, normalizeProps } from '@zag-js/react'
+import { AccordionContextValue, AccordionProps, CollapseProps, HeaderProps, ItemProps } from './types'
+import { create } from 'zustand'
 
-interface AccordionProps {
-  children: React.ReactNode
-  defaultActiveKey?: string
-}
+export const useAccordionStore = create<AccordionContextValue>(set => ({
+  api: null as any,
+  state: null,
+  send: () => {},
+  activeEventKey: [], // Change to an array to support multiple keys
+  setActiveEventKey: keys => set({ activeEventKey: keys }),
+}))
 
-interface HeaderProps {
-  eventKey: string
-  children: React.ReactNode
-  customStyle?: React.CSSProperties
-}
-
-interface CollapseProps {
-  eventKey: string
-  children: React.ReactNode
-  customStyle?: React.CSSProperties
-}
-
-export const Accordion = ({children, defaultActiveKey}: AccordionProps) => {
+export const Accordion = ({
+  children,
+  defaultActiveKey,
+  customClasses,
+  customStyle,
+  isMulti = false,
+}: AccordionProps) => {
   const [state, send] = useMachine(
     accordion.machine({
       id: defaultActiveKey as string,
       collapsible: true,
       value: defaultActiveKey ? [defaultActiveKey] : [],
+      multiple: isMulti, // Use the correct key for multiple
     }),
   )
 
   const api = accordion.connect(state, send, normalizeProps)
 
-  const items = React.Children.map(children, child => {
-    if (React.isValidElement<HeaderProps>(child) && child.type === Accordion.Header) {
-      const headerEventKey = child.props.eventKey
+  useAccordionStore.setState({ api, state, send })
 
-      return (
-        <div {...api.getItemProps({value: headerEventKey})}>
-          <button
-            style={{
-              background: 'none',
-              border: 'none',
-              padding: 0,
-              margin: 0,
-              font: 'inherit',
-              color: 'inherit',
-              width: '100%',
-              height: '100%',
-            }}
-            {...api.getItemTriggerProps({value: headerEventKey})}
-          >
-            {child.props.children}
-          </button>
-        </div>
-      )
-    }
+  React.useEffect(() => {
+    const activeKeys = state.context.value || []; // Get active keys
+    useAccordionStore.setState({ activeEventKey: activeKeys }); // Update active keys in store
+  }, [state])
 
-    if (React.isValidElement<CollapseProps>(child) && child.type === Accordion.Collapse) {
-      const headerEventKey = child.props.eventKey
-      return <div {...api.getItemContentProps({value: headerEventKey})}>{child.props.children}</div>
-    }
-
-    return null
-  })
-
-  return <div {...api.getRootProps()}>{items}</div>
+  return (
+    <div {...api.getRootProps()} className={customClasses} style={customStyle}>
+      {children}
+    </div>
+  )
 }
 
-Accordion.Header = ({eventKey, children, customStyle}: HeaderProps) => {
-  console.log(eventKey)
-  return <div style={customStyle}>{children}</div>
+Accordion.Item = ({ eventKey, children }: ItemProps) => {
+  const { api } = useAccordionStore()
+
+  return <div {...api.getItemProps({ value: eventKey })}>{children}</div>
 }
 
-Accordion.Collapse = ({eventKey, children, customStyle}: CollapseProps) => {
-  console.log(eventKey)
-  return <div style={customStyle}>{children}</div>
+Accordion.Header = ({ eventKey, children, customClasses, customStyle }: HeaderProps) => {
+  const { api, setActiveEventKey } = useAccordionStore()
+
+  const { onClick, ...triggerProps } = api.getItemTriggerProps({ value: eventKey })
+
+  const handleClick = (e: React.MouseEvent) => {
+    onClick(e)
+
+    const currentActiveKeys = useAccordionStore.getState().activeEventKey || [];
+    const isActive = currentActiveKeys.includes(eventKey);
+
+    const newActiveKeys = isActive
+      ? currentActiveKeys.filter(key => key !== eventKey) // Remove if already active
+      : [...currentActiveKeys, eventKey]; // Add if not active
+
+    setActiveEventKey(newActiveKeys); // Update active keys in store
+  }
+
+  return (
+    <div style={customStyle} className={customClasses}>
+      <button
+        {...triggerProps}
+        onClick={handleClick}
+        className={clsx('zap-reset-btn', classes.headerClass)}
+      >
+        {children}
+      </button>
+    </div>
+  )
 }
+
+Accordion.Collapse = ({ eventKey, children, customClasses, customStyle }: CollapseProps) => {
+  const { state } = useAccordionStore()
+  const isOpen = state.context.value.includes(eventKey); // Check if the current item is open
+
+  return (
+    <div
+      style={customStyle}
+      className={customClasses}
+      hidden={!isOpen} // Manage visibility based on isOpen
+    >
+      {children}
+    </div>
+  )
+}
+
+export default Accordion;
