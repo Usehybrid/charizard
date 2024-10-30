@@ -1,3 +1,4 @@
+// TableCheckbox.tsx
 import * as React from 'react'
 import classes from './styles.module.css'
 import clsx from 'clsx'
@@ -24,11 +25,18 @@ export function TableCheckbox({
   }, [ref, indeterminate])
 
   return (
-    <span className={classes.checkboxSpan} style={{display: isHeader ? 'flex' : undefined}}>
+    <span
+      className={clsx(classes.checkboxSpan, indeterminate && classes.indeterminate)}
+      style={{display: isHeader ? 'flex' : undefined}}
+    >
       <input
         type="checkbox"
         ref={ref}
-        className={clsx(classes.checkbox, row.id === CHECKBOX_COL_ID && classes.checkboxSelect)}
+        className={clsx(
+          classes.checkbox,
+          row.id === CHECKBOX_COL_ID && classes.checkboxSelect,
+          indeterminate && classes.indeterminateInput,
+        )}
         {...rest}
       />
     </span>

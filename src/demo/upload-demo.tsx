@@ -1,5 +1,4 @@
-import {Upload, UploadFileType} from '../components'
-import {DOCS_TYPE} from '../components/upload/types'
+import {DOCS_TYPE, Upload, UploadFileType} from '../components'
 import axios from 'axios'
 
 export function UploadDemo() {

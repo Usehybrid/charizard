@@ -1,6 +1,6 @@
+/* styles.module.css */
 .checkboxSpan {
   margin: auto;
-  /* display: flex; */
 }
 
 .checkboxSpan > input[type='checkbox'] {
@@ -29,16 +29,24 @@
 }
 
 .checkboxSpan > input[type='checkbox']:checked.checkboxSelect {
+  background-image: url('../../assets/check.svg');
+}
+
+/* Indeterminate state styles */
+.checkboxSpan > input[type='checkbox'].indeterminateInput {
+  border-color: var(--theme-blue);
+  background-color: var(--theme-blue);
   background-image: url('../../assets/minus.svg');
+  background-position: center;
+  background-size: 12px;
+  background-repeat: no-repeat;
 }
 
 /* for radio */
-
 .checkbox,
 .radio {
   width: 16px;
   height: 16px;
-
   border: 1px solid var(--stroke-border);
   accent-color: var(--theme-blue);
 }
