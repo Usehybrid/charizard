@@ -1,13 +1,45 @@
-.labelContainer {
+/* loading styles */
+
+.labelLoader {
+  display: block;
+  height: 18px;
+  width: 130px;
+  margin-bottom: 20px;
+}
+
+.optionsContainerLoader {
+  display: flex;
+  flex-direction: column;
+}
+
+.circleLoader {
+  display: block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50% !important;
+}
+.circleTextLoader {
+  display: block;
+  height: 18px;
+  width: 100px;
+  margin-bottom: 20px;
+}
+
+/* common styles */
+
+.options {
+  display: flex;
+  gap: 6px;
+}
+
+/* radio group styles */
+
+.heading {
   margin-bottom: 10px;
 }
 
-.heading {
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 20px;
-  color: var(--text-secondary);
-  margin-bottom: 0;
+.topMargin {
+  margin-top: 10px;
 }
 
 .optionsContainer {
@@ -16,16 +48,11 @@
   gap: 10px;
 }
 
-.topMargin {
-  margin-top: 10px;
-}
-
 .radio {
   display: flex;
-  gap: 10px;
+  gap: 12px;
   user-select: none;
   cursor: pointer;
-  font-size: 16px;
   align-items: center;
 }
 
@@ -35,16 +62,11 @@
   flex-direction: column;
 }
 
-.heading {
-  font-size: 14px;
-  line-height: 20px;
-  font-weight: 400;
-  color: var(--text-primary);
+.headingDisabled {
+  color: var(--text-tertiary);
 }
 
 .subHeading {
-  font-size: 12px;
-  line-height: 16px;
   color: var(--text-secondary);
 }
 
@@ -53,12 +75,17 @@
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  border: 1px solid var(--neutral-arch-100);
+  border: 1px solid var(--stroke-selection);
   flex-shrink: 0;
 }
-.radioControl:hover {
+.radio:hover .radioControl :not(.controlDisabled) {
   border: 1px solid var(--p-p30);
   transition: all 100ms;
+}
+.radioControlActive {
+  border-color: var(--p-p40);
+  background-color: var(--p-p40);
+  position: relative;
 }
 .controlDisabled {
   cursor: not-allowed;
@@ -71,12 +98,7 @@
   border-color: var(--disabled-50);
 }
 
-.radioControlActive {
-  border-color: var(--p-p40);
-  background-color: var(--p-p40);
-  position: relative;
-}
-.radioControlActive:hover {
+.radio:hover .radioControlActive :not(.controlDisabled) {
   border-color: var(--p-p60);
   background-color: var(--p-p60);
   position: relative;
@@ -122,27 +144,4 @@
 
 .infoIcon > path {
   fill: var(--neutral-arch-600);
-}
-
-.headingLoader {
-  display: block;
-  height: 18px;
-  width: 130px;
-  margin-bottom: 20px;
-}
-.optionsContainerLoader {
-  display: flex;
-  flex-direction: column;
-}
-.circleLoader {
-  display: block;
-  width: 20px;
-  height: 20px;
-  border-radius: 50% !important;
-}
-.circleTextLoader {
-  display: block;
-  height: 18px;
-  width: 100px;
-  margin-bottom: 20px;
 }

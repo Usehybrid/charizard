@@ -1,6 +1,6 @@
 import {StrictMode} from 'react'
 import {createRoot} from 'react-dom/client'
-import {RadioGroupDemo} from './demo/radio-demo'
+import {CheckboxDemo} from './demo/checkbox/checkbox-demo'
 
 const styles = {
   width: '90%',
@@ -22,7 +22,7 @@ createRoot(document.getElementById('root') as HTMLElement).render(
 function App() {
   return (
     <div style={styles}>
-      <RadioGroupDemo />
+      <CheckboxDemo />
     </div>
   )
 }

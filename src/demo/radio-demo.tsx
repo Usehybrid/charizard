@@ -1,10 +1,10 @@
-import {RadioGroup} from '../components'
+import {RadioGroupV2} from '../components'
 
 export function RadioGroupDemo() {
   return (
     <div>
-      <RadioGroup
-        radioHeading="Sample Radio Heading"
+      <RadioGroupV2
+        label="Sample Radio Heading"
         items={radioOptions}
         // defaultValue={formik.values.some_value}
         onChange={() => {
@@ -17,6 +17,7 @@ export function RadioGroupDemo() {
         //     ? formik.errors.policy_applicable?.applicable_to
         //     : ''
         // }
+        disabled
       />
     </div>
   )

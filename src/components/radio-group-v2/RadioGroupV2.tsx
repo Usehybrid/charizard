@@ -5,7 +5,7 @@ import infoCircleIcon from '../assets/info-circle.svg'
 import {TooltipV2} from '../tooltip-v2'
 import classes from './styles.module.css'
 import {useMachine, normalizeProps} from '@zag-js/react'
-import {InputContainer, InputLabel} from '../input'
+import {LabelV2} from '../input-v2'
 import {SVG} from '../svg'
 import {Placement} from '@zag-js/popper'
 import {Skeleton} from '../skeleton'
@@ -14,7 +14,7 @@ interface RadioGroupV2Props {
   /**
    * heading for radio group
    */
-  radioHeading?: string
+  label?: string
   /**
    * items to show in radio group
    */
@@ -47,20 +47,20 @@ interface RadioGroupV2Props {
   errorMsg?: string
   optionsContainerStyles?: React.CSSProperties
   disabled?: boolean
-  showSkeleton?: boolean
+  isLoading?: boolean
   handleClickManually?: boolean
 }
 
 export function RadioGroupV2({
   items,
-  radioHeading,
+  label,
   defaultValue,
   onChange,
   required = false,
   errorMsg,
   optionsContainerStyles,
   disabled = false,
-  showSkeleton = false,
+  isLoading = false,
   handleClickManually = false,
 }: RadioGroupV2Props) {
   const [state, send] = useMachine(
@@ -80,44 +80,40 @@ export function RadioGroupV2({
     api.setValue(defaultValue || '')
   }, [defaultValue])
 
-  return showSkeleton ? (
-    <div className={classes.radioGroup}>
-      <div className={classes.root}>
-        {radioHeading && (
-          <div>
-            <Skeleton className={classes.headingLoader} />
+  return isLoading ? (
+    <>
+      {label && <Skeleton className={classes.labelLoader} />}
+      <div className={classes.optionsContainerLoader} style={optionsContainerStyles}>
+        {items.map(opt => (
+          <div key={opt.value} className={classes.options}>
+            <Skeleton className={classes.circleLoader} />
+            {!!opt.label.heading && <Skeleton className={classes.circleTextLoader} />}
           </div>
-        )}
-        <div className={clsx(classes.optionsContainerLoader)} style={optionsContainerStyles}>
-          {items.map(opt => (
-            <div key={opt.value} style={{display: 'flex', gap: '6px'}}>
-              <Skeleton className={classes.circleLoader} />
-              {!!opt.label.heading && <Skeleton className={classes.circleTextLoader} />}
-            </div>
-          ))}
-        </div>
+        ))}
       </div>
-    </div>
+    </>
   ) : (
-    <div className={classes.radioGroup}>
-      <div {...api.getRootProps()} className={classes.root}>
-        {radioHeading && (
-          <InputContainer customClassName={classes.labelContainer}>
-            <InputLabel required={required} customClasses={classes.heading}>
-              {radioHeading}
-            </InputLabel>
-          </InputContainer>
+    <>
+      <div {...api.getRootProps()}>
+        {label && (
+          <LabelV2 required={required} className={classes.heading} disabled={disabled}>
+            {label}
+          </LabelV2>
         )}
         <div
-          className={clsx(classes.optionsContainer, {[classes.topMargin]: !radioHeading})}
+          className={clsx(classes.optionsContainer, {[classes.topMargin]: !label})}
           style={optionsContainerStyles}
         >
           {items.map(opt => (
-            <div key={opt.value} style={{display: 'flex', gap: '6px'}}>
+            <div key={opt.value} className={classes.options}>
               <label {...api.getItemProps({value: opt.value})} className={classes.radio}>
                 <span {...api.getItemTextProps({value: opt.value})} className={classes.radioLabel}>
-                  <span className={classes.heading}>{opt.label.heading}</span>
-                  <span className={classes.subHeading}>{opt.label.subHeading}</span>
+                  <span className={clsx('zap-content-medium', disabled && classes.headingDisabled)}>
+                    {opt.label.heading}
+                  </span>
+                  <span className={clsx(classes.subHeading, 'zap-content-medium')}>
+                    {opt.label.subHeading}
+                  </span>
                 </span>
                 <input {...api.getItemHiddenInputProps({value: opt.value})} />
                 <div
@@ -154,6 +150,6 @@ export function RadioGroupV2({
         </div>
       </div>
       {errorMsg && <p className={classes.errorMsg}>{errorMsg}</p>}
-    </div>
+    </>
   )
 }
