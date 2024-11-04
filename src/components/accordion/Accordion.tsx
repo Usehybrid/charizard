@@ -10,7 +10,7 @@ export const useAccordionStore = create<AccordionContextValue>(set => ({
   api: null as any,
   state: null,
   send: () => {},
-  activeEventKey: [], // Change to an array to support multiple keys
+  activeEventKey: [],
   setActiveEventKey: keys => set({ activeEventKey: keys }),
 }))
 
@@ -26,7 +26,7 @@ export const Accordion = ({
       id: defaultActiveKey as string,
       collapsible: true,
       value: defaultActiveKey ? [defaultActiveKey] : [],
-      multiple: isMulti, // Use the correct key for multiple
+      multiple: isMulti,
     }),
   )
 
@@ -35,8 +35,8 @@ export const Accordion = ({
   useAccordionStore.setState({ api, state, send })
 
   React.useEffect(() => {
-    const activeKeys = state.context.value || []; // Get active keys
-    useAccordionStore.setState({ activeEventKey: activeKeys }); // Update active keys in store
+    const activeKeys = state.context.value || [];
+    useAccordionStore.setState({ activeEventKey: activeKeys });
   }, [state])
 
   return (
@@ -64,10 +64,10 @@ Accordion.Header = ({ eventKey, children, customClasses, customStyle }: HeaderPr
     const isActive = currentActiveKeys.includes(eventKey);
 
     const newActiveKeys = isActive
-      ? currentActiveKeys.filter(key => key !== eventKey) // Remove if already active
-      : [...currentActiveKeys, eventKey]; // Add if not active
+      ? currentActiveKeys.filter(key => key !== eventKey)
+      : [...currentActiveKeys, eventKey];
 
-    setActiveEventKey(newActiveKeys); // Update active keys in store
+    setActiveEventKey(newActiveKeys);
   }
 
   return (
@@ -85,13 +85,13 @@ Accordion.Header = ({ eventKey, children, customClasses, customStyle }: HeaderPr
 
 Accordion.Collapse = ({ eventKey, children, customClasses, customStyle }: CollapseProps) => {
   const { state } = useAccordionStore()
-  const isOpen = state.context.value.includes(eventKey); // Check if the current item is open
+  const isOpen = state.context.value.includes(eventKey);
 
   return (
     <div
       style={customStyle}
       className={customClasses}
-      hidden={!isOpen} // Manage visibility based on isOpen
+      hidden={!isOpen}
     >
       {children}
     </div>
