@@ -1,0 +1,148 @@
+.labelContainer {
+  margin-bottom: 10px;
+}
+
+.heading {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  color: var(--text-secondary);
+  margin-bottom: 0;
+}
+
+.optionsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.topMargin {
+  margin-top: 10px;
+}
+
+.radio {
+  display: flex;
+  gap: 10px;
+  user-select: none;
+  cursor: pointer;
+  font-size: 16px;
+  align-items: center;
+}
+
+.radioLabel {
+  order: 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.heading {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  color: var(--text-primary);
+}
+
+.subHeading {
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--text-secondary);
+}
+
+.radioControl {
+  order: 1;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1px solid var(--neutral-arch-100);
+  flex-shrink: 0;
+}
+.radioControl:hover {
+  border: 1px solid var(--p-p30);
+  transition: all 100ms;
+}
+.controlDisabled {
+  cursor: not-allowed;
+  background-color: var(--disabled-50);
+  border-color: var(--disabled-50);
+}
+.controlDisabled:hover {
+  cursor: not-allowed;
+  background-color: var(--disabled-50);
+  border-color: var(--disabled-50);
+}
+
+.radioControlActive {
+  border-color: var(--p-p40);
+  background-color: var(--p-p40);
+  position: relative;
+}
+.radioControlActive:hover {
+  border-color: var(--p-p60);
+  background-color: var(--p-p60);
+  position: relative;
+}
+.radioControlActive.radioControlActiveDisabled {
+  opacity: 0.6;
+}
+
+.radioControlActive::after {
+  content: '';
+  display: block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--neutral-white);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.errorMsg {
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  margin: 0;
+  color: var(--status-danger);
+  text-align: left;
+}
+
+.infoIcon {
+  width: 16px;
+  height: 16px;
+}
+
+.infoIconSpan {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2px;
+}
+
+.infoIcon > path {
+  fill: var(--neutral-arch-600);
+}
+
+.headingLoader {
+  display: block;
+  height: 18px;
+  width: 130px;
+  margin-bottom: 20px;
+}
+.optionsContainerLoader {
+  display: flex;
+  flex-direction: column;
+}
+.circleLoader {
+  display: block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50% !important;
+}
+.circleTextLoader {
+  display: block;
+  height: 18px;
+  width: 100px;
+  margin-bottom: 20px;
+}
