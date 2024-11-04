@@ -1,11 +1,25 @@
 .checkboxContainer {
   display: flex;
   align-items: center;
+  gap: 8px;
   cursor: pointer;
+  position: relative;
+  user-select: none;
+}
+
+.checkboxContainer:hover .customCheckbox[data-state='unchecked'] {
+  border-color: var(--p-p50);
+}
+
+.disabled {
+  cursor: not-allowed;
 }
 
 .hiddenCheckbox {
-  display: none;
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
 }
 
 .customCheckbox {
@@ -13,52 +27,66 @@
   height: 16px;
   display: inline-block;
   border-radius: 4px;
-  border: 1px solid #d3dbf8;
+  border: 1px solid var(--stroke-selection);
   background-color: white;
   position: relative;
-  margin-right: 8px;
+  transition: all 0.2s ease;
 }
 
-.customCheckbox[data-checked='true'] {
-  border-color: var(--theme-blue);
-  background-color: var(--theme-blue);
+.customCheckbox[data-state='checked'] {
+  border-color: var(--p-p50);
+  background-color: var(--p-p50);
 }
 
-.customCheckbox[data-checked='true']::after {
+.customCheckbox[data-state='checked']::after {
   content: url('../assets/checkbox/checked.svg');
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 10px;
-  height: 10px;
+  display: block;
+  width: 16px;
+  height: 16px;
+  line-height: 1;
 }
 
-.customCheckbox[data-checked='false']::after {
-  content: url('../assets/checkbox/unchecked.svg');
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 10px;
-  height: 10px;
+.customCheckbox[data-state='indeterminate'] {
+  border-color: var(--p-p50);
+  background-color: var(--p-p50);
 }
 
-.customCheckbox[data-checked='indeterminate'] {
-  background-color: var(--theme-blue);
-}
-
-.customCheckbox[data-checked='indeterminate']::after {
+.customCheckbox[data-state='indeterminate']::after {
   content: url('../assets/checkbox/indeterminate.svg');
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 10px;
-  height: 10px;
+  display: block;
+  width: 16px;
+  height: 16px;
+  line-height: 1;
+}
+
+.disabledCheckbox {
+  background-color: var(--disabled-50) !important;
+  border-color: var(--disabled-50) !important;
+  cursor: not-allowed;
 }
 
 .checkboxLabel {
   color: var(--text-primary);
   font-size: 14px;
+  line-height: 20px;
+}
+
+.disabledLabel {
+  color: var(--disabled-50);
+}
+
+/* Focus styles */
+.hiddenCheckbox:focus-visible + .customCheckbox {
+  outline: 2px solid var(--p-p50);
+  outline-offset: 2px;
+}
+
+/* Hover styles for checked state */
+.checkboxContainer:hover .customCheckbox[data-state='checked']:not(.disabledCheckbox) {
+  background-color: var(--p-p60);
+}
+
+/* Hover styles for indeterminate state */
+.checkboxContainer:hover .customCheckbox[data-state='indeterminate']:not(.disabledCheckbox) {
+  background-color: var(--p-p60);
 }

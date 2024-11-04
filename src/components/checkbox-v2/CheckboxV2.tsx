@@ -1,4 +1,5 @@
 import * as React from 'react'
+import {useEffect, useRef} from 'react'
 import classes from './checkbox.module.css'
 import clsx from 'clsx'
 
@@ -8,38 +9,54 @@ interface CheckboxProps {
   indeterminate?: boolean
   disabled?: boolean
   onChange: (checked: boolean) => void
+  className?: string
 }
 
-export const CheckboxV2: React.FC<CheckboxProps> = ({
+export function CheckboxV2({
   label,
   checked = false,
   indeterminate = false,
   disabled = false,
   onChange,
-}) => {
+  className,
+}: CheckboxProps) {
+  const checkboxRef = useRef<HTMLInputElement>(null)
+
+  useEffect(() => {
+    if (checkboxRef.current) {
+      checkboxRef.current.indeterminate = indeterminate
+    }
+  }, [indeterminate])
+
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onChange(e.target.checked)
+    if (!disabled) {
+      onChange(e.target.checked)
+    }
   }
 
   return (
-    <label className={classes.checkboxContainer}>
-      {/* Hidden Checkbox */}
+    <label className={clsx(classes.checkboxContainer, disabled && classes.disabled, className)}>
       <input
+        ref={checkboxRef}
         type="checkbox"
         checked={checked}
         onChange={handleCheckboxChange}
         disabled={disabled}
         className={classes.hiddenCheckbox}
       />
-      {/* Custom Checkbox */}
       <span
-        className={classes.customCheckbox}
-        data-checked={
-          disabled ? undefined : indeterminate ? 'indeterminate' : checked ? 'true' : 'false'
-        }
+        className={clsx(classes.customCheckbox, disabled && classes.disabledCheckbox)}
+        data-state={indeterminate ? 'indeterminate' : checked ? 'checked' : 'unchecked'}
       />
-      {/* Label */}
-      <span className={clsx(classes.checkboxLabel, 'zap-content-medium')}>{label}</span>
+      <span
+        className={clsx(
+          classes.checkboxLabel,
+          'zap-content-medium',
+          disabled && classes.disabledLabel,
+        )}
+      >
+        {label}
+      </span>
     </label>
   )
 }
