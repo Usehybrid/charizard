@@ -6,6 +6,10 @@ export default function TableHeaderActions({
   customActionItems?: JSX.Element[]
 }) {
   return (
-    <div className={classes.customHeaderActionButtons}>{customActionItems?.map(item => item)}</div>
+    <div className={classes.customHeaderActionButtons}>
+      {customActionItems && customActionItems.length > 0
+        ? customActionItems.map((item, index) => <div key={`header-action-${index}`}>{item}</div>)
+        : null}
+    </div>
   )
 }
