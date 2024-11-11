@@ -1,16 +1,17 @@
 import * as React from 'react'
 import clsx from 'clsx'
+import classes from './table-meta-header.module.css'
 import TableExport from '../table-export/TableExport'
 import TableFiltersDrawer from '../table-filters-drawer/TableFiltersDrawer'
 import TableHeaderFilters from '../table-header-filters'
 import TableCustomCols from '../table-custom-cols'
 import TableSelectedActions from '../table-selected-actions'
-import classes from './table-meta-header.module.css'
+import TableHeaderActions from '../table-header-filters/TableHeaderActions'
 import {TableProps} from '../Table'
 import {Search} from '../../search'
 import {SINGLE_VALUE_FILTER_TYPES, useTableStore} from '../store'
-import type {Table} from '@tanstack/react-table'
 import {pluralize} from '../../../utils'
+import type {Table} from '@tanstack/react-table'
 
 interface TableMetaHeaderProps {
   rowSelectionConfig: TableProps['rowSelectionConfig']
@@ -24,6 +25,7 @@ interface TableMetaHeaderProps {
   table: Table<any>
   isCheckbox?: boolean
   isDropdownActions?: boolean
+  customActionItems?: JSX.Element[]
 }
 
 export default function TableMetaHeader({
@@ -38,6 +40,7 @@ export default function TableMetaHeader({
   table,
   isCheckbox,
   isDropdownActions,
+  customActionItems,
 }: TableMetaHeaderProps) {
   const hasRowActions = rowSelectionConfig?.actions && rowSelectionConfig.actions.length > 0
   const rowsSelected = Object.keys(rowSelection).length
@@ -115,6 +118,11 @@ export default function TableMetaHeader({
                 customIconStyles: {top: '4px'},
               }}
             />
+          </div>
+        )}
+        {typeof customActionItems === 'object' && (
+          <div className={classes.search}>
+            <TableHeaderActions customActionItems={customActionItems} />
           </div>
         )}
 

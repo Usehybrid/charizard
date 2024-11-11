@@ -18,4 +18,11 @@
   flex-shrink: 0;
 }
 
+.customHeaderActionButtons {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+}
+
 /* Additional styles for other elements can be customized as needed */
