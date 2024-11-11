@@ -141,6 +141,7 @@ export interface TableProps {
     handleExport: any
     isLegacy?: boolean
   }
+  customActionItems?: JSX.Element[]
 }
 
 // todo
@@ -178,6 +179,7 @@ export function Table({
   tableStyleConfig,
   customColumnConfig,
   exportConfig,
+  customActionItems,
 }: TableProps) {
   const initialRenderRef = React.useRef(true)
   const [sorting, setSorting] = React.useState<SortingState>([])
@@ -374,6 +376,7 @@ export function Table({
             table={table}
             isCheckbox={isCheckbox}
             isDropdownActions={actionsConfig.isDropdownActions}
+            customActionItems={customActionItems}
           />
         )}
         <TableComp
