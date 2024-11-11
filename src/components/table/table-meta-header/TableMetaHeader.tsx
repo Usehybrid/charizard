@@ -120,10 +120,8 @@ export default function TableMetaHeader({
             />
           </div>
         )}
-        {typeof customActionItems === 'object' && (
-          <div className={classes.search}>
-            <TableHeaderActions customActionItems={customActionItems} />
-          </div>
+        {customActionItems && customActionItems.length > 0 && (
+          <TableHeaderActions customActionItems={customActionItems} />
         )}
 
         {typeof filterConfig === 'object' &&
