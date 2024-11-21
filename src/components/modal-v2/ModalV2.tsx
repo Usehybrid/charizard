@@ -6,6 +6,7 @@ import {ButtonV2, ButtonV2Props} from '../button-v2'
 import {SVG} from '../svg'
 import closeIcon from '../assets/close.svg'
 import {DialogFooterButtons} from '../../types/common'
+import clsx from 'clsx'
 
 /**
  * Props for the ModalV2 component.
@@ -27,6 +28,7 @@ interface ModalV2Props {
   footerButtons: DialogFooterButtons
   /** Indicates whether to show a backdrop behind the modal. */
   showBackdrop?: boolean
+  customModalClasses?: string
 }
 
 /**
@@ -45,6 +47,7 @@ export function ModalV2({
   footerButtons,
   showBackdrop = false,
   onClose,
+  customModalClasses,
 }: ModalV2Props) {
   const [state, send] = useMachine(dialog.machine({id: React.useId(), open: isOpen}))
   const api = dialog.connect(state, send, normalizeProps)
@@ -70,7 +73,7 @@ export function ModalV2({
         <Portal>
           {showBackdrop && <div {...api.getBackdropProps()} className={classes.backdrop} />}
           <div {...api.getPositionerProps()} className={classes.positioner}>
-            <div {...api.getContentProps()} className={classes.modal}>
+            <div {...api.getContentProps()} className={clsx(classes.modal, customModalClasses)}>
               <div {...api.getTitleProps()} className={classes.header}>
                 <div>
                   <h2 className="zap-heading-semibold">{title}</h2>
