@@ -55,6 +55,7 @@ export function Badge({
   children,
   icon,
   customSvgStyles = {},
+  onClick,
 }: BadgeProps) {
   const isCDNIcon = icon ? icon.includes('https://') : false
 
@@ -94,7 +95,11 @@ export function Badge({
         )
       ) : null}
       {children}
-      {selected && <SVG path={multiplyIcon} svgClassName={classes.icon} />}
+      {selected && (
+        <div onClick={onClick}>
+          <SVG path={multiplyIcon} svgClassName={classes.icon} />
+        </div>
+      )}
     </div>
   )
 }
