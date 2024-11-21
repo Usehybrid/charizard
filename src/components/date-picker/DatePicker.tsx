@@ -24,7 +24,6 @@ import {StylesConfig} from 'react-select'
 import {create} from 'zustand'
 import {DateStore, MonthYear} from './type'
 
-
 const useDateStore = create<DateStore>()(set => ({
   monthYear: {
     month: new Date().getMonth(),
@@ -57,6 +56,7 @@ interface DatePickerProps extends PropsSingle {
   showOutsideDays?: boolean
   disabled?: Matcher | Matcher[]
   trigger?: React.ReactNode
+  id?: string
 }
 
 export function DatePicker({
@@ -74,6 +74,7 @@ export function DatePicker({
   isError,
   showOutsideDays = true,
   trigger,
+  id,
   ...props
 }: DatePickerProps) {
   const {monthYear, setMonthYear} = useDateStore()
@@ -121,7 +122,9 @@ export function DatePicker({
       <Popover placement={'bottom'}>
         <PopoverTrigger openOnHover={false}>
           {trigger ? (
-            <div ref={btnRef}>{trigger}</div>
+            <div ref={btnRef} id={id}>
+              {trigger}
+            </div>
           ) : variant === 'form' ? (
             <Button
               size="adapt"
@@ -135,7 +138,7 @@ export function DatePicker({
                 height: '32px',
               }}
             >
-              <div className={classes.formButton} ref={btnRef}>
+              <div className={classes.formButton} ref={btnRef} id={id}>
                 <span style={{color: !date ? 'var(--text-secondary)' : undefined}}>
                   {displayDate}
                 </span>
@@ -149,7 +152,7 @@ export function DatePicker({
               disabled={disableDatepicker}
               customStyles={{cursor: disableDatepicker ? 'not-allowed' : 'pointer', height: '32px'}}
             >
-              <div className={classes.buttonContent} ref={btnRef}>
+              <div className={classes.buttonContent} ref={btnRef} id={id}>
                 <SVG
                   path={calender}
                   width={20}
