@@ -19,14 +19,34 @@ export enum BADGE_HIGHLIGHT {
   NONE = 'none',
 }
 
-interface BadgeProps {
+interface BaseBadgeProps {
   highlight?: BADGE_HIGHLIGHT
   status?: BADGE_STATUS
-  selected?: boolean
   children: React.ReactNode
-  icon?: string
+}
+
+interface IconBadgeProps extends BaseBadgeProps {
+  icon: string
   customSvgStyles?: React.CSSProperties
 }
+
+interface NonIconBadgeProps extends BaseBadgeProps {
+  icon?: never
+  customSvgStyles?: never
+}
+
+interface SelectableBadgeProps extends BaseBadgeProps {
+  selected: true
+  onClick: () => void
+}
+
+interface NonSelectableBadgeProps extends BaseBadgeProps {
+  selected?: false
+  onClick?: never
+}
+
+type BadgeProps = (IconBadgeProps | NonIconBadgeProps) &
+  (SelectableBadgeProps | NonSelectableBadgeProps)
 
 export function Badge({
   highlight = BADGE_HIGHLIGHT.NONE,
