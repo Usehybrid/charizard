@@ -12,7 +12,7 @@ export default defineConfig({
     dts({
       rollupTypes: true, // Merge all types into one file
       insertTypesEntry: true, // Insert type entry file in the package
-      tsconfigPath: './tsconfig.app.json', // Points to your tsconfig
+      tsconfigPath: './tsconfig.json', // Points to your tsconfig
     }),
     libCss(),
     checker({typescript: true}),
