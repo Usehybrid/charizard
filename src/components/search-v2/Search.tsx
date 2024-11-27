@@ -22,7 +22,7 @@ import {useDebounce} from '../../hooks'
  *   placeholder="Search..."
  * />
  */
-export function SearchV2({search = '', setSearch, ...props}: SearchV2Props) {
+export function SearchV2({search = '', setSearch, inputGroupProps = {}, ...props}: SearchV2Props) {
   const [searchTerm, setSearchTerm] = React.useState(search)
   const debouncedSearchTerm = useDebounce(searchTerm as string)
   const isControlled = typeof setSearch === 'function'
@@ -51,7 +51,7 @@ export function SearchV2({search = '', setSearch, ...props}: SearchV2Props) {
   }
 
   return (
-    <InputGroupV2>
+    <InputGroupV2 {...inputGroupProps}>
       <InputLeftIcon icon={searchIcon} />
       <InputV2 {...props} value={searchTerm} onChange={searchHandler} />
       {searchTerm && <InputRightIcon onClick={clearSearchHandler} icon={closeIcon} />}
