@@ -17,10 +17,10 @@ export const colourStyles: StylesConfig<any> = {
       backgroundColor: isDisabled
         ? undefined
         : isSelected
-          ? data.color
-          : isFocused
-            ? 'var(--neutral-arch-30)'
-            : '#ffffff',
+        ? data.color
+        : isFocused
+        ? 'var(--neutral-arch-30)'
+        : '#ffffff',
       color: 'var(--text-primary)',
       cursor: isDisabled ? 'not-allowed' : 'default',
       padding: '8px 12px',
@@ -95,6 +95,16 @@ export const colourStyles: StylesConfig<any> = {
         'invert(66%) sepia(16%) saturate(358%) hue-rotate(202deg) brightness(95%) contrast(83%)',
     },
   }),
+  menu: baseStyles => {
+    return {
+      ...baseStyles,
+      pointerEvents: 'auto',
+      zIndex: 9999,
+    }
+  },
+  menuPortal: baseStyles => {
+    return {...baseStyles, zIndex: 9999}
+  },
 }
 
 export const getControlStyles = (
@@ -109,8 +119,8 @@ export const getControlStyles = (
       borderColor: errorMsg
         ? 'var(--status-error) !important'
         : isFocused
-          ? 'var(--theme-blue) !important'
-          : 'var(--neutral-arch-300) !important',
+        ? 'var(--theme-blue) !important'
+        : 'var(--neutral-arch-300) !important',
       fontSize: '16px',
       boxShadow: 'none',
       transition: 'all 0.3s ease-in-out',

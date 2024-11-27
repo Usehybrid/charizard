@@ -153,6 +153,8 @@ export function SelectAsync({
         }}
         formatGroupLabel={formatGroupLabel}
         menuPlacement={menuPlacement}
+        menuPortalTarget={document.body}
+        menuPosition="fixed"
         {...extraProps}
       />
       {errorMsg && <p className={classes.errorMsg}>{errorMsg}</p>}

@@ -32,6 +32,8 @@ export const styles: StylesConfig<any> = {
       boxShadow: '0px 4px 16px 0px rgba(18, 18, 18, 0.04), 0px 2px 8px 0px rgba(18, 18, 18, 0.08)',
       margin: '4px 0',
       backgroundColor: '#fff',
+      pointerEvents: 'auto',
+      zIndex: 9999,
     }
   },
   menuList: baseStyles => {
@@ -96,5 +98,8 @@ export const styles: StylesConfig<any> = {
       ...baseStyles,
       display: 'none',
     }
+  },
+  menuPortal: baseStyles => {
+    return {...baseStyles, zIndex: 9999}
   },
 }
