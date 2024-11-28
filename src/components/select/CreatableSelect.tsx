@@ -197,6 +197,8 @@ export function CreatableSelect({
         }}
         formatGroupLabel={formatGroupLabel}
         menuPlacement={menuPlacement}
+        menuPortalTarget={document.body}
+        menuPosition="fixed"
         {...extraprops}
       />
       {errorMsg && <p className={classes.errorMsg}>{errorMsg}</p>}

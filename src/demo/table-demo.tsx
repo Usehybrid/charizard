@@ -1,7 +1,7 @@
 import * as React from 'react'
 import randomIcon from '../components/assets/check.svg'
 import {createColumnHelper} from '@tanstack/react-table'
-import {Table} from '../components'
+import {Table, TableTagsCell} from '../components'
 import {INV_ACTION_TYPES, useInventoryStore} from '../components/table/inventory/inventory.store'
 import {FILTER_TYPE} from '../components/table/types'
 
@@ -143,6 +143,17 @@ const columns = [
   columnHelper.accessor('software', {
     header: 'Software Name',
     cell: info => info.getValue().name,
+    enableHiding: false,
+    enableSorting: true,
+    enablePinning: true,
+    size: 100,
+  }),
+
+  columnHelper.accessor('tags', {
+    header: 'Software Name',
+    cell: info => (
+      <TableTagsCell items={info.getValue()?.map(g => ({name: g.group_name})) as any} />
+    ),
     enableHiding: false,
     enableSorting: true,
     enablePinning: true,
@@ -570,6 +581,7 @@ const filtersV2 = {
 export interface Software {
   id: string
   notes: string
+  tags: any[]
   description: string
   is_deleted: boolean
   account_manager_name: any
@@ -714,6 +726,33 @@ const data: Software[] = [
     deleted_on: null,
     software_license_count: '1',
     software_users_count: '1',
+    tags: [
+      {
+        id: '0147n2zr2dyeih7',
+        group_name: 'IT',
+        group_email: 'it@usehybrid.io',
+      },
+      {
+        id: '01ljsd9k2f056wp',
+        group_name: 'People',
+        group_email: 'people@usehybrid.io',
+      },
+      {
+        id: '03x8tuzt38el7bf',
+        group_name: 'sales group',
+        group_email: 'sales_group@usehybrid.io',
+      },
+      {
+        id: '02y3w24744wmjjy',
+        group_name: 'tech_test',
+        group_email: 'tech_test@usehybrid.io',
+      },
+      {
+        id: '04h042r01jhck6o',
+        group_name: 'test-tech',
+        group_email: 'test-tech@usehybrid.io',
+      },
+    ],
   },
   {
     id: '963a877a-931c-421a-a070-2693ae69af59',
@@ -766,8 +805,10 @@ const data: Software[] = [
     deleted_on: null,
     software_license_count: '0',
     software_users_count: '1',
+    tags: [],
   },
   {
+    tags: [],
     id: '963a877a-931c-421a-a070-2693ae69af59999',
     notes: 'Ranomd',
     description: 'afasdd',
@@ -820,6 +861,7 @@ const data: Software[] = [
     software_users_count: '1',
   },
   {
+    tags: [],
     id: '963a877a-931c-421a-a070-2693ae69af5939128736',
     notes: 'Ranomd',
     description: 'afasdd',
@@ -873,6 +915,7 @@ const data: Software[] = [
   },
 
   {
+    tags: [],
     id: '963a877a-931c-421a-a070-2693ae69af5313dksb',
     notes: 'Ranomd',
     description: 'afasdd',
