@@ -1,6 +1,6 @@
 import {StrictMode} from 'react'
 import {createRoot} from 'react-dom/client'
-import {CheckboxDemo} from './demo/checkbox/checkbox-demo'
+import {TableDemo} from './demo/table-demo'
 
 const styles = {
   width: '90%',
@@ -22,7 +22,7 @@ createRoot(document.getElementById('root') as HTMLElement).render(
 function App() {
   return (
     <div style={styles}>
-      <CheckboxDemo />
+      <TableDemo />
     </div>
   )
 }
