@@ -57,6 +57,16 @@
   overflow-y: scroll;
 }
 
+.hideScrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.hideScrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+
 .footer {
   display: flex;
   padding: 12px 16px;

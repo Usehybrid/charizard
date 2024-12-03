@@ -84,7 +84,10 @@ export function ModalV2({
                 </button>
               </div>
 
-              <div {...api.getDescriptionProps()} className={classes.content}>
+              <div
+                {...api.getDescriptionProps()}
+                className={clsx(classes.hideScrollbar, classes.content)}
+              >
                 {children}
               </div>
 
