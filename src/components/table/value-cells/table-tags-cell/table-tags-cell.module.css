@@ -10,11 +10,10 @@
 .content {
   padding: 8px 12px;
   background-color: var(--neutral-white);
-
   border-radius: 8px;
-
-  /* dd_popup_sottomsheet_toast */
   box-shadow: 0px 4px 16px 0px rgba(18, 18, 18, 0.04), 0px 2px 8px 0px rgba(18, 18, 18, 0.08);
+  max-height: 120px;
+  overflow-y: scroll;
 }
 
 .positioner [data-part='arrow'] {

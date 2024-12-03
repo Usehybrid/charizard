@@ -1,4 +1,4 @@
-import {Route, Routes} from 'react-router-dom'
+import {Route, Routes} from 'react-router'
 import {Error500} from './Error500'
 import {Error404} from './Error404'
 import {ErrorsLayout} from './ErrorsLayout'

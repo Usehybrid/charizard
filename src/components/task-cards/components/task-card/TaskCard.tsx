@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import * as React from 'react'
-import {useLocation, useNavigate} from 'react-router-dom'
+import {useLocation, useNavigate} from 'react-router'
 import deleteBin from '../../../assets/delete-bin.svg'
 import infoOctagon from '../../../assets/info-octagon.svg'
 import {AsyncImage} from '../../../asyncImage'

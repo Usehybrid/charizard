@@ -8,7 +8,7 @@ interface Breadcrumb {
 }
 
 export const useBreadcrumbs = (breadcrumbs: Breadcrumb[]) => {
-  const setBreadcrumbs = useBreadcrumbsStore(state => state.setBreadcrumbs)
+  const setBreadcrumbs = useBreadcrumbsStore(s => s.setBreadcrumbs)
 
   React.useEffect(() => {
     setBreadcrumbs(breadcrumbs)

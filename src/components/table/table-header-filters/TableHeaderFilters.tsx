@@ -19,12 +19,9 @@ export default function TableHeaderFilters({
   const filters = filterConfig.filters?.header || []
 
   const tableFilters = useTableStore(s => s.filters)
-
-  const {addFilters, removeFilters, resetFilters} = useTableStore(s => ({
-    addFilters: s.addFilters,
-    removeFilters: s.removeFilters,
-    resetFilters: s.resetFilters,
-  }))
+  const addFilters = useTableStore(state => state.addFilters)
+  const removeFilters = useTableStore(state => state.removeFilters)
+  const resetFilters = useTableStore(state => state.resetFilters)
 
   if (isError) return <div className={classes.filtersInfo}>Error getting filters</div>
 

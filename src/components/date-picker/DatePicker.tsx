@@ -77,7 +77,8 @@ export function DatePicker({
   id,
   ...props
 }: DatePickerProps) {
-  const {monthYear, setMonthYear} = useDateStore()
+  const monthYear = useDateStore(state => state.monthYear)
+  const setMonthYear = useDateStore(state => state.setMonthYear)
 
   React.useEffect(() => {
     if (value && !isNaN(new Date(value).getTime())) {
@@ -239,7 +240,9 @@ const dropdownStyles: StylesConfig<any> = {
 }
 
 function Dropdown(props: any) {
-  const {monthYear, setMonthYear} = useDateStore()
+  const monthYear = useDateStore(state => state.monthYear)
+  const setMonthYear = useDateStore(state => state.setMonthYear)
+
   //TODO: @abhishek improve logic
   const isYearDropdown = props['aria-label'] === 'Choose the Year'
   let selectedOption: DropdownOption | undefined = undefined
@@ -271,7 +274,9 @@ function Dropdown(props: any) {
 }
 
 function Nav() {
-  const {monthYear, setMonthYear} = useDateStore()
+  const monthYear = useDateStore(state => state.monthYear)
+  const setMonthYear = useDateStore(state => state.setMonthYear)
+
   const {nextMonth, previousMonth} = useDayPicker()
   return (
     <div className={classes.navContainer}>

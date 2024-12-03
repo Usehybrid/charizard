@@ -1,6 +1,6 @@
 {
   "name": "@hybr1d-tech/charizard",
-  "version": "0.7.179",
+  "version": "1.1.0",
   "type": "module",
   "files": [
     "dist"
@@ -58,12 +58,12 @@
     "react-infinite-scroll-component": "^6.1.0",
     "react-inlinesvg": "^4.1.5",
     "react-intersection-observer": "^9.8.0",
-    "react-router-dom": "^6.28.0",
+    "react-router": "^7.0.2",
     "react-select": "^5.8.3",
     "react-toastify": "^10.0.6",
     "react-tooltip": "^5.28.0",
     "use-deep-compare-effect": "^1.8.1",
-    "zustand": "^4.5.5"
+    "zustand": "^5.0.1"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "^8.4.5",

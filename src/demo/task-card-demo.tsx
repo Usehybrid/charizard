@@ -1,10 +1,5 @@
 // import * as React from 'react'
-import {
-  createBrowserRouter,
-  createRoutesFromElements,
-  Route,
-  RouterProvider,
-} from 'react-router-dom'
+import {createBrowserRouter, createRoutesFromElements, Route, RouterProvider} from 'react-router'
 import {TaskCards} from '../components'
 
 export default function TaskCardDemo() {
@@ -41,7 +36,6 @@ export default function TaskCardDemo() {
           ></Route>,
         ),
       )}
-      future={{v7_startTransition: true}}
     />
   )
 }

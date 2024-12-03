@@ -47,6 +47,25 @@ export function TableTagsCell({
 
   const api = popover.connect(state, send, normalizeProps)
 
+  React.useEffect(() => {
+    const handleScroll = () => {
+      if (api.open) {
+        send('CLOSE')
+      }
+    }
+
+    const tableElement = document.querySelector('#zap-table-scroll-container')
+    if (tableElement) {
+      tableElement.addEventListener('scroll', handleScroll)
+    }
+
+    return () => {
+      if (tableElement) {
+        tableElement.removeEventListener('scroll', handleScroll)
+      }
+    }
+  }, [api.open])
+
   return (
     <div className={classes.box} style={customStyles}>
       {visibleItems.map(renderBadge)}
