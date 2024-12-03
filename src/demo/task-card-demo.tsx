@@ -36,7 +36,6 @@ export default function TaskCardDemo() {
           ></Route>,
         ),
       )}
-      future={{v7_startTransition: true}}
     />
   )
 }
