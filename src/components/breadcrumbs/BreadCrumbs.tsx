@@ -1,10 +1,10 @@
 import classes from './breadcrumbs.module.css'
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router'
 import {clsx} from 'clsx'
 import {useBreadcrumbsStore} from './store'
 
 export function Breadcrumbs() {
-  const {breadcrumbs} = useBreadcrumbsStore()
+  const breadcrumbs = useBreadcrumbsStore(s => s.breadcrumbs)
 
   if (breadcrumbs.length <= 3) {
     return (

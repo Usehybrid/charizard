@@ -46,7 +46,8 @@ export function DateRangePicker({
   ...props
 }: DateRangePickerProps) {
   const date = value
-  const {monthYear, setMonthYear} = useDateStore()
+  const monthYear = useDateStore(state => state.monthYear)
+  const setMonthYear = useDateStore(state => state.setMonthYear)
   const [selectedRange, setSelectedRange] = React.useState(RANGE_OPTIONS[0])
   const [hoverRange, setHoverRange] = React.useState<DateRange | undefined>(undefined)
 
@@ -289,7 +290,8 @@ export function DateRangePicker({
 }
 
 function Nav() {
-  const {monthYear, setMonthYear} = useDateStore()
+  const monthYear = useDateStore(state => state.monthYear)
+  const setMonthYear = useDateStore(state => state.setMonthYear)
   const {nextMonth, previousMonth} = useDayPicker()
   return (
     <div className={classes.navContainer}>

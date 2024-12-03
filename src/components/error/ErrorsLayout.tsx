@@ -1,5 +1,5 @@
 import * as React from 'react'
-import {Outlet, useNavigate} from 'react-router-dom'
+import {Outlet, useNavigate} from 'react-router'
 import classes from './styles.module.css'
 import logoImage from '../assets/logo-full.svg'
 import errorImage from '../assets/illustrations/sleeping-user.svg'

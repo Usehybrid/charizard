@@ -23,11 +23,8 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
   const [filterCheckedState, setFilterCheckedState] = React.useState<Record<string, any[]>>({})
   const [allCheckedState, setAllCheckedState] = React.useState<Record<string, boolean>>({})
   const [search, setSearch] = React.useState('')
-  const {resetAllFilters, changeFiltersDrawer} = useTableStore(s => ({
-    setDefaultFilters: s.setDefaultFilters,
-    resetAllFilters: s.resetAllFilters,
-    changeFiltersDrawer: s.changeFiltersDrawer,
-  }))
+  const resetAllFilters = useTableStore(state => state.resetAllFilters)
+  const changeFiltersDrawer = useTableStore(state => state.changeFiltersDrawer)
   const tableFilters = useTableStore(s => s.filters)
   const {filterDispatch} = filterConfig
 
