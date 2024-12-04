@@ -27,10 +27,9 @@
 
 .active {
   background-color: var(--neutral-arch-30);
-  color: var(--theme-blue);
+  color: var(--p-p50);
   font-weight: 600;
 }
-
 
 .firstSelector {
   border-radius: 8px 0px 0px 8px;
