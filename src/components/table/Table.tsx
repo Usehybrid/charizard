@@ -206,10 +206,32 @@ export function Table({
   // Add cleanup effect that handles both internal and external state
   React.useEffect(() => {
     return () => {
+      // Reset filters (internal and external)
       filterConfig?.filterDispatch?.({type: TABLE_ACTION_TYPES.RESET_ALL, payload: null})
       resetTableStore(filterConfig?.filterReset)
+
+      // Reset external states
+      if (searchConfig?.setSearch) {
+        searchConfig.setSearch('')
+      }
+
+      if (sortConfig) {
+        sortConfig.setSortBy('')
+        sortConfig.setSortOrd('')
+      }
+
+      if (paginationConfig) {
+        paginationConfig.setPage(0)
+        paginationConfig.setLimit(25)
+      }
+
+      // ! might have to readd
+      // if (rowSelectionConfig) {
+      //   rowSelectionConfig.setSelectedRows?.([])
+      //   rowSelectionConfig.setRowSelection?.({})
+      // }
     }
-  }, [])
+  }, []) // Empty dependency array since we only need this on unmount
 
   useDeepCompareEffect(() => {
     if (!sortConfig) return

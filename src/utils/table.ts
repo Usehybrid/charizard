@@ -1,5 +1,8 @@
 import {create} from 'zustand'
 
+export const DEFAULT_PAGE = 0
+export const DEFAULT_LIMIT = 25
+
 export enum TABLE_ACTION_TYPES {
   SEARCH = 'search',
   SORT_BY = 'sort_by',
