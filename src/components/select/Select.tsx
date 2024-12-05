@@ -149,7 +149,6 @@ export function Select({
         }}
         formatGroupLabel={formatGroupLabel}
         menuPlacement={menuPlacement}
-        menuPortalTarget={document.body}
         menuPosition="fixed"
         {...extraprops}
       />
