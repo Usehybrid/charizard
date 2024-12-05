@@ -107,7 +107,8 @@ export const CustomOption = (props: any) => {
         {variant === SELECT_VARIANT.USERS && !profileImgUrl && (
           <div className={classes.initials}>{getInitials(label)}</div>
         )}
-        {icon && <SVG path={icon} spanClassName={classes.icon} />}
+        {/* {icon && <SVG path={icon} spanClassName={classes.icon} />} */}
+        {icon && <AsyncImage src={icon} alt={label} className={classes.profileImg} />}
         <div className={classes.labelContainer}>
           <span
             className={clsx(classes.label, isSelected && classes.selectedLabel)}
@@ -142,7 +143,8 @@ export const CustomSingleValue = (props: any) => {
         {profileImgUrl && (
           <AsyncImage src={profileImgUrl} alt={label} className={classes.profileImg} />
         )}
-        {icon && <SVG path={icon} spanClassName={classes.icon} />}
+        {/* {icon && <SVG path={icon} spanClassName={classes.icon} />} */}
+        {icon && <AsyncImage src={icon} alt={label} className={classes.profileImg} />}
         <div className={classes.labelContainer}>
           <span className={classes.label}>{label}</span>
         </div>
@@ -185,7 +187,8 @@ export const CustomMultiValue = (props: any) => {
         {variant === SELECT_VARIANT.USERS && !profileImgUrl && (
           <div className={classes.initials}>{getInitials(label)}</div>
         )}
-        {icon && <SVG path={icon} spanClassName={classes.icon} />}
+        {/* {icon && <SVG path={icon} spanClassName={classes.icon} />} */}
+        {icon && <AsyncImage src={icon} alt={label} className={classes.profileImg} />}
         <div className={classes.labelContainer}>
           <span
             className={classes.label}
