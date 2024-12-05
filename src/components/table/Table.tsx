@@ -25,6 +25,8 @@ import type {
 } from '@tanstack/react-table'
 import type {FilterConfig, TableCustomColumns} from './types'
 import {TableCustomColsVariant} from './table-custom-cols/TableCustomCols'
+import {TABLE_ACTION_TYPES} from '../../utils/table'
+import {useTableStore} from './store'
 
 export interface TableProps {
   // the table data
@@ -198,6 +200,16 @@ export function Table({
   const isEmpty = !loaderConfig.isFetching && !loaderConfig.isError && !data.length
 
   const {isCheckbox, isRadio, setSelectedRows} = rowSelectionConfig
+
+  const resetTableStore = useTableStore(state => state.resetAllFilters)
+
+  // Add cleanup effect that handles both internal and external state
+  React.useEffect(() => {
+    return () => {
+      filterConfig?.filterDispatch?.({type: TABLE_ACTION_TYPES.RESET_ALL, payload: null})
+      resetTableStore(filterConfig?.filterReset)
+    }
+  }, [])
 
   useDeepCompareEffect(() => {
     if (!sortConfig) return
