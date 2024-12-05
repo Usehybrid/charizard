@@ -122,6 +122,10 @@ export default function TaskCard({
               <div className={clsx(classes.detailValue, 'zap-subcontent-medium')}>
                 {detail.value as string}
               </div>
+            ) : typeof detail.value === 'number' ? (
+              <div className={clsx(classes.detailValue, 'zap-subcontent-medium')}>
+                {detail.value as number}
+              </div>
             ) : (
               <div className={clsx(classes.detailValueNA, 'zap-subcontent-medium')}>N/A</div>
             )}
