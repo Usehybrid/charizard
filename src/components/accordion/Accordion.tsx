@@ -50,13 +50,13 @@ export const Accordion = ({
 
 Accordion.Item = ({eventKey, children}: ItemProps) => {
   const api = useAccordionStore(state => state.api)
-  return <div {...api.getItemProps({value: eventKey})}>{children}</div>
+  if (api) return <div {...api.getItemProps({value: eventKey})}>{children}</div>
 }
 
 Accordion.Header = ({eventKey, children, customClasses, customStyle}: HeaderProps) => {
   const api = useAccordionStore(state => state.api)
+  if (!api) return
   const setActiveEventKey = useAccordionStore(state => state.setActiveEventKey)
-
   const {onClick, ...triggerProps} = api.getItemTriggerProps({value: eventKey})
 
   const handleClick = (e: React.MouseEvent) => {
