@@ -50,12 +50,21 @@ export function SwitchV2({
     }
   }, [props.checked])
 
+  const stopPropagation = (event: React.MouseEvent | React.TouchEvent) => {
+    event.stopPropagation()
+  }
+
   return (
     <div>
       <div className={classes.container}>
         <label className={classes.labelContainer} {...api.getRootProps()}>
           <input {...api.getHiddenInputProps()} />
-          <span className={classes.sliderContainer} {...api.getControlProps()}>
+          <span
+            onClick={stopPropagation}
+            onTouchStart={stopPropagation}
+            className={classes.sliderContainer}
+            {...api.getControlProps()}
+          >
             <span className={classes.slider} {...api.getThumbProps()} />
           </span>
           {children && (

@@ -25,6 +25,8 @@ import type {
 } from '@tanstack/react-table'
 import type {FilterConfig, TableCustomColumns} from './types'
 import {TableCustomColsVariant} from './table-custom-cols/TableCustomCols'
+import {TABLE_ACTION_TYPES} from '../../utils/table'
+import {useTableStore} from './store'
 
 export interface TableProps {
   // the table data
@@ -198,6 +200,38 @@ export function Table({
   const isEmpty = !loaderConfig.isFetching && !loaderConfig.isError && !data.length
 
   const {isCheckbox, isRadio, setSelectedRows} = rowSelectionConfig
+
+  const resetTableStore = useTableStore(state => state.resetAllFilters)
+
+  // Add cleanup effect that handles both internal and external state
+  React.useEffect(() => {
+    return () => {
+      // Reset filters (internal and external)
+      filterConfig?.filterDispatch?.({type: TABLE_ACTION_TYPES.RESET_ALL, payload: null})
+      resetTableStore(filterConfig?.filterReset)
+
+      // Reset external states
+      if (searchConfig?.setSearch) {
+        searchConfig.setSearch('')
+      }
+
+      if (sortConfig) {
+        sortConfig.setSortBy('')
+        sortConfig.setSortOrd('')
+      }
+
+      if (paginationConfig) {
+        paginationConfig.setPage(0)
+        paginationConfig.setLimit(25)
+      }
+
+      // ! might have to readd
+      // if (rowSelectionConfig) {
+      //   rowSelectionConfig.setSelectedRows?.([])
+      //   rowSelectionConfig.setRowSelection?.({})
+      // }
+    }
+  }, []) // Empty dependency array since we only need this on unmount
 
   useDeepCompareEffect(() => {
     if (!sortConfig) return

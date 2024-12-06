@@ -1,6 +1,6 @@
 import {create} from 'zustand'
 
-interface Breadcrumb {
+export interface Breadcrumb {
   label: string
   href?: string
   active?: boolean
