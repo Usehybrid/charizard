@@ -15,13 +15,11 @@ jobs:
     steps:
       - name: Setup repo + install pnpm
         uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v3
-        with:
-          version: 8     
+      - uses: pnpm/action-setup@v4   
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           registry-url: "https://registry.npmjs.org"
           cache: 'pnpm'
       - name: Install Packages
