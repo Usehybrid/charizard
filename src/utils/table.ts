@@ -14,6 +14,7 @@ export enum TABLE_ACTION_TYPES {
   SELECTOR_FILTER = 'selector_filter',
   PAGE = 'page',
   LIMIT = 'limit',
+  SET_DURATION = 'set_duration',
 }
 
 type TBaseQuery = {
