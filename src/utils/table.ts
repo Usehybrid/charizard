@@ -66,6 +66,14 @@ const tableQueryReducer = <TQuery extends TBaseQuery>(
       return {...query, page: payload}
     case TABLE_ACTION_TYPES.LIMIT:
       return {...query, limit: payload, page: 0}
+    case TABLE_ACTION_TYPES.SET_DURATION:
+      return {
+        ...query,
+        filters: {
+          ...query.filters,
+          duration: payload,
+        },
+      }
     default:
       throw new Error(`Unhandled action type: ${type}`)
   }
