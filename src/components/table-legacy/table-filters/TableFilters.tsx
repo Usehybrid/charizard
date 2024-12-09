@@ -14,14 +14,11 @@ export default function TableFilters({filterConfig}: TableFiltersProps) {
 
   const tableFilters = useTableStore(s => s.filters)
 
-  const {setDefaultFilters, addFilters, removeFilters, resetFilters, resetAllFilters} =
-    useTableStore(s => ({
-      setDefaultFilters: s.setDefaultFilters,
-      addFilters: s.addFilters,
-      removeFilters: s.removeFilters,
-      resetFilters: s.resetFilters,
-      resetAllFilters: s.resetAllFilters,
-    }))
+  const setDefaultFilters = useTableStore(state => state.setDefaultFilters)
+  const addFilters = useTableStore(state => state.addFilters)
+  const removeFilters = useTableStore(state => state.removeFilters)
+  const resetFilters = useTableStore(state => state.resetFilters)
+  const resetAllFilters = useTableStore(state => state.resetAllFilters)
 
   React.useEffect(() => {
     if (!filters?.length || isLoading) return
