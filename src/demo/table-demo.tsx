@@ -1,8 +1,8 @@
 import * as React from 'react'
 import randomIcon from '../components/assets/check.svg'
 import {createColumnHelper} from '@tanstack/react-table'
-import {Table, TableTagsCell} from '../components'
-import {INV_ACTION_TYPES, useInventoryStore} from '../components/table/inventory/inventory.store'
+import {Table, TABLE_ACTION_TYPES, TableTagsCell} from '../components'
+import {useInventoryStore} from '../components/table/inventory/inventory.store'
 import {FILTER_TYPE} from '../components/table/types'
 
 export function TableDemo() {
@@ -25,14 +25,14 @@ export function TableDemo() {
         filters: filtersV2,
         isLoading: false,
         isError: false,
-        filterDispatch: value => dispatch({type: INV_ACTION_TYPES.FILTER, payload: value}),
-        filterReset: () => dispatch({type: INV_ACTION_TYPES.RESET_FILTERS, payload: null}),
+        filterDispatch: value => dispatch({type: TABLE_ACTION_TYPES.FILTER, payload: value}),
+        filterReset: () => dispatch({type: TABLE_ACTION_TYPES.RESET_FILTERS, payload: null}),
       }}
       sortConfig={{
         sortBy: query.sort_by,
-        sortOrd: query.sort_order,
-        setSortBy: (value: any) => dispatch({type: INV_ACTION_TYPES.SORT_BY, payload: value}),
-        setSortOrd: (value: any) => dispatch({type: INV_ACTION_TYPES.SORT_ORDER, payload: value}),
+        sortOrd: query.sort_order as any,
+        setSortBy: (value: any) => dispatch({type: TABLE_ACTION_TYPES.SORT_BY, payload: value}),
+        setSortOrd: (value: any) => dispatch({type: TABLE_ACTION_TYPES.SORT_ORDER, payload: value}),
         sortMap: {
           software: 'softwares',
           software_owners: 'software_owners',
@@ -43,8 +43,8 @@ export function TableDemo() {
       paginationConfig={{
         page: query.page,
         limit: query.limit,
-        setPage: value => dispatch({type: INV_ACTION_TYPES.PAGE, payload: value}),
-        setLimit: value => dispatch({type: INV_ACTION_TYPES.LIMIT, payload: value}),
+        setPage: value => dispatch({type: TABLE_ACTION_TYPES.PAGE, payload: value}),
+        setLimit: value => dispatch({type: TABLE_ACTION_TYPES.LIMIT, payload: value}),
         metaData: {
           total_items: 1000,
           page_no: 0,

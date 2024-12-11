@@ -1,95 +1,46 @@
-import {create} from 'zustand'
+import {createTableStore, DEFAULT_LIMIT, DEFAULT_PAGE} from '../../../utils/table'
 
-// * inventory list store
-interface InventoryStore {
-  query: InventoryQueries
-  dispatch: (action: {type: INV_ACTION_TYPES; payload: string | number | null}) => void
-}
-
-const invInitialQueries = {
-  page: 0,
-  limit: 25,
+// * Inventory List Store
+export const invInitialQueries = {
+  page: DEFAULT_PAGE,
+  limit: DEFAULT_LIMIT,
   search: '',
-  sort_by: 'software_owners',
-  sort_order: 'desc' as '' | 'asc' | 'desc',
+  sort_by: '',
+  sort_order: '',
   filters: {
     filter_type: '',
     filter_brand: '',
     filter_country: '',
-    filter_status: 'under_maintenance',
-    joining_date: '',
-    table_type: 'folders',
-    filter_status_2: 'unassigned',
+    filter_status: '',
+    filter_mdm_enrolled: '',
+    filter_ram: '',
+    filter_storage: '',
+    filter_processor: '',
+    filter_procurement_type: '',
+    filter_procurement_from: '',
+    filter_model: '',
+    filter_device_location: '',
+    filter_device_grading: '',
   },
 }
 
 export type InventoryQueries = typeof invInitialQueries
+export const useInventoryStore = createTableStore(invInitialQueries)
 
-export enum INV_ACTION_TYPES {
-  SEARCH = 'search',
-  SORT_BY = 'sort_by',
-  SORT_ORDER = 'sort_order',
-  INITIAL_FILTER = 'initial_filter',
-  STATUS_FILTER = 'status',
-  FILTER = 'filter',
-  RESET_FILTERS = 'reset_filters',
-  RESET_ALL = 'reset_all',
-  SELECTOR_FILTER = 'selector_filter',
-  PAGE = 'page',
-  LIMIT = 'limit',
+// * Inventory Allocation History Store
+export const inventoryAllocationHistoryInitialQueries = {
+  page: DEFAULT_PAGE,
+  limit: DEFAULT_LIMIT,
+  search: '',
+  sort_by: '',
+  sort_order: '',
+  filters: {
+    filter_team: '',
+    filter_department: '',
+  },
 }
 
-// @ts-ignore
-export const invQueryReducer = (query, {payload, type}) => {
-  switch (type) {
-    case INV_ACTION_TYPES.SEARCH:
-      return {...query, search: payload}
-    case INV_ACTION_TYPES.SORT_BY:
-      return {...query, sort_by: payload}
-    case INV_ACTION_TYPES.SORT_ORDER:
-      return {...query, sort_order: payload}
-    // set selected filters on mount
-    case INV_ACTION_TYPES.INITIAL_FILTER:
-      return {...query, filter: payload}
-    case INV_ACTION_TYPES.FILTER:
-      const {value, filterType} = payload
-      return {
-        ...query,
-        page: 0,
-        filters: {
-          ...query.filters,
-          [filterType]: value,
-        },
-      }
-    case INV_ACTION_TYPES.RESET_FILTERS:
-      return {...query, filters: invInitialQueries.filters}
-    case INV_ACTION_TYPES.RESET_ALL:
-      return invInitialQueries
-    case INV_ACTION_TYPES.SELECTOR_FILTER:
-      return {
-        ...query,
-        filters: {
-          ...query.filters,
-          filter_status: payload,
-        },
-      }
-    case INV_ACTION_TYPES.PAGE:
-      return {...query, page: payload}
-    case INV_ACTION_TYPES.LIMIT:
-      return {...query, limit: payload}
-    default:
-      throw new Error(`Unhandled action type:${type} in inventory query reducer`)
-  }
-}
-// @ts-ignore
-const invQueryDispatcher = (state: InventoryStore, action) => {
-  const updatedQuery = invQueryReducer(state.query, action)
-  return {
-    query: updatedQuery,
-  }
-}
-
-export const useInventoryStore = create<InventoryStore>(set => ({
-  query: invInitialQueries,
-  dispatch: action => set(state => invQueryDispatcher(state, action)),
-}))
+export type InventoryAllocationHistoryQueries = typeof inventoryAllocationHistoryInitialQueries
+export const useInventoryAllocationHistoryStore = createTableStore(
+  inventoryAllocationHistoryInitialQueries,
+)
