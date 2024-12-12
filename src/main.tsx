@@ -1,6 +1,5 @@
 import {StrictMode} from 'react'
 import {createRoot} from 'react-dom/client'
-import {SelectorDemo} from './demo/selector-demo'
 import { TableDemo } from './demo/table-demo'
 
 const styles = {
