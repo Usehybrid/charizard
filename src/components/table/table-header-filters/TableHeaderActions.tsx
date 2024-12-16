@@ -1,9 +1,10 @@
+import {ReactElement} from 'react'
 import classes from './styles-new.module.css'
 
 export default function TableHeaderActions({
   customActionItems,
 }: {
-  customActionItems?: JSX.Element[]
+  customActionItems?: ReactElement[]
 }) {
   return (
     <div className={classes.customHeaderActionButtons}>

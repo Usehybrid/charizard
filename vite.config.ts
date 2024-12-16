@@ -33,4 +33,7 @@ export default defineConfig({
       },
     },
   },
+  // optimizeDeps: {
+  //   include: ['react', 'react-dom', '@hybr1d-tech/charizard'],
+  // },
 })
