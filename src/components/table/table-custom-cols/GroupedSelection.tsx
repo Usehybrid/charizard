@@ -1,5 +1,5 @@
 import * as React from 'react'
-import CustomColCheckbox from './CustomColCheckbox'
+import CustomColCheckboxGroup from './CustomColCheckboxGroup'
 import classes from './table-custom-cols.module.css'
 import {CustomColCheckedState} from '../types'
 
@@ -42,7 +42,7 @@ export function GroupedSelection({checkedState, setCheckedState, search}: Groupe
           <h3 className={classes.groupTitle}>{group}</h3>
           {items.map(item => (
             <div key={item.id} className={classes.option}>
-              <CustomColCheckbox
+              <CustomColCheckboxGroup
                 label={item.label}
                 id={item.id}
                 checked={item.checked}
