@@ -32,6 +32,68 @@ export interface TableStore<TQuery> {
   dispatch: (action: {type: TABLE_ACTION_TYPES; payload: any | null}) => void
 }
 
+// Utility function to build filter query
+export const buildFilterQuery = (
+  queryFilters: Record<string, any>,
+  exclude: string[] = [],
+): Record<string, any> => {
+  const filters: Record<string, any> = {}
+
+  if (queryFilters) {
+    Object.keys(queryFilters).forEach(key => {
+      if (queryFilters[key] && !exclude.includes(key)) {
+        filters[key] = queryFilters[key]
+      }
+    })
+  }
+
+  return filters
+}
+
+// Utility function to get sort parameter
+export const getSortBy = (query: {sort_by?: string; sort_order?: string}) => {
+  if (!query.sort_by) return undefined
+  switch (query.sort_order) {
+    case 'asc':
+      return `+${query.sort_by}`
+    case 'desc':
+      return `-${query.sort_by}`
+    default:
+      return `${query.sort_by}`
+  }
+}
+
+// Utility function to build table query parameters
+export const buildTableQuery = (query: TBaseQuery): Record<string, any> => {
+  const params: Record<string, any> = {
+    page: query.page,
+    limit: query.limit,
+  }
+
+  if (query.search) {
+    params.search = query.search
+  }
+
+  if (query.sort_by) {
+    params.sort_by = getSortBy({
+      sort_by: query.sort_by,
+      sort_order: query.sort_order,
+    })
+  }
+
+  if (query.filters) {
+    Object.assign(params, buildFilterQuery(query.filters))
+  }
+
+  Object.keys(params).forEach(key => {
+    if (params[key] === undefined) {
+      delete params[key]
+    }
+  })
+
+  return params
+}
+
 // Reusable table query dispatcher
 const tableQueryReducer = <TQuery extends TBaseQuery>(
   query: TQuery,
