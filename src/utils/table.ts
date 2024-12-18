@@ -161,19 +161,11 @@ type TableNames = {
 }
 
 export const TABLE_NAMES: TableNames = {
-  zenHR: {
+  team: {
     employeeDirectory: {
       list: {label: 'People', value: 'team_list'},
       hiringTemplate: {label: 'Hiring Templates', value: 'team_hiring_template'},
       profileSoftwares: {label: 'Profile Softwares', value: 'team_profile_softwares'},
-    },
-    attendance: {
-      timesheetList: {label: 'Attendance Timesheets', value: 'attendance_timesheets_list'},
-      policyList: {label: 'Attendance Policy List', value: 'attendance_policy_list'},
-    },
-    leave: {
-      policies: {label: 'Leave Policies', value: 'leave_policies'},
-      publicHolidays: {label: 'Leave Public Holidays', value: 'leave_public_holidays'},
     },
   },
   zenIT: {
@@ -194,8 +186,11 @@ export const TABLE_NAMES: TableNames = {
       devices: {label: 'MDM Devices', value: 'mdm_devices'},
       users: {label: 'MDM Users', value: 'mdm_users'},
     },
+    webstore: {
+      quotation: {label: 'Quotation List', value: 'quotation_list'},
+    },
   },
-  zenTools: {
+  zenCore: {
     workflow: {
       list: {label: 'Workflow List', value: 'workflow_list'},
       history: {label: 'Workflow History', value: 'workflow_history'},
@@ -206,6 +201,16 @@ export const TABLE_NAMES: TableNames = {
     goal: {
       list: {label: 'Goal List', value: 'goal_list'},
       departmentList: {label: 'Department Goals', value: 'departments_goal_list'},
+    },
+  },
+  zenHR: {
+    attendance: {
+      timesheetList: {label: 'Attendance Timesheets', value: 'attendance_timesheets_list'},
+      policyList: {label: 'Attendance Policy List', value: 'attendance_policy_list'},
+    },
+    leave: {
+      policies: {label: 'Leave Policies', value: 'leave_policies'},
+      publicHolidays: {label: 'Leave Public Holidays', value: 'leave_public_holidays'},
     },
   },
 }
