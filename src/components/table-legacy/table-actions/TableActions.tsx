@@ -1,5 +1,5 @@
 import classes from './styles.module.css'
-import {Button} from '../../button'
+import {BUTTON_V2_SIZE, ButtonV2} from '../../button-v2'
 import {TableLegacyProps} from '../TableLegacy'
 
 type TableActionsProps = {
@@ -26,13 +26,13 @@ export default function TableActions({actionsConfig, data}: TableActionsProps) {
   if (!key && !customComp)
     return (
       <div className={classes.box}>
-        <Button.ActionsDropdown menuItems={items} data={data} />
+        <ButtonV2.ActionsDropdown menuItems={items} />
       </div>
     )
 
   return (
     <div className={classes.box}>
-      <Button.ActionsDropdown menuItems={items} data={data} variant="small" />
+      <ButtonV2.ActionsDropdown menuItems={items} size={BUTTON_V2_SIZE.SMALL} />
       {customComp ? (
         customComp(data)
       ) : key && data[key] ? (

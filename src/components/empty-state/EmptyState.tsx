@@ -1,7 +1,7 @@
 import * as React from 'react'
 import clsx from 'clsx'
 import classes from './styles.module.css'
-import {Button, BUTTON_VARIANT} from '../button'
+import {ButtonV2, BUTTON_V2_VARIANT} from '../button-v2'
 import {SVG} from '../svg'
 
 interface EmptyStateProps {
@@ -41,9 +41,9 @@ export function EmptyState({
       </div>
 
       {btnText && (
-        <Button onClick={onClick} variant={BUTTON_VARIANT.GHOST}>
+        <ButtonV2 onClick={onClick} variant={BUTTON_V2_VARIANT.GHOST}>
           {btnText}
-        </Button>
+        </ButtonV2>
       )}
     </div>
   )

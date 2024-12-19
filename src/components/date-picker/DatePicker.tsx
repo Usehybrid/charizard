@@ -8,8 +8,6 @@ import {format, isDate, parseISO} from 'date-fns'
 import {DayPicker, DropdownOption, Matcher, PropsSingle, useDayPicker} from 'react-day-picker'
 import {Placement} from '@popperjs/core'
 import {
-  Button,
-  BUTTON_VARIANT,
   SVG,
   Popover,
   PopoverTrigger,
@@ -48,7 +46,7 @@ interface DatePickerProps extends PropsSingle {
   disableDatepicker?: boolean
   errorMsg?: string
   isError?: boolean
-  buttonVariant?: BUTTON_VARIANT
+  buttonVariant?: BUTTON_V2_VARIANT
   customContainerStyles?: React.CSSProperties
   popoverConfig?: {
     placement?: Placement
@@ -67,7 +65,7 @@ export function DatePicker({
   errorMsg = '',
   disableDatepicker = false,
   disabled,
-  buttonVariant = BUTTON_VARIANT.GHOST,
+  buttonVariant = BUTTON_V2_VARIANT.GHOST,
   customContainerStyles,
   popoverConfig,
   isError,
@@ -123,10 +121,10 @@ export function DatePicker({
           {trigger ? (
             <div ref={btnRef}>{trigger}</div>
           ) : variant === 'form' ? (
-            <Button
+            <ButtonV2
               size="adapt"
               disabled={disableDatepicker}
-              variant={BUTTON_VARIANT.MINIMAL}
+              variant={BUTTON_V2_VARIANT.MINIMAL}
               customStyles={{
                 padding: '0 12px',
                 cursor: disableDatepicker ? 'not-allowed' : 'pointer',
@@ -141,9 +139,9 @@ export function DatePicker({
                 </span>
                 <SVG path={calender} width={20} height={20} />
               </div>
-            </Button>
+            </ButtonV2>
           ) : (
-            <Button
+            <ButtonV2
               variant={buttonVariant}
               size="adapt"
               disabled={disableDatepicker}
@@ -160,7 +158,7 @@ export function DatePicker({
                   {displayDate}
                 </span>
               </div>
-            </Button>
+            </ButtonV2>
           )}
           {errorMsg && (
             <p className={clsx('zap-subcontent-medium', classes.errorMsg)}>{errorMsg}</p>

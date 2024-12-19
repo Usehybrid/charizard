@@ -1,11 +1,10 @@
 import clsx from 'clsx'
 import classes from './styles.module.css'
-import {BUTTON_VARIANT} from '../button'
 import {ButtonV2, BUTTON_V2_VARIANT, BUTTON_V2_SIZE, BUTTON_V2_TYPE} from '../button-v2'
 import {SVG} from '../svg'
 
 export type FooterButtons = Array<{
-  variant?: BUTTON_VARIANT | BUTTON_V2_VARIANT
+  variant?:  BUTTON_V2_VARIANT
   onClick: () => void
   btnText: string
   btnType?: BUTTON_V2_TYPE | 'submit'
@@ -15,24 +14,6 @@ export type FooterButtons = Array<{
   loadingText?: string
   icon?: string
 }>
-
-// Map BUTTON_VARIANT to BUTTON_V2_VARIANT
-export const mapVariant = (
-  variant?: BUTTON_VARIANT | BUTTON_V2_VARIANT,
-): BUTTON_V2_VARIANT | undefined => {
-  switch (variant) {
-    case BUTTON_VARIANT.PRIMARY:
-      return BUTTON_V2_VARIANT.PRIMARY
-    case BUTTON_VARIANT.SECONDARY:
-      return BUTTON_V2_VARIANT.SECONDARY
-    case BUTTON_VARIANT.DANGER:
-      return BUTTON_V2_VARIANT.PRIMARY
-    case BUTTON_VARIANT.MINIMAL:
-      return BUTTON_V2_VARIANT.TERTIARY
-    default:
-      return variant as BUTTON_V2_VARIANT | undefined
-  }
-}
 
 interface ModalFooterProps {
   /**
@@ -68,7 +49,7 @@ export function ModalFooter({children, api, buttons, showBorder = true}: ModalFo
             <ButtonV2
               key={idx}
               disabled={btn.disabled}
-              variant={mapVariant(btn.variant)}
+              variant={btn.variant}
               onClick={async () => {
                 await btn.onClick()
                 api?.setOpen(false)
