@@ -6,67 +6,62 @@ import moreMenuIcon from '../assets/more-menu-2.svg'
 import classes from './styles.module.css'
 import {useMachine, normalizeProps, Portal} from '@zag-js/react'
 import {SVG} from '../svg'
-import {BUTTON_V2_SIZE, BUTTON_V2_TYPE, BUTTON_V2_VARIANT} from './types'
+import {BUTTON_SIZE, BUTTON_TYPE, BUTTON_VARIANT} from './types'
 import type {PositioningOptions} from '@zag-js/popper'
 import {handleScrollTable} from './utils'
 
 interface BaseButtonProps {
-  variant?: BUTTON_V2_VARIANT
+  variant?: BUTTON_VARIANT
   disabled?: boolean
   onClick?: React.MouseEventHandler<HTMLButtonElement>
-  size?: BUTTON_V2_SIZE | 'xs' | 'sm' | 'md' | 'adapt' // can be removed in the future when old dependencies are updated('xs' | 'sm' | 'md' | 'adapt')
+  size?: BUTTON_SIZE
   customStyles?: React.CSSProperties
   btnType?: 'button' | 'reset' | 'submit'
 }
 
-interface IconOnlyButtonV2TypeProps extends BaseButtonProps {
-  type: BUTTON_V2_TYPE.ICON_ONLY
+interface IconOnlyButtonTypeProps extends BaseButtonProps {
+  type: BUTTON_TYPE.ICON_ONLY
   icon: React.ReactNode
   children?: React.ReactNode
 }
 
-interface IconButtonV2TypeProps extends BaseButtonProps {
-  type: BUTTON_V2_TYPE.ICON_LEFT | BUTTON_V2_TYPE.ICON_RIGHT
+interface IconButtonTypeProps extends BaseButtonProps {
+  type: BUTTON_TYPE.ICON_LEFT | BUTTON_TYPE.ICON_RIGHT
   icon: React.ReactNode
   children: React.ReactNode
 }
 
-interface OtherButtonV2TypeProps extends BaseButtonProps {
-  type?: BUTTON_V2_TYPE.BASIC | BUTTON_V2_TYPE.BUTTON | BUTTON_V2_TYPE.RESET
+interface OtherButtonTypeProps extends BaseButtonProps {
+  type?: BUTTON_TYPE.BASIC | BUTTON_TYPE.BUTTON | BUTTON_TYPE.RESET
   icon?: React.ReactNode
   children: React.ReactNode
 }
 
-export type ButtonV2Props =
-  | IconOnlyButtonV2TypeProps
-  | IconButtonV2TypeProps
-  | OtherButtonV2TypeProps
+export type ButtonProps = IconOnlyButtonTypeProps | IconButtonTypeProps | OtherButtonTypeProps
 
-export function ButtonV2({
+export function Button({
   children,
-  variant = BUTTON_V2_VARIANT.PRIMARY,
+  variant = BUTTON_VARIANT.PRIMARY,
   disabled = false,
   onClick,
-  type = BUTTON_V2_TYPE.BASIC,
-  size = BUTTON_V2_SIZE.DEFAULT,
+  type = BUTTON_TYPE.BASIC,
+  size = BUTTON_SIZE.DEFAULT,
   customStyles = {},
   icon,
   btnType,
-}: ButtonV2Props) {
+}: ButtonProps) {
   return (
     <button
       className={clsx(
         classes.btn,
-        variant === BUTTON_V2_VARIANT.PRIMARY && classes.btnPrimary,
-        variant === BUTTON_V2_VARIANT.SECONDARY && classes.btnSecondary,
-        variant === BUTTON_V2_VARIANT.TERTIARY && classes.btnTertiary,
-        variant === BUTTON_V2_VARIANT.LINK && classes.btnLink,
-        size === BUTTON_V2_SIZE.DEFAULT && classes.btnDefault,
-        size === BUTTON_V2_SIZE.SMALL && classes.btnSmall,
-        type === BUTTON_V2_TYPE.ICON_ONLY &&
-          size === BUTTON_V2_SIZE.DEFAULT &&
-          classes.iconOnlyDefault,
-        type === BUTTON_V2_TYPE.ICON_ONLY && size === BUTTON_V2_SIZE.SMALL && classes.iconOnlySmall,
+        variant === BUTTON_VARIANT.PRIMARY && classes.btnPrimary,
+        variant === BUTTON_VARIANT.SECONDARY && classes.btnSecondary,
+        variant === BUTTON_VARIANT.TERTIARY && classes.btnTertiary,
+        variant === BUTTON_VARIANT.LINK && classes.btnLink,
+        size === BUTTON_SIZE.DEFAULT && classes.btnDefault,
+        size === BUTTON_SIZE.SMALL && classes.btnSmall,
+        type === BUTTON_TYPE.ICON_ONLY && size === BUTTON_SIZE.DEFAULT && classes.iconOnlyDefault,
+        type === BUTTON_TYPE.ICON_ONLY && size === BUTTON_SIZE.SMALL && classes.iconOnlySmall,
         disabled && classes.disabled,
       )}
       disabled={disabled}
@@ -74,14 +69,14 @@ export function ButtonV2({
       style={customStyles}
       type={btnType}
     >
-      {type === BUTTON_V2_TYPE.ICON_LEFT && icon}
-      {type === BUTTON_V2_TYPE.ICON_ONLY ? icon : children}
-      {type === BUTTON_V2_TYPE.ICON_RIGHT && icon}
+      {type === BUTTON_TYPE.ICON_LEFT && icon}
+      {type === BUTTON_TYPE.ICON_ONLY ? icon : children}
+      {type === BUTTON_TYPE.ICON_RIGHT && icon}
     </button>
   )
 }
 
-export type MenuItemV2 = {
+export type MenuItem = {
   label: string
   iconSrc?: string
   onClick: any
@@ -93,11 +88,11 @@ export type MenuItemV2 = {
 
 export interface GroupActionProps {
   children: React.ReactNode
-  variant?: BUTTON_V2_VARIANT
+  variant?: BUTTON_VARIANT
   disabled?: boolean
-  menuItems: MenuItemV2[]
+  menuItems: MenuItem[]
   customData?: any
-  size?: BUTTON_V2_SIZE
+  size?: BUTTON_SIZE
   positionerProps?: PositioningOptions
   isTable?: boolean
   customStyles?: {
@@ -113,11 +108,11 @@ export interface GroupActionProps {
 const GroupAction = React.forwardRef(function (
   {
     children,
-    variant = BUTTON_V2_VARIANT.PRIMARY,
+    variant = BUTTON_VARIANT.PRIMARY,
     disabled = false,
     menuItems,
     customData,
-    size = BUTTON_V2_SIZE.DEFAULT,
+    size = BUTTON_SIZE.DEFAULT,
     positionerProps,
     isTable = false,
     isCustomTrigger = false,
@@ -210,12 +205,12 @@ const GroupAction = React.forwardRef(function (
         <button
           className={clsx(
             classes.btn,
-            variant === BUTTON_V2_VARIANT.PRIMARY && classes.btnPrimary,
-            variant === BUTTON_V2_VARIANT.SECONDARY && classes.btnSecondary,
-            variant === BUTTON_V2_VARIANT.TERTIARY && classes.btnTertiary,
-            variant === BUTTON_V2_VARIANT.LINK && classes.btnLink,
-            size === BUTTON_V2_SIZE.DEFAULT && classes.btnDefault,
-            size === BUTTON_V2_SIZE.SMALL && classes.btnSmall,
+            variant === BUTTON_VARIANT.PRIMARY && classes.btnPrimary,
+            variant === BUTTON_VARIANT.SECONDARY && classes.btnSecondary,
+            variant === BUTTON_VARIANT.TERTIARY && classes.btnTertiary,
+            variant === BUTTON_VARIANT.LINK && classes.btnLink,
+            size === BUTTON_SIZE.DEFAULT && classes.btnDefault,
+            size === BUTTON_SIZE.SMALL && classes.btnSmall,
             disabled && classes.disabled,
           )}
           disabled={disabled}
@@ -232,15 +227,15 @@ const GroupAction = React.forwardRef(function (
         <button
           className={clsx(
             classes.btn,
-            variant === BUTTON_V2_VARIANT.PRIMARY && classes.btnPrimary,
-            variant === BUTTON_V2_VARIANT.SECONDARY && classes.btnSecondary,
-            variant === BUTTON_V2_VARIANT.TERTIARY && classes.btnTertiary,
-            variant === BUTTON_V2_VARIANT.LINK && classes.btnLink,
-            size === BUTTON_V2_SIZE.DEFAULT && classes.btnDefault,
-            size === BUTTON_V2_SIZE.SMALL && classes.btnSmall,
+            variant === BUTTON_VARIANT.PRIMARY && classes.btnPrimary,
+            variant === BUTTON_VARIANT.SECONDARY && classes.btnSecondary,
+            variant === BUTTON_VARIANT.TERTIARY && classes.btnTertiary,
+            variant === BUTTON_VARIANT.LINK && classes.btnLink,
+            size === BUTTON_SIZE.DEFAULT && classes.btnDefault,
+            size === BUTTON_SIZE.SMALL && classes.btnSmall,
             disabled && classes.disabled,
-            size === BUTTON_V2_SIZE.DEFAULT && classes.iconOnlyDefault,
-            size === BUTTON_V2_SIZE.SMALL && classes.iconOnlySmall,
+            size === BUTTON_SIZE.DEFAULT && classes.iconOnlyDefault,
+            size === BUTTON_SIZE.SMALL && classes.iconOnlySmall,
             isTable && classes.groupActionTable,
           )}
           style={customButtonStyles}
@@ -253,12 +248,12 @@ const GroupAction = React.forwardRef(function (
           <button
             className={clsx(
               classes.btn,
-              variant === BUTTON_V2_VARIANT.PRIMARY && classes.btnPrimary,
-              variant === BUTTON_V2_VARIANT.SECONDARY && classes.btnSecondary,
-              variant === BUTTON_V2_VARIANT.TERTIARY && classes.btnTertiary,
-              variant === BUTTON_V2_VARIANT.LINK && classes.btnLink,
-              size === BUTTON_V2_SIZE.DEFAULT && classes.btnDefault,
-              size === BUTTON_V2_SIZE.SMALL && classes.btnSmall,
+              variant === BUTTON_VARIANT.PRIMARY && classes.btnPrimary,
+              variant === BUTTON_VARIANT.SECONDARY && classes.btnSecondary,
+              variant === BUTTON_VARIANT.TERTIARY && classes.btnTertiary,
+              variant === BUTTON_VARIANT.LINK && classes.btnLink,
+              size === BUTTON_SIZE.DEFAULT && classes.btnDefault,
+              size === BUTTON_SIZE.SMALL && classes.btnSmall,
               disabled && classes.disabled,
               classes.btnGrpLeft,
             )}
@@ -271,12 +266,12 @@ const GroupAction = React.forwardRef(function (
           <button
             className={clsx(
               classes.btn,
-              variant === BUTTON_V2_VARIANT.PRIMARY && classes.btnPrimary,
-              variant === BUTTON_V2_VARIANT.SECONDARY && classes.btnSecondary,
-              variant === BUTTON_V2_VARIANT.TERTIARY && classes.btnTertiary,
-              variant === BUTTON_V2_VARIANT.LINK && classes.btnLink,
-              size === BUTTON_V2_SIZE.DEFAULT && classes.btnDefault,
-              size === BUTTON_V2_SIZE.SMALL && classes.btnSmall,
+              variant === BUTTON_VARIANT.PRIMARY && classes.btnPrimary,
+              variant === BUTTON_VARIANT.SECONDARY && classes.btnSecondary,
+              variant === BUTTON_VARIANT.TERTIARY && classes.btnTertiary,
+              variant === BUTTON_VARIANT.LINK && classes.btnLink,
+              size === BUTTON_SIZE.DEFAULT && classes.btnDefault,
+              size === BUTTON_SIZE.SMALL && classes.btnSmall,
               disabled && classes.disabled,
               classes.btnGrpRight,
             )}
@@ -297,11 +292,11 @@ const GroupAction = React.forwardRef(function (
 })
 
 export interface ActionsDropdownProps {
-  variant?: BUTTON_V2_VARIANT
+  variant?: BUTTON_VARIANT
   disabled?: boolean
-  menuItems: MenuItemV2[]
+  menuItems: MenuItem[]
   customData?: any
-  size?: BUTTON_V2_SIZE
+  size?: BUTTON_SIZE
   positionerProps?: PositioningOptions
   isTable?: boolean
   children?: React.ReactNode
@@ -355,5 +350,5 @@ export const ActionsDropdown = React.forwardRef(function (
   )
 })
 
-ButtonV2.GroupAction = GroupAction
-ButtonV2.ActionsDropdown = ActionsDropdown
+Button.GroupAction = GroupAction
+Button.ActionsDropdown = ActionsDropdown

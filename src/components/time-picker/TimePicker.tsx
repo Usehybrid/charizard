@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import * as React from 'react'
 import clockIcon from '../assets/time/clock.svg'
-import {BUTTON_V2_SIZE, BUTTON_V2_VARIANT, ButtonV2} from '../button-v2'
+import {BUTTON_SIZE, BUTTON_VARIANT, Button} from '../button'
 import {InputGroupV2, InputRightIcon, InputV2} from '../input-v2'
 import {Popover, PopoverContent, PopoverTrigger} from '../popover'
 import classes from './styles.module.css'
@@ -218,16 +218,16 @@ export function TimePicker({
           )}
         </div>
         <div className={classes.footer}>
-          <ButtonV2
-            size={BUTTON_V2_SIZE.SMALL}
-            variant={BUTTON_V2_VARIANT.GHOST}
+          <Button
+            size={BUTTON_SIZE.SMALL}
+            variant={BUTTON_VARIANT.GHOST}
             onClick={closeHandler}
           >
             Close
-          </ButtonV2>
-          <ButtonV2 size={BUTTON_V2_SIZE.SMALL} onClick={handleTimeChange}>
+          </Button>
+          <Button size={BUTTON_SIZE.SMALL} onClick={handleTimeChange}>
             Ok
-          </ButtonV2>
+          </Button>
         </div>
       </PopoverContent>
     </Popover>

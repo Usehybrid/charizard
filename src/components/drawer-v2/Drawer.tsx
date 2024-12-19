@@ -3,7 +3,7 @@ import clsx from 'clsx'
 import closeIcon from '../assets/close.svg'
 import classes from './drawer.module.css'
 import {SVG} from '../svg'
-import {ButtonV2, ButtonV2Props} from '../button-v2'
+import {Button, ButtonProps} from '../button'
 import {DialogFooterButtons} from '../../types/common'
 import {useLockBodyScroll} from '../../hooks'
 import {Portal} from '@zag-js/react'
@@ -178,9 +178,9 @@ export function DrawerV2({
                       <div className={classes.footerBtnContainer}>
                         <div className={classes.footerBtn}>
                           {buttons.map(({btnText, ...btnProps}, idx) => (
-                            <ButtonV2 key={idx} {...(btnProps as ButtonV2Props)}>
+                            <Button key={idx} {...(btnProps as ButtonProps)}>
                               {btnText}
-                            </ButtonV2>
+                            </Button>
                           ))}
                         </div>
 

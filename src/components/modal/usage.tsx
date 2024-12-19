@@ -1,4 +1,4 @@
-import {BUTTON_V2_VARIANT} from '../button-v2'
+import {BUTTON_V2_VARIANT} from '../button'
 import {Modal} from './Modal'
 import {ModalBody} from './ModalBody'
 import {ModalContent} from './ModalContent'

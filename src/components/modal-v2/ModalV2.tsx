@@ -2,7 +2,7 @@ import * as React from 'react'
 import * as dialog from '@zag-js/dialog'
 import classes from './modal.module.css'
 import {useMachine, normalizeProps, Portal} from '@zag-js/react'
-import {ButtonV2, ButtonV2Props} from '../button-v2'
+import {Button, ButtonProps} from '../button'
 import {SVG} from '../svg'
 import closeIcon from '../assets/close.svg'
 import {DialogFooterButtons} from '../../types/common'
@@ -95,9 +95,9 @@ export function ModalV2({
                 <div className={classes.footer}>
                   {footerButtons?.map(({btnText, isLoading, loadingText, ...btnProps}, idx) => {
                     return (
-                      <ButtonV2 key={idx} {...(btnProps as ButtonV2Props)}>
+                      <Button key={idx} {...(btnProps as ButtonProps)}>
                         {isLoading ? loadingText : btnText}
-                      </ButtonV2>
+                      </Button>
                     )
                   })}
                 </div>

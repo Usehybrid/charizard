@@ -1,6 +1,6 @@
 import classes from './styles.module.css'
 import {TableProps} from '../Table'
-import {BUTTON_V2_SIZE, BUTTON_V2_VARIANT, ButtonV2} from '../../button-v2'
+import {BUTTON_SIZE, BUTTON_VARIANT, Button} from '../../button'
 
 interface TableActionsProps {
   actionsConfig: TableProps['actionsConfig']
@@ -25,10 +25,10 @@ export default function TableActions({actionsConfig, data}: TableActionsProps) {
 
   return (
     <div className={classes.box}>
-      <ButtonV2.ActionsDropdown
+      <Button.ActionsDropdown
         menuItems={items}
-        variant={BUTTON_V2_VARIANT.TERTIARY}
-        size={BUTTON_V2_SIZE.SMALL}
+        variant={BUTTON_VARIANT.TERTIARY}
+        size={BUTTON_SIZE.SMALL}
         isTable
         customData={data}
       />

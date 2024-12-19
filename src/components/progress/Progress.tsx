@@ -2,7 +2,7 @@ import * as React from 'react'
 import clsx from 'clsx'
 import classes from './styles.module.css'
 import checkIcon from '../assets/check.svg'
-import {ButtonV2, BUTTON_V2_VARIANT} from '../button-v2'
+import {Button, BUTTON_VARIANT} from '../button'
 import {SVG} from '../svg'
 
 type ProgressProps = {
@@ -165,40 +165,40 @@ export function Progress({
         </div>
         {showHeaderBtns && (
           <div className={classes.btnsFlex}>
-            <ButtonV2 variant={BUTTON_V2_VARIANT.SECONDARY} onClick={onCancelClick}>
+            <Button variant={BUTTON_VARIANT.SECONDARY} onClick={onCancelClick}>
               Cancel
-            </ButtonV2>
+            </Button>
             {showSkipBtn && currentStep === stepToShowSkipBtn && (
-              <ButtonV2 onClick={handleOnSkipClick} variant={BUTTON_V2_VARIANT.GHOST}>
+              <Button onClick={handleOnSkipClick} variant={BUTTON_VARIANT.GHOST}>
                 {skipBtnText}
-              </ButtonV2>
+              </Button>
             )}
-            <ButtonV2 onClick={onContinueClick}>
+            <Button onClick={onContinueClick}>
               {isFinalStep ? lastStepHeaderContinueBtnText : 'Continue'}
-            </ButtonV2>
+            </Button>
           </div>
         )}
       </div>
       <div className={classes.body}>{steps[currentStep].component}</div>
       {showFooter && (
         <div className={classes.footer}>
-          <ButtonV2 variant={BUTTON_V2_VARIANT.SECONDARY} onClick={onCancelClick}>
+          <Button variant={BUTTON_VARIANT.SECONDARY} onClick={onCancelClick}>
             Cancel
-          </ButtonV2>
+          </Button>
           <div className={classes.btnsFlex}>
             {currentStep > 0 && (
-              <ButtonV2 variant={BUTTON_V2_VARIANT.SECONDARY} onClick={onBackClick}>
+              <Button variant={BUTTON_VARIANT.SECONDARY} onClick={onBackClick}>
                 Back
-              </ButtonV2>
+              </Button>
             )}
             {showSkipBtn && currentStep === stepToShowSkipBtn && (
-              <ButtonV2 onClick={handleOnSkipClick} variant={BUTTON_V2_VARIANT.GHOST}>
+              <Button onClick={handleOnSkipClick} variant={BUTTON_VARIANT.GHOST}>
                 {skipBtnText}
-              </ButtonV2>
+              </Button>
             )}
-            <ButtonV2 onClick={onContinueClick}>
+            <Button onClick={onContinueClick}>
               {isFinalStep ? lastStepFooterContinueBtnText : 'Continue'}
-            </ButtonV2>
+            </Button>
           </div>
         </div>
       )}
