@@ -13,10 +13,10 @@ import {
   PopoverTrigger,
   PopoverContent,
   SelectV2,
-  ButtonV2,
-  BUTTON_V2_TYPE,
-  BUTTON_V2_SIZE,
-  BUTTON_V2_VARIANT,
+  Button,
+  BUTTON_TYPE,
+  BUTTON_SIZE,
+  BUTTON_VARIANT,
 } from '../index'
 import {StylesConfig} from 'react-select'
 import {create} from 'zustand'
@@ -46,7 +46,7 @@ interface DatePickerProps extends PropsSingle {
   disableDatepicker?: boolean
   errorMsg?: string
   isError?: boolean
-  buttonVariant?: BUTTON_V2_VARIANT
+  buttonVariant?: BUTTON_VARIANT
   customContainerStyles?: React.CSSProperties
   popoverConfig?: {
     placement?: Placement
@@ -65,7 +65,7 @@ export function DatePicker({
   errorMsg = '',
   disableDatepicker = false,
   disabled,
-  buttonVariant = BUTTON_V2_VARIANT.GHOST,
+  buttonVariant = BUTTON_VARIANT.GHOST,
   customContainerStyles,
   popoverConfig,
   isError,
@@ -121,10 +121,10 @@ export function DatePicker({
           {trigger ? (
             <div ref={btnRef}>{trigger}</div>
           ) : variant === 'form' ? (
-            <ButtonV2
-              size="adapt"
+            <Button
+              size={BUTTON_SIZE.SMALL}
               disabled={disableDatepicker}
-              variant={BUTTON_V2_VARIANT.MINIMAL}
+              variant={BUTTON_VARIANT.MINIMAL}
               customStyles={{
                 padding: '0 12px',
                 cursor: disableDatepicker ? 'not-allowed' : 'pointer',
@@ -139,11 +139,11 @@ export function DatePicker({
                 </span>
                 <SVG path={calender} width={20} height={20} />
               </div>
-            </ButtonV2>
+            </Button>
           ) : (
-            <ButtonV2
+            <Button
               variant={buttonVariant}
-              size="adapt"
+              size={BUTTON_SIZE.SMALL}
               disabled={disableDatepicker}
               customStyles={{cursor: disableDatepicker ? 'not-allowed' : 'pointer', height: '32px'}}
             >
@@ -158,7 +158,7 @@ export function DatePicker({
                   {displayDate}
                 </span>
               </div>
-            </ButtonV2>
+            </Button>
           )}
           {errorMsg && (
             <p className={clsx('zap-subcontent-medium', classes.errorMsg)}>{errorMsg}</p>
@@ -274,11 +274,11 @@ function Nav() {
   const {nextMonth, previousMonth} = useDayPicker()
   return (
     <div className={classes.navContainer}>
-      <ButtonV2
+      <Button
         disabled={!previousMonth}
-        type={BUTTON_V2_TYPE.ICON_ONLY}
-        size={BUTTON_V2_SIZE.SMALL}
-        variant={BUTTON_V2_VARIANT.SECONDARY}
+        type={BUTTON_TYPE.ICON_ONLY}
+        size={BUTTON_SIZE.SMALL}
+        variant={BUTTON_VARIANT.SECONDARY}
         onClick={e => {
           e.preventDefault()
           setMonthYear({
@@ -287,12 +287,12 @@ function Nav() {
           })
         }}
         icon={<SVG path={chevronLeft} width={20} height={20} />}
-      ></ButtonV2>
-      <ButtonV2
+      ></Button>
+      <Button
         disabled={!nextMonth}
-        type={BUTTON_V2_TYPE.ICON_ONLY}
-        size={BUTTON_V2_SIZE.SMALL}
-        variant={BUTTON_V2_VARIANT.SECONDARY}
+        type={BUTTON_TYPE.ICON_ONLY}
+        size={BUTTON_SIZE.SMALL}
+        variant={BUTTON_VARIANT.SECONDARY}
         onClick={e => {
           e.preventDefault()
           setMonthYear({
@@ -301,7 +301,7 @@ function Nav() {
           })
         }}
         icon={<SVG path={chevronRight} width={20} height={20} />}
-      ></ButtonV2>
+      ></Button>
     </div>
   )
 }

@@ -1,5 +1,5 @@
 import classes from './table-pagination.module.css'
-import {BUTTON_V2_SIZE, BUTTON_V2_VARIANT, ButtonV2} from '../../button-v2'
+import {BUTTON_SIZE, BUTTON_VARIANT, Button} from '../../button'
 
 interface TableLimitProps {
   setLimit: (l: number) => void
@@ -23,14 +23,14 @@ export default function TableLimit({setLimit, limit, itemsOnPage}: TableLimitPro
   return (
     <div className={classes.limitBox}>
       <p className="zap-subcontent-medium">Rows per page</p>
-      <ButtonV2.GroupAction
+      <Button.GroupAction
         menuItems={selectData}
-        variant={BUTTON_V2_VARIANT.TERTIARY}
-        size={BUTTON_V2_SIZE.SMALL}
+        variant={BUTTON_VARIANT.TERTIARY}
+        size={BUTTON_SIZE.SMALL}
         customStyles={{customMenuStyles: {minWidth: '63px'}}}
       >
         {limit}
-      </ButtonV2.GroupAction>
+      </Button.GroupAction>
     </div>
   )
 }

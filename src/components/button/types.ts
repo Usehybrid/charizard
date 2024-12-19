@@ -1,4 +1,4 @@
-export enum BUTTON_V2_VARIANT {
+export enum BUTTON_VARIANT {
   PRIMARY = 'primary',
   SECONDARY = 'secondary',
   TERTIARY = 'tertiary',
@@ -9,12 +9,12 @@ export enum BUTTON_V2_VARIANT {
   MINIMAL = 'tertiary',
 }
 
-export enum BUTTON_V2_SIZE {
+export enum BUTTON_SIZE {
   SMALL = 'small',
   DEFAULT = 'default',
 }
 
-export enum BUTTON_V2_TYPE {
+export enum BUTTON_TYPE {
   BASIC = 'basic',
   ICON_LEFT = 'iconLeft',
   ICON_RIGHT = 'iconRight',

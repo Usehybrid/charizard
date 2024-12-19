@@ -7,7 +7,7 @@ import calender from '../assets/calender.svg'
 import chevronDown from '../assets/chevron-down.svg'
 import chevronLeft from '../assets/chevron-left.svg'
 import chevronRight from '../assets/chevron-right.svg'
-import {BUTTON_V2_SIZE, BUTTON_V2_TYPE, BUTTON_V2_VARIANT, ButtonV2} from '../button-v2'
+import {BUTTON_SIZE, BUTTON_TYPE, BUTTON_VARIANT, Button} from '../button'
 import {InputControlV2, LabelV2} from '../input-v2'
 import {Popover, PopoverContent, PopoverTrigger} from '../popover'
 import {SelectV2} from '../select-v2'
@@ -39,7 +39,7 @@ export function DateRangePicker({
   errorMsg = '',
   customInputContentStyles,
   customClasses = {},
-  size = BUTTON_V2_SIZE.DEFAULT,
+  size = BUTTON_SIZE.DEFAULT,
   onReset,
   placeholder,
   trigger,
@@ -151,8 +151,8 @@ export function DateRangePicker({
           {trigger ? (
             trigger
           ) : (
-            <ButtonV2
-              variant={BUTTON_V2_VARIANT.GHOST}
+            <Button
+              variant={BUTTON_VARIANT.GHOST}
               customStyles={{width: '100%'}}
               disabled={disableDatepicker}
               size={size}
@@ -185,7 +185,7 @@ export function DateRangePicker({
                   />
                 )}
               </div>
-            </ButtonV2>
+            </Button>
           )}
           {errorMsg && (
             <p className={clsx('zap-subcontent-medium', classes.errorMsg)}>{errorMsg}</p>
@@ -295,11 +295,11 @@ function Nav() {
   const {nextMonth, previousMonth} = useDayPicker()
   return (
     <div className={classes.navContainer}>
-      <ButtonV2
+      <Button
         disabled={!previousMonth}
-        type={BUTTON_V2_TYPE.ICON_ONLY}
-        size={BUTTON_V2_SIZE.SMALL}
-        variant={BUTTON_V2_VARIANT.SECONDARY}
+        type={BUTTON_TYPE.ICON_ONLY}
+        size={BUTTON_SIZE.SMALL}
+        variant={BUTTON_VARIANT.SECONDARY}
         onClick={e => {
           e.preventDefault()
           setMonthYear({
@@ -308,12 +308,12 @@ function Nav() {
           })
         }}
         icon={<SVG path={chevronLeft} width={20} height={20} />}
-      ></ButtonV2>
-      <ButtonV2
+      ></Button>
+      <Button
         disabled={!nextMonth}
-        type={BUTTON_V2_TYPE.ICON_ONLY}
-        size={BUTTON_V2_SIZE.SMALL}
-        variant={BUTTON_V2_VARIANT.SECONDARY}
+        type={BUTTON_TYPE.ICON_ONLY}
+        size={BUTTON_SIZE.SMALL}
+        variant={BUTTON_VARIANT.SECONDARY}
         onClick={e => {
           e.preventDefault()
           setMonthYear({
@@ -322,7 +322,7 @@ function Nav() {
           })
         }}
         icon={<SVG path={chevronRight} width={20} height={20} />}
-      ></ButtonV2>
+      ></Button>
     </div>
   )
 }

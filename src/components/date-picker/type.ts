@@ -1,7 +1,7 @@
 import {Placement} from '@zag-js/popper'
 import * as React from 'react'
 import {ClassNames, DateRange, Matcher, PropsRange} from 'react-day-picker'
-import {BUTTON_V2_SIZE} from '../button-v2'
+import {BUTTON_SIZE} from '../button'
 
 export interface DateRangePickerProps extends PropsRange {
   value: DateRange
@@ -23,7 +23,7 @@ export interface DateRangePickerProps extends PropsRange {
     content?: string
     dateIcon?: string
   }
-  size?: BUTTON_V2_SIZE
+  size?: BUTTON_SIZE
   placeholder?: string
   trigger?: React.ReactNode
 }

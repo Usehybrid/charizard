@@ -3,7 +3,7 @@ import {Outlet, useNavigate} from 'react-router'
 import classes from './styles.module.css'
 import logoImage from '../assets/logo-full.svg'
 import errorImage from '../assets/illustrations/sleeping-user.svg'
-import {BUTTON_V2_SIZE, BUTTON_V2_VARIANT, ButtonV2} from '../button-v2'
+import {BUTTON_SIZE, BUTTON_VARIANT, Button} from '../button'
 import {AsyncImage} from '../asyncImage'
 import {ZENADMIN_CONTACT, ZENADMIN_URL} from '../../utils'
 
@@ -40,17 +40,17 @@ export function ErrorsLayout({
         <div className={classes.content}>{children ? children : <Outlet />}</div>
         <div className={classes.action}>
           {showReload && (
-            <ButtonV2
+            <Button
               onClick={reloadPageHandler}
-              size={BUTTON_V2_SIZE.SMALL}
-              variant={BUTTON_V2_VARIANT.GHOST}
+              size={BUTTON_SIZE.SMALL}
+              variant={BUTTON_VARIANT.GHOST}
             >
               Reload page
-            </ButtonV2>
+            </Button>
           )}
-          <ButtonV2 onClick={navigateToHomeHandler} size={BUTTON_V2_SIZE.SMALL}>
+          <Button onClick={navigateToHomeHandler} size={BUTTON_SIZE.SMALL}>
             Go to homepage
-          </ButtonV2>
+          </Button>
         </div>
       </div>
       <div>
