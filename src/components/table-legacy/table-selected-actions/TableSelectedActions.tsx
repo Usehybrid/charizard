@@ -2,7 +2,7 @@ import chevronDown from '../../assets/chevron-down.svg'
 import classes from './table-selected-actions.module.css'
 import {TableLegacyProps} from '../TableLegacy'
 import {SVG} from '../../svg'
-import {Button, BUTTON_VARIANT} from '../../button'
+import {ButtonV2, BUTTON_V2_VARIANT, BUTTON_V2_SIZE} from '../../button-v2'
 
 interface TableSelectedActionsProps {
   rowSelectionConfig: TableLegacyProps['rowSelectionConfig']
@@ -32,9 +32,9 @@ export default function TableSelectedActions({
                 <SVG path={iconSrc || ''} svgClassName={classes.selectedIcon} />
               </div>
             )}
-            <Button.MenuButton
-              variant={BUTTON_VARIANT.SECONDARY}
-              size="sm"
+            <ButtonV2.GroupAction
+              variant={BUTTON_V2_VARIANT.SECONDARY}
+              size={BUTTON_V2_SIZE.SMALL}
               isCustomTrigger
               menuItems={
                 actions?.map(action => ({
@@ -45,15 +45,15 @@ export default function TableSelectedActions({
               }
               positionerProps={{placement: 'bottom-start'}}
             >
-              <Button variant={BUTTON_VARIANT.SECONDARY} size="sm">
+              <ButtonV2 variant={BUTTON_V2_VARIANT.SECONDARY} size="sm">
                 Actions
                 <SVG
                   svgClassName={classes.actionsBtnIcon}
                   path={chevronDown}
                   spanClassName={classes.actionsBtnIconSpan}
                 />
-              </Button>
-            </Button.MenuButton>
+              </ButtonV2>
+            </ButtonV2.GroupAction>
           </div>
         </div>
       )}

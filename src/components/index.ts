@@ -7,7 +7,6 @@ export * from '../types'
 export * from '../hooks'
 export * from '../utils'
 
-export * from './button'
 export * from './empty-state'
 export * from './table-legacy'
 export * from './search'
