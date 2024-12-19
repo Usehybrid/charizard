@@ -3,7 +3,7 @@ import clsx from 'clsx'
 import classes from './styles.module.css'
 import closeIcon from '../assets/close.svg'
 import {BUTTON_V2_TYPE, ButtonV2} from '../button-v2'
-import {FooterButtons, mapVariant} from '../modal/ModalFooter'
+import {FooterButtons} from '../modal/ModalFooter'
 import {SVG} from '../svg'
 
 interface DrawerProps {
@@ -187,7 +187,7 @@ export function Drawer({
                           <ButtonV2
                             key={idx}
                             disabled={btn?.disabled}
-                            variant={mapVariant(btn?.variant)}
+                            variant={btn?.variant}
                             onClick={btn.onClick ? btn.onClick : undefined}
                             type={
                               btn.btnType === BUTTON_V2_TYPE.ICON_LEFT ||
