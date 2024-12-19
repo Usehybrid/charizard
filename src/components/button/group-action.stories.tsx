@@ -1,19 +1,19 @@
 import type {Meta, StoryObj} from '@storybook/react'
-import {ButtonV2} from './Button'
-import {BUTTON_V2_VARIANT} from './types'
+import {Button} from './Button'
+import {BUTTON_VARIANT} from './types'
 
-const meta: Meta<typeof ButtonV2.GroupAction> = {
-  component: ButtonV2.GroupAction,
+const meta: Meta<typeof Button.GroupAction> = {
+  component: Button.GroupAction,
 }
 
 export default meta
 
-type Story = StoryObj<typeof ButtonV2.GroupAction>
+type Story = StoryObj<typeof Button.GroupAction>
 
 export const Primary: Story = {
   args: {
     children: 'Click me',
-    variant: BUTTON_V2_VARIANT.PRIMARY,
+    variant: BUTTON_VARIANT.PRIMARY,
     menuItems: [
       {
         label: 'Item 1',
@@ -31,7 +31,7 @@ export const Primary: Story = {
 export const Secondary: Story = {
   args: {
     children: 'Click me',
-    variant: BUTTON_V2_VARIANT.SECONDARY,
+    variant: BUTTON_VARIANT.SECONDARY,
     menuItems: [
       {
         label: 'Item 1',
@@ -49,7 +49,7 @@ export const Secondary: Story = {
 export const Tertiary: Story = {
   args: {
     children: 'Click me',
-    variant: BUTTON_V2_VARIANT.TERTIARY,
+    variant: BUTTON_VARIANT.TERTIARY,
     menuItems: [
       {
         label: 'Item 1',
