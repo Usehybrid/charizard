@@ -1,7 +1,7 @@
-import {ButtonV2Props} from '../components'
+import {ButtonProps} from '../components'
 
 export type DialogFooterButtons = Array<
-  Omit<ButtonV2Props, 'children'> & {
+  Omit<ButtonProps, 'children'> & {
     btnText: string
     isLoading?: boolean
     loadingText?: string

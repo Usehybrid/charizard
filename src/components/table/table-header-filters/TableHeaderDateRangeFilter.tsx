@@ -1,5 +1,5 @@
 import * as React from 'react'
-import {BUTTON_V2_SIZE} from '../../button-v2'
+import {BUTTON_SIZE} from '../../button'
 import {DateRangePicker} from '../../date-picker'
 import {DateRangePickerProps} from '../../date-picker/type'
 import {TableStore} from '../store'
@@ -59,7 +59,7 @@ export default function TableHeaderDateRangeFilter({
         content: 'zap-button-small',
         dateIcon: classes.dateIcon,
       }}
-      size={BUTTON_V2_SIZE.SMALL}
+      size={BUTTON_SIZE.SMALL}
       placeholder={filter.name}
     />
   )

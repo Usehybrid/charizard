@@ -5,7 +5,7 @@ import deleteBin from '../../../assets/delete-bin.svg'
 import infoOctagon from '../../../assets/info-octagon.svg'
 import {AsyncImage} from '../../../asyncImage'
 import {Badge, BADGE_HIGHLIGHT, BADGE_STATUS} from '../../../badge'
-import {BUTTON_V2_SIZE, BUTTON_V2_VARIANT, ButtonV2} from '../../../button-v2'
+import {BUTTON_SIZE, BUTTON_VARIANT, Button} from '../../../button'
 import {getFileTypeIcon} from '../../../upload/helper'
 import {UserChip} from '../../../user-chip'
 import getStatus, {TASK_STATUS} from '../../helper'
@@ -139,10 +139,10 @@ export default function TaskCard({
       </div>
       <div className={classes.actionSection} onClick={e => e.stopPropagation()}>
         {!!menuItems?.length && (
-          <ButtonV2.ActionsDropdown
+          <Button.ActionsDropdown
             menuItems={menuItems}
-            variant={BUTTON_V2_VARIANT.TERTIARY}
-            size={BUTTON_V2_SIZE.SMALL}
+            variant={BUTTON_VARIANT.TERTIARY}
+            size={BUTTON_SIZE.SMALL}
             customData={data}
             ref={dropDownRef}
             hideDivider

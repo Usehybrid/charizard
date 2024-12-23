@@ -1,44 +1,54 @@
 import * as React from 'react'
 import * as menu from '@zag-js/menu'
 import clsx from 'clsx'
-import chevronDown from '../assets/chevron-down.svg'
-import threeDots from '../assets/three-dots.svg'
+import chevronDown from '../assets/chevron-down-16.svg'
+import moreMenuIcon from '../assets/more-menu-2.svg'
 import classes from './styles.module.css'
 import {useMachine, normalizeProps, Portal} from '@zag-js/react'
 import {SVG} from '../svg'
-import {PositioningOptions} from '@zag-js/popper'
+import {BUTTON_SIZE, BUTTON_TYPE, BUTTON_VARIANT} from './types'
+import type {PositioningOptions} from '@zag-js/popper'
+import {handleScrollTable} from './utils'
 
-export enum BUTTON_VARIANT {
-  PRIMARY = 'primary',
-  SECONDARY = 'secondary',
-  GHOST = 'ghost',
-  DANGER = 'danger',
-  LINK = 'link',
-  MINIMAL = 'minimal',
-}
-
-export type ButtonProps = {
-  children: React.ReactNode
+interface BaseButtonProps {
   variant?: BUTTON_VARIANT
   disabled?: boolean
   onClick?: React.MouseEventHandler<HTMLButtonElement>
-  type?: 'button' | 'submit' | 'reset'
-  size?: 'xs' | 'sm' | 'md' | 'adapt'
+  size?: BUTTON_SIZE
   customStyles?: React.CSSProperties
+  btnType?: 'button' | 'reset' | 'submit'
 }
 
-// 1. Button => primary, secondary, ghost
-// 2. Button Group => primary
-// 2. Button Menu => primary
+interface IconOnlyButtonTypeProps extends BaseButtonProps {
+  type: BUTTON_TYPE.ICON_ONLY
+  icon: React.ReactNode
+  children?: React.ReactNode
+}
+
+interface IconButtonTypeProps extends BaseButtonProps {
+  type: BUTTON_TYPE.ICON_LEFT | BUTTON_TYPE.ICON_RIGHT
+  icon: React.ReactNode
+  children: React.ReactNode
+}
+
+interface OtherButtonTypeProps extends BaseButtonProps {
+  type?: BUTTON_TYPE.BASIC | BUTTON_TYPE.BUTTON | BUTTON_TYPE.RESET
+  icon?: React.ReactNode
+  children: React.ReactNode
+}
+
+export type ButtonProps = IconOnlyButtonTypeProps | IconButtonTypeProps | OtherButtonTypeProps
 
 export function Button({
   children,
   variant = BUTTON_VARIANT.PRIMARY,
   disabled = false,
   onClick,
-  type = 'button',
-  size = 'md',
+  type = BUTTON_TYPE.BASIC,
+  size = BUTTON_SIZE.DEFAULT,
   customStyles = {},
+  icon,
+  btnType,
 }: ButtonProps) {
   return (
     <button
@@ -46,21 +56,22 @@ export function Button({
         classes.btn,
         variant === BUTTON_VARIANT.PRIMARY && classes.btnPrimary,
         variant === BUTTON_VARIANT.SECONDARY && classes.btnSecondary,
-        variant === BUTTON_VARIANT.GHOST && classes.btnGhost,
-        variant === BUTTON_VARIANT.DANGER && classes.btnDanger,
+        variant === BUTTON_VARIANT.TERTIARY && classes.btnTertiary,
         variant === BUTTON_VARIANT.LINK && classes.btnLink,
-        variant === BUTTON_VARIANT.MINIMAL && classes.btnMinimal,
-        size === 'sm' && classes.btnSm,
-        size === 'adapt' && classes.btnAdapt,
-        size === 'xs' && classes.btnXs,
+        size === BUTTON_SIZE.DEFAULT && classes.btnDefault,
+        size === BUTTON_SIZE.SMALL && classes.btnSmall,
+        type === BUTTON_TYPE.ICON_ONLY && size === BUTTON_SIZE.DEFAULT && classes.iconOnlyDefault,
+        type === BUTTON_TYPE.ICON_ONLY && size === BUTTON_SIZE.SMALL && classes.iconOnlySmall,
         disabled && classes.disabled,
       )}
       disabled={disabled}
       onClick={onClick}
-      type={type}
       style={customStyles}
+      type={btnType}
     >
-      {children}
+      {type === BUTTON_TYPE.ICON_LEFT && icon}
+      {type === BUTTON_TYPE.ICON_ONLY ? icon : children}
+      {type === BUTTON_TYPE.ICON_RIGHT && icon}
     </button>
   )
 }
@@ -71,83 +82,86 @@ export type MenuItem = {
   onClick: any
   filterFn?: any
   disabled?: boolean
+  customStyles?: React.CSSProperties
+  customSvgClassName?: string
 }
 
-export interface MenuButtonProps {
+export interface GroupActionProps {
   children: React.ReactNode
   variant?: BUTTON_VARIANT
   disabled?: boolean
   menuItems: MenuItem[]
-  onClick?: React.MouseEventHandler<HTMLButtonElement>
-  isCustomTrigger?: boolean
-  isSingleBtnTrigger?: boolean
-  // exists when it's a custom trigger, used to pass the whole row
   customData?: any
-  size?: 'sm' | 'md'
-  // props for actions dropdown
-  actionsDropdownOptions?: {
-    setIsActive: React.Dispatch<React.SetStateAction<boolean>>
-  }
+  size?: BUTTON_SIZE
   positionerProps?: PositioningOptions
   isTable?: boolean
+  customStyles?: {
+    customMenuStyles?: React.CSSProperties
+    customButtonStyles?: React.CSSProperties
+  }
+  isCustomTrigger?: boolean
+  isSingleBtnTrigger?: boolean
+  hideDivider?: boolean
+  onClick?: any
 }
 
-function MenuButton({
-  children,
-  variant = BUTTON_VARIANT.PRIMARY,
-  disabled = false,
-  menuItems,
-  onClick,
-  isCustomTrigger = false,
-  isSingleBtnTrigger = false,
-  customData,
-  size = 'md',
-  actionsDropdownOptions,
-  positionerProps,
-  isTable = false,
-}: MenuButtonProps) {
+const GroupAction = React.forwardRef(function (
+  {
+    children,
+    variant = BUTTON_VARIANT.PRIMARY,
+    disabled = false,
+    menuItems,
+    customData,
+    size = BUTTON_SIZE.DEFAULT,
+    positionerProps,
+    isTable = false,
+    isCustomTrigger = false,
+    customStyles,
+    isSingleBtnTrigger = false,
+    hideDivider = false,
+    onClick,
+  }: GroupActionProps,
+  ref,
+) {
   const [state, send] = useMachine(
     menu.machine({
       id: React.useId(),
       positioning: {placement: positionerProps?.placement || 'bottom-end'},
     }),
   )
+
   const api = menu.connect(state, send, normalizeProps)
 
-  // to sync with actions dropdown, to get active state styles
-  React.useEffect(() => {
-    if (!isCustomTrigger || !actionsDropdownOptions?.setIsActive) return
-    actionsDropdownOptions.setIsActive(api.open)
-  }, [api.open])
+  const customMenuStyles = customStyles?.customMenuStyles
+  const customButtonStyles = customStyles?.customButtonStyles
 
-  const isOpenRef = React.useRef(api.open)
-
-  React.useEffect(() => {
-    isOpenRef.current = api.open
-  }, [api.open])
-
-  const handleScroll = () => {
-    if (isOpenRef.current) {
-      console.log('scrolling...')
-      api.setOpen(false)
-    }
-  }
+  React.useImperativeHandle(
+    ref,
+    () => {
+      return {
+        blur() {
+          api.setOpen(false)
+        },
+      }
+    },
+    [api],
+  )
 
   React.useEffect(() => {
     if (isTable) {
       const scrollContainer = document.getElementById('zap-table-scroll-container')
       if (scrollContainer) {
-        scrollContainer.addEventListener('scroll', handleScroll, {passive: true})
-        return () => scrollContainer.removeEventListener('scroll', handleScroll)
+        scrollContainer.addEventListener('scroll', () => handleScrollTable(api), {passive: true})
+        return () => scrollContainer.removeEventListener('scroll', () => handleScrollTable(api))
       }
     }
-  }, [])
+  }, [api])
 
   const dropdown = (
     <>
       {menuItems.length > 0 && (
         <div {...api.getPositionerProps()}>
-          <div {...api.getContentProps()} className={classes.menus}>
+          <div {...api.getContentProps()} className={classes.menus} style={customMenuStyles}>
             {menuItems
               .filter(menu => {
                 if (!menu.filterFn) return true
@@ -157,17 +171,25 @@ function MenuButton({
               .map(menu => (
                 <div
                   key={menu.label}
-                  className={clsx(classes.menu, {[classes.menuDisabled]: menu.disabled})}
+                  className={clsx(classes.menu, !hideDivider && classes.divider, {
+                    [classes.menuDisabled]: menu.disabled,
+                  })}
                   {...api.getItemProps({value: menu.label.toLowerCase()})}
                   onClick={
                     menu.disabled
                       ? undefined
                       : isCustomTrigger
-                        ? () => menu.onClick(customData)
-                        : menu.onClick
+                      ? () => menu.onClick(customData)
+                      : menu.onClick
                   }
+                  style={menu.customStyles}
                 >
-                  {menu.iconSrc && <SVG path={menu.iconSrc} svgClassName={classes.menuIcon} />}
+                  {menu.iconSrc && (
+                    <SVG
+                      path={menu.iconSrc}
+                      svgClassName={clsx(classes.menuIcon, menu.customSvgClassName)}
+                    />
+                  )}
                   {menu.label}
                 </div>
               ))}
@@ -183,26 +205,40 @@ function MenuButton({
         <button
           className={clsx(
             classes.btn,
-            classes.btnMenuSingle,
-            variant === 'primary' && classes.btnPrimary,
-            variant === 'secondary' && classes.btnSecondary,
-            variant === 'ghost' && classes.btnGhost,
-            size === 'sm' && classes.btnSm,
+            variant === BUTTON_VARIANT.PRIMARY && classes.btnPrimary,
+            variant === BUTTON_VARIANT.SECONDARY && classes.btnSecondary,
+            variant === BUTTON_VARIANT.TERTIARY && classes.btnTertiary,
+            variant === BUTTON_VARIANT.LINK && classes.btnLink,
+            size === BUTTON_SIZE.DEFAULT && classes.btnDefault,
+            size === BUTTON_SIZE.SMALL && classes.btnSmall,
             disabled && classes.disabled,
           )}
           disabled={disabled}
           {...api.getTriggerProps()}
         >
           {children}
-          <SVG path={chevronDown} width={24} height={24} svgClassName={classes.chevronDown} />
+          <SVG
+            path={chevronDown}
+            svgClassName={classes.chevronDown}
+            spanClassName={classes.chevronDownSpan}
+          />
         </button>
       ) : isCustomTrigger ? (
         <button
           className={clsx(
-            'zap-reset-btn',
-            classes.customTrigger,
-            api.open && classes.customTriggerActive,
+            classes.btn,
+            variant === BUTTON_VARIANT.PRIMARY && classes.btnPrimary,
+            variant === BUTTON_VARIANT.SECONDARY && classes.btnSecondary,
+            variant === BUTTON_VARIANT.TERTIARY && classes.btnTertiary,
+            variant === BUTTON_VARIANT.LINK && classes.btnLink,
+            size === BUTTON_SIZE.DEFAULT && classes.btnDefault,
+            size === BUTTON_SIZE.SMALL && classes.btnSmall,
+            disabled && classes.disabled,
+            size === BUTTON_SIZE.DEFAULT && classes.iconOnlyDefault,
+            size === BUTTON_SIZE.SMALL && classes.iconOnlySmall,
+            isTable && classes.groupActionTable,
           )}
+          style={customButtonStyles}
           {...api.getTriggerProps()}
         >
           {children}
@@ -212,12 +248,14 @@ function MenuButton({
           <button
             className={clsx(
               classes.btn,
-              classes.btnMenu,
-              variant === 'primary' && classes.btnPrimary,
-              variant === 'secondary' && classes.btnSecondary,
-              variant === 'ghost' && classes.btnGhost,
-              size === 'sm' && classes.btnSm,
+              variant === BUTTON_VARIANT.PRIMARY && classes.btnPrimary,
+              variant === BUTTON_VARIANT.SECONDARY && classes.btnSecondary,
+              variant === BUTTON_VARIANT.TERTIARY && classes.btnTertiary,
+              variant === BUTTON_VARIANT.LINK && classes.btnLink,
+              size === BUTTON_SIZE.DEFAULT && classes.btnDefault,
+              size === BUTTON_SIZE.SMALL && classes.btnSmall,
               disabled && classes.disabled,
+              classes.btnGrpLeft,
             )}
             disabled={disabled}
             onClick={onClick}
@@ -228,28 +266,22 @@ function MenuButton({
           <button
             className={clsx(
               classes.btn,
-              classes.btnAddon,
-              variant === 'primary' && classes.btnPrimary,
-              variant === 'primary' && classes.btnAddonPrimary,
-              variant === 'secondary' && classes.btnSecondary,
-              variant === 'secondary' && classes.btnAddonSecondary,
-              variant === 'ghost' && classes.btnGhost,
-              variant === 'ghost' && classes.btnAddonGhost,
-              size === 'sm' && classes.btnSm,
+              variant === BUTTON_VARIANT.PRIMARY && classes.btnPrimary,
+              variant === BUTTON_VARIANT.SECONDARY && classes.btnSecondary,
+              variant === BUTTON_VARIANT.TERTIARY && classes.btnTertiary,
+              variant === BUTTON_VARIANT.LINK && classes.btnLink,
+              size === BUTTON_SIZE.DEFAULT && classes.btnDefault,
+              size === BUTTON_SIZE.SMALL && classes.btnSmall,
               disabled && classes.disabled,
+              classes.btnGrpRight,
             )}
             disabled={disabled}
             {...api.getTriggerProps()}
           >
-            <img
-              src={chevronDown}
-              alt="chevron down"
-              className={clsx(
-                variant === 'primary' && classes.btnImgPrimary,
-                variant === 'secondary' && classes.btnImgSecondary,
-                variant === 'ghost' && classes.btnImgGhost,
-                size === 'sm' && classes.btnImgSm,
-              )}
+            <SVG
+              path={chevronDown}
+              svgClassName={classes.chevronDown}
+              spanClassName={classes.chevronDownSpan}
             />
           </button>
         </div>
@@ -257,46 +289,66 @@ function MenuButton({
       {isTable ? <Portal>{dropdown}</Portal> : dropdown}
     </>
   )
-}
-export type MenuActionsDropdownProps = {
+})
+
+export interface ActionsDropdownProps {
+  variant?: BUTTON_VARIANT
+  disabled?: boolean
   menuItems: MenuItem[]
-  data?: any
-  variant?: 'regular' | 'small'
+  customData?: any
+  size?: BUTTON_SIZE
+  positionerProps?: PositioningOptions
   isTable?: boolean
+  children?: React.ReactNode
+  hideDivider?: boolean
+  customStyles?: {
+    customMenuStyles?: React.CSSProperties
+    customButtonStyles?: React.CSSProperties
+  }
 }
 
-function MenuActionsDropdown({
-  menuItems,
-  data,
-  variant = 'regular',
-  isTable = false,
-}: MenuActionsDropdownProps) {
-  const [isActive, setIsActive] = React.useState(false)
-
+export const ActionsDropdown = React.forwardRef(function (
+  {
+    variant,
+    disabled,
+    menuItems,
+    customData,
+    size,
+    positionerProps,
+    isTable,
+    children,
+    hideDivider,
+    customStyles,
+  }: ActionsDropdownProps,
+  ref,
+) {
   return (
-    <MenuButton
+    <GroupAction
+      variant={variant}
+      disabled={disabled}
       menuItems={menuItems}
-      isCustomTrigger={true}
-      customData={data}
-      actionsDropdownOptions={{setIsActive}}
+      customData={customData}
+      size={size}
+      positionerProps={positionerProps}
       isTable={isTable}
+      isCustomTrigger={true}
+      hideDivider={hideDivider}
+      customStyles={customStyles}
+      ref={ref}
     >
-      <div
-        className={clsx(
-          variant === 'regular' && classes.actionsBoxRegular,
-          variant === 'small' && classes.actionsBoxSmall,
-          isActive && classes.actionsBoxActive,
-        )}
-      >
+      {children ? (
+        children
+      ) : (
         <SVG
-          path={threeDots}
-          svgClassName={clsx(classes.actionsDropdown, isActive && classes.actionsDropdownActive)}
-          spanClassName={classes.actionsDropdownSpan}
+          path={moreMenuIcon}
+          width={16}
+          height={16}
+          svgClassName={isTable ? classes.moreMenuIconTable : undefined}
         />
-      </div>
-    </MenuButton>
+      )}
+    </GroupAction>
   )
-}
+})
 
-Button.MenuButton = MenuButton
-Button.ActionsDropdown = MenuActionsDropdown
+Button.GroupAction = GroupAction
+Button.ActionsDropdown = ActionsDropdown

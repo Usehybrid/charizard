@@ -3,7 +3,7 @@ import clsx from 'clsx'
 import * as React from 'react'
 import chevronRight from '../../assets/chevron-right.svg'
 import filterIcon from '../../assets/user-interface/filter-2.svg'
-import {BUTTON_V2_VARIANT} from '../../button-v2'
+import {BUTTON_VARIANT} from '../../button'
 import {DrawerV2} from '../../drawer-v2'
 import {Search} from '../../search'
 import {SVG} from '../../svg'
@@ -102,7 +102,7 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
     {
       btnText: 'Cancel',
       onClick: onClose,
-      variant: BUTTON_V2_VARIANT.TERTIARY,
+      variant: BUTTON_VARIANT.TERTIARY,
     },
     {
       btnText: 'Reset All',
@@ -112,7 +112,7 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
 
         onClose()
       },
-      variant: BUTTON_V2_VARIANT.SECONDARY,
+      variant: BUTTON_VARIANT.SECONDARY,
     },
     {
       btnText: 'Apply',

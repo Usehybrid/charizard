@@ -8,17 +8,15 @@ import {format, isDate, parseISO} from 'date-fns'
 import {DayPicker, DropdownOption, Matcher, PropsSingle, useDayPicker} from 'react-day-picker'
 import {Placement} from '@popperjs/core'
 import {
-  Button,
-  BUTTON_VARIANT,
   SVG,
   Popover,
   PopoverTrigger,
   PopoverContent,
   SelectV2,
-  ButtonV2,
-  BUTTON_V2_TYPE,
-  BUTTON_V2_SIZE,
-  BUTTON_V2_VARIANT,
+  Button,
+  BUTTON_TYPE,
+  BUTTON_SIZE,
+  BUTTON_VARIANT,
 } from '../index'
 import {StylesConfig} from 'react-select'
 import {create} from 'zustand'
@@ -124,7 +122,7 @@ export function DatePicker({
             <div ref={btnRef}>{trigger}</div>
           ) : variant === 'form' ? (
             <Button
-              size="adapt"
+              size={BUTTON_SIZE.SMALL}
               disabled={disableDatepicker}
               variant={BUTTON_VARIANT.MINIMAL}
               customStyles={{
@@ -145,7 +143,7 @@ export function DatePicker({
           ) : (
             <Button
               variant={buttonVariant}
-              size="adapt"
+              size={BUTTON_SIZE.SMALL}
               disabled={disableDatepicker}
               customStyles={{cursor: disableDatepicker ? 'not-allowed' : 'pointer', height: '32px'}}
             >
@@ -276,11 +274,11 @@ function Nav() {
   const {nextMonth, previousMonth} = useDayPicker()
   return (
     <div className={classes.navContainer}>
-      <ButtonV2
+      <Button
         disabled={!previousMonth}
-        type={BUTTON_V2_TYPE.ICON_ONLY}
-        size={BUTTON_V2_SIZE.SMALL}
-        variant={BUTTON_V2_VARIANT.SECONDARY}
+        type={BUTTON_TYPE.ICON_ONLY}
+        size={BUTTON_SIZE.SMALL}
+        variant={BUTTON_VARIANT.SECONDARY}
         onClick={e => {
           e.preventDefault()
           setMonthYear({
@@ -289,12 +287,12 @@ function Nav() {
           })
         }}
         icon={<SVG path={chevronLeft} width={20} height={20} />}
-      ></ButtonV2>
-      <ButtonV2
+      ></Button>
+      <Button
         disabled={!nextMonth}
-        type={BUTTON_V2_TYPE.ICON_ONLY}
-        size={BUTTON_V2_SIZE.SMALL}
-        variant={BUTTON_V2_VARIANT.SECONDARY}
+        type={BUTTON_TYPE.ICON_ONLY}
+        size={BUTTON_SIZE.SMALL}
+        variant={BUTTON_VARIANT.SECONDARY}
         onClick={e => {
           e.preventDefault()
           setMonthYear({
@@ -303,7 +301,7 @@ function Nav() {
           })
         }}
         icon={<SVG path={chevronRight} width={20} height={20} />}
-      ></ButtonV2>
+      ></Button>
     </div>
   )
 }

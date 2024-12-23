@@ -11,7 +11,7 @@ import {SortableList} from './sortable/SortableList'
 import {CHECKBOX_COL_ID, DROPDOWN_COL_ID, RADIO_COL_ID} from '../constants'
 import {Loader} from '../../loader'
 import {DrawerV2} from '../../drawer-v2'
-import {BUTTON_V2_VARIANT} from '../../button-v2'
+import {BUTTON_VARIANT} from '../../button'
 import type {CustomColCheckedState, TableCustomColumns} from '../types'
 import {GroupedSelection} from './GroupedSelection'
 import {useDisclosure} from '../../../hooks'
@@ -97,7 +97,7 @@ export default function TableCustomCols({
     {
       btnText: 'Cancel',
       onClick: onClose,
-      variant: BUTTON_V2_VARIANT.TERTIARY,
+      variant: BUTTON_VARIANT.TERTIARY,
     },
     {
       btnText: 'Save',
