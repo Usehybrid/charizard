@@ -265,6 +265,7 @@ function Dropdown(props: any) {
       value={selectedOption}
       mainContainerClassName={isYearDropdown ? classes.yearDropdown : classes.monthDropdown}
       customStyles={dropdownStyles}
+      menuPortalTarget={document.body}
     />
   )
 }
