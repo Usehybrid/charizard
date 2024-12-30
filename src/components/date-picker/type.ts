@@ -2,6 +2,7 @@ import {Placement} from '@zag-js/popper'
 import * as React from 'react'
 import {ClassNames, DateRange, Matcher, PropsRange} from 'react-day-picker'
 import {BUTTON_V2_SIZE} from '../button-v2'
+import type {SelectV2Props} from '../select-v2'
 
 export interface DateRangePickerProps extends PropsRange {
   value: DateRange
@@ -26,6 +27,7 @@ export interface DateRangePickerProps extends PropsRange {
   size?: BUTTON_V2_SIZE
   placeholder?: string
   trigger?: React.ReactNode
+  selectProps?: Omit<SelectV2Props, 'options' | 'onChange'>
 }
 
 export type MonthYear = {

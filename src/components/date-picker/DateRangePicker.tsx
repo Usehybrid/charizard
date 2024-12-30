@@ -43,6 +43,7 @@ export function DateRangePicker({
   onReset,
   placeholder,
   trigger,
+  selectProps,
   ...props
 }: DateRangePickerProps) {
   const date = value
@@ -206,6 +207,7 @@ export function DateRangePicker({
                 onChange={onDropdownClick}
                 value={selectedRange}
                 mainContainerClassName={classes.quickSelector}
+                {...selectProps}
               />
             </InputControlV2>
           )}

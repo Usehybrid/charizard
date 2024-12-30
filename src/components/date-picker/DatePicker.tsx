@@ -19,6 +19,7 @@ import {
   BUTTON_V2_TYPE,
   BUTTON_V2_SIZE,
   BUTTON_V2_VARIANT,
+  type SelectV2Props,
 } from '../index'
 import {StylesConfig} from 'react-select'
 import {create} from 'zustand'
@@ -56,6 +57,7 @@ interface DatePickerProps extends PropsSingle {
   showOutsideDays?: boolean
   disabled?: Matcher | Matcher[]
   trigger?: React.ReactNode
+  selectProps?: Omit<SelectV2Props, 'options' | 'onChange'>
 }
 
 export function DatePicker({
@@ -73,6 +75,7 @@ export function DatePicker({
   isError,
   showOutsideDays = true,
   trigger,
+  selectProps,
   ...props
 }: DatePickerProps) {
   const monthYear = useDateStore(state => state.monthYear)
@@ -197,7 +200,9 @@ export function DatePicker({
               dropdown_icon: classes.dropdownIcon,
             }}
             components={{
-              Dropdown,
+              Dropdown: (dropdownProps: any) => (
+                <Dropdown {...dropdownProps} selectProps={selectProps} />
+              ),
               Nav,
             }}
             mode={mode}
@@ -235,7 +240,7 @@ const dropdownStyles: StylesConfig<any> = {
   },
 }
 
-function Dropdown(props: any) {
+function Dropdown({selectProps, ...props}: any) {
   const monthYear = useDateStore(state => state.monthYear)
   const setMonthYear = useDateStore(state => state.setMonthYear)
 
@@ -266,6 +271,7 @@ function Dropdown(props: any) {
       mainContainerClassName={isYearDropdown ? classes.yearDropdown : classes.monthDropdown}
       customStyles={dropdownStyles}
       menuPortalTarget={document.body}
+      {...selectProps}
     />
   )
 }
