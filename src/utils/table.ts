@@ -136,6 +136,14 @@ const tableQueryReducer = <TQuery extends TBaseQuery>(
           duration: payload,
         },
       }
+    case TABLE_ACTION_TYPES.SELECTOR_FILTER:
+      return {
+        ...query,
+        filters: {
+          ...query.filters,
+          filter_status: payload,
+        },
+      }
     default:
       throw new Error(`Unhandled action type: ${type}`)
   }
