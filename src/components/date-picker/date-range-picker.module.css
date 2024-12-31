@@ -21,6 +21,12 @@
   position: relative;
   z-index: 2;
 }
+
+.quickRangePicker .quickSelector .react-select__menu-portal {
+  left: unset !important;
+  top: unset !important;
+  right: -30px !important;
+}
 .buttonContent {
   display: flex;
   justify-content: center;
