@@ -22,7 +22,7 @@
   z-index: 2;
 }
 
-.quickRangePicker .quickSelector .react-select__menu-portal {
+.quickRangePicker .quickSelector :global(.react-select__menu-portal) {
   left: unset !important;
   top: unset !important;
   right: -30px !important;
