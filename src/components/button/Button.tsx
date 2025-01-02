@@ -16,6 +16,7 @@ interface BaseButtonProps {
   onClick?: React.MouseEventHandler<HTMLButtonElement>
   size?: BUTTON_SIZE
   customStyles?: React.CSSProperties
+  className?: string
   btnType?: 'button' | 'reset' | 'submit'
 }
 
@@ -47,6 +48,7 @@ export function Button({
   type = BUTTON_TYPE.BASIC,
   size = BUTTON_SIZE.DEFAULT,
   customStyles = {},
+  className,
   icon,
   btnType,
 }: ButtonProps) {
@@ -63,11 +65,13 @@ export function Button({
         type === BUTTON_TYPE.ICON_ONLY && size === BUTTON_SIZE.DEFAULT && classes.iconOnlyDefault,
         type === BUTTON_TYPE.ICON_ONLY && size === BUTTON_SIZE.SMALL && classes.iconOnlySmall,
         disabled && classes.disabled,
+        className
       )}
       disabled={disabled}
       onClick={onClick}
       style={customStyles}
       type={btnType}
+
     >
       {type === BUTTON_TYPE.ICON_LEFT && icon}
       {type === BUTTON_TYPE.ICON_ONLY ? icon : children}
