@@ -23,6 +23,18 @@
   align-items: center;
 }
 
+.captionDropdowns .monthDropdown :global(.react-select__menu-portal) {
+  left: unset !important;
+  top: unset !important;
+  right: 126px !important;
+}
+
+.captionDropdowns .yearDropdown :global(.react-select__menu-portal) {
+  left: unset !important;
+  top: unset !important;
+  right: 47px !important;
+}
+
 .calendarIcon > path,
 .calendarIcon > g > path {
   fill: var(--theme-blue);

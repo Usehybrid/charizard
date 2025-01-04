@@ -238,6 +238,9 @@ function Dropdown(props: any) {
 
   //TODO: @abhishek improve logic
   const isYearDropdown = props['aria-label'] === 'Choose the Year'
+
+  console.log({isYearDropdown})
+
   let selectedOption: DropdownOption | undefined = undefined
   if (isYearDropdown) {
     selectedOption = props.options?.find((option: any) => {
