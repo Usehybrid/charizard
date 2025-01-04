@@ -3,13 +3,26 @@
   gap: 0.5rem;
 }
 .formButton {
+  font-weight: 400;
+  font-size: 16px;
+  padding: 6px 12px;
+  border-radius: 4px;
+  border: 1px solid var(--p-p10);
+  width: 100%;
+  height: 32px;
+  outline: none;
+  transition: border 0.3s ease-in-out;
+  color: var(--text-primary);
+  background-color: var(--neutral-white);
+}
+
+.formBtnInner {
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-weight: 400;
-  font-size: 16px;
 }
+
 .calendarIcon > path,
 .calendarIcon > g > path {
   fill: var(--theme-blue);

@@ -121,11 +121,10 @@ export function DatePicker({
           {trigger ? (
             <div ref={btnRef}>{trigger}</div>
           ) : variant === 'form' ? (
-            <Button
-              size={BUTTON_SIZE.SMALL}
+            <button
+              className={clsx('zap-reset-btn', classes.formButton)}
               disabled={disableDatepicker}
-              variant={BUTTON_VARIANT.MINIMAL}
-              customStyles={{
+              style={{
                 padding: '0 12px',
                 cursor: disableDatepicker ? 'not-allowed' : 'pointer',
                 caretColor: isError || errorMsg ? 'var(--status-danger)' : undefined,
@@ -133,13 +132,13 @@ export function DatePicker({
                 height: '32px',
               }}
             >
-              <div className={classes.formButton} ref={btnRef}>
+              <div className={classes.formBtnInner} ref={btnRef}>
                 <span style={{color: !date ? 'var(--text-secondary)' : undefined}}>
                   {displayDate}
                 </span>
                 <SVG path={calender} width={20} height={20} />
               </div>
-            </Button>
+            </button>
           ) : (
             <Button
               variant={buttonVariant}
