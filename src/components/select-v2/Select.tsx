@@ -93,6 +93,7 @@ export function SelectV2(props: SelectV2Props) {
         onChange={selectOptionHandler}
         data-variant={variant}
         data-divider={showDivider}
+        menuPortalTarget={document.body}
         menuPosition="fixed"
         {...restProps}
       />
