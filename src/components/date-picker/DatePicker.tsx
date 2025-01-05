@@ -131,6 +131,7 @@ export function DatePicker({
                 borderColor: isError || errorMsg ? 'var(--status-danger)' : undefined,
                 height: '32px',
               }}
+              onClick={e => e.stopPropagation()}
             >
               <div className={classes.formBtnInner} ref={btnRef}>
                 <span style={{color: !date ? 'var(--text-secondary)' : undefined}}>
@@ -238,8 +239,6 @@ function Dropdown(props: any) {
 
   //TODO: @abhishek improve logic
   const isYearDropdown = props['aria-label'] === 'Choose the Year'
-
-  console.log({isYearDropdown})
 
   let selectedOption: DropdownOption | undefined = undefined
   if (isYearDropdown) {
