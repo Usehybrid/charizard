@@ -59,7 +59,12 @@ export function Checkbox({
   return (
     <>
       <label
-        className={clsx(classes.checkbox, {[classes.disabled]: disabled}, customClasses)}
+        className={clsx(
+          'zap-content-medium',
+          classes.checkbox,
+          {[classes.disabled]: disabled},
+          customClasses,
+        )}
         style={customStyles}
         htmlFor={id}
       >
