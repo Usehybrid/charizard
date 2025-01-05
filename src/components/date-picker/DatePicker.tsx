@@ -88,7 +88,6 @@ export function DatePicker({
   const date = React.useMemo(() => {
     if (value) {
       const parsedDate = isDate(value) ? value : parseISO(value)
-      console.log('Parsed date:', parsedDate)
       return parsedDate
     }
     return undefined
@@ -97,7 +96,6 @@ export function DatePicker({
   const displayDate = React.useMemo(() => {
     if (!date) return 'Pick a date'
     const formattedDate = format(date, displayDateFormat)
-    console.log('Formatted display date:', formattedDate)
     return formattedDate
   }, [date, displayDateFormat])
 
@@ -109,7 +107,6 @@ export function DatePicker({
       return
     }
     const formattedSelectedDate = format(selectedDate, 'yyyy-MM-dd')
-    // console.log('Selected date:', formattedSelectedDate)
     onChange(formattedSelectedDate)
     btnRef?.current?.click()
   }
@@ -122,6 +119,7 @@ export function DatePicker({
             <div ref={btnRef}>{trigger}</div>
           ) : variant === 'form' ? (
             <button
+              type="button"
               className={clsx('zap-reset-btn', classes.formButton)}
               disabled={disableDatepicker}
               style={{
@@ -131,7 +129,6 @@ export function DatePicker({
                 borderColor: isError || errorMsg ? 'var(--status-danger)' : undefined,
                 height: '32px',
               }}
-              onClick={e => e.stopPropagation()}
             >
               <div className={classes.formBtnInner} ref={btnRef}>
                 <span style={{color: !date ? 'var(--text-secondary)' : undefined}}>
