@@ -93,13 +93,13 @@ export function UploadDemo() {
     customUrl?: string,
     inventoryId?: string | null,
     softwareId?: string | null,
-  ): Promise<any[]> {
+  ): Promise<{ uploadedFiles: any[]; isUploaded: boolean }> {
     const payloadImages: any[] = [...images]
     const s3Target = type
-
-    const uploadPromises = await images.map(
+    let allUploaded = true
+    const uploadPromises = images.map(
       image =>
-        new Promise<{url: string | undefined; id: string; metaData: any}>(resolve => {
+        new Promise<{ url: string | undefined; id: string; metaData: any; isUploaded: boolean }>(resolve => {
           if (image.url?.includes('blob') || image.docLink?.includes('blob')) {
             requestDocUploadPermission(
               image.fileName,
@@ -118,15 +118,24 @@ export function UploadDemo() {
                 }
               })
               .then(data => {
+                const isUploaded = !!data?.isUploaded
+                if (!isUploaded) {
+                  allUploaded = false
+                }
                 resolve({
                   ...data,
                   url: data?.url,
                   id: image.id,
                   metaData: data?.metaData,
+                  isUploaded,
                 })
               })
+              .catch(() => {
+                allUploaded = false
+                resolve({ ...image, isUploaded: false })
+              })
           } else {
-            resolve({...image})
+            resolve({ ...image, isUploaded: false })
           }
         }),
     )
@@ -139,13 +148,18 @@ export function UploadDemo() {
             url: imageObj.url,
             id: imageObj.id,
             metaData: imageObj.metaData,
+            isUploaded: imageObj.isUploaded,
           }
         }
       })
     } catch (error) {
       console.error('handleImageUpload e()', error)
+      allUploaded = false
     }
-    return payloadImages
+    return {
+      uploadedFiles: payloadImages,
+      isUploaded: allUploaded,
+    }
   }
 
   return (

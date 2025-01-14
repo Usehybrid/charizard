@@ -63,7 +63,7 @@ interface UploadProps {
     customUrl?: string,
     inventoryId?: string | null,
     softwareId?: string | null,
-  ) => Promise<UploadFileType[]>
+  ) => Promise<{uploadedFiles: UploadFileType[]; isUploaded: boolean}>
   variant?: string
 }
 
@@ -108,6 +108,7 @@ UploadProps) {
   const [fileUploadProgress, setFileUploadProgress] = React.useState<progressBarType[]>([])
   const [fileUploadLimitError, setFileUploadLimitError] = React.useState<string | null>(null)
   const [uploadLimitError, setUploadLimitError] = React.useState('')
+  const [isFileUploadComplete, setIsFileUploadComplete] = React.useState(false)
   const fileInputRef = React.useRef<any>()
   const isInputDisabled =
     (fileUploadLimit &&
@@ -249,7 +250,7 @@ UploadProps) {
     const uploadFile = async () => {
       const newFiles = structuredClone(files)
       setIsUploading && setIsUploading(true)
-      const uploadedFiles = await handleImageUpload(
+      const {uploadedFiles, isUploaded} = await handleImageUpload(
         newFiles,
         type,
         undefined,
@@ -258,6 +259,7 @@ UploadProps) {
         inventoryId,
         softwareId,
       )
+      setIsFileUploadComplete(isUploaded)
       setUploadedFiles(uploadedFiles)
       setIsUploading && setIsUploading(false)
       setCallUpload(false)
@@ -289,7 +291,10 @@ UploadProps) {
             Note: You can upload maximum of {fileUploadLimit} file(s)
           </p>
         )} */}
-        {!(files.length === fileUploadLimit) && (
+        {!(
+          (files.length === fileUploadLimit && isFileUploadComplete) ||
+          preLoadedFiles.length === fileUploadLimit
+        ) && (
           <div
             onClick={() => {
               if (!isInputDisabled) {
