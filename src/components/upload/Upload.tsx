@@ -250,6 +250,7 @@ UploadProps) {
     const uploadFile = async () => {
       const newFiles = structuredClone(files)
       setIsUploading && setIsUploading(true)
+      setIsFileUploadComplete(false)
       const {uploadedFiles, isUploaded} = await handleImageUpload(
         newFiles,
         type,
@@ -273,6 +274,12 @@ UploadProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [uploadedFiles.length])
 
+  React.useEffect(() => {
+    if (preLoadedFiles.length >= fileUploadLimit) {
+      setIsFileUploadComplete(true)
+    }
+  }, [])
+
   return (
     <>
       <input
@@ -292,8 +299,8 @@ UploadProps) {
           </p>
         )} */}
         {!(
-          (files.length === fileUploadLimit && isFileUploadComplete) ||
-          preLoadedFiles.length === fileUploadLimit
+          files.filter(file => !cancelledKey.includes(file.key)).length >= fileUploadLimit &&
+          isFileUploadComplete
         ) && (
           <div
             onClick={() => {
