@@ -284,6 +284,13 @@ UploadProps) {
     <>
       <input
         ref={fileInputRef}
+        onClick={() => {
+          if (!isInputDisabled) {
+            beforeUploadHandler && beforeUploadHandler();
+            fileInputRef.current.value = '';
+            fileInputRef.current.click();
+          }
+        }}        
         onChange={handleFileChange}
         type="file"
         accept={acceptedFileTypes}
@@ -293,11 +300,6 @@ UploadProps) {
         disabled={disabled || files.length >= 10}
       />
       <div style={{width: '100%'}}>
-        {/* {fileUploadLimit && (
-          <p className={classes.fileUploadLimit}>
-            Note: You can upload maximum of {fileUploadLimit} file(s)
-          </p>
-        )} */}
         {!(
           files.filter(file => !cancelledKey.includes(file.key)).length >= fileUploadLimit &&
           isFileUploadComplete
