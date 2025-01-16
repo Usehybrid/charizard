@@ -130,13 +130,13 @@ UploadProps) {
   }, [uploadLimitError])
 
   React.useEffect(() => {
-    if (preLoadedFiles.length > 0 && !files.length) {
+    if (preLoadedFiles.length > 0) {
       const newFiles = preLoadedFiles.map(file => ({...file, isUploaded: true}))
       setFiles(newFiles)
       setUploadedFiles(newFiles)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [preLoadedFiles])
+
   async function handleFileChange(e: any) {
     const uploadedFiles = e.target.files
     setFileUploadLimitError(null)
@@ -207,8 +207,8 @@ UploadProps) {
 
   function handleFileDelete(key: string) {
     const newFiles = uploadedFiles.filter(items => items.key !== key)
-    setFiles(newFiles => newFiles.filter(items => items.key !== key))
-    setUploadedFiles(files => files.filter(items => items.key !== key))
+    setFiles(newFiles)
+    setUploadedFiles(newFiles)
     getUploadDoc(newFiles)
   }
 
