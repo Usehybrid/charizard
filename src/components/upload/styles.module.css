@@ -171,6 +171,7 @@
 }
 .fileUploadLimitError,
 .errorMsg {
+  margin-top: 10px;
   margin-bottom: 10px;
   color: var(--status-danger);
   text-align: left;
