@@ -42,6 +42,7 @@ export default function TableCustomCols({
   const [checkedState, setCheckedState] = React.useState<TableCustomColumns['checked_state']>([])
   const [search, setSearch] = React.useState('')
 
+  const originalApiStateRef = React.useRef<TableCustomColumns['checked_state']>([])
   const prevCheckedStateRef = React.useRef<TableCustomColumns['checked_state']>([])
 
   const disabledCols = table
@@ -54,16 +55,17 @@ export default function TableCustomCols({
         c.id !== DROPDOWN_COL_ID,
     )
 
+  // Update the API state effect
   React.useEffect(() => {
     if (isError || isPending) return
     if (columns?.checked_state) {
+      // Store original API state
+      originalApiStateRef.current = columns.checked_state
       setCheckedState(columns.checked_state)
       prevCheckedStateRef.current = columns.checked_state
-      // Also configure table here to sync initial state
       configureTable(columns.checked_state)
     }
   }, [columns?.checked_state, isPending, isError])
-
   const draggableCols = checkedState.filter(c => c.checked)
   const nonDraggableCols = checkedState.filter(c => !c.checked)
 
@@ -140,26 +142,11 @@ export default function TableCustomCols({
     }
   }
 
-  // Reset state when drawer closes without saving
+  // Update handleClose to use original API state
   const handleClose = () => {
-    // Reset to previous state
-    setCheckedState(prevCheckedStateRef.current)
-
-    // First reset all column visibility
-    table.getAllLeafColumns().forEach(col => {
-      if (
-        col.getCanHide() &&
-        !col.columnDef.enablePinning &&
-        col.id !== CHECKBOX_COL_ID &&
-        col.id !== RADIO_COL_ID &&
-        col.id !== DROPDOWN_COL_ID
-      ) {
-        col.toggleVisibility(false)
-      }
-    })
-
-    // Then reconfigure with previous state
-    configureTable(prevCheckedStateRef.current)
+    // Reset to original API state
+    setCheckedState(originalApiStateRef.current)
+    configureTable(originalApiStateRef.current)
     onClose()
   }
 
