@@ -188,24 +188,13 @@ export function Table({
   // used for checkbox visibility
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
   const [columnOrder, setColumnOrder] = React.useState<ColumnOrderState>([])
-  // const [columnPinning, setColumnPinning] = React.useState<ColumnPinningState>({
-  //   left: tableStyleConfig?.stickyIds
-  //     ? [RADIO_COL_ID, CHECKBOX_COL_ID, ...tableStyleConfig?.stickyIds]
-  //     : [RADIO_COL_ID, CHECKBOX_COL_ID],
-  //   right: [DROPDOWN_COL_ID],
-  // })
-
-  const [columnPinning, setColumnPinning] = React.useState<ColumnPinningState>(() => {
-    const leftPinned = tableStyleConfig?.stickyIds || []
-    return {
-      left: [
-        ...(rowSelectionConfig?.isCheckbox ? [CHECKBOX_COL_ID] : []),
-        ...(rowSelectionConfig?.isRadio ? [RADIO_COL_ID] : []),
-        ...leftPinned,
-      ],
-      right: [DROPDOWN_COL_ID],
-    }
+  const [columnPinning, setColumnPinning] = React.useState<ColumnPinningState>({
+    left: tableStyleConfig?.stickyIds
+      ? [RADIO_COL_ID, CHECKBOX_COL_ID, ...tableStyleConfig?.stickyIds]
+      : [RADIO_COL_ID, CHECKBOX_COL_ID],
+    right: [DROPDOWN_COL_ID],
   })
+
   const [rowSelection, setRowSelection] = React.useState({})
 
   // account for search state here itself
@@ -279,113 +268,50 @@ export function Table({
     setSelectedRows([...rows])
   }, [rowSelectionConfig?.rowSelection, rowSelection])
 
-  // const _columns = [
-  //   {
-  //     id: CHECKBOX_COL_ID,
-  //     header: (props: any) => (
-  //       <TableCheckbox
-  //         {...{
-  //           checked: props.table.getIsAllRowsSelected(),
-  //           indeterminate: props.table.getIsSomeRowsSelected(),
-  //           onChange: props.table.getToggleAllRowsSelectedHandler(),
-  //           row: props.header,
-  //           isHeader: true,
-  //         }}
-  //       />
-  //     ),
-  //     cell: ({row}: {row: any}) => (
-  //       <TableCheckbox
-  //         {...{
-  //           checked: row.getIsSelected(),
-  //           disabled: !row.getCanSelect(),
-  //           indeterminate: row.getIsSomeSelected(),
-  //           onChange: row.getToggleSelectedHandler(),
-  //           row,
-  //         }}
-  //       />
-  //     ),
-  //     size: 40,
-  //     enablePinning: false,
-  //   },
-  //   {
-  //     id: RADIO_COL_ID,
-  //     cell: ({row}: {row: any}) => (
-  //       <TableRadio
-  //         {...{
-  //           checked: row.getIsSelected(),
-  //           disabled: !row.getCanSelect(),
-  //           indeterminate: row.getIsSomeSelected(),
-  //           onChange: row.getToggleSelectedHandler(),
-
-  //           row,
-  //         }}
-  //       />
-  //     ),
-  //     size: 40,
-  //   },
-  //   ...columns,
-  //   {
-  //     id: DROPDOWN_COL_ID,
-  //     cell: (props: any) => (
-  //       <TableActions actionsConfig={actionsConfig} data={props.row.original} />
-  //     ),
-  //     header: 'Actions',
-  //     size: 70,
-  //     enablePinning: true,
-  //   },
-  // ]
-
   const _columns = [
-    ...(rowSelectionConfig
-      ? [
-          rowSelectionConfig.isCheckbox
-            ? {
-                id: CHECKBOX_COL_ID,
-                header: (props: any) => (
-                  <TableCheckbox
-                    {...{
-                      checked: props.table.getIsAllRowsSelected(),
-                      indeterminate: props.table.getIsSomeRowsSelected(),
-                      onChange: props.table.getToggleAllRowsSelectedHandler(),
-                      row: props.header,
-                      isHeader: true,
-                    }}
-                  />
-                ),
-                cell: ({row}: {row: any}) => (
-                  <TableCheckbox
-                    {...{
-                      checked: row.getIsSelected(),
-                      disabled: !row.getCanSelect(),
-                      indeterminate: row.getIsSomeSelected(),
-                      onChange: row.getToggleSelectedHandler(),
-                      row,
-                    }}
-                  />
-                ),
-                size: 40,
-                enablePinning: false,
-              }
-            : null,
-          rowSelectionConfig.isRadio
-            ? {
-                id: RADIO_COL_ID,
-                cell: ({row}: {row: any}) => (
-                  <TableRadio
-                    {...{
-                      checked: row.getIsSelected(),
-                      disabled: !row.getCanSelect(),
-                      indeterminate: row.getIsSomeSelected(),
-                      onChange: row.getToggleSelectedHandler(),
+    {
+      id: CHECKBOX_COL_ID,
+      header: (props: any) => (
+        <TableCheckbox
+          {...{
+            checked: props.table.getIsAllRowsSelected(),
+            indeterminate: props.table.getIsSomeRowsSelected(),
+            onChange: props.table.getToggleAllRowsSelectedHandler(),
+            row: props.header,
+            isHeader: true,
+          }}
+        />
+      ),
+      cell: ({row}: {row: any}) => (
+        <TableCheckbox
+          {...{
+            checked: row.getIsSelected(),
+            disabled: !row.getCanSelect(),
+            indeterminate: row.getIsSomeSelected(),
+            onChange: row.getToggleSelectedHandler(),
+            row,
+          }}
+        />
+      ),
+      size: 40,
+      enablePinning: false,
+    },
+    {
+      id: RADIO_COL_ID,
+      cell: ({row}: {row: any}) => (
+        <TableRadio
+          {...{
+            checked: row.getIsSelected(),
+            disabled: !row.getCanSelect(),
+            indeterminate: row.getIsSomeSelected(),
+            onChange: row.getToggleSelectedHandler(),
 
-                      row,
-                    }}
-                  />
-                ),
-              }
-            : null,
-        ].filter(Boolean)
-      : []),
+            row,
+          }}
+        />
+      ),
+      size: 40,
+    },
     ...columns,
     {
       id: DROPDOWN_COL_ID,
@@ -396,7 +322,7 @@ export function Table({
       size: 70,
       enablePinning: true,
     },
-  ].filter(Boolean)
+  ]
 
   const table = useReactTable({
     data,
@@ -441,16 +367,16 @@ export function Table({
   }, [])
 
   // hide checkbox column
-  // React.useLayoutEffect(() => {
-  //   if (isCheckbox) return
-  //   table.getColumn(CHECKBOX_COL_ID)?.toggleVisibility(false)
-  // }, [])
+  React.useLayoutEffect(() => {
+    if (isCheckbox) return
+    table.getColumn(CHECKBOX_COL_ID)?.toggleVisibility(false)
+  }, [])
 
-  // // hide checkbox column
-  // React.useLayoutEffect(() => {
-  //   if (isRadio) return
-  //   table.getColumn(RADIO_COL_ID)?.toggleVisibility(false)
-  // }, [])
+  // hide checkbox column
+  React.useLayoutEffect(() => {
+    if (isRadio) return
+    table.getColumn(RADIO_COL_ID)?.toggleVisibility(false)
+  }, [])
 
   // hide actions dropdown column
   React.useLayoutEffect(() => {

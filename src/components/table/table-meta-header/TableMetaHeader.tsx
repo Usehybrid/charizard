@@ -4,7 +4,7 @@ import classes from './table-meta-header.module.css'
 import TableExport from '../table-export/TableExport'
 import TableFiltersDrawer from '../table-filters-drawer/TableFiltersDrawer'
 import TableHeaderFilters from '../table-header-filters'
-import TableCustomCols from '../table-custom-cols/TableCustomColsV2'
+import TableCustomCols from '../table-custom-cols'
 import TableSelectedActions from '../table-selected-actions'
 import TableHeaderActions from '../table-header-filters/TableHeaderActions'
 import {TableProps} from '../Table'
@@ -142,7 +142,6 @@ export default function TableMetaHeader({
             table={table}
             isCheckbox={isCheckbox}
             isDropdownActions={isDropdownActions}
-            rowSelectionConfig={rowSelectionConfig}
           />
         )}
 
