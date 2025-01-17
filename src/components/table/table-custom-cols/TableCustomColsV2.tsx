@@ -69,16 +69,17 @@ export default function TableCustomCols({
 
   const configureTable = React.useCallback(
     (_checkedState: TableCustomColumns['checked_state']) => {
-      // First ensure checkbox/radio column is visible
+      // First ensure selection column is visible
       const selectionCol = table.getColumn(isCheckbox ? CHECKBOX_COL_ID : RADIO_COL_ID)
       if (selectionCol) {
         selectionCol.toggleVisibility(true)
       }
 
-      // Reset visibility only for configurable columns
+      // Reset visibility only for configurable columns that aren't pinned
       table.getAllLeafColumns().forEach(col => {
         if (
           col.getCanHide() &&
+          !col.columnDef.enablePinning && // Check for pinned columns
           col.id !== CHECKBOX_COL_ID &&
           col.id !== RADIO_COL_ID &&
           col.id !== DROPDOWN_COL_ID
@@ -90,26 +91,31 @@ export default function TableCustomCols({
       // Then set visibility based on checked state
       _checkedState.forEach(obj => {
         const col = table.getColumn(obj.id)
-        if (col) {
+        if (col && !col.columnDef.enablePinning) {
+          // Don't toggle pinned columns
           col.toggleVisibility(obj.checked)
         }
       })
 
-      // Set column order with selection column always first
+      // Set column order with selection column and pinned columns first
       table.setColumnOrder(() => {
         const orderableCols = _checkedState.map(obj => obj.id)
+        const pinnedCols = table
+          .getAllLeafColumns()
+          .filter(col => col.columnDef.enablePinning)
+          .map(col => col.id)
+
         const arr = [
           isCheckbox ? CHECKBOX_COL_ID : RADIO_COL_ID,
-          ...orderableCols,
+          ...pinnedCols,
+          ...orderableCols.filter(id => !pinnedCols.includes(id)),
           isDropdownActions ? DROPDOWN_COL_ID : undefined,
         ].filter(Boolean) as string[]
 
-        // Keep disabled columns in their original positions
+        // Handle other disabled columns
         disabledCols.forEach(col => {
-          if (col.getIndex() < arr.length) {
+          if (!col.columnDef.enablePinning && col.getIndex() < arr.length) {
             arr.splice(col.getIndex(), 0, col.id)
-          } else {
-            arr.push(col.id)
           }
         })
 
