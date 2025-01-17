@@ -54,18 +54,13 @@ export default function TableCustomCols({
         c.id !== DROPDOWN_COL_ID,
     )
 
-  // React.useEffect(() => {
-  //   if (isError || isPending) return
-  //   setCheckedState(columns?.checked_state || [])
-  //   configureTable(columns?.checked_state || [])
-  // }, [isPending, isError])
-
-  // Update checkedState when columns prop changes
   React.useEffect(() => {
     if (isError || isPending) return
     if (columns?.checked_state) {
       setCheckedState(columns.checked_state)
       prevCheckedStateRef.current = columns.checked_state
+      // Also configure table here to sync initial state
+      configureTable(columns.checked_state)
     }
   }, [columns?.checked_state, isPending, isError])
 
@@ -74,9 +69,20 @@ export default function TableCustomCols({
 
   const configureTable = React.useCallback(
     (_checkedState: TableCustomColumns['checked_state']) => {
-      // Reset visibility only for non-fixed columns that can be hidden
+      // First ensure checkbox/radio column is visible
+      const selectionCol = table.getColumn(isCheckbox ? CHECKBOX_COL_ID : RADIO_COL_ID)
+      if (selectionCol) {
+        selectionCol.toggleVisibility(true)
+      }
+
+      // Reset visibility only for configurable columns
       table.getAllLeafColumns().forEach(col => {
-        if (col.getCanHide() && !col.columnDef.enablePinning) {
+        if (
+          col.getCanHide() &&
+          col.id !== CHECKBOX_COL_ID &&
+          col.id !== RADIO_COL_ID &&
+          col.id !== DROPDOWN_COL_ID
+        ) {
           col.toggleVisibility(false)
         }
       })
@@ -84,13 +90,12 @@ export default function TableCustomCols({
       // Then set visibility based on checked state
       _checkedState.forEach(obj => {
         const col = table.getColumn(obj.id)
-        if (col && !col.columnDef.enablePinning) {
-          // Only toggle non-pinned columns
+        if (col) {
           col.toggleVisibility(obj.checked)
         }
       })
 
-      // Set column order
+      // Set column order with selection column always first
       table.setColumnOrder(() => {
         const orderableCols = _checkedState.map(obj => obj.id)
         const arr = [
@@ -99,8 +104,13 @@ export default function TableCustomCols({
           isDropdownActions ? DROPDOWN_COL_ID : undefined,
         ].filter(Boolean) as string[]
 
+        // Keep disabled columns in their original positions
         disabledCols.forEach(col => {
-          arr.splice(col.getIndex(), 0, col.id)
+          if (col.getIndex() < arr.length) {
+            arr.splice(col.getIndex(), 0, col.id)
+          } else {
+            arr.push(col.id)
+          }
         })
 
         return arr
@@ -112,6 +122,7 @@ export default function TableCustomCols({
   const handleSave = async () => {
     try {
       const currentCheckedState = [...checkedState]
+
       configureTable(currentCheckedState)
       await handleSaveColumns(currentCheckedState)
       prevCheckedStateRef.current = currentCheckedState
