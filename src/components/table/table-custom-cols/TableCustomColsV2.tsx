@@ -142,7 +142,23 @@ export default function TableCustomCols({
 
   // Reset state when drawer closes without saving
   const handleClose = () => {
+    // Reset to previous state
     setCheckedState(prevCheckedStateRef.current)
+
+    // First reset all column visibility
+    table.getAllLeafColumns().forEach(col => {
+      if (
+        col.getCanHide() &&
+        !col.columnDef.enablePinning &&
+        col.id !== CHECKBOX_COL_ID &&
+        col.id !== RADIO_COL_ID &&
+        col.id !== DROPDOWN_COL_ID
+      ) {
+        col.toggleVisibility(false)
+      }
+    })
+
+    // Then reconfigure with previous state
     configureTable(prevCheckedStateRef.current)
     onClose()
   }
