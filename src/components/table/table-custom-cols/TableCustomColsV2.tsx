@@ -72,12 +72,11 @@ export default function TableCustomCols({
   const draggableCols = checkedState.filter(c => c.checked)
   const nonDraggableCols = checkedState.filter(c => !c.checked)
 
-  // Configure table columns visibility and order
   const configureTable = React.useCallback(
     (_checkedState: TableCustomColumns['checked_state']) => {
-      // First reset all column visibility
+      // Reset visibility only for non-fixed columns that can be hidden
       table.getAllLeafColumns().forEach(col => {
-        if (col.getCanHide()) {
+        if (col.getCanHide() && !col.columnDef.enablePinning) {
           col.toggleVisibility(false)
         }
       })
@@ -85,7 +84,8 @@ export default function TableCustomCols({
       // Then set visibility based on checked state
       _checkedState.forEach(obj => {
         const col = table.getColumn(obj.id)
-        if (col) {
+        if (col && !col.columnDef.enablePinning) {
+          // Only toggle non-pinned columns
           col.toggleVisibility(obj.checked)
         }
       })
