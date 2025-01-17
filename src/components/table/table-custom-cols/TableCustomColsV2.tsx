@@ -74,11 +74,17 @@ export default function TableCustomCols({
 
   const configureTable = React.useCallback(
     (_checkedState: TableCustomColumns['checked_state']) => {
-      // First ensure selection column is visible
       if (rowSelectionConfig) {
-        const selectionCol = table.getColumn(isCheckbox ? CHECKBOX_COL_ID : RADIO_COL_ID)
-        if (selectionCol) {
-          selectionCol.toggleVisibility(true)
+        const columnId = rowSelectionConfig.isCheckbox
+          ? CHECKBOX_COL_ID
+          : rowSelectionConfig.isRadio
+          ? RADIO_COL_ID
+          : null
+        if (columnId) {
+          const selectionCol = table.getColumn(columnId)
+          if (selectionCol) {
+            selectionCol.toggleVisibility(true)
+          }
         }
       }
 
@@ -113,8 +119,15 @@ export default function TableCustomCols({
           .map(col => col.id)
 
         const arr = [
-          // Only include selection columns if rowSelectionConfig exists
-          ...(rowSelectionConfig ? [isCheckbox ? CHECKBOX_COL_ID : RADIO_COL_ID] : []),
+          ...(rowSelectionConfig
+            ? [
+                rowSelectionConfig.isCheckbox
+                  ? CHECKBOX_COL_ID
+                  : rowSelectionConfig.isRadio
+                  ? RADIO_COL_ID
+                  : null,
+              ].filter(Boolean)
+            : []),
           ...pinnedCols,
           ...orderableCols.filter(id => !pinnedCols.includes(id)),
           isDropdownActions ? DROPDOWN_COL_ID : undefined,
