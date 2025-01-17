@@ -12,9 +12,10 @@ import {CHECKBOX_COL_ID, DROPDOWN_COL_ID, RADIO_COL_ID} from '../constants'
 import {Loader} from '../../loader'
 import {DrawerV2} from '../../drawer-v2'
 import {BUTTON_VARIANT} from '../../button'
-import type {CustomColCheckedState, TableCustomColumns} from '../types'
 import {GroupedSelection} from './GroupedSelection'
 import {useDisclosure} from '../../../hooks'
+import type {TableProps} from '../Table'
+import type {CustomColCheckedState, TableCustomColumns} from '../types'
 
 interface TableCustomColsProps {
   customColumnConfig: {
@@ -28,6 +29,7 @@ interface TableCustomColsProps {
   table: Table<any>
   isCheckbox?: boolean
   isDropdownActions?: boolean
+  rowSelectionConfig: TableProps['rowSelectionConfig']
 }
 export type TableCustomColsVariant = 'default' | 'selection'
 
@@ -36,6 +38,7 @@ export default function TableCustomCols({
   table,
   isCheckbox,
   isDropdownActions,
+  rowSelectionConfig,
 }: TableCustomColsProps) {
   const {isOpen, onOpen, onClose} = useDisclosure()
   const {columns, isPending, isError, handleSaveColumns} = customColumnConfig
@@ -72,9 +75,11 @@ export default function TableCustomCols({
   const configureTable = React.useCallback(
     (_checkedState: TableCustomColumns['checked_state']) => {
       // First ensure selection column is visible
-      const selectionCol = table.getColumn(isCheckbox ? CHECKBOX_COL_ID : RADIO_COL_ID)
-      if (selectionCol) {
-        selectionCol.toggleVisibility(true)
+      if (rowSelectionConfig) {
+        const selectionCol = table.getColumn(isCheckbox ? CHECKBOX_COL_ID : RADIO_COL_ID)
+        if (selectionCol) {
+          selectionCol.toggleVisibility(true)
+        }
       }
 
       // Reset visibility only for configurable columns that aren't pinned
@@ -108,7 +113,8 @@ export default function TableCustomCols({
           .map(col => col.id)
 
         const arr = [
-          isCheckbox ? CHECKBOX_COL_ID : RADIO_COL_ID,
+          // Only include selection columns if rowSelectionConfig exists
+          ...(rowSelectionConfig ? [isCheckbox ? CHECKBOX_COL_ID : RADIO_COL_ID] : []),
           ...pinnedCols,
           ...orderableCols.filter(id => !pinnedCols.includes(id)),
           isDropdownActions ? DROPDOWN_COL_ID : undefined,

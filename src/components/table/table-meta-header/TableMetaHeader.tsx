@@ -142,6 +142,7 @@ export default function TableMetaHeader({
             table={table}
             isCheckbox={isCheckbox}
             isDropdownActions={isDropdownActions}
+            rowSelectionConfig={rowSelectionConfig}
           />
         )}
 
