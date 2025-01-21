@@ -24,13 +24,21 @@ export default function TableHeaderDateRangeFilter({
   filterDispatch,
   resetFilters,
 }: TableHeaderFilterProps) {
-  const defaultValue = tableFilter?.values ? (tableFilter?.values as string)?.split(',') : undefined
-  const [initialLoaded, setInitialLoaded] = React.useState(!!defaultValue)
+  const [initialLoaded, setInitialLoaded] = React.useState(false)
+  const values = tableFilter?.values ? (tableFilter.values as string)?.split(',') : []
+
   const {period, from, to, handleDateChange} = useDateRangePicker(
     0,
-    defaultValue?.[0],
-    defaultValue?.[1],
+    values[0] || undefined,
+    values[1] || undefined,
   )
+
+  React.useEffect(() => {
+    if (!tableFilter?.values) {
+      setInitialLoaded(false)
+      handleDateChange(undefined)
+    }
+  }, [tableFilter])
 
   React.useEffect(() => {
     if (initialLoaded) {
