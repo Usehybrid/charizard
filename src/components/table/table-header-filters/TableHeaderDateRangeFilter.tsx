@@ -38,7 +38,7 @@ export default function TableHeaderDateRangeFilter({
         resetFilters(filter.key, filterDispatch)
       }
     }
-  }, [filter.key, resetFilters, filterDispatch])
+  }, [])
 
   React.useEffect(() => {
     if (initialLoaded) {
