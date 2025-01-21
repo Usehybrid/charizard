@@ -1,11 +1,11 @@
 import * as React from 'react'
+import classes from './styles.module.css'
+import {TableStore} from '../store'
 import {BUTTON_SIZE} from '../../button'
 import {DateRangePicker} from '../../date-picker'
 import {DateRangePickerProps} from '../../date-picker/type'
-import {TableStore} from '../store'
-import type {FilterOptions, InternalTableFilters} from '../types'
-import classes from './styles.module.css'
 import {useDateRangePicker} from '../../../hooks'
+import type {FilterOptions, InternalTableFilters} from '../types'
 
 interface TableHeaderFilterProps {
   filter: FilterOptions
@@ -24,7 +24,10 @@ export default function TableHeaderDateRangeFilter({
   filterDispatch,
   resetFilters,
 }: TableHeaderFilterProps) {
-  const [initialLoaded, setInitialLoaded] = React.useState(false)
+  const [initialLoaded, setInitialLoaded] = React.useState(() => {
+    return !!tableFilter?.values && tableFilter.values !== ''
+  })
+
   const values = tableFilter?.values ? (tableFilter.values as string)?.split(',') : []
 
   const {period, from, to, handleDateChange} = useDateRangePicker(
@@ -55,12 +58,11 @@ export default function TableHeaderDateRangeFilter({
         handleDateChange(value)
       }}
       value={{
-        from: initialLoaded && period.from ? period.from : undefined,
-        to: initialLoaded && period.to ? period.to : undefined,
+        from: initialLoaded ? period.from : undefined,
+        to: initialLoaded ? period.to : undefined,
       }}
       onReset={() => {
         setInitialLoaded(false)
-        handleDateChange(undefined)
         resetFilters(tableFilter?.key, filterDispatch)
       }}
       customClasses={{
