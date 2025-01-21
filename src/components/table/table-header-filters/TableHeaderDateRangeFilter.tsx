@@ -55,11 +55,12 @@ export default function TableHeaderDateRangeFilter({
         handleDateChange(value)
       }}
       value={{
-        from: initialLoaded ? period.from : undefined,
-        to: initialLoaded ? period.to : undefined,
+        from: initialLoaded && period.from ? period.from : undefined,
+        to: initialLoaded && period.to ? period.to : undefined,
       }}
       onReset={() => {
         setInitialLoaded(false)
+        handleDateChange(undefined)
         resetFilters(tableFilter?.key, filterDispatch)
       }}
       customClasses={{
