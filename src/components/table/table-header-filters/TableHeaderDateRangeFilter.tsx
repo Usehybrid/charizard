@@ -33,14 +33,6 @@ export default function TableHeaderDateRangeFilter({
   )
 
   React.useEffect(() => {
-    return () => {
-      if (filter.key === 'filter_date_range') {
-        resetFilters(filter.key, filterDispatch)
-      }
-    }
-  }, [])
-
-  React.useEffect(() => {
     if (initialLoaded) {
       addFilters(filter.key, [from, to].filter(Boolean).join(','), filterDispatch)
     }
