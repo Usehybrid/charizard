@@ -26,8 +26,7 @@ type TBaseQuery = {
   filters: Record<string, any>
 }
 
-// Common table query store type
-export interface TableStore<TQuery> {
+interface TableStore<TQuery> {
   query: TQuery
   dispatch: (action: {type: TABLE_ACTION_TYPES; payload: any | null}) => void
 }
