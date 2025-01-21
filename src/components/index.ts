@@ -8,7 +8,6 @@ export * from '../hooks'
 export * from '../utils'
 
 export * from './empty-state'
-export * from './table-legacy'
 export * from './search'
 export * from './drawer'
 export * from './input'
