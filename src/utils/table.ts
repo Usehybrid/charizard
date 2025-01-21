@@ -133,7 +133,7 @@ const tableQueryReducer = <TQuery extends TBaseQuery>(
         ...query,
         filters: {
           ...query.filters,
-          duration: payload,
+          filter_date_range: payload,
         },
       }
     case TABLE_ACTION_TYPES.SELECTOR_FILTER:
