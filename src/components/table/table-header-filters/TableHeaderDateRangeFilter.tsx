@@ -24,10 +24,7 @@ export default function TableHeaderDateRangeFilter({
   filterDispatch,
   resetFilters,
 }: TableHeaderFilterProps) {
-  const [initialLoaded, setInitialLoaded] = React.useState(() => {
-    return !!tableFilter?.values && tableFilter.values !== ''
-  })
-
+  const [initialLoaded, setInitialLoaded] = React.useState(false)
   const values = tableFilter?.values ? (tableFilter.values as string)?.split(',') : []
 
   const {period, from, to, handleDateChange} = useDateRangePicker(
@@ -36,12 +33,33 @@ export default function TableHeaderDateRangeFilter({
     values[1] || undefined,
   )
 
+  console.log('table internal', tableFilter?.values)
+
   React.useEffect(() => {
     if (!tableFilter?.values) {
       setInitialLoaded(false)
       handleDateChange(undefined)
     }
   }, [tableFilter])
+
+  // Add effect to track tableFilter changes
+  React.useEffect(() => {
+    console.log('TableFilter changed:', {
+      tableFilter,
+      values,
+      initialLoaded,
+    })
+
+    // If we have values in tableFilter, set initialLoaded to true
+    if (tableFilter?.values && !initialLoaded) {
+      setInitialLoaded(true)
+      // Also update the date picker with these values
+      handleDateChange({
+        from: values[0] ? new Date(values[0]) : undefined,
+        to: values[1] ? new Date(values[1]) : undefined,
+      })
+    }
+  }, [tableFilter?.values])
 
   React.useEffect(() => {
     if (initialLoaded) {
