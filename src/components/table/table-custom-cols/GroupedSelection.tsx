@@ -7,31 +7,23 @@ interface GroupedSelectionProps {
   checkedState: CustomColCheckedState[]
   setCheckedState: React.Dispatch<React.SetStateAction<CustomColCheckedState[]>>
   search: string
-  onVisibilityChange?: (columnId: string, isVisible: boolean) => void
 }
 
-export function GroupedSelection({
-  checkedState,
-  setCheckedState,
-  search,
-  onVisibilityChange,
-}: GroupedSelectionProps) {
-  // Keep track of initial state
-  const initialStateRef = React.useRef<CustomColCheckedState[]>([])
-
-  // Initialize reference on mount
-  React.useEffect(() => {
-    initialStateRef.current = checkedState
-  }, [])
-
-  // Sync with initial state when component unmounts
-  React.useEffect(() => {
-    return () => {
-      if (initialStateRef.current.length) {
-        setCheckedState(initialStateRef.current)
-      }
-    }
-  }, [])
+export function GroupedSelection({checkedState, setCheckedState, search}: GroupedSelectionProps) {
+  // Handle local state for checkboxes within the drawer
+  const handleCheckboxChange = React.useCallback(
+    (id: string, checked: boolean) => {
+      setCheckedState(prev => {
+        const newState = [...prev]
+        const index = newState.findIndex(item => item.id === id)
+        if (index !== -1) {
+          newState[index] = {...newState[index], checked}
+        }
+        return newState
+      })
+    },
+    [setCheckedState],
+  )
 
   const groupedItems = React.useMemo(() => {
     const groups: Record<string, CustomColCheckedState[]> = {}
@@ -57,22 +49,6 @@ export function GroupedSelection({
     })
     return filtered
   }, [groupedItems, search])
-
-  // Handle checkbox changes with state restoration capability
-  const handleCheckboxChange = React.useCallback(
-    (id: string, checked: boolean) => {
-      setCheckedState(prev => {
-        const newState = [...prev]
-        const index = newState.findIndex(item => item.id === id)
-        if (index !== -1) {
-          newState[index] = {...newState[index], checked}
-          onVisibilityChange?.(id, checked)
-        }
-        return newState
-      })
-    },
-    [setCheckedState, onVisibilityChange],
-  )
 
   return (
     <>

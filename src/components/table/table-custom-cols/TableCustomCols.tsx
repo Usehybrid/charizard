@@ -15,7 +15,7 @@ import {BUTTON_VARIANT} from '../../button'
 import type {CustomColCheckedState, TableCustomColumns} from '../types'
 import {GroupedSelection} from './GroupedSelection'
 import {useDisclosure} from '../../../hooks'
-import {useColumnVisibility} from './grouped-utils'
+import {useDrawerState} from './grouped-utils'
 
 interface TableCustomColsProps {
   customColumnConfig: {
@@ -90,27 +90,58 @@ export default function TableCustomCols({
     onClose()
   }
 
+  // Only initialize drawer state if we're using the selection variant
+  const {
+    drawerState,
+    setDrawerState,
+    handleCancel,
+    handleSave: handleDrawerSave,
+  } = customColumnConfig?.variant === 'selection'
+    ? useDrawerState({
+        table,
+        columns,
+        isPending,
+        isError,
+        handleSaveColumns,
+      })
+    : {
+        drawerState: [],
+        setDrawerState: () => {},
+        handleCancel: () => {},
+        handleSave: () => Promise.resolve(),
+      }
+
   const filteredNonDragCols = nonDraggableCols.filter(c =>
     c.label.toLowerCase().includes(search.toLowerCase()),
   )
 
-  const footerBtn = [
-    {
-      btnText: 'Cancel',
-      onClick: onClose,
-      variant: BUTTON_VARIANT.TERTIARY,
-    },
-    {
-      btnText: 'Save',
-      onClick: handleSave,
-    },
-  ]
+  const footerButtons = React.useMemo(() => {
+    if (customColumnConfig?.variant === 'selection') {
+      return [
+        {
+          btnText: 'Cancel',
+          onClick: handleCancel,
+          variant: BUTTON_VARIANT.TERTIARY,
+        },
+        {
+          btnText: 'Save',
+          onClick: handleDrawerSave,
+        },
+      ]
+    }
 
-  const {handleColumnVisibilityChange} = useColumnVisibility({
-    table,
-    checkedState,
-    setCheckedState,
-  })
+    return [
+      {
+        btnText: 'Cancel',
+        onClick: onClose,
+        variant: BUTTON_VARIANT.TERTIARY,
+      },
+      {
+        btnText: 'Save',
+        onClick: handleSave,
+      },
+    ]
+  }, [])
 
   return (
     <>
@@ -119,7 +150,13 @@ export default function TableCustomCols({
       </button>
       <Portal>
         {isOpen && (
-          <DrawerV2 isOpen={isOpen} title="Columns" onClose={onClose} size="sm" buttons={footerBtn}>
+          <DrawerV2
+            isOpen={isOpen}
+            title="Columns"
+            onClose={onClose}
+            size="sm"
+            buttons={footerButtons}
+          >
             {isError ? (
               <div className={classes.error}>Something went wrong, please try again later.</div>
             ) : isPending ? (
@@ -137,10 +174,9 @@ export default function TableCustomCols({
                 </div>
                 {customColumnConfig?.variant === 'selection' ? (
                   <GroupedSelection
-                    checkedState={checkedState}
-                    setCheckedState={setCheckedState}
+                    checkedState={drawerState}
+                    setCheckedState={setDrawerState}
                     search={search}
-                    onVisibilityChange={handleColumnVisibilityChange}
                   />
                 ) : (
                   <>
