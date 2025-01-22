@@ -144,6 +144,10 @@ export interface TableProps {
     isLegacy?: boolean
   }
   customActionItems?: JSX.Element[]
+  visibilityConfig?: {
+    columnVisibility: VisibilityState
+    setColumnVisibility: React.Dispatch<React.SetStateAction<VisibilityState>>
+  }
 }
 
 // todo
@@ -182,6 +186,7 @@ export function Table({
   customColumnConfig,
   exportConfig,
   customActionItems,
+  visibilityConfig,
 }: TableProps) {
   const initialRenderRef = React.useRef(true)
   const [sorting, setSorting] = React.useState<SortingState>([])
@@ -331,14 +336,14 @@ export function Table({
     columns: _columns,
     state: {
       sorting,
-      columnVisibility,
+      columnVisibility: visibilityConfig?.columnVisibility || columnVisibility,
       columnOrder,
       rowSelection: rowSelectionConfig?.rowSelection || rowSelection,
       columnPinning,
     },
     manualSorting: true,
     onSortingChange: setSorting,
-    onColumnVisibilityChange: setColumnVisibility,
+    onColumnVisibilityChange: visibilityConfig?.setColumnVisibility || setColumnVisibility,
     onColumnOrderChange: setColumnOrder,
     onColumnPinningChange: setColumnPinning,
     onRowSelectionChange: rowSelectionConfig?.setRowSelection || setRowSelection,
@@ -390,10 +395,6 @@ export function Table({
     if (!rowSelectionConfig?.clearOnSearch) return
     setRowSelection({})
   }, [searchConfig?.search])
-
-  console.log('internal complete table', table)
-  console.log('internal complete table A flat', table.getVisibleFlatColumns())
-  console.log('internal complete table B leaf', table.getVisibleLeafColumns())
 
   return (
     <div

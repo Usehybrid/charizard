@@ -22,7 +22,6 @@ export function GroupedSelection({checkedState, setCheckedState, search}: Groupe
     })
     return groups
   }, [checkedState])
-  console.log('internal groupedItems', groupedItems)
 
   const filteredGroups = React.useMemo(() => {
     const filtered: Record<string, CustomColCheckedState[]> = {}
