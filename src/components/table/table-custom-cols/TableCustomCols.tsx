@@ -83,10 +83,26 @@ export default function TableCustomCols({
     })
   }
 
+  // const handleSave = () => {
+  //   configureTable(checkedState)
+  //   handleSaveColumns(checkedState)
+  //   onClose()
+  // }
+
+  const groupedSelectionRef = React.useRef<{applyChanges: () => void}>(null)
+
   const handleSave = () => {
-    configureTable(checkedState)
-    handleSaveColumns(checkedState)
-    onClose()
+    if (customColumnConfig?.variant === 'selection') {
+      // Get changes from GroupedSelection
+      groupedSelectionRef.current?.applyChanges()
+      // Then save
+      handleSaveColumns(checkedState)
+      onClose()
+    } else {
+      configureTable(checkedState)
+      handleSaveColumns(checkedState)
+      onClose()
+    }
   }
 
   const filteredNonDragCols = nonDraggableCols.filter(c =>
@@ -133,7 +149,7 @@ export default function TableCustomCols({
                     checkedState={checkedState}
                     setCheckedState={setCheckedState}
                     search={search}
-                    table={table}
+                    ref={groupedSelectionRef}
                   />
                 ) : (
                   <>
