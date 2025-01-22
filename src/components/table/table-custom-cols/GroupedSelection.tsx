@@ -10,9 +10,17 @@ interface GroupedSelectionProps {
 }
 
 export function GroupedSelection({checkedState, setCheckedState, search}: GroupedSelectionProps) {
+  // Local state for drawer changes
+  const [localCheckedState, setLocalCheckedState] = React.useState<CustomColCheckedState[]>([])
+
+  // Initialize local state when drawer opens
+  React.useEffect(() => {
+    setLocalCheckedState(checkedState)
+  }, [checkedState])
+
   const groupedItems = React.useMemo(() => {
     const groups: Record<string, CustomColCheckedState[]> = {}
-    checkedState.forEach(item => {
+    localCheckedState.forEach(item => {
       const group = item.group || 'Ungrouped'
       if (!groups[group]) {
         groups[group] = []
@@ -20,7 +28,7 @@ export function GroupedSelection({checkedState, setCheckedState, search}: Groupe
       groups[group].push(item)
     })
     return groups
-  }, [checkedState])
+  }, [localCheckedState])
 
   const filteredGroups = React.useMemo(() => {
     const filtered: Record<string, CustomColCheckedState[]> = {}
@@ -35,6 +43,17 @@ export function GroupedSelection({checkedState, setCheckedState, search}: Groupe
     return filtered
   }, [groupedItems, search])
 
+  // We'll use this to update both local and parent state
+  const handleLocalStateUpdate: React.Dispatch<React.SetStateAction<CustomColCheckedState[]>> =
+    React.useCallback(
+      value => {
+        const newState = typeof value === 'function' ? value(localCheckedState) : value
+        setLocalCheckedState(newState)
+        setCheckedState(newState)
+      },
+      [setCheckedState, localCheckedState],
+    )
+
   return (
     <>
       {Object.entries(filteredGroups).map(([group, items]) => (
@@ -46,7 +65,7 @@ export function GroupedSelection({checkedState, setCheckedState, search}: Groupe
                 label={item.label}
                 id={item.id}
                 checked={item.checked}
-                setCheckedState={setCheckedState}
+                setCheckedState={handleLocalStateUpdate}
               />
             </div>
           ))}
