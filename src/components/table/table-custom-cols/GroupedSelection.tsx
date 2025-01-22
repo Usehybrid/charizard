@@ -1,5 +1,4 @@
 import * as React from 'react'
-import useDeepCompareEffect from 'use-deep-compare-effect'
 import GroupedCustomColCheckbox from './GroupedCustomColCheckbox'
 import classes from './table-custom-cols.module.css'
 import {CustomColCheckedState} from '../types'
@@ -23,6 +22,15 @@ export function GroupedSelection({
   // Initialize reference on mount
   React.useEffect(() => {
     initialStateRef.current = checkedState
+  }, [])
+
+  // Sync with initial state when component unmounts
+  React.useEffect(() => {
+    return () => {
+      if (initialStateRef.current.length) {
+        setCheckedState(initialStateRef.current)
+      }
+    }
   }, [])
 
   const groupedItems = React.useMemo(() => {
@@ -65,15 +73,6 @@ export function GroupedSelection({
     },
     [setCheckedState, onVisibilityChange],
   )
-
-  // Sync with initial state when component unmounts
-  useDeepCompareEffect(() => {
-    return () => {
-      if (initialStateRef.current.length) {
-        setCheckedState(initialStateRef.current)
-      }
-    }
-  }, [])
 
   return (
     <>
