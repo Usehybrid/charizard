@@ -1,5 +1,5 @@
 import * as React from 'react'
-import GroupedCustomColCheckbox from './GroupedCustomColCheckbox'
+import CustomColCheckbox from './CustomColCheckbox'
 import classes from './table-custom-cols.module.css'
 import {CustomColCheckedState} from '../types'
 
@@ -10,21 +10,6 @@ interface GroupedSelectionProps {
 }
 
 export function GroupedSelection({checkedState, setCheckedState, search}: GroupedSelectionProps) {
-  // Handle local state for checkboxes within the drawer
-  const handleCheckboxChange = React.useCallback(
-    (id: string, checked: boolean) => {
-      setCheckedState(prev => {
-        const newState = [...prev]
-        const index = newState.findIndex(item => item.id === id)
-        if (index !== -1) {
-          newState[index] = {...newState[index], checked}
-        }
-        return newState
-      })
-    },
-    [setCheckedState],
-  )
-
   const groupedItems = React.useMemo(() => {
     const groups: Record<string, CustomColCheckedState[]> = {}
     checkedState.forEach(item => {
@@ -57,11 +42,11 @@ export function GroupedSelection({checkedState, setCheckedState, search}: Groupe
           <h3 className={classes.groupTitle}>{group}</h3>
           {items.map(item => (
             <div key={item.id} className={classes.option}>
-              <GroupedCustomColCheckbox
+              <CustomColCheckbox
                 label={item.label}
                 id={item.id}
                 checked={item.checked}
-                onCheckChange={checked => handleCheckboxChange(item.id, checked)}
+                setCheckedState={setCheckedState}
               />
             </div>
           ))}
