@@ -33,8 +33,6 @@ export default function TableHeaderDateRangeFilter({
     values[1] || undefined,
   )
 
-  console.log('table internal', tableFilter?.values)
-
   React.useEffect(() => {
     if (!tableFilter?.values) {
       setInitialLoaded(false)
@@ -44,12 +42,6 @@ export default function TableHeaderDateRangeFilter({
 
   // Add effect to track tableFilter changes
   React.useEffect(() => {
-    console.log('TableFilter changed:', {
-      tableFilter,
-      values,
-      initialLoaded,
-    })
-
     // If we have values in tableFilter, set initialLoaded to true
     if (tableFilter?.values && !initialLoaded) {
       setInitialLoaded(true)

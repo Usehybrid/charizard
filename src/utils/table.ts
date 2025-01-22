@@ -1,4 +1,7 @@
+import * as React from 'react'
+import useDeepCompareEffect from 'use-deep-compare-effect'
 import {create} from 'zustand'
+import {Table} from '@tanstack/react-table'
 
 export const DEFAULT_PAGE = 0
 export const DEFAULT_LIMIT = 25
@@ -243,4 +246,47 @@ export const getTableNameInfo = (value: TableNameValueString): TableNameValue | 
     }
   }
   return undefined
+}
+
+interface UseStickyColumnsProps {
+  table: Table<any>
+  stickyIds?: string[]
+  formattedColumns: any[]
+}
+
+export function useStickyColumns({table, stickyIds, formattedColumns}: UseStickyColumnsProps) {
+  // Track if columns have been initialized
+  const columnsInitialized = React.useRef(false)
+
+  useDeepCompareEffect(() => {
+    if (!formattedColumns.length || !stickyIds?.length) return
+
+    // Get the first visible column
+    const firstVisibleColumn = formattedColumns.find(col => table.getColumn(col.id)?.getIsVisible())
+
+    if (firstVisibleColumn) {
+      // Update column pinning
+      table.setColumnPinning(state => ({
+        ...state,
+        left: [firstVisibleColumn.id, ...stickyIds.filter(id => id !== firstVisibleColumn.id)],
+      }))
+
+      // Enable pinning for first column
+      if (firstVisibleColumn.id) {
+        const column = table.getColumn(firstVisibleColumn.id)
+        if (column) {
+          column.columnDef.enablePinning = true
+        }
+      }
+    }
+
+    columnsInitialized.current = true
+  }, [formattedColumns, stickyIds, table])
+
+  // Reset on unmount
+  React.useEffect(() => {
+    return () => {
+      columnsInitialized.current = false
+    }
+  }, [])
 }

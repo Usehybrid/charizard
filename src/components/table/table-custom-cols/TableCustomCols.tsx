@@ -15,6 +15,7 @@ import {BUTTON_VARIANT} from '../../button'
 import type {CustomColCheckedState, TableCustomColumns} from '../types'
 import {GroupedSelection} from './GroupedSelection'
 import {useDisclosure} from '../../../hooks'
+import {useColumnVisibility} from './grouped-utils'
 
 interface TableCustomColsProps {
   customColumnConfig: {
@@ -105,6 +106,12 @@ export default function TableCustomCols({
     },
   ]
 
+  const {handleColumnVisibilityChange} = useColumnVisibility({
+    table,
+    checkedState,
+    setCheckedState,
+  })
+
   return (
     <>
       <button onClick={onOpen} className={clsx('zap-reset-btn', classes.actionCommon)}>
@@ -133,6 +140,7 @@ export default function TableCustomCols({
                     checkedState={checkedState}
                     setCheckedState={setCheckedState}
                     search={search}
+                    onVisibilityChange={handleColumnVisibilityChange}
                   />
                 ) : (
                   <>
