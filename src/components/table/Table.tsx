@@ -148,6 +148,10 @@ export interface TableProps {
     columnVisibility: VisibilityState
     setColumnVisibility: React.Dispatch<React.SetStateAction<VisibilityState>>
   }
+  pinningConfig?: {
+    columnPinning: ColumnPinningState
+    setColumnPinning: React.Dispatch<React.SetStateAction<ColumnPinningState>>
+  }
 }
 
 // todo
@@ -187,6 +191,7 @@ export function Table({
   exportConfig,
   customActionItems,
   visibilityConfig,
+  pinningConfig,
 }: TableProps) {
   const initialRenderRef = React.useRef(true)
   const [sorting, setSorting] = React.useState<SortingState>([])
@@ -337,13 +342,13 @@ export function Table({
       columnVisibility: visibilityConfig?.columnVisibility || columnVisibility,
       columnOrder,
       rowSelection: rowSelectionConfig?.rowSelection || rowSelection,
-      columnPinning,
+      columnPinning: pinningConfig?.columnPinning || columnPinning,
     },
     manualSorting: true,
     onSortingChange: setSorting,
     onColumnVisibilityChange: visibilityConfig?.setColumnVisibility || setColumnVisibility,
     onColumnOrderChange: setColumnOrder,
-    onColumnPinningChange: setColumnPinning,
+    onColumnPinningChange: pinningConfig?.setColumnPinning || setColumnPinning,
     onRowSelectionChange: rowSelectionConfig?.setRowSelection || setRowSelection,
     enableRowSelection: true,
     enableMultiRowSelection: isRadio ? false : true,
