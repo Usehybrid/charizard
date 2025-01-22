@@ -324,6 +324,8 @@ export function Table({
     },
   ]
 
+  console.log('internal table 1 column visibility', columnVisibility)
+
   const table = useReactTable({
     data,
     columns: _columns,
@@ -388,6 +390,10 @@ export function Table({
     if (!rowSelectionConfig?.clearOnSearch) return
     setRowSelection({})
   }, [searchConfig?.search])
+
+  console.log('internal complete table', table)
+  console.log('internal complete table A flat', table.getVisibleFlatColumns())
+  console.log('internal complete table B leaf', table.getVisibleLeafColumns())
 
   return (
     <div
@@ -625,10 +631,6 @@ const getCommonPinningStyles = (
   const rightShadow = 'drop-shadow(-2px 0px 2px rgba(0, 0, 0, 0.07))'
 
   return {
-    // borderRight:
-    //   isLastLeftPinnedColumn && showLeftShadow ? '1px solid var(--stroke-border)' : undefined,
-    // borderLeft:
-    //   isFirstRightPinnedColumn && showRightShadow ? '1px solid var(--stroke-border)' : undefined,
     filter:
       isLastLeftPinnedColumn && showLeftShadow
         ? leftShadow
@@ -638,7 +640,6 @@ const getCommonPinningStyles = (
     left: isPinned === 'left' ? `${column.getStart('left')}px` : undefined,
     right: isPinned === 'right' ? `${column.getAfter('right')}px` : undefined,
     position: isPinned ? 'sticky' : undefined,
-    // zIndex: isPinned ? (column.id === DROPDOWN_COL_ID ? 4 : 2) : 0,
     zIndex: isPinned ? 2 : 0,
     backgroundColor: isHeader ? `var(--fill-highlight)` : '#ffffff',
     marginRight: isLastLeftPinnedColumn ? '20px' : undefined,
