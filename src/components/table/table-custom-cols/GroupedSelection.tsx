@@ -10,7 +10,6 @@ interface GroupedSelectionProps {
 }
 
 export function GroupedSelection({checkedState, setCheckedState, search}: GroupedSelectionProps) {
-  console.log('internal checked state', checkedState)
   const groupedItems = React.useMemo(() => {
     const groups: Record<string, CustomColCheckedState[]> = {}
     checkedState.forEach(item => {
@@ -35,7 +34,6 @@ export function GroupedSelection({checkedState, setCheckedState, search}: Groupe
     })
     return filtered
   }, [groupedItems, search])
-  console.log('internal filteredGroups', filteredGroups)
 
   return (
     <>

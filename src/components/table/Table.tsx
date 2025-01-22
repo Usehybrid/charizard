@@ -329,8 +329,6 @@ export function Table({
     },
   ]
 
-  console.log('internal table 1 column visibility', columnVisibility)
-
   const table = useReactTable({
     data,
     columns: _columns,
