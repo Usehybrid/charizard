@@ -2,35 +2,38 @@ import * as React from 'react'
 import CustomColCheckbox from './CustomColCheckbox'
 import classes from './table-custom-cols.module.css'
 import {CustomColCheckedState} from '../types'
+import {Table} from '@tanstack/react-table'
 
 interface GroupedSelectionProps {
   checkedState: CustomColCheckedState[]
   setCheckedState: React.Dispatch<React.SetStateAction<CustomColCheckedState[]>>
   search: string
+  table: Table<any> // Add table prop
 }
 
-export function GroupedSelection({checkedState, setCheckedState, search}: GroupedSelectionProps) {
-  // Keep track of the source of truth for checked state
-  const currentStateRef = React.useRef<CustomColCheckedState[]>([])
+export function GroupedSelection({
+  checkedState,
+  setCheckedState,
+  search,
+  table,
+}: GroupedSelectionProps) {
+  // Handle checkbox changes
+  const handleColumnToggle = React.useCallback(
+    (id: string, checked: boolean) => {
+      // Update checkedState
+      setCheckedState(prev => {
+        const newState = prev.map(item => (item.id === id ? {...item, checked} : item))
 
-  React.useEffect(() => {
-    // Update ref when checked state changes from parent
-    if (JSON.stringify(currentStateRef.current) !== JSON.stringify(checkedState)) {
-      currentStateRef.current = checkedState.map(item => ({...item}))
-    }
-  }, [checkedState])
+        // Directly update table visibility
+        const column = table.getColumn(id)
+        if (column) {
+          column.toggleVisibility(checked)
+        }
 
-  const handleCheckboxUpdate = React.useCallback(
-    (oldState: CustomColCheckedState[]) => {
-      // Create new state array to ensure proper re-render
-      const newState = oldState.map(item => ({...item}))
-      // Update ref with new state
-      currentStateRef.current = newState
-      // Update parent state
-      setCheckedState(newState)
-      return newState
+        return newState
+      })
     },
-    [setCheckedState],
+    [table, setCheckedState],
   )
 
   const groupedItems = React.useMemo(() => {
@@ -40,7 +43,7 @@ export function GroupedSelection({checkedState, setCheckedState, search}: Groupe
       if (!groups[group]) {
         groups[group] = []
       }
-      groups[group].push({...item})
+      groups[group].push(item)
     })
     return groups
   }, [checkedState])
@@ -69,11 +72,21 @@ export function GroupedSelection({checkedState, setCheckedState, search}: Groupe
                 label={item.label}
                 id={item.id}
                 checked={item.checked}
-                setCheckedState={value => {
-                  if (typeof value === 'function') {
-                    handleCheckboxUpdate(value(checkedState))
+                setCheckedState={oldState => {
+                  if (typeof oldState === 'function') {
+                    // For function updates
+                    const newState = oldState(checkedState)
+                    const changedItem = newState.find(i => i.id === item.id)
+                    if (changedItem) {
+                      handleColumnToggle(item.id, changedItem.checked)
+                    }
                   } else {
-                    handleCheckboxUpdate(value)
+                    // For direct state updates
+                    const newState = [...oldState]
+                    const index = newState.findIndex(i => i.id === item.id)
+                    if (index !== -1) {
+                      handleColumnToggle(item.id, newState[index].checked)
+                    }
                   }
                 }}
               />

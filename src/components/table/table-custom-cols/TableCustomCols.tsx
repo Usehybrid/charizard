@@ -133,6 +133,7 @@ export default function TableCustomCols({
                     checkedState={checkedState}
                     setCheckedState={setCheckedState}
                     search={search}
+                    table={table}
                   />
                 ) : (
                   <>
