@@ -10,48 +10,40 @@ interface GroupedSelectionProps {
 }
 
 export function GroupedSelection({checkedState, setCheckedState, search}: GroupedSelectionProps) {
-  // Local state for drawer changes
-  const [localCheckedState, setLocalCheckedState] = React.useState<CustomColCheckedState[]>([])
-  const prevCheckedStateRef = React.useRef<CustomColCheckedState[]>([])
+  // Keep track of the source of truth for checked state
+  const currentStateRef = React.useRef<CustomColCheckedState[]>([])
 
-  // Sync local state with parent state whenever it changes
   React.useEffect(() => {
-    // Only update if the checked states are actually different
-    if (JSON.stringify(prevCheckedStateRef.current) !== JSON.stringify(checkedState)) {
-      setLocalCheckedState(checkedState)
-      prevCheckedStateRef.current = checkedState
+    // Update ref when checked state changes from parent
+    if (JSON.stringify(currentStateRef.current) !== JSON.stringify(checkedState)) {
+      currentStateRef.current = checkedState.map(item => ({...item}))
     }
   }, [checkedState])
 
-  // Wrap the state update function to maintain type safety
-  const handleStateUpdate: React.Dispatch<React.SetStateAction<CustomColCheckedState[]>> =
-    React.useCallback(
-      value => {
-        const newState = typeof value === 'function' ? value(localCheckedState) : value
-
-        // Update local state first
-        setLocalCheckedState(newState)
-
-        // Update parent state ensuring visibility sync
-        setCheckedState(newState)
-
-        // Store current state for comparison
-        prevCheckedStateRef.current = newState
-      },
-      [setCheckedState, localCheckedState],
-    )
+  const handleCheckboxUpdate = React.useCallback(
+    (oldState: CustomColCheckedState[]) => {
+      // Create new state array to ensure proper re-render
+      const newState = oldState.map(item => ({...item}))
+      // Update ref with new state
+      currentStateRef.current = newState
+      // Update parent state
+      setCheckedState(newState)
+      return newState
+    },
+    [setCheckedState],
+  )
 
   const groupedItems = React.useMemo(() => {
     const groups: Record<string, CustomColCheckedState[]> = {}
-    localCheckedState.forEach(item => {
+    checkedState.forEach(item => {
       const group = item.group || 'Ungrouped'
       if (!groups[group]) {
         groups[group] = []
       }
-      groups[group].push({...item}) // Create new reference for each item
+      groups[group].push({...item})
     })
     return groups
-  }, [localCheckedState])
+  }, [checkedState])
 
   const filteredGroups = React.useMemo(() => {
     const filtered: Record<string, CustomColCheckedState[]> = {}
@@ -77,7 +69,13 @@ export function GroupedSelection({checkedState, setCheckedState, search}: Groupe
                 label={item.label}
                 id={item.id}
                 checked={item.checked}
-                setCheckedState={handleStateUpdate}
+                setCheckedState={value => {
+                  if (typeof value === 'function') {
+                    handleCheckboxUpdate(value(checkedState))
+                  } else {
+                    handleCheckboxUpdate(value)
+                  }
+                }}
               />
             </div>
           ))}
@@ -86,7 +84,6 @@ export function GroupedSelection({checkedState, setCheckedState, search}: Groupe
     </>
   )
 }
-
 // import * as React from 'react'
 // import CustomColCheckbox from './CustomColCheckbox'
 // import classes from './table-custom-cols.module.css'
