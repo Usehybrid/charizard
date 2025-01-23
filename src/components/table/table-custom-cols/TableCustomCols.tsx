@@ -39,13 +39,24 @@ export default function TableCustomCols({
   isDropdownActions,
 }: TableCustomColsProps) {
   const {isOpen, onOpen, onClose: _onClose} = useDisclosure()
-  const {columns, isPending, isError, handleSaveColumns, onCloseListener} = customColumnConfig
+  const {columns, isPending, isError, handleSaveColumns, onCloseListener, variant} =
+    customColumnConfig
   const [checkedState, setCheckedState] = React.useState<TableCustomColumns['checked_state']>([])
   const [search, setSearch] = React.useState('')
 
+  // Keep track of initial state for selection variant
+  const initialStateRef = React.useRef<TableCustomColumns['checked_state']>([])
+
   const onClose = () => {
-    if (typeof onCloseListener === 'function') onCloseListener(checkedState, setCheckedState)
+    if (variant === 'selection' && initialStateRef.current.length > 0) {
+      setCheckedState(structuredClone(initialStateRef.current))
+      configureTable(initialStateRef.current)
+    }
+    if (typeof onCloseListener === 'function') {
+      onCloseListener(checkedState, setCheckedState)
+    }
     _onClose()
+    setSearch('')
   }
 
   const disabledCols = table
@@ -60,9 +71,14 @@ export default function TableCustomCols({
 
   React.useEffect(() => {
     if (isError || isPending) return
-    setCheckedState(columns?.checked_state || [])
-    configureTable(columns?.checked_state || [])
-  }, [isPending, isError])
+    const initialState = columns?.checked_state || []
+    setCheckedState(initialState)
+    if (variant === 'selection') {
+      // Store initial state for selection variant
+      initialStateRef.current = structuredClone(initialState)
+    }
+    configureTable(initialState)
+  }, [isPending, isError, variant])
 
   const draggableCols = checkedState.filter(c => c.checked)
   const nonDraggableCols = checkedState.filter(c => !c.checked)
@@ -91,8 +107,13 @@ export default function TableCustomCols({
 
   const handleSave = () => {
     configureTable(checkedState)
+    if (variant === 'selection') {
+      // Update initial state reference on save for selection variant
+      initialStateRef.current = structuredClone(checkedState)
+    }
     handleSaveColumns(checkedState)
-    onClose()
+    _onClose()
+    setSearch('')
   }
 
   const filteredNonDragCols = nonDraggableCols.filter(c =>
