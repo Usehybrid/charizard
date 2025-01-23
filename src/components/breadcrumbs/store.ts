@@ -4,6 +4,7 @@ export interface Breadcrumb {
   label: string
   href?: string
   active?: boolean
+  onClick?: any
 }
 
 interface BreadcrumbsStore {

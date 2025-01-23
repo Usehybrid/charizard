@@ -1,11 +1,5 @@
 import * as React from 'react'
-import {useBreadcrumbsStore} from './store'
-
-interface Breadcrumb {
-  label: string
-  href?: string
-  active?: boolean
-}
+import {type Breadcrumb, useBreadcrumbsStore} from './store'
 
 export const useBreadcrumbs = (breadcrumbs: Breadcrumb[]) => {
   const setBreadcrumbs = useBreadcrumbsStore(s => s.setBreadcrumbs)

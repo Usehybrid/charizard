@@ -22,6 +22,9 @@ export function Breadcrumbs() {
                 <Link
                   to={breadcrumb.href || ''}
                   className={clsx('zap-content-medium', classes.link)}
+                  onClick={() => {
+                    if (typeof breadcrumb.onClick === 'function') breadcrumb.onClick()
+                  }}
                 >
                   {breadcrumb.label}
                 </Link>
