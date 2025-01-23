@@ -20,15 +20,15 @@ import {SearchV2} from '../search-v2'
  * @param {DropdownOption[]} [props.options] - Options to display in the dropdown.
  * @param {boolean} [props.hideSearch=false] - Whether to hide the search input in the dropdown.
  * @param {(value: string) => void} [props.onOptionSelect] - Callback for when an option is selected.
- * 
+ *
  * @returns {JSX.Element} The left adornment for an input field.
- * 
+ *
  * @example
  *  <InputGroupV2>
  *   <InputV2 />
  *   <InputLeftAdornment>...</InputLeftAdornment>
  * </InputGroupV2>
- * 
+ *
  * @example
  *  <InputGroupV2>
  *   <InputLeftAdornment isDropdown options={options} onOptionSelect={handleSelect}>...</InputLeftAdornment>
@@ -43,6 +43,7 @@ export function InputLeftAdornment({
   options,
   hideSearch = false,
   onOptionSelect,
+  onclick,
 }: InputAdornmentProps) {
   const [search, setSearch] = React.useState('')
   const [state, send] = useMachine(
@@ -69,7 +70,10 @@ export function InputLeftAdornment({
 
   if (!isDropdown) {
     return (
-      <div className={clsx(classes.adornment, classes.left, disabled && classes.disabled)}>
+      <div
+        className={clsx(classes.adornment, classes.left, disabled && classes.disabled)}
+        onClick={onclick}
+      >
         <span className="zap-content-medium">{children}</span>
       </div>
     )
