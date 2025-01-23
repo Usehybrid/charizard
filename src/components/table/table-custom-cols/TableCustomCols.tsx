@@ -44,7 +44,7 @@ export default function TableCustomCols({
   const [search, setSearch] = React.useState('')
 
   const onClose = () => {
-    if (typeof onCloseListener === 'function') onCloseListener(checkedState)
+    if (typeof onCloseListener === 'function') onCloseListener(checkedState, setCheckedState)
     _onClose()
   }
 
