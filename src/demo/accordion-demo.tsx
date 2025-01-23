@@ -1,15 +1,8 @@
-import {
-  Accordion,
-  //  useAccordionStore
-} from '../components/accordion'
+import {Accordion} from '../components/accordion'
 
 export function AccordionDemo() {
-  // const activeEventKey = useAccordionStore(state => state.activeEventKey)
-
-  // const setActiveEventKey = useAccordionStore(state => state.setActiveEventKey)
-
   return (
-    <Accordion defaultActiveKey="header-1" isMulti>
+    <Accordion defaultActiveKey="header-1" isMulti isOpenAll>
       <Accordion.Item eventKey="header-1">
         <Accordion.Header eventKey="header-1">
           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Pariatur at explicabo optio
