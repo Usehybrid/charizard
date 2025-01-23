@@ -259,19 +259,25 @@ export function Table({
   }, [sorting])
 
   React.useEffect(() => {
-    if (!sortConfig || !initialRenderRef.current) {
-      return
-    }
+    if (!sortConfig || !initialRenderRef.current) return
 
     const {sortBy, sortOrd} = sortConfig
-    setSorting([
-      {
-        id: sortBy,
-        desc: sortOrd === 'desc',
-      },
-    ])
+
+    if (sortBy && sortOrd) {
+      setSorting([
+        {
+          id: sortBy,
+          desc: sortOrd === 'desc',
+        },
+      ])
+    }
     initialRenderRef.current = false
   }, [sortConfig])
+
+  React.useEffect(() => {
+    console.log('Sort state changed:', sorting)
+    console.log('API params:', {sortBy: sortConfig?.sortBy, sortOrd: sortConfig?.sortOrd})
+  }, [sorting, sortConfig])
 
   useDeepCompareEffect(() => {
     if (!rowSelectionConfig || !setSelectedRows) return
