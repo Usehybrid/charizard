@@ -24,6 +24,7 @@ interface TableCustomColsProps {
     isError: boolean
     handleSaveColumns: (columns: any) => Promise<void>
     variant?: TableCustomColsVariant
+    onCloseListener?: any
   }
   table: Table<any>
   isCheckbox?: boolean
@@ -37,10 +38,15 @@ export default function TableCustomCols({
   isCheckbox,
   isDropdownActions,
 }: TableCustomColsProps) {
-  const {isOpen, onOpen, onClose} = useDisclosure()
-  const {columns, isPending, isError, handleSaveColumns} = customColumnConfig
+  const {isOpen, onOpen, onClose: _onClose} = useDisclosure()
+  const {columns, isPending, isError, handleSaveColumns, onCloseListener} = customColumnConfig
   const [checkedState, setCheckedState] = React.useState<TableCustomColumns['checked_state']>([])
   const [search, setSearch] = React.useState('')
+
+  const onClose = () => {
+    if (typeof onCloseListener === 'function') onCloseListener(checkedState)
+    _onClose()
+  }
 
   const disabledCols = table
     .getAllLeafColumns()
