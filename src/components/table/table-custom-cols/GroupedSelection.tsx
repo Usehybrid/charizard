@@ -40,16 +40,20 @@ export function GroupedSelection({checkedState, setCheckedState, search}: Groupe
       {Object.entries(filteredGroups).map(([group, items]) => (
         <div key={group}>
           <h3 className={classes.groupTitle}>{group}</h3>
-          {items.map(item => (
-            <div key={item.id} className={classes.option}>
-              <CustomColCheckbox
-                label={item.label}
-                id={item.id}
-                checked={item.checked}
-                setCheckedState={setCheckedState}
-              />
-            </div>
-          ))}
+          {items.map(item => {
+            return (
+              <div key={item.id} className={classes.option}>
+                <CustomColCheckbox
+                  label={item.label}
+                  id={item.id}
+                  checked={item.checked}
+                  setCheckedState={setCheckedState}
+                  // fix the first column
+                  disabled={item.id === 'name'}
+                />
+              </div>
+            )
+          })}
         </div>
       ))}
     </>

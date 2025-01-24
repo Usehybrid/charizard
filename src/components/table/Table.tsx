@@ -133,7 +133,6 @@ export interface TableProps {
     isError: boolean
     handleSaveColumns: (columns: any) => Promise<void>
     variant?: TableCustomColsVariant
-    onCloseListener?: any
   }
   /**
    * export config (csv)
@@ -274,10 +273,24 @@ export function Table({
     initialRenderRef.current = false
   }, [sortConfig])
 
-  React.useEffect(() => {
-    console.log('Sort state changed:', sorting)
-    console.log('API params:', {sortBy: sortConfig?.sortBy, sortOrd: sortConfig?.sortOrd})
-  }, [sorting, sortConfig])
+  useDeepCompareEffect(() => {
+    if (!sortConfig) return
+
+    const {setSortOrd, setSortBy, sortMap} = sortConfig
+
+    // When sorting is removed, explicitly set to neutral state
+    if (!sorting.length) {
+      setSortBy('')
+      setSortOrd('')
+      return
+    }
+
+    // When sorting is applied
+    const id = sorting[0].id
+    const mappedId = sortMap[id] || id
+    setSortBy(mappedId)
+    setSortOrd(sorting[0].desc ? 'desc' : 'asc')
+  }, [sorting])
 
   useDeepCompareEffect(() => {
     if (!rowSelectionConfig || !setSelectedRows) return
@@ -361,13 +374,13 @@ export function Table({
     enableMultiRowSelection: isRadio ? false : true,
     manualPagination: true,
     manualFiltering: true,
+
     getCoreRowModel: getCoreRowModel(),
     defaultColumn: {
-      // minSize: 0,
       size: Number.MAX_SAFE_INTEGER,
       enablePinning: false,
-      enableSorting: false,
-      // maxSize: Number.MAX_SAFE_INTEGER,
+      enableSorting: true,
+      sortDescFirst: true,
     },
     getRowId: rowSelectionConfig?.rowIdKey
       ? (row: any) => row[rowSelectionConfig?.rowIdKey as string]
