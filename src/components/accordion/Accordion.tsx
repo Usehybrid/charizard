@@ -21,18 +21,13 @@ export const Accordion = ({
   customStyle,
   isMulti = false,
   isOpenAll = false,
+  allEventKeys = [],
 }: AccordionProps) => {
   const [state, send] = useMachine(
     accordion.machine({
       id: defaultActiveKey as string,
       collapsible: true,
-      value: isOpenAll
-        ? React.Children.toArray(children)
-            .filter(child => React.isValidElement(child))
-            .map(child => (child as React.ReactElement<ItemProps>).props.eventKey)
-        : defaultActiveKey
-        ? [defaultActiveKey]
-        : [],
+      value: isOpenAll ? allEventKeys.map(String) : defaultActiveKey ? [defaultActiveKey] : [],
       multiple: isMulti || isOpenAll,
     }),
   )
