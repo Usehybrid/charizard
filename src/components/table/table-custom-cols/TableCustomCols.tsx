@@ -24,8 +24,6 @@ interface TableCustomColsProps {
     isError: boolean
     handleSaveColumns: (columns: any) => Promise<void>
     variant?: TableCustomColsVariant
-    onCloseListener?: any
-    onMountListener?: any
   }
   table: Table<any>
   isCheckbox?: boolean
@@ -39,19 +37,30 @@ export default function TableCustomCols({
   isCheckbox,
   isDropdownActions,
 }: TableCustomColsProps) {
-  const {isOpen, onOpen, onClose: _onClose} = useDisclosure()
+  const {isOpen, onOpen: _onOpen, onClose: _onClose} = useDisclosure()
   const {
     columns,
     isPending,
     isError,
     handleSaveColumns,
-    onCloseListener,
+
     variant,
-    onMountListener,
   } = customColumnConfig
   const [checkedState, setCheckedState] = React.useState<TableCustomColumns['checked_state']>([])
   const [search, setSearch] = React.useState('')
 
+  const syncCheckedState = React.useCallback(() => {
+    if (variant !== 'selection' || isError || isPending || !columns?.checked_state) return
+    const currentState = columns.checked_state
+    setCheckedState(currentState)
+    initialStateRef.current = structuredClone(currentState)
+    configureTable(currentState)
+  }, [columns?.checked_state, isError, isPending, variant])
+
+  const onOpen = () => {
+    syncCheckedState()
+    _onOpen()
+  }
   // Keep track of initial state for selection variant
   const initialStateRef = React.useRef<TableCustomColumns['checked_state']>([])
 
@@ -59,9 +68,6 @@ export default function TableCustomCols({
     if (variant === 'selection' && initialStateRef.current.length > 0) {
       setCheckedState(structuredClone(initialStateRef.current))
       configureTable(initialStateRef.current)
-    }
-    if (typeof onCloseListener === 'function') {
-      onCloseListener(checkedState, setCheckedState)
     }
     _onClose()
     setSearch('')
@@ -87,12 +93,6 @@ export default function TableCustomCols({
     }
     configureTable(initialState)
   }, [isPending, isError, variant])
-
-  React.useEffect(() => {
-    if (typeof onMountListener === 'function') {
-      onMountListener(setCheckedState, checkedState)
-    }
-  }, [])
 
   const draggableCols = checkedState.filter(c => c.checked)
   const nonDraggableCols = checkedState.filter(c => !c.checked)

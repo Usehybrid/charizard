@@ -133,8 +133,6 @@ export interface TableProps {
     isError: boolean
     handleSaveColumns: (columns: any) => Promise<void>
     variant?: TableCustomColsVariant
-    onCloseListener?: any
-    onMountListener?: any
   }
   /**
    * export config (csv)
