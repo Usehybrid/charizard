@@ -9,7 +9,7 @@ import sortIcon from '../assets/line-height.svg'
 import sortAscIcon from '../assets/sort-asc.svg'
 import sortDescIcon from '../assets/sort-desc.svg'
 import classes from './styles.module.css'
-import {useReactTable, getCoreRowModel, flexRender} from '@tanstack/react-table'
+import {useReactTable, getCoreRowModel, flexRender, getSortedRowModel} from '@tanstack/react-table'
 import {SVG} from '../svg'
 import {TablePagination} from './table-pagination'
 import {TableCheckbox} from './table-columns'
@@ -244,16 +244,35 @@ export function Table({
     }
   }, [])
 
+  // useDeepCompareEffect(() => {
+  //   if (!sortConfig) return
+
+  //   const {setSortOrd, setSortBy, sortMap} = sortConfig
+  //   if (!sorting.length) {
+  //     setSortBy('')
+  //     setSortOrd('')
+  //     return
+  //   }
+  //   setSortBy(sortMap[sorting[0].id])
+  //   setSortOrd(sorting[0].desc ? 'desc' : 'asc')
+  // }, [sorting])
+
   useDeepCompareEffect(() => {
     if (!sortConfig) return
 
     const {setSortOrd, setSortBy, sortMap} = sortConfig
+
+    // When sorting is removed, explicitly set to neutral state
     if (!sorting.length) {
       setSortBy('')
       setSortOrd('')
       return
     }
-    setSortBy(sortMap[sorting[0].id])
+
+    // When sorting is applied
+    const id = sorting[0].id
+    const mappedId = sortMap[id] || id
+    setSortBy(mappedId)
     setSortOrd(sorting[0].desc ? 'desc' : 'asc')
   }, [sorting])
 
@@ -272,6 +291,25 @@ export function Table({
     }
     initialRenderRef.current = false
   }, [sortConfig])
+
+  useDeepCompareEffect(() => {
+    if (!sortConfig) return
+
+    const {setSortOrd, setSortBy, sortMap} = sortConfig
+
+    // When sorting is removed, explicitly set to neutral state
+    if (!sorting.length) {
+      setSortBy('')
+      setSortOrd('')
+      return
+    }
+
+    // When sorting is applied
+    const id = sorting[0].id
+    const mappedId = sortMap[id] || id
+    setSortBy(mappedId)
+    setSortOrd(sorting[0].desc ? 'desc' : 'asc')
+  }, [sorting])
 
   useDeepCompareEffect(() => {
     if (!rowSelectionConfig || !setSelectedRows) return
@@ -355,12 +393,14 @@ export function Table({
     enableMultiRowSelection: isRadio ? false : true,
     manualPagination: true,
     manualFiltering: true,
+    enableSortingRemoval: true, // Explicitly enable sorting removal
+    getSortedRowModel: getSortedRowModel(), // Add this even with manualSorting: true
     getCoreRowModel: getCoreRowModel(),
     defaultColumn: {
       // minSize: 0,
       size: Number.MAX_SAFE_INTEGER,
       enablePinning: false,
-      enableSorting: false,
+      enableSorting: true,
       // maxSize: Number.MAX_SAFE_INTEGER,
     },
     getRowId: rowSelectionConfig?.rowIdKey
