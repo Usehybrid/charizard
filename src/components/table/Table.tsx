@@ -9,7 +9,7 @@ import sortIcon from '../assets/line-height.svg'
 import sortAscIcon from '../assets/sort-asc.svg'
 import sortDescIcon from '../assets/sort-desc.svg'
 import classes from './styles.module.css'
-import {useReactTable, getCoreRowModel, flexRender, getSortedRowModel} from '@tanstack/react-table'
+import {useReactTable, getCoreRowModel, flexRender} from '@tanstack/react-table'
 import {SVG} from '../svg'
 import {TablePagination} from './table-pagination'
 import {TableCheckbox} from './table-columns'
@@ -244,64 +244,16 @@ export function Table({
     }
   }, [])
 
-  // useDeepCompareEffect(() => {
-  //   if (!sortConfig) return
-
-  //   const {setSortOrd, setSortBy, sortMap} = sortConfig
-  //   if (!sorting.length) {
-  //     setSortBy('')
-  //     setSortOrd('')
-  //     return
-  //   }
-  //   setSortBy(sortMap[sorting[0].id])
-  //   setSortOrd(sorting[0].desc ? 'desc' : 'asc')
-  // }, [sorting])
-
   useDeepCompareEffect(() => {
     if (!sortConfig) return
 
     const {setSortOrd, setSortBy, sortMap} = sortConfig
-
-    console.group('Sorting State Change')
-    console.log('Current sorting state:', sorting)
-    console.log('Sort Map:', sortMap)
-
-    if (!sorting.length) {
-      console.log('Going to neutral state')
-      setSortBy('')
-      setSortOrd('')
-      console.groupEnd()
-      return
-    }
-
-    const currentColumn = sorting[0].id
-    const mappedColumn = sortMap[currentColumn]
-
-    console.log('Column being sorted:', currentColumn)
-    console.log('Mapped to:', mappedColumn)
-    console.log('Is descending?:', sorting[0].desc)
-
-    setSortBy(mappedColumn)
-    setSortOrd(sorting[0].desc ? 'desc' : 'asc')
-    console.groupEnd()
-  }, [sorting])
-
-  useDeepCompareEffect(() => {
-    if (!sortConfig) return
-
-    const {setSortOrd, setSortBy, sortMap} = sortConfig
-
-    // When sorting is removed, explicitly set to neutral state
     if (!sorting.length) {
       setSortBy('')
       setSortOrd('')
       return
     }
-
-    // When sorting is applied
-    const id = sorting[0].id
-    const mappedId = sortMap[id] || id
-    setSortBy(mappedId)
+    setSortBy(sortMap[sorting[0].id])
     setSortOrd(sorting[0].desc ? 'desc' : 'asc')
   }, [sorting])
 
@@ -422,15 +374,13 @@ export function Table({
     enableMultiRowSelection: isRadio ? false : true,
     manualPagination: true,
     manualFiltering: true,
-    enableSortingRemoval: true, // Explicitly enable sorting removal
-    getSortedRowModel: getSortedRowModel(), // Add this even with manualSorting: true
+
     getCoreRowModel: getCoreRowModel(),
     defaultColumn: {
-      // minSize: 0,
       size: Number.MAX_SAFE_INTEGER,
       enablePinning: false,
       enableSorting: true,
-      // maxSize: Number.MAX_SAFE_INTEGER,
+      sortDescFirst: true,
     },
     getRowId: rowSelectionConfig?.rowIdKey
       ? (row: any) => row[rowSelectionConfig?.rowIdKey as string]
@@ -594,15 +544,9 @@ function TableComp({
                     {header.isPlaceholder ? null : (
                       <div
                         {...{
-                          // onClick: loaderConfig?.isFetching
-                          //   ? undefined
-                          //   : header.column.getToggleSortingHandler(),
                           onClick: loaderConfig?.isFetching
                             ? undefined
-                            : e => {
-                                console.log('Header clicked:', header.id)
-                                header.column.getToggleSortingHandler()?.(e)
-                              },
+                            : header.column.getToggleSortingHandler(),
                           style: {
                             display: 'flex',
                             alignItems: 'center',
