@@ -248,6 +248,7 @@ export interface DropdownProps extends BaseInputAdornmentProps {
   onOptionSelect: (value: string) => void
   hideSearch?: boolean
   isLoading?: boolean
+  onclick?: () => void
 }
 
 /**
@@ -275,6 +276,7 @@ export interface NonDropdownProps extends BaseInputAdornmentProps {
   hideSearch?: never
   onOptionSelect?: never
   isLoading?: never
+  onclick?: () => void
 }
 
 /**
