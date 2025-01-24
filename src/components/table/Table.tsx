@@ -134,6 +134,7 @@ export interface TableProps {
     handleSaveColumns: (columns: any) => Promise<void>
     variant?: TableCustomColsVariant
     onCloseListener?: any
+    onMountListener?: any
   }
   /**
    * export config (csv)
@@ -273,11 +274,6 @@ export function Table({
     }
     initialRenderRef.current = false
   }, [sortConfig])
-
-  React.useEffect(() => {
-    console.log('Sort state changed:', sorting)
-    console.log('API params:', {sortBy: sortConfig?.sortBy, sortOrd: sortConfig?.sortOrd})
-  }, [sorting, sortConfig])
 
   useDeepCompareEffect(() => {
     if (!rowSelectionConfig || !setSelectedRows) return

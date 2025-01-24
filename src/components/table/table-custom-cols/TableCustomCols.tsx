@@ -25,6 +25,7 @@ interface TableCustomColsProps {
     handleSaveColumns: (columns: any) => Promise<void>
     variant?: TableCustomColsVariant
     onCloseListener?: any
+    onMountListener?: any
   }
   table: Table<any>
   isCheckbox?: boolean
@@ -39,8 +40,15 @@ export default function TableCustomCols({
   isDropdownActions,
 }: TableCustomColsProps) {
   const {isOpen, onOpen, onClose: _onClose} = useDisclosure()
-  const {columns, isPending, isError, handleSaveColumns, onCloseListener, variant} =
-    customColumnConfig
+  const {
+    columns,
+    isPending,
+    isError,
+    handleSaveColumns,
+    onCloseListener,
+    variant,
+    onMountListener,
+  } = customColumnConfig
   const [checkedState, setCheckedState] = React.useState<TableCustomColumns['checked_state']>([])
   const [search, setSearch] = React.useState('')
 
@@ -79,6 +87,12 @@ export default function TableCustomCols({
     }
     configureTable(initialState)
   }, [isPending, isError, variant])
+
+  React.useEffect(() => {
+    if (typeof onMountListener === 'function') {
+      onMountListener(setCheckedState, checkedState)
+    }
+  }, [])
 
   const draggableCols = checkedState.filter(c => c.checked)
   const nonDraggableCols = checkedState.filter(c => !c.checked)
