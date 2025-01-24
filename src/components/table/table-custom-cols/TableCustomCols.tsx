@@ -89,7 +89,7 @@ export default function TableCustomCols({
     const initialState = columns?.checked_state || []
     setCheckedState(initialState)
     configureTable(initialState)
-  }, [isPending, isError, variant, columns?.checked_state])
+  }, [columns?.checked_state])
 
   const draggableCols = checkedState.filter(c => c.checked)
   const nonDraggableCols = checkedState.filter(c => !c.checked)
