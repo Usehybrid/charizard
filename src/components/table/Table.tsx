@@ -262,6 +262,35 @@ export function Table({
 
     const {setSortOrd, setSortBy, sortMap} = sortConfig
 
+    console.group('Sorting State Change')
+    console.log('Current sorting state:', sorting)
+    console.log('Sort Map:', sortMap)
+
+    if (!sorting.length) {
+      console.log('Going to neutral state')
+      setSortBy('')
+      setSortOrd('')
+      console.groupEnd()
+      return
+    }
+
+    const currentColumn = sorting[0].id
+    const mappedColumn = sortMap[currentColumn]
+
+    console.log('Column being sorted:', currentColumn)
+    console.log('Mapped to:', mappedColumn)
+    console.log('Is descending?:', sorting[0].desc)
+
+    setSortBy(mappedColumn)
+    setSortOrd(sorting[0].desc ? 'desc' : 'asc')
+    console.groupEnd()
+  }, [sorting])
+
+  useDeepCompareEffect(() => {
+    if (!sortConfig) return
+
+    const {setSortOrd, setSortBy, sortMap} = sortConfig
+
     // When sorting is removed, explicitly set to neutral state
     if (!sorting.length) {
       setSortBy('')
@@ -565,9 +594,15 @@ function TableComp({
                     {header.isPlaceholder ? null : (
                       <div
                         {...{
+                          // onClick: loaderConfig?.isFetching
+                          //   ? undefined
+                          //   : header.column.getToggleSortingHandler(),
                           onClick: loaderConfig?.isFetching
                             ? undefined
-                            : header.column.getToggleSortingHandler(),
+                            : e => {
+                                console.log('Header clicked:', header.id)
+                                header.column.getToggleSortingHandler()?.(e)
+                              },
                           style: {
                             display: 'flex',
                             alignItems: 'center',
