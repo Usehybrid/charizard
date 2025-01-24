@@ -49,12 +49,22 @@ export default function TableCustomCols({
   const [checkedState, setCheckedState] = React.useState<TableCustomColumns['checked_state']>([])
   const [search, setSearch] = React.useState('')
 
+  const drawerOpenedRef = React.useRef(false)
+
   const syncCheckedState = React.useCallback(() => {
-    if (variant !== 'selection' || isError || isPending || !columns?.checked_state) return
+    if (
+      variant !== 'selection' ||
+      isError ||
+      isPending ||
+      !columns?.checked_state ||
+      drawerOpenedRef.current
+    )
+      return
     const currentState = columns.checked_state
     setCheckedState(currentState)
     initialStateRef.current = structuredClone(currentState)
     configureTable(currentState)
+    drawerOpenedRef.current = true
   }, [columns?.checked_state, isError, isPending, variant])
 
   const onOpen = () => {
@@ -65,10 +75,12 @@ export default function TableCustomCols({
   const initialStateRef = React.useRef<TableCustomColumns['checked_state']>([])
 
   const onClose = () => {
+    drawerOpenedRef.current = false
     if (variant === 'selection' && initialStateRef.current.length > 0) {
       setCheckedState(structuredClone(initialStateRef.current))
       configureTable(initialStateRef.current)
     }
+
     _onClose()
     setSearch('')
   }
@@ -122,12 +134,12 @@ export default function TableCustomCols({
   const handleSave = () => {
     configureTable(checkedState)
     if (variant === 'selection') {
-      // Update initial state reference on save for selection variant
       initialStateRef.current = structuredClone(checkedState)
     }
     handleSaveColumns(checkedState)
     _onClose()
     setSearch('')
+    drawerOpenedRef.current = false
   }
 
   const filteredNonDragCols = nonDraggableCols.filter(c =>
