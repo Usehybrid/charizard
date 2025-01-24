@@ -14,6 +14,8 @@ export interface AccordionProps {
   customClasses?: string
   customStyle?: React.CSSProperties
   isMulti?: boolean
+  isOpenAll?: boolean
+  allEventKeys?: string[] | number[]
 }
 
 export interface HeaderProps {

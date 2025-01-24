@@ -20,13 +20,15 @@ export const Accordion = ({
   customClasses,
   customStyle,
   isMulti = false,
+  isOpenAll = false,
+  allEventKeys = [],
 }: AccordionProps) => {
   const [state, send] = useMachine(
     accordion.machine({
       id: defaultActiveKey as string,
       collapsible: true,
-      value: defaultActiveKey ? [defaultActiveKey] : [],
-      multiple: isMulti,
+      value: isOpenAll ? allEventKeys.map(String) : defaultActiveKey ? [defaultActiveKey] : [],
+      multiple: isMulti || isOpenAll,
     }),
   )
 
