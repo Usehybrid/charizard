@@ -15,6 +15,7 @@ import {CHECKBOX_COL_ID, DROPDOWN_COL_ID, RADIO_COL_ID} from '../constants'
 import {SortableList} from './sortable/SortableList'
 import {GroupedSelection} from './GroupedSelection'
 import type {CustomColCheckedState, TableCustomColumns} from '../types'
+import useDeepCompareEffect from 'use-deep-compare-effect'
 
 interface TableCustomColsProps {
   customColumnConfig: {
@@ -38,44 +39,21 @@ export default function TableCustomCols({
   isDropdownActions,
 }: TableCustomColsProps) {
   const {isOpen, onOpen: _onOpen, onClose: _onClose} = useDisclosure()
-  const {
-    columns,
-    isPending,
-    isError,
-    handleSaveColumns,
-
-    variant,
-  } = customColumnConfig
+  const {columns, isPending, isError, handleSaveColumns, variant} = customColumnConfig
   const [checkedState, setCheckedState] = React.useState<TableCustomColumns['checked_state']>([])
   const [search, setSearch] = React.useState('')
 
-  const drawerOpenedRef = React.useRef(false)
-
-  const syncCheckedState = React.useCallback(() => {
-    if (
-      variant !== 'selection' ||
-      isError ||
-      isPending ||
-      !columns?.checked_state ||
-      drawerOpenedRef.current
-    )
-      return
-    const currentState = columns.checked_state
-    setCheckedState(currentState)
-    initialStateRef.current = structuredClone(currentState)
-    configureTable(currentState)
-    drawerOpenedRef.current = true
-  }, [columns?.checked_state, isError, isPending, variant])
-
-  const onOpen = () => {
-    syncCheckedState()
-    _onOpen()
-  }
   // Keep track of initial state for selection variant
   const initialStateRef = React.useRef<TableCustomColumns['checked_state']>([])
 
+  const onOpen = () => {
+    if (variant === 'selection' && columns?.checked_state) {
+      initialStateRef.current = structuredClone(columns.checked_state)
+    }
+    _onOpen()
+  }
+
   const onClose = () => {
-    drawerOpenedRef.current = false
     if (variant === 'selection' && initialStateRef.current.length > 0) {
       setCheckedState(structuredClone(initialStateRef.current))
       configureTable(initialStateRef.current)
@@ -95,16 +73,23 @@ export default function TableCustomCols({
         c.id !== DROPDOWN_COL_ID,
     )
 
+  // For non-selection variant
   React.useEffect(() => {
+    if (variant === 'selection') return
     if (isError || isPending) return
     const initialState = columns?.checked_state || []
     setCheckedState(initialState)
-    if (variant === 'selection') {
-      // Store initial state for selection variant
-      initialStateRef.current = structuredClone(initialState)
-    }
     configureTable(initialState)
   }, [isPending, isError, variant])
+
+  // For selection variant
+  useDeepCompareEffect(() => {
+    if (variant !== 'selection') return
+    if (isError || isPending) return
+    const initialState = columns?.checked_state || []
+    setCheckedState(initialState)
+    configureTable(initialState)
+  }, [isPending, isError, variant, columns?.checked_state])
 
   const draggableCols = checkedState.filter(c => c.checked)
   const nonDraggableCols = checkedState.filter(c => !c.checked)
@@ -139,7 +124,6 @@ export default function TableCustomCols({
     handleSaveColumns(checkedState)
     _onClose()
     setSearch('')
-    drawerOpenedRef.current = false
   }
 
   const filteredNonDragCols = nonDraggableCols.filter(c =>

@@ -25,6 +25,7 @@ export default function CustomColCheckbox({
 }: CustomColCheckboxProps) {
   const onCheckedChange = React.useCallback(
     (details: CheckboxChangeDetails) => {
+      if (disabled) return
       setCheckedState(oldState => {
         let newState = [...oldState]
         if (id === 'all') {

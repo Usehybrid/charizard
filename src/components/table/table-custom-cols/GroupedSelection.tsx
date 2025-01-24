@@ -47,6 +47,7 @@ export function GroupedSelection({checkedState, setCheckedState, search}: Groupe
                 id={item.id}
                 checked={item.checked}
                 setCheckedState={setCheckedState}
+                disabled={items[0].id === item.id}
               />
             </div>
           ))}
