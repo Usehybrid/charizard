@@ -15,6 +15,8 @@ export default function TableLimit({setLimit, limit, itemsOnPage}: TableLimitPro
     {label: '100', value: '100', onClick: () => setLimit(100)},
   ]
 
+  if (itemsOnPage === 0) return <div className={classes.limitBox} />
+
   // when the filters/search or any items are less than the least possible limit, hide the comp
   if (itemsOnPage && itemsOnPage < +selectData[0].value) {
     return <div className={classes.limitBox} />

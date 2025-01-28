@@ -32,20 +32,6 @@ export function TablePagination({paginationConfig}: TablePaginationProps) {
 
   const paginationApi = pagination.connect(state, send, normalizeProps)
 
-  // React.useEffect(() => {
-  //   paginationApi.setPage(paginationConfig.page + 1)
-  // }, [])
-
-  // React.useEffect(() => {
-  //   // used to rerender the component after searching and filtering in the table
-  //   paginationApi.setCount(metaData?.total_items || 0)
-  // }, [metaData?.total_items, limit])
-
-  // React.useEffect(() => {
-  //   // used to rerender the component after searching and filtering in the table
-  //   paginationApi.setPageSize(paginationConfig.limit)
-  // }, [limit])
-
   React.useEffect(() => {
     // Set the page when the component first renders or if the pagination page changes
     paginationApi.setPage(paginationConfig.page + 1)
