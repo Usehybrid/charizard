@@ -4,7 +4,7 @@ import classes from './checkbox.module.css'
 import clsx from 'clsx'
 
 interface CheckboxProps {
-  label: string
+  label: string | React.ReactNode
   checked?: boolean
   indeterminate?: boolean
   disabled?: boolean
