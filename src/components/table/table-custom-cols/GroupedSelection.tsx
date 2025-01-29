@@ -10,6 +10,21 @@ interface GroupedSelectionProps {
 }
 
 export function GroupedSelection({checkedState, setCheckedState, search}: GroupedSelectionProps) {
+  // Get group order based on first appearance in data
+  const groupOrder = React.useMemo(() => {
+    const order: Record<string, number> = {}
+    let orderIndex = 0
+
+    checkedState.forEach(item => {
+      const group = item.group || 'Ungrouped'
+      if (!(group in order)) {
+        order[group] = orderIndex++
+      }
+    })
+
+    return order
+  }, [checkedState])
+
   const groupedItems = React.useMemo(() => {
     const groups: Record<string, CustomColCheckedState[]> = {}
     checkedState.forEach(item => {
@@ -35,9 +50,18 @@ export function GroupedSelection({checkedState, setCheckedState, search}: Groupe
     return filtered
   }, [groupedItems, search])
 
+  // Sort groups based on their first appearance in the data
+  const sortedGroups = React.useMemo(() => {
+    return Object.entries(filteredGroups).sort(([groupA], [groupB]) => {
+      const orderA = groupOrder[groupA] ?? Number.MAX_VALUE
+      const orderB = groupOrder[groupB] ?? Number.MAX_VALUE
+      return orderA - orderB
+    })
+  }, [filteredGroups, groupOrder])
+
   return (
     <>
-      {Object.entries(filteredGroups).map(([group, items]) => (
+      {sortedGroups.map(([group, items]) => (
         <div key={group}>
           <h3 className={classes.groupTitle}>{group}</h3>
           {items.map(item => {
@@ -48,7 +72,6 @@ export function GroupedSelection({checkedState, setCheckedState, search}: Groupe
                   id={item.id}
                   checked={item.checked}
                   setCheckedState={setCheckedState}
-                  // fix the first column
                   disabled={item.id === 'name'}
                 />
               </div>
