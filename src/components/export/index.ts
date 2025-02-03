@@ -1,1 +1,1 @@
-export {default} from './styles.module.css'
+export * from './Export'
