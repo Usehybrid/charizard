@@ -248,7 +248,7 @@ export interface DropdownProps extends BaseInputAdornmentProps {
   onOptionSelect: (value: string) => void
   hideSearch?: boolean
   isLoading?: boolean
-  onclick?: () => void
+  onclick?: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
 }
 
 /**
@@ -276,7 +276,7 @@ export interface NonDropdownProps extends BaseInputAdornmentProps {
   hideSearch?: never
   onOptionSelect?: never
   isLoading?: never
-  onclick?: () => void
+  onclick?: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
 }
 
 /**
