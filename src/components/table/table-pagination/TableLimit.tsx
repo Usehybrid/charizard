@@ -1,4 +1,5 @@
 import classes from './table-pagination.module.css'
+import {useRef} from 'react'
 import {BUTTON_SIZE, BUTTON_VARIANT, Button} from '../../button'
 
 interface TableLimitProps {
@@ -9,22 +10,27 @@ interface TableLimitProps {
 }
 
 export default function TableLimit({setLimit, limit, itemsOnPage, totalItems}: TableLimitProps) {
+  const groupActionRef = useRef<{blur: () => void}>(null)
+
+  const handleLimitChange = (newLimit: number) => {
+    setLimit(newLimit)
+    groupActionRef.current?.blur()
+  }
+
   const selectData = [
-    {label: '25', value: '25', onClick: () => setLimit(25)},
-    {label: '50', value: '50', onClick: () => setLimit(50)},
-    {label: '75', value: '75', onClick: () => setLimit(75)},
-    {label: '100', value: '100', onClick: () => setLimit(100)},
+    {label: '25', value: '25', onClick: () => handleLimitChange(25)},
+    {label: '50', value: '50', onClick: () => handleLimitChange(50)},
+    {label: '75', value: '75', onClick: () => handleLimitChange(75)},
+    {label: '100', value: '100', onClick: () => handleLimitChange(100)},
   ]
 
-  // Return empty div if no items or itemsOnPage is 0
   if (!totalItems || totalItems === 0 || itemsOnPage === 0) {
     return <div className={classes.limitBox} />
   }
 
   const minLimit = +selectData[0].value
 
-  // Hide component if either total items or items on current page is less than minimum limit
-  if (totalItems < minLimit || (itemsOnPage && itemsOnPage < minLimit)) {
+  if (totalItems < minLimit || (itemsOnPage && itemsOnPage < minLimit) || limit >= totalItems) {
     return <div className={classes.limitBox} />
   }
 
@@ -32,10 +38,14 @@ export default function TableLimit({setLimit, limit, itemsOnPage, totalItems}: T
     <div className={classes.limitBox}>
       <p className="zap-subcontent-medium">Rows per page</p>
       <Button.GroupAction
+        ref={groupActionRef}
         menuItems={selectData}
         variant={BUTTON_VARIANT.TERTIARY}
         size={BUTTON_SIZE.SMALL}
-        customStyles={{customMenuStyles: {minWidth: '63px'}}}
+        customStyles={{
+          customMenuStyles: {minWidth: '63px'},
+          customButtonStyles: {minWidth: '40px'},
+        }}
       >
         {limit}
       </Button.GroupAction>

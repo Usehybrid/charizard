@@ -65,13 +65,12 @@ export function Button({
         type === BUTTON_TYPE.ICON_ONLY && size === BUTTON_SIZE.DEFAULT && classes.iconOnlyDefault,
         type === BUTTON_TYPE.ICON_ONLY && size === BUTTON_SIZE.SMALL && classes.iconOnlySmall,
         disabled && classes.disabled,
-        className
+        className,
       )}
       disabled={disabled}
       onClick={onClick}
       style={customStyles}
       type={btnType}
-
     >
       {type === BUTTON_TYPE.ICON_LEFT && icon}
       {type === BUTTON_TYPE.ICON_ONLY ? icon : children}
@@ -263,6 +262,7 @@ const GroupAction = React.forwardRef(function (
             )}
             disabled={disabled}
             onClick={onClick}
+            style={customButtonStyles}
           >
             {children}
           </button>
