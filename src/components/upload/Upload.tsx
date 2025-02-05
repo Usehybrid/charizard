@@ -1,7 +1,7 @@
 import * as React from 'react'
 import classes from './styles.module.css'
 import clsx from 'clsx'
-import {formatBytes, getFileTypeIcon} from './helper'
+import {formatBytes, getFileTypeIcon, renderFileTypes} from './helper'
 import {SVG} from '../svg'
 import close from '../assets/close.svg'
 import fileUpload from '../assets/file-upload.svg'
@@ -286,11 +286,11 @@ UploadProps) {
         ref={fileInputRef}
         onClick={() => {
           if (!isInputDisabled) {
-            beforeUploadHandler && beforeUploadHandler();
-            fileInputRef.current.value = '';
-            fileInputRef.current.click();
+            beforeUploadHandler && beforeUploadHandler()
+            fileInputRef.current.value = ''
+            fileInputRef.current.click()
           }
-        }}        
+        }}
         onChange={handleFileChange}
         type="file"
         accept={acceptedFileTypes}
@@ -364,7 +364,8 @@ UploadProps) {
                   </div> */}
                   <div className={clsx(classes.subTitle, disabled ? classes.disabledSubTitle : '')}>
                     <span>File Type: </span>
-                    <b> {addDocumentSubtitle || `PDF, Doc, Docx, PNG, WEBP,Xls, Xlsx and JPEG.`}</b>
+                    <b>{addDocumentSubtitle}</b>
+                    <b>{renderFileTypes(acceptedFileTypes)}</b>
                     <div className={classes.smallCircle}></div>
                     Max size per file: <b>{`${uploadFileLimit || 5} MB`}</b>
                     <div className={classes.smallCircle}></div>

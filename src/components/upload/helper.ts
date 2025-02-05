@@ -55,3 +55,29 @@ export function getFileTypeIcon(type: any) {
 
   return fileVertical
 }
+
+export function renderFileTypes(extensions: string): string {
+  const extensionMap: Record<string, string> = {
+    'application/pdf': 'PDF',
+    '.doc': 'Doc',
+    '.docx': 'Docx',
+    'image/png': 'PNG',
+    'image/jpeg': 'JPEG',
+    'image/webp': 'WEBP',
+    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': 'Xlsx',
+    'application/vnd.ms-excel': 'Xls',
+  }
+
+  const extensionList = extensions.split(',').map(ext => ext.trim())
+
+  const fileTypesSet = new Set<string>()
+
+  extensionList.forEach(extension => {
+    const fileType = extensionMap[extension]
+    if (fileType) {
+      fileTypesSet.add(fileType)
+    }
+  })
+
+  return Array.from(fileTypesSet).join(', ')
+}
