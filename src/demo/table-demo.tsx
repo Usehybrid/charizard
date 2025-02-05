@@ -45,16 +45,16 @@ export function TableDemo() {
         limit: query.limit,
         setPage: value => dispatch({type: TABLE_ACTION_TYPES.PAGE, payload: value}),
         setLimit: value => dispatch({type: TABLE_ACTION_TYPES.LIMIT, payload: value}),
-        metaData: {
-          total_items: 1000,
-          page_no: 0,
-          items_on_page: 25,
-        },
         // metaData: {
-        //   total_items: 6,
+        //   total_items: 1000,
         //   page_no: 0,
-        //   items_on_page: 6,
+        //   items_on_page: 25,
         // },
+        metaData: {
+          total_items: 181,
+          page_no: 7,
+          items_on_page: 6,
+        },
       }}
       rowSelectionConfig={{
         entityName: 'Software',

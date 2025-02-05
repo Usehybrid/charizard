@@ -51,19 +51,18 @@ export function TablePagination({paginationConfig}: TablePaginationProps) {
     paginationApi.setPageSize(paginationConfig.limit)
   }, [limit, metaData?.total_items])
 
-  const actualPageNo = metaData?.page_no ? metaData.page_no : 0
-  const startItem = actualPageNo * (metaData?.items_on_page || 0) + 1
-  const endItem = Math.min(
-    actualPageNo * (metaData?.items_on_page || 0) + limit,
-    metaData?.total_items || 0,
-  )
+  const actualPageNo = metaData?.page_no ?? 0
+  const totalItems = metaData?.total_items ?? 0
+  const itemsOnPage = metaData?.items_on_page ?? limit
+  const startItem = actualPageNo * limit + 1
+  const endItem = Math.min(startItem + itemsOnPage - 1, totalItems)
 
   return (
     <div className={classes.box}>
       <TableLimit setLimit={setLimit} limit={limit} itemsOnPage={metaData?.items_on_page} />
-      {!!metaData?.total_items && (
+      {!!totalItems && (
         <p className={clsx(classes.meta, 'zap-subcontent-medium')}>
-          {startItem} - {endItem} out of {metaData?.total_items}
+          {startItem} - {endItem} out of {totalItems}
         </p>
       )}
       {paginationApi.totalPages > 1 && (
