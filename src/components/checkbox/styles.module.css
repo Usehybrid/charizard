@@ -36,6 +36,7 @@
   border: 0;
   pointer-events: none;
   cursor: not-allowed;
+  border: 1px solid var(--stroke-buttons-input);
 }
 .checkbox .checkboxBox:hover {
   border: 1px solid var(--p-p30);
@@ -55,8 +56,8 @@
   background: var(--p-p60);
 }
 .checkbox .checkboxInput:checked + .checkboxBox.disabled {
-  /* opacity: 0.6; */
-  background: var(--disabled-50);
+  opacity: .6;
+  background: var(--p-p50);
   border: 0px solid var(--disabled-50);
 }
 
