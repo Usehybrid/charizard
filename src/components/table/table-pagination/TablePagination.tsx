@@ -59,7 +59,12 @@ export function TablePagination({paginationConfig}: TablePaginationProps) {
 
   return (
     <div className={classes.box}>
-      <TableLimit setLimit={setLimit} limit={limit} itemsOnPage={metaData?.items_on_page} />
+      <TableLimit
+        setLimit={setLimit}
+        limit={limit}
+        itemsOnPage={metaData?.items_on_page}
+        totalItems={metaData?.total_items}
+      />
       {!!totalItems && (
         <p className={clsx(classes.meta, 'zap-subcontent-medium')}>
           {startItem} - {endItem} out of {totalItems}

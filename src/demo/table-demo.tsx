@@ -52,8 +52,8 @@ export function TableDemo() {
         // },
         metaData: {
           total_items: 181,
-          page_no: 7,
-          items_on_page: 6,
+          page_no: 1,
+          items_on_page: 81,
         },
       }}
       rowSelectionConfig={{
