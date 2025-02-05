@@ -64,7 +64,6 @@ export function TablePagination({paginationConfig}: TablePaginationProps) {
         limit={limit}
         itemsOnPage={metaData?.items_on_page}
         totalItems={metaData?.total_items}
-        page={paginationConfig.page}
       />
       {!!totalItems && (
         <p className={clsx(classes.meta, 'zap-subcontent-medium')}>

@@ -7,16 +7,9 @@ interface TableLimitProps {
   limit: number
   itemsOnPage?: number
   totalItems?: number
-  page: number
 }
 
-export default function TableLimit({
-  setLimit,
-  limit,
-  itemsOnPage,
-  totalItems,
-  page,
-}: TableLimitProps) {
+export default function TableLimit({setLimit, limit, itemsOnPage, totalItems}: TableLimitProps) {
   const groupActionRef = useRef<{blur: () => void}>(null)
 
   const handleLimitChange = (newLimit: number) => {
@@ -35,15 +28,7 @@ export default function TableLimit({
     return <div className={classes.limitBox} />
   }
 
-  const minLimit = +selectData[0].value
-  const remainingItems = totalItems - itemsOnPage * page
-
-  if (
-    totalItems < minLimit ||
-    (itemsOnPage && itemsOnPage < minLimit) ||
-    limit >= totalItems ||
-    (remainingItems && limit >= remainingItems)
-  ) {
+  if (itemsOnPage < limit) {
     return <div className={classes.limitBox} />
   }
 
