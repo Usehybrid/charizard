@@ -62,7 +62,7 @@ export function renderFileTypes(extensions: string): string {
     '.doc': 'Doc',
     '.docx': 'Docx',
     'image/png': 'PNG',
-    'image/jpeg': 'JPEG',
+    'image/jpeg': 'JPEG, JPG',
     'image/webp': 'WEBP',
     'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': 'Xlsx',
     'application/vnd.ms-excel': 'Xls',
