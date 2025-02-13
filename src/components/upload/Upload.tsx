@@ -10,6 +10,7 @@ import {pluralize} from '../../utils'
 import {DOCS_TYPE} from '../../types'
 import {Button, BUTTON_VARIANT} from '../button'
 import {TooltipV2} from '../tooltip-v2'
+import {Alert, ALERT_ACTION_TYPES, ALERT_TYPES} from '../alert'
 export type UploadFileType = {
   id?: string
   ext: string
@@ -111,6 +112,7 @@ UploadProps) {
   const [fileUploadLimitError, setFileUploadLimitError] = React.useState<string | null>(null)
   const [uploadLimitError, setUploadLimitError] = React.useState('')
   const [isFileUploadComplete, setIsFileUploadComplete] = React.useState<boolean | null>(null)
+  const [hide, setHide] = React.useState(true)
   const fileInputRef = React.useRef<any>()
   const isInputDisabled =
     (fileUploadLimit &&
@@ -281,6 +283,12 @@ UploadProps) {
       setIsFileUploadComplete(true)
     }
   }, [])
+
+  React.useEffect(() => {
+    if (isFileUploadComplete) {
+      setHide(true)
+    }
+  }, [isFileUploadComplete])
 
   return (
     <>
@@ -504,7 +512,7 @@ UploadProps) {
                             </div>
                           </div>
                         </div>
-                        {!isFileUploadComplete ? (
+                        {isFileUploadComplete !== null && !isFileUploadComplete ? (
                           <TooltipV2
                             trigger={
                               <Button variant={BUTTON_VARIANT.TERTIARY} disabled>
@@ -568,7 +576,10 @@ UploadProps) {
                         </div>
                         <Button
                           variant={BUTTON_VARIANT.TERTIARY}
-                          onClick={() => setCancelledKey([...cancelledKey, file.key])}
+                          onClick={() => {
+                            setHide(false)
+                            setCancelledKey([...cancelledKey, file.key])
+                          }}
                         >
                           <SVG path={close} height={16} width={16} />
                         </Button>
@@ -579,6 +590,15 @@ UploadProps) {
                 </div>
               ))}
           </div>
+        )}
+        {!isFileUploadComplete && !hide && (
+          <Alert
+            header={<div>Cancelling file upload.</div>}
+            alertType={ALERT_TYPES.HIGHLIGHT}
+            actionType={ALERT_ACTION_TYPES.CLOSE}
+            hide={hide}
+            setHide={setHide}
+          />
         )}
       </div>
     </>
