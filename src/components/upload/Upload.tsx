@@ -8,6 +8,8 @@ import fileUpload from '../assets/file-upload.svg'
 import deleteOutline from '../assets/delete-bin.svg'
 import {pluralize} from '../../utils'
 import {DOCS_TYPE} from '../../types'
+import {Button, BUTTON_VARIANT} from '../button'
+import {TooltipV2} from '../tooltip-v2'
 export type UploadFileType = {
   id?: string
   ext: string
@@ -108,14 +110,14 @@ UploadProps) {
   const [fileUploadProgress, setFileUploadProgress] = React.useState<progressBarType[]>([])
   const [fileUploadLimitError, setFileUploadLimitError] = React.useState<string | null>(null)
   const [uploadLimitError, setUploadLimitError] = React.useState('')
-  const [isFileUploadComplete, setIsFileUploadComplete] = React.useState(false)
+  const [isFileUploadComplete, setIsFileUploadComplete] = React.useState<boolean | null>(null)
   const fileInputRef = React.useRef<any>()
   const isInputDisabled =
     (fileUploadLimit &&
       files.filter(file => !cancelledKey.includes(file.key))?.length >= fileUploadLimit) ||
     disabled
       ? true
-      : false
+      : false || (isFileUploadComplete !== null && !isFileUploadComplete)
 
   React.useEffect(() => {
     console.log(uploadLimitError)
@@ -303,7 +305,71 @@ UploadProps) {
         {!(
           files.filter(file => !cancelledKey.includes(file.key)).length >= fileUploadLimit &&
           isFileUploadComplete
-        ) && (
+        ) &&
+        isFileUploadComplete !== null &&
+        !isFileUploadComplete &&
+        !(
+          fileUploadLimit &&
+          files.filter(file => !cancelledKey.includes(file.key))?.length >= fileUploadLimit
+        ) ? (
+          <TooltipV2
+            trigger={
+              <div
+                className={
+                  customComponent
+                    ? ''
+                    : clsx(
+                        classes.uploadBtn,
+                        uploadBtnClassName,
+                        disabled || isInputDisabled ? classes.disabledUploadBtn : '',
+                      )
+                }
+                style={{
+                  background: isInputDisabled ? '#F4F4F4' : '',
+                  cursor: disabled || isInputDisabled ? 'not-allowed' : 'pointer',
+                }}
+              >
+                {customComponent ? (
+                  customComponent
+                ) : (
+                  <>
+                    <div
+                      className={clsx(classes.parentContainer)}
+                      style={{justifyContent: alignContent}}
+                    >
+                      {showUploadIcon && <SVG path={fileUpload} height={28} width={28} />}
+                      <div className={clsx(classes.title, disabled ? classes.disabledTitle : '')}>
+                        {addDocumentText}
+                      </div>
+                      <div
+                        className={clsx(classes.subTitle, disabled ? classes.disabledSubTitle : '')}
+                      >
+                        <span>File Type: </span>
+                        <b>{addDocumentSubtitle}</b>
+                        <b> {renderFileTypes(acceptedFileTypes)}.</b>
+                        <div className={classes.divider}></div>
+                        Max size per file: <b>{`${uploadFileLimit || 5} MB`}</b>
+                        <div className={classes.divider}></div>
+                        Upload allowed: <b>{fileUploadLimit}</b>
+                      </div>
+                      {extraSubtitleText && (
+                        <div
+                          className={clsx(
+                            classes.subTitle,
+                            disabled ? classes.disabledSubTitle : '',
+                          )}
+                        >
+                          {extraSubtitleText}
+                        </div>
+                      )}
+                    </div>
+                  </>
+                )}
+              </div>
+            }
+            content={'Please wait till all the files are uploaded.'}
+          />
+        ) : (
           <div
             onClick={() => {
               if (!isInputDisabled) {
@@ -360,15 +426,15 @@ UploadProps) {
                     {addDocumentText}
                   </div>
                   {/* <div className={clsx(classes.subTitle, disabled ? classes.disabledSubTitle : '')}>
-                    Choose file or drag and drop here
-                  </div> */}
+                  Choose file or drag and drop here
+                </div> */}
                   <div className={clsx(classes.subTitle, disabled ? classes.disabledSubTitle : '')}>
                     <span>File Type: </span>
                     <b>{addDocumentSubtitle}</b>
                     <b> {renderFileTypes(acceptedFileTypes)}.</b>
-                    <div className={classes.smallCircle}></div>
+                    <div className={classes.divider}></div>
                     Max size per file: <b>{`${uploadFileLimit || 5} MB`}</b>
-                    <div className={classes.smallCircle}></div>
+                    <div className={classes.divider}></div>
                     Upload allowed: <b>{fileUploadLimit}</b>
                   </div>
                   {extraSubtitleText && (
@@ -427,7 +493,7 @@ UploadProps) {
                                   {file.ext || file.type?.split('/')[1]}{' '}
                                 </div>
                               )}
-                              {file.size && <div className={classes.smallCircle}></div>}
+                              {file.size && <div className={classes.divider}></div>}
                               {file.size && (
                                 <div>
                                   {Number(file.size?.split(' ')[0]).toFixed(2) +
@@ -438,12 +504,27 @@ UploadProps) {
                             </div>
                           </div>
                         </div>
-                        <div
-                          className={classes.actionBtn}
-                          onClick={() => handleFileDelete(file.key)}
-                        >
-                          <img className={classes.deleteIcon} src={deleteOutline} alt="delete" />
-                        </div>
+                        {!isFileUploadComplete ? (
+                          <TooltipV2
+                            trigger={
+                              <Button variant={BUTTON_VARIANT.TERTIARY} disabled>
+                                <img
+                                  className={classes.deleteIcon}
+                                  src={deleteOutline}
+                                  alt="delete"
+                                />
+                              </Button>
+                            }
+                            content={'Please wait till all the files are uploaded.'}
+                          />
+                        ) : (
+                          <Button
+                            variant={BUTTON_VARIANT.TERTIARY}
+                            onClick={() => handleFileDelete(file.key)}
+                          >
+                            <img className={classes.deleteIcon} src={deleteOutline} alt="delete" />
+                          </Button>
+                        )}
                       </div>
                     </div>
                   ) : (
@@ -469,7 +550,7 @@ UploadProps) {
                               <div className={classes.fileType}>
                                 {getFileUploadProgress(file.key)?.toFixed(0)} %{' '}
                               </div>
-                              <div className={classes.smallCircle}></div>
+                              <div className={classes.divider}></div>
                               <div>
                                 {file?.size?.split(' ')[0] &&
                                 getFileUploadProgress(file.key)?.toFixed(0) &&
@@ -485,13 +566,12 @@ UploadProps) {
                             </div>
                           </div>
                         </div>
-                        <div
-                          className={classes.actionBtn}
+                        <Button
+                          variant={BUTTON_VARIANT.TERTIARY}
                           onClick={() => setCancelledKey([...cancelledKey, file.key])}
                         >
-                          {' '}
                           <SVG path={close} height={16} width={16} />
-                        </div>
+                        </Button>
                         {/* </div> */}
                       </div>
                     </div>

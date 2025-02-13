@@ -70,10 +70,9 @@
   text-overflow: ellipsis;
   text-transform: uppercase;
 }
-.smallCircle {
+.divider {
   width: 1.2px;
   height: 10px;
-  /* border-radius: 50%; */
   background-color: var(--text-secondary);
   opacity: 0.5;
   margin: 0 3px;
@@ -230,19 +229,6 @@
   color: var(--text-secondary);
 }
 
-.actionBtn {
-  position: relative;
-  z-index: 1;
-  cursor: pointer;
-  padding: 6px;
-  border-radius: 8px;
-  border: 1px solid var(--stroke-selection);
-  background: var(--fill-selection);
-}
-.actionBtn:hover {
-  border: 1px solid var(--p-p10);
-  background: var(--p-p10);
-}
 .uploadingImg {
   height: 30px;
   width: 25px;
