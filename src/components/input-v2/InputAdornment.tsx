@@ -46,23 +46,21 @@ export function InputLeftAdornment({
   onclick,
 }: InputAdornmentProps) {
   const [search, setSearch] = React.useState('')
-  const [state, send] = useMachine(
-    menu.machine({
-      id: React.useId(),
-      onSelect(val) {
-        if (isDropdown) {
-          onOptionSelect(val.value)
-        }
-      },
-      onOpenChange(val) {
-        if (!val.open) {
-          setSearch('')
-        }
-      },
-    }),
-  )
+  const service = useMachine(menu.machine, {
+    id: React.useId(),
+    onSelect(val) {
+      if (isDropdown) {
+        onOptionSelect(val.value)
+      }
+    },
+    onOpenChange(val) {
+      if (!val.open) {
+        setSearch('')
+      }
+    },
+  })
 
-  const api = menu.connect(state, send, normalizeProps)
+  const api = menu.connect(service, normalizeProps)
 
   const filteredOptions = options?.filter((option: DropdownOption) => {
     return `${option.label}${option.value}`.toLowerCase().includes(search.toLowerCase())
@@ -173,23 +171,21 @@ export function InputRightAdornment({
   onOptionSelect,
 }: InputAdornmentProps) {
   const [search, setSearch] = React.useState('')
-  const [state, send] = useMachine(
-    menu.machine({
-      id: React.useId(),
-      onSelect(val) {
-        if (isDropdown) {
-          onOptionSelect(val.value)
-        }
-      },
-      onOpenChange(val) {
-        if (!val.open) {
-          setSearch('')
-        }
-      },
-    }),
-  )
+  const service = useMachine(menu.machine, {
+    id: React.useId(),
+    onSelect(val) {
+      if (isDropdown) {
+        onOptionSelect(val.value)
+      }
+    },
+    onOpenChange(val) {
+      if (!val.open) {
+        setSearch('')
+      }
+    },
+  })
 
-  const api = menu.connect(state, send, normalizeProps)
+  const api = menu.connect(service, normalizeProps)
 
   const filteredOptions = options?.filter((option: DropdownOption) => {
     return `${option.label}${option.value}`.toLowerCase().includes(search.toLowerCase())

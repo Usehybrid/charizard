@@ -16,26 +16,24 @@ interface SegmentedControlProps {
    * handle on change
    * use this if you are controlling the behavior of segmented control from an external entity
    */
-  handleOnChange?: (value: string) => void
+  handleOnChange?: (value: string | null) => void
 }
 
 export function SegmentedControl({items, defaultValue, handleOnChange}: SegmentedControlProps) {
-  const [state, send] = useMachine(
-    radio.machine({
-      id: React.useId(),
-      value: defaultValue ?? items?.[0]?.value,
-      onValueChange(details) {
-        handleOnChange && handleOnChange(details.value)
-      },
-    }),
-  )
-  const api = radio.connect(state, send, normalizeProps)
+  const service = useMachine(radio.machine, {
+    id: React.useId(),
+    defaultValue: defaultValue ?? items?.[0]?.value,
+    onValueChange(details) {
+      handleOnChange && handleOnChange(details.value)
+    },
+  })
+  const api = radio.connect(service, normalizeProps)
 
-  React.useEffect(() => {
-    if (defaultValue && defaultValue !== api.value) {
-      api.setValue(defaultValue)
-    }
-  }, [defaultValue])
+  // React.useEffect(() => {
+  //   if (defaultValue && defaultValue !== api.value) {
+  //     api.setValue(defaultValue)
+  //   }
+  // }, [defaultValue])
 
   return (
     <div className={classes.segmentedControl}>

@@ -28,7 +28,7 @@ type ModalProps = {
   /**
    * Machine Props
    */
-  machineProps?: dialog.Context | {}
+  machineProps?: any | {}
 }
 
 export function Modal({
@@ -46,15 +46,13 @@ export function Modal({
     [onClose],
   )
 
-  const [state, send] = useMachine(
-    dialog.machine({
-      id: React.useId(),
-      open: isOpen,
-      onOpenChange: details => handleOpenChange(details.open),
-      ...machineProps,
-    }),
-  )
-  const api = dialog.connect(state, send, normalizeProps)
+  const service = useMachine(dialog.machine, {
+    id: React.useId(),
+    open: isOpen,
+    onOpenChange: details => handleOpenChange(details.open),
+    ...machineProps,
+  })
+  const api = dialog.connect(service, normalizeProps)
 
   const clones = React.Children.toArray(children).map((child: any) => {
     return React.cloneElement(child, {

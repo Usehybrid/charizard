@@ -126,14 +126,12 @@ const GroupAction = React.forwardRef(function (
   }: GroupActionProps,
   ref,
 ) {
-  const [state, send] = useMachine(
-    menu.machine({
-      id: React.useId(),
-      positioning: {placement: positionerProps?.placement || 'bottom-end'},
-    }),
-  )
+  const service = useMachine(menu.machine, {
+    id: React.useId(),
+    positioning: {placement: positionerProps?.placement || 'bottom-end'},
+  })
 
-  const api = menu.connect(state, send, normalizeProps)
+  const api = menu.connect(service, normalizeProps)
 
   const customMenuStyles = customStyles?.customMenuStyles
   const customButtonStyles = customStyles?.customButtonStyles

@@ -12,10 +12,6 @@ type CustomColCheckboxProps = Pick<OptionsProp, 'setCheckedState'> & {
   disabled?: boolean
 }
 
-type CheckboxChangeDetails = {
-  checked: boolean
-}
-
 export default function CustomColCheckbox({
   id,
   label,
@@ -24,7 +20,7 @@ export default function CustomColCheckbox({
   disabled = false,
 }: CustomColCheckboxProps) {
   const onCheckedChange = React.useCallback(
-    (details: CheckboxChangeDetails) => {
+    (details: checkbox.CheckedChangeDetails) => {
       if (disabled) return
       setCheckedState(oldState => {
         let newState = [...oldState]
@@ -46,10 +42,13 @@ export default function CustomColCheckbox({
     [id, setCheckedState],
   )
 
-  const [state, send] = useMachine(
-    checkbox.machine({id: React.useId(), disabled, checked, onCheckedChange}),
-  )
-  const api = checkbox.connect(state, send, normalizeProps)
+  const service = useMachine(checkbox.machine, {
+    id: React.useId(),
+    disabled,
+    checked,
+    onCheckedChange,
+  })
+  const api = checkbox.connect(service, normalizeProps)
 
   React.useEffect(() => {
     api.setChecked(checked)

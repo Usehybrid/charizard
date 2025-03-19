@@ -24,15 +24,14 @@ export function ColorPicker({
   onChange,
   defaultColor,
 }: ColorPickerProps) {
-  const [state, send] = useMachine(
-    colorPicker.machine({
-      name,
-      id: React.useId(),
-      value: colorPicker.parse(defaultColor ?? presets[5]),
-    }),
-  )
+  const service = useMachine(colorPicker.machine, {
+    name,
+    id: React.useId(),
+    defaultValue: defaultColor as any as colorPicker.Color,
+    value: colorPicker.parse(defaultColor ?? presets[5]),
+  })
 
-  const api = colorPicker.connect(state, send, normalizeProps)
+  const api = colorPicker.connect(service, normalizeProps)
 
   return (
     <div {...api.getRootProps()} className={classes.root}>

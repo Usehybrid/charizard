@@ -16,26 +16,24 @@ export default function FilterDrawerAllCheckbox({
 }) {
   const allRef = React.useRef(false)
 
-  const [state, send] = useMachine(
-    checkbox.machine({
-      id: `all`,
-      checked,
-      onCheckedChange: ({checked}: {checked: any}) => {
-        setHasChanges(true)
-        if (allRef.current) return
-        setFilterCheckedState((prevState: Record<string, any[]>) => {
-          return {
-            ...prevState,
-            [filterKey]: prevState[filterKey].map(obj => ({...obj, checked})),
-          }
-        })
+  const service = useMachine(checkbox.machine, {
+    id: `all`,
+    checked,
+    onCheckedChange: ({checked}: {checked: any}) => {
+      setHasChanges(true)
+      if (allRef.current) return
+      setFilterCheckedState((prevState: Record<string, any[]>) => {
+        return {
+          ...prevState,
+          [filterKey]: prevState[filterKey].map(obj => ({...obj, checked})),
+        }
+      })
 
-        allRef.current = false
-      },
-    }),
-  )
+      allRef.current = false
+    },
+  })
 
-  const api = checkbox.connect(state, send, normalizeProps)
+  const api = checkbox.connect(service, normalizeProps)
 
   React.useEffect(() => {
     if (api.checked !== checked) {

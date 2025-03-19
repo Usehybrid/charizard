@@ -19,36 +19,33 @@ export function TablePagination({paginationConfig}: TablePaginationProps) {
   // * table page is non zero indexed whereas the db is zero indexed
   const {setLimit, limit, metaData} = paginationConfig
 
-  const [state, send] = useMachine(
-    pagination.machine({
-      id: 'zap-charizard-table-pagination',
-      count: metaData?.total_items || 0,
-      onPageChange(details) {
-        paginationConfig?.setPage(details.page - 1)
-      },
-      pageSize: paginationConfig.limit,
-    }),
-  )
+  const service = useMachine(pagination.machine, {
+    id: 'zap-charizard-table-pagination',
+    count: metaData?.total_items || 0,
+    onPageChange(details) {
+      paginationConfig?.setPage(details.page - 1)
+    },
+    pageSize: paginationConfig.limit,
+  })
 
-  const paginationApi = pagination.connect(state, send, normalizeProps)
+  const paginationApi = pagination.connect(service, normalizeProps)
 
   React.useEffect(() => {
     // Set the page when the component first renders or if the pagination page changes
     paginationApi.setPage(paginationConfig.page + 1)
   }, [paginationConfig.page])
 
+  // No longer need to use setCount in an effect
+  // The count is now reactively updated via props to useMachine
   React.useEffect(() => {
-    // Rerender the component after searching or filtering
-    paginationApi.setCount(metaData?.total_items || 0)
-  }, [metaData?.total_items, limit])
+    // Explicitly update pageSize when limit changes
+    paginationApi.setPageSize(paginationConfig.limit)
 
-  React.useEffect(() => {
     // Reset the page number when the limit changes, only if the current page is invalid
     const maxPage = Math.ceil((metaData?.total_items || 0) / paginationConfig.limit)
     if (paginationConfig.page + 1 > maxPage) {
       paginationApi.setPage(1) // Reset to first page if current page exceeds total pages
     }
-    paginationApi.setPageSize(paginationConfig.limit)
   }, [limit, metaData?.total_items])
 
   const actualPageNo = metaData?.page_no ?? 0

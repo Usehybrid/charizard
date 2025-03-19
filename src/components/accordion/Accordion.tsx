@@ -23,25 +23,24 @@ export const Accordion = ({
   isOpenAll = false,
   allEventKeys = [],
 }: AccordionProps) => {
-  const [state, send] = useMachine(
-    accordion.machine({
-      id: defaultActiveKey as string,
-      collapsible: true,
-      value: isOpenAll ? allEventKeys.map(String) : defaultActiveKey ? [defaultActiveKey] : [],
-      multiple: isMulti || isOpenAll,
-    }),
-  )
+  const service = useMachine(accordion.machine, {
+    id: defaultActiveKey as string,
+    collapsible: true,
+    defaultValue: defaultActiveKey ? [defaultActiveKey] : undefined,
+    value: isOpenAll ? allEventKeys.map(String) : defaultActiveKey ? [defaultActiveKey] : [],
+    multiple: isMulti || isOpenAll,
+  })
 
-  const api = accordion.connect(state, send, normalizeProps)
-
-  React.useEffect(() => {
-    useAccordionStore.setState({api, state, send})
-  }, [api, state, send])
+  const api = accordion.connect(service, normalizeProps)
 
   React.useEffect(() => {
-    const activeKeys = state.context.value || []
+    useAccordionStore.setState({api, state: service.state, send: service.send})
+  }, [api, service.state, service.send])
+
+  React.useEffect(() => {
+    const activeKeys = service.context.get('value') || []
     useAccordionStore.getState().setActiveEventKey(activeKeys)
-  }, [state])
+  }, [service])
 
   return (
     <div {...api.getRootProps()} className={customClasses} style={customStyle}>

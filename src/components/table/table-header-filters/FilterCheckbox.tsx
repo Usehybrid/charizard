@@ -26,23 +26,21 @@ export default function FilterCheckbox({
   countryCode?: string
   customName?: string
 }) {
-  const [state, send] = useMachine(
-    checkbox.machine({
-      id: value,
-      name: label,
-      checked: checked,
-      onCheckedChange: ({checked}: {checked: any}) => {
-        // sync internal table state
-        if (checked) {
-          addFilters(filterKey, value, filterDispatch)
-        } else {
-          removeFilters(filterKey, value, filterDispatch)
-        }
-      },
-    }),
-  )
+  const service = useMachine(checkbox.machine, {
+    id: value,
+    name: label,
+    checked: checked,
+    onCheckedChange: ({checked}: {checked: any}) => {
+      // sync internal table state
+      if (checked) {
+        addFilters(filterKey, value, filterDispatch)
+      } else {
+        removeFilters(filterKey, value, filterDispatch)
+      }
+    },
+  })
 
-  const api = checkbox.connect(state, send, normalizeProps)
+  const api = checkbox.connect(service, normalizeProps)
 
   return (
     <label {...api.getRootProps()} className={clsx(classes.optionLabel, 'zap-subcontent-medium')}>

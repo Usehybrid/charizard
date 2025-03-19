@@ -46,21 +46,21 @@ export function ModalV2({
   children,
   footerButtons,
   showBackdrop = false,
-  onClose,
+  // onClose,
   customModalClasses,
 }: ModalV2Props) {
-  const [state, send] = useMachine(dialog.machine({id: React.useId(), open: isOpen}))
-  const api = dialog.connect(state, send, normalizeProps)
+  const service = useMachine(dialog.machine, {id: React.useId(), open: isOpen})
+  const api = dialog.connect(service, normalizeProps)
 
-  React.useEffect(() => {
-    api.setOpen(!!isOpen)
-  }, [isOpen])
+  // React.useEffect(() => {
+  //   api.setOpen(!!isOpen)
+  // }, [isOpen])
 
-  React.useEffect(() => {
-    if (!api.open) {
-      onClose?.()
-    }
-  }, [api.open])
+  // React.useEffect(() => {
+  //   if (!api.open) {
+  //     onClose?.()
+  //   }
+  // }, [api.open])
 
   return (
     <>

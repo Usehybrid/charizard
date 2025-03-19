@@ -31,31 +31,29 @@ export default function FilterDrawerCheckbox({
     }
   }, [checked])
 
-  const [state, send] = useMachine(
-    checkbox.machine({
-      id: value,
-      name: label,
-      checked,
-      onCheckedChange: ({checked}: {checked: any}) => {
-        setHasChanges(true)
+  const service = useMachine(checkbox.machine, {
+    id: value,
+    name: label,
+    checked,
+    onCheckedChange: ({checked}: {checked: any}) => {
+      setHasChanges(true)
 
-        setFilterCheckedState((prevState: Record<string, any[]>) => {
-          const updatedState = {...prevState}
-          updatedState[filterKey][idx] = {label, value, checked}
+      setFilterCheckedState((prevState: Record<string, any[]>) => {
+        const updatedState = {...prevState}
+        updatedState[filterKey][idx] = {label, value, checked}
 
-          // // If a single checkbox is unchecked, ensure "All" is unchecked
-          if (!checked) {
-            updatedState[filterKey] = updatedState[filterKey].map((item, index) =>
-              index === -1 ? {...item, checked: false} : item,
-            )
-          }
-          return updatedState
-        })
-      },
-    }),
-  )
+        // // If a single checkbox is unchecked, ensure "All" is unchecked
+        if (!checked) {
+          updatedState[filterKey] = updatedState[filterKey].map((item, index) =>
+            index === -1 ? {...item, checked: false} : item,
+          )
+        }
+        return updatedState
+      })
+    },
+  })
 
-  const api = checkbox.connect(state, send, normalizeProps)
+  const api = checkbox.connect(service, normalizeProps)
 
   return (
     <label {...api.getRootProps()} className={classes.optionLabel}>
