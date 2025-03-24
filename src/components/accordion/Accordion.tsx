@@ -33,14 +33,21 @@ export const Accordion = ({
 
   const api = accordion.connect(service, normalizeProps)
 
+  const storedActiveKeys = useAccordionStore(state => state.activeEventKey)
+
   React.useEffect(() => {
     useAccordionStore.setState({api, state: service.state, send: service.send})
-  }, [api, service.state, service.send])
+  }, [api, service.send])
 
   React.useEffect(() => {
     const activeKeys = service.context.get('value') || []
+
+    if (JSON.stringify(storedActiveKeys) === JSON.stringify(activeKeys)) {
+      return
+    }
+
     useAccordionStore.getState().setActiveEventKey(activeKeys)
-  }, [service])
+  }, [service.context.get('value'), storedActiveKeys])
 
   return (
     <div {...api.getRootProps()} className={customClasses} style={customStyle}>
@@ -87,8 +94,9 @@ Accordion.Header = ({eventKey, children, customClasses, customStyle}: HeaderProp
 }
 
 Accordion.Collapse = ({eventKey, children, customClasses, customStyle}: CollapseProps) => {
-  const state = useAccordionStore(state => state.state)
-  const isOpen = state.context.value.includes(eventKey)
+  const activeKeys = useAccordionStore(state => state.activeEventKey)
+
+  const isOpen = activeKeys.includes(eventKey)
 
   return (
     <div style={customStyle} className={customClasses} hidden={!isOpen}>
