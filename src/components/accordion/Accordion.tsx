@@ -37,7 +37,7 @@ export const Accordion = ({
 
   React.useEffect(() => {
     useAccordionStore.setState({api, state: service.state, send: service.send})
-  }, [api, service.send])
+  }, [api, service.state, service.send])
 
   React.useEffect(() => {
     const activeKeys = service.context.get('value') || []
