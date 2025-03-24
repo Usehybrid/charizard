@@ -18,6 +18,7 @@ interface BaseButtonProps {
   customStyles?: React.CSSProperties
   className?: string
   btnType?: 'button' | 'reset' | 'submit'
+  zapTriggerProps?: any
 }
 
 interface IconOnlyButtonTypeProps extends BaseButtonProps {
@@ -51,6 +52,7 @@ export function Button({
   className,
   icon,
   btnType,
+  zapTriggerProps = {},
 }: ButtonProps) {
   return (
     <button
@@ -71,6 +73,7 @@ export function Button({
       onClick={onClick}
       style={customStyles}
       type={btnType}
+      {...zapTriggerProps}
     >
       {type === BUTTON_TYPE.ICON_LEFT && icon}
       {type === BUTTON_TYPE.ICON_ONLY ? icon : children}
