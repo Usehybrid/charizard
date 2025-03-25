@@ -1,6 +1,7 @@
-import {Accordion} from '../components/accordion'
+import {Accordion, useAccordionStore} from '../components/accordion'
 
 export function AccordionDemo() {
+  console.log(useAccordionStore(store => store.activeEventKey))
   return (
     <Accordion
       defaultActiveKey="header-1"
