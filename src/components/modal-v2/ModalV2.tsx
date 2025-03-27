@@ -49,18 +49,17 @@ export function ModalV2({
   onClose,
   customModalClasses,
 }: ModalV2Props) {
-  const service = useMachine(dialog.machine, {id: React.useId(), defaultOpen: isOpen})
+  const service = useMachine(dialog.machine, {
+    id: React.useId(),
+    defaultOpen: isOpen,
+    open: isOpen,
+    onOpenChange: ({open}) => {
+      if (!open && onClose) {
+        onClose()
+      }
+    },
+  })
   const api = dialog.connect(service, normalizeProps)
-
-  React.useEffect(() => {
-    api.setOpen(!!isOpen)
-  }, [isOpen])
-
-  React.useEffect(() => {
-    if (!api.open) {
-      onClose?.()
-    }
-  }, [api.open])
 
   return (
     <>
