@@ -1,7 +1,5 @@
 import {StrictMode} from 'react'
 import {createRoot} from 'react-dom/client'
-import {TableDemo} from './demo/table-demo'
-import {ToastDemo} from './demo/toast-demo'
 import {ModalV2, useDisclosure} from './components'
 
 const styles = {
