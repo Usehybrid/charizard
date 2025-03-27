@@ -74,10 +74,6 @@ export function RadioGroupV2({
 
   const api = radio.connect(service, normalizeProps)
 
-  // React.useEffect(() => {
-  //   api.setValue(defaultValue || '')
-  // }, [defaultValue])
-
   return isLoading ? (
     <>
       {label && <Skeleton className={classes.labelLoader} />}

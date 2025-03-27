@@ -2,6 +2,7 @@ import {StrictMode} from 'react'
 import {createRoot} from 'react-dom/client'
 import {TableDemo} from './demo/table-demo'
 import {ToastDemo} from './demo/toast-demo'
+import {ModalV2, useDisclosure} from './components'
 
 const styles = {
   width: '90%',
@@ -21,10 +22,14 @@ createRoot(document.getElementById('root') as HTMLElement).render(
 )
 
 function App() {
+  const {isOpen, onOpen, onClose} = useDisclosure()
   return (
     <div style={styles}>
       {/* <TableDemo /> */}
-      <ToastDemo />
+      <button onClick={onOpen}>Open</button>
+      <ModalV2 title="Header" footerButtons={[]} {...{isOpen, onClose}}>
+        Test modal
+      </ModalV2>
     </div>
   )
 }

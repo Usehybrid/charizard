@@ -74,10 +74,6 @@ export function RadioGroup({
 
   const api = radio.connect(service, normalizeProps)
 
-  // React.useEffect(() => {
-  //   api.setValue(defaultValue || '')
-  // }, [defaultValue])
-
   return showSkeleton ? (
     <div className={classes.radioGroup}>
       <div className={classes.root}>
