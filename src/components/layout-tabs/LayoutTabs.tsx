@@ -21,32 +21,16 @@ interface LayoutTabsProps {
 }
 
 export function LayoutTabs({tabs, defaultValue, tabClassName, onValueChange}: LayoutTabsProps) {
-  // const url = React.useMemo(() => new URL(window.location.href), [])
-  // const value = url.searchParams.get(SEARCH_PARAM_KEY) ?? defaultValue
+  const service = useMachine(zagTabs.machine, {
+    id: React.useId(),
+    defaultValue,
+    // value,
+    onValueChange(details) {
+      onValueChange?.(details.value)
+    },
+  })
 
-  // todo sync with url, without affecting browser history/default behaviour
-
-  // React.useEffect(() => {
-  //   if (url.searchParams.has(SEARCH_PARAM_KEY)) return
-  //   url.searchParams.append(SEARCH_PARAM_KEY, value)
-  //   history.pushState({...history.state}, '', url.href)
-  // }, [])
-
-  const [state, send] = useMachine(
-    zagTabs.machine({
-      id: React.useId(),
-      value: defaultValue,
-      onValueChange(details) {
-        onValueChange?.(details.value)
-      },
-      // onValueChange(details) {
-      //   url.searchParams.set(SEARCH_PARAM_KEY, details.value)
-      //   history.pushState({...history.state}, '', url.href)
-      // },
-    }),
-  )
-
-  const api = zagTabs.connect(state, send, normalizeProps)
+  const api = zagTabs.connect(service, normalizeProps)
 
   return (
     <div {...api.getRootProps()}>

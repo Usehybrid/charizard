@@ -7,7 +7,6 @@ import {useMachine, normalizeProps, Portal} from '@zag-js/react'
 import {SVG} from '../../svg'
 import {generateRange} from './utils'
 
-
 interface TableEllipsesProps {
   paginationApi: any
   i: number
@@ -23,18 +22,16 @@ export default function TableEllipses({paginationApi, i}: TableEllipsesProps) {
     itemToValue: item => item.value,
   })
 
-  const [_state, _send] = useMachine(
-    select.machine({
-      id: React.useId(),
-      collection,
-      onValueChange(details) {
-        const val = details.value[0]
-        paginationApi.setPage(+val)
-      },
-    }),
-  )
+  const _service = useMachine(select.machine, {
+    id: React.useId(),
+    collection,
+    onValueChange(details) {
+      const val = details.value[0]
+      paginationApi.setPage(+val)
+    },
+  })
 
-  const selectApi = select.connect(_state, _send, normalizeProps)
+  const selectApi = select.connect(_service, normalizeProps)
   return (
     <div {...selectApi.getRootProps()} key={`ellipsis-${i}`}>
       <div {...selectApi.getControlProps()}>

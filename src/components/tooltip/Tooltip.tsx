@@ -34,18 +34,16 @@ export function Tooltip({
   closeDelay = 0,
   placement = 'top',
 }: TooltipProps) {
-  const [state, send] = useMachine(
-    tooltip.machine({
-      id: React.useId(),
-      openDelay,
-      closeDelay,
-      positioning: {
-        placement,
-        gutter: 3,
-      },
-    }),
-  )
-  const api = tooltip.connect(state, send, normalizeProps)
+  const service = useMachine(tooltip.machine, {
+    id: React.useId(),
+    openDelay,
+    closeDelay,
+    positioning: {
+      placement,
+      gutter: 3,
+    },
+  })
+  const api = tooltip.connect(service, normalizeProps)
 
   const clones = React.Children.toArray(children).map((child: any) => {
     return React.cloneElement(child, {

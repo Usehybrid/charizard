@@ -49,18 +49,36 @@ export function ModalV2({
   onClose,
   customModalClasses,
 }: ModalV2Props) {
-  const [state, send] = useMachine(dialog.machine({id: React.useId(), open: isOpen}))
-  const api = dialog.connect(state, send, normalizeProps)
+  const service = useMachine(dialog.machine, {
+    id: React.useId(),
+    open: isOpen,
+    onOpenChange: ({open}) => {
+      if (!open && onClose) {
+        onClose()
+      }
+    },
+  })
+  const api = dialog.connect(service, normalizeProps)
+
+  console.log('Modal render state:', {
+    isOpen,
+    apiOpen: api.open,
+    bodyHasScrollLock: document.body.hasAttribute('data-scroll-lock'),
+    bodyPointerEvents: document.body.style.pointerEvents,
+    rootAriaHidden: document.getElementById('root')?.getAttribute('aria-hidden'),
+  })
 
   React.useEffect(() => {
-    api.setOpen(!!isOpen)
-  }, [isOpen])
-
-  React.useEffect(() => {
-    if (!api.open) {
-      onClose?.()
+    if (!isOpen) {
+      console.log('Modal CLOSED state:', {
+        isOpen,
+        apiOpen: api.open,
+        bodyHasScrollLock: document.body.hasAttribute('data-scroll-lock'),
+        bodyPointerEvents: document.body.style.pointerEvents,
+        rootAriaHidden: document.getElementById('root')?.getAttribute('aria-hidden'),
+      })
     }
-  }, [api.open])
+  }, [isOpen, api.open])
 
   return (
     <>

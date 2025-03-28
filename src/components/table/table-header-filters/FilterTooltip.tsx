@@ -10,8 +10,8 @@ type FilterTooltipProps = {
   selectedFilters: number
 }
 export default function FilterTooltip({filter, tableFilter, selectedFilters}: FilterTooltipProps) {
-  const [tooltipState, tooltipSend] = useMachine(tooltip.machine({id: filter.key}))
-  const tooltipApi = tooltip.connect(tooltipState, tooltipSend, normalizeProps)
+  const tooltipSvc = useMachine(tooltip.machine, {id: filter.key})
+  const tooltipApi = tooltip.connect(tooltipSvc, normalizeProps)
 
   const tableFilterWithName = filter.options?.filter(op => tableFilter?.values.includes(op.value))
 

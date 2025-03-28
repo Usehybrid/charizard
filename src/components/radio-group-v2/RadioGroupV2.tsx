@@ -36,7 +36,7 @@ interface RadioGroupV2Props {
    * @param value
    *  value of selected radio
    * */
-  onChange: (value: string) => void
+  onChange: (value: string | null) => void
   /**
    * if radio group is required
    * */
@@ -63,22 +63,16 @@ export function RadioGroupV2({
   isLoading = false,
   handleClickManually = false,
 }: RadioGroupV2Props) {
-  const [state, send] = useMachine(
-    radio.machine({
-      id: React.useId(),
-      value: defaultValue,
-      onValueChange: ({value}) => {
-        onChange(value)
-      },
-      disabled: disabled || handleClickManually,
-    }),
-  )
+  const service = useMachine(radio.machine, {
+    id: React.useId(),
+    defaultValue,
+    onValueChange: ({value}) => {
+      onChange(value)
+    },
+    disabled: disabled || handleClickManually,
+  })
 
-  const api = radio.connect(state, send, normalizeProps)
-
-  React.useEffect(() => {
-    api.setValue(defaultValue || '')
-  }, [defaultValue])
+  const api = radio.connect(service, normalizeProps)
 
   return isLoading ? (
     <>

@@ -35,6 +35,7 @@
   display: flex;
   flex-direction: column;
   gap: 4px;
+  flex-grow: 1;
 }
 
 .toastMessage {

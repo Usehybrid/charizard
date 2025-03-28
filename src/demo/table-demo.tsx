@@ -1,9 +1,42 @@
 import * as React from 'react'
 import randomIcon from '../components/assets/check.svg'
 import {createColumnHelper} from '@tanstack/react-table'
-import {Table, TABLE_ACTION_TYPES, TableTagsCell} from '../components'
-import {useInventoryStore} from '../components/table/inventory/inventory.store'
+import {
+  createTableStore,
+  DEFAULT_LIMIT,
+  DEFAULT_PAGE,
+  Table,
+  TABLE_ACTION_TYPES,
+  TableTagsCell,
+} from '../components'
 import {FILTER_TYPE} from '../components/table/types'
+
+// * Inventory List Store
+export const invInitialQueries = {
+  page: DEFAULT_PAGE,
+  limit: DEFAULT_LIMIT,
+  search: '',
+  sort_by: '',
+  sort_order: '',
+  filters: {
+    filter_type: '',
+    filter_brand: '',
+    filter_country: '',
+    filter_status: '',
+    filter_mdm_enrolled: '',
+    filter_ram: '',
+    filter_storage: '',
+    filter_processor: '',
+    filter_procurement_type: '',
+    filter_procurement_from: '',
+    filter_model: '',
+    filter_device_location: '',
+    filter_device_grading: '',
+  },
+}
+
+export type InventoryQueries = typeof invInitialQueries
+export const useInventoryStore = createTableStore(invInitialQueries)
 
 export function TableDemo() {
   const [search, setSearch] = React.useState('')

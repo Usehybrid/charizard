@@ -29,7 +29,22 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  z-index: 2;
 }
+
+/* Add this to ensure the delete button is always clickable */
+.contentContainer button {
+  position: relative;
+  z-index: 3;
+}
+
+.deleteIcon,
+svg[path='close'] {
+  cursor: pointer;
+  position: relative;
+  z-index: 3;
+}
+
 .detailsContainer {
   width: fit-content;
   margin-left: 5px;
@@ -156,6 +171,7 @@
   left: 0;
   background: #dcd9fd60;
   transition: all 200ms;
+  z-index: 1;
 }
 .deleteIcon {
   cursor: pointer;

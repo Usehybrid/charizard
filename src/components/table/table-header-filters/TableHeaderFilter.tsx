@@ -31,13 +31,11 @@ export default function TableHeaderFilter({
   filterDispatch,
 }: TableHeaderFilterProps) {
   const [search, setSearch] = React.useState('')
-  const [state, send] = useMachine(
-    menu.machine({
-      id: filter['id'],
-      closeOnSelect: false,
-    }),
-  )
-  const api = menu.connect(state, send, normalizeProps)
+  const service = useMachine(menu.machine, {
+    id: filter['id'],
+    closeOnSelect: false,
+  })
+  const api = menu.connect(service, normalizeProps)
 
   const filteredOptions = filter?.options.filter(option => {
     if (!option.name) return false

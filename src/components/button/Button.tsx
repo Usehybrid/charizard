@@ -18,6 +18,7 @@ interface BaseButtonProps {
   customStyles?: React.CSSProperties
   className?: string
   btnType?: 'button' | 'reset' | 'submit'
+  zapTriggerProps?: any
 }
 
 interface IconOnlyButtonTypeProps extends BaseButtonProps {
@@ -51,6 +52,7 @@ export function Button({
   className,
   icon,
   btnType,
+  zapTriggerProps = {},
 }: ButtonProps) {
   return (
     <button
@@ -71,6 +73,7 @@ export function Button({
       onClick={onClick}
       style={customStyles}
       type={btnType}
+      {...zapTriggerProps}
     >
       {type === BUTTON_TYPE.ICON_LEFT && icon}
       {type === BUTTON_TYPE.ICON_ONLY ? icon : children}
@@ -126,14 +129,12 @@ const GroupAction = React.forwardRef(function (
   }: GroupActionProps,
   ref,
 ) {
-  const [state, send] = useMachine(
-    menu.machine({
-      id: React.useId(),
-      positioning: {placement: positionerProps?.placement || 'bottom-end'},
-    }),
-  )
+  const service = useMachine(menu.machine, {
+    id: React.useId(),
+    positioning: {placement: positionerProps?.placement || 'bottom-end'},
+  })
 
-  const api = menu.connect(state, send, normalizeProps)
+  const api = menu.connect(service, normalizeProps)
 
   const customMenuStyles = customStyles?.customMenuStyles
   const customButtonStyles = customStyles?.customButtonStyles

@@ -18,8 +18,8 @@ interface TableExportProps {
 
 export default function TableExport({exportConfig}: TableExportProps) {
   const {isPending, handleExport} = exportConfig
-  const [state, send] = useMachine(popover.machine({id: React.useId()}))
-  const api = popover.connect(state, send, normalizeProps)
+  const service = useMachine(popover.machine, {id: React.useId()})
+  const api = popover.connect(service, normalizeProps)
   const Wrapper = api.portalled ? Portal : React.Fragment
 
   const handleExportInternal = async (type: string) => {

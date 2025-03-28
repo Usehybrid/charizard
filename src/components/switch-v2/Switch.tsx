@@ -7,7 +7,7 @@ import {TooltipV2, TooltipV2Props} from '../tooltip-v2/TooltipV2'
 import {SVG} from '../svg'
 import infoCircleIcon from '../assets/info-circle.svg'
 
-interface SwitchV2Props extends Omit<zagSwitch.Context, 'id'> {
+interface SwitchV2Props extends Omit<zagSwitch.Props, 'id'> {
   children?: React.ReactNode
   errorMsg?: string
   info?: string
@@ -40,9 +40,9 @@ export function SwitchV2({
   tooltipProps = {},
   ...props
 }: SwitchV2Props) {
-  const [state, send] = useMachine(zagSwitch.machine({...props, id: React.useId()}))
+  const service = useMachine(zagSwitch.machine, {...props, id: React.useId()})
 
-  const api = zagSwitch.connect(state, send, normalizeProps)
+  const api = zagSwitch.connect(service, normalizeProps)
 
   React.useEffect(() => {
     if (props.checked !== undefined) {

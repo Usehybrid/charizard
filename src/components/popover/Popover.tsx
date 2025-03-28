@@ -33,16 +33,14 @@ export function Popover({
   closeOnScroll = false,
   containerRef,
 }: PopoverProps) {
-  const [state, send] = useMachine(
-    popover.machine({
-      id: React.useId(),
-      positioning: {placement},
-      closeOnInteractOutside: true,
-      portalled: false,
-      ...popoverProps,
-    }),
-  )
-  const api = popover.connect(state, send, normalizeProps)
+  const service = useMachine(popover.machine, {
+    id: React.useId(),
+    positioning: {placement},
+    closeOnInteractOutside: true,
+    portalled: false,
+    ...popoverProps,
+  })
+  const api = popover.connect(service, normalizeProps)
 
   function closePopover() {
     api?.setOpen(false)

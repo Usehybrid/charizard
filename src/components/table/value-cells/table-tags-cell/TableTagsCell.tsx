@@ -37,20 +37,18 @@ export function TableTagsCell({
   const visibleItems = items.slice(0, maxVisible)
   const remainingItems = items.slice(maxVisible)
 
-  const [state, send] = useMachine(
-    popover.machine({
-      id: React.useId(),
-      positioning: {placement: 'bottom'},
-      closeOnInteractOutside: true,
-    }),
-  )
+  const service = useMachine(popover.machine, {
+    id: React.useId(),
+    positioning: {placement: 'bottom'},
+    closeOnInteractOutside: true,
+  })
 
-  const api = popover.connect(state, send, normalizeProps)
+  const api = popover.connect(service, normalizeProps)
 
   React.useEffect(() => {
     const handleScroll = () => {
       if (api.open) {
-        send('CLOSE')
+        api.setOpen(false)
       }
     }
 

@@ -24,15 +24,18 @@ export function ColorPicker({
   onChange,
   defaultColor,
 }: ColorPickerProps) {
-  const [state, send] = useMachine(
-    colorPicker.machine({
-      name,
-      id: React.useId(),
-      value: colorPicker.parse(defaultColor ?? presets[5]),
-    }),
-  )
+  // Use either defaultValue or value, not both
+  const service = useMachine(colorPicker.machine, {
+    name,
+    id: React.useId(),
+    defaultValue: colorPicker.parse(defaultColor ?? presets[5]),
+    // Set up a callback to handle value changes
+    onValueChange: details => {
+      onChange(details.valueAsString)
+    },
+  })
 
-  const api = colorPicker.connect(state, send, normalizeProps)
+  const api = colorPicker.connect(service, normalizeProps)
 
   return (
     <div {...api.getRootProps()} className={classes.root}>
@@ -52,8 +55,8 @@ export function ColorPicker({
                 key={preset}
                 {...api.getSwatchTriggerProps({value: preset})}
                 className="zap-reset-btn"
+                // Simplify the onClick handler to use the built-in setValue
                 onClick={() => {
-                  onChange(preset)
                   api.setValue(colorPicker.parse(preset))
                   api.setOpen(false)
                 }}
