@@ -1,6 +1,7 @@
 import {StrictMode} from 'react'
 import {createRoot} from 'react-dom/client'
 import {ModalV2, useDisclosure} from './components'
+import { AccordionDemo } from './demo/accordion-demo'
 
 const styles = {
   width: '90%',
@@ -20,14 +21,15 @@ createRoot(document.getElementById('root') as HTMLElement).render(
 )
 
 function App() {
-  const {isOpen, onOpen, onClose} = useDisclosure()
+  // const {isOpen, onOpen, onClose} = useDisclosure()
   return (
     <div style={styles}>
       {/* <TableDemo /> */}
-      <button onClick={onOpen}>Open</button>
+      {/* <button onClick={onOpen}>Open</button>
       <ModalV2 title="Header" footerButtons={[]} {...{isOpen, onClose}}>
         Test modal
-      </ModalV2>
+      </ModalV2> */}
+      <AccordionDemo />
     </div>
   )
 }
