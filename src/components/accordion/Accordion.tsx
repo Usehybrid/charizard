@@ -16,27 +16,28 @@ export const useAccordionStore = create<AccordionContextValue>(set => ({
 
 export const Accordion = ({
   children,
-  defaultActiveKey,
+  defaultActiveKey = [],
   customClasses,
   customStyle,
   isMulti = false,
-  isOpenAll = false,
-  allEventKeys = [],
 }: AccordionProps) => {
+  const storedActiveKeys = useAccordionStore(state => state.activeEventKey)
   const service = useMachine(accordion.machine, {
-    id: defaultActiveKey as string,
+    id: defaultActiveKey[0],
     collapsible: true,
-    defaultValue: defaultActiveKey ? [defaultActiveKey] : undefined,
-    value: isOpenAll ? allEventKeys.map(String) : defaultActiveKey ? [defaultActiveKey] : [],
-    multiple: isMulti || isOpenAll,
+    defaultValue: defaultActiveKey,
+    value: !defaultActiveKey?.length ? storedActiveKeys : undefined,
+    multiple: isMulti,
   })
 
   const api = accordion.connect(service, normalizeProps)
 
-  const storedActiveKeys = useAccordionStore(state => state.activeEventKey)
-
   React.useEffect(() => {
-    useAccordionStore.setState({api, state: service.state, send: service.send})
+    useAccordionStore.setState({
+      api,
+      state: service.state,
+      send: service.send,
+    })
   }, [api, service.state, service.send])
 
   React.useEffect(() => {

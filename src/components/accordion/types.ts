@@ -10,12 +10,10 @@ export interface AccordionContextValue {
 
 export interface AccordionProps {
   children: React.ReactNode
-  defaultActiveKey?: string
+  defaultActiveKey?: string[]
   customClasses?: string
   customStyle?: React.CSSProperties
   isMulti?: boolean
-  isOpenAll?: boolean
-  allEventKeys?: string[] | number[]
 }
 
 export interface HeaderProps {
