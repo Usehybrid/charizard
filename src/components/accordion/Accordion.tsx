@@ -7,48 +7,43 @@ import {AccordionContextValue, AccordionProps, CollapseProps, HeaderProps, ItemP
 import {create} from 'zustand'
 
 export const useAccordionStore = create<AccordionContextValue>(set => ({
-  api: null as any,
-  state: null,
-  send: () => {},
+  service: null as any,
+  api: null, // Add this line to include the api property
   activeEventKey: [],
   setActiveEventKey: keys => set({activeEventKey: keys}),
 }))
 
 export const Accordion = ({
   children,
-  defaultActiveKey = [],
+  defaultActiveKey,
   customClasses,
   customStyle,
   isMulti = false,
+  isOpenAll = false,
+  allEventKeys = [],
 }: AccordionProps) => {
-  const storedActiveKeys = useAccordionStore(state => state.activeEventKey)
+  // New API: pass machine directly and configure with options object
   const service = useMachine(accordion.machine, {
-    id: defaultActiveKey[0],
+    id: defaultActiveKey as string,
     collapsible: true,
-    defaultValue: defaultActiveKey,
-    value: !defaultActiveKey?.length ? storedActiveKeys : undefined,
-    multiple: isMulti,
+    // Use defaultValue instead of directly setting value in machine creation
+    defaultValue: isOpenAll ? allEventKeys.map(String) : defaultActiveKey ? [defaultActiveKey] : [],
+    multiple: isMulti || isOpenAll,
   })
 
+  // Get the API with normalizeProps
   const api = accordion.connect(service, normalizeProps)
 
   React.useEffect(() => {
-    useAccordionStore.setState({
-      api,
-      state: service.state,
-      send: service.send,
-    })
-  }, [api, service.state, service.send])
+    useAccordionStore.setState({service, api})
+  }, [service, api])
 
   React.useEffect(() => {
-    const activeKeys = service.context.get('value') || []
-
-    if (JSON.stringify(storedActiveKeys) === JSON.stringify(activeKeys)) {
-      return
-    }
-
+    // For now, let's try to get the value from the API
+    const api = accordion.connect(service, normalizeProps)
+    const activeKeys = api.value || []
     useAccordionStore.getState().setActiveEventKey(activeKeys)
-  }, [service.context.get('value'), storedActiveKeys])
+  }, [service])
 
   return (
     <div {...api.getRootProps()} className={customClasses} style={customStyle}>
@@ -70,14 +65,11 @@ Accordion.Header = ({eventKey, children, customClasses, customStyle}: HeaderProp
 
   const handleClick = (e: React.MouseEvent) => {
     onClick(e)
-
     const currentActiveKeys = useAccordionStore.getState().activeEventKey || []
     const isActive = currentActiveKeys.includes(eventKey)
-
     const newActiveKeys = isActive
       ? currentActiveKeys.filter(key => key !== eventKey)
       : [...currentActiveKeys, eventKey]
-
     setActiveEventKey(newActiveKeys)
   }
 
@@ -95,9 +87,9 @@ Accordion.Header = ({eventKey, children, customClasses, customStyle}: HeaderProp
 }
 
 Accordion.Collapse = ({eventKey, children, customClasses, customStyle}: CollapseProps) => {
-  const activeKeys = useAccordionStore(state => state.activeEventKey)
-
-  const isOpen = activeKeys.includes(eventKey)
+  const api = useAccordionStore(state => state.api)
+  // Check if the item is expanded using the API
+  const isOpen = api?.value?.includes(eventKey) || false
 
   return (
     <div style={customStyle} className={customClasses} hidden={!isOpen}>

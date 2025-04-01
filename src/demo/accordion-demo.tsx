@@ -2,7 +2,7 @@ import {Accordion} from '../components/accordion'
 
 export function AccordionDemo() {
   return (
-    <Accordion>
+    <Accordion defaultActiveKey="header-1" isMulti isOpenAll allEventKeys={["header-1", "header-2"]}>
       <Accordion.Item eventKey="header-1">
         <Accordion.Header eventKey="header-1">
           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Pariatur at explicabo optio

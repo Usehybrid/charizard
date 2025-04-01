@@ -1,19 +1,25 @@
 import * as accordion from '@zag-js/accordion'
 
 export interface AccordionContextValue {
-  api: accordion.Api<any>
-  state: any
-  send: (event: any) => void
+  api: ReturnType<typeof accordion.connect> | null
+  service: any
   activeEventKey: string[]
-  setActiveEventKey: (key: string[]) => void
+  setActiveEventKey: (keys: string[]) => void
 }
 
-export interface AccordionProps {
+export interface AccordionProps extends Partial<accordion.Props> {
   children: React.ReactNode
-  defaultActiveKey?: string[]
+  defaultActiveKey?: string
   customClasses?: string
   customStyle?: React.CSSProperties
   isMulti?: boolean
+  isOpenAll?: boolean
+  allEventKeys?: string[]
+}
+
+export interface ItemProps {
+  eventKey: string
+  children: React.ReactNode
 }
 
 export interface HeaderProps {
@@ -28,9 +34,4 @@ export interface CollapseProps {
   children: React.ReactNode
   customClasses?: string
   customStyle?: React.CSSProperties
-}
-
-export interface ItemProps {
-  eventKey: string
-  children: React.ReactNode
 }
