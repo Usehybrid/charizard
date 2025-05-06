@@ -1,7 +1,6 @@
 import {StrictMode} from 'react'
 import {createRoot} from 'react-dom/client'
-import {ModalV2, useDisclosure} from './components'
-import { AccordionDemo } from './demo/accordion-demo'
+import {AccordionDemo} from './demo/accordion-demo'
 
 const styles = {
   width: '90%',

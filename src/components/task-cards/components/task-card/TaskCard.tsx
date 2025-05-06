@@ -35,7 +35,7 @@ export default function TaskCard({
   data: ITask
   onClicks?: ((data: ITask) => void)[]
 }) {
-  const dropDownRef = React.useRef<{blur: () => void}>()
+  const dropDownRef = React.useRef<{blur: () => void}>(null)
   const navigate = useNavigate()
   const location = useLocation()
 

@@ -113,7 +113,7 @@ UploadProps) {
   const [uploadLimitError, setUploadLimitError] = React.useState('')
   const [isFileUploadComplete, setIsFileUploadComplete] = React.useState<boolean | null>(null)
   const [hide, setHide] = React.useState(true)
-  const fileInputRef = React.useRef<any>()
+  const fileInputRef = React.useRef<any>(null)
   const isInputDisabled =
     (fileUploadLimit &&
       files.filter(file => !cancelledKey.includes(file.key))?.length >= fileUploadLimit) ||

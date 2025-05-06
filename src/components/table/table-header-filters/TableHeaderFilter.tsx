@@ -1,22 +1,22 @@
-import * as menu from '@zag-js/menu'
-import {normalizeProps, useMachine} from '@zag-js/react'
-import clsx from 'clsx'
 import * as React from 'react'
-import chevronDown from '../../assets/chevron-down.svg'
-import {Search} from '../../search'
-import {SVG} from '../../svg'
-import {TableStore} from '../store'
-import type {FilterOptions, InternalTableFilters, MenuConfig} from '../types'
+import * as menu from '@zag-js/menu'
+import clsx from 'clsx'
 import FilterCheckbox from './FilterCheckbox'
 import FilterTooltip from './FilterTooltip'
+import chevronDown from '../../assets/chevron-down.svg'
 import classes from './styles.module.css'
+import {normalizeProps, useMachine} from '@zag-js/react'
+import {Search} from '../../search'
+import {SVG} from '../../svg'
+import {InternalTableStore} from '../store'
+import type {FilterOptions, InternalTableFilters, MenuConfig} from '../types'
 
 interface TableHeaderFilterProps {
   filter: FilterOptions
-  tableFilters: TableStore['filters']
+  tableFilters: InternalTableStore['filters']
   tableFilter: InternalTableFilters
-  addFilters: TableStore['addFilters']
-  removeFilters: TableStore['removeFilters']
+  addFilters: InternalTableStore['addFilters']
+  removeFilters: InternalTableStore['removeFilters']
   resetFilters: (filterKey: string, filterDispatch: any) => void
   filterDispatch: (value: any) => void
 }

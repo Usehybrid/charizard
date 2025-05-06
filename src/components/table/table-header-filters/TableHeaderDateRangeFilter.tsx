@@ -1,6 +1,6 @@
 import * as React from 'react'
 import classes from './styles.module.css'
-import {TableStore} from '../store'
+import {InternalTableStore} from '../store'
 import {BUTTON_SIZE} from '../../button'
 import {DateRangePicker} from '../../date-picker'
 import {DateRangePickerProps} from '../../date-picker/type'
@@ -9,10 +9,10 @@ import type {FilterOptions, InternalTableFilters} from '../types'
 
 interface TableHeaderFilterProps {
   filter: FilterOptions
-  tableFilters: TableStore['filters']
+  tableFilters: InternalTableStore['filters']
   tableFilter: InternalTableFilters
-  addFilters: TableStore['addFilters']
-  removeFilters: TableStore['removeFilters']
+  addFilters: InternalTableStore['addFilters']
+  removeFilters: InternalTableStore['removeFilters']
   resetFilters: (filterKey: string, filterDispatch: any) => void
   filterDispatch: (value: any) => void
 }

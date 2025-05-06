@@ -8,7 +8,7 @@ import {defineConfig} from 'vite'
 
 export default defineConfig({
   plugins: [
-    react(),
+    react({jsxImportSource: 'react'}),
     dts({
       rollupTypes: true, // Merge all types into one file
       insertTypesEntry: true, // Insert type entry file in the package

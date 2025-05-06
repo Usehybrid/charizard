@@ -17,7 +17,7 @@ export enum TABLE_ACTION_TYPES {
   SET_DURATION = 'set_duration',
 }
 
-type TBaseQuery = {
+export type TBaseQuery = {
   page: number
   limit: number
   search: string
@@ -26,7 +26,7 @@ type TBaseQuery = {
   filters: Record<string, any>
 }
 
-interface TableStore<TQuery> {
+export interface TableStore<TQuery> {
   query: TQuery
   dispatch: (action: {type: TABLE_ACTION_TYPES; payload: any | null}) => void
 }

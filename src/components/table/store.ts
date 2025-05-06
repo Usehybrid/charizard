@@ -5,8 +5,7 @@ import {FILTER_TYPE, InternalTableFilters} from './types'
 // Define SINGLE_VALUE_FILTER_TYPES to categorize the types of filters
 export const SINGLE_VALUE_FILTER_TYPES = [FILTER_TYPE.DATE_RANGE, FILTER_TYPE.TAB]
 
-// Define the structure of the store state
-export interface TableStore {
+export interface InternalTableStore {
   filters: InternalTableFilters[]
   setDefaultFilters: (filters: InternalTableFilters[]) => void
   addFilters: (filterKey: string, value: string, filterDispatch: any) => void
@@ -16,7 +15,7 @@ export interface TableStore {
   resetAllFilters: (filterReset?: any) => void
 }
 
-export const useTableStore = create<TableStore>()(
+export const useTableStore = create<InternalTableStore>()(
   devtools(
     set => ({
       filters: [],

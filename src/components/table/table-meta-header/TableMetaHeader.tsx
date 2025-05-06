@@ -25,7 +25,7 @@ interface TableMetaHeaderProps {
   table: Table<any>
   isCheckbox?: boolean
   isDropdownActions?: boolean
-  customActionItems?: JSX.Element[]
+  customActionItems?: React.ReactElement[]
 }
 
 export default function TableMetaHeader({

@@ -2,7 +2,7 @@ import * as checkbox from '@zag-js/checkbox'
 import ReactCountryFlag from 'react-country-flag'
 import classes from './styles.module.css'
 import {useMachine, normalizeProps} from '@zag-js/react'
-import {TableStore} from '../store'
+import {InternalTableStore} from '../store'
 import clsx from 'clsx'
 
 export default function FilterCheckbox({
@@ -20,8 +20,8 @@ export default function FilterCheckbox({
   value: string
   checked: boolean
   filterKey: string
-  addFilters: TableStore['addFilters']
-  removeFilters: TableStore['removeFilters']
+  addFilters: InternalTableStore['addFilters']
+  removeFilters: InternalTableStore['removeFilters']
   filterDispatch: (value: any) => void
   countryCode?: string
   customName?: string

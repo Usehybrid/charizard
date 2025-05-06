@@ -1,13 +1,13 @@
 import {SelectorsV2} from '../../selectors-v2'
-import {TableStore} from '../store'
+import {InternalTableStore} from '../store'
 import type {FilterOptions, InternalTableFilters} from '../types'
 
 interface TableHeaderFilterProps {
   filter: FilterOptions
-  tableFilters: TableStore['filters']
+  tableFilters: InternalTableStore['filters']
   tableFilter: InternalTableFilters
-  addFilters: TableStore['addFilters']
-  removeFilters: TableStore['removeFilters']
+  addFilters: InternalTableStore['addFilters']
+  removeFilters: InternalTableStore['removeFilters']
   resetFilters: (filterKey: string, filterDispatch: any) => void
   filterDispatch: (value: any) => void
 }

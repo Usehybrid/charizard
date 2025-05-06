@@ -143,7 +143,7 @@ export interface TableProps {
     handleExport: any
     isLegacy?: boolean
   }
-  customActionItems?: JSX.Element[]
+  customActionItems?: React.ReactElement[]
   visibilityConfig?: {
     columnVisibility: VisibilityState
     setColumnVisibility: React.Dispatch<React.SetStateAction<VisibilityState>>

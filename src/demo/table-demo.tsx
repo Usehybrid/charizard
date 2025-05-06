@@ -1,15 +1,9 @@
 import * as React from 'react'
 import randomIcon from '../components/assets/check.svg'
 import {createColumnHelper} from '@tanstack/react-table'
-import {
-  createTableStore,
-  DEFAULT_LIMIT,
-  DEFAULT_PAGE,
-  Table,
-  TABLE_ACTION_TYPES,
-  TableTagsCell,
-} from '../components'
+import {DEFAULT_LIMIT, DEFAULT_PAGE, Table, TABLE_ACTION_TYPES, TableTagsCell} from '../components'
 import {FILTER_TYPE} from '../components/table/types'
+import {createTableStore} from '../utils/table'
 
 // * Inventory List Store
 export const invInitialQueries = {
