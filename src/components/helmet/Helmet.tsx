@@ -10,7 +10,7 @@ interface HelmetProps {
   children?: React.ReactNode
 }
 
-export default function Helmet({
+export function Helmet({
   title,
   description,
   canonicalUrl = window.location.href,
