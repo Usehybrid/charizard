@@ -9,27 +9,27 @@ interface TableUserCellProps {
   user: any
   onClick: any
   showCopy?: boolean
+  isMobile?: boolean
 }
 
 export function TableUserCell({
   user,
   onClick,
   showCopy = true,
+  isMobile = false,
 }: TableUserCellProps): React.ReactElement | null {
   return (
     <div className={classes.box}>
       <img src={user.profile_img_url} alt="User Profile" className={classes.userImage} />
-
       <div className={classes.userDetails}>
         <div className={classes.usernameContainer} onClick={onClick}>
-          <TableBoxEllipses data={getUsername(user)} customStyle={{maxWidth: '190px'}} />
-
-          {/* // todo @sohhamm confirm on the event chip */}
-          {/* <EventChips user={user} events={user?.eventType ?? []} /> */}
+          <TableBoxEllipses
+            data={getUsername(user)}
+            customStyle={{maxWidth: isMobile ? '190px' : '160px'}}
+          />
         </div>
         <div className={classes.emailBox}>
           <div className={clsx(classes.userEmail, 'zap-subcontent-medium')}>{user.work_email}</div>
-
           {user.work_email && showCopy && (
             <SVG
               path={fileMultiple}
@@ -46,31 +46,3 @@ export function TableUserCell({
     </div>
   )
 }
-
-// interface EventChipsProps {
-//   user: any
-//   events: string[]
-// }
-
-// export function EventChips({user, events}: EventChipsProps) {
-//   const wrapEvent = useMediaQuery('(max-width: 1400px)')
-
-//   return (
-//     <div className={classes.eventBox}>
-//       {events?.map(event => {
-//         return user[eventMap[event]?.key] || event === TEAMS_EVENT.NEVER_LOGGED_IN ? (
-//           <div
-//             key={event}
-//             className={clsx(classes.badge, classes[eventMap[event]?.variant])}
-//             title={`${wrapEvent && event !== TEAMS_EVENT.NEVER_LOGGED_IN ? '' : eventMap[event]?.message}`}
-//           >
-//             <div className={classes.emoji}>{eventMap[event]?.emoji}</div>
-//             <div className={classes.emoji}>
-//               <SVG path={eventMap[event]?.to} svgClassName={classes.emoji} />
-//             </div>
-//           </div>
-//         ) : null
-//       })}
-//     </div>
-//   )
-// }

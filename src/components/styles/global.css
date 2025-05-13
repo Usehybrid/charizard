@@ -6,6 +6,7 @@
   text-rendering: optimizeLegibility;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+  --mobile-breakpoint: 768px;
 }
 
 /*
