@@ -6,9 +6,9 @@ import moreMenuIcon from '../assets/more-menu-2.svg'
 import classes from './styles.module.css'
 import {useMachine, normalizeProps, Portal} from '@zag-js/react'
 import {SVG} from '../svg'
+import {handleScrollTable} from './utils'
 import {BUTTON_SIZE, BUTTON_TYPE, BUTTON_VARIANT} from './types'
 import type {PositioningOptions} from '@zag-js/popper'
-import {handleScrollTable} from './utils'
 
 interface BaseButtonProps {
   variant?: BUTTON_VARIANT

@@ -36,7 +36,6 @@ export const getDefaultCheckedState = (
 
   filters.forEach(filter => {
     // plus 1 due to 'All'
-    // obj[filter.key] = Array(filter.options.length + 1).fill({checked: false})
     obj[filter.key] = Array(filter.options.length)
       .fill({checked: false})
       .map((arr, idx) => {
@@ -48,12 +47,8 @@ export const getDefaultCheckedState = (
       })
   })
 
-  // console.log({obj, tableFilters})
   tableFilters.forEach(tableFilter => {
     if (tableFilter.values.length) {
-      // console.log(obj[tableFilter.key])
-      // console.log(tableFilter.values)
-
       obj[tableFilter.key]?.forEach(o => {
         if (tableFilter.values.includes(o.value)) {
           o.checked = true
@@ -61,7 +56,6 @@ export const getDefaultCheckedState = (
           o.checked = false
         }
       })
-      // const idx = obj[tableFilter.key].findIndex(objValue => objValue === table)
     }
   })
 

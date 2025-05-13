@@ -8,9 +8,6 @@ import closeIcon from '../assets/close.svg'
 import {DialogFooterButtons} from '../../types/common'
 import clsx from 'clsx'
 
-/**
- * Props for the ModalV2 component.
- */
 interface ModalV2Props {
   /** Indicates if the modal is open. */
   isOpen?: boolean
@@ -59,26 +56,6 @@ export function ModalV2({
     },
   })
   const api = dialog.connect(service, normalizeProps)
-
-  console.log('Modal render state:', {
-    isOpen,
-    apiOpen: api.open,
-    bodyHasScrollLock: document.body.hasAttribute('data-scroll-lock'),
-    bodyPointerEvents: document.body.style.pointerEvents,
-    rootAriaHidden: document.getElementById('root')?.getAttribute('aria-hidden'),
-  })
-
-  React.useEffect(() => {
-    if (!isOpen) {
-      console.log('Modal CLOSED state:', {
-        isOpen,
-        apiOpen: api.open,
-        bodyHasScrollLock: document.body.hasAttribute('data-scroll-lock'),
-        bodyPointerEvents: document.body.style.pointerEvents,
-        rootAriaHidden: document.getElementById('root')?.getAttribute('aria-hidden'),
-      })
-    }
-  }, [isOpen, api.open])
 
   return (
     <>
