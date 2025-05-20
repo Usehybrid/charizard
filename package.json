@@ -66,29 +66,29 @@
     "zustand": "^5.0.4"
   },
   "devDependencies": {
-    "@storybook/addon-essentials": "^8.6.12",
-    "@storybook/addon-interactions": "^8.6.12",
-    "@storybook/addon-links": "^8.6.12",
-    "@storybook/blocks": "^8.6.12",
-    "@storybook/react": "^8.6.12",
-    "@storybook/react-vite": "^8.6.12",
-    "@storybook/test": "^8.6.12",
-    "@types/node": "^22.15.17",
+    "@storybook/addon-essentials": "^8.6.14",
+    "@storybook/addon-interactions": "^8.6.14",
+    "@storybook/addon-links": "^8.6.14",
+    "@storybook/blocks": "^8.6.14",
+    "@storybook/react": "^8.6.14",
+    "@storybook/react-vite": "^8.6.14",
+    "@storybook/test": "^8.6.14",
+    "@types/node": "^22.15.19",
     "@types/react": "^19.1.4",
-    "@types/react-dom": "^19.1.4",
+    "@types/react-dom": "^19.1.5",
     "@vitejs/plugin-react-swc": "^3.9.0",
     "axios": "^1.9.0",
     "globals": "^16.1.0",
-    "storybook": "^8.6.12",
+    "storybook": "^8.6.14",
     "storybook-css-modules-preset": "^1.1.1",
     "typescript": "5.8.3",
     "vite": "^6.3.5",
     "vite-plugin-checker": "^0.9.3",
-    "vite-plugin-dts": "4.5.3",
+    "vite-plugin-dts": "4.5.4",
     "vite-plugin-libcss": "^1.1.1"
   },
   "publishConfig": {
     "access": "public"
   },
-  "packageManager": "pnpm@10.10.0"
+  "packageManager": "pnpm@10.11.0"
 }
