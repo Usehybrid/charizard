@@ -26,6 +26,7 @@ interface ModalV2Props {
   /** Indicates whether to show a backdrop behind the modal. */
   showBackdrop?: boolean
   customModalClasses?: string
+  onCustomInteractOutside?: (event: dialog.InteractOutsideEvent) => void
 }
 
 /**
@@ -45,6 +46,7 @@ export function ModalV2({
   showBackdrop = false,
   onClose,
   customModalClasses,
+  onCustomInteractOutside,
 }: ModalV2Props) {
   const service = useMachine(dialog.machine, {
     id: React.useId(),
@@ -54,6 +56,7 @@ export function ModalV2({
         onClose()
       }
     },
+    onInteractOutside: onCustomInteractOutside,
   })
   const api = dialog.connect(service, normalizeProps)
 
