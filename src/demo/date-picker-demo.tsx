@@ -4,7 +4,7 @@ import {DateRangePicker} from '../components/date-picker/DateRangePicker'
 import {useDateRangePicker} from '../hooks'
 
 export function DatePickerDemo() {
-  const {period, from, to, handleDateChange} = useDateRangePicker()
+  const {period, handleDateChange} = useDateRangePicker()
   const [d, sD] = useState<string | Date | undefined>()
   return (
     <div>
