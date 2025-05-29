@@ -53,7 +53,7 @@ export function Alert({
           backgroundColor: alertTypeMap[alertType].bg,
           borderColor: alertTypeMap[alertType].color,
           gap: actionType === ALERT_ACTION_TYPES.SHOW_MORE && !showMore ? 0 : '16px',
-          opacity: actionType === ALERT_ACTION_TYPES.SHOW_MORE && !showMore ? '0.5' : '1',
+          // opacity: actionType === ALERT_ACTION_TYPES.SHOW_MORE && !showMore ? '0.5' : '1',
         }}
       >
         <div className={classes.alertHeader}>
