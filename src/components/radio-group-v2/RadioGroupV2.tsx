@@ -28,9 +28,13 @@ interface RadioGroupV2Props {
     }
   }>
   /**
-   * default value to be selected on first render
+   * default value to be selected on first render (uncontrolled)
    */
   defaultValue?: string
+  /**
+   * controlled value - when provided, component becomes controlled
+   */
+  value?: string
   /**
    * callback to be called on change of radio group
    * @param value
@@ -55,6 +59,7 @@ export function RadioGroupV2({
   items,
   label,
   defaultValue,
+  value,
   onChange,
   required = false,
   errorMsg,
@@ -65,7 +70,7 @@ export function RadioGroupV2({
 }: RadioGroupV2Props) {
   const service = useMachine(radio.machine, {
     id: React.useId(),
-    defaultValue,
+    ...(value !== undefined ? {value} : {defaultValue}),
     onValueChange: ({value}) => {
       onChange(value)
     },
