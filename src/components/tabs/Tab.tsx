@@ -23,7 +23,7 @@ export const Tab: React.FC<TabProps> = ({
     <button
       className={clsx(
         classes.tab,
-        isActive ? classes.activeTab : '',
+        isActive && classes.activeTab,
         'zap-content-semibold',
         customClassName,
       )}

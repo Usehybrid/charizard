@@ -15,9 +15,10 @@ export interface UsersChipUser {
 interface UsersChipProps {
   status?: USER_CHIP_STATUS
   users: Array<Partial<UsersChipUser>>
+  userCount?: number
 }
 
-export function UsersChip({status = USER_CHIP_STATUS.DEFAULT, users}: UsersChipProps) {
+export function UsersChip({status = USER_CHIP_STATUS.DEFAULT, users, userCount}: UsersChipProps) {
   return users?.length > 0 ? (
     <div
       className={clsx(
@@ -31,12 +32,14 @@ export function UsersChip({status = USER_CHIP_STATUS.DEFAULT, users}: UsersChipP
           src={users[0].profile_img_url ? users[0].profile_img_url : ''}
           className={clsx(classes.profileImage, classes.firstImage)}
         />
-        {users?.length > 1 && (
-          <img
-            src={users[1].profile_img_url ? users[1].profile_img_url : ''}
-            className={clsx(classes.profileImage, classes.secondImage)}
-          />
-        )}
+        {userCount
+          ? userCount
+          : users?.length > 1 && (
+              <img
+                src={users[1].profile_img_url ? users[1].profile_img_url : ''}
+                className={clsx(classes.profileImage, classes.secondImage)}
+              />
+            )}
       </div>
       <div className={clsx(classes.userCount, 'zap-caption-semibold')}>{users.length}</div>
     </div>
