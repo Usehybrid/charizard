@@ -11,15 +11,15 @@ export function UserChipMultiDemo() {
         'https://hybrid-dev-test.s3.us-west-2.amazonaws.com/user-avatars/neutral/9.png',
       id: 'cea4d3ed-bc4b-4092-ba5d-8245a106e08d',
     },
-    // {
-    //   first_name: 'Emma',
-    //   middle_name: null,
-    //   last_name: 'Watson',
-    //   work_email: 'emm.watson@hybr1d.io',
-    //   profile_img_url:
-    //     'https://hybrid-dev-test.s3.us-west-2.amazonaws.com/user-avatars/female/3.png',
-    //   id: '20297f5a-7349-425e-8c52-22ad78897e65',
-    // },
+    {
+      first_name: 'Emma',
+      middle_name: null,
+      last_name: 'Watson',
+      work_email: 'emm.watson@hybr1d.io',
+      profile_img_url:
+        'https://hybrid-dev-test.s3.us-west-2.amazonaws.com/user-avatars/female/3.png',
+      id: '20297f5a-7349-425e-8c52-22ad78897e65',
+    },
     // {
     //   first_name: 'asg',
     //   middle_name: null,
@@ -38,7 +38,7 @@ export function UserChipMultiDemo() {
       <UsersChip status={USER_CHIP_STATUS.ERROR} users={users} />
       <UsersChip status={USER_CHIP_STATUS.WARNING} users={users} />
       <UsersChip status={USER_CHIP_STATUS.HIGHLIGHT} users={users} />
-      <UsersChip status={USER_CHIP_STATUS.DEFAULT} users={users} />
+      <UsersChip status={USER_CHIP_STATUS.DEFAULT} users={users} userCount={45} />
     </div>
   )
 }

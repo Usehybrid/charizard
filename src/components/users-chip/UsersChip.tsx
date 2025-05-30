@@ -32,16 +32,16 @@ export function UsersChip({status = USER_CHIP_STATUS.DEFAULT, users, userCount}:
           src={users[0].profile_img_url ? users[0].profile_img_url : ''}
           className={clsx(classes.profileImage, classes.firstImage)}
         />
-        {userCount
-          ? userCount
-          : users?.length > 1 && (
-              <img
-                src={users[1].profile_img_url ? users[1].profile_img_url : ''}
-                className={clsx(classes.profileImage, classes.secondImage)}
-              />
-            )}
+        {users?.length > 1 && (
+          <img
+            src={users[1].profile_img_url ? users[1].profile_img_url : ''}
+            className={clsx(classes.profileImage, classes.secondImage)}
+          />
+        )}
       </div>
-      <div className={clsx(classes.userCount, 'zap-caption-semibold')}>{users.length}</div>
+      <div className={clsx(classes.userCount, 'zap-caption-semibold')}>
+        {userCount ? userCount : users.length}
+      </div>
     </div>
   ) : (
     <div className={clsx(classes.userChipContainer, classes.zeroState, classes[status])}>

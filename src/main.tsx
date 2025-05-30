@@ -1,6 +1,7 @@
 import {StrictMode} from 'react'
 import {createRoot} from 'react-dom/client'
-import {AccordionDemo} from './demo/accordion-demo'
+
+import {UserChipMultiDemo} from './demo/user-chip-multi'
 
 const styles = {
   width: '90%',
@@ -20,15 +21,9 @@ createRoot(document.getElementById('root') as HTMLElement).render(
 )
 
 function App() {
-  // const {isOpen, onOpen, onClose} = useDisclosure()
   return (
     <div style={styles}>
-      {/* <TableDemo /> */}
-      {/* <button onClick={onOpen}>Open</button>
-      <ModalV2 title="Header" footerButtons={[]} {...{isOpen, onClose}}>
-        Test modal
-      </ModalV2> */}
-      <AccordionDemo />
+      <UserChipMultiDemo />
     </div>
   )
 }
