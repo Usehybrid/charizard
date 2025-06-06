@@ -120,9 +120,6 @@ export default function TableMetaHeader({
             />
           </div>
         )}
-        {customActionItems && customActionItems.length > 0 && (
-          <TableHeaderActions customActionItems={customActionItems} />
-        )}
 
         {typeof filterConfig === 'object' &&
           !filterConfig.isLoading &&
@@ -146,6 +143,10 @@ export default function TableMetaHeader({
         )}
 
         {typeof exportConfig === 'object' && <TableExport exportConfig={exportConfig} />}
+
+        {customActionItems && customActionItems.length > 0 && (
+          <TableHeaderActions customActionItems={customActionItems} />
+        )}
       </div>
     </div>
   )

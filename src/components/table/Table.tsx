@@ -155,15 +155,11 @@ export interface TableProps {
 }
 
 // todo
-// * min size and max size of table not working
 // * handle undefined filter (while loading)
 // * use deferred while value when data is being re-fetched for total row count flickering issue
 // * figure out clearing of row selection after overlay closes
-// * responsiveness
 // * sync all the table states with url (automatic reset state in table when route changes (or sync filter with url) (p1))
 // * empty state center aligned
-// ?p1: DATE FILTER https://www.figma.com/file/gVfOsoM56qfu6BmwQ9XEaR/SaaS-V1.1?node-id=60%3A6727&mode=dev
-//? Single filter https://www.figma.com/file/gVfOsoM56qfu6BmwQ9XEaR/SaaS-V1.1?node-id=60%3A6383&mode=dev
 
 export function Table({
   data,
@@ -374,7 +370,6 @@ export function Table({
     enableMultiRowSelection: isRadio ? false : true,
     manualPagination: true,
     manualFiltering: true,
-
     getCoreRowModel: getCoreRowModel(),
     defaultColumn: {
       size: Number.MAX_SAFE_INTEGER,
