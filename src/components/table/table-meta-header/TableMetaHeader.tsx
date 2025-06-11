@@ -93,15 +93,15 @@ export default function TableMetaHeader({
 
   React.useEffect(() => {
     if (filterConfig?.initialFilters) {
-      const array = Object.values(filterConfig?.initialFilters)
-      for (let i = 0; i < array.length; i++) {
-        if (array[i].length !== 0) {
+      const values = Object.values(filterConfig?.initialFilters)
+      for (let i in values) {
+        if (values[i].length !== 0) {
           setRowSelection({})
           break
         }
       }
     }
-  }, [filterConfig?.initialFilters])
+  }, [JSON.stringify(filterConfig?.initialFilters)])
 
   return (
     <div className={classes.box}>

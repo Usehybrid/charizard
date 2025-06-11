@@ -21,8 +21,6 @@ export default function TableHeaderFilters({
 
   const filters = filterConfig.filters?.header || []
 
-  console.log(filterConfig)
-
   const tableFilters = useTableStore(s => s.filters)
   const addFilters = useTableStore(state => state.addFilters)
   const removeFilters = useTableStore(state => state.removeFilters)
