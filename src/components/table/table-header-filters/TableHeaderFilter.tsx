@@ -12,6 +12,7 @@ import {InternalTableStore} from '../store'
 import type {FilterOptions, InternalTableFilters, MenuConfig} from '../types'
 
 interface TableHeaderFilterProps {
+  setRowSelection: React.Dispatch<React.SetStateAction<{}>>
   filter: FilterOptions
   tableFilters: InternalTableStore['filters']
   tableFilter: InternalTableFilters
@@ -22,6 +23,7 @@ interface TableHeaderFilterProps {
 }
 
 export default function TableHeaderFilter({
+  setRowSelection,
   filter,
   tableFilters,
   tableFilter,
@@ -45,6 +47,7 @@ export default function TableHeaderFilter({
   const selectedFilters = tableFilter?.values.length
 
   const handleResetFilter = () => {
+    setRowSelection({})
     resetFilters(tableFilter?.key, filterDispatch)
     api.setOpen(false)
   }
