@@ -6,6 +6,7 @@ import {InternalTableStore} from '../store'
 import clsx from 'clsx'
 
 export default function FilterCheckbox({
+  setRowSelection,
   label,
   value,
   addFilters,
@@ -16,6 +17,7 @@ export default function FilterCheckbox({
   countryCode,
   customName,
 }: {
+  setRowSelection: React.Dispatch<React.SetStateAction<{}>>
   label: string
   value: string
   checked: boolean
@@ -31,6 +33,7 @@ export default function FilterCheckbox({
     name: label,
     checked: checked,
     onCheckedChange: ({checked}: {checked: any}) => {
+      setRowSelection({})
       // sync internal table state
       if (checked) {
         addFilters(filterKey, value, filterDispatch)

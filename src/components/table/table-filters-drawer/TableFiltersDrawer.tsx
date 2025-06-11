@@ -15,10 +15,14 @@ import {useDisclosure} from '../../../hooks'
 import {getDefaultCheckedState, removeUncheckedItems} from './utils'
 
 interface TableFiltersDrawerProps {
+  setRowSelection: React.Dispatch<React.SetStateAction<{}>>
   filterConfig: FilterConfig
 }
 
-export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerProps) {
+export default function TableFiltersDrawer({
+  setRowSelection,
+  filterConfig,
+}: TableFiltersDrawerProps) {
   const {isOpen, onOpen, onClose} = useDisclosure()
   const [filterCheckedState, setFilterCheckedState] = React.useState<Record<string, any[]>>({})
   const [allCheckedState, setAllCheckedState] = React.useState<Record<string, boolean>>({})
@@ -74,6 +78,7 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
 
   const handleApplyFilters = () => {
     const checkedState = removeUncheckedItems(filterCheckedState)
+    setRowSelection({})
     Object.entries(checkedState).forEach(([key, value]) => {
       changeFiltersDrawer(key, value ? value.split(',') : [], filterDispatch)
     })
@@ -108,6 +113,7 @@ export default function TableFiltersDrawer({filterConfig}: TableFiltersDrawerPro
       btnText: 'Reset All',
       onClick: () => {
         if (search.length) setSearch('')
+        setRowSelection({})
         resetAllFilters(filterConfig.filterReset)
 
         onClose()

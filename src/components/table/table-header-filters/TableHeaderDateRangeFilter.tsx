@@ -8,6 +8,7 @@ import {useDateRangePicker} from '../../../hooks'
 import type {FilterOptions, InternalTableFilters} from '../types'
 
 interface TableHeaderFilterProps {
+  setRowSelection: React.Dispatch<React.SetStateAction<{}>>
   filter: FilterOptions
   tableFilters: InternalTableStore['filters']
   tableFilter: InternalTableFilters
@@ -18,6 +19,7 @@ interface TableHeaderFilterProps {
 }
 
 export default function TableHeaderDateRangeFilter({
+  setRowSelection,
   filter,
   tableFilter,
   addFilters,
@@ -54,6 +56,7 @@ export default function TableHeaderDateRangeFilter({
   }, [tableFilter?.values])
 
   React.useEffect(() => {
+    setRowSelection({})
     if (initialLoaded) {
       addFilters(filter.key, [from, to].filter(Boolean).join(','), filterDispatch)
     }
@@ -73,6 +76,7 @@ export default function TableHeaderDateRangeFilter({
       }}
       onReset={() => {
         setInitialLoaded(false)
+        setRowSelection({})
         resetFilters(tableFilter?.key, filterDispatch)
       }}
       customClasses={{

@@ -1,3 +1,4 @@
+import * as React from 'react'
 import {useTableStore} from '../store'
 import {FILTER_TYPE, type FilterConfig} from '../types'
 import TableHeaderDateRangeFilter from './TableHeaderDateRangeFilter'
@@ -6,11 +7,13 @@ import classes from './styles.module.css'
 import TableHeaderSelectors from './TableHeaderSelectors'
 
 interface TableHeaderFiltersProps {
+  setRowSelection: React.Dispatch<React.SetStateAction<{}>>
   filterConfig: FilterConfig
   showTabs?: boolean
 }
 
 export default function TableHeaderFilters({
+  setRowSelection,
   filterConfig,
   showTabs = false,
 }: TableHeaderFiltersProps) {
@@ -42,6 +45,7 @@ export default function TableHeaderFilters({
           removeFilters,
           resetFilters,
           filterDispatch,
+          setRowSelection,
         }
 
         switch (filter.type) {

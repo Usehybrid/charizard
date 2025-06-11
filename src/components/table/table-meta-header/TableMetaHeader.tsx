@@ -85,6 +85,12 @@ export default function TableMetaHeader({
     setDefaultFilters([...filters?.map(mapFn)])
   }, [filters?.length, filterConfig?.initialFilters])
 
+  React.useEffect(() => {
+    if (searchConfig?.search) {
+      setRowSelection({})
+    }
+  }, [searchConfig?.search])
+
   return (
     <div className={classes.box}>
       <div className={classes.texts}>
@@ -103,7 +109,11 @@ export default function TableMetaHeader({
         {typeof filterConfig === 'object' &&
           !filterConfig.isLoading &&
           !!filterConfig.filters?.header?.length && (
-            <TableHeaderFilters filterConfig={filterConfig} showTabs />
+            <TableHeaderFilters
+              setRowSelection={setRowSelection}
+              filterConfig={filterConfig}
+              showTabs
+            />
           )}
         {typeof searchConfig === 'object' && (
           <div className={classes.search}>
@@ -124,13 +134,13 @@ export default function TableMetaHeader({
         {typeof filterConfig === 'object' &&
           !filterConfig.isLoading &&
           !!filterConfig.filters?.header?.length && (
-            <TableHeaderFilters filterConfig={filterConfig} />
+            <TableHeaderFilters setRowSelection={setRowSelection} filterConfig={filterConfig} />
           )}
 
         {typeof filterConfig === 'object' &&
           !filterConfig.isLoading &&
           !!filterConfig.filters?.drawer?.length && (
-            <TableFiltersDrawer filterConfig={filterConfig} />
+            <TableFiltersDrawer setRowSelection={setRowSelection} filterConfig={filterConfig} />
           )}
 
         {typeof customColumnConfig === 'object' && (
