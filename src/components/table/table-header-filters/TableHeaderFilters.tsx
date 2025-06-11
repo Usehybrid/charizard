@@ -45,18 +45,13 @@ export default function TableHeaderFilters({
           removeFilters,
           resetFilters,
           filterDispatch,
+          setRowSelection,
         }
 
         switch (filter.type) {
           case FILTER_TYPE.DATE_RANGE:
             if (!showTabs) {
-              return (
-                <TableHeaderDateRangeFilter
-                  setRowSelection={setRowSelection}
-                  key={filter.id}
-                  {...filterProps}
-                />
-              )
+              return <TableHeaderDateRangeFilter key={filter.id} {...filterProps} />
             }
             break
           case FILTER_TYPE.TAB:
@@ -66,13 +61,7 @@ export default function TableHeaderFilters({
             break
           default:
             if (!showTabs) {
-              return (
-                <TableHeaderFilter
-                  setRowSelection={setRowSelection}
-                  key={filter.id}
-                  {...filterProps}
-                />
-              )
+              return <TableHeaderFilter key={filter.id} {...filterProps} />
             }
             break
         }

@@ -3,6 +3,7 @@ import {InternalTableStore} from '../store'
 import type {FilterOptions, InternalTableFilters} from '../types'
 
 interface TableHeaderFilterProps {
+  setRowSelection: React.Dispatch<React.SetStateAction<{}>>
   filter: FilterOptions
   tableFilters: InternalTableStore['filters']
   tableFilter: InternalTableFilters
@@ -13,6 +14,7 @@ interface TableHeaderFilterProps {
 }
 
 export default function TableHeaderSelectors({
+  setRowSelection,
   filter,
   tableFilters,
   addFilters,
@@ -24,6 +26,7 @@ export default function TableHeaderSelectors({
   }))
 
   const selectorHandler = (value: string) => {
+    setRowSelection({})
     addFilters(filter.key, value, filterDispatch)
   }
 

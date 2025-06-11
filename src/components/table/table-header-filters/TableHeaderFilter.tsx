@@ -120,6 +120,7 @@ export default function TableHeaderFilter({
                       countryCode={option.country_code}
                       key={option.value}
                       customName={option.customName}
+                      setRowSelection={setRowSelection}
                     />
                   </div>
                 ))

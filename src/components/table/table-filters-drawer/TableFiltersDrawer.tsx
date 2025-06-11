@@ -78,6 +78,7 @@ export default function TableFiltersDrawer({
 
   const handleApplyFilters = () => {
     const checkedState = removeUncheckedItems(filterCheckedState)
+    setRowSelection({})
     Object.entries(checkedState).forEach(([key, value]) => {
       changeFiltersDrawer(key, value ? value.split(',') : [], filterDispatch)
     })

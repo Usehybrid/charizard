@@ -56,6 +56,7 @@ export default function TableHeaderDateRangeFilter({
   }, [tableFilter?.values])
 
   React.useEffect(() => {
+    setRowSelection({})
     if (initialLoaded) {
       addFilters(filter.key, [from, to].filter(Boolean).join(','), filterDispatch)
     }

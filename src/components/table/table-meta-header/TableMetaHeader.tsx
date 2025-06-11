@@ -91,18 +91,6 @@ export default function TableMetaHeader({
     }
   }, [searchConfig?.search])
 
-  React.useEffect(() => {
-    if (filterConfig?.initialFilters) {
-      const values = Object.values(filterConfig?.initialFilters)
-      for (let i in values) {
-        if (values[i].length !== 0) {
-          setRowSelection({})
-          break
-        }
-      }
-    }
-  }, [JSON.stringify(filterConfig?.initialFilters)])
-
   return (
     <div className={classes.box}>
       <div className={classes.texts}>
