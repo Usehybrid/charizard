@@ -1,4 +1,17 @@
 .headerClass {
   height: 100%;
   width: 100%;
+  cursor: pointer;
+}
+
+/* Optional: Add smooth transitions for opacity and transform for content */
+.accordionContent {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 200ms ease-in-out, transform 200ms ease-in-out;
+}
+
+.accordionContent[aria-hidden='true'] {
+  opacity: 0;
+  transform: translateY(-10px);
 }
