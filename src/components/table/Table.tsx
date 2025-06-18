@@ -339,15 +339,19 @@ export function Table({
       size: 40,
     },
     ...columns,
-    {
-      id: DROPDOWN_COL_ID,
-      cell: (props: any) => (
-        <TableActions actionsConfig={actionsConfig} data={props.row.original} />
-      ),
-      header: 'Actions',
-      size: 70,
-      enablePinning: true,
-    },
+    ...(!!Object.values(rowSelection).length
+      ? []
+      : [
+          {
+            id: DROPDOWN_COL_ID,
+            cell: (props: any) => (
+              <TableActions actionsConfig={actionsConfig} data={props.row.original} />
+            ),
+            header: 'Actions',
+            size: 70,
+            enablePinning: true,
+          },
+        ]),
   ]
 
   const table = useReactTable({
