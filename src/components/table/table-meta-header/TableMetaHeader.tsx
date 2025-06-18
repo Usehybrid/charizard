@@ -101,6 +101,7 @@ export default function TableMetaHeader({
           <TableSelectedActions
             rowSelectionConfig={rowSelectionConfig}
             rowSelection={rowSelection}
+            setRowSelection={setRowSelection}
           />
         )}
       </div>
