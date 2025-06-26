@@ -51,4 +51,5 @@ export enum MODULES {
   HOLIDAY_CALENDAR = 'holiday-calendar',
   IT_REQUEST = 'it-request',
   WORKFLOW = 'workflow',
+  DEVICES = 'devices'
 }
