@@ -26,6 +26,7 @@ const HIDE_CANCEL_REQUEST = [
   MODULES.ATTENDANCE,
   MODULES.IT_REQUEST,
   MODULES.WORKFLOW,
+  MODULES.DEVICES,
 ]
 
 export default function TaskCard({
