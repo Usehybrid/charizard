@@ -20,20 +20,11 @@ export default defineConfig({
   build: {
     lib: {
       entry: resolve(__dirname, 'src/components/index.ts'),
-      name: 'Charizard',
       fileName: 'hybr1d-ui',
+      formats: ['es'],
     },
     rollupOptions: {
       external: [...Object.keys(pkg.peerDependencies), '@emotion/react'],
-      output: {
-        globals: {
-          react: 'React',
-          'react-dom': 'ReactDOM',
-        },
-      },
     },
   },
-  // optimizeDeps: {
-  //   include: ['react', 'react-dom', '@hybr1d-tech/charizard'],
-  // },
 })
