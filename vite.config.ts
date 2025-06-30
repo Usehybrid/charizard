@@ -24,7 +24,7 @@ export default defineConfig({
       formats: ['es'],
     },
     rollupOptions: {
-      external: [...Object.keys(pkg.peerDependencies), '@emotion/react'],
+      external: [...Object.keys(pkg.peerDependencies)],
     },
   },
 })
