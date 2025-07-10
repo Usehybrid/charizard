@@ -26,6 +26,10 @@ export interface TaskCardsProps {
     setLimit: (limit: number) => void
   }
   onClicks?: ((data: ITask) => void)[][]
+  moduleAccess?: {
+    hasDeviceAccess?: boolean
+    hasLeaveAccess?: boolean
+  }
 }
 
 export function TaskCards({
@@ -36,6 +40,7 @@ export function TaskCards({
   emptyText = 'No requests',
   paginationConfig,
   onClicks,
+  moduleAccess,
 }: TaskCardsProps) {
   const isEmpty = !isLoading && !isError && (!data || data?.length === 0)
   return (
@@ -55,6 +60,7 @@ export function TaskCards({
                 data={data}
                 key={idx}
                 onClicks={onClicks?.[idx]}
+                moduleAccess={moduleAccess}
               />
             ))
           )}
@@ -68,6 +74,7 @@ export function TaskCards({
     </div>
   )
 }
+
 function Error() {
   return (
     <div className={classes.emptyBox}>
