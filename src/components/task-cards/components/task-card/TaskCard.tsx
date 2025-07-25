@@ -1,16 +1,16 @@
-import clsx from 'clsx'
 import * as React from 'react'
-import {useLocation, useNavigate} from 'react-router'
+import clsx from 'clsx'
 import deleteBin from '../../../assets/delete-bin.svg'
 import infoOctagon from '../../../assets/info-octagon.svg'
+import classes from './task-card.module.css'
+import {useLocation, useNavigate} from 'react-router'
+import getStatus, {TASK_STATUS} from '../../helper'
 import {AsyncImage} from '../../../asyncImage'
 import {Badge, BADGE_HIGHLIGHT, BADGE_STATUS} from '../../../badge'
 import {BUTTON_SIZE, BUTTON_VARIANT, Button} from '../../../button'
 import {getFileTypeIcon} from '../../../upload/helper'
 import {UserChip} from '../../../user-chip'
-import getStatus, {TASK_STATUS} from '../../helper'
 import {ITask, ITaskDetails, ITaskObjectValue, MODULES} from '../../types'
-import classes from './task-card.module.css'
 import {
   getDefaultFormattedDateTime,
   getUsername,
@@ -32,15 +32,33 @@ const HIDE_CANCEL_REQUEST = [
 export default function TaskCard({
   data,
   onClicks,
+  moduleAccess,
 }: {
   data: ITask
   onClicks?: ((data: ITask) => void)[]
+  moduleAccess?: {
+    hasDeviceAccess?: boolean
+    hasLeaveAccess?: boolean
+  }
 }) {
   const dropDownRef = React.useRef<{blur: () => void}>(null)
   const navigate = useNavigate()
   const location = useLocation()
 
-  const menuItems = getTaskMenuItems(data, onClicks, navigate, location)
+  const hasModuleAccess = () => {
+    switch (data.module_reference) {
+      case MODULES.DEVICES:
+        return moduleAccess?.hasDeviceAccess ?? true
+      case MODULES.LEAVE:
+        return moduleAccess?.hasLeaveAccess ?? true
+      default:
+        return true
+    }
+  }
+
+  const menuItems = hasModuleAccess()
+    ? getTaskMenuItems(data, onClicks, navigate, location, moduleAccess)
+    : []
 
   const hideActionHandler = () => {
     dropDownRef.current?.blur()
@@ -178,6 +196,10 @@ export function getTaskMenuItems(
   onClicks: ((data: ITask) => void)[] | undefined,
   navigate: ReturnType<typeof useNavigate>,
   location: ReturnType<typeof useLocation>,
+  moduleAccess?: {
+    hasDeviceAccess?: boolean
+    hasLeaveAccess?: boolean
+  },
 ) {
   return [
     {
@@ -202,7 +224,9 @@ export function getTaskMenuItems(
       iconSrc: infoOctagon,
       hidden:
         (data.module_reference === MODULES.LEAVE && !data.task_details_id) ||
-        HIDE_DETAILS.includes(data.module_reference as MODULES),
+        HIDE_DETAILS.includes(data.module_reference as MODULES) ||
+        (data.module_reference === MODULES.DEVICES && !moduleAccess?.hasDeviceAccess) ||
+        (data.module_reference === MODULES.LEAVE && !moduleAccess?.hasLeaveAccess),
     },
     {
       label: 'Cancel request',
