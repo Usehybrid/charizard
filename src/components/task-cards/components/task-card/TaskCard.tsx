@@ -209,6 +209,10 @@ export function getTaskMenuItems(
           onClicks[0](data)
           return
         }
+        if (data.module_reference === 'it_support') {
+          navigate(`/it-support/${data.task_details_id}`)
+          return
+        }
         if (data.module_reference === 'attendance') {
           navigate(`/attendance/approve/${data.task_details_id}`)
           return
