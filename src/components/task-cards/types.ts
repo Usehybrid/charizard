@@ -50,6 +50,7 @@ export enum MODULES {
   ATTENDANCE = 'attendance',
   HOLIDAY_CALENDAR = 'holiday-calendar',
   IT_REQUEST = 'it-request',
+  IT_SUPPORT = 'it-support',
   WORKFLOW = 'workflow',
   DEVICES = 'devices'
 }
