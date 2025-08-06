@@ -6,6 +6,8 @@ export enum TASK_STATUS {
   CLOSED = 'closed',
   DECLINED = 'declined',
   CANCELLED = 'cancelled',
+  OPEN = 'open',
+  RESOLVED = 'resolved',
 }
 
 export default function getStatus(status: string) {
@@ -24,6 +26,10 @@ export default function getStatus(status: string) {
       return 'Declined'
     case TASK_STATUS.APPROVED:
       return 'Approved'
+    case TASK_STATUS.OPEN:
+      return 'Open'
+    case TASK_STATUS.RESOLVED:
+      return 'Resolved'
     default:
       console.warn(`Unknown status: ${status}`)
       return 'Unknown'
