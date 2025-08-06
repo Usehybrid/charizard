@@ -43,14 +43,13 @@ export interface FileType {
   file_name: string
 }
 
-
 export enum MODULES {
   PROFILE = 'profile',
   LEAVE = 'leave',
   ATTENDANCE = 'attendance',
   HOLIDAY_CALENDAR = 'holiday-calendar',
   IT_REQUEST = 'it-request',
-  IT_SUPPORT = 'it-support',
+  IT_SUPPORT = 'it_support',
   WORKFLOW = 'workflow',
-  DEVICES = 'devices'
+  DEVICES = 'devices',
 }
