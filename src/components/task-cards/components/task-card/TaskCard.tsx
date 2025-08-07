@@ -248,7 +248,8 @@ export function getTaskMenuItems(
         (data.module_reference === MODULES.LEAVE && !data.task_details_id) ||
         HIDE_CANCEL_REQUEST.includes(data.module_reference as MODULES) ||
         data.status === TASK_STATUS.CANCELLED ||
-        (data.module_reference === MODULES.IT_SUPPORT && data.status === TASK_STATUS.CLOSED) ||
+        (data.module_reference === MODULES.IT_SUPPORT &&
+          (data.status === TASK_STATUS.CLOSED || data.status === TASK_STATUS.RESOLVED)) ||
         data.status === TASK_STATUS.DECLINED ||
         data.status === TASK_STATUS.PENDING_CANCELLATION ||
         (data.module_reference === 'leave' &&
