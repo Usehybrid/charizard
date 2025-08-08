@@ -32,6 +32,9 @@ export default function getStatus(status: string) {
       return 'Resolved'
     default:
       console.warn(`Unknown status: ${status}`)
-      return 'Unknown'
+      return status
+        .split(' ')
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ')
   }
 }
