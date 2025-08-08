@@ -30,7 +30,7 @@ export interface TaskCardsProps {
     hasDeviceAccess?: boolean
     hasLeaveAccess?: boolean
   }
-  labels?: string[]
+  readonly labels?: string[]
 }
 
 export function TaskCards({
