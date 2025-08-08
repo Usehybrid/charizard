@@ -33,6 +33,7 @@ export default function TaskCard({
   data,
   onClicks,
   moduleAccess,
+  labels,
 }: {
   data: ITask
   onClicks?: ((data: ITask) => void)[]
@@ -40,6 +41,7 @@ export default function TaskCard({
     hasDeviceAccess?: boolean
     hasLeaveAccess?: boolean
   }
+  labels?: string[]
 }) {
   const dropDownRef = React.useRef<{blur: () => void}>(null)
   const navigate = useNavigate()
@@ -57,7 +59,7 @@ export default function TaskCard({
   }
 
   const menuItems = hasModuleAccess()
-    ? getTaskMenuItems(data, onClicks, navigate, location, moduleAccess)
+    ? getTaskMenuItems(data, onClicks, navigate, location, moduleAccess, labels)
     : []
 
   const hideActionHandler = () => {
@@ -202,10 +204,11 @@ export function getTaskMenuItems(
     hasDeviceAccess?: boolean
     hasLeaveAccess?: boolean
   },
+  labels?: string[],
 ) {
   return [
     {
-      label: 'See details',
+      label: labels?.[0] ?? 'See details',
       onClick: (data: ITask) => {
         if (onClicks?.[0]) {
           onClicks[0](data)
@@ -231,7 +234,7 @@ export function getTaskMenuItems(
         (data.module_reference === MODULES.LEAVE && !moduleAccess?.hasLeaveAccess),
     },
     {
-      label: 'Cancel request',
+      label: labels?.[1] ?? 'Cancel request',
       onClick: (data: ITask) => {
         if (onClicks?.[1]) {
           onClicks[1](data)

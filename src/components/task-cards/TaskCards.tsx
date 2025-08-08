@@ -30,6 +30,7 @@ export interface TaskCardsProps {
     hasDeviceAccess?: boolean
     hasLeaveAccess?: boolean
   }
+  readonly labels?: string[]
 }
 
 export function TaskCards({
@@ -41,6 +42,7 @@ export function TaskCards({
   paginationConfig,
   onClicks,
   moduleAccess,
+  labels,
 }: TaskCardsProps) {
   const isEmpty = !isLoading && !isError && (!data || data?.length === 0)
   return (
@@ -61,6 +63,7 @@ export function TaskCards({
                 key={idx}
                 onClicks={onClicks?.[idx]}
                 moduleAccess={moduleAccess}
+                labels={labels}
               />
             ))
           )}
