@@ -92,15 +92,15 @@ export const useTableStore = create<InternalTableStore>()(
         }),
 
       resetAllFilters: filterReset =>
-        set(state => ({
-          filters: state.filters.map(obj => {
-            filterReset?.()
-            return {
+        set(state => {
+          filterReset?.()
+          return {
+            filters: state.filters.map(obj => ({
               ...obj,
               values: obj.type && SINGLE_VALUE_FILTER_TYPES.includes(obj.type) ? '' : [],
-            }
-          }),
-        })),
+            })),
+          }
+        }),
     }),
     {
       name: 'table-store',
