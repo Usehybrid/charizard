@@ -121,8 +121,16 @@ const tableQueryReducer = <TQuery extends TBaseQuery>(
     }
     case TABLE_ACTION_TYPES.RESET_ALL:
       return initialQueries
-    case TABLE_ACTION_TYPES.RESET_FILTERS:
-      return {...query, filters: initialQueries.filters}
+    case TABLE_ACTION_TYPES.RESET_FILTERS: {
+      const preserveKeys = payload?.preserve || []
+      const resetFilters = {...initialQueries.filters}
+      preserveKeys.forEach((filterKey: string) => {
+        if (query.filters[filterKey] !== undefined && query.filters[filterKey] !== '') {
+          resetFilters[filterKey] = query.filters[filterKey]
+        }
+      })
+      return {...query, filters: resetFilters}
+    }
     case TABLE_ACTION_TYPES.PAGE:
       return {...query, page: payload}
     case TABLE_ACTION_TYPES.LIMIT:
