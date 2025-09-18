@@ -28,6 +28,7 @@ interface ModalV2Props {
   customModalClasses?: string
   onCustomInteractOutside?: (event: dialog.InteractOutsideEvent) => void
   closeOnInteractOutside?: boolean
+  hideHeader?: boolean
 }
 
 /**
@@ -49,6 +50,7 @@ export function ModalV2({
   customModalClasses,
   onCustomInteractOutside,
   closeOnInteractOutside,
+  hideHeader = false,
 }: ModalV2Props) {
   const service = useMachine(dialog.machine, {
     id: React.useId(),
@@ -62,7 +64,7 @@ export function ModalV2({
     closeOnInteractOutside,
   })
   const api = dialog.connect(service, normalizeProps)
-
+  console.log(hideHeader)
   return (
     <>
       {trigger && (
@@ -75,11 +77,16 @@ export function ModalV2({
           {showBackdrop && <div {...api.getBackdropProps()} className={classes.backdrop} />}
           <div {...api.getPositionerProps()} className={classes.positioner}>
             <div {...api.getContentProps()} className={clsx(classes.modal, customModalClasses)}>
-              <div {...api.getTitleProps()} className={classes.header}>
-                <div>
-                  <h2 className="zap-heading-semibold">{title}</h2>
-                  {subTitle && <p className="zap-subcontent-regular">{subTitle}</p>}
-                </div>
+              <div
+                {...api.getTitleProps()}
+                className={hideHeader ? classes.noHeader : classes.header}
+              >
+                {!hideHeader && (
+                  <div>
+                    <h2 className="zap-heading-semibold">{title}</h2>
+                    {subTitle && <p className="zap-subcontent-regular">{subTitle}</p>}
+                  </div>
+                )}
                 <button {...api.getCloseTriggerProps()} className="zap-reset-btn">
                   <SVG path={closeIcon} svgClassName={classes.icon} />
                 </button>
