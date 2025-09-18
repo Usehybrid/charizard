@@ -24,8 +24,9 @@ export function ModalDemo() {
     <ModalV2
       title="Title here"
       trigger={<button onClick={onOpen}>Open modal</button>}
-      footerButtons={buttons}
+      footerButtons={[]}
       isOpen={isOpen}
+      hideHeader={true}
     >
       test content
     </ModalV2>
