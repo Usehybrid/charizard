@@ -14,59 +14,66 @@ export default function TableSelectedActions({
   rowSelection,
   setRowSelection,
 }: TableSelectedActionsProps) {
-  if (
-    !rowSelectionConfig ||
-    !rowSelectionConfig.isCheckbox ||
-    Object.keys(rowSelection).length === 0
-  )
-    return null
+  if (!rowSelectionConfig || Object.keys(rowSelection).length === 0) return null
 
-  const {isCheckbox, actions} = rowSelectionConfig
+  const {isCheckbox, isRadio, actions} = rowSelectionConfig
   const showDropdown = actions?.length && actions.length > 2
   const firstAction = actions?.length ? actions[0] : null
 
-  return (
-    <>
-      {isCheckbox && Object.keys(rowSelection).length > 0 && (
-        <>
-          {showDropdown ? (
-            <Button.GroupAction
-              variant={BUTTON_VARIANT.SECONDARY}
-              size={BUTTON_SIZE.SMALL}
-              menuItems={actions.slice(1)}
-              positionerProps={{placement: 'bottom-end'}}
-              onClick={async () => {
-                await firstAction?.onClick()
-                setRowSelection({})
-              }}
-            >
-              <SVG
-                svgClassName={classes.btnIcon}
-                path={firstAction?.iconSrc || ''}
-                spanClassName={classes.btnIconSpan}
-              />
-              {firstAction?.label}
-            </Button.GroupAction>
-          ) : (
-            <div className={classes.selectedActions}>
-              {actions?.map(action => (
-                <Button
-                  onClick={async () => {
-                    await action.onClick()
-                    setRowSelection({})
-                  }}
-                  variant={BUTTON_VARIANT.SECONDARY}
-                  size={BUTTON_SIZE.SMALL}
-                  key={action.label}
-                >
-                  <SVG path={action.iconSrc} svgClassName={classes.btnIcon} />
-                  {action.label}
-                </Button>
-              ))}
-            </div>
-          )}
-        </>
-      )}
-    </>
-  )
+  if (isRadio) {
+    return (
+      <Button
+        onClick={() => setRowSelection({})}
+        variant={BUTTON_VARIANT.SECONDARY}
+        size={BUTTON_SIZE.SMALL}
+      >
+        Clear Selection
+      </Button>
+    )
+  }
+
+  if (isCheckbox) {
+    return (
+      <>
+        {showDropdown ? (
+          <Button.GroupAction
+            variant={BUTTON_VARIANT.SECONDARY}
+            size={BUTTON_SIZE.SMALL}
+            menuItems={actions.slice(1)}
+            positionerProps={{placement: 'bottom-end'}}
+            onClick={async () => {
+              await firstAction?.onClick()
+              setRowSelection({})
+            }}
+          >
+            <SVG
+              svgClassName={classes.btnIcon}
+              path={firstAction?.iconSrc || ''}
+              spanClassName={classes.btnIconSpan}
+            />
+            {firstAction?.label}
+          </Button.GroupAction>
+        ) : (
+          <div className={classes.selectedActions}>
+            {actions?.map(action => (
+              <Button
+                onClick={async () => {
+                  await action.onClick()
+                  setRowSelection({})
+                }}
+                variant={BUTTON_VARIANT.SECONDARY}
+                size={BUTTON_SIZE.SMALL}
+                key={action.label}
+              >
+                <SVG path={action.iconSrc} svgClassName={classes.btnIcon} />
+                {action.label}
+              </Button>
+            ))}
+          </div>
+        )}
+      </>
+    )
+  }
+
+  return null
 }
