@@ -43,6 +43,7 @@ export default function TableMetaHeader({
   customActionItems,
 }: TableMetaHeaderProps) {
   const hasRowActions = rowSelectionConfig?.actions && rowSelectionConfig.actions.length > 0
+  const hasRadioSelection = rowSelectionConfig?.isRadio && Object.keys(rowSelection).length > 0
   const rowsSelected = Object.keys(rowSelection).length
   const isRowSelected = rowsSelected > 0
   const selectedText = `${rowsSelected} ${pluralize(
@@ -97,7 +98,7 @@ export default function TableMetaHeader({
         <p className={clsx(classes.heading, 'zap-content-semibold')}>
           {isRowSelected ? selectedText : totalText} {isRowSelected ? 'Selected' : ''}
         </p>
-        {hasRowActions && (
+        {(hasRowActions || hasRadioSelection) && (
           <TableSelectedActions
             rowSelectionConfig={rowSelectionConfig}
             rowSelection={rowSelection}
