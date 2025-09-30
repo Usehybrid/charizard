@@ -22,13 +22,15 @@ export default function TableSelectedActions({
 
   if (isRadio) {
     return (
-      <Button
-        onClick={() => setRowSelection({})}
-        variant={BUTTON_VARIANT.SECONDARY}
-        size={BUTTON_SIZE.SMALL}
-      >
-        Clear Selection
-      </Button>
+      <div className={classes.selectedActions}>
+        <Button
+          onClick={() => setRowSelection({})}
+          variant={BUTTON_VARIANT.SECONDARY}
+          size={BUTTON_SIZE.SMALL}
+        >
+          Clear Selection
+        </Button>
+      </div>
     )
   }
 
