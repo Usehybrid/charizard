@@ -264,3 +264,8 @@
 .dateContentContainer {
   gap: 8px;
 }
+
+.filterLabel {
+  overflow-wrap: break-word;
+  word-break: break-all;
+}
