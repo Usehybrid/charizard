@@ -28,6 +28,7 @@ export default function TableBoxEllipses({data, customStyle}: TableBoxEllipsesPr
       placement="right"
       portalId={TOOLTIP_DEFAULTS.portalId}
       contentMaxLength={100}
+      customStyle={{wordBreak: 'break-all', whiteSpace: 'normal'}}
       trigger={
         <div
           className={clsx(classes.box, 'zap-content-medium')}
