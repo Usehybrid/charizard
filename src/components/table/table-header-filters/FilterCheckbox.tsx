@@ -48,7 +48,7 @@ export default function FilterCheckbox({
   return (
     <label {...api.getRootProps()} className={clsx(classes.optionLabel, 'zap-subcontent-medium')}>
       <div {...api.getControlProps()} />
-      <span className={classes.filterLabel} {...api.getLabelProps()}>
+      <span {...api.getLabelProps()}>
         {countryCode && (
           <ReactCountryFlag
             countryCode={countryCode || 'IN'}
