@@ -54,6 +54,8 @@ interface DatePickerProps extends PropsSingle {
   showOutsideDays?: boolean
   disabled?: Matcher | Matcher[]
   trigger?: React.ReactNode
+  startMonth?: Date
+  endMonth?: Date
 }
 
 export function DatePicker({
@@ -71,6 +73,8 @@ export function DatePicker({
   isError,
   showOutsideDays = true,
   trigger,
+  startMonth = new Date(2020, 0),
+  endMonth = new Date(2050, 0),
   ...props
 }: DatePickerProps) {
   const monthYear = useDateStore(state => state.monthYear)
@@ -169,7 +173,8 @@ export function DatePicker({
           <DayPicker
             showOutsideDays={showOutsideDays}
             captionLayout="dropdown"
-            endMonth={new Date(2050, 0)}
+            startMonth={startMonth}
+            endMonth={endMonth}
             classNames={{
               month: classes.month,
               month_caption: classes.caption,
@@ -234,7 +239,6 @@ function Dropdown(props: any) {
   const monthYear = useDateStore(state => state.monthYear)
   const setMonthYear = useDateStore(state => state.setMonthYear)
 
-  //TODO: @abhishek improve logic
   const isYearDropdown = props['aria-label'] === 'Choose the Year'
 
   let selectedOption: DropdownOption | undefined = undefined
