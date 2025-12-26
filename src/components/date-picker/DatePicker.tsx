@@ -19,16 +19,7 @@ import {
   BUTTON_VARIANT,
 } from '../index'
 import {StylesConfig} from 'react-select'
-import {create} from 'zustand'
-import {DateStore, MonthYear} from './type'
-
-const useDateStore = create<DateStore>()(set => ({
-  monthYear: {
-    month: new Date().getMonth(),
-    year: new Date().getFullYear(),
-  },
-  setMonthYear: (value: MonthYear) => set({monthYear: value}),
-}))
+import {MonthYear} from './type'
 
 interface DatePickerProps extends PropsSingle {
   value?: Date | string
@@ -77,14 +68,30 @@ export function DatePicker({
   endMonth = new Date(2050, 0),
   ...props
 }: DatePickerProps) {
-  const monthYear = useDateStore(state => state.monthYear)
-  const setMonthYear = useDateStore(state => state.setMonthYear)
+  // Local state for this specific instance
+  const [monthYear, setMonthYear] = React.useState(() => {
+    if (value && !isNaN(new Date(value).getTime())) {
+      return {
+        month: new Date(value).getMonth(),
+        year: new Date(value).getFullYear(),
+      }
+    }
+    return {
+      month: new Date().getMonth(),
+      year: new Date().getFullYear(),
+    }
+  })
 
   React.useEffect(() => {
     if (value && !isNaN(new Date(value).getTime())) {
       setMonthYear({
         month: new Date(value).getMonth(),
         year: new Date(value).getFullYear(),
+      })
+    } else {
+      setMonthYear({
+        month: new Date().getMonth(),
+        year: new Date().getFullYear(),
       })
     }
   }, [value])
@@ -197,11 +204,13 @@ export function DatePicker({
               dropdown_icon: classes.dropdownIcon,
             }}
             components={{
-              Dropdown,
-              Nav,
+              Dropdown: (props: any) => (
+                <Dropdown {...props} monthYear={monthYear} setMonthYear={setMonthYear} />
+              ),
+              Nav: () => <Nav monthYear={monthYear} setMonthYear={setMonthYear} />,
             }}
             mode={mode}
-            defaultMonth={date}
+            defaultMonth={date || new Date()}
             selected={date}
             onSelect={handleDateSelect}
             numberOfMonths={1}
@@ -235,10 +244,7 @@ const dropdownStyles: StylesConfig<any> = {
   },
 }
 
-function Dropdown(props: any) {
-  const monthYear = useDateStore(state => state.monthYear)
-  const setMonthYear = useDateStore(state => state.setMonthYear)
-
+function Dropdown({monthYear, setMonthYear, ...props}: any) {
   const isYearDropdown = props['aria-label'] === 'Choose the Year'
 
   let selectedOption: DropdownOption | undefined = undefined
@@ -269,10 +275,13 @@ function Dropdown(props: any) {
   )
 }
 
-function Nav() {
-  const monthYear = useDateStore(state => state.monthYear)
-  const setMonthYear = useDateStore(state => state.setMonthYear)
-
+function Nav({
+  monthYear,
+  setMonthYear,
+}: {
+  monthYear: MonthYear
+  setMonthYear: (value: MonthYear) => void
+}) {
   const {nextMonth, previousMonth} = useDayPicker()
   return (
     <div className={classes.navContainer}>
