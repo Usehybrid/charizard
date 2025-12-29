@@ -24,26 +24,24 @@ import {MonthYear} from './type'
 
 type DateStore = {
   instances: Map<string, MonthYear>
-  getInstanceState: (id: string) => MonthYear
+  getInstanceMonthYear: (id: string) => MonthYear | undefined
   setInstanceMonthYear: (id: string, value: MonthYear) => void
+  removeInstance: (id: string) => void
 }
 
 const useDateStore = create<DateStore>()((set, get) => ({
   instances: new Map(),
-  getInstanceState: (id: string) => {
-    const instances = get().instances
-    if (!instances.has(id)) {
-      instances.set(id, {
-        month: new Date().getMonth(),
-        year: new Date().getFullYear(),
-      })
-      set({instances: new Map(instances)})
-    }
-    return instances.get(id)!
+  getInstanceMonthYear: (id: string) => {
+    return get().instances.get(id)
   },
   setInstanceMonthYear: (id: string, value: MonthYear) => {
     const instances = new Map(get().instances)
     instances.set(id, value)
+    set({instances})
+  },
+  removeInstance: (id: string) => {
+    const instances = new Map(get().instances)
+    instances.delete(id)
     set({instances})
   },
 }))
@@ -97,15 +95,27 @@ export function DatePicker({
 }: DatePickerProps) {
   const datePickerInstanceId = React.useId()
   const setInstanceMonthYear = useDateStore(state => state.setInstanceMonthYear)
+  const removeInstance = useDateStore(state => state.removeInstance)
 
-  const monthYear = useDateStore(state => state.getInstanceState(datePickerInstanceId))
+  const [monthYear, setLocalMonthYear] = React.useState(() => ({
+    month: new Date().getMonth(),
+    year: new Date().getFullYear(),
+  }))
 
   const setMonthYear = React.useCallback(
     (value: MonthYear) => {
+      setLocalMonthYear(value)
       setInstanceMonthYear(datePickerInstanceId, value)
     },
-    [datePickerInstanceId, setInstanceMonthYear],
+    [datePickerInstanceId],
   )
+
+  React.useEffect(() => {
+    setInstanceMonthYear(datePickerInstanceId, monthYear)
+    return () => {
+      removeInstance(datePickerInstanceId)
+    }
+  }, [datePickerInstanceId, monthYear, setInstanceMonthYear, removeInstance])
 
   React.useEffect(() => {
     if (value && !isNaN(new Date(value).getTime())) {
@@ -224,8 +234,8 @@ export function DatePicker({
               dropdown_icon: classes.dropdownIcon,
             }}
             components={{
-              Dropdown: props => Dropdown({monthYear, setMonthYear, ...props}),
-              Nav: props => Nav({monthYear, setMonthYear, ...props}),
+              Dropdown: props => <Dropdown monthYear={monthYear} setMonthYear={setMonthYear} {...props} />,
+              Nav: props => <Nav monthYear={monthYear} setMonthYear={setMonthYear} {...props} />,
             }}
             mode={mode}
             defaultMonth={date}
