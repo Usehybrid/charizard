@@ -112,10 +112,13 @@ export function DatePicker({
 
   React.useEffect(() => {
     setInstanceMonthYear(datePickerInstanceId, monthYear)
+  }, [datePickerInstanceId, monthYear, setInstanceMonthYear])
+
+  React.useEffect(() => {
     return () => {
       removeInstance(datePickerInstanceId)
     }
-  }, [datePickerInstanceId, monthYear, setInstanceMonthYear, removeInstance])
+  }, [datePickerInstanceId, removeInstance])
 
   React.useEffect(() => {
     if (value && !isNaN(new Date(value).getTime())) {
