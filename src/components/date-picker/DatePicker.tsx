@@ -24,25 +24,36 @@ import {MonthYear} from './type'
 
 type DateStore = {
   instances: Map<string, MonthYear>
-  getInstanceMonthYear: (id: string) => MonthYear | undefined
+  getInstanceState: (id: string) => MonthYear
   setInstanceMonthYear: (id: string, value: MonthYear) => void
   removeInstance: (id: string) => void
 }
 
 const useDateStore = create<DateStore>()((set, get) => ({
   instances: new Map(),
-  getInstanceMonthYear: (id: string) => {
-    return get().instances.get(id)
+  getInstanceState: (id: string) => {
+    let instances = get().instances
+    if (!instances.has(id)) {
+      const newState = {
+        month: new Date().getMonth(),
+        year: new Date().getFullYear(),
+      }
+      instances = new Map(instances)
+      instances.set(id, newState)
+      set({ instances })
+      return newState
+    }
+    return instances.get(id)!
   },
   setInstanceMonthYear: (id: string, value: MonthYear) => {
     const instances = new Map(get().instances)
     instances.set(id, value)
-    set({instances})
+    set({ instances })
   },
   removeInstance: (id: string) => {
     const instances = new Map(get().instances)
     instances.delete(id)
-    set({instances})
+    set({ instances })
   },
 }))
 
@@ -94,25 +105,16 @@ export function DatePicker({
   ...props
 }: DatePickerProps) {
   const datePickerInstanceId = React.useId()
+  const monthYear = useDateStore(state => state.getInstanceState(datePickerInstanceId))
   const setInstanceMonthYear = useDateStore(state => state.setInstanceMonthYear)
   const removeInstance = useDateStore(state => state.removeInstance)
 
-  const [monthYear, setLocalMonthYear] = React.useState(() => ({
-    month: new Date().getMonth(),
-    year: new Date().getFullYear(),
-  }))
-
   const setMonthYear = React.useCallback(
     (value: MonthYear) => {
-      setLocalMonthYear(value)
       setInstanceMonthYear(datePickerInstanceId, value)
     },
-    [datePickerInstanceId],
+    [datePickerInstanceId, setInstanceMonthYear],
   )
-
-  React.useEffect(() => {
-    setInstanceMonthYear(datePickerInstanceId, monthYear)
-  }, [datePickerInstanceId, monthYear, setInstanceMonthYear])
 
   React.useEffect(() => {
     return () => {
