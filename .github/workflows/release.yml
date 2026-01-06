@@ -12,6 +12,9 @@ env:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
     steps:
       - name: Setup repo + install pnpm
         uses: actions/checkout@v4
@@ -27,9 +30,7 @@ jobs:
       - name: Build
         run: pnpm run build
       - name: Publish Package
-        run: pnpm publish --no-git-checks
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: pnpm publish --no-git-checks --provenance
       - name: slack - build success
         uses: act10ns/slack@v2.0.0
         with:
