@@ -27,7 +27,6 @@ const HIDE_CANCEL_REQUEST = [
   MODULES.IT_REQUEST,
   MODULES.WORKFLOW,
   MODULES.DEVICES,
-  MODULES.LEAVE,
 ]
 
 export default function TaskCard({
@@ -249,7 +248,7 @@ export function getTaskMenuItems(
       customStyles: {color: 'var(--status-error-e50)'},
       customSvgClassName: classes.logoutIcon,
       hidden:
-        // (data.module_reference === MODULES.LEAVE && !data.task_details_id) ||
+        (data.module_reference === MODULES.LEAVE && !data.task_details_id) ||
         HIDE_CANCEL_REQUEST.includes(data.module_reference as MODULES) ||
         data.status === TASK_STATUS.CANCELLED ||
         (data.module_reference === MODULES.IT_SUPPORT &&
