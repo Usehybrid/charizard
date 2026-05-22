@@ -1,29 +1,46 @@
 import * as React from 'react'
 import ReactSelectAsync from 'react-select/async'
 import clsx from 'clsx'
-import classes from './styles.module.css'
-import {colourStyles, getControlStyles} from './config'
+import {components} from 'react-select'
 import type {MenuPlacement, StylesConfig} from 'react-select'
+import closeIcon from '../assets/close.svg'
 import {
-  Option,
-  ClearIndicator,
-  DropdownIndicator,
-  MultiValueLabel,
-  MultiValueRemove,
-  SingleValue,
-} from './Common'
+  CustomDropdownIndicator,
+  CustomIndicatorsContainer,
+  CustomLoadingIndicator,
+  CustomMenu,
+  CustomMultiValue,
+  CustomMultiValueRemove,
+  CustomOption,
+  CustomSingleValue,
+} from '../select-v2/Common'
+import {styles as selectV2Styles} from '../select-v2/styles'
+import selectV2Classes from '../select-v2/styles.module.css'
+import {SELECT_VARIANT} from '../select-v2/types'
+import {SVG} from '../svg'
 import {SelectActionMeta, SelectMultiValue, SelectSingleValue, SelectValue} from './types'
+
+type SelectAsyncOption = {
+  label: string
+  value: string
+  subLabel?: string
+  color?: `#${string}`
+  profileImgUrl?: string | null
+  icon?: string
+}
+
+const SelectAsyncClearIndicator = (props: any) => (
+  <components.ClearIndicator {...props}>
+    <SVG path={closeIcon} spanClassName={selectV2Classes.clearIcon} />
+  </components.ClearIndicator>
+)
 
 interface SelectAsyncProps {
   /**
    * The options to be displayed in the select
    * should atleast have {label: string, value: string}
    */
-  options: (inputValue: string) => Promise<Array<{
-    label: string | ''
-    value: string | ''
-    profileImgUrl?: string | null
-  }> | void>
+  options: (inputValue: string) => Promise<SelectAsyncOption[] | void>
   /**
    * Handle change events on the select
    */
@@ -40,6 +57,10 @@ interface SelectAsyncProps {
    * The className of the select
    */
   className?: string
+  /**
+   * The className of the main container
+   */
+  mainContainerClassName?: string
   /**
    * The placeholder of the select
    */
@@ -60,6 +81,10 @@ interface SelectAsyncProps {
    * The styles of the select component
    */
   selectStyles?: StylesConfig<any>
+  /**
+   * The SelectV2 styles override alias.
+   */
+  customStyles?: StylesConfig<any>
   /**
    * The default value of the select
    */
@@ -87,6 +112,14 @@ interface SelectAsyncProps {
    */
   errorMsg?: string | string[] | false
   /**
+   * Defines the SelectV2 option/value presentation.
+   */
+  variant?: SELECT_VARIANT
+  /**
+   * Defines whether to add dividers between option list items.
+   */
+  showDivider?: boolean
+  /**
    * extra props to pass for select component
    */
   extraProps?: any
@@ -99,13 +132,17 @@ export function SelectAsync({
   name,
   id,
   className,
+  mainContainerClassName,
   placeholder,
   selectStyles,
+  customStyles,
   defaultValue,
   formatGroupLabel,
   customContainerStyles,
   menuPlacement,
   errorMsg,
+  variant = SELECT_VARIANT.DEFAULT,
+  showDivider = false,
   extraProps,
   isDisabled = false,
   isSearchable = true,
@@ -117,9 +154,15 @@ export function SelectAsync({
     <div
       onClick={e => e.stopPropagation()}
       style={customContainerStyles}
-      className={classes.selectContainer}
+      className={clsx(
+        selectV2Classes.mainContainer,
+        isDisabled && selectV2Classes.disabled,
+        'zap-content-medium',
+        mainContainerClassName,
+      )}
     >
       <ReactSelectAsync
+        classNamePrefix="react-select"
         value={customValue}
         isMulti={isMulti}
         placeholder={placeholder}
@@ -133,20 +176,41 @@ export function SelectAsync({
         id={id}
         className={clsx(className)}
         isSearchable={isSearchable}
-        styles={{...colourStyles, ...getControlStyles(errorMsg), ...selectStyles}}
+        unstyled
+        styles={{
+          ...selectV2Styles,
+          control: (baseStyles, state) => ({
+            ...(selectV2Styles.control?.(baseStyles, state) || baseStyles),
+            borderColor: errorMsg
+              ? 'var(--status-error)'
+              : state.isFocused
+              ? '#254DDA'
+              : '#E5E9FB',
+            ':hover': {
+              borderColor: errorMsg ? 'var(--status-error)' : '#254DDA',
+            },
+          }),
+          ...selectStyles,
+          ...customStyles,
+        }}
         components={{
-          Option,
-          MultiValueLabel,
-          MultiValueRemove,
-          DropdownIndicator,
-          ClearIndicator,
-          SingleValue,
+          Option: CustomOption,
+          MultiValue: CustomMultiValue,
+          MultiValueRemove: CustomMultiValueRemove,
+          DropdownIndicator: CustomDropdownIndicator,
+          ClearIndicator: SelectAsyncClearIndicator,
+          SingleValue: CustomSingleValue,
+          Menu: CustomMenu,
+          IndicatorsContainer: CustomIndicatorsContainer,
+          LoadingIndicator: CustomLoadingIndicator,
         }}
         isDisabled={isDisabled}
         onChange={(newValue: SelectValue, actionMeta: SelectActionMeta) => {
           if (isMulti) {
             onChange(
-              (newValue as SelectMultiValue).map(val => val.value),
+              Array.isArray(newValue)
+                ? (newValue as SelectMultiValue).map(val => val.value)
+                : [],
               actionMeta,
             )
           } else onChange((newValue as SelectSingleValue)?.value ?? '', actionMeta)
@@ -155,9 +219,16 @@ export function SelectAsync({
         menuPlacement={menuPlacement}
         menuPortalTarget={document.body}
         menuPosition="fixed"
+        data-variant={variant}
+        data-divider={showDivider}
+        hideSelectedOptions={false}
         {...extraProps}
       />
-      {errorMsg && <p className={classes.errorMsg}>{errorMsg}</p>}
+      {errorMsg && (
+        <span className={clsx('zap-subcontent-medium', selectV2Classes.errorMsg)}>
+          {errorMsg}
+        </span>
+      )}
     </div>
   )
 }
