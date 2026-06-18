@@ -1,6 +1,7 @@
 import {MultiValue} from 'react-select'
-import type {SingleValue, ActionMeta, StylesConfig} from 'react-select'
+import type {SingleValue, ActionMeta, StylesConfig, GroupBase} from 'react-select'
 import {Props as ReactSelectProps} from 'react-select'
+import type {CreatableProps} from 'react-select/creatable'
 
 export type HexColor = `#${string}`
 
@@ -39,6 +40,22 @@ export interface SelectV2Props extends ReactSelectProps<any, boolean> {
   customStyles?: StylesConfig<any>
 }
 
-export interface CreatableSelectV2Props extends SelectV2Props {
+/**
+ * Creatable-only props from react-select that aren't part of the base Select
+ * props (SelectV2Props extends those). The component already spreads
+ * `...restProps` into <CreatableSelect>, so these work at runtime — this just
+ * makes them type-visible. `onChange` is intentionally not picked: SelectV2Props
+ * overrides it with a custom signature and picking the react-select one clashes.
+ */
+type CreatableExtraProps = Pick<
+  CreatableProps<any, boolean, GroupBase<any>>,
+  | 'allowCreateWhileLoading'
+  | 'createOptionPosition'
+  | 'formatCreateLabel'
+  | 'isValidNewOption'
+  | 'getNewOptionData'
+>
+
+export interface CreatableSelectV2Props extends SelectV2Props, CreatableExtraProps {
   onCreateOption: (value: string) => Promise<void> | void
 }
