@@ -19,6 +19,10 @@ catalog:
 
 overrides:
   vite: 'catalog:'
+  # Security: force patched versions of vulnerable transitive deps (Dependabot).
+  # Both arrive via react-select (a peer dep, externalized from the build).
+  '@babel/runtime': '^7.26.10' # GHSA-968p-4wvh-cqc8 (ReDoS), fixed in 7.26.10
+  yaml: '^1.10.3' # GHSA-48c2-rrv3-qjmp (DoS), fixed in 1.10.3; stay on v1 for cosmiconfig@7
 
 peerDependencyRules:
   allowAny:
