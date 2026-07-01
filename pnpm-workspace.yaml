@@ -14,8 +14,8 @@ packages:
 # Vite+ toolchain: alias `vite` to the Vite+ core so `vp` drives the build,
 # matching hybr1d-frontend / headless-view.
 catalog:
-  vite: npm:@voidzero-dev/vite-plus-core@latest
-  vite-plus: latest
+  vite: npm:@voidzero-dev/vite-plus-core@0.2.1
+  vite-plus: 0.2.1
 
 overrides:
   vite: 'catalog:'
