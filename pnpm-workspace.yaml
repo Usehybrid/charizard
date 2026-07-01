@@ -7,5 +7,21 @@ onlyBuiltDependencies:
   - esbuild
 
 packages:
+  - '.'
   - 'packages/*'
   - 'apps/*'
+
+# Vite+ toolchain: alias `vite` to the Vite+ core so `vp` drives the build,
+# matching hybr1d-frontend / headless-view.
+catalog:
+  vite: npm:@voidzero-dev/vite-plus-core@latest
+  vite-plus: latest
+
+overrides:
+  vite: 'catalog:'
+
+peerDependencyRules:
+  allowAny:
+    - vite
+  allowedVersions:
+    vite: '*'

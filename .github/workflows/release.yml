@@ -16,25 +16,24 @@ jobs:
       contents: read
       id-token: write
     steps:
-      - name: Setup repo + install pnpm
+      - name: Checkout
         uses: actions/checkout@v6
-      - uses: pnpm/action-setup@v4   
-      - name: Setup Node
-        uses: actions/setup-node@v6
+      - name: Setup Vite+ (node 24 + pnpm + npm auth)
+        uses: voidzero-dev/setup-vp@v1
         with:
-          node-version: 24
+          node-version: '24'
+          cache: true
           registry-url: "https://registry.npmjs.org"
-          cache: 'pnpm'
       - name: Install Packages
-        run: pnpm install
+        run: vp install
       - name: Build
-        run: pnpm run build
+        run: vp run build
       - name: Publish Package
         run: npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: slack - build success
-        uses: act10ns/slack@v2.1.0
+        uses: act10ns/slack@v2.2.0
         with:
           status: ${{ job.status }}
           channel: '#alerts-deploys'
@@ -42,12 +41,10 @@ jobs:
             'Charizard was successfully published to npm'
         if: success()
       - name: slack - build failed
-        uses: act10ns/slack@v2.1.0
+        uses: act10ns/slack@v2.2.0
         with:
           status: ${{ job.status }}
           channel: '#alerts-deploys'
           message:
             'Charizard has failed to publish to npm'
         if: failure()
-
-   
