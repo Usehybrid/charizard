@@ -10,7 +10,7 @@ export default defineConfig({
   plugins: [
     react({jsxImportSource: 'react'}),
     dts({
-      rollupTypes: true, // Merge all types into one file
+      bundleTypes: true, // Merge all types into one file
       insertTypesEntry: true, // Insert type entry file in the package
       tsconfigPath: './tsconfig.app.json', // Points to your tsconfig
     }),

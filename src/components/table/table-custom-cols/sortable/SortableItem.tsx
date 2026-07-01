@@ -1,8 +1,7 @@
 import * as React from 'react'
 import classes from './sortable.module.css'
-import {useSortable} from '@dnd-kit/sortable'
-import {CSS} from '@dnd-kit/utilities'
-import type {DraggableSyntheticListeners, UniqueIdentifier} from '@dnd-kit/core'
+import {useSortable} from '@dnd-kit/react/sortable'
+import type {UniqueIdentifier} from '@dnd-kit/abstract'
 import type {CSSProperties, PropsWithChildren} from 'react'
 import clsx from 'clsx'
 
@@ -12,48 +11,44 @@ interface Props {
 }
 
 interface Context {
-  attributes: Record<string, any>
-  listeners: DraggableSyntheticListeners
-  ref(node: HTMLElement | null): void
+  handleRef: (element: Element | null) => void
 }
 
 const SortableItemContext = React.createContext<Context>({
-  attributes: {},
-  listeners: undefined,
-  ref() {},
+  handleRef() {},
 })
 
+/**
+ * Position (sortable group + index-within-group) for each item, keyed by id.
+ * `SortableList` computes this and `SortableItem` reads its own entry, so the
+ * public `<SortableList.Item id=... />` API stays unchanged while the new
+ * `useSortable` still gets the required `index`/`group` it needs.
+ */
+export interface SortablePosition {
+  index: number
+  group: UniqueIdentifier
+}
+
+export const SortablePositionsContext = React.createContext<
+  Map<UniqueIdentifier, SortablePosition>
+>(new Map())
+
 export function SortableItem({children, id, isHidden = false}: PropsWithChildren<Props>) {
-  const {
-    attributes,
-    isDragging,
-    listeners,
-    setNodeRef,
-    setActivatorNodeRef,
-    transform,
-    transition,
-  } = useSortable({id})
-  const context = React.useMemo(
-    () => ({
-      attributes,
-      listeners,
-      ref: setActivatorNodeRef,
-    }),
-    [attributes, listeners, setActivatorNodeRef],
-  )
+  const positions = React.useContext(SortablePositionsContext)
+  const position = positions.get(id)
+  const {ref, handleRef, isDragging} = useSortable({
+    id,
+    index: position?.index ?? 0,
+    group: position?.group,
+  })
+  const context = React.useMemo(() => ({handleRef}), [handleRef])
   const style: CSSProperties = {
     opacity: isDragging ? 0.4 : undefined,
-    transform: CSS.Translate.toString(transform),
-    transition,
   }
 
   return (
     <SortableItemContext.Provider value={context}>
-      <li
-        className={clsx(classes.sort, isHidden && classes.sortHidden)}
-        ref={setNodeRef}
-        style={style}
-      >
+      <li className={clsx(classes.sort, isHidden && classes.sortHidden)} ref={ref} style={style}>
         {children}
       </li>
     </SortableItemContext.Provider>
@@ -61,10 +56,10 @@ export function SortableItem({children, id, isHidden = false}: PropsWithChildren
 }
 
 export function DragHandle() {
-  const {attributes, listeners, ref} = React.useContext(SortableItemContext)
+  const {handleRef} = React.useContext(SortableItemContext)
 
   return (
-    <div className={classes.dragHandle} {...attributes} {...listeners} ref={ref}>
+    <div className={classes.dragHandle} ref={handleRef}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="23"
