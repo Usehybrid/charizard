@@ -41,6 +41,8 @@ export default defineConfig({
         preserveModules: true,
         preserveModulesRoot: 'src',
         entryFileNames: '[name].js',
+        // stable name if a plugin ever emits a helper chunk (none do today)
+        chunkFileNames: '[name].js',
         // The global-styles aggregate gets a STABLE name because it's a
         // public subpath export (@hybr1d-tech/charizard/styles.css) that
         // consumers must import explicitly — bundlers that tree-shake the
