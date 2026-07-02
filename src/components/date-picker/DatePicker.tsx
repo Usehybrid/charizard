@@ -7,17 +7,10 @@ import clsx from 'clsx'
 import {format, isDate, parseISO} from 'date-fns'
 import {DayPicker, DropdownOption, Matcher, PropsSingle, useDayPicker} from 'react-day-picker'
 import {Placement} from '@popperjs/core'
-import {
-  SVG,
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
-  SelectV2,
-  Button,
-  BUTTON_TYPE,
-  BUTTON_SIZE,
-  BUTTON_VARIANT,
-} from '../index'
+import {SVG} from '../svg'
+import {Popover, PopoverTrigger, PopoverContent} from '../popover'
+import {SelectV2} from '../select-v2'
+import {BUTTON_SIZE, BUTTON_TYPE, BUTTON_VARIANT, Button} from '../button'
 import {StylesConfig} from 'react-select'
 import {create} from 'zustand'
 import {DateStore, MonthYear} from './type'

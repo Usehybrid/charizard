@@ -1,7 +1,4 @@
-import './styles/_typography.css'
-import './styles/_variables.css'
-import './styles/global.css'
-import './toasts/styles/main.css'
+import './styles/index.css'
 
 export * from '../types'
 export * from '../hooks'

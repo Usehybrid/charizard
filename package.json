@@ -1,18 +1,22 @@
 {
   "name": "@hybr1d-tech/charizard",
-  "version": "2.6.0",
+  "version": "2.7.0",
   "type": "module",
   "files": [
     "dist"
   ],
-  "main": "./dist/hybr1d-ui.js",
-  "module": "./dist/hybr1d-ui.js",
+  "main": "./dist/components/index.js",
+  "module": "./dist/components/index.js",
   "types": "./dist/index.d.ts",
+  "sideEffects": [
+    "**/*.css"
+  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/hybr1d-ui.js"
-    }
+      "import": "./dist/components/index.js"
+    },
+    "./package.json": "./package.json"
   },
   "repository": {
     "type": "git",
@@ -81,10 +85,10 @@
     "storybook-css-modules-preset": "^1.1.1",
     "typescript": "6.0.3",
     "vite": "catalog:",
-    "vite-plus": "catalog:",
     "vite-plugin-checker": "^0.14.4",
     "vite-plugin-dts": "5.0.3",
-    "vite-plugin-libcss": "^1.1.2"
+    "vite-plugin-lib-inject-css": "^2.2.2",
+    "vite-plus": "catalog:"
   },
   "publishConfig": {
     "access": "public"
