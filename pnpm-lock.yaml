@@ -176,6 +176,9 @@ importers:
       vite-plus:
         specifier: 'catalog:'
         version: 0.2.1(@types/node@26.0.1)(@voidzero-dev/vite-plus-core@0.2.1(@types/node@26.0.1)(esbuild@0.28.1)(typescript@6.0.3)(yaml@1.10.3))(esbuild@0.28.1)(typescript@6.0.3)(yaml@1.10.3)
+      vitest:
+        specifier: ^4.1.9
+        version: 4.1.9(@types/node@26.0.1)(@vitest/browser-preview@4.1.9)(@voidzero-dev/vite-plus-core@0.2.1(@types/node@26.0.1)(esbuild@0.28.1)(typescript@6.0.3)(yaml@1.10.3))
 
 packages:
 

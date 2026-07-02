@@ -2,12 +2,13 @@ import * as React from 'react'
 import classes from './sortable.module.css'
 import {DragDropProvider, KeyboardSensor, PointerSensor} from '@dnd-kit/react'
 import {RestrictToVerticalAxis} from '@dnd-kit/abstract/modifiers'
-import {arrayMove} from '@dnd-kit/helpers'
 import type {DragEndEvent} from '@dnd-kit/react'
 import type {UniqueIdentifier} from '@dnd-kit/abstract'
+import {isSortable} from '@dnd-kit/react/sortable'
 import {DragHandle, SortableItem, SortablePositionsContext} from './SortableItem'
 import type {SortablePosition} from './SortableItem'
 import type {CustomColCheckedState} from '../../types'
+import {reorderSortableItems} from './reorder-sortable-items'
 
 // Sentinel group for items without a `group`, so every sortable item belongs to
 // exactly one `useSortable` group (ungrouped items reorder among themselves).
@@ -61,21 +62,14 @@ export function SortableList<T extends BaseItem>({items: _items, onChange, rende
   const handleDragEnd = React.useCallback(
     ({operation, canceled}: DragEndEvent) => {
       if (canceled) return
-      const {source, target} = operation
-      if (!source || !target || source.id === target.id) return
+      const {source} = operation
+      if (!source || !isSortable(source)) return
 
-      onChange(prevItems => {
-        const activeIndex = prevItems.findIndex(item => item.id === source.id)
-        const overIndex = prevItems.findIndex(item => item.id === target.id)
-        if (activeIndex === -1 || overIndex === -1) return prevItems
-
-        // Ensure items are in the same group (or both ungrouped)
-        if (prevItems[activeIndex].group !== prevItems[overIndex].group) {
-          return prevItems // Do not move if groups are different
-        }
-
-        return arrayMove(prevItems, activeIndex, overIndex)
-      })
+      // Optimistic sorting changes the source index and then makes the source
+      // itself the drop target. Reconcile from the sortable indices instead of
+      // treating target.id as the destination item.
+      if (source.initialGroup !== source.group) return
+      onChange(prevItems => reorderSortableItems(prevItems, source.id, source.index))
     },
     [onChange],
   )
