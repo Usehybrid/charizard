@@ -1,4 +1,4 @@
-import './styles/index.css'
+import './styles/charizard.css'
 
 export * from '../types'
 export * from '../hooks'
