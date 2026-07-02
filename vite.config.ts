@@ -41,6 +41,8 @@ export default defineConfig({
         preserveModules: true,
         preserveModulesRoot: 'src',
         entryFileNames: '[name].js',
+        // stable name if a plugin ever emits a helper chunk (none do today)
+        chunkFileNames: '[name].js',
         assetFileNames: 'assets/[name]-[hash][extname]',
       },
     },

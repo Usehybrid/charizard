@@ -29,6 +29,9 @@ jobs:
       - name: Build
         run: vp run build
       - name: Publish Package
+        # publish only on v* tag pushes — PR runs are CI-only (a PR run once
+        # published a version before the tag did)
+        if: startsWith(github.ref, 'refs/tags/v')
         run: npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -39,7 +42,7 @@ jobs:
           channel: '#alerts-deploys'
           message:
             'Charizard was successfully published to npm'
-        if: success()
+        if: success() && startsWith(github.ref, 'refs/tags/v')
       - name: slack - build failed
         uses: act10ns/slack@v2.2.0
         with:
@@ -47,4 +50,4 @@ jobs:
           channel: '#alerts-deploys'
           message:
             'Charizard has failed to publish to npm'
-        if: failure()
+        if: failure() && startsWith(github.ref, 'refs/tags/v')
