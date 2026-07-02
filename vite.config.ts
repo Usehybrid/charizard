@@ -41,7 +41,15 @@ export default defineConfig({
         preserveModules: true,
         preserveModulesRoot: 'src',
         entryFileNames: '[name].js',
-        assetFileNames: 'assets/[name]-[hash][extname]',
+        // The global-styles aggregate gets a STABLE name because it's a
+        // public subpath export (@hybr1d-tech/charizard/styles.css) that
+        // consumers must import explicitly — bundlers that tree-shake the
+        // barrel drop its injected CSS import, so the entry-side injection
+        // alone cannot be relied on (learned the hard way in production).
+        assetFileNames: assetInfo =>
+          assetInfo.names?.some(n => n.endsWith('charizard.css'))
+            ? 'assets/charizard.css'
+            : 'assets/[name]-[hash][extname]',
       },
     },
   },

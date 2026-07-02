@@ -16,6 +16,7 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/components/index.js"
     },
+    "./styles.css": "./dist/assets/charizard.css",
     "./package.json": "./package.json"
   },
   "repository": {
