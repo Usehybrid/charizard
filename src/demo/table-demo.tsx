@@ -387,7 +387,7 @@ const filtersV2 = {
       options: [],
       config: {
         mode: 'range',
-        showQuickSelect: false,
+        showQuickSelect: true,
         disabled: undefined,
         customDisable: undefined,
         disableWeekends: false,

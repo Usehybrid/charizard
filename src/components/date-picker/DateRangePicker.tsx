@@ -280,13 +280,30 @@ export function DateRangePicker({
             {...props}
           />
           {onReset && (
-            <button className={clsx('zap-reset-btn', classes.resetBtn)} onClick={onReset}>
-              Reset
-            </button>
+            <ResetButton
+              onReset={() => {
+                setSelectedRange(RANGE_OPTIONS[0])
+                onReset()
+              }}
+            />
           )}
         </PopoverContent>
       </Popover>
     </div>
+  )
+}
+
+function ResetButton({onReset, api}: {onReset: () => void; api?: any}) {
+  return (
+    <button
+      className={clsx('zap-reset-btn', classes.resetBtn)}
+      onClick={() => {
+        onReset()
+        api?.setOpen(false)
+      }}
+    >
+      Reset
+    </button>
   )
 }
 
