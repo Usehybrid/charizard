@@ -1,0 +1,15 @@
+.thumb {
+  width: 120px;
+  height: 90px;
+  border-radius: 8px;
+  object-fit: cover;
+  display: block;
+}
+
+.banner {
+  width: 280px;
+  height: 90px;
+  border-radius: 8px;
+  object-fit: cover;
+  display: block;
+}

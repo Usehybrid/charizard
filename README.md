@@ -35,7 +35,7 @@ Charizard powers the product surfaces at [Hybr1d](https://github.com/Usehybrid).
 - 🧭 **[React Router v8](https://reactrouter.com/)** for navigation-aware components (breadcrumbs, error pages, URL-driven disclosures)
 - 📅 **[date-fns](https://date-fns.org/)** + **[react-day-picker](https://daypicker.dev/)** powering the date and time pickers
 - 🎨 **CSS Modules** — component styles are injected automatically, no global CSS conflicts
-- ⚡ **[Vite Plus](https://www.npmjs.com/package/vite-plus)** (`vp`) — VoidZero's unified toolchain — for the dev server and library build with generated type declarations, and **Storybook** for the component playground
+- ⚡ **[Vite Plus](https://www.npmjs.com/package/vite-plus)** (`vp`) — VoidZero's unified toolchain — for the dev server and library build with generated type declarations, plus a **self-hosted showcase site** ([usehybrid.github.io/charizard](https://usehybrid.github.io/charizard/)) rendering every component from source
 
 ## Installation
 
@@ -91,11 +91,13 @@ Every component follows the same pattern: named exports for the component, its p
 
 > `V2` components are the newer generation of an existing component. Prefer `V2` where one exists; the originals remain exported for backwards compatibility.
 
-Browse them all interactively in Storybook:
+Browse them all interactively on the showcase site — [usehybrid.github.io/charizard](https://usehybrid.github.io/charizard/) — or run it locally:
 
 ```bash
-vp run storybook
+vp run dev
 ```
+
+The site renders the components straight from `src`, so it always reflects the current branch. It also publishes a machine-readable component index at [`llms.txt`](https://usehybrid.github.io/charizard/llms.txt) and [`components.json`](https://usehybrid.github.io/charizard/components.json) for AI agents consuming the design system.
 
 ### Hooks & utilities
 
@@ -110,18 +112,23 @@ git clone https://github.com/Usehybrid/charizard.git
 cd charizard
 vp install
 
-vp run dev          # dev server with the demo playground (src/demo)
-vp run storybook    # Storybook on http://localhost:6006
-vp run build        # typecheck + build the library to dist/
-vp run watch        # rebuild on change (useful when linking into an app)
+vp run dev            # showcase site / playground on a local dev server (src/site)
+vp run build          # typecheck + build the library to dist/
+vp run watch          # rebuild on change (useful when linking into an app)
+vp run site:build     # build the static showcase site to dist-site/
+vp run site:preview   # preview the built showcase site
+vp run test           # run tests (includes a mount-smoke test of every showcase page)
 ```
+
+Note: the showcase pages live inside the main `tsconfig.app.json` project, so a type
+error in a page fails `vp run build` too — intentional, it keeps the showcase honest.
 
 ### Adding a new component
 
 1. Create a folder under [`src/components`](src/components) with the component, a `types.ts`, a `styles.module.css`, and an `index.ts`.
 2. Use **named exports** for the component and **export its prop types**.
 3. Re-export it from [`src/components/index.ts`](src/components/index.ts).
-4. Add a `*.stories.tsx` file so it shows up in Storybook.
+4. Add a showcase page at `src/site/pages/<slug>.tsx` (pages auto-register by filename) and add the component's entry to `src/site/manifest.ts` so it appears in the nav and the AI manifest.
 
 ## Releasing
 
