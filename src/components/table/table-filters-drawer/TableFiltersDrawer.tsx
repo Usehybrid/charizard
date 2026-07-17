@@ -25,7 +25,6 @@ export default function TableFiltersDrawer({
 }: TableFiltersDrawerProps) {
   const {isOpen, onOpen, onClose} = useDisclosure()
   const [filterCheckedState, setFilterCheckedState] = React.useState<Record<string, any[]>>({})
-  const [allCheckedState, setAllCheckedState] = React.useState<Record<string, boolean>>({})
   const [search, setSearch] = React.useState('')
   const resetAllFilters = useTableStore(state => state.resetAllFilters)
   const changeFiltersDrawer = useTableStore(state => state.changeFiltersDrawer)
@@ -39,39 +38,31 @@ export default function TableFiltersDrawer({
 
   const [currFilter, setCurrFilter] = React.useState(filters[0])
 
-  const filteredOptions = currFilter?.options
-    .filter(option => {
-      if (!option.name) return false
-      return option.name.toLowerCase().includes(search.toLowerCase())
-    })
-    .map(op => op.value)
+  const visibleOptionValues =
+    currFilter?.options
+      .filter(option => {
+        if (!option.name) return false
+        return option.name.toLowerCase().includes(search.toLowerCase())
+      })
+      .map(op => op.value) ?? []
 
   React.useEffect(() => {
     if (!filters.length) return
     const obj = getDefaultCheckedState(filters, tableFilters)
     setFilterCheckedState(obj)
-    updateAllCheckedState(obj)
   }, [])
 
   React.useEffect(() => {
     const obj = getDefaultCheckedState(filters, tableFilters)
     setFilterCheckedState(obj)
-    updateAllCheckedState(obj)
   }, [isOpen])
 
-  const updateAllCheckedState = (state: Record<string, any[]>) => {
-    const newAllCheckedState = {...allCheckedState}
-    filters.forEach(filter => {
-      newAllCheckedState[filter.key] = state[filter.key]?.every(obj => obj.checked) || false
-    })
-    setAllCheckedState(newAllCheckedState)
-  }
-
-  const toggleAll = (filterKey: string, checked: boolean) => {
+  const toggleAll = (filterKey: string, optionValues: string[], checked: boolean) => {
     setFilterCheckedState(prevState => {
       const newState = {...prevState}
-      newState[filterKey] = newState[filterKey].map(item => ({...item, checked}))
-      updateAllCheckedState(newState)
+      newState[filterKey] = newState[filterKey].map(item =>
+        optionValues.includes(item.value) ? {...item, checked} : item,
+      )
       return newState
     })
   }
@@ -93,8 +84,9 @@ export default function TableFiltersDrawer({
   const handleIndividualCheckboxChange = (filterKey: string, idx: number, checked: boolean) => {
     setFilterCheckedState(prevState => {
       const newState = {...prevState}
-      newState[filterKey][idx].checked = checked
-      updateAllCheckedState(newState)
+      newState[filterKey] = newState[filterKey].map((item, itemIdx) =>
+        itemIdx === idx ? {...item, checked} : item,
+      )
       return newState
     })
   }
@@ -202,15 +194,21 @@ export default function TableFiltersDrawer({
                 )}
 
                 <div className={classes.options}>
-                  {filteredOptions.length === 0 ? (
+                  {visibleOptionValues.length === 0 ? (
                     <div className={'zap-content-regular'}>No search results found</div>
                   ) : (
                     <>
                       <div className={classes.option} style={{fontWeight: 700}}>
                         <FilterDrawerCheckboxNew
                           label="All"
-                          checked={allCheckedState[currFilter.key]}
-                          onChange={checked => toggleAll(currFilter.key, checked)}
+                          checked={visibleOptionValues.every(optionValue =>
+                            filterCheckedState[currFilter.key]?.some(
+                              option => option.value === optionValue && option.checked,
+                            ),
+                          )}
+                          onChange={checked =>
+                            toggleAll(currFilter.key, visibleOptionValues, checked)
+                          }
                           customStyles={{fontWeight: 600}}
                         />
                       </div>
@@ -220,7 +218,7 @@ export default function TableFiltersDrawer({
                           className={classes.option}
                           style={{
                             display: search.length
-                              ? !filteredOptions.includes(option.value)
+                              ? !visibleOptionValues.includes(option.value)
                                 ? 'none'
                                 : undefined
                               : undefined,
