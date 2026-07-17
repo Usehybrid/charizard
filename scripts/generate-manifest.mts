@@ -14,7 +14,7 @@ import {CATEGORIES} from '../src/site/manifest.ts'
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const OUT_DIR = resolve(ROOT, 'public')
-const SITE_URL = 'https://usehybrid.github.io/charizard'
+const SITE_URL = 'https://ui.zenadmin.co'
 const PKG = '@hybr1d-tech/charizard'
 
 function snippetsFor(slug: string): string[] {
