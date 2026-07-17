@@ -35,7 +35,7 @@ Charizard powers the product surfaces at [Hybr1d](https://github.com/Usehybrid).
 - 🧭 **[React Router v8](https://reactrouter.com/)** for navigation-aware components (breadcrumbs, error pages, URL-driven disclosures)
 - 📅 **[date-fns](https://date-fns.org/)** + **[react-day-picker](https://daypicker.dev/)** powering the date and time pickers
 - 🎨 **CSS Modules** — component styles are injected automatically, no global CSS conflicts
-- ⚡ **[Vite Plus](https://www.npmjs.com/package/vite-plus)** (`vp`) — VoidZero's unified toolchain — for the dev server and library build with generated type declarations, plus a **self-hosted showcase site** ([usehybrid.github.io/charizard](https://usehybrid.github.io/charizard/)) rendering every component from source
+- ⚡ **[Vite Plus](https://www.npmjs.com/package/vite-plus)** (`vp`) — VoidZero's unified toolchain — for the dev server and library build with generated type declarations, plus a **self-hosted showcase site** ([ui.zenadmin.co](https://ui.zenadmin.co/)) rendering every component from source
 
 ## Installation
 
@@ -91,13 +91,13 @@ Every component follows the same pattern: named exports for the component, its p
 
 > `V2` components are the newer generation of an existing component. Prefer `V2` where one exists; the originals remain exported for backwards compatibility.
 
-Browse them all interactively on the showcase site — [usehybrid.github.io/charizard](https://usehybrid.github.io/charizard/) — or run it locally:
+Browse them all interactively on the showcase site — [ui.zenadmin.co](https://ui.zenadmin.co/) — or run it locally:
 
 ```bash
 vp run dev
 ```
 
-The site renders the components straight from `src`, so it always reflects the current branch. It also publishes a machine-readable component index at [`llms.txt`](https://usehybrid.github.io/charizard/llms.txt) and [`components.json`](https://usehybrid.github.io/charizard/components.json) for AI agents consuming the design system.
+The site renders the components straight from `src`, so it always reflects the current branch. It also publishes a machine-readable component index at [`llms.txt`](https://ui.zenadmin.co/llms.txt) and [`components.json`](https://ui.zenadmin.co/components.json) for AI agents consuming the design system.
 
 ### Hooks & utilities
 

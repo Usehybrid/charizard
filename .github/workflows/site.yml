@@ -26,7 +26,8 @@ jobs:
       - run: vp install
       - run: vp run site:build
         env:
-          SITE_BASE: /charizard/
+          # Custom domain (ui.zenadmin.co) serves from the root path.
+          SITE_BASE: /
       - uses: actions/upload-pages-artifact@v4
         with:
           path: dist-site
