@@ -24,12 +24,13 @@
     "url": "https://github.com/Usehybrid/charizard"
   },
   "scripts": {
-    "dev": "vp dev",
+    "dev": "vp dev -c vite.site.config.ts",
     "build": "tsc && vp build",
     "watch": "vp build --watch",
-    "preview": "vp preview",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
+    "site:build": "node scripts/generate-manifest.mts && vp build -c vite.site.config.ts",
+    "site:manifest": "node scripts/generate-manifest.mts",
+    "site:preview": "vp preview -c vite.site.config.ts",
+    "fixtures:snapshot": "node scripts/snapshot-fixtures.mts",
     "prepublishOnly": "npm run build"
   },
   "engines": {
@@ -73,17 +74,12 @@
   },
   "devDependencies": {
     "@microsoft/api-extractor": "^7.58.9",
-    "@storybook/addon-links": "^10.4.6",
-    "@storybook/react": "^10.4.6",
-    "@storybook/react-vite": "^10.4.6",
     "@types/node": "^26.0.1",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react-swc": "^4.3.1",
-    "axios": "^1.18.1",
     "globals": "^17.7.0",
-    "storybook": "^10.4.6",
-    "storybook-css-modules-preset": "^1.1.1",
+    "happy-dom": "^20.10.6",
     "typescript": "6.0.3",
     "vite": "catalog:",
     "vite-plugin-checker": "^0.14.4",

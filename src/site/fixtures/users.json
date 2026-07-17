@@ -1,0 +1,2719 @@
+[
+  {
+    "id": "0263326a-34d3-4ba9-95d1-c93fff09790a",
+    "email": "",
+    "first_name": "Ash",
+    "middle_name": null,
+    "last_name": "Ketchum",
+    "work_number": null,
+    "created_at": "2024-10-22T10:24:46.898Z",
+    "first_active_at": null,
+    "start_date": "2025-04-17T00:00:00.000Z",
+    "join_date": "2023-12-01T00:00:00.000Z",
+    "work_email": "ash.ketchum@example.com",
+    "country_id": "7f1a4664-9a54-4497-9356-5d4b9190cadb",
+    "profile_img_url": "",
+    "reporting_manager_id": null,
+    "date_of_birth": null,
+    "is_deleted": false,
+    "offboard_on": null,
+    "is_work_remote": true,
+    "work_location_id": "4608381f-c6c8-406e-81cd-6834a1e6ec1c",
+    "employee_id": "32",
+    "time_away_policy_id": "644ecde3-dde0-47e0-bdf2-a8cf852fdca3",
+    "time_away_allocation_id": "061082f1-fdcf-481b-8ca8-33650d968e89",
+    "time_away_period_id": "9890333f-dc90-420d-851e-2dc4e54bdd9d",
+    "public_holiday_calendar_id": "US-TX",
+    "status": "active",
+    "hide_work_email": false,
+    "nationalities": [
+      "Afghan",
+      "Albanian",
+      "Algerian",
+      "American"
+    ],
+    "spoken_languages": [
+      "Abkhazian",
+      "Afar",
+      "Afrikaans",
+      "Akan"
+    ],
+    "gender": "Male",
+    "personal_number": "385-228-4167",
+    "probation_end": null,
+    "tenure": "1 years, 3 months",
+    "last_working_day": null,
+    "employment_end_date": "2026-02-09",
+    "working_days": null,
+    "work_anniversary_years": "1",
+    "tax_id": "22",
+    "number_of_direct_reports": "2",
+    "employment_type": "direct_employee",
+    "last_accessed_at": null,
+    "contract_type": "",
+    "user_position": {
+      "position": {
+        "id": "3e85c2de-7eb1-465c-b11e-a11d86ac1a10",
+        "name": "Customer Success Advocate"
+      }
+    },
+    "user_department": {
+      "department": {
+        "id": "108f2cfc-c782-43ab-98b3-39b947ff5127",
+        "name": "Customer Success"
+      }
+    },
+    "work_location": {
+      "city": "Salt Lake City",
+      "country": {
+        "id": "7f1a4664-9a54-4497-9356-5d4b9190cadb",
+        "name": "United States",
+        "country_code": "US"
+      }
+    },
+    "user_tags": [],
+    "first_tag_name": null,
+    "user_roles": [
+      {
+        "role": {
+          "id": "be0e03de-305d-4e15-bec0-b9db8e08ceca",
+          "name": "it"
+        }
+      }
+    ],
+    "first_role_name": "it",
+    "total_count": "279",
+    "invite_on_start_date": false,
+    "addresses": null,
+    "personal_address": null,
+    "primary_contact": null,
+    "secondary_contact": null,
+    "user_bank": {
+      "bank_name": "Roth Adams",
+      "ac_name": "Josephine Murphy",
+      "ac_no": "338",
+      "routing_no": "265",
+      "sorting_code": "Consequat Doloribus",
+      "swift": "Est voluptatem sed "
+    },
+    "user_info": {
+      "id": "3c041628-6d2d-4983-acb3-57b1d95be4de",
+      "bio": "Ipsa est excepturi",
+      "github_id": "Id possimus commodi",
+      "linkedin_id": "Voluptatem minim rep",
+      "twitter_id": "Voluptatem accusanti"
+    },
+    "reporting_to": null,
+    "country": {
+      "id": "7f1a4664-9a54-4497-9356-5d4b9190cadb",
+      "name": "United States",
+      "dial_code": "1",
+      "country_code": "US"
+    },
+    "allocated_inventories": [],
+    "allocated_inventories_v2": [],
+    "eventType": [
+      "never_logged_in"
+    ],
+    "work_timezone": {
+      "name": "America/Adak",
+      "offset": 540
+    }
+  },
+  {
+    "id": "9b3f55a1-a32d-48f9-875e-af6b00d81874",
+    "email": "misty.waterflower@example.com",
+    "first_name": "Misty",
+    "middle_name": null,
+    "last_name": "Waterflower",
+    "work_number": null,
+    "created_at": "2025-03-24T08:03:05.087Z",
+    "first_active_at": null,
+    "start_date": "2025-03-24T00:00:00.000Z",
+    "join_date": "2025-03-24T00:00:00.000Z",
+    "work_email": "misty.waterflower@example.com",
+    "country_id": "0f7540d0-1abd-4605-a7a4-834b6c834688",
+    "profile_img_url": "",
+    "reporting_manager_id": null,
+    "date_of_birth": null,
+    "is_deleted": false,
+    "offboard_on": null,
+    "is_work_remote": true,
+    "work_location_id": "e14402ca-be0a-44ce-9b7e-955fdb301214",
+    "employee_id": null,
+    "time_away_policy_id": "6ce56595-8322-4fe1-931a-4f9916585087",
+    "time_away_allocation_id": "62cae33b-f26b-42e8-97d7-df9231f4bfb7",
+    "time_away_period_id": "b719927d-6fd1-41c8-bfa4-30688c3dabe0",
+    "public_holiday_calendar_id": "HK",
+    "status": "active",
+    "hide_work_email": false,
+    "nationalities": [],
+    "spoken_languages": [],
+    "gender": null,
+    "personal_number": null,
+    "probation_end": null,
+    "tenure": "1 years, 3 months",
+    "last_working_day": null,
+    "employment_end_date": null,
+    "working_days": null,
+    "work_anniversary_years": "1",
+    "tax_id": null,
+    "number_of_direct_reports": "0",
+    "employment_type": "direct_employee",
+    "last_accessed_at": null,
+    "contract_type": null,
+    "user_position": {
+      "position": {
+        "id": null,
+        "name": null
+      }
+    },
+    "user_department": {
+      "department": {
+        "id": "0fddc487-5476-442f-a696-2e600eaa36d0",
+        "name": "Business Development"
+      }
+    },
+    "work_location": {
+      "city": "Central",
+      "country": {
+        "id": "0f7540d0-1abd-4605-a7a4-834b6c834688",
+        "name": "Hong Kong",
+        "country_code": "HK"
+      }
+    },
+    "user_tags": [
+      {
+        "id": "4d94eae1-0497-4118-9df9-d4b6d6212813",
+        "tag": {
+          "id": "4d94eae1-0497-4118-9df9-d4b6d6212813",
+          "name": "Backend"
+        }
+      },
+      {
+        "id": "c348bb7d-5d36-4bf8-9dc8-322a9a2191ee",
+        "tag": {
+          "id": "c348bb7d-5d36-4bf8-9dc8-322a9a2191ee",
+          "name": "After Sales"
+        }
+      },
+      {
+        "id": "74cac7c6-d30d-4917-8dca-e92c0729b8a9",
+        "tag": {
+          "id": "74cac7c6-d30d-4917-8dca-e92c0729b8a9",
+          "name": "IT product area"
+        }
+      }
+    ],
+    "first_tag_name": "After Sales",
+    "user_roles": [
+      {
+        "role": {
+          "id": "5ae628ea-c18d-4de0-b6de-57bc37a52fa1",
+          "name": "owner"
+        }
+      },
+      {
+        "role": {
+          "id": "5ae628ea-c18d-4de0-b6de-57bc37a52fa1",
+          "name": "owner"
+        }
+      },
+      {
+        "role": {
+          "id": "5ae628ea-c18d-4de0-b6de-57bc37a52fa1",
+          "name": "owner"
+        }
+      }
+    ],
+    "first_role_name": "owner",
+    "total_count": "279",
+    "invite_on_start_date": true,
+    "addresses": null,
+    "personal_address": null,
+    "primary_contact": null,
+    "secondary_contact": null,
+    "user_bank": null,
+    "user_info": null,
+    "reporting_to": null,
+    "country": {
+      "id": "0f7540d0-1abd-4605-a7a4-834b6c834688",
+      "name": "Hong Kong",
+      "dial_code": "852",
+      "country_code": "HK"
+    },
+    "allocated_inventories": [],
+    "allocated_inventories_v2": [],
+    "eventType": [
+      "never_logged_in"
+    ],
+    "work_timezone": {
+      "name": "Asia/Hong_Kong",
+      "offset": -480
+    }
+  },
+  {
+    "id": "636167af-7693-491d-9ad8-46af82869051",
+    "email": "brock.stone@example.com",
+    "first_name": "Brock",
+    "middle_name": null,
+    "last_name": "Stone",
+    "work_number": null,
+    "created_at": "2025-06-02T16:48:33.472Z",
+    "first_active_at": "2025-06-24T13:18:43.826Z",
+    "start_date": "2025-08-17T00:00:00.000Z",
+    "join_date": "2025-08-17T00:00:00.000Z",
+    "work_email": "brock.stone@example.com",
+    "country_id": "c05429a4-f8d5-4284-9b9a-ba40e35879b7",
+    "profile_img_url": "",
+    "reporting_manager_id": null,
+    "date_of_birth": null,
+    "is_deleted": false,
+    "offboard_on": null,
+    "is_work_remote": true,
+    "work_location_id": "80bc9c05-8efc-4620-a97c-fa16c973d175",
+    "employee_id": "",
+    "time_away_policy_id": "6ce56595-8322-4fe1-931a-4f9916585087",
+    "time_away_allocation_id": "0057c84b-c87b-459e-ae7e-99363088da96",
+    "time_away_period_id": "4322a8af-7746-46de-8e1d-b048b4b1dec7",
+    "public_holiday_calendar_id": "IN-RJ",
+    "status": "active",
+    "hide_work_email": false,
+    "nationalities": [],
+    "spoken_languages": [],
+    "gender": "Male",
+    "personal_number": "798237483",
+    "probation_end": null,
+    "tenure": "0 years, 11 months",
+    "last_working_day": null,
+    "employment_end_date": null,
+    "working_days": null,
+    "work_anniversary_years": "0",
+    "tax_id": "",
+    "number_of_direct_reports": "0",
+    "employment_type": "direct_employee",
+    "last_accessed_at": "2026-07-08T08:35:11.000Z",
+    "contract_type": "",
+    "user_position": {
+      "position": {
+        "id": null,
+        "name": null
+      }
+    },
+    "user_department": {
+      "department": {
+        "id": "d75fa925-853b-4f1f-ba72-908a7eff5598",
+        "name": "Tech"
+      }
+    },
+    "work_location": {
+      "city": "PUNE",
+      "country": {
+        "id": "c05429a4-f8d5-4284-9b9a-ba40e35879b7",
+        "name": "India",
+        "country_code": "IN"
+      }
+    },
+    "user_tags": [],
+    "first_tag_name": null,
+    "user_roles": [
+      {
+        "role": {
+          "id": "12cbd1cd-73a9-4bb6-91c3-7cfd09f4d7d9",
+          "name": "user"
+        }
+      }
+    ],
+    "first_role_name": "user",
+    "total_count": "279",
+    "invite_on_start_date": false,
+    "addresses": null,
+    "personal_address": null,
+    "primary_contact": null,
+    "secondary_contact": null,
+    "user_bank": null,
+    "user_info": {
+      "id": "6ed78a19-60f5-47a6-ab33-3212a8029fa9",
+      "bio": "TESTRHGVNB",
+      "github_id": null,
+      "linkedin_id": null,
+      "twitter_id": null
+    },
+    "reporting_to": null,
+    "country": {
+      "id": "c05429a4-f8d5-4284-9b9a-ba40e35879b7",
+      "name": "India",
+      "dial_code": "91",
+      "country_code": "IN"
+    },
+    "allocated_inventories": [],
+    "allocated_inventories_v2": [
+      {
+        "id": "4f4d0615-d72c-4aff-ab8a-dbbc51c655c3",
+        "amount": 1820,
+        "currency": {
+          "id": "2efb576a-be86-44f4-bef3-36ef08d80f77",
+          "name": "USD",
+          "symbol": "$"
+        },
+        "location": {
+          "city": "MP",
+          "country": "Aland Islands"
+        },
+        "asset_tag": null,
+        "allocated_to": "636167af-7693-491d-9ad8-46af82869051",
+        "serial_number": "122ll",
+        "product_details": {
+          "model": "Macbook Pro",
+          "product_type": "Laptops",
+          "product_company": "Apple",
+          "inventory_product_id": "cb19e096-faee-4ae4-bbc1-41460e526c17"
+        },
+        "allocation_history": [
+          {
+            "id": "4bce78aa-ff09-4369-a656-0e7d2c3af344",
+            "created_at": "2026-05-29T13:39:43+00:00",
+            "allocated_by": "5a6858d4-9395-45a2-b329-893c82803d6f",
+            "allocated_to": "8cd98a36-01f4-4f61-9783-93a32579942e",
+            "inventory_id": "4f4d0615-d72c-4aff-ab8a-dbbc51c655c3",
+            "usage_end_date": null,
+            "is_current_user": true,
+            "usage_start_date": "2026-05-29"
+          }
+        ],
+        "deallocation_status": "scheduled"
+      }
+    ],
+    "eventType": [],
+    "work_timezone": {
+      "name": "Asia/Kolkata",
+      "offset": -330
+    }
+  },
+  {
+    "id": "7a793d5e-d9bf-4d69-baad-9afe6b21db2d",
+    "email": "may.maple@example.com",
+    "first_name": "May",
+    "middle_name": null,
+    "last_name": "Maple",
+    "work_number": null,
+    "created_at": "2024-10-25T06:17:43.249Z",
+    "first_active_at": "2024-11-07T11:21:33.380Z",
+    "start_date": "2024-10-26T00:00:00.000Z",
+    "join_date": null,
+    "work_email": "may.maple@example.com",
+    "country_id": "c05429a4-f8d5-4284-9b9a-ba40e35879b7",
+    "profile_img_url": "",
+    "reporting_manager_id": "0263326a-34d3-4ba9-95d1-c93fff09790a",
+    "date_of_birth": null,
+    "is_deleted": false,
+    "offboard_on": null,
+    "is_work_remote": false,
+    "work_location_id": "41435fa8-502b-4c35-bdc5-97373f5d94a2",
+    "employee_id": "156",
+    "time_away_policy_id": "6ce56595-8322-4fe1-931a-4f9916585087",
+    "time_away_allocation_id": "590de6de-9cbe-458c-95a9-17007941ac85",
+    "time_away_period_id": "626302e5-4b43-4ce2-a418-2989cdc17465",
+    "public_holiday_calendar_id": "IN-RJ",
+    "status": "active",
+    "hide_work_email": false,
+    "nationalities": [],
+    "spoken_languages": [],
+    "gender": null,
+    "personal_number": null,
+    "probation_end": null,
+    "tenure": "1 years, 8 months",
+    "last_working_day": null,
+    "employment_end_date": null,
+    "working_days": [],
+    "work_anniversary_years": "1",
+    "tax_id": null,
+    "number_of_direct_reports": "0",
+    "employment_type": "contractor",
+    "last_accessed_at": "2026-07-16T16:01:41.000Z",
+    "contract_type": "part_time",
+    "user_position": {
+      "position": {
+        "id": null,
+        "name": null
+      }
+    },
+    "user_department": {
+      "department": {
+        "id": "7769c3af-b1ad-47c4-b061-ab9928de3669",
+        "name": "QA Department"
+      }
+    },
+    "work_location": {
+      "city": "Pune",
+      "country": {
+        "id": "c05429a4-f8d5-4284-9b9a-ba40e35879b7",
+        "name": "India",
+        "country_code": "IN"
+      }
+    },
+    "user_tags": [
+      {
+        "id": "aa4957d5-cd4a-4ece-98a2-086317df4263",
+        "tag": {
+          "id": "aa4957d5-cd4a-4ece-98a2-086317df4263",
+          "name": "Inside Sales"
+        }
+      }
+    ],
+    "first_tag_name": "Inside Sales",
+    "user_roles": [
+      {
+        "role": {
+          "id": "03d6716d-309c-46a7-888f-25f48782b98c",
+          "name": "admin"
+        }
+      }
+    ],
+    "first_role_name": "admin",
+    "total_count": "279",
+    "invite_on_start_date": false,
+    "addresses": null,
+    "personal_address": null,
+    "primary_contact": null,
+    "secondary_contact": null,
+    "user_bank": null,
+    "user_info": {
+      "id": "4d04375c-4ba6-4efc-8a59-cd78b788a061",
+      "bio": null,
+      "github_id": null,
+      "linkedin_id": null,
+      "twitter_id": null
+    },
+    "reporting_to": {
+      "id": "0263326a-34d3-4ba9-95d1-c93fff09790a",
+      "first_name": "May",
+      "middle_name": null,
+      "last_name": "Maple",
+      "email": "",
+      "work_email": "may.maple@example.com",
+      "profile_img_url": ""
+    },
+    "country": {
+      "id": "c05429a4-f8d5-4284-9b9a-ba40e35879b7",
+      "name": "India",
+      "dial_code": "91",
+      "country_code": "IN"
+    },
+    "allocated_inventories": [],
+    "allocated_inventories_v2": [],
+    "eventType": [],
+    "work_timezone": {
+      "name": "Asia/Kolkata",
+      "offset": -330
+    }
+  },
+  {
+    "id": "a7fadadd-e8f3-4a08-9fc1-8eab1c5ca17b",
+    "email": "dawn.berlitz@example.com",
+    "first_name": "Dawn",
+    "middle_name": "Test",
+    "last_name": "Berlitz",
+    "work_number": null,
+    "created_at": "2025-01-06T13:15:39.820Z",
+    "first_active_at": null,
+    "start_date": "2025-01-01T00:00:00.000Z",
+    "join_date": "2025-01-01T00:00:00.000Z",
+    "work_email": "dawn.berlitz@example.com",
+    "country_id": "c05429a4-f8d5-4284-9b9a-ba40e35879b7",
+    "profile_img_url": "",
+    "reporting_manager_id": null,
+    "date_of_birth": null,
+    "is_deleted": false,
+    "offboard_on": null,
+    "is_work_remote": false,
+    "work_location_id": "670115e0-8cff-4683-b033-0deaec4e57fc",
+    "employee_id": "34",
+    "time_away_policy_id": "6ce56595-8322-4fe1-931a-4f9916585087",
+    "time_away_allocation_id": "47a364f6-512a-441a-81ba-801318d6ce04",
+    "time_away_period_id": "8fbfcf95-595d-44ef-9034-1536609e2367",
+    "public_holiday_calendar_id": "IN-RJ",
+    "status": "active",
+    "hide_work_email": false,
+    "nationalities": [
+      "Afghan",
+      "Angolan"
+    ],
+    "spoken_languages": [
+      "Abkhazian",
+      "Afrikaans"
+    ],
+    "gender": "Female",
+    "personal_number": "+919762259576",
+    "probation_end": "2025-01-01T00:00:00.000Z",
+    "tenure": "1 years, 6 months",
+    "last_working_day": null,
+    "employment_end_date": null,
+    "working_days": null,
+    "work_anniversary_years": "1",
+    "tax_id": "22",
+    "number_of_direct_reports": "1",
+    "employment_type": "direct_employee",
+    "last_accessed_at": null,
+    "contract_type": "",
+    "user_position": {
+      "position": {
+        "id": "4e88b946-fab3-492d-959e-413ed8330eed",
+        "name": "Backend Dev"
+      }
+    },
+    "user_department": {
+      "department": {
+        "id": "8c03f7a2-a937-42cf-963d-3ab43bccf8d8",
+        "name": "Account Management"
+      }
+    },
+    "work_location": {
+      "city": "Bengaluru",
+      "country": {
+        "id": "c05429a4-f8d5-4284-9b9a-ba40e35879b7",
+        "name": "India",
+        "country_code": "IN"
+      }
+    },
+    "user_tags": [],
+    "first_tag_name": null,
+    "user_roles": [
+      {
+        "role": {
+          "id": "5ae628ea-c18d-4de0-b6de-57bc37a52fa1",
+          "name": "owner"
+        }
+      }
+    ],
+    "first_role_name": "owner",
+    "total_count": "279",
+    "invite_on_start_date": true,
+    "addresses": null,
+    "personal_address": null,
+    "primary_contact": null,
+    "secondary_contact": null,
+    "user_bank": {
+      "bank_name": "Kotak",
+      "ac_name": "18120122131562",
+      "ac_no": "9898",
+      "routing_no": "12445",
+      "sorting_code": "kkbjk008876",
+      "swift": "511"
+    },
+    "user_info": {
+      "id": "d056f8d2-3618-452a-bba8-e8650f198d0e",
+      "bio": "qwewe",
+      "github_id": null,
+      "linkedin_id": null,
+      "twitter_id": null
+    },
+    "reporting_to": null,
+    "country": {
+      "id": "c05429a4-f8d5-4284-9b9a-ba40e35879b7",
+      "name": "India",
+      "dial_code": "91",
+      "country_code": "IN"
+    },
+    "allocated_inventories": [],
+    "allocated_inventories_v2": [
+      {
+        "id": "468f1008-c012-47e1-a68d-5e7849607013",
+        "amount": null,
+        "currency": {
+          "id": "2efb576a-be86-44f4-bef3-36ef08d80f77",
+          "name": "USD",
+          "symbol": "$"
+        },
+        "location": {
+          "city": "Pune",
+          "country": "Afghanistan"
+        },
+        "asset_tag": null,
+        "allocated_to": "a7fadadd-e8f3-4a08-9fc1-8eab1c5ca17b",
+        "serial_number": "ASDAS12",
+        "product_details": {
+          "model": "m1",
+          "product_type": "Trackpads",
+          "product_company": "Apple",
+          "inventory_product_id": "117d07d7-bbd6-4eba-95f3-56a40105571e"
+        },
+        "allocation_history": [
+          {
+            "id": "0b6cdae1-58de-4668-8794-6162ab20a0da",
+            "created_at": "2025-11-04T11:06:07+00:00",
+            "allocated_by": "5a6858d4-9395-45a2-b329-893c82803d6f",
+            "allocated_to": "a7fadadd-e8f3-4a08-9fc1-8eab1c5ca17b",
+            "inventory_id": "468f1008-c012-47e1-a68d-5e7849607013",
+            "usage_end_date": null,
+            "is_current_user": true,
+            "usage_start_date": "2025-11-04"
+          }
+        ],
+        "deallocation_status": null
+      }
+    ],
+    "eventType": [
+      "never_logged_in"
+    ],
+    "work_timezone": {
+      "name": "Asia/Kolkata",
+      "offset": -330
+    }
+  },
+  {
+    "id": "a52226a1-a6c9-4366-bd10-a67fb8764003",
+    "email": "",
+    "first_name": "Serena",
+    "middle_name": "Test",
+    "last_name": "Yvonne",
+    "work_number": null,
+    "created_at": "2024-10-22T10:24:41.717Z",
+    "first_active_at": null,
+    "start_date": "2025-04-17T00:00:00.000Z",
+    "join_date": "2023-11-23T00:00:00.000Z",
+    "work_email": "serena.yvonne@example.com",
+    "country_id": "7f1a4664-9a54-4497-9356-5d4b9190cadb",
+    "profile_img_url": "",
+    "reporting_manager_id": null,
+    "date_of_birth": null,
+    "is_deleted": false,
+    "offboard_on": null,
+    "is_work_remote": true,
+    "work_location_id": "52316d68-bfd6-403c-86ee-665bb5a7eb53",
+    "employee_id": "25",
+    "time_away_policy_id": "6ce56595-8322-4fe1-931a-4f9916585087",
+    "time_away_allocation_id": "f1f94996-40f4-4d00-ac17-d32037ba982e",
+    "time_away_period_id": "1c6b1ca9-c20b-48f6-8697-c37e00a4f8e8",
+    "public_holiday_calendar_id": "US-TX",
+    "status": "active",
+    "hide_work_email": false,
+    "nationalities": [
+      "Albanian",
+      "Algerian"
+    ],
+    "spoken_languages": [
+      "Assamese",
+      "Armenian"
+    ],
+    "gender": "Male",
+    "personal_number": "801-555-3351",
+    "probation_end": "2023-11-23T00:00:00.000Z",
+    "tenure": "1 years, 3 months",
+    "last_working_day": null,
+    "employment_end_date": "2025-01-22",
+    "working_days": null,
+    "work_anniversary_years": "1",
+    "tax_id": "22",
+    "number_of_direct_reports": "0",
+    "employment_type": "direct_employee",
+    "last_accessed_at": null,
+    "contract_type": "",
+    "user_position": {
+      "position": {
+        "id": "3e85c2de-7eb1-465c-b11e-a11d86ac1a10",
+        "name": "Customer Success Advocate"
+      }
+    },
+    "user_department": {
+      "department": {
+        "id": "108f2cfc-c782-43ab-98b3-39b947ff5127",
+        "name": "Customer Success"
+      }
+    },
+    "work_location": {
+      "city": "Payson",
+      "country": {
+        "id": "7f1a4664-9a54-4497-9356-5d4b9190cadb",
+        "name": "United States",
+        "country_code": "US"
+      }
+    },
+    "user_tags": [],
+    "first_tag_name": null,
+    "user_roles": [
+      {
+        "role": {
+          "id": "12cbd1cd-73a9-4bb6-91c3-7cfd09f4d7d9",
+          "name": "user"
+        }
+      }
+    ],
+    "first_role_name": "user",
+    "total_count": "279",
+    "invite_on_start_date": false,
+    "addresses": null,
+    "personal_address": null,
+    "primary_contact": null,
+    "secondary_contact": null,
+    "user_bank": {
+      "bank_name": "Kotak",
+      "ac_name": "1812232462",
+      "ac_no": "1812232462",
+      "routing_no": "1812232462",
+      "sorting_code": "1812232462",
+      "swift": "1812232462"
+    },
+    "user_info": {
+      "id": "a247dd80-c4c4-4cf9-a55b-f189ef9cb0b8",
+      "bio": "qwewe",
+      "github_id": null,
+      "linkedin_id": null,
+      "twitter_id": null
+    },
+    "reporting_to": null,
+    "country": {
+      "id": "7f1a4664-9a54-4497-9356-5d4b9190cadb",
+      "name": "United States",
+      "dial_code": "1",
+      "country_code": "US"
+    },
+    "allocated_inventories": [],
+    "allocated_inventories_v2": [],
+    "eventType": [
+      "never_logged_in"
+    ],
+    "work_timezone": {
+      "name": "America/Adak",
+      "offset": 540
+    }
+  },
+  {
+    "id": "bc5650be-4e0a-4709-b59c-86d6519f6a14",
+    "email": "",
+    "first_name": "Clemont",
+    "middle_name": null,
+    "last_name": "Citron",
+    "work_number": null,
+    "created_at": "2024-10-22T10:24:51.288Z",
+    "first_active_at": null,
+    "start_date": "2025-04-17T00:00:00.000Z",
+    "join_date": null,
+    "work_email": "clemont.citron@example.com",
+    "country_id": "7f1a4664-9a54-4497-9356-5d4b9190cadb",
+    "profile_img_url": "",
+    "reporting_manager_id": "fcc550c1-7e7a-4c9f-b466-4dcd1a266232",
+    "date_of_birth": null,
+    "is_deleted": false,
+    "offboard_on": null,
+    "is_work_remote": false,
+    "work_location_id": "22e7252e-46bb-43ec-810a-d3eee191d739",
+    "employee_id": "39",
+    "time_away_policy_id": "6ce56595-8322-4fe1-931a-4f9916585087",
+    "time_away_allocation_id": "959b0724-0371-424d-a34b-4a1297ce4c21",
+    "time_away_period_id": "91dd1155-c0dc-4372-a2be-de3e43b7137c",
+    "public_holiday_calendar_id": "US-TX",
+    "status": "active",
+    "hide_work_email": false,
+    "nationalities": [],
+    "spoken_languages": [],
+    "gender": "Male",
+    "personal_number": "801-555-7894",
+    "probation_end": null,
+    "tenure": "1 years, 3 months",
+    "last_working_day": null,
+    "employment_end_date": "2024-10-01",
+    "working_days": [],
+    "work_anniversary_years": "1",
+    "tax_id": null,
+    "number_of_direct_reports": "1",
+    "employment_type": "direct_employee",
+    "last_accessed_at": null,
+    "contract_type": null,
+    "user_position": {
+      "position": {
+        "id": "d99a73a8-7eaa-451d-b270-6c7c8dcff050",
+        "name": "Senior Developer"
+      }
+    },
+    "user_department": {
+      "department": {
+        "id": "695c3fe8-0292-4cf5-89a1-ea29acd7c71f",
+        "name": "Product"
+      }
+    },
+    "work_location": {
+      "city": "Orem",
+      "country": {
+        "id": "7f1a4664-9a54-4497-9356-5d4b9190cadb",
+        "name": "United States",
+        "country_code": "US"
+      }
+    },
+    "user_tags": [],
+    "first_tag_name": null,
+    "user_roles": [
+      {
+        "role": {
+          "id": "12cbd1cd-73a9-4bb6-91c3-7cfd09f4d7d9",
+          "name": "user"
+        }
+      }
+    ],
+    "first_role_name": "user",
+    "total_count": "279",
+    "invite_on_start_date": false,
+    "addresses": null,
+    "personal_address": null,
+    "primary_contact": null,
+    "secondary_contact": null,
+    "user_bank": null,
+    "user_info": null,
+    "reporting_to": {
+      "id": "fcc550c1-7e7a-4c9f-b466-4dcd1a266232",
+      "first_name": "Clemont",
+      "middle_name": null,
+      "last_name": "Citron",
+      "email": "",
+      "work_email": "clemont.citron@example.com",
+      "profile_img_url": ""
+    },
+    "country": {
+      "id": "7f1a4664-9a54-4497-9356-5d4b9190cadb",
+      "name": "United States",
+      "dial_code": "1",
+      "country_code": "US"
+    },
+    "allocated_inventories": [],
+    "allocated_inventories_v2": [],
+    "eventType": [
+      "never_logged_in"
+    ],
+    "work_timezone": {
+      "name": "America/Adak",
+      "offset": 540
+    }
+  },
+  {
+    "id": "67f31d77-5046-4c4e-b5bf-e9811ba5ce17",
+    "email": "",
+    "first_name": "Iris",
+    "middle_name": null,
+    "last_name": "Ajia",
+    "work_number": null,
+    "created_at": "2024-10-22T10:25:30.778Z",
+    "first_active_at": null,
+    "start_date": "2025-09-15T00:00:00.000Z",
+    "join_date": null,
+    "work_email": "iris.ajia@example.com",
+    "country_id": "7f1a4664-9a54-4497-9356-5d4b9190cadb",
+    "profile_img_url": "",
+    "reporting_manager_id": "57a2b922-a8ee-41ff-ad3d-6eb3dd237397",
+    "date_of_birth": null,
+    "is_deleted": false,
+    "offboard_on": null,
+    "is_work_remote": false,
+    "work_location_id": "ff343eee-b13a-4ceb-b1c3-b6a90d6d96bd",
+    "employee_id": "86",
+    "time_away_policy_id": "6ce56595-8322-4fe1-931a-4f9916585087",
+    "time_away_allocation_id": "4184eff5-0fad-4cb8-bf05-49c3dcd01af4",
+    "time_away_period_id": "bf994338-d2e0-4d35-a00f-6f189450e4c3",
+    "public_holiday_calendar_id": "US-TX",
+    "status": "active",
+    "hide_work_email": false,
+    "nationalities": [],
+    "spoken_languages": [],
+    "gender": "Male",
+    "personal_number": "801-555-6510",
+    "probation_end": null,
+    "tenure": "0 years, 10 months",
+    "last_working_day": null,
+    "employment_end_date": "2025-05-30",
+    "working_days": [],
+    "work_anniversary_years": "0",
+    "tax_id": null,
+    "number_of_direct_reports": "0",
+    "employment_type": "direct_employee",
+    "last_accessed_at": null,
+    "contract_type": null,
+    "user_position": {
+      "position": {
+        "id": "a31f8d62-aa35-49a4-ac31-cdee89f996fa",
+        "name": "Web Designer"
+      }
+    },
+    "user_department": {
+      "department": {
+        "id": "695c3fe8-0292-4cf5-89a1-ea29acd7c71f",
+        "name": "Product"
+      }
+    },
+    "work_location": {
+      "city": "Lindon",
+      "country": {
+        "id": "7f1a4664-9a54-4497-9356-5d4b9190cadb",
+        "name": "United States",
+        "country_code": "US"
+      }
+    },
+    "user_tags": [],
+    "first_tag_name": null,
+    "user_roles": [
+      {
+        "role": {
+          "id": "12cbd1cd-73a9-4bb6-91c3-7cfd09f4d7d9",
+          "name": "user"
+        }
+      }
+    ],
+    "first_role_name": "user",
+    "total_count": "279",
+    "invite_on_start_date": false,
+    "addresses": null,
+    "personal_address": null,
+    "primary_contact": null,
+    "secondary_contact": null,
+    "user_bank": null,
+    "user_info": null,
+    "reporting_to": {
+      "id": "57a2b922-a8ee-41ff-ad3d-6eb3dd237397",
+      "first_name": "Iris",
+      "middle_name": null,
+      "last_name": "Ajia",
+      "email": "iris.ajia@example.com",
+      "work_email": "iris.ajia@example.com",
+      "profile_img_url": ""
+    },
+    "country": {
+      "id": "7f1a4664-9a54-4497-9356-5d4b9190cadb",
+      "name": "United States",
+      "dial_code": "1",
+      "country_code": "US"
+    },
+    "allocated_inventories": [],
+    "allocated_inventories_v2": [],
+    "eventType": [
+      "never_logged_in"
+    ],
+    "work_timezone": {
+      "name": "America/Adak",
+      "offset": 540
+    }
+  },
+  {
+    "id": "013a03e6-7496-46a3-b280-06eda3d2ed88",
+    "email": "",
+    "first_name": "Cilan",
+    "middle_name": null,
+    "last_name": "Dento",
+    "work_number": null,
+    "created_at": "2024-10-22T10:25:07.841Z",
+    "first_active_at": null,
+    "start_date": "2025-09-15T00:00:00.000Z",
+    "join_date": null,
+    "work_email": "cilan.dento@example.com",
+    "country_id": "e7ed5bc5-b286-4a45-a07b-d85d53f848dc",
+    "profile_img_url": "",
+    "reporting_manager_id": "edbd749e-2184-4f43-b23e-7d56076bbcaa",
+    "date_of_birth": null,
+    "is_deleted": false,
+    "offboard_on": null,
+    "is_work_remote": false,
+    "work_location_id": "23da8204-1ff0-4f8f-bffd-438805de201f",
+    "employee_id": "66",
+    "time_away_policy_id": "644ecde3-dde0-47e0-bdf2-a8cf852fdca3",
+    "time_away_allocation_id": "f6a5b502-1a7c-474a-b118-c5ef0e85fe27",
+    "time_away_period_id": "ac555eec-d898-4241-b2b4-3a301322ed9d",
+    "public_holiday_calendar_id": "GB",
+    "status": "active",
+    "hide_work_email": false,
+    "nationalities": [],
+    "spoken_languages": [],
+    "gender": "Male",
+    "personal_number": "+44 208 555 6774",
+    "probation_end": null,
+    "tenure": "0 years, 10 months",
+    "last_working_day": null,
+    "employment_end_date": "2025-11-17",
+    "working_days": [],
+    "work_anniversary_years": "0",
+    "tax_id": null,
+    "number_of_direct_reports": "0",
+    "employment_type": "direct_employee",
+    "last_accessed_at": null,
+    "contract_type": null,
+    "user_position": {
+      "position": {
+        "id": "ec220d44-02c4-4556-93fd-9df413f07c8d",
+        "name": "Social Media Marketer"
+      }
+    },
+    "user_department": {
+      "department": {
+        "id": "789a0937-ce94-45be-be9d-4a1b7bfdb8b6",
+        "name": "Marketing"
+      }
+    },
+    "work_location": {
+      "city": "London",
+      "country": {
+        "id": "e7ed5bc5-b286-4a45-a07b-d85d53f848dc",
+        "name": "United Kingdom",
+        "country_code": "GB"
+      }
+    },
+    "user_tags": [],
+    "first_tag_name": null,
+    "user_roles": [
+      {
+        "role": {
+          "id": "12cbd1cd-73a9-4bb6-91c3-7cfd09f4d7d9",
+          "name": "user"
+        }
+      }
+    ],
+    "first_role_name": "user",
+    "total_count": "279",
+    "invite_on_start_date": false,
+    "addresses": null,
+    "personal_address": null,
+    "primary_contact": null,
+    "secondary_contact": null,
+    "user_bank": null,
+    "user_info": null,
+    "reporting_to": {
+      "id": "edbd749e-2184-4f43-b23e-7d56076bbcaa",
+      "first_name": "Cilan",
+      "middle_name": null,
+      "last_name": "Dento",
+      "email": "",
+      "work_email": "cilan.dento@example.com",
+      "profile_img_url": ""
+    },
+    "country": {
+      "id": "e7ed5bc5-b286-4a45-a07b-d85d53f848dc",
+      "name": "United Kingdom",
+      "dial_code": "44",
+      "country_code": "GB"
+    },
+    "allocated_inventories": [],
+    "allocated_inventories_v2": [],
+    "eventType": [
+      "never_logged_in"
+    ],
+    "work_timezone": {
+      "name": "Europe/London",
+      "offset": -60
+    }
+  },
+  {
+    "id": "1eeadc31-7420-4096-86f3-c5093c82918f",
+    "email": "gary.oak@example.com",
+    "first_name": "Gary",
+    "middle_name": null,
+    "last_name": "Oak",
+    "work_number": null,
+    "created_at": "2025-03-25T11:06:21.959Z",
+    "first_active_at": null,
+    "start_date": "2025-03-25T00:00:00.000Z",
+    "join_date": null,
+    "work_email": "gary.oak@example.com",
+    "country_id": "0f7540d0-1abd-4605-a7a4-834b6c834688",
+    "profile_img_url": "",
+    "reporting_manager_id": null,
+    "date_of_birth": null,
+    "is_deleted": false,
+    "offboard_on": null,
+    "is_work_remote": false,
+    "work_location_id": "a667da69-8937-4379-8237-9682ec335694",
+    "employee_id": null,
+    "time_away_policy_id": "6ce56595-8322-4fe1-931a-4f9916585087",
+    "time_away_allocation_id": "c1a84c4e-bc76-404d-934a-dba7c91655a4",
+    "time_away_period_id": "fdc461b0-5a36-409b-9018-373f602a865d",
+    "public_holiday_calendar_id": "HK",
+    "status": "active",
+    "hide_work_email": false,
+    "nationalities": [],
+    "spoken_languages": [],
+    "gender": null,
+    "personal_number": null,
+    "probation_end": null,
+    "tenure": "1 years, 3 months",
+    "last_working_day": null,
+    "employment_end_date": null,
+    "working_days": [],
+    "work_anniversary_years": "1",
+    "tax_id": null,
+    "number_of_direct_reports": "0",
+    "employment_type": "direct_employee",
+    "last_accessed_at": null,
+    "contract_type": null,
+    "user_position": {
+      "position": {
+        "id": null,
+        "name": null
+      }
+    },
+    "user_department": {
+      "department": {
+        "id": "63216231-3c21-4ac2-82e0-39878677696d",
+        "name": "Administration"
+      }
+    },
+    "work_location": {
+      "city": "Central",
+      "country": {
+        "id": "0f7540d0-1abd-4605-a7a4-834b6c834688",
+        "name": "Hong Kong",
+        "country_code": "HK"
+      }
+    },
+    "user_tags": [],
+    "first_tag_name": null,
+    "user_roles": [
+      {
+        "role": {
+          "id": "5ae628ea-c18d-4de0-b6de-57bc37a52fa1",
+          "name": "owner"
+        }
+      }
+    ],
+    "first_role_name": "owner",
+    "total_count": "279",
+    "invite_on_start_date": true,
+    "addresses": null,
+    "personal_address": null,
+    "primary_contact": null,
+    "secondary_contact": null,
+    "user_bank": null,
+    "user_info": null,
+    "reporting_to": null,
+    "country": {
+      "id": "0f7540d0-1abd-4605-a7a4-834b6c834688",
+      "name": "Hong Kong",
+      "dial_code": "852",
+      "country_code": "HK"
+    },
+    "allocated_inventories": [],
+    "allocated_inventories_v2": [
+      {
+        "id": "ef6343da-40d5-4a84-8434-49b1f5c60194",
+        "amount": 2459,
+        "currency": {
+          "id": "2efb576a-be86-44f4-bef3-36ef08d80f77",
+          "name": "USD",
+          "symbol": "$"
+        },
+        "location": {
+          "city": "Pune",
+          "country": "India"
+        },
+        "asset_tag": null,
+        "allocated_to": "1eeadc31-7420-4096-86f3-c5093c82918f",
+        "serial_number": "pp3",
+        "product_details": {
+          "model": "ThinkPad P1 Gen 8",
+          "product_type": "Laptops",
+          "product_company": "Lenovo",
+          "inventory_product_id": "7ea42fd8-ec35-4e00-96d3-9d5e84b39579"
+        },
+        "allocation_history": [
+          {
+            "id": "5355a60c-7102-4af1-addf-e4dad7570052",
+            "created_at": "2026-07-13T00:00:00+00:00",
+            "allocated_by": "7a793d5e-d9bf-4d69-baad-9afe6b21db2d",
+            "allocated_to": "1eeadc31-7420-4096-86f3-c5093c82918f",
+            "inventory_id": "ef6343da-40d5-4a84-8434-49b1f5c60194",
+            "usage_end_date": null,
+            "is_current_user": true,
+            "usage_start_date": "2026-01-01"
+          }
+        ],
+        "deallocation_status": null
+      }
+    ],
+    "eventType": [
+      "never_logged_in"
+    ],
+    "work_timezone": {
+      "name": "Asia/Hong_Kong",
+      "offset": -480
+    }
+  },
+  {
+    "id": "ebd835cc-39b5-48a3-b725-8f2b37895950",
+    "email": "tracey.sketchit@example.com",
+    "first_name": "Tracey",
+    "middle_name": null,
+    "last_name": "Sketchit",
+    "work_number": null,
+    "created_at": "2025-04-30T05:55:34.316Z",
+    "first_active_at": null,
+    "start_date": "2025-04-30T00:00:00.000Z",
+    "join_date": "2025-04-30T00:00:00.000Z",
+    "work_email": "tracey.sketchit@example.com",
+    "country_id": "0f7540d0-1abd-4605-a7a4-834b6c834688",
+    "profile_img_url": "",
+    "reporting_manager_id": null,
+    "date_of_birth": null,
+    "is_deleted": false,
+    "offboard_on": null,
+    "is_work_remote": true,
+    "work_location_id": "5a00a6bb-f24b-466f-8426-edeeb2ee573b",
+    "employee_id": null,
+    "time_away_policy_id": "6ce56595-8322-4fe1-931a-4f9916585087",
+    "time_away_allocation_id": "4e0e439c-d906-4f0d-b0ff-7d30d3558cd0",
+    "time_away_period_id": "79ec9254-f410-4e21-a9e1-55995bf8f026",
+    "public_holiday_calendar_id": "HK",
+    "status": "active",
+    "hide_work_email": false,
+    "nationalities": [],
+    "spoken_languages": [],
+    "gender": null,
+    "personal_number": null,
+    "probation_end": null,
+    "tenure": "1 years, 2 months",
+    "last_working_day": null,
+    "employment_end_date": null,
+    "working_days": null,
+    "work_anniversary_years": "1",
+    "tax_id": null,
+    "number_of_direct_reports": "0",
+    "employment_type": "direct_employee",
+    "last_accessed_at": null,
+    "contract_type": null,
+    "user_position": {
+      "position": {
+        "id": null,
+        "name": null
+      }
+    },
+    "user_department": {
+      "department": {
+        "id": "8c03f7a2-a937-42cf-963d-3ab43bccf8d8",
+        "name": "Account Management"
+      }
+    },
+    "work_location": {
+      "city": "Central",
+      "country": {
+        "id": "0f7540d0-1abd-4605-a7a4-834b6c834688",
+        "name": "Hong Kong",
+        "country_code": "HK"
+      }
+    },
+    "user_tags": [],
+    "first_tag_name": null,
+    "user_roles": [
+      {
+        "role": {
+          "id": "5ae628ea-c18d-4de0-b6de-57bc37a52fa1",
+          "name": "owner"
+        }
+      }
+    ],
+    "first_role_name": "owner",
+    "total_count": "279",
+    "invite_on_start_date": false,
+    "addresses": null,
+    "personal_address": null,
+    "primary_contact": null,
+    "secondary_contact": null,
+    "user_bank": null,
+    "user_info": null,
+    "reporting_to": null,
+    "country": {
+      "id": "0f7540d0-1abd-4605-a7a4-834b6c834688",
+      "name": "Hong Kong",
+      "dial_code": "852",
+      "country_code": "HK"
+    },
+    "allocated_inventories": [],
+    "allocated_inventories_v2": [],
+    "eventType": [
+      "never_logged_in"
+    ],
+    "work_timezone": {
+      "name": "Asia/Hong_Kong",
+      "offset": -480
+    }
+  },
+  {
+    "id": "319f6a81-dd9c-4dce-829b-26b8203f7d7a",
+    "email": "max.birch@example.com",
+    "first_name": "Max",
+    "middle_name": null,
+    "last_name": "Birch",
+    "work_number": null,
+    "created_at": "2025-03-27T20:13:18.446Z",
+    "first_active_at": null,
+    "start_date": "2025-03-28T00:00:00.000Z",
+    "join_date": null,
+    "work_email": "max.birch@example.com",
+    "country_id": "0f7540d0-1abd-4605-a7a4-834b6c834688",
+    "profile_img_url": "",
+    "reporting_manager_id": null,
+    "date_of_birth": null,
+    "is_deleted": false,
+    "offboard_on": null,
+    "is_work_remote": false,
+    "work_location_id": "a667da69-8937-4379-8237-9682ec335694",
+    "employee_id": null,
+    "time_away_policy_id": "6ce56595-8322-4fe1-931a-4f9916585087",
+    "time_away_allocation_id": "b80dd447-9952-438e-b24f-4bf073d9b734",
+    "time_away_period_id": "673596ec-104e-4b14-ab96-764016a73cb4",
+    "public_holiday_calendar_id": "HK",
+    "status": "active",
+    "hide_work_email": false,
+    "nationalities": [],
+    "spoken_languages": [],
+    "gender": null,
+    "personal_number": null,
+    "probation_end": null,
+    "tenure": "1 years, 3 months",
+    "last_working_day": null,
+    "employment_end_date": null,
+    "working_days": [],
+    "work_anniversary_years": "1",
+    "tax_id": null,
+    "number_of_direct_reports": "0",
+    "employment_type": "direct_employee",
+    "last_accessed_at": null,
+    "contract_type": null,
+    "user_position": {
+      "position": {
+        "id": null,
+        "name": null
+      }
+    },
+    "user_department": {
+      "department": {
+        "id": "8c03f7a2-a937-42cf-963d-3ab43bccf8d8",
+        "name": "Account Management"
+      }
+    },
+    "work_location": {
+      "city": "Central",
+      "country": {
+        "id": "0f7540d0-1abd-4605-a7a4-834b6c834688",
+        "name": "Hong Kong",
+        "country_code": "HK"
+      }
+    },
+    "user_tags": [],
+    "first_tag_name": null,
+    "user_roles": [
+      {
+        "role": {
+          "id": "5ae628ea-c18d-4de0-b6de-57bc37a52fa1",
+          "name": "owner"
+        }
+      }
+    ],
+    "first_role_name": "owner",
+    "total_count": "279",
+    "invite_on_start_date": true,
+    "addresses": null,
+    "personal_address": null,
+    "primary_contact": null,
+    "secondary_contact": null,
+    "user_bank": null,
+    "user_info": null,
+    "reporting_to": null,
+    "country": {
+      "id": "0f7540d0-1abd-4605-a7a4-834b6c834688",
+      "name": "Hong Kong",
+      "dial_code": "852",
+      "country_code": "HK"
+    },
+    "allocated_inventories": [],
+    "allocated_inventories_v2": [],
+    "eventType": [
+      "never_logged_in"
+    ],
+    "work_timezone": {
+      "name": "Asia/Hong_Kong",
+      "offset": -480
+    }
+  },
+  {
+    "id": "e3053d79-e545-41b6-b0c9-16336f6482f5",
+    "email": "bonnie.lemon@example.com",
+    "first_name": "Bonnie",
+    "middle_name": null,
+    "last_name": "Lemon",
+    "work_number": null,
+    "created_at": "2025-03-28T05:24:47.909Z",
+    "first_active_at": null,
+    "start_date": "2025-03-28T00:00:00.000Z",
+    "join_date": null,
+    "work_email": "bonnie.lemon@example.com",
+    "country_id": "0f7540d0-1abd-4605-a7a4-834b6c834688",
+    "profile_img_url": "",
+    "reporting_manager_id": null,
+    "date_of_birth": null,
+    "is_deleted": false,
+    "offboard_on": null,
+    "is_work_remote": false,
+    "work_location_id": "a667da69-8937-4379-8237-9682ec335694",
+    "employee_id": null,
+    "time_away_policy_id": "6ce56595-8322-4fe1-931a-4f9916585087",
+    "time_away_allocation_id": "d209ad60-c544-46c5-852c-bccf67d03bb3",
+    "time_away_period_id": "b8771b0b-3216-47ee-8ad8-e8471acc1335",
+    "public_holiday_calendar_id": "HK",
+    "status": "active",
+    "hide_work_email": false,
+    "nationalities": [],
+    "spoken_languages": [],
+    "gender": null,
+    "personal_number": null,
+    "probation_end": null,
+    "tenure": "1 years, 3 months",
+    "last_working_day": null,
+    "employment_end_date": null,
+    "working_days": [],
+    "work_anniversary_years": "1",
+    "tax_id": null,
+    "number_of_direct_reports": "0",
+    "employment_type": "direct_employee",
+    "last_accessed_at": null,
+    "contract_type": null,
+    "user_position": {
+      "position": {
+        "id": null,
+        "name": null
+      }
+    },
+    "user_department": {
+      "department": {
+        "id": "8c03f7a2-a937-42cf-963d-3ab43bccf8d8",
+        "name": "Account Management"
+      }
+    },
+    "work_location": {
+      "city": "Central",
+      "country": {
+        "id": "0f7540d0-1abd-4605-a7a4-834b6c834688",
+        "name": "Hong Kong",
+        "country_code": "HK"
+      }
+    },
+    "user_tags": [],
+    "first_tag_name": null,
+    "user_roles": [
+      {
+        "role": {
+          "id": "5ae628ea-c18d-4de0-b6de-57bc37a52fa1",
+          "name": "owner"
+        }
+      }
+    ],
+    "first_role_name": "owner",
+    "total_count": "279",
+    "invite_on_start_date": true,
+    "addresses": null,
+    "personal_address": null,
+    "primary_contact": null,
+    "secondary_contact": null,
+    "user_bank": null,
+    "user_info": null,
+    "reporting_to": null,
+    "country": {
+      "id": "0f7540d0-1abd-4605-a7a4-834b6c834688",
+      "name": "Hong Kong",
+      "dial_code": "852",
+      "country_code": "HK"
+    },
+    "allocated_inventories": [],
+    "allocated_inventories_v2": [],
+    "eventType": [
+      "never_logged_in"
+    ],
+    "work_timezone": {
+      "name": "Asia/Hong_Kong",
+      "offset": -480
+    }
+  },
+  {
+    "id": "0e2f8c52-706d-4dd6-90dc-f1a4169a5a23",
+    "email": "lillie.aether@example.com",
+    "first_name": "Lillie",
+    "middle_name": null,
+    "last_name": "Aether",
+    "work_number": null,
+    "created_at": "2025-03-28T05:46:37.961Z",
+    "first_active_at": null,
+    "start_date": "2025-03-28T00:00:00.000Z",
+    "join_date": null,
+    "work_email": "lillie.aether@example.com",
+    "country_id": "0f7540d0-1abd-4605-a7a4-834b6c834688",
+    "profile_img_url": "",
+    "reporting_manager_id": null,
+    "date_of_birth": null,
+    "is_deleted": false,
+    "offboard_on": null,
+    "is_work_remote": false,
+    "work_location_id": "a667da69-8937-4379-8237-9682ec335694",
+    "employee_id": null,
+    "time_away_policy_id": "6ce56595-8322-4fe1-931a-4f9916585087",
+    "time_away_allocation_id": "991fde92-b1df-4e8a-af0e-3cee3092478a",
+    "time_away_period_id": "c2534768-2481-4a53-8ec9-8fd2860baf86",
+    "public_holiday_calendar_id": "HK",
+    "status": "active",
+    "hide_work_email": false,
+    "nationalities": [],
+    "spoken_languages": [],
+    "gender": null,
+    "personal_number": null,
+    "probation_end": null,
+    "tenure": "1 years, 3 months",
+    "last_working_day": null,
+    "employment_end_date": null,
+    "working_days": [],
+    "work_anniversary_years": "1",
+    "tax_id": null,
+    "number_of_direct_reports": "0",
+    "employment_type": "direct_employee",
+    "last_accessed_at": null,
+    "contract_type": null,
+    "user_position": {
+      "position": {
+        "id": null,
+        "name": null
+      }
+    },
+    "user_department": {
+      "department": {
+        "id": "8c03f7a2-a937-42cf-963d-3ab43bccf8d8",
+        "name": "Account Management"
+      }
+    },
+    "work_location": {
+      "city": "Central",
+      "country": {
+        "id": "0f7540d0-1abd-4605-a7a4-834b6c834688",
+        "name": "Hong Kong",
+        "country_code": "HK"
+      }
+    },
+    "user_tags": [],
+    "first_tag_name": null,
+    "user_roles": [
+      {
+        "role": {
+          "id": "5ae628ea-c18d-4de0-b6de-57bc37a52fa1",
+          "name": "owner"
+        }
+      }
+    ],
+    "first_role_name": "owner",
+    "total_count": "279",
+    "invite_on_start_date": true,
+    "addresses": null,
+    "personal_address": null,
+    "primary_contact": null,
+    "secondary_contact": null,
+    "user_bank": null,
+    "user_info": null,
+    "reporting_to": null,
+    "country": {
+      "id": "0f7540d0-1abd-4605-a7a4-834b6c834688",
+      "name": "Hong Kong",
+      "dial_code": "852",
+      "country_code": "HK"
+    },
+    "allocated_inventories": [],
+    "allocated_inventories_v2": [],
+    "eventType": [
+      "never_logged_in"
+    ],
+    "work_timezone": {
+      "name": "Asia/Hong_Kong",
+      "offset": -480
+    }
+  },
+  {
+    "id": "f06148f9-b803-40cc-9858-5a4511131953",
+    "email": "gladion.mohn@example.com",
+    "first_name": "Gladion",
+    "middle_name": null,
+    "last_name": "Mohn",
+    "work_number": null,
+    "created_at": "2025-03-27T06:43:45.890Z",
+    "first_active_at": null,
+    "start_date": "2025-03-27T00:00:00.000Z",
+    "join_date": null,
+    "work_email": "gladion.mohn@example.com",
+    "country_id": "0f7540d0-1abd-4605-a7a4-834b6c834688",
+    "profile_img_url": "",
+    "reporting_manager_id": null,
+    "date_of_birth": null,
+    "is_deleted": false,
+    "offboard_on": null,
+    "is_work_remote": false,
+    "work_location_id": "a667da69-8937-4379-8237-9682ec335694",
+    "employee_id": null,
+    "time_away_policy_id": "6ce56595-8322-4fe1-931a-4f9916585087",
+    "time_away_allocation_id": "63040243-d994-4865-b28d-df5070385a0f",
+    "time_away_period_id": "a19f51a0-5771-4353-a569-f8713490282a",
+    "public_holiday_calendar_id": "HK",
+    "status": "active",
+    "hide_work_email": false,
+    "nationalities": [],
+    "spoken_languages": [],
+    "gender": null,
+    "personal_number": null,
+    "probation_end": null,
+    "tenure": "1 years, 3 months",
+    "last_working_day": null,
+    "employment_end_date": null,
+    "working_days": [],
+    "work_anniversary_years": "1",
+    "tax_id": null,
+    "number_of_direct_reports": "0",
+    "employment_type": "direct_employee",
+    "last_accessed_at": null,
+    "contract_type": null,
+    "user_position": {
+      "position": {
+        "id": null,
+        "name": null
+      }
+    },
+    "user_department": {
+      "department": {
+        "id": "8c03f7a2-a937-42cf-963d-3ab43bccf8d8",
+        "name": "Account Management"
+      }
+    },
+    "work_location": {
+      "city": "Central",
+      "country": {
+        "id": "0f7540d0-1abd-4605-a7a4-834b6c834688",
+        "name": "Hong Kong",
+        "country_code": "HK"
+      }
+    },
+    "user_tags": [],
+    "first_tag_name": null,
+    "user_roles": [
+      {
+        "role": {
+          "id": "5ae628ea-c18d-4de0-b6de-57bc37a52fa1",
+          "name": "owner"
+        }
+      }
+    ],
+    "first_role_name": "owner",
+    "total_count": "279",
+    "invite_on_start_date": true,
+    "addresses": null,
+    "personal_address": null,
+    "primary_contact": null,
+    "secondary_contact": null,
+    "user_bank": null,
+    "user_info": null,
+    "reporting_to": null,
+    "country": {
+      "id": "0f7540d0-1abd-4605-a7a4-834b6c834688",
+      "name": "Hong Kong",
+      "dial_code": "852",
+      "country_code": "HK"
+    },
+    "allocated_inventories": [],
+    "allocated_inventories_v2": [],
+    "eventType": [
+      "never_logged_in"
+    ],
+    "work_timezone": {
+      "name": "Asia/Hong_Kong",
+      "offset": -480
+    }
+  },
+  {
+    "id": "cdb195ce-01bd-4442-9ca2-52b2e176ab8e",
+    "email": "mallow.abo@example.com",
+    "first_name": "Mallow",
+    "middle_name": null,
+    "last_name": "Abo",
+    "work_number": null,
+    "created_at": "2025-03-27T06:56:23.607Z",
+    "first_active_at": null,
+    "start_date": "2025-03-28T00:00:00.000Z",
+    "join_date": null,
+    "work_email": "mallow.abo@example.com",
+    "country_id": "0f7540d0-1abd-4605-a7a4-834b6c834688",
+    "profile_img_url": "",
+    "reporting_manager_id": null,
+    "date_of_birth": null,
+    "is_deleted": false,
+    "offboard_on": null,
+    "is_work_remote": false,
+    "work_location_id": "a667da69-8937-4379-8237-9682ec335694",
+    "employee_id": null,
+    "time_away_policy_id": "6ce56595-8322-4fe1-931a-4f9916585087",
+    "time_away_allocation_id": "c34906f6-9b00-4345-bd6b-9e1c10c3006c",
+    "time_away_period_id": "47f37bd0-972a-4dc0-bff4-bcca535fd012",
+    "public_holiday_calendar_id": "HK",
+    "status": "active",
+    "hide_work_email": false,
+    "nationalities": [],
+    "spoken_languages": [],
+    "gender": null,
+    "personal_number": null,
+    "probation_end": null,
+    "tenure": "1 years, 3 months",
+    "last_working_day": null,
+    "employment_end_date": null,
+    "working_days": [],
+    "work_anniversary_years": "1",
+    "tax_id": null,
+    "number_of_direct_reports": "0",
+    "employment_type": "direct_employee",
+    "last_accessed_at": null,
+    "contract_type": null,
+    "user_position": {
+      "position": {
+        "id": null,
+        "name": null
+      }
+    },
+    "user_department": {
+      "department": {
+        "id": "8c03f7a2-a937-42cf-963d-3ab43bccf8d8",
+        "name": "Account Management"
+      }
+    },
+    "work_location": {
+      "city": "Central",
+      "country": {
+        "id": "0f7540d0-1abd-4605-a7a4-834b6c834688",
+        "name": "Hong Kong",
+        "country_code": "HK"
+      }
+    },
+    "user_tags": [],
+    "first_tag_name": null,
+    "user_roles": [
+      {
+        "role": {
+          "id": "5ae628ea-c18d-4de0-b6de-57bc37a52fa1",
+          "name": "owner"
+        }
+      }
+    ],
+    "first_role_name": "owner",
+    "total_count": "279",
+    "invite_on_start_date": true,
+    "addresses": null,
+    "personal_address": null,
+    "primary_contact": null,
+    "secondary_contact": null,
+    "user_bank": null,
+    "user_info": null,
+    "reporting_to": null,
+    "country": {
+      "id": "0f7540d0-1abd-4605-a7a4-834b6c834688",
+      "name": "Hong Kong",
+      "dial_code": "852",
+      "country_code": "HK"
+    },
+    "allocated_inventories": [],
+    "allocated_inventories_v2": [],
+    "eventType": [
+      "never_logged_in"
+    ],
+    "work_timezone": {
+      "name": "Asia/Hong_Kong",
+      "offset": -480
+    }
+  },
+  {
+    "id": "bfce38bf-7089-4b2f-9958-8920263e6d12",
+    "email": "lana.suiren@example.com",
+    "first_name": "Lana",
+    "middle_name": null,
+    "last_name": "Suiren",
+    "work_number": null,
+    "created_at": "2025-03-27T06:59:01.381Z",
+    "first_active_at": null,
+    "start_date": "2025-03-27T00:00:00.000Z",
+    "join_date": null,
+    "work_email": "lana.suiren@example.com",
+    "country_id": "0f7540d0-1abd-4605-a7a4-834b6c834688",
+    "profile_img_url": "",
+    "reporting_manager_id": null,
+    "date_of_birth": null,
+    "is_deleted": false,
+    "offboard_on": null,
+    "is_work_remote": false,
+    "work_location_id": "a667da69-8937-4379-8237-9682ec335694",
+    "employee_id": null,
+    "time_away_policy_id": "6ce56595-8322-4fe1-931a-4f9916585087",
+    "time_away_allocation_id": "fd672f79-0595-4c34-b3ce-72eef9494151",
+    "time_away_period_id": "4fa9130f-4aaa-4f3d-b49d-b72688b90c83",
+    "public_holiday_calendar_id": "HK",
+    "status": "active",
+    "hide_work_email": false,
+    "nationalities": [],
+    "spoken_languages": [],
+    "gender": null,
+    "personal_number": null,
+    "probation_end": null,
+    "tenure": "1 years, 3 months",
+    "last_working_day": null,
+    "employment_end_date": null,
+    "working_days": [],
+    "work_anniversary_years": "1",
+    "tax_id": null,
+    "number_of_direct_reports": "0",
+    "employment_type": "direct_employee",
+    "last_accessed_at": null,
+    "contract_type": null,
+    "user_position": {
+      "position": {
+        "id": null,
+        "name": null
+      }
+    },
+    "user_department": {
+      "department": {
+        "id": "0fddc487-5476-442f-a696-2e600eaa36d0",
+        "name": "Business Development"
+      }
+    },
+    "work_location": {
+      "city": "Central",
+      "country": {
+        "id": "0f7540d0-1abd-4605-a7a4-834b6c834688",
+        "name": "Hong Kong",
+        "country_code": "HK"
+      }
+    },
+    "user_tags": [],
+    "first_tag_name": null,
+    "user_roles": [
+      {
+        "role": {
+          "id": "5ae628ea-c18d-4de0-b6de-57bc37a52fa1",
+          "name": "owner"
+        }
+      }
+    ],
+    "first_role_name": "owner",
+    "total_count": "279",
+    "invite_on_start_date": true,
+    "addresses": null,
+    "personal_address": null,
+    "primary_contact": null,
+    "secondary_contact": null,
+    "user_bank": null,
+    "user_info": null,
+    "reporting_to": null,
+    "country": {
+      "id": "0f7540d0-1abd-4605-a7a4-834b6c834688",
+      "name": "Hong Kong",
+      "dial_code": "852",
+      "country_code": "HK"
+    },
+    "allocated_inventories": [],
+    "allocated_inventories_v2": [],
+    "eventType": [
+      "never_logged_in"
+    ],
+    "work_timezone": {
+      "name": "Asia/Hong_Kong",
+      "offset": -480
+    }
+  },
+  {
+    "id": "ae45f752-ebc2-4c63-95d5-0343fae297b4",
+    "email": "kiawe.kaki@example.com",
+    "first_name": "Kiawe",
+    "middle_name": null,
+    "last_name": "Kaki",
+    "work_number": null,
+    "created_at": "2025-03-27T07:15:21.604Z",
+    "first_active_at": null,
+    "start_date": "2025-03-28T00:00:00.000Z",
+    "join_date": null,
+    "work_email": "kiawe.kaki@example.com",
+    "country_id": "0f7540d0-1abd-4605-a7a4-834b6c834688",
+    "profile_img_url": "",
+    "reporting_manager_id": null,
+    "date_of_birth": null,
+    "is_deleted": false,
+    "offboard_on": null,
+    "is_work_remote": false,
+    "work_location_id": "a667da69-8937-4379-8237-9682ec335694",
+    "employee_id": null,
+    "time_away_policy_id": "6ce56595-8322-4fe1-931a-4f9916585087",
+    "time_away_allocation_id": "8becca61-d3c2-40ec-be01-ad92a9e24f84",
+    "time_away_period_id": "696233df-0d27-4751-8307-94442480aa19",
+    "public_holiday_calendar_id": "HK",
+    "status": "active",
+    "hide_work_email": false,
+    "nationalities": [],
+    "spoken_languages": [],
+    "gender": null,
+    "personal_number": null,
+    "probation_end": null,
+    "tenure": "1 years, 3 months",
+    "last_working_day": null,
+    "employment_end_date": null,
+    "working_days": [],
+    "work_anniversary_years": "1",
+    "tax_id": null,
+    "number_of_direct_reports": "0",
+    "employment_type": "direct_employee",
+    "last_accessed_at": null,
+    "contract_type": null,
+    "user_position": {
+      "position": {
+        "id": null,
+        "name": null
+      }
+    },
+    "user_department": {
+      "department": {
+        "id": "8c03f7a2-a937-42cf-963d-3ab43bccf8d8",
+        "name": "Account Management"
+      }
+    },
+    "work_location": {
+      "city": "Central",
+      "country": {
+        "id": "0f7540d0-1abd-4605-a7a4-834b6c834688",
+        "name": "Hong Kong",
+        "country_code": "HK"
+      }
+    },
+    "user_tags": [],
+    "first_tag_name": null,
+    "user_roles": [
+      {
+        "role": {
+          "id": "5ae628ea-c18d-4de0-b6de-57bc37a52fa1",
+          "name": "owner"
+        }
+      }
+    ],
+    "first_role_name": "owner",
+    "total_count": "279",
+    "invite_on_start_date": true,
+    "addresses": null,
+    "personal_address": null,
+    "primary_contact": null,
+    "secondary_contact": null,
+    "user_bank": null,
+    "user_info": null,
+    "reporting_to": null,
+    "country": {
+      "id": "0f7540d0-1abd-4605-a7a4-834b6c834688",
+      "name": "Hong Kong",
+      "dial_code": "852",
+      "country_code": "HK"
+    },
+    "allocated_inventories": [],
+    "allocated_inventories_v2": [],
+    "eventType": [
+      "never_logged_in"
+    ],
+    "work_timezone": {
+      "name": "Asia/Hong_Kong",
+      "offset": -480
+    }
+  },
+  {
+    "id": "94712b0d-dbd3-4e64-86d7-19ce4eb0947b",
+    "email": "sophocles.maamane@example.com",
+    "first_name": "Sophocles",
+    "middle_name": null,
+    "last_name": "Maamane",
+    "work_number": null,
+    "created_at": "2025-03-27T07:16:55.417Z",
+    "first_active_at": null,
+    "start_date": "2025-03-28T00:00:00.000Z",
+    "join_date": null,
+    "work_email": "sophocles.maamane@example.com",
+    "country_id": "0f7540d0-1abd-4605-a7a4-834b6c834688",
+    "profile_img_url": "",
+    "reporting_manager_id": null,
+    "date_of_birth": null,
+    "is_deleted": false,
+    "offboard_on": null,
+    "is_work_remote": false,
+    "work_location_id": "a667da69-8937-4379-8237-9682ec335694",
+    "employee_id": null,
+    "time_away_policy_id": "6ce56595-8322-4fe1-931a-4f9916585087",
+    "time_away_allocation_id": "3970825b-c6b4-46dc-a3e7-c6150b870816",
+    "time_away_period_id": "cdb5e5a5-278e-4c69-8fc4-e710c0ed8f3f",
+    "public_holiday_calendar_id": "HK",
+    "status": "active",
+    "hide_work_email": false,
+    "nationalities": [],
+    "spoken_languages": [],
+    "gender": null,
+    "personal_number": null,
+    "probation_end": null,
+    "tenure": "1 years, 3 months",
+    "last_working_day": null,
+    "employment_end_date": null,
+    "working_days": [],
+    "work_anniversary_years": "1",
+    "tax_id": null,
+    "number_of_direct_reports": "0",
+    "employment_type": "direct_employee",
+    "last_accessed_at": null,
+    "contract_type": null,
+    "user_position": {
+      "position": {
+        "id": null,
+        "name": null
+      }
+    },
+    "user_department": {
+      "department": {
+        "id": "8c03f7a2-a937-42cf-963d-3ab43bccf8d8",
+        "name": "Account Management"
+      }
+    },
+    "work_location": {
+      "city": "Central",
+      "country": {
+        "id": "0f7540d0-1abd-4605-a7a4-834b6c834688",
+        "name": "Hong Kong",
+        "country_code": "HK"
+      }
+    },
+    "user_tags": [],
+    "first_tag_name": null,
+    "user_roles": [
+      {
+        "role": {
+          "id": "5ae628ea-c18d-4de0-b6de-57bc37a52fa1",
+          "name": "owner"
+        }
+      }
+    ],
+    "first_role_name": "owner",
+    "total_count": "279",
+    "invite_on_start_date": true,
+    "addresses": null,
+    "personal_address": null,
+    "primary_contact": null,
+    "secondary_contact": null,
+    "user_bank": null,
+    "user_info": null,
+    "reporting_to": null,
+    "country": {
+      "id": "0f7540d0-1abd-4605-a7a4-834b6c834688",
+      "name": "Hong Kong",
+      "dial_code": "852",
+      "country_code": "HK"
+    },
+    "allocated_inventories": [],
+    "allocated_inventories_v2": [],
+    "eventType": [
+      "never_logged_in"
+    ],
+    "work_timezone": {
+      "name": "Asia/Hong_Kong",
+      "offset": -480
+    }
+  },
+  {
+    "id": "7be69d1f-7a2f-4a14-bf1c-a8f4981db6f2",
+    "email": "goh.gou@example.com",
+    "first_name": "Goh",
+    "middle_name": null,
+    "last_name": "Gou",
+    "work_number": null,
+    "created_at": "2025-03-27T10:19:16.870Z",
+    "first_active_at": null,
+    "start_date": "2025-03-27T00:00:00.000Z",
+    "join_date": null,
+    "work_email": "goh.gou@example.com",
+    "country_id": "0f7540d0-1abd-4605-a7a4-834b6c834688",
+    "profile_img_url": "",
+    "reporting_manager_id": null,
+    "date_of_birth": null,
+    "is_deleted": false,
+    "offboard_on": null,
+    "is_work_remote": false,
+    "work_location_id": "a667da69-8937-4379-8237-9682ec335694",
+    "employee_id": null,
+    "time_away_policy_id": "6ce56595-8322-4fe1-931a-4f9916585087",
+    "time_away_allocation_id": "f06ac216-73ce-42c5-8545-351a8d435820",
+    "time_away_period_id": "87b75eae-9684-4e13-9fc3-3fcdf2e861dc",
+    "public_holiday_calendar_id": "HK",
+    "status": "active",
+    "hide_work_email": false,
+    "nationalities": [],
+    "spoken_languages": [],
+    "gender": null,
+    "personal_number": null,
+    "probation_end": null,
+    "tenure": "1 years, 3 months",
+    "last_working_day": null,
+    "employment_end_date": null,
+    "working_days": [],
+    "work_anniversary_years": "1",
+    "tax_id": null,
+    "number_of_direct_reports": "0",
+    "employment_type": "direct_employee",
+    "last_accessed_at": null,
+    "contract_type": null,
+    "user_position": {
+      "position": {
+        "id": null,
+        "name": null
+      }
+    },
+    "user_department": {
+      "department": {
+        "id": "8c03f7a2-a937-42cf-963d-3ab43bccf8d8",
+        "name": "Account Management"
+      }
+    },
+    "work_location": {
+      "city": "Central",
+      "country": {
+        "id": "0f7540d0-1abd-4605-a7a4-834b6c834688",
+        "name": "Hong Kong",
+        "country_code": "HK"
+      }
+    },
+    "user_tags": [],
+    "first_tag_name": null,
+    "user_roles": [
+      {
+        "role": {
+          "id": "5ae628ea-c18d-4de0-b6de-57bc37a52fa1",
+          "name": "owner"
+        }
+      }
+    ],
+    "first_role_name": "owner",
+    "total_count": "279",
+    "invite_on_start_date": true,
+    "addresses": null,
+    "personal_address": null,
+    "primary_contact": null,
+    "secondary_contact": null,
+    "user_bank": null,
+    "user_info": null,
+    "reporting_to": null,
+    "country": {
+      "id": "0f7540d0-1abd-4605-a7a4-834b6c834688",
+      "name": "Hong Kong",
+      "dial_code": "852",
+      "country_code": "HK"
+    },
+    "allocated_inventories": [],
+    "allocated_inventories_v2": [],
+    "eventType": [
+      "never_logged_in"
+    ],
+    "work_timezone": {
+      "name": "Asia/Hong_Kong",
+      "offset": -480
+    }
+  },
+  {
+    "id": "9ea5b41e-8765-46c4-9dc8-f840746e7b40",
+    "email": "chloe.sakuragi@example.com",
+    "first_name": "Chloe",
+    "middle_name": null,
+    "last_name": "Sakuragi",
+    "work_number": null,
+    "created_at": "2025-03-27T10:58:22.202Z",
+    "first_active_at": null,
+    "start_date": "2025-03-27T00:00:00.000Z",
+    "join_date": null,
+    "work_email": "chloe.sakuragi@example.com",
+    "country_id": "0f7540d0-1abd-4605-a7a4-834b6c834688",
+    "profile_img_url": "",
+    "reporting_manager_id": null,
+    "date_of_birth": null,
+    "is_deleted": false,
+    "offboard_on": null,
+    "is_work_remote": false,
+    "work_location_id": "a667da69-8937-4379-8237-9682ec335694",
+    "employee_id": null,
+    "time_away_policy_id": "6ce56595-8322-4fe1-931a-4f9916585087",
+    "time_away_allocation_id": "9b585435-991d-4c86-8080-67b1f328f17e",
+    "time_away_period_id": "dd99c325-01d6-4d6b-9797-32fa05df6297",
+    "public_holiday_calendar_id": "HK",
+    "status": "active",
+    "hide_work_email": false,
+    "nationalities": [],
+    "spoken_languages": [],
+    "gender": null,
+    "personal_number": null,
+    "probation_end": null,
+    "tenure": "1 years, 3 months",
+    "last_working_day": null,
+    "employment_end_date": null,
+    "working_days": [],
+    "work_anniversary_years": "1",
+    "tax_id": null,
+    "number_of_direct_reports": "0",
+    "employment_type": "direct_employee",
+    "last_accessed_at": null,
+    "contract_type": null,
+    "user_position": {
+      "position": {
+        "id": null,
+        "name": null
+      }
+    },
+    "user_department": {
+      "department": {
+        "id": "8c03f7a2-a937-42cf-963d-3ab43bccf8d8",
+        "name": "Account Management"
+      }
+    },
+    "work_location": {
+      "city": "Central",
+      "country": {
+        "id": "0f7540d0-1abd-4605-a7a4-834b6c834688",
+        "name": "Hong Kong",
+        "country_code": "HK"
+      }
+    },
+    "user_tags": [],
+    "first_tag_name": null,
+    "user_roles": [
+      {
+        "role": {
+          "id": "5ae628ea-c18d-4de0-b6de-57bc37a52fa1",
+          "name": "owner"
+        }
+      }
+    ],
+    "first_role_name": "owner",
+    "total_count": "279",
+    "invite_on_start_date": true,
+    "addresses": null,
+    "personal_address": null,
+    "primary_contact": null,
+    "secondary_contact": null,
+    "user_bank": null,
+    "user_info": null,
+    "reporting_to": null,
+    "country": {
+      "id": "0f7540d0-1abd-4605-a7a4-834b6c834688",
+      "name": "Hong Kong",
+      "dial_code": "852",
+      "country_code": "HK"
+    },
+    "allocated_inventories": [],
+    "allocated_inventories_v2": [],
+    "eventType": [
+      "never_logged_in"
+    ],
+    "work_timezone": {
+      "name": "Asia/Hong_Kong",
+      "offset": -480
+    }
+  },
+  {
+    "id": "d69f1d57-8e2c-4421-8201-8fff39f67401",
+    "email": "bea.saito@example.com",
+    "first_name": "Bea",
+    "middle_name": null,
+    "last_name": "Saito",
+    "work_number": null,
+    "created_at": "2025-03-27T11:01:32.831Z",
+    "first_active_at": null,
+    "start_date": "2025-03-27T00:00:00.000Z",
+    "join_date": null,
+    "work_email": "bea.saito@example.com",
+    "country_id": "c05429a4-f8d5-4284-9b9a-ba40e35879b7",
+    "profile_img_url": "",
+    "reporting_manager_id": null,
+    "date_of_birth": null,
+    "is_deleted": false,
+    "offboard_on": null,
+    "is_work_remote": false,
+    "work_location_id": "bb5ab1e9-a582-423e-a05e-3da43607f85b",
+    "employee_id": null,
+    "time_away_policy_id": "6ce56595-8322-4fe1-931a-4f9916585087",
+    "time_away_allocation_id": "a592e81c-5765-47a9-b6ce-a4c334b9207a",
+    "time_away_period_id": "09594ab6-7195-4265-a1da-c0de10886e0c",
+    "public_holiday_calendar_id": "IN-RJ",
+    "status": "active",
+    "hide_work_email": false,
+    "nationalities": [],
+    "spoken_languages": [],
+    "gender": null,
+    "personal_number": null,
+    "probation_end": null,
+    "tenure": "1 years, 3 months",
+    "last_working_day": null,
+    "employment_end_date": null,
+    "working_days": [],
+    "work_anniversary_years": "1",
+    "tax_id": null,
+    "number_of_direct_reports": "0",
+    "employment_type": "direct_employee",
+    "last_accessed_at": null,
+    "contract_type": null,
+    "user_position": {
+      "position": {
+        "id": null,
+        "name": null
+      }
+    },
+    "user_department": {
+      "department": {
+        "id": "8c03f7a2-a937-42cf-963d-3ab43bccf8d8",
+        "name": "Account Management"
+      }
+    },
+    "work_location": {
+      "city": "PUNE",
+      "country": {
+        "id": "c05429a4-f8d5-4284-9b9a-ba40e35879b7",
+        "name": "India",
+        "country_code": "IN"
+      }
+    },
+    "user_tags": [],
+    "first_tag_name": null,
+    "user_roles": [
+      {
+        "role": {
+          "id": "5ae628ea-c18d-4de0-b6de-57bc37a52fa1",
+          "name": "owner"
+        }
+      }
+    ],
+    "first_role_name": "owner",
+    "total_count": "279",
+    "invite_on_start_date": true,
+    "addresses": null,
+    "personal_address": null,
+    "primary_contact": null,
+    "secondary_contact": null,
+    "user_bank": null,
+    "user_info": null,
+    "reporting_to": null,
+    "country": {
+      "id": "c05429a4-f8d5-4284-9b9a-ba40e35879b7",
+      "name": "India",
+      "dial_code": "91",
+      "country_code": "IN"
+    },
+    "allocated_inventories": [],
+    "allocated_inventories_v2": [],
+    "eventType": [
+      "never_logged_in"
+    ],
+    "work_timezone": {
+      "name": "Asia/Kolkata",
+      "offset": -330
+    }
+  },
+  {
+    "id": "02809811-f887-47a9-8c57-ee5bca4d184d",
+    "email": "allister.onion@example.com",
+    "first_name": "Allister",
+    "middle_name": null,
+    "last_name": "Onion",
+    "work_number": null,
+    "created_at": "2024-10-21T12:00:13.144Z",
+    "first_active_at": null,
+    "start_date": "2024-01-20T00:00:00.000Z",
+    "join_date": null,
+    "work_email": "allister.onion@example.com",
+    "country_id": "abdadf28-76e0-412e-ad18-068dfbe43ec9",
+    "profile_img_url": "",
+    "reporting_manager_id": null,
+    "date_of_birth": null,
+    "is_deleted": false,
+    "offboard_on": null,
+    "is_work_remote": false,
+    "work_location_id": "fe1e05df-269a-43c6-bed6-31578c57b46b",
+    "employee_id": "55",
+    "time_away_policy_id": "6ce56595-8322-4fe1-931a-4f9916585087",
+    "time_away_allocation_id": "073b95c9-b017-4326-b6bc-32e25edc6a08",
+    "time_away_period_id": "96c0124f-59a9-427c-ab06-f146dec1743f",
+    "public_holiday_calendar_id": null,
+    "status": "active",
+    "hide_work_email": false,
+    "nationalities": [],
+    "spoken_languages": [],
+    "gender": null,
+    "personal_number": null,
+    "probation_end": null,
+    "tenure": "2 years, 5 months",
+    "last_working_day": null,
+    "employment_end_date": null,
+    "working_days": [],
+    "work_anniversary_years": "2",
+    "tax_id": null,
+    "number_of_direct_reports": "11",
+    "employment_type": "direct_employee",
+    "last_accessed_at": null,
+    "contract_type": "",
+    "user_position": {
+      "position": {
+        "id": "3067eeb6-ab54-4217-b64f-2c7115aeab06",
+        "name": "Junior Developer"
+      }
+    },
+    "user_department": {
+      "department": {
+        "id": null,
+        "name": null
+      }
+    },
+    "work_location": {
+      "city": "",
+      "country": {
+        "id": "abdadf28-76e0-412e-ad18-068dfbe43ec9",
+        "name": "Afghanistan",
+        "country_code": "AF"
+      }
+    },
+    "user_tags": [],
+    "first_tag_name": null,
+    "user_roles": [
+      {
+        "role": {
+          "id": "12cbd1cd-73a9-4bb6-91c3-7cfd09f4d7d9",
+          "name": "user"
+        }
+      }
+    ],
+    "first_role_name": "user",
+    "total_count": "279",
+    "invite_on_start_date": false,
+    "addresses": null,
+    "personal_address": null,
+    "primary_contact": null,
+    "secondary_contact": null,
+    "user_bank": null,
+    "user_info": null,
+    "reporting_to": null,
+    "country": {
+      "id": "abdadf28-76e0-412e-ad18-068dfbe43ec9",
+      "name": "Afghanistan",
+      "dial_code": "93",
+      "country_code": "AF"
+    },
+    "allocated_inventories": [],
+    "allocated_inventories_v2": [],
+    "eventType": [
+      "never_logged_in"
+    ],
+    "work_timezone": {
+      "name": "Asia/Kabul",
+      "offset": -270
+    }
+  },
+  {
+    "id": "de002946-db79-444c-bf20-c9dc14657cf7",
+    "email": "",
+    "first_name": "Marnie",
+    "middle_name": "",
+    "last_name": "Mary",
+    "work_number": null,
+    "created_at": "2024-10-21T12:00:14.556Z",
+    "first_active_at": null,
+    "start_date": "2024-08-13T00:00:00.000Z",
+    "join_date": null,
+    "work_email": "marnie.mary@example.com",
+    "country_id": "c05429a4-f8d5-4284-9b9a-ba40e35879b7",
+    "profile_img_url": "",
+    "reporting_manager_id": "02809811-f887-47a9-8c57-ee5bca4d184d",
+    "date_of_birth": null,
+    "is_deleted": false,
+    "offboard_on": null,
+    "is_work_remote": false,
+    "work_location_id": "554ff862-7457-4edf-97fe-7c001920dee2",
+    "employee_id": "1234456550",
+    "time_away_policy_id": "6ce56595-8322-4fe1-931a-4f9916585087",
+    "time_away_allocation_id": "75a187a2-1242-4393-9f59-7c6cb231de6f",
+    "time_away_period_id": "890c5a61-eb8a-4549-ba20-084d3d78db65",
+    "public_holiday_calendar_id": "IN-RJ",
+    "status": "active",
+    "hide_work_email": false,
+    "nationalities": [],
+    "spoken_languages": [],
+    "gender": "",
+    "personal_number": "",
+    "probation_end": null,
+    "tenure": "1 years, 11 months",
+    "last_working_day": null,
+    "employment_end_date": null,
+    "working_days": [],
+    "work_anniversary_years": "1",
+    "tax_id": null,
+    "number_of_direct_reports": "3",
+    "employment_type": "direct_employee",
+    "last_accessed_at": null,
+    "contract_type": "",
+    "user_position": {
+      "position": {
+        "id": "6f545851-78af-47b3-b66f-d295ecd0869d",
+        "name": "CFO"
+      }
+    },
+    "user_department": {
+      "department": {
+        "id": "0fddc487-5476-442f-a696-2e600eaa36d0",
+        "name": "Business Development"
+      }
+    },
+    "work_location": {
+      "city": "asd",
+      "country": {
+        "id": "c05429a4-f8d5-4284-9b9a-ba40e35879b7",
+        "name": "India",
+        "country_code": "IN"
+      }
+    },
+    "user_tags": [],
+    "first_tag_name": null,
+    "user_roles": [
+      {
+        "role": {
+          "id": "12cbd1cd-73a9-4bb6-91c3-7cfd09f4d7d9",
+          "name": "user"
+        }
+      }
+    ],
+    "first_role_name": "user",
+    "total_count": "279",
+    "invite_on_start_date": false,
+    "addresses": null,
+    "personal_address": null,
+    "primary_contact": null,
+    "secondary_contact": null,
+    "user_bank": null,
+    "user_info": null,
+    "reporting_to": {
+      "id": "02809811-f887-47a9-8c57-ee5bca4d184d",
+      "first_name": "Marnie",
+      "middle_name": null,
+      "last_name": "Mary",
+      "email": "marnie.mary@example.com",
+      "work_email": "marnie.mary@example.com",
+      "profile_img_url": ""
+    },
+    "country": {
+      "id": "c05429a4-f8d5-4284-9b9a-ba40e35879b7",
+      "name": "India",
+      "dial_code": "91",
+      "country_code": "IN"
+    },
+    "allocated_inventories": [],
+    "allocated_inventories_v2": [],
+    "eventType": [
+      "never_logged_in"
+    ],
+    "work_timezone": {
+      "name": "Asia/Kolkata",
+      "offset": -330
+    }
+  },
+  {
+    "id": "a29a5629-5a09-428e-981f-c556ebfa9f59",
+    "email": "",
+    "first_name": "Hop",
+    "middle_name": null,
+    "last_name": "Pop",
+    "work_number": null,
+    "created_at": "2024-10-21T12:00:16.588Z",
+    "first_active_at": null,
+    "start_date": "2023-09-01T00:00:00.000Z",
+    "join_date": null,
+    "work_email": "hop.pop@example.com",
+    "country_id": "c05429a4-f8d5-4284-9b9a-ba40e35879b7",
+    "profile_img_url": "",
+    "reporting_manager_id": "536d3ede-9afe-47eb-97fe-357a0c9b0fb0",
+    "date_of_birth": null,
+    "is_deleted": false,
+    "offboard_on": null,
+    "is_work_remote": false,
+    "work_location_id": "f83be9ab-be35-475d-90dd-8724637c6c89",
+    "employee_id": "",
+    "time_away_policy_id": "6ce56595-8322-4fe1-931a-4f9916585087",
+    "time_away_allocation_id": "495f8f58-78e9-4adf-b744-ae2c00bb3366",
+    "time_away_period_id": "d3ad7cee-8d64-433d-93e2-6fac10400aee",
+    "public_holiday_calendar_id": "IN-RJ",
+    "status": "active",
+    "hide_work_email": false,
+    "nationalities": [],
+    "spoken_languages": [],
+    "gender": null,
+    "personal_number": null,
+    "probation_end": null,
+    "tenure": "2 years, 10 months",
+    "last_working_day": null,
+    "employment_end_date": null,
+    "working_days": [],
+    "work_anniversary_years": "2",
+    "tax_id": null,
+    "number_of_direct_reports": "31",
+    "employment_type": "direct_employee",
+    "last_accessed_at": null,
+    "contract_type": "",
+    "user_position": {
+      "position": {
+        "id": "24104ba2-04a3-4587-a090-04cdc4e11db3",
+        "name": "VP Product"
+      }
+    },
+    "user_department": {
+      "department": {
+        "id": "695c3fe8-0292-4cf5-89a1-ea29acd7c71f",
+        "name": "Product"
+      }
+    },
+    "work_location": {
+      "city": "Gwalior",
+      "country": {
+        "id": "c05429a4-f8d5-4284-9b9a-ba40e35879b7",
+        "name": "India",
+        "country_code": "IN"
+      }
+    },
+    "user_tags": [],
+    "first_tag_name": null,
+    "user_roles": [
+      {
+        "role": {
+          "id": "12cbd1cd-73a9-4bb6-91c3-7cfd09f4d7d9",
+          "name": "user"
+        }
+      }
+    ],
+    "first_role_name": "user",
+    "total_count": "279",
+    "invite_on_start_date": false,
+    "addresses": null,
+    "personal_address": null,
+    "primary_contact": null,
+    "secondary_contact": null,
+    "user_bank": null,
+    "user_info": null,
+    "reporting_to": {
+      "id": "536d3ede-9afe-47eb-97fe-357a0c9b0fb0",
+      "first_name": "Hop",
+      "middle_name": null,
+      "last_name": "Pop",
+      "email": "",
+      "work_email": "hop.pop@example.com",
+      "profile_img_url": ""
+    },
+    "country": {
+      "id": "c05429a4-f8d5-4284-9b9a-ba40e35879b7",
+      "name": "India",
+      "dial_code": "91",
+      "country_code": "IN"
+    },
+    "allocated_inventories": [],
+    "allocated_inventories_v2": [],
+    "eventType": [
+      "never_logged_in"
+    ],
+    "work_timezone": {
+      "name": "Asia/Kolkata",
+      "offset": -330
+    }
+  }
+]

@@ -33,5 +33,5 @@
 - [ ] I have commented my code, particularly in hard-to-understand areas
 - [ ] I have updated the patch version using pnpm
 - [ ] My change follows the component API standard
-- [ ] Visual regression: screenshots or Storybook links attached (if UI changed)
+- [ ] Visual regression: screenshots or showcase-site links attached (if UI changed)
 - [ ] Accessibility: no new a11y violations introduced
