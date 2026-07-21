@@ -25,6 +25,34 @@ const useDateStore = create<DateStore>()(set => ({
   setMonthYear: (value: MonthYear) => set({monthYear: value}),
 }))
 
+const CUSTOM_OPTION = RANGE_OPTIONS[0]
+
+/**
+ * The concrete `{from, to}` window a quick-select preset resolves to, relative to
+ * `today`. `custom` (and anything unrecognised) has no fixed window — the calendar
+ * drives it — so it returns `null`.
+ */
+export function rangeOptionToDates(value: string, today: Date = new Date()): DateRange | null {
+  switch (value) {
+    case 'today':
+      return {from: today, to: today}
+    case 'ytd':
+      return {from: new Date(today.getFullYear(), 0, 1), to: today}
+    case '7days':
+      return {from: addDays(today, -7), to: today}
+    case '1month':
+      return {from: addMonths(today, -1), to: today}
+    case '3months':
+      return {from: addMonths(today, -3), to: today}
+    case '6months':
+      return {from: addMonths(today, -6), to: today}
+    case '1year':
+      return {from: addYears(today, -1), to: today}
+    default:
+      return null
+  }
+}
+
 export function DateRangePicker({
   value,
   onChange,
@@ -48,8 +76,29 @@ export function DateRangePicker({
   const date = value
   const monthYear = useDateStore(state => state.monthYear)
   const setMonthYear = useDateStore(state => state.setMonthYear)
-  const [selectedRange, setSelectedRange] = React.useState(RANGE_OPTIONS[0])
   const [hoverRange, setHoverRange] = React.useState<DateRange | undefined>(undefined)
+
+  /**
+   * The active quick-select preset is derived from `value` rather than held in
+   * local state: whenever the current window matches a preset's range it reads as
+   * that preset (so a default "last month" range shows "Last month", not
+   * "Custom"), and it stays correct across reloads and controlled updates instead
+   * of resetting to "Custom" on mount. A bespoke window falls back to Custom.
+   */
+  const selectedRange = React.useMemo(() => {
+    if (!showQuickSelect || !date?.from || !date?.to) return CUSTOM_OPTION
+    const today = new Date()
+    const match = RANGE_OPTIONS.find(option => {
+      const preset = rangeOptionToDates(String(option.value), today)
+      return (
+        preset != null &&
+        isSameDay(date.from as Date, preset.from as Date) &&
+        isSameDay(date.to as Date, preset.to as Date)
+      )
+    })
+    return match ?? CUSTOM_OPTION
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [showQuickSelect, date])
 
   const displayDate = React.useMemo(() => {
     if (!date?.from) return placeholder || 'Pick a date'
@@ -66,10 +115,6 @@ export function DateRangePicker({
   }, [date, placeholder])
 
   const onSelect = (values?: DateRange) => {
-    if (showQuickSelect && selectedRange.value !== RANGE_OPTIONS[0].value) {
-      setSelectedRange(RANGE_OPTIONS[0])
-    }
-
     const start = values?.from ?? undefined
     const end = values?.to ?? values?.from
     onChange({from: start, to: end})
@@ -91,55 +136,14 @@ export function DateRangePicker({
   }, [date])
 
   const onDropdownClick = (value: any) => {
-    const today = new Date()
-
-    const selected = RANGE_OPTIONS.find(option => option.value === value) ?? RANGE_OPTIONS[0]
-    setSelectedRange(selected)
-    switch (value) {
-      case 'today':
-        onChange({from: today, to: today})
-        break
-      case 'ytd':
-        onChange({
-          from: new Date(today.getFullYear(), 0, 1),
-          to: today,
-        })
-        break
-      case '7days':
-        onChange({
-          from: addDays(today, -7),
-          to: today,
-        })
-        break
-      case '1month':
-        onChange({
-          from: addMonths(today, -1),
-          to: today,
-        })
-        break
-      case '3months':
-        onChange({
-          from: addMonths(today, -3),
-          to: today,
-        })
-        break
-      case '6months':
-        onChange({
-          from: addMonths(today, -6),
-          to: today,
-        })
-        break
-      case '1year':
-        onChange({
-          from: addYears(today, -1),
-          to: today,
-        })
-        break
-      case 'custom':
-        break
-      default:
-        onChange({from: value, to: value})
-        break
+    /* The picked preset drives the window; onChange updates `value`, which
+       re-derives `selectedRange` above (no separate selection state to keep in
+       sync). `custom` keeps the current window and lets the calendar take over. */
+    const preset = rangeOptionToDates(value)
+    if (preset) {
+      onChange(preset)
+    } else if (value !== 'custom') {
+      onChange({from: value, to: value})
     }
   }
 
@@ -279,14 +283,7 @@ export function DateRangePicker({
             month={new Date(monthYear.year, monthYear.month)}
             {...props}
           />
-          {onReset && (
-            <ResetButton
-              onReset={() => {
-                setSelectedRange(RANGE_OPTIONS[0])
-                onReset()
-              }}
-            />
-          )}
+          {onReset && <ResetButton onReset={onReset} />}
         </PopoverContent>
       </Popover>
     </div>
