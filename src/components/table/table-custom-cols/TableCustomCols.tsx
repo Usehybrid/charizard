@@ -11,7 +11,7 @@ import {Search} from '../../search'
 import {Loader} from '../../loader'
 import {DrawerV2} from '../../drawer-v2'
 import {BUTTON_VARIANT} from '../../button'
-import {CHECKBOX_COL_ID, DROPDOWN_COL_ID, RADIO_COL_ID} from '../constants'
+import {CHECKBOX_COL_ID, DROPDOWN_COL_ID, EXPANDER_COL_ID, RADIO_COL_ID} from '../constants'
 import {SortableList} from './sortable/SortableList'
 import {GroupedSelection} from './GroupedSelection'
 import type {CustomColCheckedState, TableCustomColumns} from '../types'
@@ -63,6 +63,10 @@ export default function TableCustomCols({
     setSearch('')
   }
 
+  // Non-hideable columns the picker still lists (greyed out, always checked) so
+  // their position is visible. The table's own control columns are excluded:
+  // they are label-less and the table places them itself, so an entry for one
+  // reads as an empty row in the picker.
   const disabledCols = table
     .getAllLeafColumns()
     .filter(
@@ -70,7 +74,8 @@ export default function TableCustomCols({
         !c.columnDef.enableHiding &&
         c.id !== CHECKBOX_COL_ID &&
         c.id !== RADIO_COL_ID &&
-        c.id !== DROPDOWN_COL_ID,
+        c.id !== DROPDOWN_COL_ID &&
+        c.id !== EXPANDER_COL_ID,
     )
 
   // For non-selection variant
@@ -104,6 +109,7 @@ export default function TableCustomCols({
       const orderableCols = _checkedState.map(obj => obj.id)
       const arr = [
         isCheckbox ? CHECKBOX_COL_ID : RADIO_COL_ID,
+        EXPANDER_COL_ID,
         ...orderableCols,
         isDropdownActions ? DROPDOWN_COL_ID : undefined,
       ].filter(Boolean) as string[]

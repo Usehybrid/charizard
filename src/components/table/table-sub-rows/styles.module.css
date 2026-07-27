@@ -1,0 +1,45 @@
+/*
+ * The nested table an expanded row reveals. It is inset and tinted so it reads
+ * as belonging to the row above it rather than as more rows of the outer table.
+ */
+.box {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 16px 12px 56px;
+  background: var(--fill-highlight);
+}
+
+.caption {
+  color: var(--text-secondary);
+}
+
+.subTable {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #ffffff;
+  border: 1px solid var(--stroke-border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.subTableHeader {
+  color: var(--text-secondary);
+  text-align: left;
+  padding: 8px 12px;
+  background: var(--fill-highlight);
+  border-bottom: 1px solid var(--stroke-border);
+  white-space: nowrap;
+}
+
+.subTableData {
+  color: var(--text-primary);
+  height: 48px;
+  padding: 6px 12px;
+  vertical-align: middle;
+}
+
+.subTableRow:not(:last-child) > .subTableData {
+  border-bottom: 1px solid var(--stroke-selection);
+}

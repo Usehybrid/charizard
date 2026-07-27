@@ -20,9 +20,11 @@ import {TablePagination} from './table-pagination'
 import {TableCheckbox} from './table-columns'
 import {TableRadio} from './table-columns'
 import {TableRowExpander} from './table-columns'
+import {TableSubRows} from './table-sub-rows'
 import {CHECKBOX_COL_ID, DROPDOWN_COL_ID, EXPANDER_COL_ID, RADIO_COL_ID} from './constants'
 import type {
   Column,
+  ColumnDef,
   ColumnOrderState,
   ColumnPinningState,
   ExpandedState,
@@ -153,20 +155,32 @@ export interface TableProps {
   }
   /**
    * Expandable rows for one-to-many data (an order and its items, an invoice and
-   * its lines). Sub-rows are rendered by the SAME column definitions as their
-   * parent, so a per-item value sits under its own header and the custom-column
-   * picker governs both grains at once.
+   * its lines). An expanded parent reveals a nested table with its OWN header
+   * row, because the two grains describe different things: an order has a date
+   * and a total, an item has a serial number and a delivery status. Sharing one
+   * header would force every child field into a column defined for its parent.
    *
    * Opt-in: without this config the table behaves exactly as before — no
    * expander column, no expanded row model.
    *
-   * @param getSubRows returns a row's children, or undefined/[] when it has none
+   * @param getRows returns a row's children, or undefined/[] when it has none
    *   (rows with no children render no toggle rather than an inert one).
+   * @param columns column defs for the nested table, written against the child
+   *   shape. Independent of the parent's columns and of the custom-column picker.
+   * @param content custom expanded content when a child table is not the right
+   *   presentation (for example, a compact item-card list).
+   * @param expandMode 'single' collapses the previous expanded row before
+   *   opening the next; the default 'multiple' preserves existing behaviour.
    * @param entityName singular noun for the toggle's aria-label, e.g. 'order'.
+   * @param caption optional heading above the nested table, e.g. 'Order items'.
    */
   expansionConfig?: {
-    getSubRows: (row: any) => any[] | undefined
+    getRows: (row: any) => any[] | undefined
+    columns?: ColumnDef<any, any>[]
     entityName?: string
+    caption?: string
+    content?: (row: any) => React.ReactNode
+    expandMode?: 'multiple' | 'single'
   }
   customActionItems?: React.ReactElement[]
   visibilityConfig?: {
@@ -227,6 +241,24 @@ export function Table({
     right: [DROPDOWN_COL_ID],
   })
   const [expanded, setExpanded] = React.useState<ExpandedState>({})
+
+  const handleExpandedChange = (updater: React.SetStateAction<ExpandedState>) => {
+    if (expansionConfig?.expandMode !== 'single') {
+      setExpanded(updater)
+      return
+    }
+
+    setExpanded(current => {
+      const next = typeof updater === 'function' ? updater(current) : updater
+      if (next === true) return next
+
+      const currentRows = current === true ? {} : current
+      const newlyExpandedId = Object.keys(next).find(rowId => next[rowId] && !currentRows[rowId])
+      const expandedId = newlyExpandedId ?? Object.keys(next).find(rowId => next[rowId])
+
+      return expandedId ? {[expandedId]: true} : {}
+    })
+  }
 
   const [rowSelection, setRowSelection] = React.useState({})
 
@@ -381,14 +413,9 @@ export function Table({
       : [
           {
             id: DROPDOWN_COL_ID,
-            // Row actions belong to the top-level entity. A sub-row is a child
-            // record (an order item, an invoice line) and the menu's handlers are
-            // written against the parent's shape, so it gets no menu rather than
-            // one whose every action would misfire.
-            cell: (props: any) =>
-              expansionConfig && props.row.depth > 0 ? null : (
-                <TableActions actionsConfig={actionsConfig} data={props.row.original} />
-              ),
+            cell: (props: any) => (
+              <TableActions actionsConfig={actionsConfig} data={props.row.original} />
+            ),
             header: 'Actions',
             size: 70,
             enablePinning: true,
@@ -413,18 +440,18 @@ export function Table({
     onColumnOrderChange: setColumnOrder,
     onColumnPinningChange: pinningConfig?.setColumnPinning || setColumnPinning,
     onRowSelectionChange: rowSelectionConfig?.setRowSelection || setRowSelection,
-    onExpandedChange: setExpanded,
-    // Only parent rows are selectable in an expandable table — a bulk action is
-    // defined over the top-level entity, and letting a sub-row be checked would
-    // put a child in setSelectedRows alongside its parent.
-    enableRowSelection: expansionConfig ? (row: Row<any>) => row.depth === 0 : true,
+    onExpandedChange: handleExpandedChange,
+    enableRowSelection: true,
     enableMultiRowSelection: isRadio ? false : true,
     manualPagination: true,
     manualFiltering: true,
     getCoreRowModel: getCoreRowModel(),
     ...(expansionConfig
       ? {
-          getSubRows: expansionConfig.getSubRows,
+          // Children live in their own nested table rather than in the parent's
+          // row model, so expandability is declared per row instead of derived
+          // from subRows.
+          getRowCanExpand: (row: Row<any>) => !!expansionConfig.getRows(row.original)?.length,
           getExpandedRowModel: getExpandedRowModel(),
         }
       : {}),
@@ -435,13 +462,7 @@ export function Table({
       sortDescFirst: true,
     },
     getRowId: rowSelectionConfig?.rowIdKey
-      ? (row: any, index: number, parent?: Row<any>) => {
-          const ownId = row[rowSelectionConfig?.rowIdKey as string] ?? index
-          // A sub-row's id is scoped to its parent: children of different parents
-          // can legitimately share a key, and a collision would make expanding one
-          // row toggle another.
-          return parent ? `${parent.id}.${ownId}` : `${ownId}`
-        }
+      ? (row: any, index: number) => `${row[rowSelectionConfig?.rowIdKey as string] ?? index}`
       : undefined,
   })
 
@@ -517,6 +538,7 @@ export function Table({
           emptyStateConfig={emptyStateConfig}
           tableStyleConfig={tableStyleConfig}
           visibleCols={visibleCols}
+          expansionConfig={expansionConfig}
         />
       </div>
       {typeof paginationConfig === 'object' && !!paginationConfig.metaData && (
@@ -535,6 +557,7 @@ function TableComp({
   tableStyleConfig,
   isEmpty,
   visibleCols,
+  expansionConfig,
 }: {
   table: Table<any>
   isCheckbox?: boolean
@@ -544,6 +567,7 @@ function TableComp({
   tableStyleConfig: TableProps['tableStyleConfig']
   isEmpty: boolean
   visibleCols: number
+  expansionConfig: TableProps['expansionConfig']
 }) {
   const [showLeftShadow, setShowLeftShadow] = React.useState(false)
   const [showRightShadow, setShowRightShadow] = React.useState(false)
@@ -594,8 +618,8 @@ function TableComp({
                         header.id !== RADIO_COL_ID
                           ? '10px'
                           : isNextToPinnedCol
-                          ? '15px'
-                          : undefined,
+                            ? '15px'
+                            : undefined,
 
                       ...getCommonPinningStyles(
                         header.column,
@@ -651,61 +675,72 @@ function TableComp({
         ) : (
           <tbody className={classes.tableBody}>
             {table.getRowModel().rows.map((row, idx, _rows) => {
-              const isSubRow = row.depth > 0
-              /* Tinting sub-rows is what makes a group read as one entity — the
-                 exact ask behind replacing the old divider-less card list. */
-              const rowBackground = isSubRow ? 'var(--fill-highlight)' : '#ffffff'
-
               return (
-                <tr
-                  key={row.id}
-                  className={clsx(
-                    classes.tableRow,
-                    isSubRow && classes.tableSubRow,
-                    row.getIsExpanded() && classes.tableRowExpanded,
-                  )}
-                >
-                  {row.getVisibleCells().map((cell, idx2, cells) => {
-                    const isSelectionCell =
-                      (isCheckbox || isRadio) &&
-                      (cell.id === `${idx}_${RADIO_COL_ID}` ||
-                        cell.id === `${idx}_${CHECKBOX_COL_ID}`)
+                <React.Fragment key={row.id}>
+                  <tr
+                    className={clsx(
+                      classes.tableRow,
+                      row.getIsExpanded() && classes.tableRowExpanded,
+                    )}
+                  >
+                    {row.getVisibleCells().map((cell, idx2, cells) => {
+                      const isSelectionCell =
+                        (isCheckbox || isRadio) &&
+                        (cell.id === `${idx}_${RADIO_COL_ID}` ||
+                          cell.id === `${idx}_${CHECKBOX_COL_ID}`)
 
-                    let isPrevPinned = false
-                    if (tableStyleConfig?.stickyIds?.length) {
-                      isPrevPinned = cells[idx2 - 1]?.column.getCanPin()
-                    }
+                      let isPrevPinned = false
+                      if (tableStyleConfig?.stickyIds?.length) {
+                        isPrevPinned = cells[idx2 - 1]?.column.getCanPin()
+                      }
 
-                    return (
-                      <td
-                        key={cell.id}
-                        className={clsx(
-                          classes.tableData,
-                          (isCheckbox || isRadio) && classes.tableDataWithSelection,
-                          'zap-content-regular',
+                      return (
+                        <td
+                          key={cell.id}
+                          className={clsx(
+                            classes.tableData,
+                            (isCheckbox || isRadio) && classes.tableDataWithSelection,
+                            'zap-content-regular',
+                          )}
+                          style={{
+                            width:
+                              cell.column.getSize() === Number.MAX_SAFE_INTEGER
+                                ? 'auto'
+                                : cell.column.getSize(),
+                            verticalAlign: isSelectionCell ? 'middle' : undefined,
+                            paddingLeft: isPrevPinned ? '15px' : undefined,
+                            ...getCommonPinningStyles(
+                              cell.column,
+                              showLeftShadow,
+                              showRightShadow,
+                            ),
+                          }}
+                        >
+                          {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                        </td>
+                      )
+                    })}
+                  </tr>
+
+                  {/* An expanded row hands its full width to the children's own
+                      table, inset under the parent they belong to. */}
+                  {expansionConfig && row.getIsExpanded() && (
+                    <tr className={classes.subTableRow}>
+                      <td className={classes.subTableCell} colSpan={row.getVisibleCells().length}>
+                        {expansionConfig.content ? (
+                          expansionConfig.content(row.original)
+                        ) : (
+                          <TableSubRows
+                            columns={expansionConfig.columns ?? []}
+                            data={expansionConfig.getRows(row.original) ?? []}
+                            caption={expansionConfig.caption}
+                            parent={row.original}
+                          />
                         )}
-                        style={{
-                          width:
-                            cell.column.getSize() === Number.MAX_SAFE_INTEGER
-                              ? 'auto'
-                              : cell.column.getSize(),
-                          backgroundColor: rowBackground,
-                          verticalAlign: isSelectionCell ? 'middle' : undefined,
-                          paddingLeft: isPrevPinned ? '15px' : undefined,
-                          ...getCommonPinningStyles(
-                            cell.column,
-                            showLeftShadow,
-                            showRightShadow,
-                            false,
-                            rowBackground,
-                          ),
-                        }}
-                      >
-                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
                       </td>
-                    )
-                  })}
-                </tr>
+                    </tr>
+                  )}
+                </React.Fragment>
               )
             })}
           </tbody>
@@ -730,8 +765,6 @@ const getCommonPinningStyles = (
   showLeftShadow: boolean,
   showRightShadow: boolean,
   isHeader?: boolean,
-  /** Row background, so a pinned cell keeps the tint of the row it belongs to. */
-  rowBackground = '#ffffff',
 ): React.CSSProperties => {
   const isPinned = column.getIsPinned()
   const isLastLeftPinnedColumn = isPinned === 'left' && column.getIsLastColumn('left')
@@ -745,13 +778,13 @@ const getCommonPinningStyles = (
       isLastLeftPinnedColumn && showLeftShadow
         ? leftShadow
         : isFirstRightPinnedColumn && showRightShadow
-        ? rightShadow
-        : undefined,
+          ? rightShadow
+          : undefined,
     left: isPinned === 'left' ? `${column.getStart('left')}px` : undefined,
     right: isPinned === 'right' ? `${column.getAfter('right')}px` : undefined,
     position: isPinned ? 'sticky' : undefined,
     zIndex: isPinned ? 2 : 0,
-    backgroundColor: isHeader ? `var(--fill-highlight)` : rowBackground,
+    backgroundColor: isHeader ? `var(--fill-highlight)` : '#ffffff',
     marginRight: isLastLeftPinnedColumn ? '20px' : undefined,
   }
 }

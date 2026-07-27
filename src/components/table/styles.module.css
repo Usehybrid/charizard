@@ -55,8 +55,17 @@
   border-radius: 8px 8px 0 0;
 }
 
+/*
+ * Row height has a floor. It used to be purely content-driven, so density was an
+ * accident of what a table's tallest cell happened to be: Inventory looked right
+ * only because its first column is a two-line device cell with a 32px icon
+ * (~64px), while a table of single-line text collapsed to ~40px and read as
+ * cramped. `height` on a td behaves as a minimum, so taller content still wins
+ * and Inventory is unchanged.
+ */
 .tableData {
   color: var(--text-primary);
+  height: 56px;
   padding-top: 8px;
   padding-bottom: 8px;
   min-width: fit-content;
@@ -113,17 +122,15 @@
 }
 
 /*
- * Expandable rows (expansionConfig). A parent and its sub-rows must read as one
- * group: sub-rows are tinted and share a lighter internal divider, and only the
- * last sub-row carries the full-strength border that separates one entity from
- * the next.
+ * Expandable rows (expansionConfig). An expanded parent hands its full width to
+ * a nested table, so the divider between them softens: the group reads as one
+ * entity, and the next full-strength border is the one that ends it.
  */
-.tableBody > .tableSubRow > .tableData {
-  border-bottom-color: var(--stroke-selection);
-  padding-top: 6px;
-  padding-bottom: 6px;
-}
-
 .tableBody > .tableRowExpanded > .tableData {
   border-bottom-color: var(--stroke-selection);
+}
+
+.tableBody > .subTableRow > .subTableCell {
+  padding: 0;
+  border-bottom: 1px solid var(--stroke-border);
 }
