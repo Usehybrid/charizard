@@ -9,16 +9,24 @@ import sortIcon from '../assets/line-height.svg'
 import sortAscIcon from '../assets/sort-asc.svg'
 import sortDescIcon from '../assets/sort-desc.svg'
 import classes from './styles.module.css'
-import {useReactTable, getCoreRowModel, flexRender} from '@tanstack/react-table'
+import {
+  useReactTable,
+  getCoreRowModel,
+  getExpandedRowModel,
+  flexRender,
+} from '@tanstack/react-table'
 import {SVG} from '../svg'
 import {TablePagination} from './table-pagination'
 import {TableCheckbox} from './table-columns'
 import {TableRadio} from './table-columns'
-import {CHECKBOX_COL_ID, DROPDOWN_COL_ID, RADIO_COL_ID} from './constants'
+import {TableRowExpander} from './table-columns'
+import {CHECKBOX_COL_ID, DROPDOWN_COL_ID, EXPANDER_COL_ID, RADIO_COL_ID} from './constants'
 import type {
   Column,
   ColumnOrderState,
   ColumnPinningState,
+  ExpandedState,
+  Row,
   SortingState,
   Table,
   VisibilityState,
@@ -143,6 +151,23 @@ export interface TableProps {
     handleExport: any
     isLegacy?: boolean
   }
+  /**
+   * Expandable rows for one-to-many data (an order and its items, an invoice and
+   * its lines). Sub-rows are rendered by the SAME column definitions as their
+   * parent, so a per-item value sits under its own header and the custom-column
+   * picker governs both grains at once.
+   *
+   * Opt-in: without this config the table behaves exactly as before — no
+   * expander column, no expanded row model.
+   *
+   * @param getSubRows returns a row's children, or undefined/[] when it has none
+   *   (rows with no children render no toggle rather than an inert one).
+   * @param entityName singular noun for the toggle's aria-label, e.g. 'order'.
+   */
+  expansionConfig?: {
+    getSubRows: (row: any) => any[] | undefined
+    entityName?: string
+  }
   customActionItems?: React.ReactElement[]
   visibilityConfig?: {
     columnVisibility: VisibilityState
@@ -185,6 +210,7 @@ export function Table({
   tableStyleConfig,
   customColumnConfig,
   exportConfig,
+  expansionConfig,
   customActionItems,
   visibilityConfig,
   pinningConfig,
@@ -196,10 +222,11 @@ export function Table({
   const [columnOrder, setColumnOrder] = React.useState<ColumnOrderState>([])
   const [columnPinning, setColumnPinning] = React.useState<ColumnPinningState>({
     left: tableStyleConfig?.stickyIds
-      ? [RADIO_COL_ID, CHECKBOX_COL_ID, ...tableStyleConfig?.stickyIds]
-      : [RADIO_COL_ID, CHECKBOX_COL_ID],
+      ? [RADIO_COL_ID, CHECKBOX_COL_ID, EXPANDER_COL_ID, ...tableStyleConfig?.stickyIds]
+      : [RADIO_COL_ID, CHECKBOX_COL_ID, EXPANDER_COL_ID],
     right: [DROPDOWN_COL_ID],
   })
+  const [expanded, setExpanded] = React.useState<ExpandedState>({})
 
   const [rowSelection, setRowSelection] = React.useState({})
 
@@ -323,6 +350,16 @@ export function Table({
       enablePinning: false,
     },
     {
+      id: EXPANDER_COL_ID,
+      header: '',
+      cell: ({row}: {row: any}) => (
+        <TableRowExpander row={row} entityName={expansionConfig?.entityName} />
+      ),
+      size: 40,
+      enablePinning: false,
+      enableSorting: false,
+    },
+    {
       id: RADIO_COL_ID,
       cell: ({row}: {row: any}) => (
         <TableRadio
@@ -344,9 +381,14 @@ export function Table({
       : [
           {
             id: DROPDOWN_COL_ID,
-            cell: (props: any) => (
-              <TableActions actionsConfig={actionsConfig} data={props.row.original} />
-            ),
+            // Row actions belong to the top-level entity. A sub-row is a child
+            // record (an order item, an invoice line) and the menu's handlers are
+            // written against the parent's shape, so it gets no menu rather than
+            // one whose every action would misfire.
+            cell: (props: any) =>
+              expansionConfig && props.row.depth > 0 ? null : (
+                <TableActions actionsConfig={actionsConfig} data={props.row.original} />
+              ),
             header: 'Actions',
             size: 70,
             enablePinning: true,
@@ -363,6 +405,7 @@ export function Table({
       columnOrder,
       rowSelection: rowSelectionConfig?.rowSelection || rowSelection,
       columnPinning: pinningConfig?.columnPinning || columnPinning,
+      expanded,
     },
     manualSorting: true,
     onSortingChange: setSorting,
@@ -370,11 +413,21 @@ export function Table({
     onColumnOrderChange: setColumnOrder,
     onColumnPinningChange: pinningConfig?.setColumnPinning || setColumnPinning,
     onRowSelectionChange: rowSelectionConfig?.setRowSelection || setRowSelection,
-    enableRowSelection: true,
+    onExpandedChange: setExpanded,
+    // Only parent rows are selectable in an expandable table — a bulk action is
+    // defined over the top-level entity, and letting a sub-row be checked would
+    // put a child in setSelectedRows alongside its parent.
+    enableRowSelection: expansionConfig ? (row: Row<any>) => row.depth === 0 : true,
     enableMultiRowSelection: isRadio ? false : true,
     manualPagination: true,
     manualFiltering: true,
     getCoreRowModel: getCoreRowModel(),
+    ...(expansionConfig
+      ? {
+          getSubRows: expansionConfig.getSubRows,
+          getExpandedRowModel: getExpandedRowModel(),
+        }
+      : {}),
     defaultColumn: {
       size: Number.MAX_SAFE_INTEGER,
       enablePinning: false,
@@ -382,7 +435,13 @@ export function Table({
       sortDescFirst: true,
     },
     getRowId: rowSelectionConfig?.rowIdKey
-      ? (row: any) => row[rowSelectionConfig?.rowIdKey as string]
+      ? (row: any, index: number, parent?: Row<any>) => {
+          const ownId = row[rowSelectionConfig?.rowIdKey as string] ?? index
+          // A sub-row's id is scoped to its parent: children of different parents
+          // can legitimately share a key, and a collision would make expanding one
+          // row toggle another.
+          return parent ? `${parent.id}.${ownId}` : `${ownId}`
+        }
       : undefined,
   })
 
@@ -411,6 +470,12 @@ export function Table({
   React.useLayoutEffect(() => {
     if (actionsConfig.isDropdownActions) return
     table.getColumn(DROPDOWN_COL_ID)?.toggleVisibility(false)
+  }, [])
+
+  // hide the expander column unless the consumer opted into expandable rows
+  React.useLayoutEffect(() => {
+    if (expansionConfig) return
+    table.getColumn(EXPANDER_COL_ID)?.toggleVisibility(false)
   }, [])
 
   React.useEffect(() => {
@@ -585,44 +650,64 @@ function TableComp({
           <TableEmpty emptyStateConfig={emptyStateConfig} visibleCols={visibleCols} />
         ) : (
           <tbody className={classes.tableBody}>
-            {table.getRowModel().rows.map((row, idx, _rows) => (
-              <tr key={row.id} className={classes.tableRow}>
-                {row.getVisibleCells().map((cell, idx2, cells) => {
-                  const isSelectionCell =
-                    (isCheckbox || isRadio) &&
-                    (cell.id === `${idx}_${RADIO_COL_ID}` ||
-                      cell.id === `${idx}_${CHECKBOX_COL_ID}`)
+            {table.getRowModel().rows.map((row, idx, _rows) => {
+              const isSubRow = row.depth > 0
+              /* Tinting sub-rows is what makes a group read as one entity — the
+                 exact ask behind replacing the old divider-less card list. */
+              const rowBackground = isSubRow ? 'var(--fill-highlight)' : '#ffffff'
 
-                  let isPrevPinned = false
-                  if (tableStyleConfig?.stickyIds?.length) {
-                    isPrevPinned = cells[idx2 - 1]?.column.getCanPin()
-                  }
+              return (
+                <tr
+                  key={row.id}
+                  className={clsx(
+                    classes.tableRow,
+                    isSubRow && classes.tableSubRow,
+                    row.getIsExpanded() && classes.tableRowExpanded,
+                  )}
+                >
+                  {row.getVisibleCells().map((cell, idx2, cells) => {
+                    const isSelectionCell =
+                      (isCheckbox || isRadio) &&
+                      (cell.id === `${idx}_${RADIO_COL_ID}` ||
+                        cell.id === `${idx}_${CHECKBOX_COL_ID}`)
 
-                  return (
-                    <td
-                      key={cell.id}
-                      className={clsx(
-                        classes.tableData,
-                        (isCheckbox || isRadio) && classes.tableDataWithSelection,
-                        'zap-content-regular',
-                      )}
-                      style={{
-                        width:
-                          cell.column.getSize() === Number.MAX_SAFE_INTEGER
-                            ? 'auto'
-                            : cell.column.getSize(),
-                        backgroundColor: 'white',
-                        verticalAlign: isSelectionCell ? 'middle' : undefined,
-                        paddingLeft: isPrevPinned ? '15px' : undefined,
-                        ...getCommonPinningStyles(cell.column, showLeftShadow, showRightShadow),
-                      }}
-                    >
-                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                    </td>
-                  )
-                })}
-              </tr>
-            ))}
+                    let isPrevPinned = false
+                    if (tableStyleConfig?.stickyIds?.length) {
+                      isPrevPinned = cells[idx2 - 1]?.column.getCanPin()
+                    }
+
+                    return (
+                      <td
+                        key={cell.id}
+                        className={clsx(
+                          classes.tableData,
+                          (isCheckbox || isRadio) && classes.tableDataWithSelection,
+                          'zap-content-regular',
+                        )}
+                        style={{
+                          width:
+                            cell.column.getSize() === Number.MAX_SAFE_INTEGER
+                              ? 'auto'
+                              : cell.column.getSize(),
+                          backgroundColor: rowBackground,
+                          verticalAlign: isSelectionCell ? 'middle' : undefined,
+                          paddingLeft: isPrevPinned ? '15px' : undefined,
+                          ...getCommonPinningStyles(
+                            cell.column,
+                            showLeftShadow,
+                            showRightShadow,
+                            false,
+                            rowBackground,
+                          ),
+                        }}
+                      >
+                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                      </td>
+                    )
+                  })}
+                </tr>
+              )
+            })}
           </tbody>
         )}
 
@@ -645,6 +730,8 @@ const getCommonPinningStyles = (
   showLeftShadow: boolean,
   showRightShadow: boolean,
   isHeader?: boolean,
+  /** Row background, so a pinned cell keeps the tint of the row it belongs to. */
+  rowBackground = '#ffffff',
 ): React.CSSProperties => {
   const isPinned = column.getIsPinned()
   const isLastLeftPinnedColumn = isPinned === 'left' && column.getIsLastColumn('left')
@@ -664,7 +751,7 @@ const getCommonPinningStyles = (
     right: isPinned === 'right' ? `${column.getAfter('right')}px` : undefined,
     position: isPinned ? 'sticky' : undefined,
     zIndex: isPinned ? 2 : 0,
-    backgroundColor: isHeader ? `var(--fill-highlight)` : '#ffffff',
+    backgroundColor: isHeader ? `var(--fill-highlight)` : rowBackground,
     marginRight: isLastLeftPinnedColumn ? '20px' : undefined,
   }
 }

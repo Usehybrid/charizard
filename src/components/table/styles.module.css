@@ -111,3 +111,19 @@
   border: 1px solid var(--stroke-border);
   border-bottom: none;
 }
+
+/*
+ * Expandable rows (expansionConfig). A parent and its sub-rows must read as one
+ * group: sub-rows are tinted and share a lighter internal divider, and only the
+ * last sub-row carries the full-strength border that separates one entity from
+ * the next.
+ */
+.tableBody > .tableSubRow > .tableData {
+  border-bottom-color: var(--stroke-selection);
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+.tableBody > .tableRowExpanded > .tableData {
+  border-bottom-color: var(--stroke-selection);
+}

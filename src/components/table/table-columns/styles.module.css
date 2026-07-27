@@ -50,3 +50,39 @@
   border: 1px solid var(--stroke-border);
   accent-color: var(--theme-blue);
 }
+
+/* row expander (parent rows of an expandable table) */
+.expander {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  margin: auto;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.expander:hover {
+  background-color: var(--fill-selection);
+}
+
+.expanderPlaceholder {
+  display: block;
+  width: 20px;
+  height: 20px;
+  margin: auto;
+}
+
+.expanderIcon {
+  transition: transform 0.15s ease;
+}
+
+.expanderIcon > path {
+  fill: var(--text-secondary);
+}
+
+/* Chevron points right when collapsed, down when open. */
+.expanderIconOpen {
+  transform: rotate(90deg);
+}
