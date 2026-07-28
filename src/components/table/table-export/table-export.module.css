@@ -15,8 +15,29 @@
 .actionCommon:hover {
   background-color: var(--p-p10);
 }
+.actionCommon:disabled {
+  cursor: wait;
+  opacity: 0.8;
+}
 .actionCommon.active {
   background-color: var(--p-p10);
+}
+
+.exportingIcon {
+  display: inline-flex;
+  animation: export-icon-download 800ms ease-in-out infinite;
+}
+
+@keyframes export-icon-download {
+  0%,
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 0.55;
+    transform: translateY(3px);
+  }
 }
 
 /* popover dropdown */
@@ -33,7 +54,9 @@
   color: var(--text-primary);
 
   /* dd_popup_sottomsheet_toast */
-  box-shadow: 0px 4px 16px 0px rgba(18, 18, 18, 0.04), 0px 2px 8px 0px rgba(18, 18, 18, 0.08);
+  box-shadow:
+    0px 4px 16px 0px rgba(18, 18, 18, 0.04),
+    0px 2px 8px 0px rgba(18, 18, 18, 0.08);
 }
 
 .option {
@@ -49,6 +72,12 @@
   background-color: var(--fill-highlight);
 }
 
+.optionPending {
+  cursor: wait;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
 .uploadingImg {
   height: 11px;
   width: 11px;
@@ -58,4 +87,10 @@
   --z-index: 10 !important;
   left: -25px !important;
   top: -5px !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .exportingIcon {
+    animation: none;
+  }
 }
