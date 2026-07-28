@@ -1,6 +1,7 @@
 import {SVG} from '../../components'
 import {DemoSection} from '../showcase/DemoSection'
 import {DemoRow, DemoItem} from '../showcase/DemoRow'
+import {PageHeader} from '../showcase/PageHeader'
 import searchIcon from '../../components/assets/search.svg'
 import plusIcon from '../../components/assets/plus.svg'
 import deleteIcon from '../../components/assets/delete-bin.svg'
@@ -12,8 +13,9 @@ import checkIcon from '../../components/assets/check.svg'
 export default function SvgPage() {
   return (
     <div>
-      <h1>SVG</h1>
-      <p>Inline SVG renderer (react-inlinesvg) used by every icon in the library.</p>
+      <PageHeader title="SVG">
+        Inline SVG renderer (react-inlinesvg) used by every icon in the library.
+      </PageHeader>
 
       <DemoSection
         title="Library icons"

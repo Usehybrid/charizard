@@ -8,6 +8,7 @@ import {
 } from '../../components'
 import {DemoSection} from '../showcase/DemoSection'
 import {DemoRow} from '../showcase/DemoRow'
+import {PageHeader} from '../showcase/PageHeader'
 
 const variantsCode = `
 import {toastSuccess, toastError, toastInfo, toastWarning} from '@hybr1d-tech/charizard'
@@ -30,10 +31,9 @@ toastSuccess({
 export default function ToastsPage() {
   return (
     <div>
-      <h1>Toasts</h1>
-      <p>
+      <PageHeader title="Toasts">
         Toast notifications built on react-toastify with success, error, info and warning helpers.
-      </p>
+      </PageHeader>
 
       <DemoSection
         title="Toast variants"

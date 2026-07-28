@@ -1,4 +1,4 @@
-import react from '@vitejs/plugin-react-swc'
+import react from '@vitejs/plugin-react'
 import {defineConfig} from 'vite'
 
 // App-mode config for the design-system showcase site (the library build lives

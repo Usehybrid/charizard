@@ -1,6 +1,7 @@
 import {useState} from 'react'
 import {DemoSection} from '../showcase/DemoSection'
 import {DemoRow, DemoItem} from '../showcase/DemoRow'
+import {PageHeader} from '../showcase/PageHeader'
 import {ColorPicker} from '../../components'
 
 export default function ColorPickerPage() {
@@ -9,8 +10,9 @@ export default function ColorPickerPage() {
 
   return (
     <div>
-      <h1>ColorPicker</h1>
-      <p>Zag.js-powered color picker with a swatch trigger and a preset palette.</p>
+      <PageHeader title="ColorPicker">
+        Zag.js-powered color picker with a swatch trigger and a preset palette.
+      </PageHeader>
 
       <DemoSection
         title="Basic usage"
@@ -61,7 +63,10 @@ export default function ColorPickerPage() {
         </DemoRow>
       </DemoSection>
 
-      <DemoSection title="Error state" description="errorMsg renders a validation message below the control.">
+      <DemoSection
+        title="Error state"
+        description="errorMsg renders a validation message below the control."
+      >
         <DemoRow>
           <DemoItem label="With error">
             <ColorPicker

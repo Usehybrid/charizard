@@ -1,6 +1,7 @@
 import {Skeleton} from '../../components'
 import {DemoSection} from '../showcase/DemoSection'
 import {DemoRow, DemoItem} from '../showcase/DemoRow'
+import {PageHeader} from '../showcase/PageHeader'
 
 const textCode = `
 import {Skeleton} from '@hybr1d-tech/charizard'
@@ -14,10 +15,9 @@ import {Skeleton} from '@hybr1d-tech/charizard'
 export default function SkeletonPage() {
   return (
     <div>
-      <h1>Skeleton</h1>
-      <p>
+      <PageHeader title="Skeleton">
         Animated loading placeholder; size and shape it with regular style or className props.
-      </p>
+      </PageHeader>
 
       <DemoSection
         title="Text placeholder"
@@ -53,7 +53,9 @@ export default function SkeletonPage() {
         description="Combine shapes to sketch a whole record while it loads."
       >
         <div style={{display: 'flex', gap: 16, alignItems: 'center', width: '100%'}}>
-          <Skeleton style={{display: 'block', width: 56, height: 56, borderRadius: '50%', flexShrink: 0}} />
+          <Skeleton
+            style={{display: 'block', width: 56, height: 56, borderRadius: '50%', flexShrink: 0}}
+          />
           <div style={{display: 'flex', flexDirection: 'column', gap: 8, flex: 1, maxWidth: 360}}>
             <Skeleton style={{display: 'block', width: '60%', height: 16}} />
             <Skeleton style={{display: 'block', width: '90%', height: 12}} />

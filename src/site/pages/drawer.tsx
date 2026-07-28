@@ -1,65 +1,63 @@
 import * as React from 'react'
-import {Button, BUTTON_VARIANT, Drawer} from '../../components'
-import type {FooterButtons} from '../../components/modal/ModalFooter'
+import {Button, BUTTON_VARIANT, DrawerV2, type DialogFooterButtons} from '../../components'
 import {DemoSection} from '../showcase/DemoSection'
 import {DemoRow} from '../showcase/DemoRow'
+import {PageHeader} from '../showcase/PageHeader'
 
 type DrawerSize = 'sm' | 'md' | 'lg'
 type DrawerPosition = 'left' | 'right'
 type DrawerConfig = {size: DrawerSize; position: DrawerPosition}
 
 const basicCode = `
-import {Drawer, BUTTON_VARIANT, useDisclosure} from '@hybr1d-tech/charizard'
-import type {FooterButtons} from '@hybr1d-tech/charizard/components/modal/ModalFooter'
+import {DrawerV2, BUTTON_VARIANT, useDisclosure, type DialogFooterButtons} from '@hybr1d-tech/charizard'
 
 const {isOpen, onOpen, onClose} = useDisclosure()
 
-const buttons: FooterButtons = [
+const buttons: DialogFooterButtons = [
   {variant: BUTTON_VARIANT.SECONDARY, btnText: 'Cancel', onClick: onClose},
   {variant: BUTTON_VARIANT.PRIMARY, btnText: 'Save', onClick: onClose},
 ]
 
-<Drawer
+<DrawerV2
   isOpen={isOpen}
   onClose={onClose}
-  title="Device details"
-  subTitle="MacBook Pro 14-inch"
+  title="Edit workflow"
+  subTitle="Onboarding — new joiner"
   size="md"
   buttons={buttons}
 >
   Drawer content goes here.
-</Drawer>
+</DrawerV2>
 `
 
 export default function DrawerPage() {
   const [config, setConfig] = React.useState<DrawerConfig | null>(null)
   const onClose = () => setConfig(null)
 
-  const buttons: FooterButtons = [
+  const buttons: DialogFooterButtons = [
     {variant: BUTTON_VARIANT.SECONDARY, btnText: 'Cancel', onClick: onClose},
     {variant: BUTTON_VARIANT.PRIMARY, btnText: 'Save', onClick: onClose},
   ]
 
   return (
     <div>
-      <h1>Drawer</h1>
-      <p>
-        Slide-in side panel with header, footer buttons, five sizes and left/right positioning.
-      </p>
+      <PageHeader title="Drawer">
+        Portalled slide-in side panel that locks body scroll while open.
+      </PageHeader>
 
       <DemoSection
         title="Basic drawer"
-        description="Controlled with isOpen/onClose; title and subTitle render the default header and buttons render the footer."
+        description="Controlled with isOpen/onClose; footer buttons use the DialogFooterButtons shape shared with ModalV2."
         code={basicCode}
       >
         <DemoRow>
-          <Button onClick={() => setConfig({size: 'md', position: 'right'})}>Open drawer</Button>
+          <Button onClick={() => setConfig({size: 'md', position: 'right'})}>Open DrawerV2</Button>
         </DemoRow>
       </DemoSection>
 
       <DemoSection
-        title="Sizes"
-        description="size accepts 'sm', 'md' (default), 'lg', 'xlg' or 'xxlg'."
+        title="Sizes & position"
+        description="size accepts 'sm' | 'md' | 'lg' | 'xlg' | 'xxlg'; drawerPosition slides from the left or right."
       >
         <DemoRow>
           <Button
@@ -70,24 +68,10 @@ export default function DrawerPage() {
           </Button>
           <Button
             variant={BUTTON_VARIANT.SECONDARY}
-            onClick={() => setConfig({size: 'md', position: 'right'})}
-          >
-            Medium
-          </Button>
-          <Button
-            variant={BUTTON_VARIANT.SECONDARY}
             onClick={() => setConfig({size: 'lg', position: 'right'})}
           >
             Large
           </Button>
-        </DemoRow>
-      </DemoSection>
-
-      <DemoSection
-        title="Position"
-        description="drawerPosition slides the panel in from the left or the right (default)."
-      >
-        <DemoRow>
           <Button
             variant={BUTTON_VARIANT.SECONDARY}
             onClick={() => setConfig({size: 'md', position: 'left'})}
@@ -97,20 +81,20 @@ export default function DrawerPage() {
         </DemoRow>
       </DemoSection>
 
-      <Drawer
+      <DrawerV2
         isOpen={!!config}
         onClose={onClose}
-        title="Device details"
-        subTitle="MacBook Pro 14-inch"
+        title="Edit workflow"
+        subTitle="Onboarding — new joiner"
         size={config?.size ?? 'md'}
         drawerPosition={config?.position ?? 'right'}
         buttons={buttons}
       >
         <p>
-          Drawer content scrolls independently between the header and the pinned footer. Click the
-          backdrop, the close icon or a footer button to dismiss it.
+          DrawerV2 renders in a portal and locks the body scroll while open. Click the backdrop, the
+          close icon or a footer button to dismiss it.
         </p>
-      </Drawer>
+      </DrawerV2>
     </div>
   )
 }

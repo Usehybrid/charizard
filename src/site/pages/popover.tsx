@@ -8,6 +8,7 @@ import {
 } from '../../components'
 import {DemoSection} from '../showcase/DemoSection'
 import {DemoRow, DemoItem} from '../showcase/DemoRow'
+import {PageHeader} from '../showcase/PageHeader'
 
 const clickCode = `
 import {
@@ -32,11 +33,10 @@ import {
 export default function PopoverPage() {
   return (
     <div>
-      <h1>Popover</h1>
-      <p>
+      <PageHeader title="Popover">
         Zag.js-powered anchored popover composed from a trigger, content, title, description and
         close button.
-      </p>
+      </PageHeader>
 
       <DemoSection
         title="Click to open"

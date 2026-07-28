@@ -1,6 +1,7 @@
 allowBuilds:
   '@swc/core': true
   esbuild: true
+  sharp: set this to true or false
 
 onlyBuiltDependencies:
   - '@swc/core'

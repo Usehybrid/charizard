@@ -1,6 +1,7 @@
 import * as React from 'react'
 import {SegmentedControl} from '../../components'
 import {DemoSection} from '../showcase/DemoSection'
+import {PageHeader} from '../showcase/PageHeader'
 
 const panelStyles: React.CSSProperties = {
   padding: '12px 4px',
@@ -8,9 +9,21 @@ const panelStyles: React.CSSProperties = {
 }
 
 const basicItems = [
-  {label: 'Overview', value: 'overview', component: <div style={panelStyles}>Overview panel content</div>},
-  {label: 'Activity', value: 'activity', component: <div style={panelStyles}>Activity panel content</div>},
-  {label: 'Settings', value: 'settings', component: <div style={panelStyles}>Settings panel content</div>},
+  {
+    label: 'Overview',
+    value: 'overview',
+    component: <div style={panelStyles}>Overview panel content</div>,
+  },
+  {
+    label: 'Activity',
+    value: 'activity',
+    component: <div style={panelStyles}>Activity panel content</div>,
+  },
+  {
+    label: 'Settings',
+    value: 'settings',
+    component: <div style={panelStyles}>Settings panel content</div>,
+  },
 ]
 
 export default function SegmentedControlPage() {
@@ -18,8 +31,9 @@ export default function SegmentedControlPage() {
 
   return (
     <div>
-      <h1>SegmentedControl</h1>
-      <p>Mutually exclusive option switcher rendered as connected segments, with per-segment content.</p>
+      <PageHeader title="SegmentedControl">
+        Mutually exclusive option switcher rendered as connected segments, with per-segment content.
+      </PageHeader>
 
       <DemoSection
         title="Basic usage"
@@ -50,9 +64,21 @@ export default function SegmentedControlPage() {
         <div style={{width: '100%', maxWidth: 480}}>
           <SegmentedControl
             items={[
-              {label: 'Overview', value: 'overview', component: <div style={panelStyles}>Overview panel content</div>},
-              {label: 'Activity', value: 'activity', component: <div style={panelStyles}>Activity panel content</div>},
-              {label: 'Settings', value: 'settings', component: <div style={panelStyles}>Settings panel content</div>},
+              {
+                label: 'Overview',
+                value: 'overview',
+                component: <div style={panelStyles}>Overview panel content</div>,
+              },
+              {
+                label: 'Activity',
+                value: 'activity',
+                component: <div style={panelStyles}>Activity panel content</div>,
+              },
+              {
+                label: 'Settings',
+                value: 'settings',
+                component: <div style={panelStyles}>Settings panel content</div>,
+              },
             ]}
             defaultValue="activity"
           />
@@ -66,8 +92,16 @@ export default function SegmentedControlPage() {
         <div style={{width: '100%', maxWidth: 480}}>
           <SegmentedControl
             items={[
-              {label: 'Monthly', value: 'monthly', component: <div style={panelStyles}>Billed every month</div>},
-              {label: 'Yearly', value: 'yearly', component: <div style={panelStyles}>Billed once a year</div>},
+              {
+                label: 'Monthly',
+                value: 'monthly',
+                component: <div style={panelStyles}>Billed every month</div>,
+              },
+              {
+                label: 'Yearly',
+                value: 'yearly',
+                component: <div style={panelStyles}>Billed once a year</div>,
+              },
             ]}
             defaultValue="monthly"
             handleOnChange={value => setSelected(value)}

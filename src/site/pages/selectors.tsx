@@ -1,73 +1,88 @@
 import {useState} from 'react'
 import {DemoSection} from '../showcase/DemoSection'
 import {DemoRow, DemoItem} from '../showcase/DemoRow'
-import {Selectors} from '../../components'
+import {PageHeader} from '../showcase/PageHeader'
+import {SelectorsV2} from '../../components'
+
+const defaultOptions = [
+  {label: 'Option 1', value: 'option1'},
+  {label: 'Option 2', value: 'option2'},
+  {label: 'Option 3', value: 'option3'},
+]
+
+const billingOptions = [
+  {label: 'Monthly', value: 'monthly'},
+  {label: 'Quarterly', value: 'quarterly'},
+  {label: 'Annual', value: 'annual'},
+]
 
 export default function SelectorsPage() {
-  const [view, setView] = useState('Devices')
-  const [range, setRange] = useState('30 days')
+  const [selectedValue, setSelectedValue] = useState('option1')
+  const [billing, setBilling] = useState('monthly')
 
   return (
     <div>
-      <h1>Selectors</h1>
-      <p>Segmented button group that tracks its own active segment and fires onClick per option.</p>
+      <PageHeader title="Selectors">
+        Multi-select option picker — fully controlled via value and onChange.
+      </PageHeader>
 
       <DemoSection
-        title="Basic usage"
-        description="Pass an array of {name, onClick}. The component highlights the clicked segment internally; use onClick to react to changes."
-        code={`import {Selectors} from '@hybr1d-tech/charizard'
+        title="Default"
+        description="The active segment is whichever option matches value."
+        code={`import {SelectorsV2} from '@hybr1d-tech/charizard'
 
-<Selectors
-  selectors={[
-    {name: 'Devices', onClick: () => setView('Devices')},
-    {name: 'Licenses', onClick: () => setView('Licenses')},
-    {name: 'Orders', onClick: () => setView('Orders')},
+<SelectorsV2
+  options={[
+    {label: 'Option 1', value: 'option1'},
+    {label: 'Option 2', value: 'option2'},
+    {label: 'Option 3', value: 'option3'},
   ]}
+  value="option1"
+  onChange={value => console.log(value)}
 />`}
       >
         <DemoRow>
-          <DemoItem label={`Active view: ${view}`}>
-            <Selectors
-              selectors={[
-                {name: 'Devices', onClick: () => setView('Devices')},
-                {name: 'Licenses', onClick: () => setView('Licenses')},
-                {name: 'Orders', onClick: () => setView('Orders')},
-              ]}
+          <DemoItem label="value fixed to option1">
+            <SelectorsV2 options={defaultOptions} value="option1" onChange={() => {}} />
+          </DemoItem>
+          <DemoItem label="value fixed to option3">
+            <SelectorsV2 options={defaultOptions} value="option3" onChange={() => {}} />
+          </DemoItem>
+        </DemoRow>
+      </DemoSection>
+
+      <DemoSection
+        title="Custom options"
+        description="Any label/value pairs work — here as a billing-cycle picker."
+      >
+        <DemoRow>
+          <DemoItem label={`Billing: ${billing}`}>
+            <SelectorsV2
+              options={billingOptions}
+              value={billing}
+              onChange={value => setBilling(value)}
             />
           </DemoItem>
         </DemoRow>
       </DemoSection>
 
       <DemoSection
-        title="Two segments"
-        description="Works with any number of options — the first and last segments get rounded outer corners."
-      >
-        <DemoRow>
-          <DemoItem label="Binary toggle">
-            <Selectors
-              selectors={[
-                {name: 'Active', onClick: () => {}},
-                {name: 'Archived', onClick: () => {}},
-              ]}
-            />
-          </DemoItem>
-        </DemoRow>
-      </DemoSection>
+        title="Interactive"
+        description="Store the value in state and update it in onChange to make the control interactive."
+        code={`const [selectedValue, setSelectedValue] = useState('option1')
 
-      <DemoSection
-        title="Many options"
-        description="A wider group used as a report date-range picker."
+<SelectorsV2
+  options={dummyOptions}
+  value={selectedValue}
+  onChange={newValue => setSelectedValue(newValue)}
+/>`}
       >
         <DemoRow>
-          <DemoItem label={`Range: ${range}`}>
-            <Selectors
-              selectors={[
-                {name: '7 days', onClick: () => setRange('7 days')},
-                {name: '30 days', onClick: () => setRange('30 days')},
-                {name: '90 days', onClick: () => setRange('90 days')},
-                {name: '12 months', onClick: () => setRange('12 months')},
-                {name: 'All time', onClick: () => setRange('All time')},
-              ]}
+          <DemoItem label={`Selected: ${selectedValue}`}>
+            <SelectorsV2
+              options={defaultOptions}
+              value={selectedValue}
+              onChange={newValue => setSelectedValue(newValue)}
             />
           </DemoItem>
         </DemoRow>

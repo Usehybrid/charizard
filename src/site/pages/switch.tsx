@@ -1,72 +1,98 @@
-import * as React from 'react'
-import {Switch} from '../../components'
+import {useState} from 'react'
 import {DemoSection} from '../showcase/DemoSection'
-import {DemoItem, DemoRow} from '../showcase/DemoRow'
+import {DemoRow, DemoItem} from '../showcase/DemoRow'
+import {PageHeader} from '../showcase/PageHeader'
+import {SwitchV2} from '../../components'
 
 export default function SwitchPage() {
-  const [toggled, setToggled] = React.useState(true)
+  const [mfa, setMfa] = useState(true)
+  const [autoAssign, setAutoAssign] = useState(false)
 
   return (
     <div>
-      <h1>Switch</h1>
-      <p>On/off toggle switch with optional title, sub-text, sizes and a disabled state.</p>
+      <PageHeader title="Switch">
+        Zag.js-powered toggle switch with label, info tooltip and error message support.
+      </PageHeader>
 
       <DemoSection
-        title="States"
-        description="Checked, initial (off) and checked + disabled."
-        code={`import {Switch} from '@hybr1d-tech/charizard'
+        title="Basic usage"
+        description="Children render as the switch label. Use defaultChecked for uncontrolled usage and onCheckedChange to react to toggles."
+        code={`import {SwitchV2} from '@hybr1d-tech/charizard'
 
-<Switch name="checked" title="Switch" isToggled={true} handleToggleChange={() => {}} />
-<Switch name="initial" isToggled={false} handleToggleChange={() => {}} />
-<Switch name="checked-disabled" isToggled={true} disabled handleToggleChange={() => {}} />`}
+<SwitchV2
+  defaultChecked
+  onCheckedChange={({checked}) => console.log(checked)}
+>
+  Notify me on delivery
+</SwitchV2>`}
       >
         <DemoRow>
-          <DemoItem label="checked">
-            <Switch name="checked" title="Switch" isToggled={true} handleToggleChange={() => {}} />
+          <DemoItem label="Off by default">
+            <SwitchV2>Notify me on delivery</SwitchV2>
           </DemoItem>
-          <DemoItem label="initial">
-            <Switch name="initial" isToggled={false} handleToggleChange={() => {}} />
+          <DemoItem label="On by default">
+            <SwitchV2 defaultChecked>Weekly device report</SwitchV2>
           </DemoItem>
-          <DemoItem label="checked + disabled">
-            <Switch name="checked-disabled" isToggled={true} disabled handleToggleChange={() => {}} />
-          </DemoItem>
-        </DemoRow>
-      </DemoSection>
-
-      <DemoSection title="Sizes" description="Three sizes: sm, md (default) and lg.">
-        <DemoRow>
-          <DemoItem label="sm">
-            <Switch name="size-sm" size="sm" isToggled={true} handleToggleChange={() => {}} />
-          </DemoItem>
-          <DemoItem label="md">
-            <Switch name="size-md" size="md" isToggled={true} handleToggleChange={() => {}} />
-          </DemoItem>
-          <DemoItem label="lg">
-            <Switch name="size-lg" size="lg" isToggled={true} handleToggleChange={() => {}} />
+          <DemoItem label="No label">
+            <SwitchV2 />
           </DemoItem>
         </DemoRow>
       </DemoSection>
 
       <DemoSection
-        title="Interactive with sub-text"
-        description="A controlled switch; subText renders below the control only while it is toggled on."
-        code={`const [toggled, setToggled] = React.useState(true)
+        title="Controlled"
+        description="Pass checked to drive the switch from state; onCheckedChange reports the new value."
+        code={`const [mfa, setMfa] = useState(true)
 
-<Switch
-  name="notifications"
-  title="Email notifications"
-  isToggled={toggled}
-  handleToggleChange={setToggled}
-  subText="You will receive a weekly digest."
-/>`}
+<SwitchV2 checked={mfa} onCheckedChange={({checked}) => setMfa(checked)}>
+  Require MFA for all users
+</SwitchV2>`}
       >
-        <Switch
-          name="notifications"
-          title="Email notifications"
-          isToggled={toggled}
-          handleToggleChange={setToggled}
-          subText="You will receive a weekly digest."
-        />
+        <div style={{display: 'flex', flexDirection: 'column', gap: 12}}>
+          <SwitchV2 checked={mfa} onCheckedChange={({checked}) => setMfa(checked)}>
+            Require MFA for all users
+          </SwitchV2>
+          <SwitchV2 checked={autoAssign} onCheckedChange={({checked}) => setAutoAssign(checked)}>
+            Auto-assign licenses to new hires
+          </SwitchV2>
+          <p>
+            MFA: {mfa ? 'on' : 'off'} · Auto-assign: {autoAssign ? 'on' : 'off'}
+          </p>
+        </div>
+      </DemoSection>
+
+      <DemoSection
+        title="Info tooltip and error"
+        description="info renders an info icon with a tooltip next to the label; errorMsg renders below the switch."
+      >
+        <DemoRow>
+          <DemoItem label="With info">
+            <SwitchV2 info="Devices are locked remotely when marked lost" defaultChecked>
+              Enable lost mode
+            </SwitchV2>
+          </DemoItem>
+          <DemoItem label="With error">
+            <SwitchV2 errorMsg="This setting requires an MDM connection">
+              Enforce disk encryption
+            </SwitchV2>
+          </DemoItem>
+        </DemoRow>
+      </DemoSection>
+
+      <DemoSection
+        title="Disabled"
+        description="Disabled switches keep their checked state but ignore interaction."
+      >
+        <DemoRow>
+          <DemoItem label="Disabled off">
+            <SwitchV2 disabled>Beta features</SwitchV2>
+          </DemoItem>
+          <DemoItem label="Disabled on">
+            <SwitchV2 disabled defaultChecked>
+              SSO enforced by org policy
+            </SwitchV2>
+          </DemoItem>
+        </DemoRow>
       </DemoSection>
     </div>
   )

@@ -1,6 +1,7 @@
 import {Avatar} from '../../components'
 import {DemoSection} from '../showcase/DemoSection'
 import {DemoRow, DemoItem} from '../showcase/DemoRow'
+import {PageHeader} from '../showcase/PageHeader'
 
 /** Tiny inline SVG avatar so the showcase works offline. */
 const avatarImg = (initials: string, bg: string) =>
@@ -25,8 +26,9 @@ const marcus = {
 export default function AvatarPage() {
   return (
     <div>
-      <h1>Avatar</h1>
-      <p>Circular user avatar rendered from the user object&apos;s profile_img_url.</p>
+      <PageHeader title="Avatar">
+        Circular user avatar rendered from the user object&apos;s profile_img_url.
+      </PageHeader>
 
       <DemoSection
         title="Basic"

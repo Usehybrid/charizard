@@ -2,6 +2,7 @@ import {UsersChip, USER_CHIP_STATUS} from '../../components'
 import {fixtureUsers} from '../fixtures'
 import {DemoSection} from '../showcase/DemoSection'
 import {DemoRow, DemoItem} from '../showcase/DemoRow'
+import {PageHeader} from '../showcase/PageHeader'
 
 /** Tiny inline SVG avatar so the showcase works offline. */
 const avatar = (initials: string, bg: string) =>
@@ -31,8 +32,9 @@ const users = [
 export default function UsersChipPage() {
   return (
     <div>
-      <h1>UsersChip</h1>
-      <p>Overflow-aware chip for a set of users: stacked avatars plus a count.</p>
+      <PageHeader title="UsersChip">
+        Overflow-aware chip for a set of users: stacked avatars plus a count.
+      </PageHeader>
 
       <DemoSection
         title="Statuses"

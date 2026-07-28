@@ -1,6 +1,7 @@
 import {useState} from 'react'
 import {DemoSection} from '../showcase/DemoSection'
 import {DemoRow, DemoItem} from '../showcase/DemoRow'
+import {PageHeader} from '../showcase/PageHeader'
 import {TimePicker, TIME_PICKER_FORMAT} from '../../components'
 
 export default function TimePickerPage() {
@@ -9,8 +10,9 @@ export default function TimePickerPage() {
 
   return (
     <div>
-      <h1>TimePicker</h1>
-      <p>Time-of-day picker with 12/24-hour formats and optional seconds, built on the InputV2 group.</p>
+      <PageHeader title="TimePicker">
+        Time-of-day picker with 12/24-hour formats and optional seconds, built on the InputV2 group.
+      </PageHeader>
 
       <DemoSection
         title="Basic usage"

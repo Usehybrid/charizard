@@ -1,0 +1,477 @@
+[
+  {
+    "version": "2.8.2",
+    "date": "2026-07-28",
+    "changes": [
+      {
+        "kind": "fix",
+        "scope": "table",
+        "summary": "animate exports while pending",
+        "hash": "6d8049f"
+      }
+    ]
+  },
+  {
+    "version": "2.8.1",
+    "date": "2026-07-27",
+    "changes": [
+      {
+        "kind": "feature",
+        "scope": "table",
+        "summary": "support custom expanded row content",
+        "hash": "bc9c85b"
+      }
+    ]
+  },
+  {
+    "version": "2.8.0",
+    "date": "2026-07-27",
+    "changes": [
+      {
+        "kind": "feature",
+        "summary": "table row expansion",
+        "hash": "bc52885"
+      }
+    ]
+  },
+  {
+    "version": "2.7.7",
+    "date": "2026-07-21",
+    "changes": [
+      {
+        "kind": "fix",
+        "summary": "derive DateRangePicker quick-select preset from value",
+        "hash": "762dbe4"
+      }
+    ]
+  },
+  {
+    "version": "2.7.6",
+    "date": "2026-07-17",
+    "changes": [
+      {
+        "kind": "fix",
+        "summary": "scope filter select all to search results",
+        "hash": "023486d"
+      },
+      {
+        "kind": "other",
+        "summary": "point showcase site at custom domain ui.zenadmin.co",
+        "hash": "3b81499"
+      },
+      {
+        "kind": "feature",
+        "summary": "replace Storybook with self-hosted showcase site",
+        "hash": "a028191"
+      }
+    ]
+  },
+  {
+    "version": "2.7.5",
+    "date": "2026-07-16",
+    "changes": [
+      {
+        "kind": "other",
+        "summary": "minor-version-update",
+        "hash": "ea8d5be"
+      },
+      {
+        "kind": "fix",
+        "summary": "table-date-range-picker-reset",
+        "hash": "9d19344"
+      }
+    ]
+  },
+  {
+    "version": "2.7.4",
+    "date": "2026-07-09",
+    "changes": [
+      {
+        "kind": "other",
+        "summary": "2.7.4",
+        "hash": "021d2a0"
+      },
+      {
+        "kind": "fix",
+        "summary": "tooltip padding",
+        "hash": "a2d59a9"
+      }
+    ]
+  },
+  {
+    "version": "2.7.3",
+    "date": "2026-07-02",
+    "changes": [
+      {
+        "kind": "other",
+        "summary": "2.7.3",
+        "hash": "334e988"
+      },
+      {
+        "kind": "other",
+        "summary": "2.7.2",
+        "hash": "3b81d1d"
+      },
+      {
+        "kind": "fix",
+        "summary": "dnd sortable list",
+        "hash": "e3f290f"
+      },
+      {
+        "kind": "other",
+        "summary": "rewrite README with component catalog and accurate release process",
+        "hash": "d722471"
+      }
+    ]
+  },
+  {
+    "version": "2.7.2",
+    "date": "2026-07-02",
+    "changes": [
+      {
+        "kind": "other",
+        "summary": "2.7.2",
+        "hash": "5616df0"
+      },
+      {
+        "kind": "fix",
+        "summary": "expose global styles as an explicit subpath export",
+        "hash": "98b23b3"
+      },
+      {
+        "kind": "other",
+        "summary": "stable chunk names + publish only on tag pushes",
+        "hash": "e71db63"
+      }
+    ]
+  },
+  {
+    "version": "2.7.1",
+    "date": "2026-07-02",
+    "changes": [
+      {
+        "kind": "other",
+        "summary": "2.7.1",
+        "hash": "0fe079f"
+      }
+    ]
+  },
+  {
+    "version": "2.7.0",
+    "date": "2026-07-02",
+    "changes": [
+      {
+        "kind": "other",
+        "summary": "ship tree-shakeable multi-file dist (preserveModules)",
+        "hash": "4f4d9e8"
+      },
+      {
+        "kind": "other",
+        "summary": "pin vite-plus and Vite+ core to exact 0.2.1 in catalog",
+        "hash": "a7c09d9"
+      },
+      {
+        "kind": "other",
+        "scope": "security",
+        "summary": "pin @babel/runtime>=7.26.10 and yaml>=1.10.3 via pnpm overrides",
+        "hash": "febb8ca"
+      }
+    ]
+  },
+  {
+    "version": "2.6.0",
+    "date": "2026-07-01",
+    "changes": [
+      {
+        "kind": "other",
+        "summary": "2.6.0",
+        "hash": "f33c7e0"
+      },
+      {
+        "kind": "other",
+        "summary": "adopt Vite+ toolchain, fix CI node20 deprecation, align Storybook to v10",
+        "hash": "425a5f9"
+      }
+    ]
+  },
+  {
+    "version": "2.5.0",
+    "date": "2026-07-01",
+    "changes": [
+      {
+        "kind": "other",
+        "summary": "2.5.0",
+        "hash": "6b14d2b"
+      },
+      {
+        "kind": "other",
+        "summary": "DND kit React helper migration + bump up + remove unused deps",
+        "hash": "c11b9ec"
+      }
+    ]
+  },
+  {
+    "version": "2.4.2",
+    "date": "2026-06-18",
+    "changes": [
+      {
+        "kind": "other",
+        "summary": "2.4.2",
+        "hash": "97c9589"
+      },
+      {
+        "kind": "fix",
+        "summary": "creatable select type",
+        "hash": "063db77"
+      }
+    ]
+  },
+  {
+    "version": "2.4.1",
+    "date": "2026-05-22",
+    "changes": [
+      {
+        "kind": "other",
+        "summary": "2.4.1",
+        "hash": "ae5454c"
+      },
+      {
+        "kind": "feature",
+        "summary": "select async v2",
+        "hash": "d98deb8"
+      },
+      {
+        "kind": "other",
+        "scope": "deps-dev",
+        "summary": "bump vite from 7.3.1 to 7.3.2",
+        "hash": "26ad18e"
+      }
+    ]
+  },
+  {
+    "version": "2.4.0",
+    "date": "2026-03-11",
+    "changes": [
+      {
+        "kind": "other",
+        "summary": "2.4.0",
+        "hash": "d709f78"
+      },
+      {
+        "kind": "other",
+        "summary": "bump up",
+        "hash": "e0985fd"
+      },
+      {
+        "kind": "other",
+        "summary": "2.3.60",
+        "hash": "784fab8"
+      },
+      {
+        "kind": "other",
+        "summary": "2.3.59",
+        "hash": "29994c3"
+      },
+      {
+        "kind": "other",
+        "summary": "2.3.58",
+        "hash": "cba24bb"
+      },
+      {
+        "kind": "other",
+        "summary": "2.3.57",
+        "hash": "1ae7f8f"
+      },
+      {
+        "kind": "other",
+        "summary": "hidden-cancel-from-leave-task-cards",
+        "hash": "6164994"
+      }
+    ]
+  },
+  {
+    "version": "2.3.57",
+    "date": "2026-02-27",
+    "changes": [
+      {
+        "kind": "other",
+        "summary": "2.3.57",
+        "hash": "89c90aa"
+      },
+      {
+        "kind": "other",
+        "summary": "fix build + bump up",
+        "hash": "03f114c"
+      },
+      {
+        "kind": "other",
+        "summary": "Revert \"chore: hidden-cancel-from-leave-task-cards\"",
+        "hash": "e0234ee"
+      },
+      {
+        "kind": "other",
+        "summary": "hidden-cancel-from-leave-task-cards",
+        "hash": "4109236"
+      },
+      {
+        "kind": "other",
+        "scope": "deps",
+        "summary": "bump @isaacs/brace-expansion from 5.0.0 to 5.0.1",
+        "hash": "06a8612"
+      }
+    ]
+  },
+  {
+    "version": "2.3.56",
+    "date": "2026-01-06",
+    "changes": [
+      {
+        "kind": "other",
+        "summary": "2.3.56",
+        "hash": "c568315"
+      },
+      {
+        "kind": "other",
+        "summary": "use npm publish for OIDC trusted publishing",
+        "hash": "8d2d42e"
+      }
+    ]
+  },
+  {
+    "version": "2.3.55",
+    "date": "2026-01-06",
+    "changes": [
+      {
+        "kind": "other",
+        "summary": "2.3.55",
+        "hash": "da2582e"
+      },
+      {
+        "kind": "other",
+        "summary": "migrate to npm OIDC trusted publishing",
+        "hash": "f2023f5"
+      }
+    ]
+  },
+  {
+    "version": "2.3.54",
+    "date": "2026-01-05",
+    "changes": [
+      {
+        "kind": "other",
+        "summary": "2.3.54",
+        "hash": "ccf7091"
+      },
+      {
+        "kind": "other",
+        "summary": "fix build",
+        "hash": "7860006"
+      }
+    ]
+  },
+  {
+    "version": "2.3.53",
+    "date": "2026-01-05",
+    "changes": [
+      {
+        "kind": "other",
+        "summary": "2.3.53",
+        "hash": "2720c96"
+      },
+      {
+        "kind": "other",
+        "summary": "bump up",
+        "hash": "eb0fb2e"
+      }
+    ]
+  },
+  {
+    "version": "2.3.52",
+    "date": "2025-12-23",
+    "changes": [
+      {
+        "kind": "other",
+        "summary": "2.3.52",
+        "hash": "1ed5510"
+      },
+      {
+        "kind": "other",
+        "summary": "add default start and end month in datepicker",
+        "hash": "04a5f34"
+      }
+    ]
+  },
+  {
+    "version": "2.3.51",
+    "date": "2025-12-15",
+    "changes": [
+      {
+        "kind": "other",
+        "summary": "2.3.51",
+        "hash": "3ac3622"
+      },
+      {
+        "kind": "other",
+        "summary": "bump up",
+        "hash": "8c3f0f2"
+      },
+      {
+        "kind": "other",
+        "summary": "2.3.50",
+        "hash": "0a6c202"
+      },
+      {
+        "kind": "other",
+        "summary": "fix/table-device-cell-name-tooltip",
+        "hash": "25ecf3c"
+      },
+      {
+        "kind": "other",
+        "summary": "Revert \"fix:table-header-filter-label-style\"",
+        "hash": "60dbcd3"
+      },
+      {
+        "kind": "other",
+        "summary": "2.3.49",
+        "hash": "f377fe5"
+      },
+      {
+        "kind": "fix",
+        "summary": "table-header-filter-label-style",
+        "hash": "f41b3d9"
+      }
+    ]
+  },
+  {
+    "version": "2.3.48",
+    "date": "2025-11-06",
+    "changes": [
+      {
+        "kind": "other",
+        "summary": "2.3.48",
+        "hash": "12bcf58"
+      },
+      {
+        "kind": "other",
+        "summary": "bump up",
+        "hash": "9bf6ba6"
+      }
+    ]
+  },
+  {
+    "version": "2.3.47",
+    "date": "2025-09-30",
+    "changes": [
+      {
+        "kind": "other",
+        "summary": "2.3.47",
+        "hash": "1e7585a"
+      },
+      {
+        "kind": "other",
+        "summary": "fix row selection",
+        "hash": "7240008"
+      }
+    ]
+  }
+]

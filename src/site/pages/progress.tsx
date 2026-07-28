@@ -1,6 +1,7 @@
 import * as React from 'react'
 import {Progress} from '../../components'
 import {DemoSection} from '../showcase/DemoSection'
+import {PageHeader} from '../showcase/PageHeader'
 
 function StepBody({title, body}: {title: string; body: string}) {
   return (
@@ -20,8 +21,9 @@ export default function ProgressPage() {
 
   return (
     <div>
-      <h1>Progress</h1>
-      <p>Multi-step wizard with numbered steps, completion ticks and back / continue navigation.</p>
+      <PageHeader title="Progress">
+        Multi-step wizard with numbered steps, completion ticks and back / continue navigation.
+      </PageHeader>
 
       <DemoSection
         title="Stepper wizard"

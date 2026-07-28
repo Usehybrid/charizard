@@ -1,94 +1,107 @@
-import {Tooltip} from '../../components'
+import {Button, BUTTON_VARIANT, TooltipV2} from '../../components'
 import {DemoSection} from '../showcase/DemoSection'
 import {DemoRow, DemoItem} from '../showcase/DemoRow'
+import {PageHeader} from '../showcase/PageHeader'
 
-const basicCode = `
-import {Tooltip} from '@hybr1d-tech/charizard'
+const variantsCode = `
+import {TooltipV2, Button} from '@hybr1d-tech/charizard'
 
-<Tooltip placement="top">
-  <Tooltip.Trigger>Hover me</Tooltip.Trigger>
-  <Tooltip.Content>Helpful tooltip text</Tooltip.Content>
-</Tooltip>
+<TooltipV2
+  placement="top"
+  variant="dark"
+  trigger={<Button>Hover me</Button>}
+  content="This is a tooltip"
+/>
 `
+
+const VARIANTS = ['dark', 'light', 'success', 'warning', 'error', 'info'] as const
 
 export default function TooltipPage() {
   return (
     <div>
-      <h1>Tooltip</h1>
-      <p>
-        Zag.js-powered hover tooltip composed from Tooltip.Trigger and Tooltip.Content, with
-        placement, delay and background options.
-      </p>
+      <PageHeader title="Tooltip">
+        Tooltip with a simple trigger/content API, six visual variants and twelve placements.
+      </PageHeader>
 
       <DemoSection
-        title="Basic tooltip"
-        description="Tooltip clones the tooltip API into its Trigger and Content children."
-        code={basicCode}
+        title="Variants"
+        description="variant switches the tooltip color scheme: dark (default), light, success, warning, error or info."
+        code={variantsCode}
       >
         <DemoRow>
-          <Tooltip placement="top">
-            <Tooltip.Trigger>Hover me</Tooltip.Trigger>
-            <Tooltip.Content>Helpful tooltip text</Tooltip.Content>
-          </Tooltip>
+          {VARIANTS.map(variant => (
+            <DemoItem key={variant} label={variant}>
+              <TooltipV2
+                variant={variant}
+                trigger={
+                  <Button variant={BUTTON_VARIANT.SECONDARY}>
+                    {variant.charAt(0).toUpperCase() + variant.slice(1)}
+                  </Button>
+                }
+                content={`A ${variant} tooltip`}
+              />
+            </DemoItem>
+          ))}
         </DemoRow>
       </DemoSection>
 
       <DemoSection
         title="Placements"
-        description="placement accepts any @zag-js/popper placement (default 'top')."
+        description="placement accepts top/right/bottom/left plus their -start and -end variations."
       >
         <DemoRow>
           <DemoItem label="top">
-            <Tooltip placement="top">
-              <Tooltip.Trigger>Top</Tooltip.Trigger>
-              <Tooltip.Content>Placed on top</Tooltip.Content>
-            </Tooltip>
+            <TooltipV2
+              placement="top"
+              trigger={<Button variant={BUTTON_VARIANT.TERTIARY}>Top</Button>}
+              content="Placed on top"
+            />
           </DemoItem>
-          <DemoItem label="bottom">
-            <Tooltip placement="bottom">
-              <Tooltip.Trigger>Bottom</Tooltip.Trigger>
-              <Tooltip.Content>Placed at the bottom</Tooltip.Content>
-            </Tooltip>
-          </DemoItem>
-          <DemoItem label="left">
-            <Tooltip placement="left">
-              <Tooltip.Trigger>Left</Tooltip.Trigger>
-              <Tooltip.Content>Placed to the left</Tooltip.Content>
-            </Tooltip>
+          <DemoItem label="bottom-start">
+            <TooltipV2
+              placement="bottom-start"
+              trigger={<Button variant={BUTTON_VARIANT.TERTIARY}>Bottom start</Button>}
+              content="Aligned to the trigger start"
+            />
           </DemoItem>
           <DemoItem label="right">
-            <Tooltip placement="right">
-              <Tooltip.Trigger>Right</Tooltip.Trigger>
-              <Tooltip.Content>Placed to the right</Tooltip.Content>
-            </Tooltip>
+            <TooltipV2
+              placement="right"
+              trigger={<Button variant={BUTTON_VARIANT.TERTIARY}>Right</Button>}
+              content="Placed to the right"
+            />
+          </DemoItem>
+          <DemoItem label="left">
+            <TooltipV2
+              placement="left"
+              trigger={<Button variant={BUTTON_VARIANT.TERTIARY}>Left</Button>}
+              content="Placed to the left"
+            />
           </DemoItem>
         </DemoRow>
       </DemoSection>
 
       <DemoSection
-        title="Backgrounds & delays"
-        description="Content bg accepts 'black' (default), 'gray' or a custom color; openDelay/closeDelay are in milliseconds."
+        title="Content truncation"
+        description="String content longer than contentMaxLength is truncated with an ellipsis; pass null to disable the max width."
       >
         <DemoRow>
-          <DemoItem label="bg='gray'">
-            <Tooltip placement="top">
-              <Tooltip.Trigger>Gray</Tooltip.Trigger>
-              <Tooltip.Content bg="gray">Gray background</Tooltip.Content>
-            </Tooltip>
+          <DemoItem label="contentMaxLength={40}">
+            <TooltipV2
+              contentMaxLength={40}
+              trigger={<Button variant={BUTTON_VARIANT.SECONDARY}>Truncated</Button>}
+              content="This is a very long tooltip message that will be cut off after forty characters."
+            />
           </DemoItem>
-          <DemoItem label="custom bg">
-            <Tooltip placement="top">
-              <Tooltip.Trigger>Custom</Tooltip.Trigger>
-              <Tooltip.Content bg="#254dda" containerStyles={{color: 'white'}}>
-                Brand blue background
-              </Tooltip.Content>
-            </Tooltip>
-          </DemoItem>
-          <DemoItem label="openDelay={400}">
-            <Tooltip placement="top" openDelay={400} closeDelay={100}>
-              <Tooltip.Trigger>Delayed</Tooltip.Trigger>
-              <Tooltip.Content>Opens after 400ms</Tooltip.Content>
-            </Tooltip>
+          <DemoItem label="rich content">
+            <TooltipV2
+              trigger={<Button variant={BUTTON_VARIANT.SECONDARY}>Rich content</Button>}
+              content={
+                <span>
+                  Tooltips can render <strong>React nodes</strong> too.
+                </span>
+              }
+            />
           </DemoItem>
         </DemoRow>
       </DemoSection>

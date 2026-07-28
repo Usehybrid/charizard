@@ -1,6 +1,8 @@
 /* Global library styles, aggregated so the build injects them as ONE css
    import on the entry chunk with a deterministic cascade order.
    (Separate JS imports get injected in unspecified order by libInjectCss.) */
+@import '@fontsource-variable/geist';
+@import '@fontsource-variable/geist-mono';
 @import './_typography.css';
 @import './_variables.css';
 @import './global.css';

@@ -68,7 +68,7 @@
   justify-content: center;
 
   color: var(--text-secondary);
-  font-family: Instrument Sans;
+  font-family: var(--font-sans);
   font-size: 12px;
   font-style: normal;
   font-weight: 500;

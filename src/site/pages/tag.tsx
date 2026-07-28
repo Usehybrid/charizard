@@ -1,14 +1,16 @@
 import {Tag, STATUS_MAP} from '../../components'
 import {DemoSection} from '../showcase/DemoSection'
 import {DemoRow, DemoItem} from '../showcase/DemoRow'
+import {PageHeader} from '../showcase/PageHeader'
 import infoIcon from '../../components/assets/info-circle.svg'
 import checkIcon from '../../components/assets/check.svg'
 
 export default function TagPage() {
   return (
     <div>
-      <h1>Tag</h1>
-      <p>Colored label chip for assignment and lifecycle states, with optional leading icon.</p>
+      <PageHeader title="Tag">
+        Colored label chip for assignment and lifecycle states, with optional leading icon.
+      </PageHeader>
 
       <DemoSection
         title="Statuses"

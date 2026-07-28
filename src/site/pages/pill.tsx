@@ -1,12 +1,12 @@
 import {Pill, PILL_STATUS} from '../../components'
 import {DemoSection} from '../showcase/DemoSection'
 import {DemoRow, DemoItem} from '../showcase/DemoRow'
+import {PageHeader} from '../showcase/PageHeader'
 
 export default function PillPage() {
   return (
     <div>
-      <h1>Pill</h1>
-      <p>Rounded pill label in six semantic status colorways.</p>
+      <PageHeader title="Pill">Rounded pill label in six semantic status colorways.</PageHeader>
 
       <DemoSection
         title="Statuses"

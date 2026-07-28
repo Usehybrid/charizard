@@ -1,99 +1,117 @@
-import * as React from 'react'
 import {
   Button,
   BUTTON_VARIANT,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
+  ModalV2,
+  useDisclosure,
+  type DialogFooterButtons,
 } from '../../components'
-import type {FooterButtons} from '../../components/modal/ModalFooter'
 import {DemoSection} from '../showcase/DemoSection'
 import {DemoRow} from '../showcase/DemoRow'
+import {PageHeader} from '../showcase/PageHeader'
 
-type ModalSize = 'sm' | 'md' | 'fullScreen'
-
-const compositionCode = `
-import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, BUTTON_VARIANT, useDisclosure} from '@hybr1d-tech/charizard'
-import type {FooterButtons} from '@hybr1d-tech/charizard/components/modal/ModalFooter'
+const basicCode = `
+import {ModalV2, Button, BUTTON_VARIANT, useDisclosure, type DialogFooterButtons} from '@hybr1d-tech/charizard'
 
 const {isOpen, onOpen, onClose} = useDisclosure()
 
-const buttons: FooterButtons = [
+const buttons: DialogFooterButtons = [
   {variant: BUTTON_VARIANT.SECONDARY, btnText: 'Cancel', onClick: onClose},
-  {variant: BUTTON_VARIANT.PRIMARY, btnText: 'Save', onClick: onClose},
+  {variant: BUTTON_VARIANT.PRIMARY, btnText: 'Confirm', onClick: onClose},
 ]
 
-{isOpen && (
-  <Modal isOpen={isOpen} onClose={onClose} size="md">
-    <ModalContent>
-      <ModalHeader>Assign device</ModalHeader>
-      <ModalBody>Pick a teammate to assign this MacBook Pro to.</ModalBody>
-      <ModalFooter buttons={buttons} />
-    </ModalContent>
-  </Modal>
-)}
+<Button onClick={onOpen}>Open ModalV2</Button>
+<ModalV2
+  title="Order laptop"
+  subTitle="MacBook Pro 14-inch, M4 Pro"
+  isOpen={isOpen}
+  onClose={onClose}
+  footerButtons={buttons}
+>
+  Modal body content goes here.
+</ModalV2>
 `
 
-export default function ModalPage() {
-  const [size, setSize] = React.useState<ModalSize | null>(null)
-  const onClose = () => setSize(null)
-
-  const buttons: FooterButtons = [
+function footerFor(onClose: () => void): DialogFooterButtons {
+  return [
     {variant: BUTTON_VARIANT.SECONDARY, btnText: 'Cancel', onClick: onClose},
-    {variant: BUTTON_VARIANT.PRIMARY, btnText: 'Save', onClick: onClose},
+    {variant: BUTTON_VARIANT.PRIMARY, btnText: 'Confirm', onClick: onClose},
   ]
+}
+
+export default function ModalPage() {
+  const basic = useDisclosure()
+  const backdrop = useDisclosure()
+  const headerless = useDisclosure()
 
   return (
     <div>
-      <h1>Modal</h1>
-      <p>
-        Dialog modal composed from ModalContent, ModalHeader, ModalBody and ModalFooter, with sm,
-        md and fullScreen sizes.
-      </p>
+      <PageHeader title="Modal">
+        Dialog with a title/subtitle header, a scrollable content area and a footer-button API.
+      </PageHeader>
 
       <DemoSection
-        title="Composition"
-        description="Modal clones the dialog API into its children, so header, body and footer wire themselves up automatically."
-        code={compositionCode}
+        title="Basic modal"
+        description="Controlled with useDisclosure; footerButtons renders library Buttons and the header shows title, subtitle and a close icon."
+        code={basicCode}
       >
         <DemoRow>
-          <Button onClick={() => setSize('md')}>Open modal</Button>
+          <Button onClick={basic.onOpen}>Open ModalV2</Button>
         </DemoRow>
+        <ModalV2
+          title="Order laptop"
+          subTitle="MacBook Pro 14-inch, M4 Pro"
+          isOpen={basic.isOpen}
+          onClose={basic.onClose}
+          footerButtons={footerFor(basic.onClose)}
+        >
+          <p style={{padding: '12px 0'}}>
+            Confirm the order details before sending the request to procurement. Pressing Escape,
+            clicking outside or using any footer button closes the dialog.
+          </p>
+        </ModalV2>
       </DemoSection>
 
       <DemoSection
-        title="Sizes"
-        description="size accepts 'sm' (448px), 'md' (600px, default) or 'fullScreen'."
+        title="Backdrop"
+        description="showBackdrop renders a dimmed layer behind the dialog."
       >
         <DemoRow>
-          <Button variant={BUTTON_VARIANT.SECONDARY} onClick={() => setSize('sm')}>
-            Small
-          </Button>
-          <Button variant={BUTTON_VARIANT.SECONDARY} onClick={() => setSize('md')}>
-            Medium
-          </Button>
-          <Button variant={BUTTON_VARIANT.SECONDARY} onClick={() => setSize('fullScreen')}>
-            Full screen
+          <Button variant={BUTTON_VARIANT.SECONDARY} onClick={backdrop.onOpen}>
+            Open with backdrop
           </Button>
         </DemoRow>
+        <ModalV2
+          title="With backdrop"
+          isOpen={backdrop.isOpen}
+          onClose={backdrop.onClose}
+          showBackdrop
+          footerButtons={footerFor(backdrop.onClose)}
+        >
+          <p style={{padding: '12px 0'}}>The page behind this dialog is dimmed.</p>
+        </ModalV2>
       </DemoSection>
 
-      {size && (
-        <Modal isOpen onClose={onClose} size={size}>
-          <ModalContent>
-            <ModalHeader>Assign device</ModalHeader>
-            <ModalBody>
-              <p style={{padding: '12px 0'}}>
-                Pick a teammate to assign this MacBook Pro to. The footer buttons close the dialog
-                through the injected zag.js API after their own onClick runs.
-              </p>
-            </ModalBody>
-            <ModalFooter buttons={buttons} />
-          </ModalContent>
-        </Modal>
-      )}
+      <DemoSection
+        title="Hidden header"
+        description="hideHeader removes the title row but keeps the floating close button."
+      >
+        <DemoRow>
+          <Button variant={BUTTON_VARIANT.SECONDARY} onClick={headerless.onOpen}>
+            Open without header
+          </Button>
+        </DemoRow>
+        <ModalV2
+          title="Hidden header"
+          isOpen={headerless.isOpen}
+          onClose={headerless.onClose}
+          hideHeader
+          footerButtons={footerFor(headerless.onClose)}
+        >
+          <p style={{padding: '12px 0'}}>
+            Only the content and footer are visible; the title is still required for accessibility.
+          </p>
+        </ModalV2>
+      </DemoSection>
     </div>
   )
 }

@@ -28,6 +28,9 @@ jobs:
         env:
           # Custom domain (ui.zenadmin.co) serves from the root path.
           SITE_BASE: /
+          # Lets the star count refresh without hitting the anonymous rate limit.
+          # A failed fetch is non-fatal — the committed count is kept.
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/upload-pages-artifact@v4
         with:
           path: dist-site

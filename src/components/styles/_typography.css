@@ -2,7 +2,7 @@
   font-feature-settings:
     'clig' off,
     'liga' off;
-  font-family: 'Instrument Sans';
+  font-family: var(--font-sans);
   --letter-spacing: 0.2px;
 
   --line-height-142: 20px;

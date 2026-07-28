@@ -1,12 +1,7 @@
 import * as React from 'react'
-import {
-  Alert,
-  ALERT_ACTION_TYPES,
-  ALERT_TYPES,
-  Button,
-  BUTTON_VARIANT,
-} from '../../components'
+import {Alert, ALERT_ACTION_TYPES, ALERT_TYPES, Button, BUTTON_VARIANT} from '../../components'
 import {DemoSection} from '../showcase/DemoSection'
+import {PageHeader} from '../showcase/PageHeader'
 
 const typesCode = `
 import {Alert, ALERT_TYPES} from '@hybr1d-tech/charizard'
@@ -48,10 +43,9 @@ export default function AlertPage() {
 
   return (
     <div>
-      <h1>Alert</h1>
-      <p>
+      <PageHeader title="Alert">
         Inline alert banner with six intents plus optional close and show-more actions.
-      </p>
+      </PageHeader>
 
       <DemoSection
         title="Alert types"

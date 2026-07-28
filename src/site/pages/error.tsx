@@ -1,6 +1,7 @@
 import * as React from 'react'
 import {Error404, Error500, ErrorBoundaryFallback, ErrorsLayout} from '../../components'
 import {DemoSection} from '../showcase/DemoSection'
+import {PageHeader} from '../showcase/PageHeader'
 
 // The error layout is designed to fill the whole viewport (min-height: 100dvh),
 // so each demo is boxed into a fixed-height, scrollable frame.
@@ -17,12 +18,11 @@ const demoError = new Error('TypeError: cannot read properties of undefined')
 export default function ErrorPage() {
   return (
     <div>
-      <h1>Error</h1>
-      <p>
+      <PageHeader title="Error">
         Full-page error layouts: branded 404/500 screens and an error-boundary fallback. Normally
         these own the entire viewport; here each one is rendered inside a fixed-height scrollable
         frame. The &quot;Go to homepage&quot; buttons really navigate (to this site&apos;s home).
-      </p>
+      </PageHeader>
 
       <DemoSection
         title="404 page"

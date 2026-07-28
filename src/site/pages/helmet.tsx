@@ -1,14 +1,7 @@
 import * as React from 'react'
-import {Helmet} from '../../components'
+import {CheckboxV2, Helmet, InputV2} from '../../components'
 import {DemoSection} from '../showcase/DemoSection'
-
-const inputStyle: React.CSSProperties = {
-  padding: '8px 12px',
-  border: '1px solid #d0d0d0',
-  borderRadius: 6,
-  minWidth: 260,
-  font: 'inherit',
-}
+import {PageHeader} from '../showcase/PageHeader'
 
 export default function HelmetPage() {
   const [applied, setApplied] = React.useState(false)
@@ -16,12 +9,11 @@ export default function HelmetPage() {
 
   return (
     <div>
-      <h1>Helmet</h1>
-      <p>
+      <PageHeader title="Helmet">
         Document head manager: renders title, description, canonical link, Open Graph and Twitter
-        Card tags, relying on React 19&apos;s native hoisting of metadata elements into the
-        document head.
-      </p>
+        Card tags, relying on React 19&apos;s native hoisting of metadata elements into the document
+        head.
+      </PageHeader>
 
       <DemoSection
         title="Setting the document title"
@@ -30,22 +22,15 @@ export default function HelmetPage() {
 <Helmet title="Devices — ZenAdmin" />
 `}
       >
-        <div style={{display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 12}}>
-          <input
-            type="text"
-            aria-label="Document title"
-            style={inputStyle}
-            value={title}
-            onChange={e => setTitle(e.target.value)}
-          />
-          <label style={{display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer'}}>
-            <input
-              type="checkbox"
-              checked={applied}
-              onChange={e => setApplied(e.target.checked)}
+        <div style={{display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 16}}>
+          <div style={{minWidth: 280}}>
+            <InputV2
+              aria-label="Document title"
+              value={title}
+              onChange={e => setTitle(e.target.value)}
             />
-            Apply to the browser tab
-          </label>
+          </div>
+          <CheckboxV2 label="Apply to the browser tab" checked={applied} onChange={setApplied} />
           {applied && <Helmet title={title} />}
         </div>
       </DemoSection>

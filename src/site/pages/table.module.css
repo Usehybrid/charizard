@@ -1,0 +1,8 @@
+.link {
+  color: var(--p-p50);
+  font-weight: 500;
+}
+
+.secondary {
+  color: var(--text-secondary);
+}

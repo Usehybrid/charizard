@@ -1,6 +1,7 @@
 import {Status, STATUS_STATUS} from '../../components'
 import {DemoSection} from '../showcase/DemoSection'
 import {DemoRow, DemoItem} from '../showcase/DemoRow'
+import {PageHeader} from '../showcase/PageHeader'
 
 function Label({children}: {children: React.ReactNode}) {
   return (
@@ -13,8 +14,9 @@ function Label({children}: {children: React.ReactNode}) {
 export default function StatusPage() {
   return (
     <div>
-      <h1>Status</h1>
-      <p>Colored dot (or icon) status indicator with a label, for device and workflow states.</p>
+      <PageHeader title="Status">
+        Colored dot (or icon) status indicator with a label, for device and workflow states.
+      </PageHeader>
 
       <DemoSection
         title="Dot statuses"

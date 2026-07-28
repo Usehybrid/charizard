@@ -1,71 +1,90 @@
 .section {
   margin-bottom: 40px;
+  scroll-margin-top: 76px;
 }
 
 .sectionTitle {
-  margin: 0 0 4px;
-  font-size: 18px;
-  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 6px;
+  color: var(--text-primary);
 }
 
 .sectionDescription {
+  max-width: 76ch;
   margin: 0 0 12px;
-  font-size: 13px;
-  color: var(--neutral-arch-800);
+  color: var(--text-secondary);
+}
+
+.card {
+  overflow: hidden;
+  border: 1px solid var(--site-border);
+  border-radius: 12px;
+  background-color: var(--neutral-white);
+  box-shadow: var(--site-shadow-sm);
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--site-border);
+  background-color: var(--site-bg-subtle);
+}
+
+.tabs {
+  display: flex;
+  gap: 2px;
+}
+
+.tab {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background-color: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition:
+    background-color 120ms ease,
+    color 120ms ease;
+}
+
+.tab:hover {
+  color: var(--text-primary);
+  background-color: var(--fill-selection);
+}
+
+.tabActive,
+.tabActive:hover {
+  border-color: var(--site-border);
+  background-color: var(--neutral-white);
+  color: var(--p-p50);
+  box-shadow: var(--site-shadow-sm);
 }
 
 .canvas {
-  padding: 24px;
-  border: 1px solid var(--neutral-arch-200);
-  border-radius: 8px;
-  background-color: var(--neutral-white);
-}
-
-.codeBlock {
-  border: 1px solid var(--neutral-arch-200);
-  border-top: none;
-  border-radius: 0 0 8px 8px;
-  margin-top: -6px;
-  padding-top: 6px;
-  background-color: var(--neutral-arch-10);
-}
-
-.codeActions {
-  display: flex;
-  gap: 8px;
-  padding: 6px 10px;
-}
-
-.codeButton {
-  border: none;
-  background: none;
-  padding: 2px 6px;
-  border-radius: 4px;
-  font-size: 12px;
-  color: var(--theme-blue);
-  cursor: pointer;
-}
-
-.codeButton:hover {
-  background-color: var(--neutral-arch-100);
-}
-
-.codeButtonDone {
-  color: var(--status-success);
-}
-
-.code {
-  margin: 0;
-  padding: 12px 16px;
+  /* Wide demos (tables, fixed-width fields) scroll inside their own card —
+     the page body must never scroll horizontally. */
   overflow-x: auto;
-  font-size: 12.5px;
-  line-height: 1.55;
-  background-color: var(--neutral-arch-20);
-  border-radius: 0 0 8px 8px;
+  padding: 28px 24px;
+}
+
+.hidden {
+  display: none;
+}
+
+.codePane {
+  padding: 10px;
 }
 
 .rowWrap {
-  margin-bottom: 16px;
+  margin-bottom: 24px;
 }
 
 .rowWrap:last-child {
@@ -73,27 +92,34 @@
 }
 
 .rowLabel {
-  margin-bottom: 8px;
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--neutral-arch-800);
+  margin-bottom: 10px;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
 }
 
 .row {
   display: flex;
   flex-wrap: wrap;
+  /* Stretch (not center) so a field that grows — error message, helper text —
+     keeps its control's top edge in line with its neighbours', while the item
+     captions stay pinned to the bottom of the row. */
+  align-items: stretch;
+  gap: 20px 24px;
+}
+
+.rowCentered {
   align-items: center;
-  gap: 16px;
 }
 
 .item {
   display: flex;
   flex-direction: column;
-  gap: 6px;
   align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  min-width: 0;
 }
 
 .itemLabel {
-  font-size: 11px;
-  color: var(--text-hint);
+  color: var(--text-tertiary);
 }

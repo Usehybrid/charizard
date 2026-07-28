@@ -1,0 +1,432 @@
+[
+  {
+    "id": "2de350df-23f0-482b-a531-a6d8ea817e81",
+    "name": "Lenovo Ideapad 5",
+    "status": "unassigned",
+    "asset_tag": null,
+    "serial_number": "0930",
+    "mdm": false,
+    "product_type": "Laptops",
+    "logistic_status": null,
+    "location": {
+      "city": "Pune",
+      "country": "India",
+      "type": "company_hq"
+    },
+    "allocated_to": null
+  },
+  {
+    "id": "23abe05d-26cd-4cda-91fe-a7b7ad37ba62",
+    "name": "Lenovo ThinkPad P1 Gen 8",
+    "status": "unassigned",
+    "asset_tag": null,
+    "serial_number": "pp2",
+    "mdm": false,
+    "product_type": "Laptops",
+    "logistic_status": null,
+    "location": {
+      "city": "Pune",
+      "country": "India",
+      "type": "company_hq"
+    },
+    "allocated_to": null
+  },
+  {
+    "id": "ec223ac0-17a7-4cd2-82e8-a1ca5433b79d",
+    "name": "Lenovo ThinkPad P1 Gen 8",
+    "status": "unassigned",
+    "asset_tag": null,
+    "serial_number": "ppl",
+    "mdm": false,
+    "product_type": "Laptops",
+    "logistic_status": null,
+    "location": {
+      "city": "Pune",
+      "country": "India",
+      "type": "company_hq"
+    },
+    "allocated_to": null
+  },
+  {
+    "id": "ef6343da-40d5-4a84-8434-49b1f5c60194",
+    "name": "Lenovo ThinkPad P1 Gen 8",
+    "status": "in_transition",
+    "asset_tag": null,
+    "serial_number": "pp3",
+    "mdm": false,
+    "product_type": "Laptops",
+    "logistic_status": "pending_logistics_cost",
+    "location": {
+      "city": "Pune",
+      "country": "India",
+      "type": "work_location"
+    },
+    "allocated_to": {
+      "id": "1eeadc31-7420-4096-86f3-c5093c82918f",
+      "first_name": "May",
+      "middle_name": null,
+      "last_name": "Maple"
+    }
+  },
+  {
+    "id": "1a6ea4f8-c0f7-4416-b6af-c192f9c8ab41",
+    "name": "Samsung Monitor 27\" LS27BM500ECXXK",
+    "status": "in_transition",
+    "asset_tag": null,
+    "serial_number": "ddd4",
+    "mdm": false,
+    "product_type": "Monitors",
+    "logistic_status": "pending_logistics_cost",
+    "location": {
+      "city": "Salt Lake City",
+      "country": "United States",
+      "type": "work_location"
+    },
+    "allocated_to": {
+      "id": "0263326a-34d3-4ba9-95d1-c93fff09790a",
+      "first_name": "Dawn",
+      "middle_name": null,
+      "last_name": "Berlitz"
+    }
+  },
+  {
+    "id": "36883ca5-087a-4391-badc-d1a95ef53880",
+    "name": "Lenovo ThinkPad P16 G2",
+    "status": "unassigned",
+    "asset_tag": null,
+    "serial_number": null,
+    "mdm": false,
+    "product_type": "Laptops",
+    "logistic_status": null,
+    "location": {
+      "city": "Pune",
+      "country": "India",
+      "type": "company_hq"
+    },
+    "allocated_to": null
+  },
+  {
+    "id": "6b5f55d3-ec76-4769-b7f9-65813d1255bd",
+    "name": "Samsung 27\" Essential monitor",
+    "status": "in_transition",
+    "asset_tag": null,
+    "serial_number": "hhb3",
+    "mdm": false,
+    "product_type": "Monitors",
+    "logistic_status": "approved",
+    "location": {
+      "city": "Saratoga Springs",
+      "country": "United States",
+      "type": null
+    },
+    "allocated_to": {
+      "id": "d8f5a224-bc2d-443a-b4db-759bb099eb70",
+      "first_name": "Clemont",
+      "middle_name": "Test",
+      "last_name": "Citron"
+    }
+  },
+  {
+    "id": "aa9d7591-365f-43b2-8b31-08bb642a5b97",
+    "name": "Apple MacBook Air M4",
+    "status": "unassigned",
+    "asset_tag": null,
+    "serial_number": "kll",
+    "mdm": false,
+    "product_type": "Laptops",
+    "logistic_status": null,
+    "location": {
+      "city": null,
+      "country": null,
+      "type": "hybr1d_warehouse"
+    },
+    "allocated_to": null
+  },
+  {
+    "id": "d5579a3a-10c2-466f-b0e0-d816a94df483",
+    "name": "Hp EliteBook 840 G9",
+    "status": "unassigned",
+    "asset_tag": null,
+    "serial_number": "ccc",
+    "mdm": false,
+    "product_type": "Laptops",
+    "logistic_status": null,
+    "location": {
+      "city": "Pune",
+      "country": "India",
+      "type": "company_hq"
+    },
+    "allocated_to": null
+  },
+  {
+    "id": "f5b82103-dd24-4a2b-9652-4a0a3e9ad491",
+    "name": "Apple Magic Mouse - Black Multi-Touch Surface 2022",
+    "status": "unassigned",
+    "asset_tag": null,
+    "serial_number": "kkop",
+    "mdm": false,
+    "product_type": "Peripheral devices",
+    "logistic_status": null,
+    "location": {
+      "city": null,
+      "country": null,
+      "type": "hybr1d_warehouse"
+    },
+    "allocated_to": null
+  },
+  {
+    "id": "6fa8d55e-b1e1-405b-848c-1d75dcfa36a1",
+    "name": "Samsung 27\" Essential monitor",
+    "status": "in_transition",
+    "asset_tag": null,
+    "serial_number": "PQLAMZ",
+    "mdm": false,
+    "product_type": "Monitors",
+    "logistic_status": "awaiting_approval",
+    "location": {
+      "city": "Singapore",
+      "country": "Singapore",
+      "type": "company_hq"
+    },
+    "allocated_to": null
+  },
+  {
+    "id": "96937858-79ce-41ca-8620-f6f83ac75d68",
+    "name": "Apple MacBook Air M5",
+    "status": "in_transition",
+    "asset_tag": null,
+    "serial_number": null,
+    "mdm": false,
+    "product_type": "Laptops",
+    "logistic_status": "pending_logistics_cost",
+    "location": {
+      "city": "Singapore",
+      "country": "Singapore",
+      "type": "company_hq"
+    },
+    "allocated_to": null
+  },
+  {
+    "id": "c4972072-71d3-4c92-b90e-030b2c46e63e",
+    "name": "Lenovo Ideapad 5",
+    "status": "unassigned",
+    "asset_tag": null,
+    "serial_number": null,
+    "mdm": false,
+    "product_type": "Laptops",
+    "logistic_status": null,
+    "location": {
+      "city": "Bengaluru",
+      "country": "India",
+      "type": "hybr1d_warehouse"
+    },
+    "allocated_to": null
+  },
+  {
+    "id": "1aaf6e36-f44b-4e99-8da9-376631f7250b",
+    "name": "Apple Magic Mouse - White Multi-Touch Surface 2022",
+    "status": "in_transition",
+    "asset_tag": null,
+    "serial_number": "bb2",
+    "mdm": false,
+    "product_type": "Peripheral devices",
+    "logistic_status": "pending_logistics_cost",
+    "location": {
+      "city": "Bogota",
+      "country": "Colombia",
+      "type": "hybr1d_warehouse"
+    },
+    "allocated_to": {
+      "id": "636167af-7693-491d-9ad8-46af82869051",
+      "first_name": "Lillie",
+      "middle_name": null,
+      "last_name": "Aether"
+    }
+  },
+  {
+    "id": "5fcfc2ff-eee1-4a82-aedb-f38619c9a83d",
+    "name": "Apple Magic Keyboard - German",
+    "status": "in_transition",
+    "asset_tag": null,
+    "serial_number": "bb3",
+    "mdm": false,
+    "product_type": "Peripheral devices",
+    "logistic_status": "pending_logistics_cost",
+    "location": {
+      "city": "Bogota",
+      "country": "Colombia",
+      "type": "hybr1d_warehouse"
+    },
+    "allocated_to": {
+      "id": "636167af-7693-491d-9ad8-46af82869051",
+      "first_name": "Gladion",
+      "middle_name": null,
+      "last_name": "Mohn"
+    }
+  },
+  {
+    "id": "bff5a71d-fc87-41e3-8b0a-1585197e633f",
+    "name": "Apple Magic Keyboard - German",
+    "status": "unassigned",
+    "asset_tag": null,
+    "serial_number": "bb4",
+    "mdm": false,
+    "product_type": "Peripheral devices",
+    "logistic_status": null,
+    "location": {
+      "city": "Bogota",
+      "country": "Colombia",
+      "type": "hybr1d_warehouse"
+    },
+    "allocated_to": null
+  },
+  {
+    "id": "c68317b1-69d8-4de7-b3db-0adbf46c8809",
+    "name": "Apple MacBook Air M5",
+    "status": "unassigned",
+    "asset_tag": null,
+    "serial_number": "bb1",
+    "mdm": false,
+    "product_type": "Laptops",
+    "logistic_status": null,
+    "location": {
+      "city": "Bogota",
+      "country": "Colombia",
+      "type": "hybr1d_warehouse"
+    },
+    "allocated_to": null
+  },
+  {
+    "id": "786a7b66-2b69-4bf1-ae6e-3c1617528837",
+    "name": "Apple MacBook Air M5",
+    "status": "unassigned",
+    "asset_tag": null,
+    "serial_number": "0p1",
+    "mdm": false,
+    "product_type": "Laptops",
+    "logistic_status": null,
+    "location": {
+      "city": "Auckland",
+      "country": "New Zealand",
+      "type": "hybr1d_warehouse"
+    },
+    "allocated_to": null
+  },
+  {
+    "id": "93e6fed7-41db-410e-8c79-c585c99f5785",
+    "name": "Lenovo Ideapad 5",
+    "status": "unassigned",
+    "asset_tag": null,
+    "serial_number": "ooml",
+    "mdm": false,
+    "product_type": "Laptops",
+    "logistic_status": null,
+    "location": {
+      "city": "Bogota",
+      "country": "Colombia",
+      "type": "hybr1d_warehouse"
+    },
+    "allocated_to": null
+  },
+  {
+    "id": "c91060e7-640b-42ef-8dbc-7b7935686211",
+    "name": "Apple Magic Keyboard with Touch ID and Numeric Keypad for Mac models with Apple silicon - US English - Black Keys",
+    "status": "unassigned",
+    "asset_tag": null,
+    "serial_number": "00e",
+    "mdm": false,
+    "product_type": "Peripheral devices",
+    "logistic_status": null,
+    "location": {
+      "city": "Sydney",
+      "country": "Australia",
+      "type": "hybr1d_warehouse"
+    },
+    "allocated_to": null
+  },
+  {
+    "id": "e5a9d81e-e603-4e6f-89da-62df8954eb24",
+    "name": "Apple MacBook Air M5",
+    "status": "unassigned",
+    "asset_tag": null,
+    "serial_number": "0po",
+    "mdm": false,
+    "product_type": "Laptops",
+    "logistic_status": null,
+    "location": {
+      "city": "Auckland",
+      "country": "New Zealand",
+      "type": "hybr1d_warehouse"
+    },
+    "allocated_to": null
+  },
+  {
+    "id": "f88467ef-9200-44ca-ad3d-747210cf46db",
+    "name": "Samsung 27\" Essential monitor",
+    "status": "unassigned",
+    "asset_tag": null,
+    "serial_number": "00f",
+    "mdm": false,
+    "product_type": "Monitors",
+    "logistic_status": "pending_logistics_cost",
+    "location": {
+      "city": "Sydney",
+      "country": "Australia",
+      "type": "hybr1d_warehouse"
+    },
+    "allocated_to": {
+      "id": "636167af-7693-491d-9ad8-46af82869051",
+      "first_name": "Bea",
+      "middle_name": null,
+      "last_name": "Saito"
+    }
+  },
+  {
+    "id": "42ed4425-c175-4834-919d-a1e6a980ad33",
+    "name": "Lenovo ThinkBook 15 G4",
+    "status": "unassigned",
+    "asset_tag": null,
+    "serial_number": "ui12",
+    "mdm": false,
+    "product_type": "Laptops",
+    "logistic_status": null,
+    "location": {
+      "city": "Bengaluru",
+      "country": "India",
+      "type": "hybr1d_warehouse"
+    },
+    "allocated_to": null
+  },
+  {
+    "id": "da574b1e-bd92-4d86-9d74-1a3000d104dc",
+    "name": "Samsung 27\" Essential monitor",
+    "status": "unassigned",
+    "asset_tag": null,
+    "serial_number": "003",
+    "mdm": false,
+    "product_type": "Monitors",
+    "logistic_status": null,
+    "location": {
+      "city": "Auckland",
+      "country": "New Zealand",
+      "type": "hybr1d_warehouse"
+    },
+    "allocated_to": null
+  },
+  {
+    "id": "a95ccbcb-7c4d-4f1e-bec7-2bff1521705b",
+    "name": "Apple axcac",
+    "status": "unassigned",
+    "asset_tag": "123",
+    "serial_number": "KJ12388",
+    "mdm": false,
+    "product_type": "Laptops",
+    "logistic_status": null,
+    "location": {
+      "city": null,
+      "country": null,
+      "type": "hybr1d_warehouse"
+    },
+    "allocated_to": null
+  }
+]

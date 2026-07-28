@@ -1,6 +1,7 @@
 import {AsyncImage} from '../../components'
 import {DemoSection} from '../showcase/DemoSection'
 import {DemoRow, DemoItem} from '../showcase/DemoRow'
+import {PageHeader} from '../showcase/PageHeader'
 import classes from './async-image.module.css'
 
 /** Inline SVG product shots so the showcase works offline. */
@@ -15,8 +16,9 @@ const latitude = deviceImg('Dell Latitude 7450', '#e6f4f1')
 export default function AsyncImagePage() {
   return (
     <div>
-      <h1>AsyncImage</h1>
-      <p>Drop-in img replacement that shows a Skeleton placeholder until the image has loaded.</p>
+      <PageHeader title="AsyncImage">
+        Drop-in img replacement that shows a Skeleton placeholder until the image has loaded.
+      </PageHeader>
 
       <DemoSection
         title="Loaded image"

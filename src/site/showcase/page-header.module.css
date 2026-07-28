@@ -1,0 +1,65 @@
+.root {
+  margin-bottom: 32px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--site-border);
+}
+
+.top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.headings {
+  min-width: 0;
+}
+
+.title {
+  margin: 0 0 6px;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  color: var(--text-primary);
+}
+
+.lede {
+  max-width: 74ch;
+  margin: 0;
+  color: var(--text-secondary);
+}
+
+.importBar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  padding: 5px 5px 5px 12px;
+  border: 1px solid var(--site-border);
+  border-radius: 8px;
+  background-color: var(--site-bg-subtle);
+  width: fit-content;
+  max-width: 100%;
+}
+
+.importCode {
+  /* min-width:0 so a long import line scrolls inside the bar instead of
+     forcing the whole page wider on narrow screens. */
+  min-width: 0;
+  overflow-x: auto;
+  white-space: nowrap;
+  font-size: 12px;
+  color: var(--text-primary);
+}
+
+.importCopy {
+  flex: 0 0 auto;
+}
+
+@media (max-width: 700px) {
+  .top {
+    flex-direction: column;
+    gap: 14px;
+  }
+}

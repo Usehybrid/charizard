@@ -29,6 +29,38 @@ interface Endpoint {
 
 const ENDPOINTS: Endpoint[] = [
   {
+    name: 'inventories',
+    path: '/v2/inventories?page=0&limit=25&filter_status=all',
+    // Inventory rows contain procurement, finance and employee profile details
+    // that the list demo does not render. Keep only its visible table contract.
+    pick: json =>
+      json.data.map((row: any) => ({
+        id: row.id,
+        name: row.name,
+        status: row.status,
+        asset_tag: row.asset_tag,
+        serial_number: row.serial_number,
+        mdm: row.mdm,
+        product_type: row.product_type,
+        logistic_status: row.logistic_status,
+        location: row.location
+          ? {
+              city: row.location.city ?? null,
+              country: row.location.country ?? null,
+              type: row.location.type ?? null,
+            }
+          : null,
+        allocated_to: row.allocated_to
+          ? {
+              id: row.allocated_to.id,
+              first_name: row.allocated_to.first_name,
+              middle_name: row.allocated_to.middle_name,
+              last_name: row.allocated_to.last_name,
+            }
+          : null,
+      })),
+  },
+  {
     name: 'users',
     path: '/users/team?page=0&limit=25',
     pick: json => json.data,
@@ -101,7 +133,17 @@ async function main() {
 
   mkdirSync(OUT_DIR, {recursive: true})
 
-  for (const endpoint of ENDPOINTS) {
+  const requested = new Set(process.argv.slice(2))
+  const endpoints = requested.size
+    ? ENDPOINTS.filter(endpoint => requested.has(endpoint.name))
+    : ENDPOINTS
+  const unknown = [...requested].filter(name => !ENDPOINTS.some(endpoint => endpoint.name === name))
+  if (unknown.length) {
+    console.error(`Unknown fixture endpoint(s): ${unknown.join(', ')}`)
+    process.exit(1)
+  }
+
+  for (const endpoint of endpoints) {
     const res = await fetch(BASE + endpoint.path, {
       headers: {
         accept: 'application/json',

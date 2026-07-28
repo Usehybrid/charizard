@@ -1,6 +1,7 @@
 import {UserChip, USER_CHIP_STATUS} from '../../components'
 import {DemoSection} from '../showcase/DemoSection'
 import {DemoRow, DemoItem} from '../showcase/DemoRow'
+import {PageHeader} from '../showcase/PageHeader'
 
 /** Tiny inline SVG avatar so the showcase works offline. */
 const avatar = (initials: string, bg: string) =>
@@ -14,8 +15,9 @@ const marcus = avatar('MC', '#0f766e')
 export default function UserChipPage() {
   return (
     <div>
-      <h1>UserChip</h1>
-      <p>Compact user identity chip — avatar plus name — in seven status colorways.</p>
+      <PageHeader title="UserChip">
+        Compact user identity chip — avatar plus name — in seven status colorways.
+      </PageHeader>
 
       <DemoSection
         title="Statuses"

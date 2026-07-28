@@ -1,0 +1,75 @@
+/* Showcase-site chrome only — the library's own tokens live in
+   src/components/styles/_variables.css and are the source of truth for
+   anything a component renders. Everything here is docs furniture: the
+   surfaces, the code viewer and the syntax palette. */
+
+:root {
+  /* surfaces */
+  --site-bg: var(--neutral-white);
+  --site-bg-subtle: #f9fafd;
+  --site-border: var(--stroke-border);
+  --site-border-strong: var(--stroke-selection);
+
+  /* code viewer (dark, brand navy) */
+  --site-code-bg: #0b1533;
+  --site-code-bg-header: #0f1c40;
+  --site-code-border: #1c2c5c;
+  --site-code-fg: #dbe3f7;
+  --site-code-muted: #8892b8;
+  --site-code-keyword: #c792ea;
+  --site-code-string: #7fdbaa;
+  --site-code-tag: #79b8ff;
+  --site-code-attr: #7fd8e0;
+  --site-code-number: #ffab70;
+  --site-code-punct: #97a5cc;
+  --site-code-line: #4a5a86;
+
+  /* elevation */
+  --site-shadow-sm: 0 1px 2px rgb(0 0 65 / 4%);
+  --site-shadow-md: 0 4px 16px rgb(0 0 65 / 6%);
+}
+
+body {
+  background-color: var(--site-bg);
+  color: var(--text-primary);
+}
+
+a {
+  color: var(--link-rest);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--link-hover);
+}
+
+code,
+kbd,
+pre,
+samp {
+  font-family: var(--font-mono);
+}
+
+::selection {
+  background-color: var(--p-p10);
+}
+
+/* Scrollbars — subtle, matches the chrome instead of the OS default. */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--stroke-selection) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--stroke-selection);
+  border-radius: 999px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}

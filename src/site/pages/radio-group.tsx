@@ -1,133 +1,166 @@
-import * as React from 'react'
-import {RadioGroup, RadioGroupV2} from '../../components'
+import {useState} from 'react'
 import {DemoSection} from '../showcase/DemoSection'
-import {DemoItem, DemoRow} from '../showcase/DemoRow'
+import {DemoRow, DemoItem} from '../showcase/DemoRow'
+import {PageHeader} from '../showcase/PageHeader'
+import {Button, BUTTON_SIZE, BUTTON_VARIANT, RadioGroupV2} from '../../components'
 
-const legacyItems = [
-  {label: {heading: 'label 1'}, value: 'label 1'},
-  {label: {heading: 'label 2'}, value: 'label 2'},
-  {label: {heading: 'label 3'}, value: 'label 3'},
+const shippingItems = [
+  {label: {heading: 'Standard (5-7 business days)'}, value: 'standard'},
+  {label: {heading: 'Express (2-3 business days)'}, value: 'express'},
+  {label: {heading: 'Next-day'}, value: 'next-day'},
 ]
 
-const v2Items = [
-  {label: {heading: 'Option 1'}, value: 'Value 1'},
-  {label: {heading: 'Option 2'}, value: 'Value 2'},
-  {label: {heading: 'Option 3'}, value: 'Value 3'},
+const enrollmentItems = [
+  {
+    label: {heading: 'Zero-touch', subHeading: 'Device enrolls automatically on first boot'},
+    value: 'zero-touch',
+    tooltip: {txt: 'Requires Apple Business Manager or Windows Autopilot'},
+  },
+  {
+    label: {heading: 'Manual', subHeading: 'IT installs the MDM profile by hand'},
+    value: 'manual',
+  },
+  {
+    label: {heading: 'Self-service', subHeading: 'Employee enrolls from the onboarding email'},
+    value: 'self-service',
+  },
 ]
 
 export default function RadioGroupPage() {
-  const [legacyValue, setLegacyValue] = React.useState<string | null>('label 1')
-  const [v2Value, setV2Value] = React.useState<string | null>(null)
+  const [shipping, setShipping] = useState<string | null>('standard')
+  const [enrollment, setEnrollment] = useState<string | null>('zero-touch')
+  const [ownership, setOwnership] = useState<string | null>('company')
 
   return (
     <div>
-      <h1>RadioGroup</h1>
-      <p>Single-choice radio group with heading, sub-headings, disabled and skeleton states.</p>
+      <PageHeader title="RadioGroup">
+        Zag.js-powered radio group with headings, subheadings, tooltips and loading states.
+      </PageHeader>
 
       <DemoSection
         title="Basic usage"
-        description="RadioGroup takes items with a label heading and a value; defaultValue selects one on first render."
-        code={`import {RadioGroup} from '@hybr1d-tech/charizard'
+        description="Pass items with a label heading and a value. defaultValue selects an option on first render (uncontrolled)."
+        code={`import {RadioGroupV2} from '@hybr1d-tech/charizard'
 
-<RadioGroup
-  radioHeading="RadioGroup"
-  defaultValue="label 1"
+<RadioGroupV2
+  label="Shipping speed"
   items={[
-    {label: {heading: 'label 1'}, value: 'label 1'},
-    {label: {heading: 'label 2'}, value: 'label 2'},
-    {label: {heading: 'label 3'}, value: 'label 3'},
+    {label: {heading: 'Standard (5-7 business days)'}, value: 'standard'},
+    {label: {heading: 'Express (2-3 business days)'}, value: 'express'},
+    {label: {heading: 'Next-day'}, value: 'next-day'},
   ]}
-  onChange={value => console.log(value)}
+  defaultValue="standard"
+  onChange={value => setShipping(value)}
 />`}
       >
-        <div>
-          <RadioGroup
-            radioHeading="RadioGroup"
-            defaultValue="label 1"
-            items={legacyItems}
-            onChange={value => setLegacyValue(value)}
+        <div style={{maxWidth: 420}}>
+          <RadioGroupV2
+            label="Shipping speed"
+            items={shippingItems}
+            defaultValue="standard"
+            onChange={value => setShipping(value)}
           />
-          <p style={{marginTop: 8}}>
-            Selected: <b>{legacyValue ?? 'none'}</b>
-          </p>
+          <p style={{marginTop: 12}}>Selected: {shipping ?? 'none'}</p>
         </div>
       </DemoSection>
 
       <DemoSection
-        title="RadioGroupV2"
-        description="The preferred generation. Supports a label, controlled value, sub-headings, required marker and error message."
-        code={`import {RadioGroupV2} from '@hybr1d-tech/charizard'
-
-<RadioGroupV2
-  label="Sample Radio Heading"
-  items={[
-    {label: {heading: 'Option 1'}, value: 'Value 1'},
-    {label: {heading: 'Option 2'}, value: 'Value 2'},
-    {label: {heading: 'Option 3'}, value: 'Value 3'},
-  ]}
-  onChange={value => console.log(value)}
-/>`}
+        title="Subheadings and tooltips"
+        description="Each item can carry a subHeading for extra context and a tooltip rendered next to the option."
       >
-        <DemoRow>
-          <DemoItem label="basic">
-            <RadioGroupV2
-              label="Sample Radio Heading"
-              items={v2Items}
-              onChange={value => setV2Value(value)}
-            />
-          </DemoItem>
-          <DemoItem label="sub-headings + required">
-            <RadioGroupV2
-              label="Assignment"
-              required
-              items={[
-                {label: {heading: 'Assign now', subHeading: 'Device ships immediately'}, value: 'now'},
-                {label: {heading: 'Assign later', subHeading: 'Keep in stock'}, value: 'later'},
-              ]}
-              onChange={() => {}}
-            />
-          </DemoItem>
-          <DemoItem label="with error">
-            <RadioGroupV2
-              label="Applicable to"
-              items={v2Items}
-              onChange={() => {}}
-              errorMsg="Please select an option"
-            />
-          </DemoItem>
-        </DemoRow>
-        <p style={{marginTop: 8}}>
-          Selected: <b>{v2Value ?? 'none'}</b>
-        </p>
-      </DemoSection>
-
-      <DemoSection title="Disabled" description="Both generations support a disabled state.">
-        <DemoRow>
-          <DemoItem label="RadioGroup">
-            <RadioGroup
-              radioHeading="RadioGroup"
-              defaultValue="label 1"
-              items={legacyItems}
-              onChange={() => {}}
-              disabled
-            />
-          </DemoItem>
-          <DemoItem label="RadioGroupV2">
-            <RadioGroupV2 label="Sample Radio Heading" items={v2Items} onChange={() => {}} disabled />
-          </DemoItem>
-        </DemoRow>
+        <div style={{maxWidth: 480}}>
+          <RadioGroupV2
+            label="Enrollment method"
+            required
+            items={enrollmentItems}
+            defaultValue="zero-touch"
+            onChange={value => setEnrollment(value)}
+          />
+          <p style={{marginTop: 12}}>Selected: {enrollment ?? 'none'}</p>
+        </div>
       </DemoSection>
 
       <DemoSection
-        title="Loading skeleton"
-        description="RadioGroup renders a skeleton via showSkeleton; RadioGroupV2 via isLoading."
+        title="Controlled"
+        description="Pass value to make the group controlled — the selection follows your state."
+        code={`const [ownership, setOwnership] = useState<string | null>('company')
+
+<RadioGroupV2
+  label="Device ownership"
+  items={items}
+  value={ownership ?? undefined}
+  onChange={setOwnership}
+/>`}
+      >
+        <div style={{maxWidth: 420}}>
+          <RadioGroupV2
+            label="Device ownership"
+            items={[
+              {label: {heading: 'Company-owned'}, value: 'company'},
+              {label: {heading: 'Employee-owned (BYOD)'}, value: 'byod'},
+            ]}
+            value={ownership ?? undefined}
+            onChange={setOwnership}
+          />
+          <div style={{display: 'flex', gap: 8, marginTop: 12}}>
+            <Button
+              variant={BUTTON_VARIANT.SECONDARY}
+              size={BUTTON_SIZE.SMALL}
+              onClick={() => setOwnership('company')}
+            >
+              Set company-owned
+            </Button>
+            <Button
+              variant={BUTTON_VARIANT.SECONDARY}
+              size={BUTTON_SIZE.SMALL}
+              onClick={() => setOwnership('byod')}
+            >
+              Set BYOD
+            </Button>
+          </div>
+        </div>
+      </DemoSection>
+
+      <DemoSection
+        title="States"
+        description="Disabled groups, validation errors via errorMsg, and skeleton loading via isLoading."
       >
         <DemoRow>
-          <DemoItem label="showSkeleton">
-            <RadioGroup radioHeading="RadioGroup" items={legacyItems} onChange={() => {}} showSkeleton />
+          <DemoItem label="Disabled">
+            <RadioGroupV2
+              label="Warranty plan"
+              items={[
+                {label: {heading: '1 year (included)'}, value: '1y'},
+                {label: {heading: '3 years'}, value: '3y'},
+              ]}
+              defaultValue="1y"
+              disabled
+              onChange={() => {}}
+            />
           </DemoItem>
-          <DemoItem label="isLoading">
-            <RadioGroupV2 label="Sample Radio Heading" items={v2Items} onChange={() => {}} isLoading />
+          <DemoItem label="With error">
+            <RadioGroupV2
+              label="Approval policy"
+              required
+              items={[
+                {label: {heading: 'Auto-approve'}, value: 'auto'},
+                {label: {heading: 'Manager approval'}, value: 'manager'},
+              ]}
+              errorMsg="Pick an approval policy to continue"
+              onChange={() => {}}
+            />
+          </DemoItem>
+          <DemoItem label="Loading">
+            <RadioGroupV2
+              label="Region"
+              items={[
+                {label: {heading: 'EU'}, value: 'eu'},
+                {label: {heading: 'US'}, value: 'us'},
+                {label: {heading: 'APAC'}, value: 'apac'},
+              ]}
+              isLoading
+              onChange={() => {}}
+            />
           </DemoItem>
         </DemoRow>
       </DemoSection>

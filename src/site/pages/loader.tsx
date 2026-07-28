@@ -1,6 +1,7 @@
 import {Loader, LOADER_VARIANT} from '../../components'
 import {DemoSection} from '../showcase/DemoSection'
 import {DemoRow, DemoItem} from '../showcase/DemoRow'
+import {PageHeader} from '../showcase/PageHeader'
 
 const variantsCode = `
 import {Loader, LOADER_VARIANT} from '@hybr1d-tech/charizard'
@@ -29,8 +30,9 @@ const SPINNERS: Array<{variant: LOADER_VARIANT; label: string}> = [
 export default function LoaderPage() {
   return (
     <div>
-      <h1>Loader</h1>
-      <p>Loading spinners in eight animation styles, selected with the variant prop.</p>
+      <PageHeader title="Loader">
+        Loading spinners in eight animation styles, selected with the variant prop.
+      </PageHeader>
 
       <DemoSection
         title="Spinner variants"

@@ -27,8 +27,11 @@
     "dev": "vp dev -c vite.site.config.ts",
     "build": "tsc && vp build",
     "watch": "vp build --watch",
-    "site:build": "node scripts/generate-manifest.mts && vp build -c vite.site.config.ts",
+    "site:build": "node scripts/extract-props.mts && node scripts/generate-changelog.mts && node scripts/fetch-repo-meta.mts && node scripts/generate-manifest.mts && vp build -c vite.site.config.ts",
     "site:manifest": "node scripts/generate-manifest.mts",
+    "site:props": "node scripts/extract-props.mts",
+    "site:changelog": "node scripts/generate-changelog.mts",
+    "site:repo": "node scripts/fetch-repo-meta.mts",
     "site:preview": "vp preview -c vite.site.config.ts",
     "fixtures:snapshot": "node scripts/snapshot-fixtures.mts",
     "prepublishOnly": "npm run build"
@@ -77,7 +80,7 @@
     "@types/node": "^26.0.1",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react-swc": "^4.3.1",
+    "@vitejs/plugin-react": "^5.1.0",
     "globals": "^17.7.0",
     "happy-dom": "^20.10.6",
     "typescript": "6.0.3",
@@ -91,5 +94,9 @@
   "publishConfig": {
     "access": "public"
   },
-  "packageManager": "pnpm@11.9.0"
+  "packageManager": "pnpm@11.9.0",
+  "dependencies": {
+    "@fontsource-variable/geist": "^5.3.0",
+    "@fontsource-variable/geist-mono": "^5.3.0"
+  }
 }

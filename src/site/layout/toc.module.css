@@ -1,0 +1,61 @@
+.root {
+  /* Owns the last track of the docs grid, pinned to the outer edge. Fixed width
+     (rather than a share of the row) so the reading column keeps its own two
+     equal gutters — see .body in layout.module.css. */
+  grid-column: 4;
+  width: 240px;
+  position: sticky;
+  top: 52px;
+  align-self: start;
+  max-height: calc(100dvh - 92px);
+  overflow-y: auto;
+  padding: 40px 28px 40px 0;
+}
+
+.title {
+  margin-bottom: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.link {
+  display: block;
+  width: 100%;
+  padding: 4px 0 4px 10px;
+  border: none;
+  border-left: 2px solid var(--site-border);
+  background: none;
+  color: var(--text-tertiary);
+  text-align: left;
+  cursor: pointer;
+  transition:
+    color 120ms ease,
+    border-color 120ms ease;
+}
+
+.link:hover {
+  color: var(--text-primary);
+}
+
+.linkActive {
+  border-left-color: var(--p-p50);
+  color: var(--p-p50);
+}
+
+/* Matches the layout's single-column breakpoint — below it there is no right
+   gutter to live in. */
+@media (max-width: 1320px) {
+  .root {
+    display: none;
+  }
+}

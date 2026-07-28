@@ -1,90 +1,312 @@
 .shell {
   display: flex;
   min-height: 100dvh;
-  background-color: var(--neutral-white);
+  background-color: var(--site-bg);
+}
+
+.sidebarWrap {
+  flex: 0 0 258px;
 }
 
 .sidebar {
   position: sticky;
   top: 0;
-  flex: 0 0 248px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 258px;
   height: 100dvh;
-  overflow-y: auto;
-  padding: 16px 12px 32px;
-  border-right: 1px solid var(--neutral-arch-200);
-  background-color: var(--neutral-arch-10);
+  padding: 18px 12px 32px;
+  border-right: 1px solid var(--site-border);
+  background-color: var(--site-bg-subtle);
 }
 
 .brand {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 8px 10px 16px;
+  padding: 4px 10px;
   text-decoration: none;
-  color: inherit;
+  color: var(--text-primary);
+}
+
+.brand:hover {
+  color: var(--text-primary);
 }
 
 .brandMark {
-  font-size: 24px;
+  flex: 0 0 auto;
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.brandText {
+  display: flex;
+  flex-direction: column;
 }
 
 .brandSub {
-  display: block;
-  font-style: normal;
-  font-size: 11px;
-  color: var(--neutral-arch-800);
+  color: var(--text-tertiary);
+}
+
+.filter {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin: 0 4px;
+}
+
+.filterIcon {
+  position: absolute;
+  left: 9px;
+  display: grid;
+  place-items: center;
+  color: var(--text-tertiary);
+  pointer-events: none;
+}
+
+.filterInput {
+  width: 100%;
+  padding: 7px 10px 7px 32px;
+  border: 1px solid var(--site-border-strong);
+  border-radius: 8px;
+  background-color: var(--neutral-white);
+  color: var(--text-primary);
+  outline: none;
+}
+
+.filterInput::placeholder {
+  color: var(--text-tertiary);
+}
+
+.filterInput:focus {
+  border-color: var(--p-p40);
+  box-shadow: 0 0 0 3px var(--fill-selection);
 }
 
 .nav {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 20px;
+  overflow-y: auto;
+  padding-bottom: 24px;
 }
 
 .group {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 1px;
 }
 
 .groupTitle {
-  padding: 0 10px 6px;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.06em;
+  padding: 0 10px 8px;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--neutral-arch-600);
+  color: var(--text-tertiary);
 }
 
 .link {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 5px 10px;
-  border-radius: 6px;
-  font-size: 13px;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 8px;
   text-decoration: none;
-  color: var(--neutral-arch-900);
+  color: var(--text-secondary);
+  transition:
+    background-color 120ms ease,
+    color 120ms ease;
 }
 
 .link:hover {
-  background-color: var(--neutral-arch-70);
+  background-color: var(--fill-selection);
+  color: var(--text-primary);
 }
 
-.linkActive {
-  background-color: var(--neutral-arch-100);
-  color: var(--theme-blue);
-  font-weight: 600;
+.linkActive,
+.linkActive:hover {
+  background-color: var(--p-p50);
+  color: var(--neutral-white);
+}
+
+.overviewLink {
+  margin-bottom: -8px;
 }
 
 .soon {
-  font-size: 10px;
-  color: var(--text-hint);
+  padding: 1px 5px;
+  border-radius: 999px;
+  background-color: var(--neutral-arch-100);
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+}
+
+.noResults {
+  padding: 0 10px;
+  color: var(--text-tertiary);
+}
+
+.scrim {
+  display: none;
+}
+
+.main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 52px;
+  padding: 0 28px;
+  border-bottom: 1px solid var(--site-border);
+  background-color: rgb(255 255 255 / 82%);
+  backdrop-filter: blur(8px);
+}
+
+.navToggle {
+  display: none;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--site-border);
+  border-radius: 8px;
+  background-color: var(--neutral-white);
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.crumbs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  color: var(--text-primary);
+}
+
+.crumbMuted {
+  color: var(--text-tertiary);
+}
+
+.crumbSep {
+  color: var(--stroke-selection);
+}
+
+.topbarActions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+  flex: 0 0 auto;
+}
+
+.topbarLink {
+  padding: 5px 10px;
+  border-radius: 8px;
+  color: var(--text-secondary);
+  text-decoration: none;
+}
+
+.topbarLink:hover {
+  background-color: var(--fill-selection);
+  color: var(--text-primary);
+}
+
+.topbarLinkActive {
+  color: var(--p-p50);
+}
+
+/* Docs shell (shadcn's shape): the "on this page" rail owns the last track and
+   hugs the right edge, and the reading column is centred in what's left — so
+   the space between the sidebar and the content matches the space between the
+   content and the rail. The rail's track is `auto`, so on pages without one
+   (home, changelog) it collapses to zero and the content re-centres on the
+   full width instead of leaning left. */
+.body {
+  display: grid;
+  grid-template-columns: minmax(24px, 1fr) minmax(0, 900px) minmax(24px, 1fr) auto;
+  align-items: start;
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
 }
 
 .content {
-  flex: 1;
+  grid-column: 2;
   min-width: 0;
-  padding: 32px 40px 80px;
-  max-width: 1200px;
+  padding: 40px 28px 96px;
+}
+
+/* Data-heavy pages (Table) and the landing page take both gutters. */
+.contentWide,
+.contentHome {
+  grid-column: 1 / 4;
+}
+
+@media (max-width: 1320px) {
+  .body {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .content {
+    grid-column: 1;
+    width: 100%;
+    max-width: 900px;
+    justify-self: center;
+  }
+
+  .contentWide,
+  .contentHome {
+    grid-column: 1;
+    max-width: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .sidebarWrap {
+    position: fixed;
+    z-index: 20;
+    inset: 0 auto 0 0;
+    flex: none;
+    transform: translateX(-100%);
+    transition: transform 180ms ease;
+  }
+
+  .sidebarWrapOpen {
+    transform: translateX(0);
+  }
+
+  .scrim {
+    display: block;
+    position: fixed;
+    z-index: 15;
+    inset: 0;
+    border: none;
+    padding: 0;
+    background-color: rgb(0 0 65 / 32%);
+  }
+
+  .navToggle {
+    display: grid;
+  }
+
+  .topbar {
+    padding: 0 16px;
+  }
+
+  .content {
+    padding: 28px 16px 72px;
+  }
 }

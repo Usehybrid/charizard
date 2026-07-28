@@ -4,6 +4,7 @@ import calender from '../../components/assets/calender.svg'
 import closeIcon from '../../components/assets/close.svg'
 import {DemoSection} from '../showcase/DemoSection'
 import {DemoItem, DemoRow} from '../showcase/DemoRow'
+import {PageHeader} from '../showcase/PageHeader'
 
 const menuItems: MenuItem[] = [
   {
@@ -31,8 +32,9 @@ const icon = <SVG path={closeIcon} width={16} height={16} />
 export default function ButtonPage() {
   return (
     <div>
-      <h1>Button</h1>
-      <p>Primary, secondary and tertiary buttons, icon buttons and grouped actions with menus.</p>
+      <PageHeader title="Button">
+        Primary, secondary and tertiary buttons, icon buttons and grouped actions with menus.
+      </PageHeader>
 
       <DemoSection
         title="Variants"

@@ -1,4 +1,4 @@
-import react from '@vitejs/plugin-react-swc'
+import react from '@vitejs/plugin-react'
 import dts from 'vite-plugin-dts'
 import {libInjectCss} from 'vite-plugin-lib-inject-css'
 import checker from 'vite-plugin-checker'

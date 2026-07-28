@@ -9,6 +9,7 @@ import {
 import type {Breadcrumb} from '../../components'
 import {DemoSection} from '../showcase/DemoSection'
 import {DemoRow} from '../showcase/DemoRow'
+import {PageHeader} from '../showcase/PageHeader'
 
 // hrefs point at real site routes so the links stay navigable inside the hash router
 const SHORT_TRAIL: Breadcrumb[] = [
@@ -36,12 +37,10 @@ export default function BreadcrumbsPage() {
 
   return (
     <div>
-      <h1>Breadcrumbs</h1>
-      <p>
-        Router-aware breadcrumb trail fed by a global zustand store — pages declare their trail
-        with the useBreadcrumbs hook and a single Breadcrumbs instance in the app header renders
-        it.
-      </p>
+      <PageHeader title="Breadcrumbs">
+        Router-aware breadcrumb trail fed by a global zustand store — pages declare their trail with
+        the useBreadcrumbs hook and a single Breadcrumbs instance in the app header renders it.
+      </PageHeader>
 
       <DemoSection
         title="Trail from the global store"

@@ -1,0 +1,51 @@
+.root {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 10px;
+  border-radius: 8px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition:
+    background-color 120ms ease,
+    color 120ms ease;
+}
+
+.root:hover {
+  background-color: var(--fill-selection);
+  color: var(--text-primary);
+}
+
+/* Count and nudge share one grid cell: the pill is as wide as the wider of the
+   two, so swapping them on hover never shifts the layout. */
+.swap {
+  display: grid;
+  place-items: center start;
+}
+
+.count,
+.nudge {
+  grid-area: 1 / 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+  transition: opacity 120ms ease;
+}
+
+.nudge {
+  opacity: 0;
+  color: var(--p-p50);
+}
+
+.root:hover .count {
+  opacity: 0;
+}
+
+.root:hover .nudge {
+  opacity: 1;
+}
+
+.nudge svg {
+  color: var(--status-warning-w40);
+}

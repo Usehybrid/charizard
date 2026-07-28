@@ -84,12 +84,14 @@ Every component follows the same pattern: named exports for the component, its p
 | Category | Components |
 | --- | --- |
 | **Actions** | `Button`, `SegmentedControl` |
-| **Forms & inputs** | `Input`, `InputV2`, `Checkbox`, `CheckboxV2`, `RadioGroup`, `RadioGroupV2`, `Switch`, `SwitchV2`, `Select`, `SelectV2`, `Selectors`, `SelectorsV2`, `Search`, `SearchV2`, `DatePicker`, `TimePicker`, `ColorPicker`, `Upload` |
+| **Forms & inputs** | `InputV2`, `TextareaV2`, `CheckboxV2`, `RadioGroupV2`, `SwitchV2`, `SelectV2`, `CreatableSelectV2`, `SelectorsV2`, `SearchV2`, `DatePicker`, `TimePicker`, `ColorPicker`, `Upload` |
 | **Data display** | `Table`, `TaskCards`, `Badge`, `Pill`, `Tag`, `Status`, `Avatar`, `UserChip`, `UsersChip`, `Accordion`, `Progress`, `AsyncImage`, `SVG` |
-| **Overlays & feedback** | `Modal`, `ModalV2`, `Drawer`, `DrawerV2`, `Popover`, `Tooltip`, `TooltipV2`, `Alert`, `Toasts`, `Loader`, `Skeleton` |
+| **Overlays & feedback** | `ModalV2`, `DrawerV2`, `Popover`, `TooltipV2`, `Alert`, `Toasts`, `Loader`, `Skeleton` |
 | **Navigation & layout** | `Tabs`, `LayoutTabs`, `Breadcrumbs`, `EmptyState`, `Error`, `Helmet` |
 
-> `V2` components are the newer generation of an existing component. Prefer `V2` where one exists; the originals remain exported for backwards compatibility.
+> The table lists the current generation of each component — what the showcase site documents and what new code should use. Where a name still carries a `V2` suffix that's a package-level detail, not a separate component; the site lists it under its plain name (`InputV2` → **Input**).
+>
+> The superseded originals (`Input`, `Checkbox`, `RadioGroup`, `Switch`, `Select`, `Selectors`, `Search`, `Modal`, `Drawer`, `Tooltip`) are still exported so existing apps keep building, but they are no longer documented and should not be used in new code.
 
 Browse them all interactively on the showcase site — [ui.zenadmin.co](https://ui.zenadmin.co/) — or run it locally:
 
@@ -117,11 +119,30 @@ vp run build          # typecheck + build the library to dist/
 vp run watch          # rebuild on change (useful when linking into an app)
 vp run site:build     # build the static showcase site to dist-site/
 vp run site:preview   # preview the built showcase site
+vp run site:props     # regenerate the API-reference tables from the TS types
+vp run site:changelog # regenerate the changelog from git tags
+vp run site:repo      # refresh the GitHub star count shown in the header
 vp run test           # run tests (includes a mount-smoke test of every showcase page)
 ```
 
 Note: the showcase pages live inside the main `tsconfig.app.json` project, so a type
 error in a page fails `vp run build` too — intentional, it keeps the showcase honest.
+
+The prop tables under each component's **API reference** are generated from the TypeScript
+types by [`scripts/extract-props.mts`](scripts/extract-props.mts) into
+`src/site/generated/props.json` (committed so `vp run dev` and the tests work without a
+pre-step; `site:build` regenerates it). Inherited DOM attributes are summarised rather than
+listed, and a **JSDoc comment on a prop becomes its description in the docs** — so document
+props where they're declared, not on the showcase page. The
+[Changelog](https://ui.zenadmin.co/#/changelog) is generated the same way from `v*` git tags,
+which is why release commits should stay conventional (`feat(table): …`, `fix: …`).
+
+The star count in the site header is fetched **at build time** by
+[`scripts/fetch-repo-meta.mts`](scripts/fetch-repo-meta.mts) and baked into
+`src/site/generated/repo.json` — never from the visitor's browser, which would add a
+third-party request to a deliberately offline bundle and hit GitHub's 60-requests/hour
+anonymous limit. It refreshes on every deploy; a failed fetch keeps the committed number
+rather than failing the build.
 
 ### Adding a new component
 
@@ -129,6 +150,8 @@ error in a page fails `vp run build` too — intentional, it keeps the showcase 
 2. Use **named exports** for the component and **export its prop types**.
 3. Re-export it from [`src/components/index.ts`](src/components/index.ts).
 4. Add a showcase page at `src/site/pages/<slug>.tsx` (pages auto-register by filename) and add the component's entry to `src/site/manifest.ts` so it appears in the nav and the AI manifest.
+   - Use an **unversioned slug and title** (`select`, not `select-v2`) and list the real export names in the entry's `exports` — that's what the page's import line and `llms.txt` render.
+   - Compose the page from `PageHeader` (title + one-line intro) and `DemoSection` (heading, prose, `code` snippet), laying examples out with `DemoRow` / `DemoItem`.
 
 ## Releasing
 

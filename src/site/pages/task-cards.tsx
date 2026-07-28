@@ -1,5 +1,6 @@
 import {TaskCards} from '../../components'
 import {DemoSection} from '../showcase/DemoSection'
+import {PageHeader} from '../showcase/PageHeader'
 
 const taskCardsCode = `
 import {TaskCards} from '@hybr1d-tech/charizard'
@@ -15,13 +16,12 @@ export function OpenTasks() {
 export default function TaskCardsPage() {
   return (
     <div>
-      <h1>Task Cards</h1>
-      <p>
+      <PageHeader title="TaskCards">
         A card-style list for rendering user tasks (approvals, IT requests, workflows) as rows with
         a module icon, task name, detail columns such as the raising user, and a status pill. It
         supports loading and error states plus optional pagination, and uses react-router links
         internally, so it must render inside a router context.
-      </p>
+      </PageHeader>
 
       <DemoSection
         title="Task list"
@@ -52,8 +52,7 @@ const tasks = [
           first_name: 'Ash',
           middle_name: null,
           last_name: 'Ketchum',
-          profile_img_url:
-            '',
+          profile_img_url: '',
           work_email: 'ash.ketchum@example.com',
         },
       },
@@ -79,8 +78,7 @@ const tasks = [
           first_name: 'Ash',
           middle_name: null,
           last_name: 'Ketchum',
-          profile_img_url:
-            '',
+          profile_img_url: '',
           work_email: 'ash.ketchum@example.com',
         },
       },
@@ -106,8 +104,7 @@ const tasks = [
           first_name: 'Ash',
           middle_name: null,
           last_name: 'Ketchum',
-          profile_img_url:
-            '',
+          profile_img_url: '',
           work_email: 'ash.ketchum@example.com',
         },
       },

@@ -1,6 +1,7 @@
 import * as React from 'react'
 import {Tab, Tabs} from '../../components'
 import {DemoSection} from '../showcase/DemoSection'
+import {PageHeader} from '../showcase/PageHeader'
 
 const noop = () => {}
 
@@ -12,8 +13,9 @@ export default function TabsPage() {
 
   return (
     <div>
-      <h1>Tabs</h1>
-      <p>Controlled tab switcher: a tab bar of buttons with a single visible content pane.</p>
+      <PageHeader title="Tabs">
+        Controlled tab switcher: a tab bar of buttons with a single visible content pane.
+      </PageHeader>
 
       <DemoSection
         title="Controlled tabs"
@@ -38,8 +40,8 @@ const [activeKey, setActiveKey] = React.useState('overview')
           <Tab title="Overview" eventKey="overview" isActive={false} onClick={noop}>
             <div style={paneStyle}>
               <p>
-                MacBook Pro 14&quot; — assigned to Priya Nair. Enrolled in MDM, disk encryption
-                on, last check-in 2 hours ago.
+                MacBook Pro 14&quot; — assigned to Priya Nair. Enrolled in MDM, disk encryption on,
+                last check-in 2 hours ago.
               </p>
             </div>
           </Tab>

@@ -1,126 +1,140 @@
 import {useState} from 'react'
 import {DemoSection} from '../showcase/DemoSection'
 import {DemoRow, DemoItem} from '../showcase/DemoRow'
-import {Select, SelectAsync} from '../../components'
+import {PageHeader} from '../showcase/PageHeader'
+import {SelectV2, CreatableSelectV2, SELECT_VARIANT} from '../../components'
+import type {Option} from '../../components'
+import {fixtureUsers, fixtureUserName} from '../fixtures'
 
-const teamOptions = [
-  {label: 'Engineering', value: 'engineering'},
-  {label: 'Design', value: 'design'},
-  {label: 'IT Operations', value: 'it-ops'},
-  {label: 'Finance', value: 'finance'},
-  {label: 'People', value: 'people'},
+const laptopOptions: Option[] = [
+  {label: 'MacBook Pro 14"', value: 'mbp-14', subLabel: 'M3 Pro · 18GB · 512GB'},
+  {label: 'MacBook Air 13"', value: 'mba-13', subLabel: 'M3 · 16GB · 256GB'},
+  {label: 'Dell XPS 13', value: 'xps-13', subLabel: 'i7 · 16GB · 512GB'},
+  {label: 'ThinkPad X1 Carbon', value: 'tp-x1', subLabel: 'i7 · 32GB · 1TB'},
 ]
 
-const deviceOptions = [
-  {label: 'MacBook Pro 14"', value: 'mbp-14'},
-  {label: 'MacBook Air 13"', value: 'mba-13'},
-  {label: 'Dell XPS 13', value: 'xps-13'},
-  {label: 'ThinkPad X1 Carbon', value: 'tp-x1'},
-  {label: 'iPhone 15', value: 'iphone-15'},
+// Sanitized staging GET /users/team snapshot (src/site/fixtures/users.json) —
+// real API-shaped rows mapped to select options.
+const userOptions: Option[] = fixtureUsers.slice(0, 8).map(u => ({
+  label: fixtureUserName(u),
+  value: u.id,
+  subLabel: u.work_email,
+}))
+
+const tagOptions: Option[] = [
+  {label: 'Urgent', value: 'urgent', color: '#de350b'},
+  {label: 'Procurement', value: 'procurement', color: '#2980b9'},
+  {label: 'Renewal', value: 'renewal', color: '#f39c12'},
+  {label: 'Approved', value: 'approved', color: '#27ae60'},
 ]
 
 export default function SelectPage() {
-  const [team, setTeam] = useState('')
-  const [devices, setDevices] = useState<string[]>([])
-  const [owner, setOwner] = useState('')
+  const [laptop, setLaptop] = useState('')
+  const [approvers, setApprovers] = useState<string[]>([fixtureUsers[0].id])
+  const [softwareOptions, setSoftwareOptions] = useState<Option[]>([
+    {label: 'Slack', value: 'slack'},
+    {label: 'Figma', value: 'figma'},
+    {label: 'Notion', value: 'notion'},
+  ])
+  const [software, setSoftware] = useState('')
 
   return (
     <div>
-      <h1>Select</h1>
-      <p>Dropdown select built on react-select, with single, multi and async flavors.</p>
+      <PageHeader title="Select">
+        Dropdown select with variants, sub-labels, tags and a creatable flavor.
+      </PageHeader>
 
       <DemoSection
         title="Basic usage"
-        description="onChange receives the plain value (string for single select, string[] for multi) rather than the option object."
-        code={`import {Select} from '@hybr1d-tech/charizard'
+        description="Options support an optional subLabel. onChange receives the plain value (string, or string[] when isMulti). Disabled, error and loading states are built in."
+        code={`import {SelectV2} from '@hybr1d-tech/charizard'
 
-<Select
+<SelectV2
   options={[
-    {label: 'Engineering', value: 'engineering'},
-    {label: 'Design', value: 'design'},
-    {label: 'IT Operations', value: 'it-ops'},
+    {label: 'MacBook Pro 14"', value: 'mbp-14', subLabel: 'M3 Pro · 18GB · 512GB'},
+    {label: 'Dell XPS 13', value: 'xps-13', subLabel: 'i7 · 16GB · 512GB'},
   ]}
-  placeholder="Select team"
-  onChange={value => setTeam(value as string)}
+  placeholder="Select a laptop"
+  onChange={value => setLaptop(value as string)}
 />`}
       >
         <DemoRow>
-          <DemoItem label={team ? `Selected: ${team}` : 'Single select'}>
-            <div style={{width: 260}}>
-              <Select
-                options={teamOptions}
-                placeholder="Select team"
-                onChange={value => setTeam(value as string)}
+          <DemoItem label={laptop ? `Selected: ${laptop}` : 'With sub-labels'}>
+            <div style={{width: 280}}>
+              <SelectV2
+                options={laptopOptions}
+                placeholder="Select a laptop"
+                onChange={value => setLaptop(value as string)}
               />
             </div>
           </DemoItem>
-          <DemoItem label="With default value">
-            <div style={{width: 260}}>
-              <Select
-                options={teamOptions}
-                defaultValue={{label: 'IT Operations', value: 'it-ops'}}
-                placeholder="Select team"
-                onChange={() => {}}
-              />
-            </div>
-          </DemoItem>
-        </DemoRow>
-      </DemoSection>
-
-      <DemoSection
-        title="Multi and clearable"
-        description="isMulti collects several values; isClearable adds a clear-all control."
-        code={`<Select
-  options={deviceOptions}
-  isMulti
-  isClearable
-  placeholder="Select devices to assign"
-  onChange={value => setDevices(value as string[])}
-/>`}
-      >
-        <DemoRow>
-          <DemoItem label={`Selected: ${devices.length} device(s)`}>
-            <div style={{width: 340}}>
-              <Select
-                options={deviceOptions}
-                isMulti
-                isClearable
-                placeholder="Select devices to assign"
-                onChange={value => setDevices(value as string[])}
-              />
-            </div>
-          </DemoItem>
-          <DemoItem label="Single, clearable">
-            <div style={{width: 260}}>
-              <Select
-                options={teamOptions}
-                isClearable
-                placeholder="Cost center"
-                onChange={() => {}}
-              />
-            </div>
-          </DemoItem>
-        </DemoRow>
-      </DemoSection>
-
-      <DemoSection title="States" description="Disabled selects and inline validation errors via errorMsg.">
-        <DemoRow>
           <DemoItem label="Disabled">
-            <div style={{width: 260}}>
-              <Select
-                options={teamOptions}
-                placeholder="Managed by HRIS sync"
+            <div style={{width: 280}}>
+              <SelectV2
+                options={laptopOptions}
+                placeholder="Locked by catalog policy"
                 isDisabled
                 onChange={() => {}}
               />
             </div>
           </DemoItem>
+        </DemoRow>
+        <DemoRow>
           <DemoItem label="With error">
-            <div style={{width: 260}}>
-              <Select
-                options={deviceOptions}
-                placeholder="Select a device"
-                errorMsg="A device is required for this order"
+            <div style={{width: 280}}>
+              <SelectV2
+                options={laptopOptions}
+                placeholder="Select a laptop"
+                errorMsg="A device model is required"
+                onChange={() => {}}
+              />
+            </div>
+          </DemoItem>
+          <DemoItem label="Loading">
+            <div style={{width: 280}}>
+              <SelectV2 options={[]} placeholder="Loading catalog…" isLoading onChange={() => {}} />
+            </div>
+          </DemoItem>
+        </DemoRow>
+      </DemoSection>
+
+      <DemoSection
+        title="Variants"
+        description="SELECT_VARIANT changes option and chip rendering: USERS shows avatars/initials, TAGS renders colored pills from each option's color."
+      >
+        <DemoRow>
+          <DemoItem label="variant: USERS (multi)">
+            <div style={{width: 320}}>
+              <SelectV2
+                options={userOptions}
+                variant={SELECT_VARIANT.USERS}
+                isMulti
+                defaultValue={[userOptions[0], userOptions[1]]}
+                placeholder="Add watchers"
+                onChange={() => {}}
+              />
+            </div>
+          </DemoItem>
+          <DemoItem label="variant: TAGS (multi)">
+            <div style={{width: 320}}>
+              <SelectV2
+                options={tagOptions}
+                variant={SELECT_VARIANT.TAGS}
+                isMulti
+                defaultValue={[tagOptions[0], tagOptions[3]]}
+                placeholder="Add tags"
+                onChange={() => {}}
+              />
+            </div>
+          </DemoItem>
+        </DemoRow>
+        <DemoRow>
+          <DemoItem label="With dividers">
+            <div style={{width: 320}}>
+              <SelectV2
+                options={laptopOptions}
+                showDivider
+                placeholder="Select a laptop"
                 onChange={() => {}}
               />
             </div>
@@ -129,39 +143,51 @@ export default function SelectPage() {
       </DemoSection>
 
       <DemoSection
-        title="Async options"
-        description="SelectAsync loads options from a promise as the user types — here filtering an in-memory employee list."
-        code={`import {SelectAsync} from '@hybr1d-tech/charizard'
+        title="Checkbox variant (controlled multi)"
+        description="variant: CHECKBOX renders a checkable option list; drive the selection from state by mapping values back to options."
+        code={`const [approvers, setApprovers] = useState<string[]>([apiUsers[0].id])
 
-<SelectAsync
-  options={async input =>
-    employees.filter(e => e.label.toLowerCase().includes(input.toLowerCase()))
-  }
-  placeholder="Search employees"
-  onChange={value => setOwner(value as string)}
+<SelectV2
+  options={userOptions}
+  variant={SELECT_VARIANT.CHECKBOX}
+  isMulti
+  value={userOptions.filter(o => approvers.includes(o.value))}
+  onChange={value => setApprovers(value as string[])}
 />`}
       >
-        <DemoRow>
-          <DemoItem label={owner ? `Selected: ${owner}` : 'Type to search'}>
-            <div style={{width: 300}}>
-              <SelectAsync
-                options={async input => {
-                  const employees = [
-                    {label: 'Priya Sharma', value: 'priya', subLabel: 'Engineering'},
-                    {label: 'Marcus Chen', value: 'marcus', subLabel: 'Design'},
-                    {label: 'Sofia Petrova', value: 'sofia', subLabel: 'IT Operations'},
-                    {label: 'Diego Alvarez', value: 'diego', subLabel: 'Finance'},
-                  ]
-                  return employees.filter(e =>
-                    e.label.toLowerCase().includes(input.toLowerCase()),
-                  )
-                }}
-                placeholder="Search employees"
-                onChange={value => setOwner(value as string)}
-              />
-            </div>
-          </DemoItem>
-        </DemoRow>
+        <div style={{width: 340}}>
+          <SelectV2
+            options={userOptions}
+            variant={SELECT_VARIANT.CHECKBOX}
+            isMulti
+            value={userOptions.filter(o => approvers.includes(o.value))}
+            placeholder="Select approvers"
+            onChange={value => setApprovers(value as string[])}
+          />
+          <p style={{marginTop: 12}}>
+            Approvers: {approvers.length ? approvers.join(', ') : 'none'}
+          </p>
+        </div>
+      </DemoSection>
+
+      <DemoSection
+        title="Creatable"
+        description="CreatableSelectV2 lets users add options that are not in the list via onCreateOption."
+      >
+        <div style={{width: 340}}>
+          <CreatableSelectV2
+            options={softwareOptions}
+            placeholder="Pick or create a software"
+            value={softwareOptions.filter(o => o.value === software)}
+            onChange={value => setSoftware(value as string)}
+            onCreateOption={name => {
+              const option: Option = {label: name, value: name.toLowerCase().replace(/\s+/g, '-')}
+              setSoftwareOptions(prev => [...prev, option])
+              setSoftware(option.value)
+            }}
+          />
+          <p style={{marginTop: 12}}>Selected: {software || 'none'}</p>
+        </div>
       </DemoSection>
     </div>
   )

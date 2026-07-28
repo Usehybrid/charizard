@@ -1,99 +1,138 @@
-import * as React from 'react'
-import {Checkbox, CheckboxV2} from '../../components'
-import styles from './checkbox.module.css'
+import {useState} from 'react'
 import {DemoSection} from '../showcase/DemoSection'
-import {DemoItem, DemoRow} from '../showcase/DemoRow'
+import {DemoRow, DemoItem} from '../showcase/DemoRow'
+import {PageHeader} from '../showcase/PageHeader'
+import {CheckboxV2} from '../../components'
+
+const devices = [
+  {id: 'mbp-14', label: 'MacBook Pro 14" — ZEN-0041'},
+  {id: 'xps-13', label: 'Dell XPS 13 — ZEN-0087'},
+  {id: 'tp-x1', label: 'ThinkPad X1 Carbon — ZEN-0112'},
+]
 
 export default function CheckboxPage() {
-  const [indeterminate, setIndeterminate] = React.useState(false)
-  const [hoverChecked, setHoverChecked] = React.useState(false)
-  const [legacyChecked, setLegacyChecked] = React.useState(false)
+  const [subscribed, setSubscribed] = useState(true)
+  const [selected, setSelected] = useState<string[]>(['mbp-14'])
+
+  const allChecked = selected.length === devices.length
+  const someChecked = selected.length > 0 && !allChecked
+
+  const toggleAll = (checked: boolean) => {
+    setSelected(checked ? devices.map(d => d.id) : [])
+  }
+
+  const toggleOne = (id: string) => (checked: boolean) => {
+    setSelected(prev => (checked ? [...prev, id] : prev.filter(x => x !== id)))
+  }
 
   return (
     <div>
-      <h1>Checkbox</h1>
-      <p>Checkbox with label, indeterminate and disabled states, in the preferred V2 and legacy generations.</p>
+      <PageHeader title="Checkbox">
+        Controlled checkbox with label, indeterminate state and disabled support.
+      </PageHeader>
 
       <DemoSection
-        title="CheckboxV2 states"
-        description="The preferred generation. Controlled via checked/onChange, with indeterminate and disabled support."
+        title="Basic usage"
+        description="CheckboxV2 is fully controlled: pass checked and update it in onChange."
         code={`import {CheckboxV2} from '@hybr1d-tech/charizard'
 
-const [checked, setChecked] = React.useState(false)
+const [subscribed, setSubscribed] = useState(true)
 
-<CheckboxV2 label="Unchecked" checked={false} onChange={() => {}} />
-<CheckboxV2 label="Checked" checked={true} onChange={() => {}} />
-<CheckboxV2 label="Indeterminate" checked={checked} indeterminate onChange={setChecked} />
-<CheckboxV2 label="Interactive" checked={checked} onChange={setChecked} />
-<CheckboxV2 label="Disabled" checked={false} disabled onChange={() => {}} />`}
+<CheckboxV2
+  label="Email me when an order ships"
+  checked={subscribed}
+  onChange={setSubscribed}
+/>`}
       >
-        <div className={styles.checkboxGroup}>
-          <div className={styles.checkboxItem}>
-            <CheckboxV2 label="Unchecked" checked={false} onChange={() => {}} />
-          </div>
-          <div className={styles.checkboxItem}>
-            <CheckboxV2 label="Checked" checked={true} onChange={() => {}} />
-          </div>
-          <div className={styles.checkboxItem}>
+        <DemoRow>
+          <DemoItem>
             <CheckboxV2
-              label="Indeterminate"
-              checked={indeterminate}
-              indeterminate={true}
-              onChange={setIndeterminate}
+              label="Email me when an order ships"
+              checked={subscribed}
+              onChange={setSubscribed}
             />
-          </div>
-          <div className={styles.checkboxItem}>
-            <CheckboxV2 label="Interactive" checked={hoverChecked} onChange={setHoverChecked} />
-          </div>
-          <div className={styles.checkboxItem}>
-            <CheckboxV2 label="Disabled" checked={false} disabled={true} onChange={() => {}} />
-          </div>
-        </div>
+          </DemoItem>
+        </DemoRow>
       </DemoSection>
 
       <DemoSection
-        title="Checkbox (legacy)"
-        description="The first-generation checkbox. Requires id and name, takes its label as children, and reports the native change event."
-        code={`import {Checkbox} from '@hybr1d-tech/charizard'
-
-const [checked, setChecked] = React.useState(false)
-
-<Checkbox
-  id="terms"
-  name="terms"
-  checked={checked}
-  onChange={e => setChecked(e.target.checked)}
->
-  Accept terms
-</Checkbox>`}
+        title="States"
+        description="Unchecked, checked and indeterminate. Indeterminate is a visual state — checked still drives the underlying value."
       >
         <DemoRow>
-          <DemoItem label="interactive">
-            <Checkbox
-              id="legacy-interactive"
-              name="legacy-interactive"
-              checked={legacyChecked}
-              onChange={e => setLegacyChecked(e.target.checked)}
-            >
-              Accept terms
-            </Checkbox>
+          <DemoItem label="Unchecked">
+            <CheckboxV2 label="Assign to employee" checked={false} onChange={() => {}} />
           </DemoItem>
-          <DemoItem label="indeterminate">
-            <Checkbox id="legacy-indeterminate" name="legacy-indeterminate" indeterminate onChange={() => {}}>
-              Some selected
-            </Checkbox>
+          <DemoItem label="Checked">
+            <CheckboxV2 label="Enroll in MDM" checked onChange={() => {}} />
           </DemoItem>
-          <DemoItem label="checked + disabled">
-            <Checkbox id="legacy-disabled" name="legacy-disabled" checked disabled onChange={() => {}}>
-              hello
-            </Checkbox>
+          <DemoItem label="Indeterminate">
+            <CheckboxV2
+              label="Select all devices"
+              checked={false}
+              indeterminate
+              onChange={() => {}}
+            />
           </DemoItem>
         </DemoRow>
-        <DemoRow label="With error">
-          <Checkbox id="legacy-error" name="legacy-error" errorMsg="You must accept the terms" onChange={() => {}}>
-            Accept terms
-          </Checkbox>
+      </DemoSection>
+
+      <DemoSection title="Disabled" description="Disabled checkboxes ignore clicks in any state.">
+        <DemoRow>
+          <DemoItem label="Disabled unchecked">
+            <CheckboxV2
+              label="Require SSO (managed by policy)"
+              checked={false}
+              disabled
+              onChange={() => {}}
+            />
+          </DemoItem>
+          <DemoItem label="Disabled checked">
+            <CheckboxV2 label="Disk encryption enforced" checked disabled onChange={() => {}} />
+          </DemoItem>
+          <DemoItem label="Disabled indeterminate">
+            <CheckboxV2
+              label="Partial rollout"
+              checked={false}
+              indeterminate
+              disabled
+              onChange={() => {}}
+            />
+          </DemoItem>
         </DemoRow>
+      </DemoSection>
+
+      <DemoSection
+        title="Select-all pattern"
+        description="Use indeterminate on a parent checkbox while only some children are selected."
+        code={`const allChecked = selected.length === devices.length
+const someChecked = selected.length > 0 && !allChecked
+
+<CheckboxV2
+  label="All devices"
+  checked={allChecked}
+  indeterminate={someChecked}
+  onChange={checked => setSelected(checked ? devices.map(d => d.id) : [])}
+/>`}
+      >
+        <div style={{display: 'flex', flexDirection: 'column', gap: 8}}>
+          <CheckboxV2
+            label={`All devices (${selected.length}/${devices.length})`}
+            checked={allChecked}
+            indeterminate={someChecked}
+            onChange={toggleAll}
+          />
+          <div style={{display: 'flex', flexDirection: 'column', gap: 8, paddingLeft: 24}}>
+            {devices.map(device => (
+              <CheckboxV2
+                key={device.id}
+                label={device.label}
+                checked={selected.includes(device.id)}
+                onChange={toggleOne(device.id)}
+              />
+            ))}
+          </div>
+        </div>
       </DemoSection>
     </div>
   )

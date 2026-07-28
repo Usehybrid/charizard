@@ -2,6 +2,7 @@ import * as React from 'react'
 import {Badge, BADGE_STATUS, BADGE_HIGHLIGHT} from '../../components'
 import {DemoSection} from '../showcase/DemoSection'
 import {DemoRow, DemoItem} from '../showcase/DemoRow'
+import {PageHeader} from '../showcase/PageHeader'
 import infoIcon from '../../components/assets/info-circle.svg'
 import checkIcon from '../../components/assets/check.svg'
 
@@ -10,8 +11,9 @@ export default function BadgePage() {
 
   return (
     <div>
-      <h1>Badge</h1>
-      <p>Small count or status badge with optional dot / icon highlight and removable variant.</p>
+      <PageHeader title="Badge">
+        Small count or status badge with optional dot / icon highlight and removable variant.
+      </PageHeader>
 
       <DemoSection
         title="Statuses"
@@ -71,11 +73,7 @@ import infoIcon from './assets/info-circle.svg'
             </Badge>
           </DemoItem>
           <DemoItem label="ICON">
-            <Badge
-              highlight={BADGE_HIGHLIGHT.ICON}
-              icon={infoIcon}
-              status={BADGE_STATUS.HIGHLIGHT}
-            >
+            <Badge highlight={BADGE_HIGHLIGHT.ICON} icon={infoIcon} status={BADGE_STATUS.HIGHLIGHT}>
               Awaiting approval
             </Badge>
           </DemoItem>

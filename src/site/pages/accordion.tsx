@@ -1,11 +1,13 @@
 import {Accordion} from '../../components'
 import {DemoSection} from '../showcase/DemoSection'
+import {PageHeader} from '../showcase/PageHeader'
 
 export default function AccordionPage() {
   return (
     <div>
-      <h1>Accordion</h1>
-      <p>Zag.js-powered expandable content sections with animated collapse.</p>
+      <PageHeader title="Accordion">
+        Zag.js-powered expandable content sections with animated collapse.
+      </PageHeader>
 
       <DemoSection
         title="Multiple expandable sections"
@@ -37,7 +39,9 @@ import {Accordion} from '@hybr1d-tech/charizard'
           customStyle={{width: '100%'}}
         >
           <Accordion.Item eventKey="mdm">
-            <Accordion.Header eventKey="mdm">How do devices get enrolled into MDM?</Accordion.Header>
+            <Accordion.Header eventKey="mdm">
+              How do devices get enrolled into MDM?
+            </Accordion.Header>
             <Accordion.Collapse eventKey="mdm">
               <div style={{padding: '8px 0'}}>
                 New MacBooks and Windows laptops enroll automatically at first boot via zero-touch
@@ -48,7 +52,9 @@ import {Accordion} from '@hybr1d-tech/charizard'
           </Accordion.Item>
 
           <Accordion.Item eventKey="apps">
-            <Accordion.Header eventKey="apps">Which apps are installed by default?</Accordion.Header>
+            <Accordion.Header eventKey="apps">
+              Which apps are installed by default?
+            </Accordion.Header>
             <Accordion.Collapse eventKey="apps">
               <div style={{padding: '8px 0'}}>
                 The baseline bundle: browser, VPN client, password manager and the ZenAdmin agent.

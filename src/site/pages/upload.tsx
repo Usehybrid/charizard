@@ -1,12 +1,15 @@
 import {DOCS_TYPE, Upload} from '../../components'
 import type {UploadFileType} from '../../components'
 import {DemoSection} from '../showcase/DemoSection'
+import {PageHeader} from '../showcase/PageHeader'
 
 // NOTE: in the real product, handleImageUpload requests a presigned S3 URL from the
 // backend (`POST /users/document`) and PUTs the file blob to that URL. This showcase
 // simulates the round-trip with a timeout so the page works fully offline — files never
 // leave the browser.
-async function simulateImageUpload(images: any[]): Promise<{uploadedFiles: UploadFileType[]; isUploaded: boolean}> {
+async function simulateImageUpload(
+  images: any[],
+): Promise<{uploadedFiles: UploadFileType[]; isUploaded: boolean}> {
   // let the built-in progress animation run for a bit before "completing" the upload
   await new Promise(resolve => setTimeout(resolve, 2500))
 
@@ -15,7 +18,10 @@ async function simulateImageUpload(images: any[]): Promise<{uploadedFiles: Uploa
     clearInterval(image.setIntervalFunction)
     return {
       ...image,
-      ext: typeof image.type === 'string' && image.type.includes('/') ? image.type.split('/')[1] : image.ext,
+      ext:
+        typeof image.type === 'string' && image.type.includes('/')
+          ? image.type.split('/')[1]
+          : image.ext,
       isUploaded: true,
     }
   })
@@ -26,8 +32,10 @@ async function simulateImageUpload(images: any[]): Promise<{uploadedFiles: Uploa
 export default function UploadPage() {
   return (
     <div>
-      <h1>Upload</h1>
-      <p>File upload dropzone with progress bars, per-file management and size/count limits (upload simulated offline here).</p>
+      <PageHeader title="Upload">
+        File upload dropzone with progress bars, per-file management and size/count limits (upload
+        simulated offline here).
+      </PageHeader>
 
       <DemoSection
         title="Basic upload (simulated)"
@@ -77,7 +85,10 @@ export default function UploadPage() {
         </div>
       </DemoSection>
 
-      <DemoSection title="Disabled" description="The disabled dropzone blocks browsing and drag-and-drop.">
+      <DemoSection
+        title="Disabled"
+        description="The disabled dropzone blocks browsing and drag-and-drop."
+      >
         <div style={{width: '100%'}}>
           <Upload
             type={DOCS_TYPE.COMMENT_DOCS}

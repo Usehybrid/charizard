@@ -1,0 +1,158 @@
+.root {
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  background-color: var(--site-code-bg);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 8px 6px 14px;
+  border-bottom: 1px solid var(--site-code-border);
+  background-color: var(--site-code-bg-header);
+}
+
+.lang {
+  color: var(--site-code-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.scroll {
+  position: relative;
+  display: flex;
+  overflow: auto;
+}
+
+.gutter {
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  padding: 16px 0 16px 14px;
+  border-right: 1px solid var(--site-code-border);
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  line-height: 1.65;
+  text-align: right;
+  color: var(--site-code-line);
+  user-select: none;
+}
+
+.collapsed {
+  max-height: 340px;
+}
+
+.collapsed::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0;
+  height: 96px;
+  pointer-events: none;
+  background: linear-gradient(to bottom, transparent, var(--site-code-bg));
+}
+
+.pre {
+  flex: 1;
+  margin: 0;
+  padding: 16px 18px;
+  font-size: 12.5px;
+  line-height: 1.65;
+  color: var(--site-code-fg);
+  tab-size: 2;
+}
+
+.floatingCopy {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+
+.copy {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background-color: transparent;
+  color: var(--site-code-muted);
+  cursor: pointer;
+  transition:
+    color 120ms ease,
+    background-color 120ms ease;
+}
+
+.copy:hover {
+  background-color: rgb(255 255 255 / 8%);
+  color: var(--site-code-fg);
+}
+
+.copyLight {
+  color: var(--text-tertiary);
+}
+
+.copyLight:hover {
+  color: var(--text-primary);
+  background-color: var(--fill-selection);
+}
+
+.copied,
+.copied:hover {
+  color: var(--status-success-s50);
+}
+
+.expand {
+  position: absolute;
+  inset: auto 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 34px;
+  border: none;
+  border-top: 1px solid var(--site-code-border);
+  background-color: var(--site-code-bg-header);
+  color: var(--site-code-fg);
+  cursor: pointer;
+}
+
+.expand:hover {
+  color: var(--neutral-white);
+  background-color: var(--site-code-border);
+}
+
+/* syntax palette */
+.plain {
+  color: var(--site-code-fg);
+}
+
+.comment {
+  color: var(--site-code-muted);
+  font-style: italic;
+}
+
+.string {
+  color: var(--site-code-string);
+}
+
+.keyword {
+  color: var(--site-code-keyword);
+}
+
+.tag {
+  color: var(--site-code-tag);
+}
+
+.attr {
+  color: var(--site-code-attr);
+}
+
+.number {
+  color: var(--site-code-number);
+}
+
+.punct {
+  color: var(--site-code-punct);
+}

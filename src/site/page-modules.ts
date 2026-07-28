@@ -7,7 +7,21 @@ import type * as React from 'react'
  */
 export const pageModules = import.meta.glob<{default: React.ComponentType}>([
   './pages/*.tsx',
-  '!./pages/home.tsx', // statically imported by routes.tsx
+  // statically imported by routes.tsx — not component pages
+  '!./pages/home.tsx',
+  '!./pages/changelog.tsx',
 ])
 
 export const pageLoader = (slug: string) => pageModules[`./pages/${slug}.tsx`]
+
+/**
+ * The same pages as raw text, for the "Copy page" button: it rebuilds the
+ * component's markdown (description, import, snippets) from source on demand.
+ * Lazy loaders, so no page source lands in the initial bundle.
+ */
+const pageSources = import.meta.glob<string>('./pages/*.tsx', {
+  query: '?raw',
+  import: 'default',
+})
+
+export const pageSource = (slug: string) => pageSources[`./pages/${slug}.tsx`]

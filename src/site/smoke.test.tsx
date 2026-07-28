@@ -55,10 +55,7 @@ describe('showcase pages mount without throwing', () => {
         await new Promise<void>(resolve => {
           root.render(
             <RouterProvider
-              router={createMemoryRouter(
-                [{path: '/', element: <Page />}],
-                {initialEntries: ['/']},
-              )}
+              router={createMemoryRouter([{path: '/', element: <Page />}], {initialEntries: ['/']})}
             />,
           )
           // Let effects (zag machines, timers scheduled at mount) flush.
@@ -75,7 +72,34 @@ describe('showcase pages mount without throwing', () => {
   }
 })
 
-it('root routes include home and all component paths', () => {
+it('root routes include home, changelog and all component paths', () => {
   const children = routes[0].children ?? []
-  expect(children.length).toBe(ALL_COMPONENTS.length + 1)
+  const paths = children.map(child => child.path)
+  expect(paths).toContain('changelog')
+  for (const entry of ALL_COMPONENTS) {
+    expect(paths).toContain(`components/${entry.slug}`)
+  }
+  // home (index) + changelog + one per component, nothing stray
+  expect(children.length).toBe(ALL_COMPONENTS.length + 2)
+})
+
+it('the changelog page mounts and lists releases', async () => {
+  const {default: Page} = await import('./pages/changelog')
+  const container = document.createElement('div')
+  document.body.appendChild(container)
+  const root = createRoot(container)
+  try {
+    await new Promise<void>(resolve => {
+      root.render(
+        <RouterProvider
+          router={createMemoryRouter([{path: '/', element: <Page />}], {initialEntries: ['/']})}
+        />,
+      )
+      setTimeout(resolve, 20)
+    })
+    expect(container.querySelectorAll('time').length).toBeGreaterThan(0)
+  } finally {
+    root.unmount()
+    container.remove()
+  }
 })

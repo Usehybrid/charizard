@@ -1,0 +1,1948 @@
+{
+  "Button": {
+    "props": [
+      {
+        "name": "btnType",
+        "type": "\"button\" | \"reset\" | \"submit\"",
+        "required": false
+      },
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "required": false
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "customStyles",
+        "type": "CSSProperties",
+        "required": false,
+        "defaultValue": "{}"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "icon",
+        "type": "ReactNode",
+        "required": false
+      },
+      {
+        "name": "onClick",
+        "type": "MouseEventHandler<HTMLButtonElement>",
+        "required": false
+      },
+      {
+        "name": "size",
+        "type": "BUTTON_SIZE",
+        "required": false,
+        "defaultValue": "BUTTON_SIZE.DEFAULT"
+      },
+      {
+        "name": "type",
+        "type": "BUTTON_TYPE.ICON_ONLY | BUTTON_TYPE.ICON_LEFT | BUTTON_TYPE.ICON_RIGHT | BUTTON_TYPE.BASIC | BUTTON_TYPE.BUTTON | BUTTON_TYPE.RESET",
+        "required": false,
+        "defaultValue": "BUTTON_TYPE.BASIC"
+      },
+      {
+        "name": "variant",
+        "type": "BUTTON_VARIANT",
+        "required": false,
+        "defaultValue": "BUTTON_VARIANT.PRIMARY"
+      },
+      {
+        "name": "zapTriggerProps",
+        "type": "any",
+        "required": false,
+        "defaultValue": "{}"
+      }
+    ]
+  },
+  "SegmentedControl": {
+    "props": [
+      {
+        "name": "items",
+        "type": "{ label: string; value: string; component: ReactNode; }[]",
+        "required": true,
+        "description": "items to show in segmented control"
+      },
+      {
+        "name": "defaultValue",
+        "type": "string",
+        "required": false,
+        "description": "default value to be selected on first render"
+      },
+      {
+        "name": "handleOnChange",
+        "type": "((value: string | null) => void)",
+        "required": false,
+        "description": "handle on change\nuse this if you are controlling the behavior of segmented control from an external entity"
+      }
+    ]
+  },
+  "InputV2": {
+    "props": [
+      {
+        "name": "containerClassName",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "containerStyles",
+        "type": "CSSProperties",
+        "required": false
+      },
+      {
+        "name": "errorMsg",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "inputStyles",
+        "type": "CSSProperties",
+        "required": false
+      },
+      {
+        "name": "onErrorHeightChange",
+        "type": "((height: number) => void)",
+        "required": false
+      }
+    ],
+    "nativeProps": "input"
+  },
+  "TextareaV2": {
+    "props": [
+      {
+        "name": "containerClassName",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "containerStyles",
+        "type": "CSSProperties",
+        "required": false
+      },
+      {
+        "name": "errorMsg",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "inputStyles",
+        "type": "CSSProperties",
+        "required": false
+      }
+    ],
+    "nativeProps": "textarea"
+  },
+  "InputControlV2": {
+    "props": [
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "required": true
+      }
+    ],
+    "nativeProps": "div"
+  },
+  "LabelV2": {
+    "props": [
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "required": true
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "info",
+        "type": "string",
+        "required": false,
+        "defaultValue": "''"
+      },
+      {
+        "name": "required",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "tooltipProps",
+        "type": "Partial<TooltipV2Props>",
+        "required": false,
+        "defaultValue": "{}"
+      }
+    ],
+    "nativeProps": "label"
+  },
+  "CheckboxV2": {
+    "props": [
+      {
+        "name": "label",
+        "type": "ReactNode",
+        "required": true
+      },
+      {
+        "name": "onChange",
+        "type": "(checked: boolean) => void",
+        "required": true
+      },
+      {
+        "name": "checked",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "indeterminate",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      }
+    ]
+  },
+  "RadioGroupV2": {
+    "props": [
+      {
+        "name": "items",
+        "type": "{ label: { heading: ReactNode; subHeading?: string | undefined; }; value: string; tooltip?: { txt: string; trigger?: ReactNode; placement?: string | undefined; } | undefined; }[]",
+        "required": true,
+        "description": "items to show in radio group"
+      },
+      {
+        "name": "onChange",
+        "type": "(value: string | null) => void",
+        "required": true,
+        "description": "callback to be called on change of radio group"
+      },
+      {
+        "name": "defaultValue",
+        "type": "string",
+        "required": false,
+        "description": "default value to be selected on first render (uncontrolled)"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "errorMsg",
+        "type": "string",
+        "required": false,
+        "description": "error msg to display"
+      },
+      {
+        "name": "handleClickManually",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "isLoading",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "description": "heading for radio group"
+      },
+      {
+        "name": "optionsContainerStyles",
+        "type": "CSSProperties",
+        "required": false
+      },
+      {
+        "name": "required",
+        "type": "boolean",
+        "required": false,
+        "description": "if radio group is required",
+        "defaultValue": "false"
+      },
+      {
+        "name": "value",
+        "type": "string",
+        "required": false,
+        "description": "controlled value - when provided, component becomes controlled"
+      }
+    ]
+  },
+  "SwitchV2": {
+    "props": [
+      {
+        "name": "checked",
+        "type": "boolean",
+        "required": false,
+        "description": "The controlled checked state of the switch"
+      },
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "required": false
+      },
+      {
+        "name": "defaultChecked",
+        "type": "boolean",
+        "required": false,
+        "description": "The initial checked state of the switch when rendered.\nUse when you don't need to control the checked state of the switch."
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "description": "Whether the switch is disabled."
+      },
+      {
+        "name": "errorMsg",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "form",
+        "type": "string",
+        "required": false,
+        "description": "The id of the form that the switch belongs to"
+      },
+      {
+        "name": "info",
+        "type": "string",
+        "required": false,
+        "defaultValue": "''"
+      },
+      {
+        "name": "invalid",
+        "type": "boolean",
+        "required": false,
+        "description": "If `true`, the switch is marked as invalid."
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "description": "Specifies the localized strings that identifies the accessibility elements and their states"
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "required": false,
+        "description": "The name of the input field in a switch\n(Useful for form submission)."
+      },
+      {
+        "name": "onCheckedChange",
+        "type": "((details: CheckedChangeDetails) => void)",
+        "required": false,
+        "description": "Function to call when the switch is clicked."
+      },
+      {
+        "name": "readOnly",
+        "type": "boolean",
+        "required": false,
+        "description": "Whether the switch is read-only"
+      },
+      {
+        "name": "required",
+        "type": "boolean",
+        "required": false,
+        "description": "If `true`, the switch input is marked as required,"
+      },
+      {
+        "name": "tooltipProps",
+        "type": "Partial<TooltipV2Props>",
+        "required": false,
+        "defaultValue": "{}"
+      },
+      {
+        "name": "value",
+        "type": "string | number",
+        "required": false,
+        "description": "The value of switch input. Useful for form submission.",
+        "defaultValue": "\"on\""
+      }
+    ]
+  },
+  "SelectV2": {
+    "props": [
+      {
+        "name": "onChange",
+        "type": "(value: string | string[], actionMeta: SelectActionMeta) => void",
+        "required": true,
+        "description": "Handle change events on the select"
+      },
+      {
+        "name": "options",
+        "type": "Option[]",
+        "required": true,
+        "description": "Array of options that populate the select menu"
+      },
+      {
+        "name": "customStyles",
+        "type": "StylesConfig<any>",
+        "required": false
+      },
+      {
+        "name": "errorMsg",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "mainContainerClassName",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "showDivider",
+        "type": "boolean",
+        "required": false
+      },
+      {
+        "name": "variant",
+        "type": "SELECT_VARIANT",
+        "required": false
+      }
+    ]
+  },
+  "CreatableSelectV2": {
+    "props": [
+      {
+        "name": "onChange",
+        "type": "(value: string | string[], actionMeta: SelectActionMeta) => void",
+        "required": true,
+        "description": "Handle change events on the select"
+      },
+      {
+        "name": "onCreateOption",
+        "type": "(value: string) => void | Promise<void>",
+        "required": true
+      },
+      {
+        "name": "options",
+        "type": "Option[]",
+        "required": true,
+        "description": "Array of options that populate the select menu"
+      },
+      {
+        "name": "customStyles",
+        "type": "StylesConfig<any>",
+        "required": false
+      },
+      {
+        "name": "errorMsg",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "mainContainerClassName",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "showDivider",
+        "type": "boolean",
+        "required": false
+      },
+      {
+        "name": "variant",
+        "type": "SELECT_VARIANT",
+        "required": false
+      }
+    ]
+  },
+  "SelectorsV2": {
+    "props": [
+      {
+        "name": "onChange",
+        "type": "(value: string) => void",
+        "required": true
+      },
+      {
+        "name": "options",
+        "type": "{ label: string; value: string; }[]",
+        "required": true
+      },
+      {
+        "name": "value",
+        "type": "string",
+        "required": true
+      }
+    ]
+  },
+  "SearchV2": {
+    "props": [
+      {
+        "name": "containerClassName",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "containerStyles",
+        "type": "CSSProperties",
+        "required": false
+      },
+      {
+        "name": "errorMsg",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "inputGroupProps",
+        "type": "Omit<InputGroupPropsV2, \"children\">",
+        "required": false,
+        "defaultValue": "{}"
+      },
+      {
+        "name": "inputStyles",
+        "type": "CSSProperties",
+        "required": false
+      },
+      {
+        "name": "onErrorHeightChange",
+        "type": "((height: number) => void)",
+        "required": false
+      },
+      {
+        "name": "search",
+        "type": "string",
+        "required": false,
+        "defaultValue": "''"
+      },
+      {
+        "name": "setSearch",
+        "type": "Dispatch<SetStateAction<string>>",
+        "required": false
+      }
+    ],
+    "nativeProps": "input"
+  },
+  "DatePicker": {
+    "props": [
+      {
+        "name": "mode",
+        "type": "\"single\"",
+        "required": true,
+        "defaultValue": "'single'"
+      },
+      {
+        "name": "onChange",
+        "type": "(value?: string | Date | undefined) => void",
+        "required": true
+      },
+      {
+        "name": "buttonVariant",
+        "type": "BUTTON_VARIANT",
+        "required": false,
+        "defaultValue": "BUTTON_VARIANT.GHOST"
+      },
+      {
+        "name": "customContainerStyles",
+        "type": "CSSProperties",
+        "required": false
+      },
+      {
+        "name": "disabled",
+        "type": "Matcher | Matcher[]",
+        "required": false
+      },
+      {
+        "name": "disableDatepicker",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "displayDateFormat",
+        "type": "\"do LLL y\" | \"dd LLL y\" | \"yyyy-MM-dd\" | \"dd/MM/yyyy\"",
+        "required": false,
+        "defaultValue": "'do LLL y'\n'do LLL y' => 1st Jan 2021\n'dd LLL y' => 01 Jan 2021\n'yyyy-MM-dd' => 2021-01-01\n'dd/MM/yyyy' => 01/01/2021"
+      },
+      {
+        "name": "endMonth",
+        "type": "Date",
+        "required": false,
+        "defaultValue": "new Date(2050, 0)"
+      },
+      {
+        "name": "errorMsg",
+        "type": "string",
+        "required": false,
+        "defaultValue": "''"
+      },
+      {
+        "name": "isError",
+        "type": "boolean",
+        "required": false
+      },
+      {
+        "name": "popoverConfig",
+        "type": "{ placement?: Placement | undefined; }",
+        "required": false
+      },
+      {
+        "name": "showOutsideDays",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "true"
+      },
+      {
+        "name": "startMonth",
+        "type": "Date",
+        "required": false,
+        "defaultValue": "new Date(2020, 0)"
+      },
+      {
+        "name": "trigger",
+        "type": "ReactNode",
+        "required": false
+      },
+      {
+        "name": "value",
+        "type": "string | Date",
+        "required": false
+      },
+      {
+        "name": "variant",
+        "type": "\"form\" | \"default\"",
+        "required": false,
+        "defaultValue": "'default'"
+      }
+    ]
+  },
+  "TimePicker": {
+    "props": [
+      {
+        "name": "onTimeChange",
+        "type": "(timestamp: number) => void",
+        "required": true
+      },
+      {
+        "name": "containerClassName",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "containerStyles",
+        "type": "CSSProperties",
+        "required": false
+      },
+      {
+        "name": "enableSeconds",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "errorMsg",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "format",
+        "type": "TIME_PICKER_FORMAT",
+        "required": false,
+        "defaultValue": "TIME_PICKER_FORMAT.STANDARD"
+      },
+      {
+        "name": "inputStyles",
+        "type": "CSSProperties",
+        "required": false
+      },
+      {
+        "name": "onErrorHeightChange",
+        "type": "((height: number) => void)",
+        "required": false
+      },
+      {
+        "name": "timestamp",
+        "type": "number",
+        "required": false
+      }
+    ],
+    "nativeProps": "input"
+  },
+  "ColorPicker": {
+    "props": [
+      {
+        "name": "name",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "onChange",
+        "type": "(color: string) => void",
+        "required": true
+      },
+      {
+        "name": "defaultColor",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "errorMsg",
+        "type": "string | false",
+        "required": false
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "required",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      }
+    ]
+  },
+  "Upload": {
+    "props": [
+      {
+        "name": "getUploadDoc",
+        "type": "(arg: any) => void",
+        "required": true
+      },
+      {
+        "name": "handleImageUpload",
+        "type": "(images: any[], type: DOCS_TYPE, key?: string | undefined, value?: string | undefined, customUrl?: string | undefined, inventoryId?: string | null | undefined, softwareId?: string | null | undefined) => Promise<{ uploadedFiles: UploadFileType[]; isUploaded: boolean; }>",
+        "required": true
+      },
+      {
+        "name": "type",
+        "type": "DOCS_TYPE",
+        "required": true
+      },
+      {
+        "name": "acceptedFileTypes",
+        "type": "string",
+        "required": false,
+        "defaultValue": "'image/png, image/jpeg, image/jpeg, image/webp, application/pdf, .doc, .docx, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel'"
+      },
+      {
+        "name": "addDocumentSubtitle",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "addDocumentText",
+        "type": "string",
+        "required": false,
+        "defaultValue": "'Upload file'"
+      },
+      {
+        "name": "additionalNode",
+        "type": "ReactElement<unknown, string | JSXElementConstructor<any>>",
+        "required": false
+      },
+      {
+        "name": "alignContent",
+        "type": "UPLOAD_ALIGN_BTN_CONTENT",
+        "required": false
+      },
+      {
+        "name": "beforeUploadHandler",
+        "type": "(() => void)",
+        "required": false
+      },
+      {
+        "name": "customComponent",
+        "type": "ReactNode",
+        "required": false
+      },
+      {
+        "name": "customUrl",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "error",
+        "type": "string | null",
+        "required": false
+      },
+      {
+        "name": "extraSubtitleText",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "fileContainerClassName",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "fileUploadLimit",
+        "type": "number",
+        "required": false,
+        "defaultValue": "10"
+      },
+      {
+        "name": "inventoryId",
+        "type": "string | null",
+        "required": false,
+        "defaultValue": "undefined"
+      },
+      {
+        "name": "isMultiple",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "true"
+      },
+      {
+        "name": "preLoadedFiles",
+        "type": "UploadFileType[]",
+        "required": false,
+        "defaultValue": "[]"
+      },
+      {
+        "name": "setIsUploading",
+        "type": "((arg: any) => void)",
+        "required": false
+      },
+      {
+        "name": "showFileList",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "true"
+      },
+      {
+        "name": "showUploadIcon",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "true"
+      },
+      {
+        "name": "singleFileClassName",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "softwareId",
+        "type": "string | null",
+        "required": false
+      },
+      {
+        "name": "uploadBtnClassName",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "uploadFileLimit",
+        "type": "number",
+        "required": false,
+        "defaultValue": "5"
+      },
+      {
+        "name": "variant",
+        "type": "string",
+        "required": false
+      }
+    ]
+  },
+  "Table": {
+    "props": [
+      {
+        "name": "columns",
+        "type": "any",
+        "required": true
+      },
+      {
+        "name": "data",
+        "type": "any",
+        "required": true
+      },
+      {
+        "name": "loaderConfig",
+        "type": "{ text?: string | undefined; isFetching: boolean; isError: boolean; errMsg?: string | undefined; }",
+        "required": true
+      },
+      {
+        "name": "actionsConfig",
+        "type": "{ isDropdownActions?: boolean | undefined; menuItems?: { label: string; iconSrc?: string | undefined; onClick: any; filterFn?: any; disabled?: boolean | ((data: any) => boolean) | undefined; }[] | undefined; }",
+        "required": false,
+        "description": "column for actions dropdown in the last row",
+        "defaultValue": "{\n    isDropdownActions: false,\n  }"
+      },
+      {
+        "name": "customActionItems",
+        "type": "ReactElement<unknown, string | JSXElementConstructor<any>>[]",
+        "required": false
+      },
+      {
+        "name": "customColumnConfig",
+        "type": "{ description?: string | undefined; columns?: TableCustomColumns | undefined; isPending: boolean; isError: boolean; handleSaveColumns: (columns: any) => Promise<void>; variant?: TableCustomColsVariant | undefined; }",
+        "required": false,
+        "description": "custom columns"
+      },
+      {
+        "name": "emptyStateConfig",
+        "type": "{ title?: string | undefined; desc?: string | undefined; btnText?: string | undefined; onClick?: any; icon?: string | undefined; customStyle?: CSSProperties | undefined; }",
+        "required": false
+      },
+      {
+        "name": "expansionConfig",
+        "type": "{ getRows: (row: any) => any[] | undefined; columns?: ColumnDef<any, any>[] | undefined; entityName?: string | undefined; caption?: string | undefined; content?: ((row: any) => ReactNode) | undefined; expandMode?: \"multiple\" | \"single\" | undefined; }",
+        "required": false,
+        "description": "Expandable rows for one-to-many data (an order and its items, an invoice and\nits lines). An expanded parent reveals a nested table with its OWN header\nrow, because the two grains describe different things: an order has a date\nand a total, an item has a serial number and a delivery status. Sharing one\nheader would force every child field into a column defined for its parent.\n\nOpt-in: without this config the table behaves exactly as before — no\nexpander column, no expanded row model."
+      },
+      {
+        "name": "exportConfig",
+        "type": "{ isPending: boolean; isError: boolean; handleExport: any; isLegacy?: boolean | undefined; }",
+        "required": false,
+        "description": "export config (csv)"
+      },
+      {
+        "name": "filterConfig",
+        "type": "FilterConfig",
+        "required": false,
+        "description": "table filtering, data comes from an api"
+      },
+      {
+        "name": "paginationConfig",
+        "type": "{ metaData?: { total_items: number; items_on_page: number; page_no: number; } | undefined; page: number; setPage: (page: number) => void; limit: number; setLimit: (limit: number) => void; }",
+        "required": false
+      },
+      {
+        "name": "pinningConfig",
+        "type": "{ columnPinning: ColumnPinningState; setColumnPinning: Dispatch<SetStateAction<ColumnPinningState>>; }",
+        "required": false
+      },
+      {
+        "name": "rowSelectionConfig",
+        "type": "{ isCheckbox?: boolean | undefined; isRadio?: boolean | undefined; entityName: string; actions?: { iconSrc: string; label: string; onClick: any; }[] | undefined; setSelectedRows?: Dispatch<any> | undefined; iconSrc?: string | undefined; clearOnSearch?: boolean | undefined; rowIdKey: string; rowSelection?: {} | undefined; setRowSelection?: Dispatch<SetStateAction<{}>> | undefined; }",
+        "required": false,
+        "description": "Row checkbox or radio selection config",
+        "defaultValue": "{\n    isCheckbox: false,\n    isRadio: false,\n    clearOnSearch: true,\n    entityName: '',\n    rowIdKey: 'id',\n  }"
+      },
+      {
+        "name": "searchConfig",
+        "type": "{ placeholder?: string | undefined; search: string; setSearch: any; }",
+        "required": false,
+        "description": "table search"
+      },
+      {
+        "name": "sortConfig",
+        "type": "{ sortBy: string; setSortBy: any; sortOrd: \"\" | \"asc\" | \"desc\"; setSortOrd: any; sortMap: Record<string, string>; }",
+        "required": false,
+        "description": "table sorting"
+      },
+      {
+        "name": "tableStyleConfig",
+        "type": "{ maxHeight?: string | undefined; stickyIds?: string[] | undefined; }",
+        "required": false
+      },
+      {
+        "name": "totalText",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "visibilityConfig",
+        "type": "{ columnVisibility: VisibilityState; setColumnVisibility: Dispatch<SetStateAction<VisibilityState>>; }",
+        "required": false
+      }
+    ]
+  },
+  "TaskCards": {
+    "props": [
+      {
+        "name": "headers",
+        "type": "string[]",
+        "required": true
+      },
+      {
+        "name": "data",
+        "type": "ITask[]",
+        "required": false
+      },
+      {
+        "name": "emptyText",
+        "type": "string",
+        "required": false,
+        "defaultValue": "'No requests'"
+      },
+      {
+        "name": "isError",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "isLoading",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "labels",
+        "type": "string[]",
+        "required": false
+      },
+      {
+        "name": "moduleAccess",
+        "type": "{ hasDeviceAccess?: boolean | undefined; hasLeaveAccess?: boolean | undefined; }",
+        "required": false
+      },
+      {
+        "name": "onClicks",
+        "type": "((data: ITask) => void)[][]",
+        "required": false
+      },
+      {
+        "name": "paginationConfig",
+        "type": "{ metaData?: { total_items: number; items_on_page: number; page_no: number; } | undefined; page: number; setPage: (page: number) => void; limit: number; setLimit: (limit: number) => void; }",
+        "required": false
+      }
+    ]
+  },
+  "Badge": {
+    "props": [
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "required": true
+      },
+      {
+        "name": "customSvgStyles",
+        "type": "CSSProperties",
+        "required": false,
+        "defaultValue": "{}"
+      },
+      {
+        "name": "highlight",
+        "type": "BADGE_HIGHLIGHT",
+        "required": false,
+        "defaultValue": "BADGE_HIGHLIGHT.NONE"
+      },
+      {
+        "name": "icon",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "onClick",
+        "type": "() => void",
+        "required": false
+      },
+      {
+        "name": "selected",
+        "type": "true | false",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "status",
+        "type": "BADGE_STATUS",
+        "required": false,
+        "defaultValue": "BADGE_STATUS.DEFAULT"
+      }
+    ]
+  },
+  "Pill": {
+    "props": [
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "required": true
+      },
+      {
+        "name": "status",
+        "type": "PILL_STATUS",
+        "required": false,
+        "defaultValue": "PILL_STATUS.DEFAULT"
+      }
+    ]
+  },
+  "Tag": {
+    "props": [
+      {
+        "name": "status",
+        "type": "STATUS_MAP",
+        "required": true
+      },
+      {
+        "name": "text",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "customStyles",
+        "type": "CSSProperties",
+        "required": false,
+        "defaultValue": "{}"
+      },
+      {
+        "name": "icon",
+        "type": "string",
+        "required": false
+      }
+    ]
+  },
+  "Status": {
+    "props": [
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "required": true
+      },
+      {
+        "name": "status",
+        "type": "STATUS_STATUS",
+        "required": false,
+        "defaultValue": "STATUS_STATUS.INFO"
+      }
+    ]
+  },
+  "Avatar": {
+    "props": [
+      {
+        "name": "user",
+        "type": "any",
+        "required": true
+      },
+      {
+        "name": "imageStyles",
+        "type": "CSSProperties",
+        "required": false,
+        "defaultValue": "{}"
+      }
+    ]
+  },
+  "UserChip": {
+    "props": [
+      {
+        "name": "profileImgUrl",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "selected",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "status",
+        "type": "USER_CHIP_STATUS",
+        "required": false,
+        "defaultValue": "USER_CHIP_STATUS.DEFAULT"
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "required": false
+      }
+    ]
+  },
+  "UsersChip": {
+    "props": [
+      {
+        "name": "users",
+        "type": "Partial<UsersChipUser>[]",
+        "required": true
+      },
+      {
+        "name": "status",
+        "type": "USER_CHIP_STATUS",
+        "required": false,
+        "defaultValue": "USER_CHIP_STATUS.DEFAULT"
+      },
+      {
+        "name": "userCount",
+        "type": "number",
+        "required": false
+      }
+    ]
+  },
+  "Accordion": {
+    "props": [
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "required": true
+      },
+      {
+        "name": "allEventKeys",
+        "type": "string[]",
+        "required": false,
+        "defaultValue": "[]"
+      },
+      {
+        "name": "collapsible",
+        "type": "boolean",
+        "required": false,
+        "description": "Whether an accordion item can be closed after it has been expanded.",
+        "defaultValue": "false"
+      },
+      {
+        "name": "customClasses",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "customStyle",
+        "type": "CSSProperties",
+        "required": false
+      },
+      {
+        "name": "defaultActiveKey",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "defaultValue",
+        "type": "string[]",
+        "required": false,
+        "description": "The initial value of the expanded accordion items.\nUse when you don't need to control the value of the accordion."
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "description": "Whether the accordion items are disabled"
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "required": false,
+        "description": "The unique identifier of the machine."
+      },
+      {
+        "name": "isMulti",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "isOpenAll",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "multiple",
+        "type": "boolean",
+        "required": false,
+        "description": "Whether multiple accordion items can be expanded at the same time.",
+        "defaultValue": "false"
+      },
+      {
+        "name": "onFocusChange",
+        "type": "((details: FocusChangeDetails) => void)",
+        "required": false,
+        "description": "The callback fired when the focused accordion item changes."
+      },
+      {
+        "name": "onValueChange",
+        "type": "((details: ValueChangeDetails) => void)",
+        "required": false,
+        "description": "The callback fired when the state of expanded/collapsed accordion items changes."
+      },
+      {
+        "name": "orientation",
+        "type": "\"horizontal\" | \"vertical\"",
+        "required": false,
+        "description": "The orientation of the accordion items.",
+        "defaultValue": "\"vertical\""
+      },
+      {
+        "name": "value",
+        "type": "string[]",
+        "required": false,
+        "description": "The controlled value of the expanded accordion items."
+      }
+    ]
+  },
+  "Progress": {
+    "props": [
+      {
+        "name": "lastStepFooterContinueBtnText",
+        "type": "string",
+        "required": true,
+        "description": "text to show on footer continue button when the step is last step",
+        "defaultValue": "'Confirm'"
+      },
+      {
+        "name": "onCancelClick",
+        "type": "() => void",
+        "required": true,
+        "description": "handle cancel click"
+      },
+      {
+        "name": "onFinalStepClick",
+        "type": "() => void",
+        "required": true,
+        "description": "handle final step click"
+      },
+      {
+        "name": "steps",
+        "type": "{ label: string; component: ReactNode; isError: boolean; onContinueClick?: Function | undefined; }[]",
+        "required": true,
+        "description": "steps to show\nif there isError is true, user won't be able to click on Continue or finish button"
+      },
+      {
+        "name": "allowNavigationOnStepClick",
+        "type": "boolean",
+        "required": false,
+        "description": "allow navigation of steps when user click on certain step",
+        "defaultValue": "true"
+      },
+      {
+        "name": "jumpToStep",
+        "type": "number",
+        "required": false,
+        "description": "directly jump to particular step (index starts from 0)",
+        "defaultValue": "0"
+      },
+      {
+        "name": "lastStepHeaderContinueBtnText",
+        "type": "string",
+        "required": false,
+        "description": "text to show on header continue button when the step is last step",
+        "defaultValue": "'Finish'"
+      },
+      {
+        "name": "onSkipClick",
+        "type": "(() => void)",
+        "required": false,
+        "description": "on skip click",
+        "defaultValue": "() => {}"
+      },
+      {
+        "name": "showFooter",
+        "type": "boolean",
+        "required": false,
+        "description": "show footer",
+        "defaultValue": "true"
+      },
+      {
+        "name": "showHeaderBtns",
+        "type": "boolean",
+        "required": false,
+        "description": "show buttons on header",
+        "defaultValue": "false"
+      },
+      {
+        "name": "showSkipBtn",
+        "type": "boolean",
+        "required": false,
+        "description": "show skip button or not",
+        "defaultValue": "false"
+      },
+      {
+        "name": "skipBtnText",
+        "type": "string",
+        "required": false,
+        "description": "skip button text",
+        "defaultValue": "'Skip and continue'"
+      },
+      {
+        "name": "stepToShowSkipBtn",
+        "type": "number",
+        "required": false,
+        "description": "step to show skip button (counting starts from zero)",
+        "defaultValue": "0"
+      }
+    ]
+  },
+  "AsyncImage": {
+    "props": [
+      {
+        "name": "alt",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "src",
+        "type": "string",
+        "required": true
+      }
+    ],
+    "nativeProps": "img"
+  },
+  "SVG": {
+    "props": [
+      {
+        "name": "path",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "customSpanStyles",
+        "type": "CSSProperties",
+        "required": false,
+        "defaultValue": "{}"
+      },
+      {
+        "name": "customSvgStyles",
+        "type": "CSSProperties",
+        "required": false,
+        "defaultValue": "{}"
+      },
+      {
+        "name": "handleClick",
+        "type": "((e: any) => void)",
+        "required": false
+      },
+      {
+        "name": "height",
+        "type": "number",
+        "required": false
+      },
+      {
+        "name": "spanClassName",
+        "type": "string",
+        "required": false,
+        "defaultValue": "''"
+      },
+      {
+        "name": "svgClassName",
+        "type": "string",
+        "required": false,
+        "defaultValue": "''"
+      },
+      {
+        "name": "width",
+        "type": "number",
+        "required": false
+      }
+    ]
+  },
+  "ModalV2": {
+    "props": [
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "required": true,
+        "description": "Content to be displayed inside the modal."
+      },
+      {
+        "name": "footerButtons",
+        "type": "DialogFooterButtons",
+        "required": true,
+        "description": "Array of footer buttons for the modal."
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "required": true,
+        "description": "Title of the modal."
+      },
+      {
+        "name": "closeOnInteractOutside",
+        "type": "boolean",
+        "required": false
+      },
+      {
+        "name": "customModalClasses",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "hideHeader",
+        "type": "boolean",
+        "required": false,
+        "defaultValue": "false"
+      },
+      {
+        "name": "isOpen",
+        "type": "boolean",
+        "required": false,
+        "description": "Indicates if the modal is open."
+      },
+      {
+        "name": "onClose",
+        "type": "(() => void)",
+        "required": false,
+        "description": "Callback function to close the modal."
+      },
+      {
+        "name": "onCustomInteractOutside",
+        "type": "((event: InteractOutsideEvent) => void)",
+        "required": false
+      },
+      {
+        "name": "showBackdrop",
+        "type": "boolean",
+        "required": false,
+        "description": "Indicates whether to show a backdrop behind the modal.",
+        "defaultValue": "false"
+      },
+      {
+        "name": "subTitle",
+        "type": "string",
+        "required": false,
+        "description": "Optional subtitle of the modal."
+      },
+      {
+        "name": "trigger",
+        "type": "ReactNode",
+        "required": false,
+        "description": "Optional trigger element to open the modal."
+      }
+    ]
+  },
+  "DrawerV2": {
+    "props": [
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "required": true,
+        "description": "Drawer content"
+      },
+      {
+        "name": "isOpen",
+        "type": "boolean",
+        "required": true,
+        "description": "Drawer is open or not"
+      },
+      {
+        "name": "onClose",
+        "type": "() => void",
+        "required": true,
+        "description": "Callback function when drawer is closed"
+      },
+      {
+        "name": "buttons",
+        "type": "DialogFooterButtons",
+        "required": false,
+        "description": "footer buttons to show"
+      },
+      {
+        "name": "contentClassName",
+        "type": "string",
+        "required": false,
+        "description": "Drawer content className"
+      },
+      {
+        "name": "customContainerStyles",
+        "type": "CSSProperties",
+        "required": false
+      },
+      {
+        "name": "customFooter",
+        "type": "ReactNode",
+        "required": false,
+        "description": "Custom drawer footer"
+      },
+      {
+        "name": "customHeader",
+        "type": "ReactNode",
+        "required": false,
+        "description": "Custom drawer header"
+      },
+      {
+        "name": "drawerPosition",
+        "type": "\"left\" | \"right\"",
+        "required": false,
+        "description": "Drawer position",
+        "defaultValue": "'right'"
+      },
+      {
+        "name": "footerAddon",
+        "type": "ReactNode",
+        "required": false
+      },
+      {
+        "name": "footerClassName",
+        "type": "string",
+        "required": false,
+        "description": "Drawer footer className"
+      },
+      {
+        "name": "headerClassName",
+        "type": "string",
+        "required": false,
+        "description": "Drawer header className"
+      },
+      {
+        "name": "showBackdrop",
+        "type": "boolean",
+        "required": false,
+        "description": "Show backdrop or not",
+        "defaultValue": "true"
+      },
+      {
+        "name": "showFooter",
+        "type": "boolean",
+        "required": false,
+        "description": "Show footer or not",
+        "defaultValue": "true"
+      },
+      {
+        "name": "showHeader",
+        "type": "boolean",
+        "required": false,
+        "description": "Show header or not",
+        "defaultValue": "true"
+      },
+      {
+        "name": "size",
+        "type": "\"sm\" | \"md\" | \"lg\" | \"xlg\" | \"xxlg\"",
+        "required": false,
+        "description": "Drawer size",
+        "defaultValue": "'md'"
+      },
+      {
+        "name": "subTitle",
+        "type": "string",
+        "required": false,
+        "description": "Drawer subTitle"
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "required": false,
+        "description": "Drawer title"
+      }
+    ]
+  },
+  "Popover": {
+    "props": [
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "required": true,
+        "description": "Content of the trigger"
+      },
+      {
+        "name": "closeOnScroll",
+        "type": "boolean",
+        "required": false,
+        "description": "close popover on scroll",
+        "defaultValue": "false"
+      },
+      {
+        "name": "containerRef",
+        "type": "RefObject<HTMLElement>",
+        "required": false,
+        "description": "when using closeOnScroll, its necessary to pass containerRef to track scroll movement of the container you want to close the popover with respect to."
+      },
+      {
+        "name": "placement",
+        "type": "Placement",
+        "required": false,
+        "description": "Placement of the popover",
+        "defaultValue": "'top'"
+      },
+      {
+        "name": "popoverProps",
+        "type": "any",
+        "required": false,
+        "description": "Props to pass to the popover machine"
+      }
+    ]
+  },
+  "TooltipV2": {
+    "props": [
+      {
+        "name": "content",
+        "type": "ReactNode",
+        "required": true,
+        "defaultValue": "''"
+      },
+      {
+        "name": "trigger",
+        "type": "ReactNode",
+        "required": true
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "required": false,
+        "defaultValue": "''"
+      },
+      {
+        "name": "contentMaxLength",
+        "type": "number | null",
+        "required": false,
+        "defaultValue": "TOOLTIP_DEFAULTS.contentMaxLength"
+      },
+      {
+        "name": "customStyle",
+        "type": "CSSProperties",
+        "required": false,
+        "defaultValue": "{}"
+      },
+      {
+        "name": "opacity",
+        "type": "number",
+        "required": false,
+        "defaultValue": "TOOLTIP_DEFAULTS.opacity"
+      },
+      {
+        "name": "placement",
+        "type": "\"left\" | \"right\" | \"bottom\" | \"top\" | \"top-start\" | \"top-end\" | \"bottom-start\" | \"bottom-end\" | \"right-start\" | \"right-end\" | \"left-start\" | \"left-end\"",
+        "required": false,
+        "defaultValue": "'top'"
+      },
+      {
+        "name": "portalClass",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "portalId",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "variant",
+        "type": "\"dark\" | \"light\" | \"success\" | \"warning\" | \"error\" | \"info\"",
+        "required": false,
+        "defaultValue": "'dark'"
+      }
+    ]
+  },
+  "Alert": {
+    "props": [
+      {
+        "name": "alertType",
+        "type": "ALERT_TYPES",
+        "required": true
+      },
+      {
+        "name": "header",
+        "type": "ReactNode",
+        "required": true
+      },
+      {
+        "name": "actionType",
+        "type": "ALERT_ACTION_TYPES",
+        "required": false
+      },
+      {
+        "name": "body",
+        "type": "ReactNode",
+        "required": false
+      },
+      {
+        "name": "hide",
+        "type": "boolean",
+        "required": false
+      },
+      {
+        "name": "setHide",
+        "type": "Dispatch<SetStateAction<boolean>>",
+        "required": false
+      },
+      {
+        "name": "setShowMore",
+        "type": "Dispatch<SetStateAction<boolean>>",
+        "required": false
+      },
+      {
+        "name": "showMore",
+        "type": "boolean",
+        "required": false
+      }
+    ]
+  },
+  "Loader": {
+    "props": [
+      {
+        "name": "containerStyle",
+        "type": "CSSProperties",
+        "required": false
+      },
+      {
+        "name": "loaderStyle",
+        "type": "CSSProperties",
+        "required": false
+      },
+      {
+        "name": "size",
+        "type": "number",
+        "required": false
+      },
+      {
+        "name": "variant",
+        "type": "LOADER_VARIANT",
+        "required": false,
+        "defaultValue": "LOADER_VARIANT.RING"
+      }
+    ]
+  },
+  "Skeleton": {
+    "props": [],
+    "nativeProps": "div"
+  },
+  "Tabs": {
+    "props": [
+      {
+        "name": "activeKey",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "children",
+        "type": "ReactElement<TabProps, string | JSXElementConstructor<any>>[]",
+        "required": true
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "onSelect",
+        "type": "(key: string) => void",
+        "required": true
+      },
+      {
+        "name": "customClassName",
+        "type": "string",
+        "required": false,
+        "defaultValue": "''"
+      },
+      {
+        "name": "customStyles",
+        "type": "CSSProperties",
+        "required": false,
+        "defaultValue": "{}"
+      }
+    ]
+  },
+  "LayoutTabs": {
+    "props": [
+      {
+        "name": "defaultValue",
+        "type": "string",
+        "required": true,
+        "description": "default value (initial tab to render)"
+      },
+      {
+        "name": "tabs",
+        "type": "{ label: string; value: string; content: ReactNode; }[]",
+        "required": true,
+        "description": "tabs to render"
+      },
+      {
+        "name": "onValueChange",
+        "type": "((value: string) => void)",
+        "required": false,
+        "description": "callback function when tab is changed"
+      },
+      {
+        "name": "tabClassName",
+        "type": "string",
+        "required": false
+      }
+    ]
+  },
+  "EmptyState": {
+    "props": [
+      {
+        "name": "icon",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "btnText",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "customSvgClassName",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "customSvgStyles",
+        "type": "CSSProperties",
+        "required": false
+      },
+      {
+        "name": "desc",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "flexDir",
+        "type": "\"column\" | \"row\"",
+        "required": false,
+        "defaultValue": "'column'"
+      },
+      {
+        "name": "onClick",
+        "type": "MouseEventHandler<HTMLButtonElement>",
+        "required": false
+      }
+    ]
+  },
+  "Helmet": {
+    "props": [
+      {
+        "name": "canonicalUrl",
+        "type": "string",
+        "required": false,
+        "defaultValue": "typeof window !== 'undefined' ? window.location.href : ''"
+      },
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "required": false
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "keywords",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "ogImage",
+        "type": "string",
+        "required": false,
+        "defaultValue": "'assets/logo-full.svg'"
+      },
+      {
+        "name": "site",
+        "type": "string",
+        "required": false,
+        "defaultValue": "typeof window !== 'undefined' ? window.location.href : ''"
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "required": false
+      }
+    ]
+  }
+}

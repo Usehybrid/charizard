@@ -1,6 +1,7 @@
 import * as React from 'react'
 import {LayoutTabs} from '../../components'
 import {DemoSection} from '../showcase/DemoSection'
+import {PageHeader} from '../showcase/PageHeader'
 
 const paneStyle: React.CSSProperties = {padding: '16px 4px', maxWidth: 560}
 
@@ -37,7 +38,11 @@ const DEVICE_TABS = [
 const ORDER_TABS = [
   {label: 'Open', value: 'open', content: <div style={paneStyle}>4 open orders.</div>},
   {label: 'Shipped', value: 'shipped', content: <div style={paneStyle}>2 orders in transit.</div>},
-  {label: 'Delivered', value: 'delivered', content: <div style={paneStyle}>18 orders delivered.</div>},
+  {
+    label: 'Delivered',
+    value: 'delivered',
+    content: <div style={paneStyle}>18 orders delivered.</div>,
+  },
 ]
 
 export default function LayoutTabsPage() {
@@ -45,12 +50,11 @@ export default function LayoutTabsPage() {
 
   return (
     <div>
-      <h1>LayoutTabs</h1>
-      <p>
+      <PageHeader title="LayoutTabs">
         Zag.js-powered underlined tab bar used at the top of page layouts. In product apps the
-        onValueChange callback usually drives route navigation; the component itself is
-        uncontrolled after defaultValue, so it is demoed here statically with content panes.
-      </p>
+        onValueChange callback usually drives route navigation; the component itself is uncontrolled
+        after defaultValue, so it is demoed here statically with content panes.
+      </PageHeader>
 
       <DemoSection
         title="Basic layout tabs"

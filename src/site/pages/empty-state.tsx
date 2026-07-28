@@ -1,6 +1,7 @@
 import * as React from 'react'
 import {EmptyState} from '../../components'
 import {DemoSection} from '../showcase/DemoSection'
+import {PageHeader} from '../showcase/PageHeader'
 
 // EmptyState renders the icon through the SVG component (react-inlinesvg),
 // which accepts raw SVG markup as its source — no network fetch needed.
@@ -13,11 +14,10 @@ export default function EmptyStatePage() {
 
   return (
     <div>
-      <h1>EmptyState</h1>
-      <p>
-        Placeholder for empty lists and zero-data views: an icon, a title, optional description
-        and an optional ghost-button action. It adapts to its parent&apos;s width and height.
-      </p>
+      <PageHeader title="EmptyState">
+        Placeholder for empty lists and zero-data views: an icon, a title, optional description and
+        an optional ghost-button action. It adapts to its parent&apos;s width and height.
+      </PageHeader>
 
       <DemoSection
         title="Default (column layout)"

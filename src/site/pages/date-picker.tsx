@@ -2,6 +2,7 @@ import * as React from 'react'
 import {DatePicker, DateRangePicker, useDateRangePicker} from '../../components'
 import {DemoSection} from '../showcase/DemoSection'
 import {DemoItem, DemoRow} from '../showcase/DemoRow'
+import {PageHeader} from '../showcase/PageHeader'
 
 export default function DatePickerPage() {
   const {period, handleDateChange} = useDateRangePicker()
@@ -10,8 +11,9 @@ export default function DatePickerPage() {
 
   return (
     <div>
-      <h1>DatePicker</h1>
-      <p>Single-date and date-range pickers built on react-day-picker, with quick-select presets.</p>
+      <PageHeader title="DatePicker">
+        Single-date and date-range pickers built on react-day-picker, with quick-select presets.
+      </PageHeader>
 
       <DemoSection
         title="Date range picker"
@@ -48,7 +50,12 @@ const [date, setDate] = React.useState<string | Date | undefined>()
       >
         <DemoRow>
           <DemoItem label="form variant">
-            <DatePicker mode="single" variant="form" value={formDate} onChange={value => setFormDate(value)} />
+            <DatePicker
+              mode="single"
+              variant="form"
+              value={formDate}
+              onChange={value => setFormDate(value)}
+            />
           </DemoItem>
           <DemoItem label="default variant">
             <DatePicker mode="single" value={single} onChange={value => setSingle(value)} />
@@ -80,7 +87,13 @@ const [date, setDate] = React.useState<string | Date | undefined>()
             />
           </DemoItem>
           <DemoItem label="disabled">
-            <DatePicker mode="single" variant="form" value={undefined} onChange={() => {}} disableDatepicker />
+            <DatePicker
+              mode="single"
+              variant="form"
+              value={undefined}
+              onChange={() => {}}
+              disableDatepicker
+            />
           </DemoItem>
         </DemoRow>
       </DemoSection>
