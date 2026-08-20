@@ -2,6 +2,7 @@ import {Option} from '../select-v2'
 
 export const RANGE_OPTIONS: Option[] = [
   {label: 'Custom', value: 'custom'},
+  {label: 'Month to date', value: 'mtd'},
   {label: 'Year to date', value: 'ytd'},
   {label: 'Today', value: 'today'},
   {label: 'Last 7 days', value: '7days'},
