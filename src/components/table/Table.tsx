@@ -9,12 +9,8 @@ import sortIcon from '../assets/line-height.svg'
 import sortAscIcon from '../assets/sort-asc.svg'
 import sortDescIcon from '../assets/sort-desc.svg'
 import classes from './styles.module.css'
-import {
-  useReactTable,
-  getCoreRowModel,
-  getExpandedRowModel,
-  flexRender,
-} from '@tanstack/react-table'
+import {flexRender, useTable} from '@tanstack/react-table'
+import {tableFeatureSet, type TableFeatureSet} from './table-features'
 import {SVG} from '../svg'
 import {TablePagination} from './table-pagination'
 import {TableCheckbox} from './table-columns'
@@ -27,11 +23,11 @@ import type {
   ColumnDef,
   ColumnOrderState,
   ColumnPinningState,
+  ColumnVisibilityState,
   ExpandedState,
   Row,
   SortingState,
   Table,
-  VisibilityState,
 } from '@tanstack/react-table'
 import type {FilterConfig, TableCustomColumns} from './types'
 import {TableCustomColsVariant} from './table-custom-cols/TableCustomCols'
@@ -184,8 +180,8 @@ export interface TableProps {
   }
   customActionItems?: React.ReactElement[]
   visibilityConfig?: {
-    columnVisibility: VisibilityState
-    setColumnVisibility: React.Dispatch<React.SetStateAction<VisibilityState>>
+    columnVisibility: ColumnVisibilityState
+    setColumnVisibility: React.Dispatch<React.SetStateAction<ColumnVisibilityState>>
   }
   pinningConfig?: {
     columnPinning: ColumnPinningState
@@ -232,13 +228,13 @@ export function Table({
   const initialRenderRef = React.useRef(true)
   const [sorting, setSorting] = React.useState<SortingState>([])
   // used for checkbox visibility
-  const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
+  const [columnVisibility, setColumnVisibility] = React.useState<ColumnVisibilityState>({})
   const [columnOrder, setColumnOrder] = React.useState<ColumnOrderState>([])
   const [columnPinning, setColumnPinning] = React.useState<ColumnPinningState>({
-    left: tableStyleConfig?.stickyIds
+    start: tableStyleConfig?.stickyIds
       ? [RADIO_COL_ID, CHECKBOX_COL_ID, EXPANDER_COL_ID, ...tableStyleConfig?.stickyIds]
       : [RADIO_COL_ID, CHECKBOX_COL_ID, EXPANDER_COL_ID],
-    right: [DROPDOWN_COL_ID],
+    end: [DROPDOWN_COL_ID],
   })
   const [expanded, setExpanded] = React.useState<ExpandedState>({})
 
@@ -360,7 +356,8 @@ export function Table({
         <TableCheckbox
           {...{
             checked: props.table.getIsAllRowsSelected(),
-            indeterminate: props.table.getIsSomeRowsSelected(),
+            indeterminate:
+              props.table.getIsSomeRowsSelected() && !props.table.getIsAllRowsSelected(),
             onChange: props.table.getToggleAllRowsSelectedHandler(),
             row: props.header,
             isHeader: true,
@@ -423,7 +420,8 @@ export function Table({
         ]),
   ]
 
-  const table = useReactTable({
+  const table = useTable({
+    features: tableFeatureSet,
     data,
     columns: _columns,
     state: {
@@ -442,17 +440,18 @@ export function Table({
     onRowSelectionChange: rowSelectionConfig?.setRowSelection || setRowSelection,
     onExpandedChange: handleExpandedChange,
     enableRowSelection: true,
+    // v9 turns getToggleSelectedHandler() into a shift-range handler by default. This
+    // table's checkbox column has never done range selection, and enabling it silently
+    // would change what a shift-click does to a customer's selection.
+    enableRowRangeSelection: false,
     enableMultiRowSelection: isRadio ? false : true,
-    manualPagination: true,
-    manualFiltering: true,
-    getCoreRowModel: getCoreRowModel(),
     ...(expansionConfig
       ? {
           // Children live in their own nested table rather than in the parent's
           // row model, so expandability is declared per row instead of derived
           // from subRows.
-          getRowCanExpand: (row: Row<any>) => !!expansionConfig.getRows(row.original)?.length,
-          getExpandedRowModel: getExpandedRowModel(),
+          getRowCanExpand: (row: Row<TableFeatureSet, any>) =>
+            !!expansionConfig.getRows(row.original)?.length,
         }
       : {}),
     defaultColumn: {
@@ -559,7 +558,7 @@ function TableComp({
   visibleCols,
   expansionConfig,
 }: {
-  table: Table<any>
+  table: Table<TableFeatureSet, any>
   isCheckbox?: boolean
   isRadio?: boolean
   loaderConfig: TableProps['loaderConfig']
@@ -761,14 +760,14 @@ function TableComp({
 }
 
 const getCommonPinningStyles = (
-  column: Column<any>,
+  column: Column<TableFeatureSet, any, any>,
   showLeftShadow: boolean,
   showRightShadow: boolean,
   isHeader?: boolean,
 ): React.CSSProperties => {
   const isPinned = column.getIsPinned()
-  const isLastLeftPinnedColumn = isPinned === 'left' && column.getIsLastColumn('left')
-  const isFirstRightPinnedColumn = isPinned === 'right' && column.getIsFirstColumn('right')
+  const isLastLeftPinnedColumn = isPinned === 'start' && column.getIsLastColumn('start')
+  const isFirstRightPinnedColumn = isPinned === 'end' && column.getIsFirstColumn('end')
 
   const leftShadow = 'drop-shadow(2px 0px 2px rgba(0, 0, 0, 0.07))'
   const rightShadow = 'drop-shadow(-2px 0px 2px rgba(0, 0, 0, 0.07))'
@@ -780,8 +779,8 @@ const getCommonPinningStyles = (
         : isFirstRightPinnedColumn && showRightShadow
           ? rightShadow
           : undefined,
-    left: isPinned === 'left' ? `${column.getStart('left')}px` : undefined,
-    right: isPinned === 'right' ? `${column.getAfter('right')}px` : undefined,
+    left: isPinned === 'start' ? `${column.getStart('start')}px` : undefined,
+    right: isPinned === 'end' ? `${column.getAfter('end')}px` : undefined,
     position: isPinned ? 'sticky' : undefined,
     zIndex: isPinned ? 2 : 0,
     backgroundColor: isHeader ? `var(--fill-highlight)` : '#ffffff',

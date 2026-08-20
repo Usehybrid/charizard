@@ -1,10 +1,11 @@
 import clsx from 'clsx'
 import classes from './styles.module.css'
-import {type ColumnDef, flexRender, getCoreRowModel, useReactTable} from '@tanstack/react-table'
+import {type ColumnDef, flexRender, useTable} from '@tanstack/react-table'
+import {subTableFeatureSet, type SubTableFeatureSet} from '../table-features'
 
 interface TableSubRowsProps {
   /** Column defs written against the child shape, not the parent's. */
-  columns: ColumnDef<any, any>[]
+  columns: ColumnDef<SubTableFeatureSet, any, any>[]
   data: any[]
   caption?: string
   /**
@@ -26,12 +27,14 @@ interface TableSubRowsProps {
  * state to reset every time a row collapses.
  */
 export function TableSubRows({columns, data, caption, parent}: TableSubRowsProps) {
-  const table = useReactTable({
+  const table = useTable({
+    features: subTableFeatureSet,
     data,
     columns,
     meta: {parent},
-    getCoreRowModel: getCoreRowModel(),
-    defaultColumn: {size: Number.MAX_SAFE_INTEGER, enableSorting: false},
+    // No `enableSorting: false` — with no sorting feature registered there is nothing to
+    // turn off, and the option does not exist on this table's type.
+    defaultColumn: {size: Number.MAX_SAFE_INTEGER},
   })
 
   return (

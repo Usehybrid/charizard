@@ -3,9 +3,10 @@ import chevronRight from '../../assets/chevron-right.svg'
 import classes from './styles.module.css'
 import {SVG} from '../../svg'
 import type {Row} from '@tanstack/react-table'
+import type {TableFeatureSet} from '../table-features'
 
 interface TableRowExpanderProps {
-  row: Row<any>
+  row: Row<TableFeatureSet, any>
   /** Accessible label prefix, e.g. "order" → "Expand order" / "Collapse order". */
   entityName?: string
 }

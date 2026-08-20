@@ -1,5 +1,6 @@
 import * as React from 'react'
 import {createColumnHelper} from '@tanstack/react-table'
+import type {TableFeatureSet} from '../../components/table/table-features'
 import randomIcon from '../../components/assets/check.svg'
 import {
   Badge,
@@ -34,9 +35,12 @@ const useInventoryStore = createTableStore(initialQueries)
 
 const tableCode = `
 import {createColumnHelper} from '@tanstack/react-table'
-import {Table, TableDeviceCell} from '@hybr1d-tech/charizard'
+import {Table, TableDeviceCell, type TableFeatureSet} from '@hybr1d-tech/charizard'
 
-const columnHelper = createColumnHelper<Inventory>()
+// Table v9 leads every generic with TFeatures. Pass charizard's TableFeatureSet so the
+// helper describes the same table <Table /> builds — that is what makes per-column
+// options like \`size\` type-check.
+const columnHelper = createColumnHelper<TableFeatureSet, Inventory>()
 
 const columns = [
   columnHelper.accessor(
@@ -200,7 +204,7 @@ function InventoryTableDemo() {
   )
 }
 
-const columnHelper = createColumnHelper<FixtureInventory>()
+const columnHelper = createColumnHelper<TableFeatureSet, FixtureInventory>()
 
 const columns = [
   columnHelper.accessor(
