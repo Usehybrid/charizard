@@ -6,7 +6,7 @@ import chevronLeft from '../assets/chevron-left.svg'
 import chevronRight from '../assets/chevron-right.svg'
 import classes from './date-range-picker.module.css'
 import {DateRange, DayPicker, useDayPicker} from 'react-day-picker'
-import {addDays, addMonths, addYears, isBefore, isSameDay} from 'date-fns'
+import {addDays, addMonths, addYears, isBefore, isSameDay, startOfMonth} from 'date-fns'
 import {create} from 'zustand'
 import {useMediaQuery} from '../../hooks'
 import {BUTTON_SIZE, BUTTON_TYPE, BUTTON_VARIANT, Button} from '../button'
@@ -36,6 +36,8 @@ export function rangeOptionToDates(value: string, today: Date = new Date()): Dat
   switch (value) {
     case 'today':
       return {from: today, to: today}
+    case 'mtd':
+      return {from: startOfMonth(today), to: today}
     case 'ytd':
       return {from: new Date(today.getFullYear(), 0, 1), to: today}
     case '7days':
