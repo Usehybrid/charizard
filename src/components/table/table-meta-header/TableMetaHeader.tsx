@@ -12,6 +12,7 @@ import {Search} from '../../search'
 import {SINGLE_VALUE_FILTER_TYPES, useTableStore} from '../store'
 import {pluralize} from '../../../utils'
 import type {Table} from '@tanstack/react-table'
+import type {TableFeatureSet} from '../table-features'
 
 interface TableMetaHeaderProps {
   rowSelectionConfig: TableProps['rowSelectionConfig']
@@ -22,7 +23,7 @@ interface TableMetaHeaderProps {
   exportConfig: TableProps['exportConfig']
   rowSelection: {}
   setRowSelection: React.Dispatch<React.SetStateAction<{}>>
-  table: Table<any>
+  table: Table<TableFeatureSet, any>
   isCheckbox?: boolean
   isDropdownActions?: boolean
   customActionItems?: React.ReactElement[]

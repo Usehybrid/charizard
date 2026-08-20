@@ -3,7 +3,8 @@ import clsx from 'clsx'
 import CustomColCheckbox from './CustomColCheckbox'
 import viewColIcon from '../../assets/views/view-table-list.svg'
 import classes from './table-custom-cols.module.css'
-import {Table} from '@tanstack/react-table'
+import type {Table} from '@tanstack/react-table'
+import type {TableFeatureSet} from '../table-features'
 import {Portal} from '@zag-js/react'
 import {useDisclosure} from '../../../hooks'
 import {SVG} from '../../svg'
@@ -26,7 +27,7 @@ interface TableCustomColsProps {
     handleSaveColumns: (columns: any) => Promise<void>
     variant?: TableCustomColsVariant
   }
-  table: Table<any>
+  table: Table<TableFeatureSet, any>
   isCheckbox?: boolean
   isDropdownActions?: boolean
 }

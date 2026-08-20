@@ -4,6 +4,7 @@ import classes from './styles.module.css'
 import clsx from 'clsx'
 import {CHECKBOX_COL_ID} from '../constants'
 import type {Row} from '@tanstack/react-table'
+import type {TableFeatureSet} from '../table-features'
 
 export function TableCheckbox({
   indeterminate,
@@ -12,7 +13,7 @@ export function TableCheckbox({
   ...rest
 }: {
   indeterminate: boolean
-  row: Row<unknown>
+  row: Row<TableFeatureSet, any>
   setSelectedRows?: any
   isHeader?: boolean
 } & React.HTMLProps<HTMLInputElement>) {

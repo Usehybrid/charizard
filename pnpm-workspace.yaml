@@ -30,3 +30,12 @@ peerDependencyRules:
     - vite
   allowedVersions:
     vite: '*'
+
+minimumReleaseAgeExclude:
+  - '@microsoft/api-extractor-model@7.33.11'
+  - '@microsoft/api-extractor@7.58.13'
+  - '@rushstack/node-core-library@5.24.0'
+  - '@rushstack/terminal@0.24.3'
+  - '@rushstack/ts-command-line@5.3.13'
+  - '@vitejs/plugin-react@6.1.0'
+  - happy-dom@20.11.6

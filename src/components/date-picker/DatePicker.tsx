@@ -187,7 +187,6 @@ export function DatePicker({
               disabled: classes.dayDisabled,
               hidden: classes.dayHidden,
               day_button: classes.dayButton,
-              dropdown_icon: classes.dropdownIcon,
             }}
             components={{
               Dropdown,
