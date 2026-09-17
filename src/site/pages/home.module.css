@@ -9,7 +9,7 @@
 
 .eyebrow,
 .sectionLabel {
-  color: var(--p-p50);
+  color: var(--action-text);
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -58,24 +58,24 @@
 
 .cta {
   padding: 10px 16px;
-  background-color: var(--p-p50);
-  color: var(--neutral-white);
+  background-color: var(--action-primary);
+  color: var(--text-on-primary);
 }
 
 .cta:hover {
-  background-color: var(--p-p60);
-  color: var(--neutral-white);
+  background-color: var(--action-primary-hover);
+  color: var(--text-on-primary);
 }
 
 .star {
   padding: 9px 14px;
   border: 1px solid var(--site-border-strong);
-  background-color: var(--neutral-white);
+  background-color: var(--surface-default);
   color: var(--text-primary);
 }
 
 .star:hover {
-  border-color: var(--p-p40);
+  border-color: var(--action-border);
   background-color: var(--fill-selection);
   color: var(--text-primary);
 }
@@ -91,7 +91,7 @@
 }
 
 .starCount svg {
-  color: var(--status-warning-w40);
+  color: var(--feedback-warning-text);
 }
 
 .installSection {
@@ -121,7 +121,7 @@
   min-width: 0;
   border: 1px solid var(--site-border-strong);
   border-radius: 8px;
-  background-color: var(--neutral-white);
+  background-color: var(--surface-default);
   overflow: hidden;
 }
 
@@ -150,8 +150,8 @@
 .managerTabActive,
 .managerTabActive:hover {
   border-color: var(--site-border);
-  background-color: var(--neutral-white);
-  color: var(--p-p50);
+  background-color: var(--surface-default);
+  color: var(--action-text);
 }
 
 .commandRow {
@@ -249,7 +249,7 @@
   padding: 16px;
   border: 1px solid var(--site-border);
   border-radius: 10px;
-  background-color: var(--neutral-white);
+  background-color: var(--surface-default);
   color: var(--text-primary);
   text-decoration: none;
   transition:
@@ -258,7 +258,7 @@
 }
 
 .componentCard:hover {
-  border-color: var(--p-p30);
+  border-color: var(--action-border);
   background-color: var(--fill-selection);
   color: var(--text-primary);
 }
@@ -283,7 +283,7 @@
 }
 
 .componentCard:hover .componentArrow {
-  color: var(--p-p50);
+  color: var(--action-text);
   opacity: 1;
   transform: translateX(0);
 }

@@ -15,13 +15,13 @@ export enum STATUS_STATUS {
 }
 
 const statusMap = {
-  [STATUS_STATUS.DISABLED]: {bg: 'var(--dark-d70)', icon: ''},
-  [STATUS_STATUS.ENABLED]: {bg: 'var(--status-success-s50)', icon: ''},
-  [STATUS_STATUS.INFO]: {bg: 'var(--p-p50)', icon: ''},
-  [STATUS_STATUS.WARNING]: {bg: 'var(--status-warning-w50)', icon: ''},
-  [STATUS_STATUS.NODATA]: {bg: 'var(--status-error-e50)', icon: ''},
-  [STATUS_STATUS.CANCEL]: {bg: 'var(--p-p70)', icon: Cross},
-  [STATUS_STATUS.DONE]: {bg: 'var(--p-p70)', icon: Tick},
+  [STATUS_STATUS.DISABLED]: {bg: 'var(--surface-inverse)', icon: ''},
+  [STATUS_STATUS.ENABLED]: {bg: 'var(--feedback-success-text)', icon: ''},
+  [STATUS_STATUS.INFO]: {bg: 'var(--action-primary)', icon: ''},
+  [STATUS_STATUS.WARNING]: {bg: 'var(--feedback-warning-text)', icon: ''},
+  [STATUS_STATUS.NODATA]: {bg: 'var(--feedback-error-text)', icon: ''},
+  [STATUS_STATUS.CANCEL]: {bg: 'var(--action-primary-hover)', icon: Cross},
+  [STATUS_STATUS.DONE]: {bg: 'var(--action-primary-hover)', icon: Tick},
 }
 
 interface StatusProps {

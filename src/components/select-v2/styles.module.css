@@ -19,7 +19,7 @@
 }
 
 .dropdownIcon svg path {
-  fill: var(--dark-d50);
+  fill: var(--text-secondary);
 }
 
 .loadingMessage {
@@ -28,15 +28,15 @@
   justify-content: center;
   padding: 6px 12px;
   min-height: 30px;
-  color: #9999b3;
+  color: var(--text-tertiary);
 }
 
 .optionContainer:not(:last-of-type) {
-  border-bottom: 1px solid var(--neutral-white);
+  border-bottom: 1px solid var(--surface-default);
 }
 
 .optionContainer:not(:last-of-type).divider {
-  border-bottom: 1px solid var(--stroke-border);
+  border-bottom: 1px solid var(--stroke-control);
 }
 
 .option {
@@ -51,7 +51,7 @@
 }
 
 .multiOptionValue {
-  background-color: var(--neutral-arch-50);
+  background-color: var(--surface-muted);
   padding: 2px 6px;
   border-radius: 4px;
 }
@@ -67,7 +67,7 @@
 }
 
 .option .label.selectedLabel {
-  color: var(--theme-blue);
+  color: var(--action-text);
 }
 
 .option .profileImg,
@@ -81,7 +81,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--neutral-arch-50);
+  background-color: var(--surface-muted);
 }
 
 .option .icon,
@@ -104,7 +104,7 @@
 }
 .option .icon svg path,
 .selectedIcon svg path {
-  fill: var(--p-p90);
+  fill: var(--action-text);
 }
 
 .selectedIcon {
@@ -128,7 +128,7 @@
 }
 
 .clearIcon svg path {
-  fill: var(--dark-d50);
+  fill: var(--text-secondary);
 }
 
 .removeIcon {
@@ -144,11 +144,11 @@
 }
 
 .removeIcon svg path {
-  fill: var(--p-p90);
+  fill: var(--action-text);
 }
 
 .mainContainer .errorMsg {
-  color: var(--status-error);
+  color: var(--feedback-error-text);
   display: block;
   text-align: left;
 }

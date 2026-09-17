@@ -5,9 +5,9 @@
 
 @keyframes skeleton-loading {
   0% {
-    background-color: var(--neutral-arch-200);
+    background-color: var(--surface-skeleton);
   }
   100% {
-    background-color: var(--neutral-arch-300);
+    background-color: var(--surface-skeleton-shine);
   }
 }

@@ -1,6 +1,8 @@
 import {StylesConfig} from 'react-select'
 
 export const styles: StylesConfig<any> = {
+  input: base => ({...base, color: 'var(--text-primary)'}),
+  singleValue: base => ({...base, color: 'var(--text-primary)'}),
   control: (baseStyles, state) => {
     return {
       ...baseStyles,
@@ -10,10 +12,10 @@ export const styles: StylesConfig<any> = {
       minHeight: '32px',
       padding: '4px 12px',
       ':hover': {
-        borderColor: '#254DDA',
+        borderColor: 'var(--action-border)',
       },
-      borderColor: state.isFocused ? '#254DDA' : '#E5E9FB',
-      backgroundColor: '#fff',
+      borderColor: state.isFocused ? 'var(--action-border)' : 'var(--stroke-border)',
+      backgroundColor: 'var(--surface-default)',
       gap: '4px',
       opacity: state.isDisabled ? 0.5 : 1,
     }
@@ -21,7 +23,7 @@ export const styles: StylesConfig<any> = {
   placeholder: baseStyles => {
     return {
       ...baseStyles,
-      color: '#9999B3',
+      color: 'var(--text-tertiary)',
     }
   },
   menu: baseStyles => {
@@ -31,7 +33,7 @@ export const styles: StylesConfig<any> = {
       borderRadius: '4px',
       boxShadow: '0px 4px 16px 0px rgba(18, 18, 18, 0.04), 0px 2px 8px 0px rgba(18, 18, 18, 0.08)',
       margin: '4px 0',
-      backgroundColor: '#fff',
+      backgroundColor: 'var(--surface-raised)',
       pointerEvents: 'auto',
       zIndex: 9999,
     }
@@ -49,9 +51,11 @@ export const styles: StylesConfig<any> = {
     return {
       ...baseStyles,
       padding: '6px 12px',
-      backgroundColor: state.isSelected || state.isFocused ? '#F6F8FE' : '#fff',
+      color: 'var(--text-primary)',
+      backgroundColor:
+        state.isSelected || state.isFocused ? 'var(--fill-selection)' : 'var(--surface-default)',
       ':hover': {
-        backgroundColor: '#F6F8FE',
+        backgroundColor: 'var(--fill-selection)',
       },
       display: 'flex',
       alignItems: 'center',
@@ -63,8 +67,8 @@ export const styles: StylesConfig<any> = {
       ...baseStyles,
       padding: '6px 12px',
       minHeight: '30px',
-      backgroundColor: '#fff',
-      color: '#9999B3',
+      backgroundColor: 'var(--surface-default)',
+      color: 'var(--text-tertiary)',
     }
   },
   valueContainer: baseStyles => {
@@ -78,11 +82,14 @@ export const styles: StylesConfig<any> = {
   },
   multiValue: baseStyles => ({
     ...baseStyles,
+    backgroundColor: 'var(--surface-muted)',
+    color: 'var(--text-primary)',
     alignItems: 'center',
     gap: '4px',
   }),
   multiValueLabel: baseStyles => ({
     ...baseStyles,
+    color: 'var(--text-primary)',
     display: 'flex',
     alignItems: 'center',
     gap: '4px',

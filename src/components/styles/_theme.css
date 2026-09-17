@@ -1,0 +1,134 @@
+/* Semantic colours are the theme API. Palette ramps in _variables.css are
+   immutable: white remains white for logos, charts and content on solid fills. */
+:root {
+  color-scheme: light;
+  --surface-page: #fbfbfe;
+  --surface-default: #ffffff;
+  --surface-raised: #ffffff;
+  --surface-muted: #f2f5fd;
+  --surface-hover: #f6f8fe;
+  --surface-inverse: #070f2c;
+  --surface-disabled: #efefef;
+  --surface-skeleton: #f0f0f4;
+  --surface-skeleton-shine: #ffffff;
+  --surface-media: #ffffff;
+  --text-on-primary: #ffffff;
+  --text-disabled: #999999;
+  --stroke-control: #d3dbf8;
+  --action-primary: #254dda;
+  --action-primary-hover: #1e3eae;
+  --action-border: #254dda;
+  --action-text: #254dda;
+  --focus-ring: #254dda;
+  --overlay-backdrop: rgb(0 0 0 / 50%);
+  --shadow-raised: 0 4px 16px rgb(18 18 18 / 8%);
+  --feedback-success-text: #206b4c;
+  --feedback-success-bg: #f3faf7;
+  --feedback-success-solid: #197451;
+  --feedback-error-text: #b72d20;
+  --feedback-error-bg: #fef4f3;
+  --feedback-error-solid: #b72d20;
+  --feedback-warning-text: #805207;
+  --feedback-warning-bg: #fef9f1;
+  --feedback-warning-solid: #805207;
+  --feedback-info-text: #1f5b83;
+  --feedback-info-bg: #f3f9fd;
+  --feedback-info-solid: #1f5b83;
+  --chart-grid: #e5e9fb;
+  --chart-track: #e6e6ec;
+  --chart-label: var(--text-secondary);
+  --chart-tooltip-bg: var(--surface-raised);
+  --chart-tooltip-text: var(--text-primary);
+
+  --toastify-color-light: var(--surface-raised);
+  --toastify-toast-background: var(--surface-raised);
+  --toastify-text-color-light: var(--text-primary) !important;
+  --toastify-color-info: var(--feedback-info-text) !important;
+  --toastify-color-success: var(--feedback-success-text) !important;
+  --toastify-color-warning: var(--feedback-warning-text) !important;
+  --toastify-color-error: var(--feedback-error-text) !important;
+  --toastify-spinner-color: var(--text-secondary);
+  --toastify-spinner-color-empty-area: var(--surface-muted);
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --surface-page: #171719;
+  --surface-default: #202023;
+  --surface-raised: #28282c;
+  --surface-muted: #29292e;
+  --surface-hover: #303035;
+  --surface-inverse: #28282c;
+  --surface-disabled: #29292d;
+  --surface-skeleton: #29292e;
+  --surface-skeleton-shine: #39393f;
+  --text-primary: #f2f2f4;
+  --text-secondary: #b9b9c2;
+  --text-tertiary: #a1a1aa;
+  --text-hint: #a1a1aa;
+  --text-disabled: #777780;
+  --fill-highlight: var(--surface-page);
+  --fill-selection: #293453;
+  --stroke-tabs-sections: #39393f;
+  --stroke-border: #39393f;
+  --stroke-buttons-input: #777780;
+  --stroke-control: #777780;
+  --stroke-selection: #9db2ff;
+  --action-primary-hover: #345ddf;
+  --action-border: #9db2ff;
+  --action-text: #9db2ff;
+  --link-rest: #9db2ff;
+  --link-hover: #c1ceff;
+  --focus-ring: #9db2ff;
+  --disabled-50: var(--surface-disabled);
+  --disabled-100: var(--surface-disabled);
+  --disabled-500: var(--text-disabled);
+  --feedback-success-text: #5ec298;
+  --feedback-success-bg: #1d342a;
+  --feedback-error-text: #f1948a;
+  --feedback-error-bg: #3b2425;
+  --feedback-warning-text: #f5b041;
+  --feedback-warning-bg: #3a301e;
+  --feedback-info-text: #85c1e9;
+  --feedback-info-bg: #202f3e;
+  --chart-grid: #39393f;
+  --chart-track: #39393f;
+  --overlay-backdrop: rgb(0 0 0 / 64%);
+  --shadow-raised: 0 8px 24px rgb(0 0 0 / 35%);
+}
+
+/* A theme applies at the document root, so body portals share these defaults. */
+body {
+  background-color: var(--surface-page);
+  color: var(--text-primary);
+}
+
+input,
+textarea,
+select {
+  color: var(--text-primary);
+  background-color: var(--surface-default);
+}
+
+/* Restore a consistent keyboard indicator over legacy outline:none rules. */
+:is(
+  button,
+  a,
+  input,
+  textarea,
+  select,
+  [role='button'],
+  [role='menuitem'],
+  [role='menuitemradio'],
+  [role='checkbox'],
+  [role='radio'],
+  [role='switch']
+):focus-visible {
+  outline: 2px solid var(--focus-ring) !important;
+  outline-offset: 2px;
+}
+
+::selection {
+  background: var(--fill-selection);
+  color: var(--text-primary);
+}

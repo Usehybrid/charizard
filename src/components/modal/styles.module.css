@@ -31,7 +31,7 @@
   width: 100%;
   /* took a random number of 1.75, might have to change it later according to preferences */
   /* max-height: calc(100dvh - (1.75rem * 2)); */
-  background-color: var(--neutral-white);
+  background-color: var(--surface-raised);
   /* overflow-x: hidden; */
   border-radius: 8px;
 }
@@ -62,7 +62,7 @@
   justify-content: space-between;
   gap: 12px;
   padding: 12px;
-  background-color: var(--neutral-white);
+  background-color: var(--surface-raised);
 
   color: var(--text-primary);
   font-size: 20px;
@@ -73,7 +73,7 @@
 }
 
 .showBorder {
-  border-bottom: 1px solid var(--neutral-arch-300);
+  border-bottom: 1px solid var(--stroke-border);
 }
 
 .closeIconSpan {
@@ -87,7 +87,7 @@
 }
 
 .closeIcon > path {
-  fill: var(--neutral-arch-600);
+  fill: var(--text-tertiary);
 }
 
 .body {
@@ -107,13 +107,13 @@
   justify-content: flex-end;
   gap: 12px;
   padding: 12px;
-  background-color: var(--neutral-white);
+  background-color: var(--surface-raised);
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
 }
 
 .showBorder {
-  border-top: 1px solid var(--neutral-arch-300);
+  border-top: 1px solid var(--stroke-border);
 }
 
 .btnsContainer {
@@ -124,7 +124,7 @@
   gap: 8px;
 }
 
-.buttonLabel{
+.buttonLabel {
   display: flex;
   align-items: center;
   justify-content: center;

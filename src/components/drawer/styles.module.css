@@ -30,7 +30,7 @@
   /* overflow: hidden; */
   position: fixed;
   top: 0;
-  background: var(--neutral-white);
+  background: var(--surface-raised);
   box-shadow: 0px -4px 15px rgba(0, 0, 0, 0.08);
   z-index: 1040;
 
@@ -76,11 +76,11 @@
   align-items: center;
   justify-content: space-between;
   padding: 12px 20px;
-  background-color: var(--neutral-arch-10);
+  background-color: var(--surface-page);
 }
 
 .headerContainer.showBorder {
-  border-bottom: 1px solid var(--neutral-arch-300);
+  border-bottom: 1px solid var(--stroke-border);
 }
 
 .title {
@@ -107,7 +107,7 @@
 }
 
 .closeBtnIcon > path {
-  fill: var(--neutral-arch-600);
+  fill: var(--text-tertiary);
 }
 
 .descriptionContainer {
@@ -134,7 +134,7 @@
   justify-content: flex-end;
   gap: 12px;
 
-  background: var(--neutral-white);
+  background: var(--surface-raised);
 }
 
 .footerBtnContainer {

@@ -35,7 +35,7 @@
 }
 
 .version:hover {
-  color: var(--p-p50);
+  color: var(--action-text);
 }
 
 .date {
@@ -68,17 +68,17 @@
 }
 
 .feature {
-  background-color: var(--status-success-s10);
-  color: var(--status-success-s70);
+  background-color: var(--feedback-success-bg);
+  color: var(--feedback-success-text);
 }
 
 .fix {
-  background-color: var(--status-info-i10);
-  color: var(--status-info-i70);
+  background-color: var(--feedback-info-bg);
+  color: var(--feedback-info-text);
 }
 
 .other {
-  background-color: var(--neutral-arch-100);
+  background-color: var(--surface-muted);
   color: var(--text-secondary);
 }
 

@@ -5,8 +5,8 @@
   margin: 0 -30px;
   gap: 40px;
   height: 40px;
-  background: var(--neutral-arch-20);
-  border: 1px solid var(--neutral-arch-200);
+  background: var(--surface-page);
+  border: 1px solid var(--stroke-border);
   border-radius: 0px 0px 4px 4px;
 }
 
@@ -65,6 +65,6 @@
 
 .tabList .tab[data-selected] {
   color: var(--text-primary);
-  border-bottom-color: var(--theme-blue);
+  border-bottom-color: var(--action-border);
   font-weight: 500;
 }

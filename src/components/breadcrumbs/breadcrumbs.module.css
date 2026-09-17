@@ -36,7 +36,7 @@
   position: absolute;
   top: 100%;
   left: 0;
-  background-color: white;
+  background-color: var(--surface-default);
 
   border-radius: 4px;
   z-index: 100;
@@ -45,7 +45,9 @@
   list-style-type: none;
   gap: 4px;
 
-  box-shadow: 0px 4px 16px 0px rgba(18, 18, 18, 0.04), 0px 2px 8px 0px rgba(18, 18, 18, 0.08);
+  box-shadow:
+    0px 4px 16px 0px rgba(18, 18, 18, 0.04),
+    0px 2px 8px 0px rgba(18, 18, 18, 0.08);
 }
 
 .dropdown li {

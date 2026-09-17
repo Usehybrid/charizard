@@ -145,7 +145,7 @@ export function TimePicker({
         </InputGroupV2>
       </PopoverTrigger>
       <PopoverContent
-        bg="var(--neutral-white)"
+        bg="var(--surface-default)"
         className={classes.timePopover}
         positionerStyles={{zIndex: 20}}
       >
@@ -218,11 +218,7 @@ export function TimePicker({
           )}
         </div>
         <div className={classes.footer}>
-          <Button
-            size={BUTTON_SIZE.SMALL}
-            variant={BUTTON_VARIANT.GHOST}
-            onClick={closeHandler}
-          >
+          <Button size={BUTTON_SIZE.SMALL} variant={BUTTON_VARIANT.GHOST} onClick={closeHandler}>
             Close
           </Button>
           <Button size={BUTTON_SIZE.SMALL} onClick={handleTimeChange}>

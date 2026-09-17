@@ -4,11 +4,13 @@
 }
 .dateIcon > path,
 .dateIcon > g > path {
-  fill: var(--neutral-arch-600);
+  fill: var(--text-tertiary);
 }
 .popoverContent {
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
-  border: 1px solid var(--theme-blue);
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--action-border);
   border-radius: 8px;
 }
 .quickRangePicker label {
@@ -70,19 +72,19 @@
   padding: 0;
   opacity: 0.5;
   position: absolute;
-  border: 1px solid var(--theme-blue);
+  border: 1px solid var(--action-border);
   border-radius: 4px;
 }
 .navButtonPrevious:hover,
 .navButtonNext:hover {
-  background-color: var(--neutral-arch-20);
+  background-color: var(--surface-page);
   opacity: 1;
 }
 .navButtonNext svg > path,
 .navButtonNext svg > g > path,
 .navButtonPrevious svg > path,
 .navButtonPrevious svg > g > path {
-  fill: var(--theme-blue);
+  fill: var(--action-text);
 }
 
 .navButtonPrevious {
@@ -149,37 +151,37 @@
   cursor: pointer;
 }
 .cell:not(.daySelected) .day:hover {
-  background-color: var(--neutral-arch-20);
+  background-color: var(--surface-page);
   color: var(--text-primary);
 }
 .dayHighlighted {
-  background-color: var(--neutral-arch-20);
+  background-color: var(--surface-page);
   color: var(--text-primary);
 }
 .daySelected {
-  background-color: var(--theme-blue-dark);
+  background-color: var(--action-primary-hover);
   border-radius: 0.5rem;
 }
 
 .daySelected:not(.dayRangeMiddle) .day {
-  color: var(--neutral-white);
+  color: var(--text-on-primary);
 }
 
 .daySelected:hover {
-  background-color: var(--theme-blue-dark);
-  color: var(--neutral-white);
+  background-color: var(--action-primary-hover);
+  color: var(--text-on-primary);
 }
 .dayToday {
   border-radius: 0.5rem;
-  background-color: var(--neutral-arch-40);
+  background-color: var(--surface-muted);
   color: var(--text-primary);
 }
 .dayToday:hover {
-  background-color: var(--neutral-arch-40);
+  background-color: var(--surface-muted);
 }
 .dayToday.daySelected:not(.dayRangeMiddle) {
-  background-color: var(--theme-blue-dark);
-  color: var(--neutral-white);
+  background-color: var(--action-primary-hover);
+  color: var(--text-on-primary);
 }
 .dayOutside {
   opacity: 0.5;
@@ -192,7 +194,7 @@
 }
 .dayRangeStart.dayOutside,
 .dayRangeEnd.dayOutside {
-  color: var(--neutral-white);
+  color: var(--text-on-primary);
   opacity: 1;
 }
 .dayRangeStart {
@@ -207,12 +209,12 @@
   border-radius: 0.5rem;
 }
 .dayRangeMiddle {
-  background-color: var(--neutral-arch-20);
+  background-color: var(--surface-page);
   color: var(--text-primary);
   border-radius: 0;
 }
 .dayRangeMiddle:hover {
-  background-color: var(--neutral-arch-20);
+  background-color: var(--surface-page);
   color: var(--text-primary);
 }
 .dayRangeMiddle.dayOutside {
@@ -222,7 +224,7 @@
   visibility: hidden;
 }
 .errorMsg {
-  color: var(--status-error-e50);
+  color: var(--feedback-error-text);
   display: block;
   text-align: left;
 }

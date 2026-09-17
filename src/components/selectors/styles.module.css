@@ -13,7 +13,7 @@
   justify-content: center;
   align-items: center;
 
-  background-color: var(--neutral-arch-20);
+  background-color: var(--surface-page);
   box-shadow: -1px 0px 0px 0px rgba(0, 0, 0, 0.1);
 
   color: var(--text-hint);
@@ -27,7 +27,7 @@
 }
 
 .active {
-  background-color: var(--neutral-arch-30);
-  color: var(--theme-blue);
+  background-color: var(--surface-muted);
+  color: var(--action-text);
   font-weight: 600;
 }

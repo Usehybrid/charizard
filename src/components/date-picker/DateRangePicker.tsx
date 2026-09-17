@@ -199,7 +199,7 @@ export function DateRangePicker({
           )}
         </PopoverTrigger>
         <PopoverContent
-          bg="var(--neutral-white)"
+          bg="var(--surface-default)"
           className={classes.popoverContent}
           positionerStyles={{zIndex: 20}}
         >

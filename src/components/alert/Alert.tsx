@@ -126,26 +126,26 @@ export function Alert({
 export const alertTypeMap: {
   [key: string]: {bg: string; color: string; icon: string}
 } = {
-  [ALERT_TYPES.NEUTRAL]: {bg: 'var(--dark-d10)', color: 'var(--dark-d70)', icon: info},
-  [ALERT_TYPES.DEFAULT]: {bg: 'var(--p-p10)', color: 'var(--p-p70)', icon: info},
+  [ALERT_TYPES.NEUTRAL]: {bg: 'var(--surface-muted)', color: 'var(--text-primary)', icon: info},
+  [ALERT_TYPES.DEFAULT]: {bg: 'var(--fill-selection)', color: 'var(--action-text)', icon: info},
   [ALERT_TYPES.POSITIVE]: {
-    bg: 'var(--status-success-s10)',
-    color: 'var(--status-success-s70)',
+    bg: 'var(--feedback-success-bg)',
+    color: 'var(--feedback-success-text)',
     icon: success,
   },
   [ALERT_TYPES.WARNING]: {
-    bg: 'var(--status-warning-w10)',
-    color: 'var(--status-warning-w70)',
+    bg: 'var(--feedback-warning-bg)',
+    color: 'var(--feedback-warning-text)',
     icon: warning,
   },
   [ALERT_TYPES.NEGATIVE]: {
-    bg: 'var(--status-error-e10)',
-    color: 'var(--status-error-e70)',
+    bg: 'var(--feedback-error-bg)',
+    color: 'var(--feedback-error-text)',
     icon: error,
   },
   [ALERT_TYPES.HIGHLIGHT]: {
-    bg: 'var(--status-info-i10)',
-    color: 'var(--status-info-i70)',
+    bg: 'var(--feedback-info-bg)',
+    color: 'var(--feedback-info-text)',
     icon: info,
   },
 }

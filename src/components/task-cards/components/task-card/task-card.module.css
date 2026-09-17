@@ -102,7 +102,7 @@
 }
 
 .logoutIcon path {
-  fill: var(--status-error-e50);
+  fill: var(--feedback-error-text);
 }
 
 .fileIcon {

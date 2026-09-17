@@ -246,7 +246,7 @@ export function getTaskMenuItems(
         })
       },
       iconSrc: deleteBin,
-      customStyles: {color: 'var(--status-error-e50)'},
+      customStyles: {color: 'var(--feedback-error-text)'},
       customSvgClassName: classes.logoutIcon,
       hidden:
         // (data.module_reference === MODULES.LEAVE && !data.task_details_id) ||

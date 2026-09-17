@@ -53,11 +53,11 @@
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  border: 1px solid var(--neutral-arch-100);
+  border: 1px solid var(--stroke-control);
   flex-shrink: 0;
 }
 .radioControl:hover {
-  border: 1px solid var(--p-p30);
+  border: 1px solid var(--action-border);
   transition: all 100ms;
 }
 .controlDisabled {
@@ -72,13 +72,13 @@
 }
 
 .radioControlActive {
-  border-color: var(--p-p40);
-  background-color: var(--p-p40);
+  border-color: var(--action-border);
+  background-color: var(--action-primary-hover);
   position: relative;
 }
 .radioControlActive:hover {
-  border-color: var(--p-p60);
-  background-color: var(--p-p60);
+  border-color: var(--action-border);
+  background-color: var(--action-primary-hover);
   position: relative;
 }
 .radioControlActive.radioControlActiveDisabled {
@@ -91,7 +91,7 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background-color: var(--neutral-white);
+  background-color: var(--text-on-primary);
   position: absolute;
   top: 50%;
   left: 50%;
@@ -104,7 +104,7 @@
   font-weight: 400;
   line-height: 20px;
   margin: 0;
-  color: var(--status-danger);
+  color: var(--feedback-error-text);
   text-align: left;
 }
 
@@ -121,7 +121,7 @@
 }
 
 .infoIcon > path {
-  fill: var(--neutral-arch-600);
+  fill: var(--text-tertiary);
 }
 
 .headingLoader {

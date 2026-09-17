@@ -5,7 +5,7 @@
 .search {
   border-radius: 4px;
   border: 1px solid var(--stroke-selection);
-  background: var(--neutral-white);
+  background: var(--surface-default);
 
   display: flex;
   width: 100%;
@@ -24,7 +24,7 @@
 }
 
 .search:hover:not(.searchDisabled) {
-  border-color: var(--theme-blue);
+  border-color: var(--action-border);
 }
 
 .search::placeholder {
@@ -32,7 +32,7 @@
 }
 
 .search:focus-visible {
-  outline: 1px solid var(--theme-blue);
+  outline: 1px solid var(--action-border);
 }
 
 .searchIcon,

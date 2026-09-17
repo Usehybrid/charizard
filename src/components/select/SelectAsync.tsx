@@ -182,12 +182,12 @@ export function SelectAsync({
           control: (baseStyles, state) => ({
             ...(selectV2Styles.control?.(baseStyles, state) || baseStyles),
             borderColor: errorMsg
-              ? 'var(--status-error)'
+              ? 'var(--feedback-error-text)'
               : state.isFocused
-              ? '#254DDA'
-              : '#E5E9FB',
+                ? 'var(--action-border)'
+                : 'var(--stroke-border)',
             ':hover': {
-              borderColor: errorMsg ? 'var(--status-error)' : '#254DDA',
+              borderColor: errorMsg ? 'var(--feedback-error-text)' : 'var(--action-border)',
             },
           }),
           ...selectStyles,
@@ -208,9 +208,7 @@ export function SelectAsync({
         onChange={(newValue: SelectValue, actionMeta: SelectActionMeta) => {
           if (isMulti) {
             onChange(
-              Array.isArray(newValue)
-                ? (newValue as SelectMultiValue).map(val => val.value)
-                : [],
+              Array.isArray(newValue) ? (newValue as SelectMultiValue).map(val => val.value) : [],
               actionMeta,
             )
           } else onChange((newValue as SelectSingleValue)?.value ?? '', actionMeta)
@@ -225,9 +223,7 @@ export function SelectAsync({
         {...extraProps}
       />
       {errorMsg && (
-        <span className={clsx('zap-subcontent-medium', selectV2Classes.errorMsg)}>
-          {errorMsg}
-        </span>
+        <span className={clsx('zap-subcontent-medium', selectV2Classes.errorMsg)}>{errorMsg}</span>
       )}
     </div>
   )

@@ -46,56 +46,56 @@
 }
 
 .btnPrimary {
-  background-color: var(--theme-blue);
-  color: var(--neutral-white);
+  background-color: var(--action-primary);
+  color: var(--text-on-primary);
 }
 .btnPrimary:hover {
-  background-color: var(--p-p100);
+  background-color: var(--action-primary-hover);
 }
 .btnPrimary:focus {
-  background-color: var(--p-p70);
+  background-color: var(--action-primary-hover);
 }
 .btnPrimary:disabled {
-  background-color: var(--p-p50);
+  background-color: var(--action-primary);
 }
 
 .btnSecondary {
-  background-color: var(--neutral-white);
-  border: 1px solid var(--p-p50);
-  color: var(--p-p50);
+  background-color: var(--surface-default);
+  border: 1px solid var(--action-border);
+  color: var(--action-text);
 }
 .btnSecondary:hover {
   background-color: var(--fill-selection);
-  border-color: var(--p-p100);
+  border-color: var(--action-border);
 }
 .btnSecondary:focus {
   background-color: var(--fill-selection);
-  border-color: var(--p-p70);
+  border-color: var(--action-border);
 }
 .btnSecondary:disabled {
-  border-color: var(--p-p40);
+  border-color: var(--action-border);
 }
 
 .btnTertiary {
   background-color: var(--fill-selection);
   color: var(--text-primary);
-  border: 1px solid var(--p-p10);
+  border: 1px solid var(--action-border);
 }
 .btnTertiary:hover {
-  border-color: var(--p-p10);
-  background-color: var(--p-p10);
+  border-color: var(--action-border);
+  background-color: var(--fill-selection);
 }
 .btnTertiary:focus {
-  background-color: var(--p-p20);
-  border-color: var(--p-p10);
+  background-color: var(--fill-selection);
+  border-color: var(--action-border);
 }
 .btnTertiary:disabled {
   background-color: var(--fill-selection);
-  border-color: var(--p-p10);
+  border-color: var(--action-border);
 }
 
 .btnLink {
-  color: var(--p-p50);
+  color: var(--action-text);
   background-color: transparent;
   height: 24px;
   padding: 0;
@@ -109,7 +109,7 @@
 }
 .btnLink:focus {
   background-color: var(--fill-selection);
-  color: var(--p-p70);
+  color: var(--action-text);
   text-decoration: underline;
 }
 .btnLink.disabled:hover {
@@ -118,14 +118,14 @@
 
 .btnSecondary.focusVisible {
   background-color: var(--fill-selection);
-  border-color: var(--p-p70);
+  border-color: var(--action-border);
 }
 .btnTertiary.focusVisible {
-  background-color: var(--p-p20);
-  border-color: var(--p-p10);
+  background-color: var(--fill-selection);
+  border-color: var(--action-border);
 }
 .btnPrimary.focusVisible {
-  background-color: var(--p-p70);
+  background-color: var(--action-primary-hover);
 }
 
 .iconOnlySmall {
@@ -144,7 +144,7 @@
 .menus {
   z-index: 10;
   border-radius: 4px;
-  background: var(--neutral-white);
+  background: var(--surface-default);
   box-shadow: 0px 2px 8px 0px #12121214;
   border: 1px solid var(--stroke-border);
   min-width: 160px;
@@ -209,15 +209,15 @@
 }
 
 .btnAddonPrimary {
-  border-left: 1px solid var(--neutral-white);
+  border-left: 1px solid var(--text-on-primary);
 }
 
 .btnAddonSecondary {
-  border-left: 1px solid var(--p-p50);
+  border-left: 1px solid var(--action-border);
 }
 
 .btnAddonTertiary {
-  border-left: 1px solid var(--p-p10);
+  border-left: 1px solid var(--action-border);
 }
 
 .menuIcon {
@@ -237,11 +237,11 @@
 }
 
 .moreMenuIcon path {
-  fill: var(--neutral-white);
+  fill: var(--text-on-primary);
 }
 
 .moreMenuIconSecondary path {
-  fill: var(--p-p50);
+  fill: var(--action-text);
 }
 
 .btnTable {
@@ -266,7 +266,7 @@
 }
 
 .btnGrpLeft.btnPrimary {
-  border-right: 1px solid white;
+  border-right: 1px solid var(--text-on-primary);
 }
 
 .btnGrpLeft.btnSecondary {
@@ -298,4 +298,8 @@
 .groupActionTable {
   background-color: transparent;
   border: none;
+}
+
+:global(:root[data-theme='dark']) .btnPrimary {
+  box-shadow: inset 0 0 0 1px var(--action-border);
 }

@@ -13,14 +13,14 @@
 }
 
 .actionCommon:hover {
-  background-color: var(--p-p10);
+  background-color: var(--fill-selection);
 }
 .actionCommon:disabled {
   cursor: wait;
   opacity: 0.8;
 }
 .actionCommon.active {
-  background-color: var(--p-p10);
+  background-color: var(--fill-selection);
 }
 
 .exportingIcon {
@@ -50,7 +50,7 @@
   align-self: stretch;
   /* gap: 8px; */
   border-radius: 4px;
-  background: var(--neutral-white);
+  background: var(--surface-default);
   color: var(--text-primary);
 
   /* dd_popup_sottomsheet_toast */
@@ -69,7 +69,7 @@
 
 .option:hover {
   cursor: pointer;
-  background-color: var(--fill-highlight);
+  background-color: var(--surface-page);
 }
 
 .optionPending {

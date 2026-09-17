@@ -48,8 +48,8 @@
 }
 
 .linkActive {
-  border-left-color: var(--p-p50);
-  color: var(--p-p50);
+  border-left-color: var(--action-border);
+  color: var(--action-text);
 }
 
 /* Matches the layout's single-column breakpoint — below it there is no right

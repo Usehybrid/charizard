@@ -4,7 +4,7 @@
   justify-content: space-between;
   align-items: center;
   border-radius: 8px 8px 0px 0px;
-  background: #fff;
+  background: var(--surface-default);
   padding: 12px;
   position: sticky;
   top: 0;
@@ -53,7 +53,7 @@
 }
 
 .actionCommon:hover {
-  background-color: var(--p-p10);
+  background-color: var(--fill-selection);
 }
 
 .filterBtn {

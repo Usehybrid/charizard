@@ -5,8 +5,8 @@
 
 :root {
   /* surfaces */
-  --site-bg: var(--neutral-white);
-  --site-bg-subtle: #f9fafd;
+  --site-bg: var(--surface-default);
+  --site-bg-subtle: var(--surface-page);
   --site-border: var(--stroke-border);
   --site-border-strong: var(--stroke-selection);
 
@@ -51,7 +51,7 @@ samp {
 }
 
 ::selection {
-  background-color: var(--p-p10);
+  background-color: var(--fill-selection);
 }
 
 /* Scrollbars — subtle, matches the chrome instead of the OS default. */

@@ -13,7 +13,7 @@
 }
 
 .actionCommon:hover {
-  background-color: var(--p-p10);
+  background-color: var(--fill-selection);
 }
 
 .error {
@@ -42,7 +42,7 @@
 
 .content {
   scrollbar-width: none;
-  background-color: white;
+  background-color: var(--surface-default);
   color: var(--text-primary);
   height: 100dvh;
   padding-top: 1px;
@@ -78,7 +78,7 @@
   align-items: center;
   gap: 10px;
   width: 100%;
-  background: var(--neutral-arch-10);
+  background: var(--surface-page);
 
   position: sticky;
   top: 0;
@@ -102,7 +102,7 @@
 }
 
 .closeIcon > path {
-  fill: var(--neutral-arch-600);
+  fill: var(--text-tertiary);
 }
 
 .title span {
@@ -125,7 +125,7 @@
   position: sticky;
   padding-bottom: 20px;
   bottom: 0;
-  background-color: white;
+  background-color: var(--surface-default);
 }
 
 /* filter options */
@@ -142,7 +142,7 @@
   padding: 4px 6px;
 
   &:hover {
-    background: var(--neutral-arch-50);
+    background: var(--surface-muted);
   }
 }
 
@@ -152,7 +152,7 @@
   top: -16px;
   padding-top: 16px;
   margin-top: -16px;
-  background-color: white;
+  background-color: var(--surface-default);
   /* margin-top: -10px; */
   margin-bottom: 6px;
   z-index: 1;
@@ -179,7 +179,7 @@
   top: 50%;
   width: 270px;
   height: 1px;
-  background-color: var(--neutral-arch-100);
+  background-color: var(--surface-muted);
 }
 
 .info2:after {
@@ -206,14 +206,14 @@
   width: 16px;
   height: 16px;
   border-radius: 4px;
-  border: 2px solid var(--neutral-arch-100);
-  background-color: white;
+  border: 2px solid var(--stroke-border);
+  background-color: var(--surface-default);
   flex-shrink: 0;
 }
 
 .checkbox[data-state='checked'] {
-  border-color: var(--theme-blue);
-  background-color: var(--theme-blue);
+  border-color: var(--action-border);
+  background-color: var(--action-primary);
   background-image: url('../../assets/check.svg');
   background-position: center;
   background-size: 10px;
@@ -231,7 +231,7 @@
 }
 
 .optionDisabled:hover {
-  background: var(--neutral-arch-50);
+  background: var(--surface-muted);
 }
 
 .grouped {
@@ -258,5 +258,5 @@
   top: 50%;
   width: 270px;
   height: 1px;
-  background-color: var(--neutral-arch-100);
+  background-color: var(--surface-muted);
 }

@@ -9,7 +9,7 @@
   padding: 4px;
   max-width: fit-content;
   border-radius: 2px;
-  background: var(--neutral-arch-200);
+  background: var(--surface-muted);
   color: var(--text-secondary);
   font-size: 12px;
   font-weight: 500;

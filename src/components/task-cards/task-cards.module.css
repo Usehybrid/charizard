@@ -19,7 +19,7 @@
   gap: 8;
   height: 144px;
   border-radius: 8px;
-  background: var(--fill-highlight);
+  background: var(--surface-page);
 }
 .emptyTxt {
   color: var(--text-secondary);

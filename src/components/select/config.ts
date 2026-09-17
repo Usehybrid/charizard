@@ -5,6 +5,7 @@ import {Option} from './Common'
 // todo @sohhamm, figure out ts generics for styles config
 
 export const colourStyles: StylesConfig<any> = {
+  input: base => ({...base, color: 'var(--text-primary)'}),
   valueContainer: styles => {
     return {
       ...styles,
@@ -17,17 +18,17 @@ export const colourStyles: StylesConfig<any> = {
       backgroundColor: isDisabled
         ? undefined
         : isSelected
-        ? data.color
-        : isFocused
-        ? 'var(--neutral-arch-30)'
-        : '#ffffff',
+          ? data.color
+          : isFocused
+            ? 'var(--surface-muted)'
+            : 'var(--surface-default)',
       color: 'var(--text-primary)',
       cursor: isDisabled ? 'not-allowed' : 'default',
       padding: '8px 12px',
       fontSize: '16px',
       lineHeight: '24px',
       ':hover': {
-        backgroundColor: 'var(--neutral-arch-30)',
+        backgroundColor: 'var(--surface-muted)',
       },
     }
   },
@@ -47,7 +48,7 @@ export const colourStyles: StylesConfig<any> = {
   multiValue: (styles, {data, isFocused}) => {
     return {
       ...styles,
-      backgroundColor: 'var(--neutral-arch-50)',
+      backgroundColor: 'var(--surface-muted)',
       padding: data.profileImgUrl ? '0px 8px 0 0' : '0 8px',
       display: 'flex',
       alignItems: 'center',
@@ -66,11 +67,11 @@ export const colourStyles: StylesConfig<any> = {
   }),
   multiValueRemove: (styles, {data}) => ({
     ...styles,
-    color: 'var(--neutral-arch-600)',
+    color: 'var(--text-tertiary)',
     padding: '0',
     ':hover': {
       backgroundColor: 'transparent',
-      color: 'var(--neutral-arch-600)',
+      color: 'var(--text-tertiary)',
     },
     svg: {
       filter:
@@ -98,6 +99,8 @@ export const colourStyles: StylesConfig<any> = {
   menu: baseStyles => {
     return {
       ...baseStyles,
+      backgroundColor: 'var(--surface-raised)',
+      color: 'var(--text-primary)',
       pointerEvents: 'auto',
       zIndex: 9999,
     }
@@ -115,17 +118,19 @@ export const getControlStyles = (
       ...styles,
       backgroundColor: isDisabled ? 'var(--disabled-50)' : 'transparent',
       color: 'var(--text-primary)',
-      border: '1px solid var(--neutral-arch-300)',
+      border: '1px solid var(--stroke-control)',
       borderColor: errorMsg
-        ? 'var(--status-error) !important'
+        ? 'var(--feedback-error-text) !important'
         : isFocused
-        ? 'var(--theme-blue) !important'
-        : 'var(--neutral-arch-300) !important',
+          ? 'var(--action-border) !important'
+          : 'var(--stroke-control) !important',
       fontSize: '16px',
       boxShadow: 'none',
       transition: 'all 0.3s ease-in-out',
       ':hover': {
-        borderColor: errorMsg ? 'var(--status-error) !important' : 'var(--theme-blue) !important',
+        borderColor: errorMsg
+          ? 'var(--feedback-error-text) !important'
+          : 'var(--action-border) !important',
       },
       ':focus-within': {
         boxShadow: errorMsg ? 'var(--status-error) !important' : 'var(--theme-blue) !important',

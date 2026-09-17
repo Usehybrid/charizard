@@ -17,7 +17,7 @@
   position: absolute;
   border-radius: 50%;
   animation: ldsRing 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-  border-color: var(--theme-blue-dark) transparent transparent transparent;
+  border-color: var(--action-border) transparent transparent transparent;
   border-style: solid;
 }
 .ldsRing div:nth-child(1) {
@@ -52,8 +52,8 @@
   height: 29px;
   margin: 8px;
   border-radius: 50%;
-  border: 3px solid var(--theme-blue-dark);
-  border-color: var(--theme-blue-dark) transparent var(--theme-blue-dark) transparent;
+  border: 3px solid var(--action-border);
+  border-color: var(--action-border) transparent var(--action-border) transparent;
   animation: ldsDualRing 1.2s linear infinite;
 }
 @keyframes ldsDualRing {
@@ -74,7 +74,7 @@
 }
 .ldsRipple div {
   position: absolute;
-  border: 4px solid #fff;
+  border: 4px solid var(--surface-default);
   opacity: 1;
   border-radius: 50%;
   animation: ldsRipple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
@@ -126,7 +126,7 @@
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: var(--theme-blue-dark);
+  background: var(--action-primary-hover);
   animation-timing-function: cubic-bezier(0, 1, 1, 0);
 }
 .ldsEllipsis div:nth-child(1) {
@@ -188,7 +188,7 @@
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: var(--theme-blue-dark);
+  background: var(--action-primary-hover);
   margin: -4px 0 0 -4px;
 }
 .ldsRoller div:nth-child(1) {
@@ -277,7 +277,7 @@
   width: 6px;
   height: 18px;
   border-radius: 20%;
-  background: var(--theme-blue-dark);
+  background: var(--action-primary-hover);
 }
 .ldsSpinner div:nth-child(1) {
   transform: rotate(0deg);
@@ -351,8 +351,8 @@
   height: 0;
   margin: 8px;
   box-sizing: border-box;
-  border: 22px solid var(--theme-blue-dark);
-  border-color: var(--theme-blue-dark) transparent var(--theme-blue-dark) transparent;
+  border: 22px solid var(--action-border);
+  border-color: var(--action-border) transparent var(--action-border) transparent;
   animation: ldsHourglass 1.2s infinite;
 }
 @keyframes ldsHourglass {
@@ -381,7 +381,7 @@
   width: 11px;
   height: 11px;
   border-radius: 50%;
-  background: var(--theme-blue-dark);
+  background: var(--action-primary-hover);
   animation: ldsGrid 1.2s linear infinite;
 }
 .ldsGrid div:nth-child(1) {

@@ -35,7 +35,7 @@
 
 .nudge {
   opacity: 0;
-  color: var(--p-p50);
+  color: var(--action-text);
 }
 
 .root:hover .count {
@@ -47,5 +47,5 @@
 }
 
 .nudge svg {
-  color: var(--status-warning-w40);
+  color: var(--feedback-warning-text);
 }

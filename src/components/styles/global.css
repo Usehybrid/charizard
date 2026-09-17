@@ -104,7 +104,7 @@ h6 {
   font-weight: 400;
   font-size: 1rem;
   line-height: 1.54rem;
-  color: var(--status-danger);
+  color: var(--feedback-error-text);
   margin: 0;
   text-align: left;
 }

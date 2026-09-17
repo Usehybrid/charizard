@@ -101,7 +101,7 @@
 
 .copied,
 .copied:hover {
-  color: var(--status-success-s50);
+  color: var(--feedback-success-text);
 }
 
 .expand {
@@ -119,7 +119,7 @@
 }
 
 .expand:hover {
-  color: var(--neutral-white);
+  color: var(--text-on-primary);
   background-color: var(--site-code-border);
 }
 

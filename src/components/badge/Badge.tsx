@@ -105,10 +105,16 @@ export function Badge({
 }
 
 export const statusMap = {
-  [BADGE_STATUS.NEUTRAL]: {bg: 'var(--dark-d10)', color: 'var(--dark-d70)'},
-  [BADGE_STATUS.DEFAULT]: {bg: 'var(--p-p10)', color: 'var(--p-p70)'},
-  [BADGE_STATUS.POSITIVE]: {bg: 'var(--status-success-s10)', color: 'var(--status-success-s70)'},
-  [BADGE_STATUS.HIGHLIGHT]: {bg: 'var(--status-info-i10)', color: 'var(--status-info-i70)'},
-  [BADGE_STATUS.WARNING]: {bg: 'var(--status-warning-w10)', color: 'var(--status-warning-w70)'},
-  [BADGE_STATUS.NEGATIVE]: {bg: 'var(--status-error-e10)', color: 'var(--status-error-e70)'},
+  [BADGE_STATUS.NEUTRAL]: {bg: 'var(--surface-muted)', color: 'var(--text-primary)'},
+  [BADGE_STATUS.DEFAULT]: {bg: 'var(--fill-selection)', color: 'var(--action-text)'},
+  [BADGE_STATUS.POSITIVE]: {
+    bg: 'var(--feedback-success-bg)',
+    color: 'var(--feedback-success-text)',
+  },
+  [BADGE_STATUS.HIGHLIGHT]: {bg: 'var(--feedback-info-bg)', color: 'var(--feedback-info-text)'},
+  [BADGE_STATUS.WARNING]: {
+    bg: 'var(--feedback-warning-bg)',
+    color: 'var(--feedback-warning-text)',
+  },
+  [BADGE_STATUS.NEGATIVE]: {bg: 'var(--feedback-error-bg)', color: 'var(--feedback-error-text)'},
 }

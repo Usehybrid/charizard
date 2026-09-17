@@ -708,11 +708,7 @@ function TableComp({
                                 : cell.column.getSize(),
                             verticalAlign: isSelectionCell ? 'middle' : undefined,
                             paddingLeft: isPrevPinned ? '15px' : undefined,
-                            ...getCommonPinningStyles(
-                              cell.column,
-                              showLeftShadow,
-                              showRightShadow,
-                            ),
+                            ...getCommonPinningStyles(cell.column, showLeftShadow, showRightShadow),
                           }}
                         >
                           {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -783,7 +779,7 @@ const getCommonPinningStyles = (
     right: isPinned === 'end' ? `${column.getAfter('end')}px` : undefined,
     position: isPinned ? 'sticky' : undefined,
     zIndex: isPinned ? 2 : 0,
-    backgroundColor: isHeader ? `var(--fill-highlight)` : '#ffffff',
+    backgroundColor: isHeader ? `var(--surface-page)` : 'var(--surface-default)',
     marginRight: isLastLeftPinnedColumn ? '20px' : undefined,
   }
 }

@@ -122,8 +122,8 @@ export function DatePicker({
               style={{
                 padding: '0 12px',
                 cursor: disableDatepicker ? 'not-allowed' : 'pointer',
-                caretColor: isError || errorMsg ? 'var(--status-danger)' : undefined,
-                borderColor: isError || errorMsg ? 'var(--status-danger)' : undefined,
+                caretColor: isError || errorMsg ? 'var(--feedback-error-text)' : undefined,
+                borderColor: isError || errorMsg ? 'var(--feedback-error-text)' : undefined,
                 height: '32px',
               }}
             >
@@ -139,7 +139,10 @@ export function DatePicker({
               variant={buttonVariant}
               size={BUTTON_SIZE.SMALL}
               disabled={disableDatepicker}
-              customStyles={{cursor: disableDatepicker ? 'not-allowed' : 'pointer', height: '32px'}}
+              customStyles={{
+                cursor: disableDatepicker ? 'not-allowed' : 'pointer',
+                height: '32px',
+              }}
             >
               <div className={classes.buttonContent} ref={btnRef}>
                 <SVG
@@ -159,7 +162,7 @@ export function DatePicker({
           )}
         </PopoverTrigger>
         <PopoverContent
-          bg="var(--neutral-white)"
+          bg="var(--surface-default)"
           className={classes.popoverContent}
           positionerStyles={{zIndex: 20}}
         >
@@ -217,10 +220,10 @@ const dropdownStyles: StylesConfig<any> = {
       minHeight: '32px',
       padding: '4px',
       ':hover': {
-        borderColor: '#254DDA',
+        borderColor: 'var(--action-border)',
       },
-      borderColor: state.isFocused ? '#254DDA' : '#E5E9FB',
-      backgroundColor: '#fff',
+      borderColor: state.isFocused ? 'var(--action-border)' : 'var(--stroke-border)',
+      backgroundColor: 'var(--surface-default)',
       gap: '4px',
       opacity: state.isDisabled ? 0.5 : 1,
     }

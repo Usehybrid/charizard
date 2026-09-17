@@ -52,7 +52,7 @@
 }
 
 .icon > path {
-  fill: var(--dark-d50);
+  fill: var(--text-secondary);
 }
 
 .userDetails:hover .icon {

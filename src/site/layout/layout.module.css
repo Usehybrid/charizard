@@ -4,6 +4,15 @@
   background-color: var(--site-bg);
 }
 
+.themeToggle {
+  background: var(--surface-default);
+  border: 1px solid var(--stroke-control);
+  border-radius: 6px;
+  color: var(--text-primary);
+  padding: 6px 10px;
+  cursor: pointer;
+}
+
 .sidebarWrap {
   flex: 0 0 258px;
 }
@@ -71,7 +80,7 @@
   padding: 7px 10px 7px 32px;
   border: 1px solid var(--site-border-strong);
   border-radius: 8px;
-  background-color: var(--neutral-white);
+  background-color: var(--surface-default);
   color: var(--text-primary);
   outline: none;
 }
@@ -81,7 +90,7 @@
 }
 
 .filterInput:focus {
-  border-color: var(--p-p40);
+  border-color: var(--action-border);
   box-shadow: 0 0 0 3px var(--fill-selection);
 }
 
@@ -127,8 +136,8 @@
 
 .linkActive,
 .linkActive:hover {
-  background-color: var(--p-p50);
-  color: var(--neutral-white);
+  background-color: var(--action-primary);
+  color: var(--text-on-primary);
 }
 
 .overviewLink {
@@ -138,7 +147,7 @@
 .soon {
   padding: 1px 5px;
   border-radius: 999px;
-  background-color: var(--neutral-arch-100);
+  background-color: var(--surface-muted);
   color: var(--text-tertiary);
   text-transform: uppercase;
 }
@@ -181,7 +190,7 @@
   padding: 0;
   border: 1px solid var(--site-border);
   border-radius: 8px;
-  background-color: var(--neutral-white);
+  background-color: var(--surface-default);
   color: var(--text-secondary);
   cursor: pointer;
 }
@@ -225,7 +234,7 @@
 }
 
 .topbarLinkActive {
-  color: var(--p-p50);
+  color: var(--action-text);
 }
 
 /* Docs shell (shadcn's shape): the "on this page" rail owns the last track and

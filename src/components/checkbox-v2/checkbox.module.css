@@ -8,7 +8,7 @@
 }
 
 .checkboxContainer:hover .customCheckbox[data-state='unchecked'] {
-  border-color: var(--p-p50);
+  border-color: var(--action-border);
 }
 
 .disabled {
@@ -28,14 +28,14 @@
   display: inline-block;
   border-radius: 4px;
   border: 1px solid var(--stroke-selection);
-  background-color: white;
+  background-color: var(--surface-default);
   position: relative;
   transition: all 0.2s ease;
 }
 
 .customCheckbox[data-state='checked'] {
-  border-color: var(--p-p50);
-  background-color: var(--p-p50);
+  border-color: var(--action-border);
+  background-color: var(--action-primary);
 }
 
 .customCheckbox[data-state='checked']::after {
@@ -47,8 +47,8 @@
 }
 
 .customCheckbox[data-state='indeterminate'] {
-  border-color: var(--p-p50);
-  background-color: var(--p-p50);
+  border-color: var(--action-border);
+  background-color: var(--action-primary);
 }
 
 .customCheckbox[data-state='indeterminate']::after {
@@ -77,16 +77,16 @@
 
 /* Focus styles */
 .hiddenCheckbox:focus-visible + .customCheckbox {
-  outline: 2px solid var(--p-p50);
+  outline: 2px solid var(--action-border);
   outline-offset: 2px;
 }
 
 /* Hover styles for checked state */
 .checkboxContainer:hover .customCheckbox[data-state='checked']:not(.disabledCheckbox) {
-  background-color: var(--p-p60);
+  background-color: var(--action-primary-hover);
 }
 
 /* Hover styles for indeterminate state */
 .checkboxContainer:hover .customCheckbox[data-state='indeterminate']:not(.disabledCheckbox) {
-  background-color: var(--p-p60);
+  background-color: var(--action-primary-hover);
 }

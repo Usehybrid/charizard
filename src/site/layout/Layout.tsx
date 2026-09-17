@@ -14,6 +14,11 @@ import type {ToastCloseButtonProps} from '../../components/toasts/types'
 export function Layout() {
   const {pathname} = useLocation()
   const [navOpen, setNavOpen] = React.useState(false)
+  const [dark, setDark] = React.useState(false)
+
+  React.useEffect(() => {
+    document.documentElement.dataset.theme = dark ? 'dark' : 'light'
+  }, [dark])
 
   // Close the mobile nav and reset scroll on every navigation.
   React.useEffect(() => {
@@ -62,6 +67,9 @@ export function Layout() {
             )}
           </nav>
           <div className={classes.topbarActions}>
+            <button type="button" className={classes.themeToggle} onClick={() => setDark(!dark)}>
+              {dark ? 'Light mode' : 'Dark mode'}
+            </button>
             <NavLink
               className={({isActive}) =>
                 clsx(

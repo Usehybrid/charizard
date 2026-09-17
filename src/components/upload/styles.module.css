@@ -2,16 +2,16 @@
   cursor: pointer;
   text-align: center;
   border-radius: 4px;
-  border: 1px dashed var(--p-p10);
-  background: var(--fill-highlight, #fbfbfe);
+  border: 1px dashed var(--action-border);
+  background: var(--fill-highlight, var(--surface-page));
   padding: 16px 0.8rem;
   color: var(--text-secondary);
 }
 .uploadBtn:hover {
-  border: 1px dashed var(--theme-blue-dark);
+  border: 1px dashed var(--action-border);
 }
 .uploadBtn span {
-  color: #979797;
+  color: var(--text-tertiary);
 }
 .dFlex {
   display: flex;
@@ -19,7 +19,7 @@
 }
 .singleDoc {
   border-radius: 4px;
-  border: 1px solid var(--neutral-arch-200);
+  border: 1px solid var(--stroke-border);
   background: transparent;
   padding: 12px;
   position: relative;
@@ -98,7 +98,7 @@ svg[path='close'] {
   font-size: 14px;
   text-align: center;
   cursor: pointer;
-  color: var(--status-error);
+  color: var(--feedback-error-text);
 }
 .editIcon {
   position: absolute;
@@ -107,22 +107,22 @@ svg[path='close'] {
   bottom: 10px;
   right: 10px;
   cursor: pointer;
-  background-color: rgba(245, 245, 245, 0.268);
+  background-color: var(--surface-hover);
 }
 .uploadedImage {
   width: 100%;
   height: 100%;
   object-fit: cover;
   border-radius: 8px;
-  border: 3px solid #ffffff;
+  border: 3px solid var(--surface-default);
   filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.1));
 }
 .emptyLogo {
   align-items: center;
-  background: #fff;
+  background: var(--surface-default);
   border: 1px solid rgba(255, 255, 255, 0.15);
   box-sizing: content-box;
-  color: #222;
+  color: var(--text-primary);
   display: flex;
   font-weight: 800;
   justify-content: center;
@@ -139,11 +139,11 @@ svg[path='close'] {
   align-items: center;
   justify-content: center;
   margin-right: 12px;
-  background-color: var(--theme-blue-30);
+  background-color: var(--surface-muted);
   border-radius: 4px;
 }
 .title {
-  color: var(--p-p50);
+  color: var(--action-text);
   font-size: 14px;
   font-weight: 600;
   line-height: 20px;
@@ -169,7 +169,7 @@ svg[path='close'] {
   height: 100%;
   top: 0;
   left: 0;
-  background: #dcd9fd60;
+  background: var(--surface-muted);
   transition: all 200ms;
   z-index: 1;
 }
@@ -182,13 +182,13 @@ svg[path='close'] {
 }
 .fileUploadLimit {
   margin-bottom: 10px;
-  color: var(--status-info);
+  color: var(--feedback-info-text);
 }
 .fileUploadLimitError,
 .errorMsg {
   margin-top: 10px;
   margin-bottom: 10px;
-  color: var(--status-danger);
+  color: var(--feedback-error-text);
   text-align: left;
 }
 .fileContainer {
@@ -204,7 +204,7 @@ svg[path='close'] {
 }
 .addDocsIcons > path,
 .addDocsIcons > g > path {
-  fill: var(--theme-blue);
+  fill: var(--action-text);
 }
 .parentContainer {
   display: flex;
@@ -225,14 +225,14 @@ svg[path='close'] {
 }
 .disabledUploadBtn {
   border-radius: 4px;
-  border: 1px dashed var(--neutral-arch-300);
+  border: 1px dashed var(--stroke-border);
   background: var(--disabled-50);
   cursor: not-allowed;
   opacity: 0.5;
 }
 .disabledUploadBtn:hover {
   border-radius: 4px;
-  border: 1px dashed var(--neutral-arch-300);
+  border: 1px dashed var(--stroke-border);
   background: var(--disabled-50);
   cursor: not-allowed;
 }

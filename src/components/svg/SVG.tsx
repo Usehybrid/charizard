@@ -1,4 +1,5 @@
 import {default as ReactInlineSVG} from 'react-inlinesvg'
+import {themeSvg} from './theme-svg'
 
 export type SVGProps = {
   path: string
@@ -9,6 +10,8 @@ export type SVGProps = {
   customSvgStyles?: React.CSSProperties
   customSpanStyles?: React.CSSProperties
   handleClick?: (e: any) => void
+  /** Preserve original colours for a logo or artwork passed through the icon component. */
+  preserveColors?: boolean
 }
 
 export function SVG({
@@ -20,11 +23,13 @@ export function SVG({
   customSpanStyles = {},
   customSvgStyles = {},
   handleClick,
+  preserveColors = false,
 }: SVGProps) {
   return (
     <span className={`${spanClassName}`} style={{...customSpanStyles}} onClick={handleClick}>
       <ReactInlineSVG
         src={path}
+        preProcessor={preserveColors ? undefined : themeSvg}
         className={svgClassName}
         style={{...customSvgStyles}}
         // loader={<span>Loading...</span>}

@@ -26,5 +26,5 @@
 
 .btnIcon > path,
 .btnIcon > g > path {
-  fill: var(--theme-blue);
+  fill: var(--action-text);
 }

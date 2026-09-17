@@ -15,7 +15,7 @@
 }
 
 .filterBtn:hover {
-  background-color: var(--p-p10);
+  background-color: var(--fill-selection);
 }
 .content {
   padding: 0 !important;
@@ -29,7 +29,7 @@
 
 .filters {
   border-right: 1px solid var(--stroke-border);
-  background: var(--neutral-white);
+  background: var(--surface-raised);
   width: 200px;
   flex-shrink: 0;
   padding-top: 8px;
@@ -77,7 +77,7 @@
   position: absolute;
   left: 0;
   top: 0;
-  background-color: var(--p-p50);
+  background-color: var(--action-primary);
   width: 4px;
 }
 
@@ -100,7 +100,7 @@
   padding: 8px;
 
   &:hover {
-    background: var(--fill-highlight);
+    background: var(--surface-page);
   }
 }
 
@@ -110,14 +110,14 @@
   top: -16px;
   margin-bottom: 16px;
   padding-top: 16px;
-  background-color: white;
+  background-color: var(--surface-raised);
   margin-top: -16px;
 }
 
 .totalSelected {
   border-radius: 3px;
-  background: var(--p-p90);
-  color: var(--neutral-white);
+  background: var(--action-primary-hover);
+  color: var(--text-on-primary);
   padding: 0 3px;
 }
 

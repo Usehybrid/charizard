@@ -7,3 +7,4 @@
 @import './_variables.css';
 @import './global.css';
 @import '../toasts/styles/main.css';
+@import './_theme.css';

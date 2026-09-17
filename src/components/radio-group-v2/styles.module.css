@@ -79,12 +79,12 @@
   flex-shrink: 0;
 }
 .radio:hover .radioControl :not(.controlDisabled) {
-  border: 1px solid var(--p-p30);
+  border: 1px solid var(--action-border);
   transition: all 100ms;
 }
 .radioControlActive {
-  border-color: var(--p-p40);
-  background-color: var(--p-p40);
+  border-color: var(--action-border);
+  background-color: var(--action-primary-hover);
   position: relative;
 }
 .controlDisabled {
@@ -99,8 +99,8 @@
 }
 
 .radio:hover .radioControlActive :not(.controlDisabled) {
-  border-color: var(--p-p60);
-  background-color: var(--p-p60);
+  border-color: var(--action-border);
+  background-color: var(--action-primary-hover);
   position: relative;
 }
 .radioControlActive.radioControlActiveDisabled {
@@ -113,7 +113,7 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background-color: var(--neutral-white);
+  background-color: var(--text-on-primary);
   position: absolute;
   top: 50%;
   left: 50%;
@@ -126,7 +126,7 @@
   font-weight: 400;
   line-height: 20px;
   margin: 0;
-  color: var(--status-danger);
+  color: var(--feedback-error-text);
   text-align: left;
 }
 
@@ -143,5 +143,5 @@
 }
 
 .infoIcon > path {
-  fill: var(--p-p90);
+  fill: var(--action-text);
 }

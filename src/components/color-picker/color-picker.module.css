@@ -9,8 +9,8 @@
 
 .trigger {
   border-radius: 4px;
-  border: 1px solid var(--neutral-arch-300);
-  background: var(--neutral-white);
+  border: 1px solid var(--stroke-border);
+  background: var(--surface-default);
   padding: 6px 12px;
   display: flex;
   align-items: center;
@@ -26,7 +26,7 @@
 }
 
 .svg path {
-  fill: #b3b2b8;
+  fill: var(--text-tertiary);
 }
 
 .swatch {
@@ -41,9 +41,9 @@
 }
 
 .content {
-  border: 1px solid #e2e0eb;
+  border: 1px solid var(--stroke-border);
   border-radius: 4px;
-  background-color: #fff;
+  background-color: var(--surface-default);
   padding: 12px 0;
 }
 

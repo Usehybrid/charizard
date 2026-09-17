@@ -5,7 +5,7 @@
   width: fit-content;
 }
 
-.oneState{
+.oneState {
   gap: 8px;
   padding-right: 10px;
 }
@@ -21,37 +21,37 @@
 }
 
 .userChipContainer.neutral {
-  background-color: var(--dark-d10);
-  color: var(--dark-d70);
+  background-color: var(--surface-muted);
+  color: var(--text-primary);
 }
 
 .userChipContainer.default {
-  background-color: var(--p-p10);
-  color: var(--p-p70);
+  background-color: var(--fill-selection);
+  color: var(--action-text);
 }
 
 .userChipContainer.positive {
-  background-color: var(--status-success-s10);
-  color: var(--status-success-s70);
+  background-color: var(--feedback-success-bg);
+  color: var(--feedback-success-text);
 }
 
 .userChipContainer.warning {
-  background-color: var(--status-warning-w10);
-  color: var(--status-warning-w70);
+  background-color: var(--feedback-warning-bg);
+  color: var(--feedback-warning-text);
 }
 
 .userChipContainer.error {
-  background-color: var(--status-error-e10);
-  color: var(--status-error-e70);
+  background-color: var(--feedback-error-bg);
+  color: var(--feedback-error-text);
 }
 
 .userChipContainer.highlight {
-  background-color: var(--status-info-i10);
-  color: var(--status-info-i70);
+  background-color: var(--feedback-info-bg);
+  color: var(--feedback-info-text);
 }
 
 .userChipContainer.white {
-  background-color: var(--neutral-white);
+  background-color: var(--surface-default);
   color: var(--text-primary);
 }
 

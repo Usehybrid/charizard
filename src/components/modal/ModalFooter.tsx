@@ -4,7 +4,7 @@ import {Button, BUTTON_VARIANT, BUTTON_SIZE, BUTTON_TYPE} from '../button'
 import {SVG} from '../svg'
 
 export type FooterButtons = Array<{
-  variant?:  BUTTON_VARIANT
+  variant?: BUTTON_VARIANT
   onClick: () => void
   btnText: string
   btnType?: BUTTON_TYPE | 'submit'
@@ -65,7 +65,7 @@ export function ModalFooter({children, api, buttons, showBorder = true}: ModalFo
                       <SVG
                         path={btn.icon as string}
                         customSvgStyles={{
-                          fill: 'white',
+                          fill: 'var(--text-on-primary)',
                           width: '20px',
                           height: '20px',
                         }}

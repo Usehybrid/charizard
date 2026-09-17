@@ -7,7 +7,7 @@
   font-weight: 400;
   font-size: 1rem;
   line-height: 1.54rem;
-  color: #de350b;
+  color: var(--feedback-error-text);
   margin: 0;
   text-align: left;
 }

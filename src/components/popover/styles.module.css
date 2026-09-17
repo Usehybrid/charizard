@@ -10,11 +10,11 @@
 
 .content.black {
   background: var(--text-primary);
-  color: var(--neutral-white);
+  color: var(--text-on-primary);
 }
 
 .content.white {
-  background: var(--neutral-arch-200);
+  background: var(--surface-muted);
   color: var(--text-primary);
 }
 

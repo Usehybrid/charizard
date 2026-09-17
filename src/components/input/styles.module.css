@@ -40,7 +40,7 @@
 
 .inputLabel.required::after {
   content: '*';
-  color: var(--status-danger);
+  color: var(--feedback-error-text);
   margin-left: 2px;
 }
 
@@ -63,7 +63,7 @@
   color: var(--text-primary);
   width: 100%;
 
-  border: 1px solid var(--neutral-arch-100);
+  border: 1px solid var(--stroke-control);
   border-radius: 8px;
 
   outline: none;
@@ -83,12 +83,12 @@
 
 .input:focus,
 .textarea:focus {
-  border: 1px solid var(--theme-blue);
+  border: 1px solid var(--action-border);
 }
 
 .input.error {
-  border-color: var(--status-danger);
-  caret-color: var(--status-danger);
+  border-color: var(--feedback-error-text);
+  caret-color: var(--feedback-error-text);
 }
 
 .input:disabled {
@@ -107,7 +107,7 @@ input[type='date']::-webkit-inner-spin-button,
   font-weight: 400;
   font-size: 1rem;
   line-height: 1.54rem;
-  color: var(--status-danger);
+  color: var(--feedback-error-text);
   margin: 0;
   text-align: left;
 }
@@ -137,9 +137,9 @@ input[type='date']::-webkit-inner-spin-button,
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--neutral-arch-20);
-  border-top: 1px solid var(--neutral-arch-100);
-  border-bottom: 1px solid var(--neutral-arch-100);
+  background-color: var(--surface-page);
+  border-top: 1px solid var(--stroke-control);
+  border-bottom: 1px solid var(--stroke-control);
   padding: 6px 12px;
   position: relative;
   gap: 4px;
@@ -150,14 +150,14 @@ input[type='date']::-webkit-inner-spin-button,
   left: 0;
   border-top-left-radius: 4px;
   border-bottom-left-radius: 4px;
-  border-left: 1px solid var(--neutral-arch-100);
+  border-left: 1px solid var(--stroke-control);
 }
 
 .inputAddon.right {
   right: 0;
   border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;
-  border-right: 1px solid var(--neutral-arch-100);
+  border-right: 1px solid var(--stroke-control);
 }
 
 .inputAddon .dropdownContainer {
@@ -165,7 +165,7 @@ input[type='date']::-webkit-inner-spin-button,
   top: 120%;
   left: 0;
   width: fit-content;
-  background-color: var(--neutral-white);
+  background-color: var(--surface-default);
   border-radius: 8px;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15);
   padding: 0 0 12px 0;
@@ -180,7 +180,7 @@ input[type='date']::-webkit-inner-spin-button,
   position: sticky;
   top: 0;
   left: 0;
-  background-color: var(--neutral-white);
+  background-color: var(--surface-default);
 }
 
 .inputAddon .dropdownContainer .dropdownOption {
@@ -193,7 +193,7 @@ input[type='date']::-webkit-inner-spin-button,
 }
 
 .inputAddon .dropdownContainer .dropdownOption:hover {
-  background-color: var(--neutral-arch-30);
+  background-color: var(--surface-muted);
 }
 
 @media screen and (max-width: 300px) {
@@ -202,7 +202,7 @@ input[type='date']::-webkit-inner-spin-button,
   }
 }
 
-.disabled{
+.disabled {
   pointer-events: none;
   opacity: 50%;
 }

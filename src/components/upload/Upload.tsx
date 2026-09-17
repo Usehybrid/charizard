@@ -333,7 +333,7 @@ UploadProps) {
                       )
                 }
                 style={{
-                  background: isInputDisabled ? '#F4F4F4' : '',
+                  background: isInputDisabled ? 'var(--surface-muted)' : '',
                   cursor: disabled || isInputDisabled ? 'not-allowed' : 'pointer',
                 }}
               >
@@ -408,7 +408,7 @@ UploadProps) {
               e.preventDefault()
             }}
             style={{
-              background: isInputDisabled ? '#F4F4F4' : '',
+              background: isInputDisabled ? 'var(--surface-muted)' : '',
               cursor: disabled || isInputDisabled ? 'not-allowed' : 'pointer',
             }}
           >

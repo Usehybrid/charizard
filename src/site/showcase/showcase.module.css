@@ -21,7 +21,7 @@
   overflow: hidden;
   border: 1px solid var(--site-border);
   border-radius: 12px;
-  background-color: var(--neutral-white);
+  background-color: var(--surface-default);
   box-shadow: var(--site-shadow-sm);
 }
 
@@ -63,8 +63,8 @@
 .tabActive,
 .tabActive:hover {
   border-color: var(--site-border);
-  background-color: var(--neutral-white);
-  color: var(--p-p50);
+  background-color: var(--surface-default);
+  color: var(--action-text);
   box-shadow: var(--site-shadow-sm);
 }
 

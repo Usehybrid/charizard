@@ -61,10 +61,10 @@
   height: 0;
 }
 .switch input:checked + .slider {
-  background-color: var(--p-p50);
+  background-color: var(--action-primary);
 }
 .switch input:checked + .slider:hover {
-  background-color: var(--p-p60);
+  background-color: var(--action-primary-hover);
 }
 .switch.disabled .slider {
   opacity: 0.5;
@@ -77,12 +77,12 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: var(--p-p20);
+  background-color: var(--fill-selection);
   border-radius: 9999px;
   transition: 0.25s;
 }
 .switch .slider:hover {
- background-color: var(--p-p30);
+  background-color: var(--action-primary-hover);
 }
 
 .switch .slider::before {
@@ -91,7 +91,7 @@
   left: 0.154rem;
   bottom: 0.154rem;
   top: 0.154rem;
-  background-color: white;
+  background-color: var(--surface-default);
   border-radius: 50%;
   transition: 0.25s;
 }

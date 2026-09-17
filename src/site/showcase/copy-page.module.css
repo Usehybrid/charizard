@@ -5,7 +5,7 @@
   align-items: stretch;
   border: 1px solid var(--site-border-strong);
   border-radius: 8px;
-  background-color: var(--neutral-white);
+  background-color: var(--surface-default);
   box-shadow: var(--site-shadow-sm);
 }
 
@@ -49,7 +49,7 @@
   padding: 4px;
   border: 1px solid var(--site-border);
   border-radius: 10px;
-  background-color: var(--neutral-white);
+  background-color: var(--surface-default);
   box-shadow: var(--site-shadow-md);
 }
 

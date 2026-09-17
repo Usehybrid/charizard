@@ -8,7 +8,7 @@
   cursor: pointer;
   appearance: none;
   /* For iOS < 15 to remove gradient background */
-  background-color: #fff;
+  background-color: var(--surface-default);
   /* Not removed via appearance */
   margin: 0;
 }
@@ -20,8 +20,8 @@
 }
 
 .checkboxSpan > input[type='checkbox']:checked {
-  border-color: var(--theme-blue);
-  background-color: var(--theme-blue);
+  border-color: var(--action-border);
+  background-color: var(--action-primary);
   background-image: url('../../assets/check.svg');
   background-position: center;
   background-size: 12px;
@@ -34,8 +34,8 @@
 
 /* Indeterminate state styles */
 .checkboxSpan > input[type='checkbox'].indeterminateInput {
-  border-color: var(--theme-blue);
-  background-color: var(--theme-blue);
+  border-color: var(--action-border);
+  background-color: var(--action-primary);
   background-image: url('../../assets/minus.svg');
   background-position: center;
   background-size: 12px;
@@ -48,7 +48,7 @@
   width: 16px;
   height: 16px;
   border: 1px solid var(--stroke-border);
-  accent-color: var(--theme-blue);
+  accent-color: var(--action-text);
 }
 
 /* row expander (parent rows of an expandable table) */

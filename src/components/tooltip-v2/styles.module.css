@@ -1,6 +1,6 @@
 .tooltip {
-  background: var(--p-p90) !important;
-  color: var(--neutral-white) !important;
+  background: var(--surface-inverse) !important;
+  color: var(--text-on-primary) !important;
   z-index: 50;
   max-width: 260px;
   /* react-tooltip renders the label inside an inner .react-tooltip-content-wrapper

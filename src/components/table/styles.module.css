@@ -1,8 +1,8 @@
 .box {
-  background-color: var(--neutral-white);
+  background-color: var(--surface-default);
   width: 100%;
   border-radius: 8px;
-  border-bottom: 1px solid var(--neutral-arch-100);
+  border-bottom: 1px solid var(--stroke-border);
 }
 
 .header {
@@ -13,7 +13,7 @@
   justify-content: space-between;
   padding: 8.33px 20px;
   border-radius: 4px 4px 0px 0px;
-  border: 1px solid var(--neutral-arch-100);
+  border: 1px solid var(--stroke-border);
   border-bottom: none;
 }
 
@@ -46,7 +46,7 @@
 }
 
 .tableHead {
-  background: var(--fill-highlight);
+  background: var(--surface-page);
   height: 40px;
   position: sticky;
   top: 0;
@@ -111,7 +111,7 @@
 
 .tableHeaderSort:hover .tableHeaderSortSpan .tableHeaderSortIcon > g > path,
 .tableHeaderSort:hover .tableHeaderSortSpan .tableHeaderSortIcon > path {
-  fill: var(--p-p90);
+  fill: var(--action-text);
 }
 
 .tableScrollContainer {

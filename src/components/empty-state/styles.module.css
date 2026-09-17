@@ -58,5 +58,5 @@
 
 .icon > path,
 .icon > g > path {
-  fill: var(--neutral-arch-600);
+  fill: var(--text-tertiary);
 }

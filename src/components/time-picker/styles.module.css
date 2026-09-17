@@ -7,13 +7,15 @@
 }
 
 .triggerIcon path {
-  fill: var(--theme-blue);
+  fill: var(--action-text);
 }
 
 .timePopover {
   border-radius: 4px;
-  background: var(--neutral-white);
-  box-shadow: 0px 4px 16px 0px rgba(18, 18, 18, 0.04), 0px 2px 8px 0px rgba(18, 18, 18, 0.08);
+  background: var(--surface-default);
+  box-shadow:
+    0px 4px 16px 0px rgba(18, 18, 18, 0.04),
+    0px 2px 8px 0px rgba(18, 18, 18, 0.08);
   height: 268px;
   width: 240px;
   padding: 0;
@@ -77,8 +79,8 @@
 }
 
 .timeContainer .list li.selected {
-  background-color: var(--theme-blue);
-  color: var(--neutral-white);
+  background-color: var(--action-primary);
+  color: var(--text-on-primary);
 }
 
 .disabledIconContainer {

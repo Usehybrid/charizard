@@ -22,7 +22,7 @@
 }
 .filter:hover {
   cursor: pointer;
-  background-color: var(--p-p10);
+  background-color: var(--fill-selection);
 }
 
 .filter:hover .filterIcon2 > path {
@@ -63,7 +63,7 @@
   height: 16px;
 }
 .filterIcon2 > path {
-  fill: var(--p-p90);
+  fill: var(--action-text);
 }
 
 .filterCol {
@@ -75,8 +75,8 @@
 
 .totalSelected {
   border-radius: 3px;
-  background: var(--p-p90);
-  color: var(--neutral-white);
+  background: var(--action-primary-hover);
+  color: var(--text-on-primary);
   font-size: 12px;
   font-weight: 500;
   line-height: normal;
@@ -95,9 +95,11 @@
   position: relative;
   overflow-y: scroll;
   padding: 8px;
-  background: var(--neutral-white);
+  background: var(--surface-default);
   border-radius: 4px;
-  box-shadow: 0px 4px 16px 0px rgba(18, 18, 18, 0.04), 0px 2px 8px 0px rgba(18, 18, 18, 0.08);
+  box-shadow:
+    0px 4px 16px 0px rgba(18, 18, 18, 0.04),
+    0px 2px 8px 0px rgba(18, 18, 18, 0.08);
 }
 
 .dropdown:focus-visible {
@@ -120,7 +122,7 @@
 
 .option {
   border-radius: 6px;
-  background: var(--neutral-white);
+  background: var(--surface-default);
   color: var(--text-primary);
   width: 100%;
   min-height: 30px;
@@ -140,7 +142,7 @@
   top: -10px;
   margin-bottom: 6px;
   padding-top: 10px;
-  background-color: white;
+  background-color: var(--surface-default);
   margin-top: -10px;
 }
 
@@ -160,7 +162,7 @@
   gap: 7px;
   padding-left: 8px;
   padding-right: 8px;
-  background-color: white;
+  background-color: var(--surface-default);
   margin-bottom: -13px;
   padding-bottom: 6px;
 }
@@ -206,13 +208,13 @@
   height: 16px;
   border-radius: 4px;
   border: 1px solid var(--stroke-selection);
-  background-color: white;
+  background-color: var(--surface-default);
   flex-shrink: 0;
 }
 
 .optionLabel > [data-part='control'][data-state='checked'] {
-  border-color: var(--theme-blue);
-  background-color: var(--theme-blue);
+  border-color: var(--action-border);
+  background-color: var(--action-primary);
   background-image: url('../../assets/check.svg');
   background-position: center;
   background-size: 10px;
@@ -227,9 +229,11 @@
   align-items: flex-start;
   gap: 8px;
 
-  background: var(--neutral-white);
+  background: var(--surface-default);
   border-radius: 4px;
-  box-shadow: 0px 4px 16px 0px rgba(18, 18, 18, 0.04), 0px 2px 8px 0px rgba(18, 18, 18, 0.08);
+  box-shadow:
+    0px 4px 16px 0px rgba(18, 18, 18, 0.04),
+    0px 2px 8px 0px rgba(18, 18, 18, 0.08);
   min-width: 120px;
   overflow-x: hidden;
   white-space: nowrap;

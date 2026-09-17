@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: white;
+  background-color: var(--surface-default);
   min-height: 500px;
   /* sidebar is 60px in default state, and padding * 2 is 60px */
   width: calc(100dvw - 60px - 60px);
@@ -14,7 +14,7 @@
   box-shadow:
     0px 2px 8px 0px rgba(18, 18, 18, 0.04),
     0px 1px 8px 0px rgba(18, 18, 18, 0.04);
-  background-color: #fff;
+  background-color: var(--surface-default);
   color: var(--text-secondary);
   padding: 14px 26px;
 }

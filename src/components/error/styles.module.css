@@ -6,7 +6,7 @@
   justify-content: space-between;
   max-width: 1064px;
   margin: auto;
-  color: var(--black);
+  color: var(--text-primary);
   padding: 116px 0 40px;
 }
 
@@ -44,5 +44,5 @@
 }
 
 .errorContainer .error {
-  color: var(--status-error-e50);
+  color: var(--feedback-error-text);
 }

@@ -36,7 +36,7 @@
   overflow-x: auto;
   border: 1px solid var(--site-border);
   border-radius: 12px;
-  background-color: var(--neutral-white);
+  background-color: var(--surface-default);
 }
 
 .table {
@@ -74,8 +74,8 @@
   margin-left: 8px;
   padding: 1px 6px;
   border-radius: 999px;
-  background-color: var(--status-error-e10);
-  color: var(--status-error-e70);
+  background-color: var(--feedback-error-bg);
+  color: var(--feedback-error-text);
   text-transform: uppercase;
   letter-spacing: 0.06em;
   vertical-align: 2px;
@@ -96,7 +96,7 @@
 }
 
 .type {
-  color: var(--p-p60);
+  color: var(--action-text);
 }
 
 .default {

@@ -7,7 +7,7 @@
   width: 100%;
   height: 60px;
   padding: 16px 15px;
-  background: var(--neutral-white);
+  background: var(--surface-default);
   z-index: 2;
 
   position: sticky;
@@ -46,7 +46,7 @@
 .line {
   width: 2.8rem;
   height: 1px;
-  background: var(--neutral-arch-500);
+  background: var(--chart-track);
 }
 
 .labelContainer {
@@ -60,7 +60,7 @@
   width: 24px;
   height: 24px;
   flex-shrink: 0;
-  background: var(--neutral-arch-30);
+  background: var(--surface-muted);
 
   border-radius: 50%;
   display: flex;
@@ -80,7 +80,7 @@
 .circle.active {
   background: var(--theme-royal-blue-tint);
   font-weight: 700;
-  color: var(--neutral-white);
+  color: var(--text-on-primary);
 }
 
 .circle.active::after {
@@ -99,7 +99,7 @@
 }
 
 .circle.completed {
-  background: var(--theme-blue);
+  background: var(--action-primary);
   padding: 6px;
 }
 
@@ -132,7 +132,7 @@
   width: 100%;
   height: 60px;
   padding: 10px 24px;
-  background: var(--neutral-white);
+  background: var(--surface-default);
   position: sticky;
   bottom: 0;
   left: 0;

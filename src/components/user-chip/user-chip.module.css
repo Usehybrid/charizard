@@ -8,37 +8,37 @@
 }
 
 .box.neutral {
-  background-color: var(--dark-d10);
-  color: var(--dark-d70);
+  background-color: var(--surface-muted);
+  color: var(--text-primary);
 }
 
 .box.default {
-  background-color: var(--p-p10);
-  color: var(--p-p70);
+  background-color: var(--fill-selection);
+  color: var(--action-text);
 }
 
 .box.positive {
-  background-color: var(--status-success-s10);
-  color: var(--status-success-s70);
+  background-color: var(--feedback-success-bg);
+  color: var(--feedback-success-text);
 }
 
 .box.warning {
-  background-color: var(--status-warning-w10);
-  color: var(--status-warning-w70);
+  background-color: var(--feedback-warning-bg);
+  color: var(--feedback-warning-text);
 }
 
 .box.error {
-  background-color: var(--status-error-e10);
-  color: var(--status-error-e70);
+  background-color: var(--feedback-error-bg);
+  color: var(--feedback-error-text);
 }
 
 .box.highlight {
-  background-color: var(--status-info-i10);
-  color: var(--status-info-i70);
+  background-color: var(--feedback-info-bg);
+  color: var(--feedback-info-text);
 }
 
 .box.white {
-  background-color: var(--neutral-white);
+  background-color: var(--surface-default);
   color: var(--text-primary);
 }
 

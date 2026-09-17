@@ -8,7 +8,9 @@
 .accordionContent {
   opacity: 1;
   transform: translateY(0);
-  transition: opacity 200ms ease-in-out, transform 200ms ease-in-out;
+  transition:
+    opacity 200ms ease-in-out,
+    transform 200ms ease-in-out;
 }
 
 .accordionContent[aria-hidden='true'] {
