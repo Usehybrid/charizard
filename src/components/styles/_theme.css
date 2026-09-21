@@ -14,7 +14,10 @@
   --surface-media: #ffffff;
   --text-on-primary: #ffffff;
   --text-disabled: #999999;
-  --stroke-control: #d3dbf8;
+  --stroke-border: #e4e4ea;
+  --stroke-divider: #ececf0;
+  --stroke-control: #d0d0d8;
+  --stroke-selection: #c6c6d0;
   --action-primary: #254dda;
   --action-primary-hover: #1e3eae;
   --action-border: #254dda;
@@ -70,10 +73,11 @@
   --fill-highlight: var(--surface-page);
   --fill-selection: #293453;
   --stroke-tabs-sections: #39393f;
-  --stroke-border: #39393f;
-  --stroke-buttons-input: #777780;
-  --stroke-control: #777780;
-  --stroke-selection: #9db2ff;
+  --stroke-border: #343439;
+  --stroke-divider: #303035;
+  --stroke-buttons-input: #62626c;
+  --stroke-control: #62626c;
+  --stroke-selection: #55555e;
   --action-primary-hover: #345ddf;
   --action-border: #9db2ff;
   --action-text: #9db2ff;

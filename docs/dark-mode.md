@@ -34,6 +34,9 @@ dialogs, skeletons and toasts in both modes. The charcoal text pairs were checke
 against 4.5:1 and control boundaries against 3:1. A token check does not substitute
 for rendered component QA.
 
+Run `node scripts/check-dark-mode.mts` for local SVG ink and status contrast checks.
+These checks are not added to CI.
+
 ## Console integration
 
 The coordinated Pikachu branch is `feat/fr-736-dark-mode`. Console imports

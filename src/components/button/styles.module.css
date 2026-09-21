@@ -61,7 +61,7 @@
 
 .btnSecondary {
   background-color: var(--surface-default);
-  border: 1px solid var(--action-border);
+  border: 1px solid var(--stroke-control);
   color: var(--action-text);
 }
 .btnSecondary:hover {
@@ -73,16 +73,16 @@
   border-color: var(--action-border);
 }
 .btnSecondary:disabled {
-  border-color: var(--action-border);
+  border-color: var(--stroke-control);
 }
 
 .btnTertiary {
   background-color: var(--fill-selection);
   color: var(--text-primary);
-  border: 1px solid var(--action-border);
+  border: 1px solid var(--stroke-control);
 }
 .btnTertiary:hover {
-  border-color: var(--action-border);
+  border-color: var(--stroke-control);
   background-color: var(--fill-selection);
 }
 .btnTertiary:focus {
@@ -91,7 +91,7 @@
 }
 .btnTertiary:disabled {
   background-color: var(--fill-selection);
-  border-color: var(--action-border);
+  border-color: var(--stroke-control);
 }
 
 .btnLink {
@@ -213,11 +213,11 @@
 }
 
 .btnAddonSecondary {
-  border-left: 1px solid var(--action-border);
+  border-left: 1px solid var(--stroke-control);
 }
 
 .btnAddonTertiary {
-  border-left: 1px solid var(--action-border);
+  border-left: 1px solid var(--stroke-control);
 }
 
 .menuIcon {
@@ -298,8 +298,4 @@
 .groupActionTable {
   background-color: transparent;
   border: none;
-}
-
-:global(:root[data-theme='dark']) .btnPrimary {
-  box-shadow: inset 0 0 0 1px var(--action-border);
 }

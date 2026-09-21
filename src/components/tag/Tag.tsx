@@ -19,27 +19,27 @@ export enum STATUS_MAP {
 const statusMap = {
   [STATUS_MAP.SUCCESS]: {
     name: 'Assigned',
-    bgColor: 'var(--status-success-10)',
+    bgColor: 'var(--feedback-success-bg)',
     color: 'var(--feedback-success-text)',
   },
   [STATUS_MAP.WARNING]: {
     name: 'Unassigned',
-    bgColor: 'var(--status-warning-10)',
+    bgColor: 'var(--feedback-warning-bg)',
     color: 'var(--feedback-warning-text)',
   },
   [STATUS_MAP.INFO]: {
     name: 'In-Transition',
-    bgColor: 'var(--status-info-10)',
+    bgColor: 'var(--feedback-info-bg)',
     color: 'var(--feedback-info-text)',
   },
   [STATUS_MAP.DEFAULT]: {
     name: 'Archived',
-    bgColor: 'var(--dark-d10)',
+    bgColor: 'var(--surface-muted)',
     color: 'var(--text-primary)',
   },
   [STATUS_MAP.ERROR]: {
     name: 'Under maintenance',
-    bgColor: 'var(--status-error-10)',
+    bgColor: 'var(--feedback-error-bg)',
     color: 'var(--feedback-error-text)',
   },
 }
@@ -57,6 +57,7 @@ export function Tag({status, text, icon, customStyles = {}}: TagProps) {
       {icon && (
         <SVG
           path={icon}
+          svgClassName={classes.icon}
           customSvgStyles={{fill: statusMap[status].color, width: '20px', height: '20px'}}
           customSpanStyles={{marginLeft: '-2px'}}
         />

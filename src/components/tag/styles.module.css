@@ -10,3 +10,12 @@
   border-radius: 4px;
   font-weight: 500;
 }
+
+/* Tag glyphs follow the status foreground, including icons with fixed SVG ink. */
+.icon [fill]:not([fill='none']) {
+  fill: currentColor;
+}
+
+.icon [stroke]:not([stroke='none']) {
+  stroke: currentColor;
+}
