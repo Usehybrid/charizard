@@ -16,7 +16,7 @@ packages:
 # matching hybr1d-frontend / headless-view.
 catalog:
   vite: npm:@voidzero-dev/vite-plus-core@0.2.1
-  vite-plus: 0.2.1
+  vite-plus: 1.1.0
 
 overrides:
   vite: 'catalog:'
