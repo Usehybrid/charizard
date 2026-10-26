@@ -4,7 +4,7 @@ import {libInjectCss} from 'vite-plugin-lib-inject-css'
 import checker from 'vite-plugin-checker'
 import pkg from './package.json'
 import {resolve} from 'node:path'
-import {defineConfig} from 'vite'
+import {defineConfig} from 'vite-plus'
 
 const peers = Object.keys(pkg.peerDependencies)
 

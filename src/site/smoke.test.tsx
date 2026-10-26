@@ -6,7 +6,7 @@
 import {createRoot} from 'react-dom/client'
 import {createMemoryRouter} from 'react-router'
 import {RouterProvider} from 'react-router/dom'
-import {describe, expect, it, vi} from 'vitest'
+import {describe, expect, it, vi} from 'vite-plus/test'
 import {ALL_COMPONENTS} from './manifest'
 import {pageModules} from './page-modules'
 import {routes} from './routes'

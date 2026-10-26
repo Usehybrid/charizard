@@ -15,11 +15,11 @@ packages:
 # Vite+ toolchain: alias `vite` to the Vite+ core so `vp` drives the build,
 # matching hybr1d-frontend / headless-view.
 catalog:
-  vite: npm:@voidzero-dev/vite-plus-core@0.2.1
-  vite-plus: 0.2.1
+  vite: npm:@voidzero-dev/vite-plus-core@1.4.0
+  vite-plus: 1.4.0
 
 overrides:
-  vite: 'catalog:'
+  vite@*: 'catalog:'
   # Security: force patched versions of vulnerable transitive deps (Dependabot).
   # Both arrive via react-select (a peer dep, externalized from the build).
   '@babel/runtime': '^7.26.10' # GHSA-968p-4wvh-cqc8 (ReDoS), fixed in 7.26.10
