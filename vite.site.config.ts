@@ -1,5 +1,5 @@
 import react from '@vitejs/plugin-react'
-import {defineConfig} from 'vite'
+import {defineConfig} from 'vite-plus'
 
 // App-mode config for the design-system showcase site (the library build lives
 // in vite.config.ts and must stay lib-only — no dts/libInjectCss/checker here).

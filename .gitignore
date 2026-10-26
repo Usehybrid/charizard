@@ -29,3 +29,4 @@ public
 # vite logs
 vite.config.ts.timestamp-*.mjs
 *.tsbuildinfo
+.vitest/

@@ -1,4 +1,4 @@
-import {describe, expect, it} from 'vitest'
+import {describe, expect, it} from 'vite-plus/test'
 import {reorderSortableItems} from './reorder-sortable-items'
 
 const item = (id: string, checked = true, group?: string) => ({
