@@ -7,7 +7,7 @@ import clsx from 'clsx'
 export interface SearchProps {
   id: string
   search?: string
-  setSearch?: React.Dispatch<React.SetStateAction<string>>
+  setSearch?: (value: string) => void
   placeholder?: string
   clearIconClearFn?: any
   customStyles?: {

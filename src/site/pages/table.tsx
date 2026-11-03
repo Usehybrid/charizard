@@ -85,7 +85,8 @@ export default function TablePage() {
       <PageHeader title="Table">
         The workhorse data table of the design system, built on TanStack Table. It composes search,
         filters, sorting, pagination, row selection, actions, customizable columns, sticky columns,
-        and CSV export.
+        and CSV export. The search box is debounced: <code>searchConfig.setSearch</code> fires once
+        typing pauses (300ms by default, <code>searchConfig.debounceMs</code> to change it).
       </PageHeader>
 
       <DemoSection
