@@ -1,9 +1,8 @@
-import * as React from 'react'
 import {InputGroupV2, InputLeftIcon, InputRightIcon, InputV2} from '../input-v2'
 import {SearchV2Props} from './types'
 import searchIcon from '../assets/search.svg'
 import closeIcon from '../assets/close.svg'
-import {useDebounce} from '../../hooks'
+import {useDebouncedSearch} from '../../hooks'
 
 /**
  * SearchV2 is a customizable search input component that integrates with the `InputV2` component.
@@ -11,7 +10,8 @@ import {useDebounce} from '../../hooks'
  *
  * @param {SearchV2Props} props - The properties for the SearchV2 component.
  * @param {string} [props.search=''] - The current search term value (used in uncontrolled mode).
- * @param {React.Dispatch<React.SetStateAction<string>>} [props.setSearch] - Function to update the search term (used in controlled mode).
+ * @param {(value: string) => void} [props.setSearch] - Receives the term once typing pauses (controlled mode). An emptied input is sent at once.
+ * @param {number} [props.debounceMs=300] - Pause before `setSearch` fires, in ms.
  * @param {InputV2Props} [props] - Additional properties to pass to the `InputV2` component.
  * @returns {JSX.Element} The rendered SearchV2 component.
  *
@@ -22,39 +22,20 @@ import {useDebounce} from '../../hooks'
  *   placeholder="Search..."
  * />
  */
-export function SearchV2({search = '', setSearch, inputGroupProps = {}, ...props}: SearchV2Props) {
-  const [searchTerm, setSearchTerm] = React.useState(search)
-  const debouncedSearchTerm = useDebounce(searchTerm as string)
-  const isControlled = typeof setSearch === 'function'
-
-  React.useEffect(() => {
-    if (search !== searchTerm) {
-      setSearchTerm(search)
-    }
-  }, [search])
-
-  React.useEffect(() => {
-    if (isControlled) {
-      setSearch(debouncedSearchTerm)
-    }
-  }, [debouncedSearchTerm, isControlled, setSearch])
-
-  const searchHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(e.target.value)
-  }
-
-  const clearSearchHandler = () => {
-    setSearchTerm('')
-    if (isControlled) {
-      setSearch('')
-    }
-  }
+export function SearchV2({
+  search = '',
+  setSearch,
+  debounceMs,
+  inputGroupProps = {},
+  ...props
+}: SearchV2Props) {
+  const {value, onChange, clear} = useDebouncedSearch(search, setSearch, debounceMs)
 
   return (
     <InputGroupV2 {...inputGroupProps}>
       <InputLeftIcon icon={searchIcon} />
-      <InputV2 {...props} value={searchTerm} onChange={searchHandler} />
-      {searchTerm && <InputRightIcon onClick={clearSearchHandler} icon={closeIcon} />}
+      <InputV2 {...props} value={value} onChange={e => onChange(e.target.value)} />
+      {value && <InputRightIcon onClick={clear} icon={closeIcon} />}
     </InputGroupV2>
   )
 }

@@ -66,7 +66,10 @@ export interface TableProps {
   searchConfig?: {
     placeholder?: string
     search: string
+    /** receives the term once typing pauses for `debounceMs`; an emptied input is sent at once */
     setSearch: any
+    /** pause before `setSearch` fires, in ms (default 300) */
+    debounceMs?: number
   }
   /**
    * table sorting

@@ -11,6 +11,7 @@ import {TableProps} from '../Table'
 import {Search} from '../../search'
 import {SINGLE_VALUE_FILTER_TYPES, useTableStore} from '../store'
 import {pluralize} from '../../../utils'
+import {useDebouncedSearch} from '../../../hooks'
 import type {Table} from '@tanstack/react-table'
 import type {TableFeatureSet} from '../table-features'
 
@@ -57,6 +58,13 @@ export default function TableMetaHeader({
     ...(filterConfig?.filters?.header || []),
     ...(filterConfig?.filters?.drawer || []),
   ]
+
+  // the input keeps its own text; the consumer's setSearch (and its API call) fires once typing pauses
+  const tableSearch = useDebouncedSearch(
+    searchConfig?.search,
+    searchConfig?.setSearch,
+    searchConfig?.debounceMs,
+  )
 
   const resetAll = useTableStore(s => s.resetAllFilters)
   const setDefaultFilters = useTableStore(s => s.setDefaultFilters)
@@ -122,8 +130,8 @@ export default function TableMetaHeader({
           <div className={classes.search}>
             <Search
               id="table-search"
-              search={searchConfig.search}
-              setSearch={searchConfig.setSearch}
+              search={tableSearch.value}
+              setSearch={tableSearch.onChange}
               placeholder={searchConfig.placeholder}
               clearIconClearFn={() => setRowSelection({})}
               customStyles={{
