@@ -33,6 +33,7 @@ import type {FilterConfig, TableCustomColumns} from './types'
 import {TableCustomColsVariant} from './table-custom-cols/TableCustomCols'
 import {TABLE_ACTION_TYPES} from '../../utils/table'
 import {useTableStore} from './store'
+import {useDebouncedSearch} from '../../hooks'
 
 export interface TableProps {
   // the table data
@@ -260,6 +261,14 @@ export function Table({
   }
 
   const [rowSelection, setRowSelection] = React.useState({})
+
+  // the search input's text lives here, above the error-conditional header, so a term still
+  // waiting on its debounce survives the header unmounting; setSearch fires once typing pauses
+  const tableSearch = useDebouncedSearch(
+    searchConfig?.search,
+    searchConfig?.setSearch,
+    searchConfig?.debounceMs,
+  )
 
   // account for search state here itself
   const isEmpty = !loaderConfig.isFetching && !loaderConfig.isError && !data.length
@@ -519,6 +528,7 @@ export function Table({
           <TableMetaHeader
             rowSelectionConfig={rowSelectionConfig}
             searchConfig={searchConfig}
+            tableSearch={tableSearch}
             totalText={totalText}
             rowSelection={rowSelectionConfig?.rowSelection || rowSelection}
             setRowSelection={rowSelectionConfig?.setRowSelection || setRowSelection}
