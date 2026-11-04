@@ -46,23 +46,23 @@
 }
 
 .container.sm {
-  width: 30.8rem;
+  width: calc(400 * var(--zap-px));
 }
 
 .container.md {
-  width: 46.2rem;
+  width: calc(600 * var(--zap-px));
 }
 
 .container.lg {
-  width: 63.08rem;
+  width: calc(820 * var(--zap-px));
 }
 
 .container.xlg {
-  width: 77rem;
+  width: calc(1000 * var(--zap-px));
 }
 
 .container.xxlg {
-  width: 92.3rem;
+  width: calc(1200 * var(--zap-px));
 }
 
 .content {
@@ -86,8 +86,8 @@
 .title {
   font-style: normal;
   font-weight: 500;
-  font-size: 1.54rem;
-  line-height: 2.15rem;
+  font-size: calc(20 * var(--zap-px));
+  line-height: calc(28 * var(--zap-px));
   color: var(--text-primary);
 }
 
@@ -112,8 +112,8 @@
 
 .descriptionContainer {
   padding: 20px;
-  max-height: calc(100dvh - (1.75rem * 2));
-  height: calc(100dvh - (1.75rem * 2));
+  max-height: calc(100dvh - 46 * var(--zap-px));
+  height: calc(100dvh - 46 * var(--zap-px));
   overflow: scroll;
 }
 .descriptionContainer.fullHeight {
@@ -154,8 +154,8 @@
 .saveBtn,
 .cancelBtn {
   font-weight: 400;
-  font-size: 1.23rem;
-  line-height: 1.9rem;
+  font-size: calc(16 * var(--zap-px));
+  line-height: calc(24 * var(--zap-px));
   padding: 8px 16px;
   border-radius: 6px;
 }

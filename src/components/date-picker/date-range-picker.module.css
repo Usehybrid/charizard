@@ -1,6 +1,6 @@
 .dateRangePicker {
   display: grid;
-  gap: 0.5rem;
+  gap: calc(6 * var(--zap-px));
 }
 .dateIcon > path,
 .dateIcon > g > path {
@@ -39,7 +39,7 @@
 }
 .months {
   display: flex;
-  gap: 1rem;
+  gap: calc(13 * var(--zap-px));
 }
 .month {
   display: flex;
@@ -50,7 +50,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 1rem;
+  padding-top: calc(13 * var(--zap-px));
   position: relative;
 }
 .captionLabel {
@@ -64,8 +64,8 @@
 }
 .navButtonPrevious,
 .navButtonNext {
-  height: 1.75rem;
-  width: 1.75rem;
+  height: calc(23 * var(--zap-px));
+  width: calc(23 * var(--zap-px));
   background-color: transparent;
   padding: 0;
   opacity: 0.5;
@@ -86,10 +86,10 @@
 }
 
 .navButtonPrevious {
-  left: 1rem;
+  left: calc(13 * var(--zap-px));
 }
 .navButtonNext {
-  right: 1rem;
+  right: calc(13 * var(--zap-px));
 }
 .table {
   width: 100%;
@@ -100,7 +100,7 @@
   display: flex;
 }
 .headCell {
-  font-size: 1rem;
+  font-size: calc(13 * var(--zap-px));
   color: var(--text-hint);
   border-radius: 8px;
   font-weight: 400;
@@ -112,12 +112,12 @@
 .row {
   display: flex;
   width: 100%;
-  margin-top: 0.5rem;
+  margin-top: calc(6 * var(--zap-px));
   border-bottom: none !important;
 }
 .cell {
   text-align: center;
-  font-size: 0.8rem;
+  font-size: calc(10 * var(--zap-px));
   padding: 0;
   position: relative;
   width: 36px;
@@ -138,7 +138,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 0.5rem;
+  border-radius: calc(6 * var(--zap-px));
   border: none;
   outline: none;
   background-color: transparent;
@@ -158,7 +158,7 @@
 }
 .daySelected {
   background-color: var(--theme-blue-dark);
-  border-radius: 0.5rem;
+  border-radius: calc(6 * var(--zap-px));
 }
 
 .daySelected:not(.dayRangeMiddle) .day {
@@ -170,7 +170,7 @@
   color: var(--neutral-white);
 }
 .dayToday {
-  border-radius: 0.5rem;
+  border-radius: calc(6 * var(--zap-px));
   background-color: var(--neutral-arch-40);
   color: var(--text-primary);
 }
@@ -204,7 +204,7 @@
   border-bottom-left-radius: 0;
 }
 .dayRangeStart.dayRangeEnd {
-  border-radius: 0.5rem;
+  border-radius: calc(6 * var(--zap-px));
 }
 .dayRangeMiddle {
   background-color: var(--neutral-arch-20);

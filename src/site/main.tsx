@@ -1,5 +1,7 @@
 // Explicit global-styles import — mirrors the `styles.css` subpath consumers
 // use; the barrel's side-effect import can be tree-shaken in app builds.
+import '@fontsource-variable/geist'
+import '@fontsource-variable/geist-mono'
 import '../components/styles/charizard.css'
 // Docs-only chrome: surfaces, code viewer and syntax palette.
 import './site.css'

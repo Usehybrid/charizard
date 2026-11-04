@@ -4,6 +4,10 @@
    surfaces, the code viewer and the syntax palette. */
 
 :root {
+  /* the docs site is set in Geist; the library itself renders groudon's Instrument Sans */
+  --font-sans: 'Geist Variable', sans-serif;
+  --font-mono: 'Geist Mono Variable', monospace;
+
   /* surfaces */
   --site-bg: var(--neutral-white);
   --site-bg-subtle: #f9fafd;

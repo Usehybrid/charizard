@@ -1,6 +1,6 @@
 :root {
-  --font-sans: 'Geist Variable', sans-serif;
-  --font-mono: 'Geist Mono Variable', monospace;
+  /* the product font is groudon's; the docs site swaps in Geist in src/site/site.css */
+  --font-sans: var(--zap-font-sans);
   font-family: var(--font-sans);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -100,10 +100,20 @@ h6 {
   appearance: none;
 }
 
+/* Table filter chips rely on this beating their module styles; it was !important in the
+   library's old typography copy, which every app loaded, so keep that behaviour here. */
+.zap-button-small {
+  font-size: var(--zap-text-button-small-size) !important;
+  font-style: normal !important;
+  font-weight: var(--zap-weight-semibold) !important;
+  line-height: var(--zap-text-button-small-line-height) !important;
+  letter-spacing: var(--zap-letter-spacing) !important;
+}
+
 .zap-error-msg {
   font-weight: 400;
-  font-size: 1rem;
-  line-height: 1.54rem;
+  font-size: calc(13 * var(--zap-px));
+  line-height: calc(20 * var(--zap-px));
   color: var(--status-danger);
   margin: 0;
   text-align: left;
