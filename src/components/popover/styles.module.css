@@ -22,7 +22,7 @@
   position: absolute;
   top: 0;
   right: 0;
-  padding: calc(6 * var(--zap-px));
+  padding: 0.5rem;
 }
 
 .arrow {

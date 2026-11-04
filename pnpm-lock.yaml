@@ -192,6 +192,12 @@ importers:
       '@dnd-kit/react':
         specifier: ^0.5.1
         version: 0.5.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
+      '@fontsource-variable/geist':
+        specifier: ^5.3.0
+        version: 5.3.0
+      '@fontsource-variable/geist-mono':
+        specifier: ^5.3.0
+        version: 5.3.0
       '@hybr1d-tech/groudon':
         specifier: ^1.0.0
         version: 1.0.0
@@ -286,12 +292,6 @@ importers:
         specifier: ^5.0.16
         version: 5.0.16(@types/react@19.3.0)(react@19.3.1)(use-sync-external-store@1.6.0(react@19.3.1))
     devDependencies:
-      '@fontsource-variable/geist':
-        specifier: ^5.3.0
-        version: 5.3.0
-      '@fontsource-variable/geist-mono':
-        specifier: ^5.3.0
-        version: 5.3.0
       '@microsoft/api-extractor':
         specifier: ^7.59.4
         version: 7.59.4(@types/node@26.6.5)

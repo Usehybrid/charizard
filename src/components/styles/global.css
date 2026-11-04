@@ -1,6 +1,6 @@
 :root {
-  /* the product font is groudon's; the docs site swaps in Geist in src/site/site.css */
-  --font-sans: var(--zap-font-sans);
+  --font-sans: 'Geist Variable', sans-serif;
+  --font-mono: 'Geist Mono Variable', monospace;
   font-family: var(--font-sans);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -112,8 +112,8 @@ h6 {
 
 .zap-error-msg {
   font-weight: 400;
-  font-size: calc(13 * var(--zap-px));
-  line-height: calc(20 * var(--zap-px));
+  font-size: 1rem;
+  line-height: 1.54rem;
   color: var(--status-danger);
   margin: 0;
   text-align: left;

@@ -34,7 +34,7 @@
   }
 
   .meta {
-    font-size: calc(11 * var(--zap-px));
+    font-size: 0.85rem;
   }
 }
 

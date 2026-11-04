@@ -5,8 +5,8 @@
 
 .selectContainer .errorMsg {
   font-weight: 400;
-  font-size: calc(13 * var(--zap-px));
-  line-height: calc(20 * var(--zap-px));
+  font-size: 1rem;
+  line-height: 1.54rem;
   color: #de350b;
   margin: 0;
   text-align: left;
@@ -42,8 +42,8 @@
 
 .optionContainer .subLabel {
   font-weight: 400;
-  font-size: calc(12 * var(--zap-px));
-  line-height: calc(20 * var(--zap-px));
+  font-size: 0.92rem;
+  line-height: 1.54rem;
   color: var(--text-secondary);
 }
 

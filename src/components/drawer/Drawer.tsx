@@ -110,7 +110,7 @@ export function Drawer({
     const timeout = setTimeout(() => {
       if (containerRef.current && descriptionRef.current && footerRef.current) {
         const translateXValue = isOpen ? 'translateX(0)' : `translateX(${translateXOffset})`
-        const descriptionHeight = `calc(100dvh - 46 * var(--zap-px) - ${footerRef.current.clientHeight}px)`
+        const descriptionHeight = `calc(100dvh - (1.75rem * 2) - ${footerRef.current.clientHeight}px)`
 
         containerRef.current.style.transform = translateXValue
         descriptionRef.current.style.maxHeight = descriptionHeight

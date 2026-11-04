@@ -7,11 +7,11 @@
 }
 
 .inputContainer.sm {
-  width: calc(270 * var(--zap-px));
+  width: 20.8rem;
 }
 
 .inputContainer.md {
-  width: calc(360 * var(--zap-px));
+  width: 27.7rem;
 }
 
 .inputLabelContainer {
@@ -58,8 +58,8 @@
 .input,
 .textarea {
   font-weight: 400;
-  font-size: calc(16 * var(--zap-px));
-  line-height: calc(24 * var(--zap-px));
+  font-size: 1.23rem;
+  line-height: 1.85rem;
   color: var(--text-primary);
   width: 100%;
 
@@ -73,7 +73,7 @@
 }
 
 .input {
-  height: calc(36 * var(--zap-px));
+  height: 2.8rem;
 }
 
 .input::placeholder,
@@ -105,8 +105,8 @@ input[type='date']::-webkit-inner-spin-button,
 
 .errorMsg {
   font-weight: 400;
-  font-size: calc(13 * var(--zap-px));
-  line-height: calc(20 * var(--zap-px));
+  font-size: 1rem;
+  line-height: 1.54rem;
   color: var(--status-danger);
   margin: 0;
   text-align: left;
@@ -115,8 +115,8 @@ input[type='date']::-webkit-inner-spin-button,
 .inputElement {
   position: absolute;
   top: 0;
-  width: calc(36 * var(--zap-px));
-  height: calc(36 * var(--zap-px));
+  width: 2.8rem;
+  height: 2.8rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -133,7 +133,7 @@ input[type='date']::-webkit-inner-spin-button,
 
 .inputAddon {
   width: auto;
-  height: calc(36 * var(--zap-px));
+  height: 2.8rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -169,9 +169,9 @@ input[type='date']::-webkit-inner-spin-button,
   border-radius: 8px;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15);
   padding: 0 0 12px 0;
-  max-height: calc(195 * var(--zap-px));
+  max-height: 15rem;
   overflow-y: auto;
-  min-width: calc(195 * var(--zap-px));
+  min-width: 15rem;
   z-index: 10;
 }
 

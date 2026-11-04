@@ -10,7 +10,7 @@
 
 .containerRow {
   flex-direction: row;
-  gap: calc(21 * var(--zap-px));
+  gap: 1.62rem;
 }
 
 .title {

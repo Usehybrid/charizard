@@ -5,15 +5,15 @@
 }
 
 .switchLabel {
-  font-size: calc(14 * var(--zap-px));
-  line-height: calc(20 * var(--zap-px));
+  font-size: 1.08rem;
+  line-height: 1.54rem;
   color: var(--text-primary);
 }
 
 .subText {
-  font-size: calc(12 * var(--zap-px));
-  line-height: calc(18 * var(--zap-px));
-  margin-top: calc(10 * var(--zap-px));
+  font-size: 0.923rem;
+  line-height: 1.385rem;
+  margin-top: 0.75rem;
   color: var(--text-secondary);
 }
 
@@ -23,37 +23,37 @@
   display: inline-block;
 }
 .switch.sm {
-  width: calc(26 * var(--zap-px));
-  height: calc(16 * var(--zap-px));
+  width: 2rem;
+  height: 1.231rem;
 }
 .switch.sm input:checked + .slider::before {
-  transform: translateX(calc(10 * var(--zap-px)));
+  transform: translateX(0.769rem);
 }
 .switch.sm .slider::before {
-  width: calc(12 * var(--zap-px));
-  height: calc(12 * var(--zap-px));
+  width: 0.923rem;
+  height: 0.923rem;
 }
 .switch.md {
-  width: calc(34 * var(--zap-px));
-  height: calc(20 * var(--zap-px));
+  width: 2.615rem;
+  height: 1.538rem;
 }
 .switch.md input:checked + .slider::before {
-  transform: translateX(calc(14 * var(--zap-px)));
+  transform: translateX(1.077rem);
 }
 .switch.md .slider::before {
-  height: calc(16 * var(--zap-px));
-  width: calc(16 * var(--zap-px));
+  height: 1.231rem;
+  width: 1.231rem;
 }
 .switch.lg {
-  width: calc(50 * var(--zap-px));
-  height: calc(28 * var(--zap-px));
+  width: 3.846rem;
+  height: 2.154rem;
 }
 .switch.lg input:checked + .slider::before {
-  transform: translateX(calc(22 * var(--zap-px)));
+  transform: translateX(1.692rem);
 }
 .switch.lg .slider::before {
-  width: calc(24 * var(--zap-px));
-  height: calc(24 * var(--zap-px));
+  width: 1.846rem;
+  height: 1.846rem;
 }
 .switch input {
   opacity: 0;
@@ -88,9 +88,9 @@
 .switch .slider::before {
   position: absolute;
   content: '';
-  left: calc(2 * var(--zap-px));
-  bottom: calc(2 * var(--zap-px));
-  top: calc(2 * var(--zap-px));
+  left: 0.154rem;
+  bottom: 0.154rem;
+  top: 0.154rem;
   background-color: white;
   border-radius: 50%;
   transition: 0.25s;
