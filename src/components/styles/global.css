@@ -100,6 +100,16 @@ h6 {
   appearance: none;
 }
 
+/* Table filter chips rely on this beating their module styles; it was !important in the
+   library's old typography copy, which every app loaded, so keep that behaviour here. */
+.zap-button-small {
+  font-size: var(--zap-text-button-small-size) !important;
+  font-style: normal !important;
+  font-weight: var(--zap-weight-semibold) !important;
+  line-height: var(--zap-text-button-small-line-height) !important;
+  letter-spacing: var(--zap-letter-spacing) !important;
+}
+
 .zap-error-msg {
   font-weight: 400;
   font-size: 1rem;
