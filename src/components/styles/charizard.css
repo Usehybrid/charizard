@@ -1,8 +1,6 @@
 /* Global library styles, aggregated so the build injects them as ONE css
    import on the entry chunk with a deterministic cascade order.
    (Separate JS imports get injected in unspecified order by libInjectCss.) */
-@import '@fontsource-variable/geist';
-@import '@fontsource-variable/geist-mono';
 /* the type scale (tokens + zap-* classes) comes from groudon, the shared typography package */
 @import '@hybr1d-tech/groudon';
 @import './_variables.css';

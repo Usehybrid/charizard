@@ -44,7 +44,7 @@
 }
 
 .line {
-  width: 2.8rem;
+  width: calc(36 * var(--zap-px));
   height: 1px;
   background: var(--neutral-arch-500);
 }
