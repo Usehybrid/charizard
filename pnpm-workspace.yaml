@@ -39,3 +39,4 @@ minimumReleaseAgeExclude:
   - '@rushstack/ts-command-line@5.3.13'
   - '@vitejs/plugin-react@6.1.0'
   - happy-dom@20.11.6
+  - '@hybr1d-tech/groudon@1.0.0'
