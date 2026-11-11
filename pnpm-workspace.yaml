@@ -1,8 +1,6 @@
 allowBuilds:
   '@swc/core': true
   esbuild: true
-  sharp: set this to true or false
-
 onlyBuiltDependencies:
   - '@swc/core'
   - esbuild
@@ -15,10 +13,11 @@ packages:
 # Vite+ toolchain: alias `vite` to the Vite+ core so `vp` drives the build,
 # matching hybr1d-frontend / headless-view.
 catalog:
-  vite: npm:@voidzero-dev/vite-plus-core@1.4.0
-  vite-plus: 1.4.0
+  vite: npm:@voidzero-dev/vite-plus-core@1.6.0
+  vite-plus: 1.6.0
 
 overrides:
+  minimatch@10: ^11.0.1
   vite@*: 'catalog:'
   # Security: force patched versions of vulnerable transitive deps (Dependabot).
   # Both arrive via react-select (a peer dep, externalized from the build).
@@ -40,3 +39,13 @@ minimumReleaseAgeExclude:
   - '@vitejs/plugin-react@6.1.0'
   - happy-dom@20.11.6
   - '@hybr1d-tech/groudon@1.0.0'
+  - '@voidzero-dev/vite-plus-core@1.6.0'
+  - '@voidzero-dev/vite-plus-darwin-arm64@1.6.0'
+  - '@voidzero-dev/vite-plus-darwin-x64@1.6.0'
+  - '@voidzero-dev/vite-plus-linux-arm64-gnu@1.6.0'
+  - '@voidzero-dev/vite-plus-linux-arm64-musl@1.6.0'
+  - '@voidzero-dev/vite-plus-linux-x64-gnu@1.6.0'
+  - '@voidzero-dev/vite-plus-linux-x64-musl@1.6.0'
+  - '@voidzero-dev/vite-plus-win32-arm64-msvc@1.6.0'
+  - '@voidzero-dev/vite-plus-win32-x64-msvc@1.6.0'
+  - vite-plus@1.6.0
