@@ -96,6 +96,8 @@ const areUploadFilesEqual = (left: UploadFileType, right: UploadFileType) =>
   left.metaData?.fileName === right.metaData?.fileName &&
   left.metaData?.key === right.metaData?.key
 
+const EMPTY_PRELOADED_FILES: UploadFileType[] = []
+
 export function Upload({
   getUploadDoc,
   setIsUploading,
@@ -117,7 +119,7 @@ export function Upload({
   extraSubtitleText,
   inventoryId = undefined,
   softwareId,
-  preLoadedFiles = [],
+  preLoadedFiles = EMPTY_PRELOADED_FILES,
   showFileList = true,
   acceptedFileTypes = 'image/png, image/jpeg, image/jpeg, image/webp, application/pdf, .doc, .docx, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel',
   error,
