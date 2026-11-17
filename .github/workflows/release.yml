@@ -2,16 +2,22 @@ name: Publish to npm
 
 on:
   push:
+    branches: [main]
     tags:
       - "v*"
   pull_request:
     branches: ["*"]
+# Serialize releases so a main push and its tag cannot publish concurrently.
+concurrency:
+  group: npm-${{ github.event_name == 'push' && 'publish' || github.ref }}
+  cancel-in-progress: false
+
 env:
   SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
 
 jobs:
   publish:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     permissions:
       contents: read
       id-token: write
@@ -28,10 +34,27 @@ jobs:
         run: vp install
       - name: Build
         run: vp run build
+      - name: Check release version
+        id: release
+        if: github.event_name == 'push'
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import { readFileSync, appendFileSync } from 'node:fs';
+          const { name, version } = JSON.parse(readFileSync('package.json', 'utf8'));
+          const ref = process.env.GITHUB_REF;
+          if (ref.startsWith('refs/tags/') && ref !== `refs/tags/v${version}`) {
+            throw new Error(`Tag ${ref} does not match package version ${version}`);
+          }
+          const response = await fetch(`https://registry.npmjs.org/${encodeURIComponent(name)}/${encodeURIComponent(version)}`);
+          if (!response.ok && response.status !== 404) {
+            throw new Error(`npm version lookup failed: ${response.status}`);
+          }
+          appendFileSync(process.env.GITHUB_OUTPUT, `publish=${response.status === 404}\n`);
+          console.log(response.ok ? `${name}@${version} already published; skipping` : `Publishing ${name}@${version}`);
+          NODE
       - name: Publish Package
-        # publish only on v* tag pushes — PR runs are CI-only (a PR run once
-        # published a version before the tag did)
-        if: startsWith(github.ref, 'refs/tags/v')
+        if: steps.release.outputs.publish == 'true'
         run: npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -42,7 +65,7 @@ jobs:
           channel: '#alerts-deploys'
           message:
             'Charizard was successfully published to npm'
-        if: success() && startsWith(github.ref, 'refs/tags/v')
+        if: success() && steps.release.outputs.publish == 'true'
       - name: slack - build failed
         uses: act10ns/slack@v2.2.0
         with:
@@ -50,4 +73,4 @@ jobs:
           channel: '#alerts-deploys'
           message:
             'Charizard has failed to publish to npm'
-        if: failure() && startsWith(github.ref, 'refs/tags/v')
+        if: failure() && github.event_name == 'push'
