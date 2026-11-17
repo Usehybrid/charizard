@@ -24,7 +24,13 @@ export type UploadFileType = {
   fileName: string
   isUploaded: boolean
   size: string
+  fileSize?: number
+  uploadStatus?: 'pending' | 'uploaded' | 'failed' | 'cancelled'
   setIntervalFunction?: any
+}
+
+export type UploadRequestOptions = {
+  signals?: Record<string, AbortSignal>
 }
 
 export enum UPLOAD_ALIGN_BTN_CONTENT {
@@ -66,6 +72,7 @@ interface UploadProps {
     customUrl?: string,
     inventoryId?: string | null,
     softwareId?: string | null,
+    options?: UploadRequestOptions,
   ) => Promise<{uploadedFiles: UploadFileType[]; isUploaded: boolean}>
   variant?: string
 }
@@ -74,6 +81,22 @@ interface progressBarType {
   name: string
   progress: number
 }
+
+const areUploadFilesEqual = (left: UploadFileType, right: UploadFileType) =>
+  left.id === right.id &&
+  left.ext === right.ext &&
+  left.type === right.type &&
+  left.url === right.url &&
+  left.key === right.key &&
+  left.fileName === right.fileName &&
+  left.size === right.size &&
+  left.fileSize === right.fileSize &&
+  left.isUploaded === right.isUploaded &&
+  left.uploadStatus === right.uploadStatus &&
+  left.metaData?.fileName === right.metaData?.fileName &&
+  left.metaData?.key === right.metaData?.key
+
+const EMPTY_PRELOADED_FILES: UploadFileType[] = []
 
 export function Upload({
   getUploadDoc,
@@ -96,7 +119,7 @@ export function Upload({
   extraSubtitleText,
   inventoryId = undefined,
   softwareId,
-  preLoadedFiles = [],
+  preLoadedFiles = EMPTY_PRELOADED_FILES,
   showFileList = true,
   acceptedFileTypes = 'image/png, image/jpeg, image/jpeg, image/webp, application/pdf, .doc, .docx, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel',
   error,
@@ -104,28 +127,25 @@ export function Upload({
   handleImageUpload,
 }: // variant = 'normal',
 UploadProps) {
-  const [cancelledKey, setCancelledKey] = React.useState<string[]>([])
-  const [files, setFiles] = React.useState<UploadFileType[] | []>([])
-  const [callUpload, setCallUpload] = React.useState(false)
-  const [uploadedFiles, setUploadedFiles] = React.useState<UploadFileType[] | []>([])
+  const [files, setFiles] = React.useState<UploadFileType[]>(() =>
+    preLoadedFiles.map(file => ({...file, isUploaded: true, uploadStatus: 'uploaded'})),
+  )
+  const filesRef = React.useRef(files)
+  const [uploadingKeys, setUploadingKeys] = React.useState<Set<string>>(() => new Set())
   const [fileUploadProgress, setFileUploadProgress] = React.useState<progressBarType[]>([])
   const [fileUploadLimitError, setFileUploadLimitError] = React.useState<string | null>(null)
   const [uploadLimitError, setUploadLimitError] = React.useState('')
-  const [isFileUploadComplete, setIsFileUploadComplete] = React.useState<boolean | null>(null)
+  const [uploadError, setUploadError] = React.useState<string | null>(null)
   const [hide, setHide] = React.useState(true)
   const fileInputRef = React.useRef<any>(null)
-  const isInputDisabled =
-    (fileUploadLimit &&
-      files.filter(file => !cancelledKey.includes(file.key))?.length >= fileUploadLimit) ||
-    disabled
-      ? true
-      : false || (isFileUploadComplete !== null && !isFileUploadComplete)
+  const abortControllersRef = React.useRef(new Map<string, AbortController>())
+  const progressIntervalsRef = React.useRef(new Map<string, ReturnType<typeof setInterval>>())
+  const isUploading = uploadingKeys.size > 0
+  const isInputDisabled = disabled || (!!fileUploadLimit && files.length >= fileUploadLimit)
 
   React.useEffect(() => {
-    console.log(uploadLimitError)
-
     const timer = setTimeout(() => {
-      if (!!uploadLimitError.length) {
+      if (uploadLimitError.length) {
         setUploadLimitError('')
       }
     }, 5000)
@@ -134,23 +154,170 @@ UploadProps) {
   }, [uploadLimitError])
 
   React.useEffect(() => {
-    if (preLoadedFiles.length > 0) {
-      const newFiles = preLoadedFiles.map(file => ({...file, isUploaded: true}))
-      setFiles(newFiles)
-      setUploadedFiles(newFiles)
-    }
+    const preloaded = preLoadedFiles.map(file => ({
+      ...file,
+      isUploaded: true,
+      uploadStatus: 'uploaded' as const,
+    }))
+    setFiles(current => {
+      const preloadedKeys = new Set(preloaded.map(file => file.key))
+      const pending = current.filter(file => !file.isUploaded && !preloadedKeys.has(file.key))
+      const next = [...preloaded, ...pending]
+      if (
+        next.length === current.length &&
+        next.every((file, index) => areUploadFilesEqual(file, current[index]))
+      ) {
+        return current
+      }
+      current.forEach(file => {
+        if (
+          file.url.startsWith('blob:') &&
+          !next.some(nextFile => nextFile.url === file.url)
+        ) {
+          URL.revokeObjectURL(file.url)
+        }
+      })
+      filesRef.current = next
+      return next
+    })
   }, [preLoadedFiles])
 
+  React.useEffect(() => {
+    getUploadDoc(files.filter(file => file.isUploaded))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [files])
+
+  React.useEffect(() => {
+    setIsUploading?.(isUploading)
+    return () => {
+      if (isUploading) setIsUploading?.(false)
+    }
+  }, [isUploading, setIsUploading])
+
+  React.useEffect(
+    () => () => {
+      abortControllersRef.current.forEach(controller => controller.abort())
+      progressIntervalsRef.current.forEach(interval => clearInterval(interval))
+      filesRef.current.forEach(file => {
+        if (file.url.startsWith('blob:')) URL.revokeObjectURL(file.url)
+      })
+    },
+    [],
+  )
+
+  const clearProgress = (key: string) => {
+    const interval = progressIntervalsRef.current.get(key)
+    if (interval) clearInterval(interval)
+    progressIntervalsRef.current.delete(key)
+    setFileUploadProgress(current => current.filter(item => item.name !== key))
+  }
+
+  const removeFiles = (keys: Set<string>) => {
+    setFiles(current => {
+      const next = current.filter(file => !keys.has(file.key))
+      filesRef.current = next
+      return next
+    })
+  }
+
+  const uploadFiles = async (batch: UploadFileType[]) => {
+    const signals: Record<string, AbortSignal> = {}
+    const retainedBlobUrls = new Set<string>()
+    batch.forEach(file => {
+      const controller = new AbortController()
+      abortControllersRef.current.set(file.key, controller)
+      signals[file.key] = controller.signal
+    })
+    setUploadingKeys(current => new Set([...current, ...batch.map(file => file.key)]))
+
+    try {
+      const result = await handleImageUpload(
+        batch.map(file => ({...file})),
+        type,
+        undefined,
+        undefined,
+        customUrl,
+        inventoryId,
+        softwareId,
+        {signals},
+      )
+      const resultByKey = new Map(result.uploadedFiles.map(file => [file.key, file]))
+      const failedKeys = new Set<string>()
+
+      batch.forEach(file => {
+        const controller = abortControllersRef.current.get(file.key)
+        if (controller?.signal.aborted) return
+        const uploadedFile = resultByKey.get(file.key)
+        if (!uploadedFile?.isUploaded) failedKeys.add(file.key)
+        if (uploadedFile?.isUploaded && uploadedFile.url === file.url) {
+          retainedBlobUrls.add(file.url)
+        }
+      })
+
+      setFiles(current => {
+        const next = current.flatMap(file => {
+          if (!batch.some(item => item.key === file.key)) return [file]
+          const controller = abortControllersRef.current.get(file.key)
+          if (controller?.signal.aborted || failedKeys.has(file.key)) return []
+          const uploadedFile = resultByKey.get(file.key)
+          return uploadedFile
+            ? [{...file, ...uploadedFile, isUploaded: true, uploadStatus: 'uploaded' as const}]
+            : []
+        })
+        filesRef.current = next
+        return next
+      })
+
+      if (failedKeys.size) {
+        setUploadError(
+          `${failedKeys.size} ${pluralize(
+            failedKeys.size,
+            'file failed',
+            'files failed',
+          )} to upload. Please try again.`,
+        )
+      }
+    } catch {
+      const failedKeys = new Set(
+        batch
+          .filter(file => !abortControllersRef.current.get(file.key)?.signal.aborted)
+          .map(file => file.key),
+      )
+      removeFiles(failedKeys)
+      if (failedKeys.size) {
+        setUploadError(
+          `${failedKeys.size} ${pluralize(
+            failedKeys.size,
+            'file failed',
+            'files failed',
+          )} to upload. Please try again.`,
+        )
+      }
+    } finally {
+      batch.forEach(file => {
+        clearProgress(file.key)
+        abortControllersRef.current.delete(file.key)
+        if (file.url.startsWith('blob:') && !retainedBlobUrls.has(file.url)) {
+          URL.revokeObjectURL(file.url)
+        }
+      })
+      setUploadingKeys(current => {
+        const next = new Set(current)
+        batch.forEach(file => next.delete(file.key))
+        return next
+      })
+    }
+  }
+
   async function handleFileChange(e: any) {
-    const uploadedFiles = e.target.files
+    const selectedFiles = Array.from(e.target.files as FileList)
+    if (fileInputRef.current) fileInputRef.current.value = ''
     setFileUploadLimitError(null)
     setUploadLimitError('')
-    let allFiles: any = []
-    if (
-      fileUploadLimit &&
-      uploadedFiles.length + files.filter(file => !cancelledKey.includes(file.key))?.length >
-        fileUploadLimit
-    ) {
+    setUploadError(null)
+    let allFiles: UploadFileType[] = []
+    const existingCount = isMultiple ? filesRef.current.length : 0
+    if (fileUploadLimit && selectedFiles.length + existingCount > fileUploadLimit) {
       setFileUploadLimitError(
         `You are only allowed to upload ${fileUploadLimit} ${pluralize(
           fileUploadLimit,
@@ -161,37 +328,36 @@ UploadProps) {
       return
     }
     let flag = false
-    for (let key in uploadedFiles) {
-      if (
-        typeof uploadedFiles[key] === 'object' &&
-        (uploadFileLimit || 5) >= Number((uploadedFiles[key]?.size / (1024 * 1024)).toFixed(2))
-      ) {
+    for (const uploadedFile of selectedFiles) {
+      if ((uploadFileLimit || 5) >= Number((uploadedFile.size / (1024 * 1024)).toFixed(2))) {
         allFiles.push({
-          type: uploadedFiles[key].type,
-          url: URL.createObjectURL(uploadedFiles[key]),
-          fileName: uploadedFiles[key]?.name,
+          ext: uploadedFile.type.split('/')[1] || '',
+          type: uploadedFile.type,
+          url: URL.createObjectURL(uploadedFile),
+          fileName: uploadedFile.name,
           isUploaded: false,
-          size: formatBytes(uploadedFiles[key]?.size),
+          uploadStatus: 'pending',
+          size: formatBytes(uploadedFile.size),
+          fileSize: uploadedFile.size,
+          key: '',
         })
       }
       if (
-        uploadedFiles[key]?.size &&
-        (uploadFileLimit || 5) < Number((uploadedFiles[key]?.size / (1024 * 1024)).toFixed(2))
+        uploadedFile.size &&
+        (uploadFileLimit || 5) < Number((uploadedFile.size / (1024 * 1024)).toFixed(2))
       ) {
         flag = true
       }
     }
 
-    allFiles = allFiles.map((file: UploadFileType) => {
-      const key = (Math.random() + 1).toString(36).substring(7)
-      const interval = addProgressToImageUpload(key)
-      return {...file, setIntervalFunction: interval, key}
-    })
     if (flag) {
+      allFiles.forEach(file => {
+        URL.revokeObjectURL(file.url)
+      })
       setUploadLimitError(`Maximum file size allowed is  ${uploadFileLimit || 5}MB.`)
       return
     }
-    if (uploadedFiles.length > allFiles.length) {
+    if (selectedFiles.length > allFiles.length) {
       setUploadLimitError(
         `Few files were not uploaded as they are bigger than maximum size allowed ${
           uploadFileLimit || 5
@@ -199,29 +365,28 @@ UploadProps) {
       )
       // return
     }
-    setCallUpload(true)
     if (!isMultiple) {
-      setFiles([...allFiles])
-      fileInputRef.current.value = ''
-      return
+      abortControllersRef.current.forEach(controller => controller.abort())
+      Array.from(progressIntervalsRef.current.keys()).forEach(clearProgress)
+      filesRef.current.forEach(file => {
+        if (file.url.startsWith('blob:')) URL.revokeObjectURL(file.url)
+      })
     }
-    setFiles([...files, ...allFiles])
-    fileInputRef.current.value = ''
+    allFiles = allFiles.map((file: UploadFileType) => {
+      const key = crypto.randomUUID()
+      const interval = addProgressToImageUpload(key)
+      return {...file, setIntervalFunction: interval, key}
+    })
+    const nextFiles = isMultiple ? [...filesRef.current, ...allFiles] : allFiles
+    filesRef.current = nextFiles
+    setFiles(nextFiles)
+    if (allFiles.length) void uploadFiles(allFiles)
   }
 
   function handleFileDelete(key: string) {
-    const newFiles = uploadedFiles.filter(items => items.key !== key)
-    setFiles(newFiles)
-    setUploadedFiles(newFiles)
-    getUploadDoc(newFiles)
-  }
-
-  const getDiffFile = () => {
-    return (
-      files
-        ?.filter(file => !cancelledKey?.includes(file.key))
-        ?.filter(file => !uploadedFiles?.find(uploadedFile => uploadedFile.key === file.key)) || []
-    )
+    const file = filesRef.current.find(item => item.key === key)
+    if (file?.url.startsWith('blob:')) URL.revokeObjectURL(file.url)
+    removeFiles(new Set([key]))
   }
 
   const addProgressToImageUpload = (name: string) => {
@@ -233,73 +398,30 @@ UploadProps) {
       if (progress >= 70) {
         step = 0.2
       }
-      setFileUploadProgress(preState => {
-        const newFileUploadProgress = fileUploadProgress.find(progress => progress.name === name)
-        if (newFileUploadProgress) {
-          return preState.map(progress => {
-            if (progress.name !== name) return progress
-            return {name: name, progress: progress} as unknown as progressBarType
+      setFileUploadProgress(previous => {
+        const existingProgress = previous.find(item => item.name === name)
+        if (existingProgress) {
+          return previous.map(item => {
+            if (item.name !== name) return item
+            return {name, progress}
           })
         } else {
-          return [...preState, {name: name, progress: progress}]
+          return [...previous, {name, progress}]
         }
       })
     }, 100)
+    progressIntervalsRef.current.set(name, interval)
     return interval
   }
   const getFileUploadProgress = (name: string) => {
     return fileUploadProgress.findLast(progress => progress.name === name)?.progress
   }
-  React.useEffect(() => {
-    const uploadFile = async () => {
-      const newFiles = structuredClone(files)
-      setIsUploading && setIsUploading(true)
-      setIsFileUploadComplete(false)
-      const {uploadedFiles, isUploaded} = await handleImageUpload(
-        newFiles,
-        type,
-        undefined,
-        undefined,
-        customUrl,
-        inventoryId,
-        softwareId,
-      )
-      setIsFileUploadComplete(isUploaded)
-      setUploadedFiles(uploadedFiles)
-      setIsUploading && setIsUploading(false)
-      setCallUpload(false)
-    }
-    if (files.length && callUpload) uploadFile()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [files?.length])
-
-  React.useEffect(() => {
-    getUploadDoc(uploadedFiles?.filter(file => !cancelledKey?.includes(file.key)))
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [uploadedFiles.length])
-
-  React.useEffect(() => {
-    if (preLoadedFiles.length >= fileUploadLimit) {
-      setIsFileUploadComplete(true)
-    }
-  }, [])
-
-  React.useEffect(() => {
-    if (isFileUploadComplete) {
-      setHide(true)
-    }
-  }, [isFileUploadComplete])
-
   return (
     <>
       <input
         ref={fileInputRef}
-        onClick={() => {
-          if (!isInputDisabled) {
-            beforeUploadHandler && beforeUploadHandler()
-            fileInputRef.current.value = ''
-            fileInputRef.current.click()
-          }
+        onClick={event => {
+          event.currentTarget.value = ''
         }}
         onChange={handleFileChange}
         type="file"
@@ -307,19 +429,10 @@ UploadProps) {
         style={{display: 'none'}}
         multiple={isMultiple}
         max={10}
-        disabled={disabled || files.length >= 10}
+        disabled={isInputDisabled}
       />
       <div style={{width: '100%'}}>
-        {!(
-          files.filter(file => !cancelledKey.includes(file.key)).length >= fileUploadLimit &&
-          isFileUploadComplete
-        ) &&
-        isFileUploadComplete !== null &&
-        !isFileUploadComplete &&
-        !(
-          fileUploadLimit &&
-          files.filter(file => !cancelledKey.includes(file.key))?.length >= fileUploadLimit
-        ) ? (
+        {isUploading && isInputDisabled ? (
           <TooltipV2
             trigger={
               <div
@@ -381,7 +494,7 @@ UploadProps) {
           <div
             onClick={() => {
               if (!isInputDisabled) {
-                beforeUploadHandler && beforeUploadHandler()
+                beforeUploadHandler?.()
                 fileInputRef.current.click()
               }
             }}
@@ -461,16 +574,14 @@ UploadProps) {
         {(fileUploadLimitError || !!uploadLimitError) && (
           <p className={classes.fileUploadLimitError}>{fileUploadLimitError || uploadLimitError}</p>
         )}
-        {error && <p className={classes.errorMsg}>{error}</p>}
+        {(error || uploadError) && <p className={classes.errorMsg}>{error || uploadError}</p>}
         {additionalNode}
         {showFileList && (
           <div className={clsx(classes.fileContainer, fileContainerClassName)}>
             {!!files.length &&
-              [...uploadedFiles, ...getDiffFile()].map((file: UploadFileType, index) => (
+              files.map((file: UploadFileType, index) => (
                 <div key={file.key + file.fileName}>
-                  {cancelledKey.indexOf(file.key || '') !== -1 ? (
-                    <></>
-                  ) : file.isUploaded ? (
+                  {file.isUploaded ? (
                     <div
                       className={clsx(
                         classes.singleDoc,
@@ -512,27 +623,12 @@ UploadProps) {
                             </div>
                           </div>
                         </div>
-                        {isFileUploadComplete !== null && !isFileUploadComplete ? (
-                          <TooltipV2
-                            trigger={
-                              <Button variant={BUTTON_VARIANT.TERTIARY} disabled>
-                                <img
-                                  className={classes.deleteIcon}
-                                  src={deleteOutline}
-                                  alt="delete"
-                                />
-                              </Button>
-                            }
-                            content={'Please wait till all the files are uploaded.'}
-                          />
-                        ) : (
-                          <Button
-                            variant={BUTTON_VARIANT.TERTIARY}
-                            onClick={() => handleFileDelete(file.key)}
-                          >
-                            <img className={classes.deleteIcon} src={deleteOutline} alt="delete" />
-                          </Button>
-                        )}
+                        <Button
+                          variant={BUTTON_VARIANT.TERTIARY}
+                          onClick={() => handleFileDelete(file.key)}
+                        >
+                          <img className={classes.deleteIcon} src={deleteOutline} alt="delete" />
+                        </Button>
                       </div>
                     </div>
                   ) : (
@@ -578,7 +674,10 @@ UploadProps) {
                           variant={BUTTON_VARIANT.TERTIARY}
                           onClick={() => {
                             setHide(false)
-                            setCancelledKey([...cancelledKey, file.key])
+                            abortControllersRef.current.get(file.key)?.abort()
+                            clearProgress(file.key)
+                            removeFiles(new Set([file.key]))
+                            if (file.url.startsWith('blob:')) URL.revokeObjectURL(file.url)
                           }}
                         >
                           <SVG path={close} height={16} width={16} />
@@ -591,7 +690,7 @@ UploadProps) {
               ))}
           </div>
         )}
-        {!isFileUploadComplete && !hide && (
+        {isUploading && !hide && (
           <Alert
             header={<div>Cancelling file upload.</div>}
             alertType={ALERT_TYPES.HIGHLIGHT}
