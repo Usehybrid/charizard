@@ -82,6 +82,20 @@ interface progressBarType {
   progress: number
 }
 
+const areUploadFilesEqual = (left: UploadFileType, right: UploadFileType) =>
+  left.id === right.id &&
+  left.ext === right.ext &&
+  left.type === right.type &&
+  left.url === right.url &&
+  left.key === right.key &&
+  left.fileName === right.fileName &&
+  left.size === right.size &&
+  left.fileSize === right.fileSize &&
+  left.isUploaded === right.isUploaded &&
+  left.uploadStatus === right.uploadStatus &&
+  left.metaData?.fileName === right.metaData?.fileName &&
+  left.metaData?.key === right.metaData?.key
+
 export function Upload({
   getUploadDoc,
   setIsUploading,
@@ -125,7 +139,7 @@ UploadProps) {
   const abortControllersRef = React.useRef(new Map<string, AbortController>())
   const progressIntervalsRef = React.useRef(new Map<string, ReturnType<typeof setInterval>>())
   const isUploading = uploadingKeys.size > 0
-  const isInputDisabled = disabled || files.length >= fileUploadLimit
+  const isInputDisabled = disabled || (!!fileUploadLimit && files.length >= fileUploadLimit)
 
   React.useEffect(() => {
     const timer = setTimeout(() => {
@@ -138,14 +152,29 @@ UploadProps) {
   }, [uploadLimitError])
 
   React.useEffect(() => {
-    if (!preLoadedFiles.length) return
+    const preloaded = preLoadedFiles.map(file => ({
+      ...file,
+      isUploaded: true,
+      uploadStatus: 'uploaded' as const,
+    }))
     setFiles(current => {
-      const existingKeys = new Set(current.map(file => file.key))
-      const additions = preLoadedFiles
-        .filter(file => !existingKeys.has(file.key))
-        .map(file => ({...file, isUploaded: true, uploadStatus: 'uploaded' as const}))
-      if (!additions.length) return current
-      const next = [...current, ...additions]
+      const preloadedKeys = new Set(preloaded.map(file => file.key))
+      const pending = current.filter(file => !file.isUploaded && !preloadedKeys.has(file.key))
+      const next = [...preloaded, ...pending]
+      if (
+        next.length === current.length &&
+        next.every((file, index) => areUploadFilesEqual(file, current[index]))
+      ) {
+        return current
+      }
+      current.forEach(file => {
+        if (
+          file.url.startsWith('blob:') &&
+          !next.some(nextFile => nextFile.url === file.url)
+        ) {
+          URL.revokeObjectURL(file.url)
+        }
+      })
       filesRef.current = next
       return next
     })
@@ -158,12 +187,18 @@ UploadProps) {
 
   React.useEffect(() => {
     setIsUploading?.(isUploading)
+    return () => {
+      if (isUploading) setIsUploading?.(false)
+    }
   }, [isUploading, setIsUploading])
 
   React.useEffect(
     () => () => {
       abortControllersRef.current.forEach(controller => controller.abort())
       progressIntervalsRef.current.forEach(interval => clearInterval(interval))
+      filesRef.current.forEach(file => {
+        if (file.url.startsWith('blob:')) URL.revokeObjectURL(file.url)
+      })
     },
     [],
   )
@@ -185,6 +220,7 @@ UploadProps) {
 
   const uploadFiles = async (batch: UploadFileType[]) => {
     const signals: Record<string, AbortSignal> = {}
+    const retainedBlobUrls = new Set<string>()
     batch.forEach(file => {
       const controller = new AbortController()
       abortControllersRef.current.set(file.key, controller)
@@ -206,20 +242,22 @@ UploadProps) {
       const resultByKey = new Map(result.uploadedFiles.map(file => [file.key, file]))
       const failedKeys = new Set<string>()
 
-      batch.forEach((file, index) => {
+      batch.forEach(file => {
         const controller = abortControllersRef.current.get(file.key)
         if (controller?.signal.aborted) return
-        const uploadedFile = resultByKey.get(file.key) ?? result.uploadedFiles[index]
+        const uploadedFile = resultByKey.get(file.key)
         if (!uploadedFile?.isUploaded) failedKeys.add(file.key)
+        if (uploadedFile?.isUploaded && uploadedFile.url === file.url) {
+          retainedBlobUrls.add(file.url)
+        }
       })
 
       setFiles(current => {
         const next = current.flatMap(file => {
-          const batchIndex = batch.findIndex(item => item.key === file.key)
-          if (batchIndex === -1) return [file]
+          if (!batch.some(item => item.key === file.key)) return [file]
           const controller = abortControllersRef.current.get(file.key)
           if (controller?.signal.aborted || failedKeys.has(file.key)) return []
-          const uploadedFile = resultByKey.get(file.key) ?? result.uploadedFiles[batchIndex]
+          const uploadedFile = resultByKey.get(file.key)
           return uploadedFile
             ? [{...file, ...uploadedFile, isUploaded: true, uploadStatus: 'uploaded' as const}]
             : []
@@ -257,7 +295,9 @@ UploadProps) {
       batch.forEach(file => {
         clearProgress(file.key)
         abortControllersRef.current.delete(file.key)
-        if (file.url.startsWith('blob:')) URL.revokeObjectURL(file.url)
+        if (file.url.startsWith('blob:') && !retainedBlobUrls.has(file.url)) {
+          URL.revokeObjectURL(file.url)
+        }
       })
       setUploadingKeys(current => {
         const next = new Set(current)
@@ -308,14 +348,8 @@ UploadProps) {
       }
     }
 
-    allFiles = allFiles.map((file: UploadFileType) => {
-      const key = crypto.randomUUID()
-      const interval = addProgressToImageUpload(key)
-      return {...file, setIntervalFunction: interval, key}
-    })
     if (flag) {
       allFiles.forEach(file => {
-        clearProgress(file.key)
         URL.revokeObjectURL(file.url)
       })
       setUploadLimitError(`Maximum file size allowed is  ${uploadFileLimit || 5}MB.`)
@@ -331,8 +365,16 @@ UploadProps) {
     }
     if (!isMultiple) {
       abortControllersRef.current.forEach(controller => controller.abort())
-      progressIntervalsRef.current.forEach(interval => clearInterval(interval))
+      Array.from(progressIntervalsRef.current.keys()).forEach(clearProgress)
+      filesRef.current.forEach(file => {
+        if (file.url.startsWith('blob:')) URL.revokeObjectURL(file.url)
+      })
     }
+    allFiles = allFiles.map((file: UploadFileType) => {
+      const key = crypto.randomUUID()
+      const interval = addProgressToImageUpload(key)
+      return {...file, setIntervalFunction: interval, key}
+    })
     const nextFiles = isMultiple ? [...filesRef.current, ...allFiles] : allFiles
     filesRef.current = nextFiles
     setFiles(nextFiles)
